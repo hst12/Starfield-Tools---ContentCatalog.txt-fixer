@@ -15,3 +15,5 @@ You can alt-tab from the game to check the ContentCatalog file to see if corrupt
 The launch Starfield button is hard coded to the default Steam installation path at the moment and is only intended for quick testing.
 
 Quit the game if it's running before using the Clean or Edit buttons.
+
+Source code is created in Visual Studio 2022 Community Edition. No external libraries are required.
