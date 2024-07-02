@@ -43,6 +43,7 @@
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAbout = new System.Windows.Forms.Button();
+            this.btnExplore = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -52,31 +53,32 @@
             // grpCheckCatalog
             // 
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
-            this.grpCheckCatalog.Location = new System.Drawing.Point(11, 11);
-            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(2);
+            this.grpCheckCatalog.Location = new System.Drawing.Point(22, 21);
+            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
-            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(2);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(388, 274);
+            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCheckCatalog.Size = new System.Drawing.Size(776, 527);
             this.grpCheckCatalog.TabIndex = 1;
             this.grpCheckCatalog.TabStop = false;
             this.grpCheckCatalog.Text = "Catalog Contents";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(5, 18);
+            this.richTextBox1.Location = new System.Drawing.Point(10, 35);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(381, 240);
+            this.richTextBox1.Size = new System.Drawing.Size(758, 458);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(184, 18);
-            this.btnQuit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuit.Location = new System.Drawing.Point(358, 35);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(75, 26);
-            this.btnQuit.TabIndex = 5;
+            this.btnQuit.Size = new System.Drawing.Size(150, 50);
+            this.btnQuit.TabIndex = 6;
             this.btnQuit.Text = "Quit";
             this.toolTip1.SetToolTip(this.btnQuit, "Quit");
             this.btnQuit.UseVisualStyleBackColor = true;
@@ -84,9 +86,10 @@
             // 
             // cmdClean
             // 
-            this.cmdClean.Location = new System.Drawing.Point(85, 18);
+            this.cmdClean.Location = new System.Drawing.Point(170, 35);
+            this.cmdClean.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cmdClean.Name = "cmdClean";
-            this.cmdClean.Size = new System.Drawing.Size(75, 26);
+            this.cmdClean.Size = new System.Drawing.Size(150, 50);
             this.cmdClean.TabIndex = 1;
             this.cmdClean.Text = "Clean";
             this.toolTip1.SetToolTip(this.cmdClean, "Strip out corrupt characters");
@@ -95,10 +98,10 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(165, 18);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLoad.Location = new System.Drawing.Point(330, 35);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(75, 26);
+            this.btnLoad.Size = new System.Drawing.Size(150, 50);
             this.btnLoad.TabIndex = 2;
             this.btnLoad.Text = "Edit";
             this.toolTip1.SetToolTip(this.btnLoad, "Edit with default text editor");
@@ -107,10 +110,10 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(5, 18);
-            this.btnCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCheck.Location = new System.Drawing.Point(10, 35);
+            this.btnCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(75, 26);
+            this.btnCheck.Size = new System.Drawing.Size(150, 50);
             this.btnCheck.TabIndex = 0;
             this.btnCheck.Text = "Check";
             this.toolTip1.SetToolTip(this.btnCheck, "Check for corruption");
@@ -120,11 +123,11 @@
             // btnStarfield
             // 
             this.btnStarfield.AutoSize = true;
-            this.btnStarfield.Location = new System.Drawing.Point(5, 18);
-            this.btnStarfield.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStarfield.Location = new System.Drawing.Point(10, 35);
+            this.btnStarfield.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStarfield.Name = "btnStarfield";
-            this.btnStarfield.Size = new System.Drawing.Size(94, 26);
-            this.btnStarfield.TabIndex = 3;
+            this.btnStarfield.Size = new System.Drawing.Size(178, 50);
+            this.btnStarfield.TabIndex = 4;
             this.btnStarfield.Text = "Launch Starfield";
             this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield (not recommended for normal play)");
             this.btnStarfield.UseVisualStyleBackColor = true;
@@ -135,27 +138,30 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 418);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 804);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 7, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(406, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(812, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 32);
             this.toolStripStatusLabel1.Text = "Starting up";
             // 
             // grpActions
             // 
+            this.grpActions.Controls.Add(this.btnExplore);
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
             this.grpActions.Controls.Add(this.btnLoad);
-            this.grpActions.Location = new System.Drawing.Point(9, 290);
+            this.grpActions.Location = new System.Drawing.Point(18, 558);
+            this.grpActions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.grpActions.Name = "grpActions";
-            this.grpActions.Size = new System.Drawing.Size(390, 58);
+            this.grpActions.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpActions.Size = new System.Drawing.Size(780, 112);
             this.grpActions.TabIndex = 6;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -166,37 +172,52 @@
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Location = new System.Drawing.Point(11, 354);
+            this.groupBox1.Location = new System.Drawing.Point(22, 681);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(388, 48);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Size = new System.Drawing.Size(776, 92);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(104, 18);
+            this.btnAbout.Location = new System.Drawing.Point(198, 35);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 4;
+            this.btnAbout.Size = new System.Drawing.Size(150, 50);
+            this.btnAbout.TabIndex = 5;
             this.btnAbout.Text = "About";
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
+            // btnExplore
+            // 
+            this.btnExplore.Location = new System.Drawing.Point(488, 35);
+            this.btnExplore.Name = "btnExplore";
+            this.btnExplore.Size = new System.Drawing.Size(150, 50);
+            this.btnExplore.TabIndex = 3;
+            this.btnExplore.Text = "Explore";
+            this.toolTip1.SetToolTip(this.btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
+            this.btnExplore.UseVisualStyleBackColor = true;
+            this.btnExplore.Click += new System.EventHandler(this.btnExplore_Click);
+            // 
             // frmStarfieldTools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(406, 440);
+            this.ClientSize = new System.Drawing.Size(812, 846);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpActions);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.grpCheckCatalog);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "frmStarfieldTools";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Starfield Tools";
             this.grpCheckCatalog.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
@@ -223,6 +244,7 @@
         private System.Windows.Forms.GroupBox grpActions;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Button btnExplore;
     }
 }
 

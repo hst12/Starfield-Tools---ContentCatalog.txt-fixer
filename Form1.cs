@@ -20,6 +20,11 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             CheckCatalog();
+            DisplayCatalog();
+        }
+
+        private void DisplayCatalog()
+        {
             richTextBox1.Text = File.ReadAllText(GetCatalog());
         }
 
@@ -29,7 +34,7 @@ namespace Starfield_Tools
           @"\Starfield\ContentCatalog.txt");
     }
 
-        private void CheckCatalog()
+        private bool CheckCatalog()
         {
             string filePath = GetCatalog();
             // Read the file character by character
@@ -49,19 +54,24 @@ namespace Starfield_Tools
                     }
                 }
                 if (errorCount > 0)
+                {
                     toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Clean recommended";
+                    return false;
+                }
                 else
                 {
                     toolStripStatusLabel1.Text = "Content Catalog looks OK";
-                    richTextBox1.Text = File.ReadAllText(GetCatalog());
+                    DisplayCatalog();
+                    return true;
                 }
             }
+
         }
 
         private void CleanCatalog()
         {
             string filePath = GetCatalog();
-            richTextBox1.Text = "";
+            richTextBox1.Text = "Checking...\n\n";
             toolStripStatusLabel1.Text = "Checking...";
             // Read the file character by character
             StringBuilder cleanedContents = new StringBuilder();
@@ -91,11 +101,13 @@ namespace Starfield_Tools
             File.WriteAllText(filePath, cleanedContents.ToString());
 
             toolStripStatusLabel1.Text="File cleaned and rewritten successfully";
+            DisplayCatalog() ;
         }
 
         private void cmdClean_Click(object sender, EventArgs e)
         {
-            CleanCatalog();
+            if (!CheckCatalog()) CleanCatalog();
+            else toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
          }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -153,8 +165,14 @@ namespace Starfield_Tools
 Checks ContentCatalog.txt file automatically when launched.
 
 Check button re-checks the file.
+
 Clean button repairs the file. It may take a while with a large mod list.
+
 Edit button opens the file for editing with your default text editor.
+
+Explore button opens the folder with your plugin and catalog files.
+You could manually edit the Plugins.txt file to enable or disable mods if needed.
+A * character indicates that a mod is enabled.
 
 You can alt-tab from the game to check the ContentCatalog file to see if corruption has occurred by pressing the Check button.
 
@@ -164,6 +182,11 @@ Quit the game if it's running before using the Clean or Edit buttons.
 ";
                 
             MessageBox.Show(AboutText,"Starfield Tools");
+        }
+
+        private void btnExplore_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+@"\Starfield");
         }
     }
 }
