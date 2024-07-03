@@ -213,6 +213,7 @@
             this.btnRestore.Size = new System.Drawing.Size(150, 50);
             this.btnRestore.TabIndex = 6;
             this.btnRestore.Text = "Restore";
+            this.toolTip1.SetToolTip(this.btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
             this.btnRestore.UseVisualStyleBackColor = true;
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
