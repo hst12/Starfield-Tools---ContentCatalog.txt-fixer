@@ -1,4 +1,5 @@
 Starfield ContentCatalog.txt checker
+<hr>
 
 Checks ContentCatalog.txt file automatically when launched.
 
@@ -22,3 +23,6 @@ The launch Starfield button is hard coded to the default Steam installation path
 
 Quit the game if it's running before using the Clean or Edit buttons.
 
+<div align="left">
+    <img src="/Screenshot.png" width="408px" align="left"</img> 
+</div>
