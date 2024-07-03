@@ -1,6 +1,8 @@
 Starfield ContentCatalog.txt checker
 
-![Screenshot](/Screenshot.png?raw=true "Screenshot")
+<div align="center">
+    <img src="/Screenshot.png" width="408px" align="left"</img> 
+</div>
 
 Checks ContentCatalog.txt file automatically when launched.
 
