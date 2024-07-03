@@ -1,10 +1,16 @@
+Starfield ContentCatalog.txt checker
+
 Checks ContentCatalog.txt file automatically when launched.
 
 Check button re-checks the file.
 
 Clean button repairs the file. It may take a while with a large mod list.
 
-Edit button opens the file for editing with your default text editor.
+Backup button copies ContentCatalog.txt to ContentCatalog.txt.bak. A previous backup if it exists will be overwritten without warning.
+
+Restore button copies ContentCatalog.txt.bak to ContentCatalog.txt
+
+Edit buttons are for opening ContentCatalog.txt or Plugins.txt files for editing with your default text editor.
 
 Explore button opens the folder with your plugin and catalog files.
 You could manually edit the Plugins.txt file to enable or disable mods if needed.
@@ -16,4 +22,3 @@ The launch Starfield button is hard coded to the default Steam installation path
 
 Quit the game if it's running before using the Clean or Edit buttons.
 
-Source code is created in Visual Studio 2022 Community Edition. No external libraries are required.
