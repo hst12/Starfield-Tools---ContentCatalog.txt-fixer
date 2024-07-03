@@ -41,29 +41,42 @@ namespace Starfield_Tools
             StringBuilder cleanedContents = new StringBuilder();
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
-            int errorCount = 0;
-            using (StreamReader reader = new StreamReader(filePath))
+            int errorCount = 0,lineCount=0;
+            try
             {
-                int character;
-                while ((character = reader.Read()) != -1)
+
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    if ((character < 32 || character > 126) && (character != '\n' && character != '\r'))
+                    int character;
+                    while ((character = reader.Read()) != -1)
                     {
-                        errorCount++;
-                        richTextBox1.Text += "Invalid character "+character+" "+(char)character + "\n";
+                        if (character == 'n' || character == '\r') lineCount++;
+                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r'))
+                        {
+                            errorCount++;
+                            richTextBox1.Text += "Invalid character at line " + lineCount.ToString() + "\n";
+                        }
+                    }
+                    if (errorCount > 0)
+                    {
+                        toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Clean recommended";
+                        return false;
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "Content Catalog looks OK";
+                        DisplayCatalog();
+                        return true;
                     }
                 }
-                if (errorCount > 0)
-                {
-                    toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Clean recommended";
-                    return false;
-                }
-                else
-                {
-                    toolStripStatusLabel1.Text = "Content Catalog looks OK";
-                    DisplayCatalog();
-                    return true;
-                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}"+"\n\n Creating dummy file", "Error");
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+          @"\Starfield\ContentCatalog.txt", string.Empty);
+                toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt file created";
+                return false;
             }
 
         }
@@ -187,6 +200,54 @@ Quit the game if it's running before using the Clean or Edit buttons.
         private void btnExplore_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+@"\Starfield");
+        }
+
+        private void btnEditPlugins_Click(object sender, EventArgs e)
+        {
+            string pathToFile = (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+          @"\Starfield\Plugins.txt");
+
+            // Launch Notepad and open the specified text file
+            Process.Start(pathToFile);
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            string sourceFileName = GetCatalog();
+            string destFileName = sourceFileName + ".bak";
+
+            try
+            {
+                // Copy the file
+                File.Copy(sourceFileName, destFileName,true); // overwrite
+
+                Console.WriteLine("File copied successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
+        
+    }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            string destFileName = GetCatalog();
+            string sourceFileName = destFileName+".bak";
+            
+
+            try
+            {
+                // Copy the file
+                File.Copy(sourceFileName, destFileName, true); // overwrite
+
+                Console.WriteLine("File copied successfully!");
+                CheckCatalog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error");
+            }
         }
     }
 }
