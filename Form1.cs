@@ -182,6 +182,8 @@ Check button re-checks the file.
 Clean button repairs the file. It may take a while with a large mod list.
 
 Backup button copies ContentCatalog.txt to ContentCatalog.txt.bak. A previous backup if it exists will be overwritten without warning.
+Use the backup function before loading your saved game since this is when the corruption may occur.
+It's best to exit the game after making modifications to your installed mods, updating mods or changing the load order.
 
 Restore button copies ContentCatalog.txt.bak to ContentCatalog.txt
 
