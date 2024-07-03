@@ -181,7 +181,11 @@ Check button re-checks the file.
 
 Clean button repairs the file. It may take a while with a large mod list.
 
-Edit button opens the file for editing with your default text editor.
+Backup button copies ContentCatalog.txt to ContentCatalog.txt.bak. A previous backup if it exists will be overwritten without warning.
+
+Restore button copies ContentCatalog.txt.bak to ContentCatalog.txt
+
+Edit buttons are for opening ContentCatalog.txt or Plugins.txt files for editing with your default text editor.
 
 Explore button opens the folder with your plugin and catalog files.
 You could manually edit the Plugins.txt file to enable or disable mods if needed.

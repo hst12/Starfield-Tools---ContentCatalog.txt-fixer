@@ -40,14 +40,14 @@
             this.btnStarfield = new System.Windows.Forms.Button();
             this.btnExplore = new System.Windows.Forms.Button();
             this.btnEditPlugins = new System.Windows.Forms.Button();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
+            this.btnRestore = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAbout = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnBackup = new System.Windows.Forms.Button();
-            this.btnRestore = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -84,7 +84,7 @@
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
-            this.btnQuit.TabIndex = 10;
+            this.btnQuit.TabIndex = 12;
             this.btnQuit.Text = "Quit";
             this.toolTip1.SetToolTip(this.btnQuit, "Quit");
             this.btnQuit.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(262, 50);
-            this.btnLoad.TabIndex = 5;
+            this.btnLoad.TabIndex = 7;
             this.btnLoad.Text = "Edit ContentCatalog.txt";
             this.toolTip1.SetToolTip(this.btnLoad, "Edit with default text editor");
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
             this.btnStarfield.Name = "btnStarfield";
             this.btnStarfield.Size = new System.Drawing.Size(178, 50);
-            this.btnStarfield.TabIndex = 8;
+            this.btnStarfield.TabIndex = 10;
             this.btnStarfield.Text = "Launch Starfield";
             this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield (not recommended for normal play)");
             this.btnStarfield.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@
             this.btnExplore.Location = new System.Drawing.Point(465, 31);
             this.btnExplore.Name = "btnExplore";
             this.btnExplore.Size = new System.Drawing.Size(150, 50);
-            this.btnExplore.TabIndex = 7;
+            this.btnExplore.TabIndex = 9;
             this.btnExplore.Text = "Explore";
             this.toolTip1.SetToolTip(this.btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
             this.btnExplore.UseVisualStyleBackColor = true;
@@ -155,11 +155,22 @@
             this.btnEditPlugins.Location = new System.Drawing.Point(279, 31);
             this.btnEditPlugins.Name = "btnEditPlugins";
             this.btnEditPlugins.Size = new System.Drawing.Size(180, 50);
-            this.btnEditPlugins.TabIndex = 6;
+            this.btnEditPlugins.TabIndex = 8;
             this.btnEditPlugins.Text = "Edit Plugins.txt";
             this.toolTip1.SetToolTip(this.btnEditPlugins, "Edit with default text editor");
             this.btnEditPlugins.UseVisualStyleBackColor = true;
             this.btnEditPlugins.Click += new System.EventHandler(this.btnEditPlugins_Click);
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.Location = new System.Drawing.Point(330, 35);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(150, 50);
+            this.btnBackup.TabIndex = 5;
+            this.btnBackup.Text = "Backup";
+            this.toolTip1.SetToolTip(this.btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
             // statusStrip1
             // 
@@ -195,6 +206,16 @@
             this.grpActions.Text = "Actions";
             this.grpActions.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnRestore
+            // 
+            this.btnRestore.Location = new System.Drawing.Point(487, 35);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(150, 50);
+            this.btnRestore.TabIndex = 6;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnAbout);
@@ -215,7 +236,7 @@
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
-            this.btnAbout.TabIndex = 9;
+            this.btnAbout.TabIndex = 11;
             this.btnAbout.Text = "About";
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
@@ -231,27 +252,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
-            // 
-            // btnBackup
-            // 
-            this.btnBackup.Location = new System.Drawing.Point(330, 35);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(150, 50);
-            this.btnBackup.TabIndex = 5;
-            this.btnBackup.Text = "Backup";
-            this.toolTip1.SetToolTip(this.btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
-            this.btnBackup.UseVisualStyleBackColor = true;
-            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
-            // 
-            // btnRestore
-            // 
-            this.btnRestore.Location = new System.Drawing.Point(487, 35);
-            this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(150, 50);
-            this.btnRestore.TabIndex = 6;
-            this.btnRestore.Text = "Restore";
-            this.btnRestore.UseVisualStyleBackColor = true;
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // frmStarfieldTools
             // 
