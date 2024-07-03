@@ -1,5 +1,7 @@
 Starfield ContentCatalog.txt checker
 
+![Screenshot](/Screenshot.png?raw=true "Screenshot")
+
 Checks ContentCatalog.txt file automatically when launched.
 
 Check button re-checks the file.
