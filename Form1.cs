@@ -59,7 +59,7 @@ namespace Starfield_Tools
                     }
                     if (errorCount > 0)
                     {
-                        toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Clean recommended";
+                        toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Restore or Clean recommended";
                         return false;
                     }
                     else
