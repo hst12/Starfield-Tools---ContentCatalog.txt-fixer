@@ -225,7 +225,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
                 // Copy the file
                 File.Copy(sourceFileName, destFileName,true); // overwrite
 
-                Console.WriteLine("File copied successfully!");
+                toolStripStatusLabel1.Text="Backup done";
             }
             catch (Exception ex)
             {

@@ -62,7 +62,7 @@
             this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
             this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(776, 527);
+            this.grpCheckCatalog.Size = new System.Drawing.Size(1136, 527);
             this.grpCheckCatalog.TabIndex = 1;
             this.grpCheckCatalog.TabStop = false;
             this.grpCheckCatalog.Text = "Catalog Contents";
@@ -73,7 +73,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(758, 458);
+            this.richTextBox1.Size = new System.Drawing.Size(1101, 458);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -180,7 +180,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 930);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(812, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1181, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -200,7 +200,7 @@
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(780, 112);
+            this.grpActions.Size = new System.Drawing.Size(1140, 112);
             this.grpActions.TabIndex = 0;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -225,7 +225,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(780, 112);
+            this.groupBox1.Size = new System.Drawing.Size(1115, 112);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
@@ -248,7 +248,7 @@
             this.groupBox2.Controls.Add(this.btnLoad);
             this.groupBox2.Location = new System.Drawing.Point(18, 679);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(780, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1115, 112);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
@@ -258,7 +258,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(812, 972);
+            this.ClientSize = new System.Drawing.Size(1181, 972);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpActions);
