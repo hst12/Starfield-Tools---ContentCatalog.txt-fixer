@@ -1,4 +1,4 @@
-Starfield ContentCatalog.txt checker
+<b>Starfield ContentCatalog.txt checker</b>
 <hr>
 
 Checks ContentCatalog.txt file automatically when launched.
