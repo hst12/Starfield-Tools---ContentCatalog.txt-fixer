@@ -185,6 +185,7 @@ namespace Starfield_Tools
 
             toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
             richTextBox2.Text += "Clean complete\n";
+            BackupCatalog();
             DisplayCatalog();
         }
 
