@@ -259,7 +259,7 @@ namespace Starfield_Tools
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            string AboutText = @"Starfield ContentCatalog.txt checker
+            string AboutText = Application.ProductName+" "+Application.ProductVersion+"\n\n"+ @"Starfield ContentCatalog.txt checker
 
 Checks ContentCatalog.txt file automatically when launched.
 
