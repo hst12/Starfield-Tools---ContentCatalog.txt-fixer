@@ -3,6 +3,9 @@
 
 Checks ContentCatalog.txt file automatically when launched.
 
+Latest version works auotmatically. Run it before going to the Creations menu and afer exiting the Creations menu - quit the game and run the tool before loading a saved game if you've installed new mods or updated mods in the Creations menu.
+No need to use the tool if you're just playing the game normally.
+
 <b>Check</b> button re-checks the file.
 
 <b>Clean</b> button repairs the file. It may take a while with a large mod list.
