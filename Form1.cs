@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,13 +15,77 @@ using System.Windows.Forms;
 
 namespace Starfield_Tools
 {
+
     public partial class frmStarfieldTools : Form
     {
+
+        //private bool AutoCheck = true, AutoClean = true, AutoBackup = true, AutoRestore = true;
+        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore;
+
         public frmStarfieldTools()
         {
             InitializeComponent();
-            CheckCatalog();
+
+            // Initialise Checkboxes
+            // Retrieve settings
+            AutoCheck = Properties.Settings.Default.AutoCheck;
+            AutoClean = Properties.Settings.Default.AutoClean;
+            AutoBackup = Properties.Settings.Default.AutoBackup;
+            AutoRestore = Properties.Settings.Default.AutoRestore;
+
+            AutoCheck = true;
+            AutoClean = true;
+            AutoBackup = true;
+            AutoRestore = true;
+
+
+            chkAutoCheck.Checked = AutoCheck;
+            chkAutoClean.Checked = AutoClean;
+            chkAutoBackup.Checked = AutoBackup;
+            chkAutoRestore.Checked = AutoRestore;
+
+            richTextBox2.Text = "";
+            if (AutoCheck) // Check catalog status if enabled
+            {
+                if (!CheckCatalog()) // If not okay, then...
+                {
+                    if (AutoRestore) // Restore backup file if auto restore is on
+                        if (!RestoreCatalog()) // Check restore status
+                            if (AutoClean) // Clean if restore failed
+                                CleanCatalog();
+                }
+                toolStripStatusLabel1.Text = "Checks complete";
+            }
+            else toolStripStatusLabel1.Text = "Ready";
+
+
+
+            if (AutoBackup)
+                if (!CheckBackup()) // Backup if necessary
+                    BackupCatalog();
+
             DisplayCatalog();
+
+        }
+
+        private bool CheckBackup()
+        {
+            string fileName1 = GetCatalog();
+            string fileName2 = fileName1 + ".bak";
+
+            DateTime lastWriteTime1 = File.GetLastWriteTime(fileName1);
+            DateTime lastWriteTime2 = File.GetLastWriteTime(fileName2);
+
+            if (lastWriteTime1 == lastWriteTime2)
+            {
+                richTextBox2.Text += "Backup is up to date.\n";
+                return true;
+            }
+            else
+            {
+                richTextBox2.Text += "Backup is out of date.\n";
+                return false;
+            }
         }
 
         private void DisplayCatalog()
@@ -32,16 +97,19 @@ namespace Starfield_Tools
         {
             return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
           @"\Starfield\ContentCatalog.txt");
-    }
+        }
 
-        private bool CheckCatalog()
+        private bool CheckCatalog() // returns true if catalog good
         {
             string filePath = GetCatalog();
             // Read the file character by character
             StringBuilder cleanedContents = new StringBuilder();
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
-            int errorCount = 0,lineCount=0;
+            int errorCount = 0, lineCount = 0;
+
+            richTextBox2.Text += "Checking Catalog\n";
+
             try
             {
 
@@ -59,12 +127,14 @@ namespace Starfield_Tools
                     }
                     if (errorCount > 0)
                     {
+                        richTextBox2.Text = "Error(s) found\n";
                         toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Restore or Clean recommended";
                         return false;
                     }
                     else
                     {
                         toolStripStatusLabel1.Text = "Content Catalog looks OK";
+                        richTextBox2.Text += "Catalog OK\n";
                         DisplayCatalog();
                         return true;
                     }
@@ -72,7 +142,7 @@ namespace Starfield_Tools
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Error: {e.Message}"+"\n\n Creating dummy file", "Error");
+                MessageBox.Show($"Error: {e.Message}" + "\n\n Creating dummy file", "Error");
                 File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
           @"\Starfield\ContentCatalog.txt", string.Empty);
                 toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt file created";
@@ -88,7 +158,7 @@ namespace Starfield_Tools
             toolStripStatusLabel1.Text = "Checking...";
             // Read the file character by character
             StringBuilder cleanedContents = new StringBuilder();
-            
+
             using (StreamReader reader = new StreamReader(filePath))
             {
                 int character;
@@ -113,18 +183,32 @@ namespace Starfield_Tools
             // Write the cleaned contents back to the file
             File.WriteAllText(filePath, cleanedContents.ToString());
 
-            toolStripStatusLabel1.Text="File cleaned and rewritten successfully";
-            DisplayCatalog() ;
+            toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
+            richTextBox2.Text += "Clean complete\n";
+            DisplayCatalog();
         }
 
         private void cmdClean_Click(object sender, EventArgs e)
         {
-            if (!CheckCatalog()) CleanCatalog();
-            else toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
-         }
+            if (!CheckCatalog())
+                CleanCatalog();
+            else
+            {
+                richTextBox2.Text += "Cleaning not needed\n";
+                toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
+            }
+        }
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
+            // Set a values
+
+            Properties.Settings.Default.AutoCheck = AutoCheck;
+            Properties.Settings.Default.AutoClean = AutoClean;
+            Properties.Settings.Default.AutoBackup = AutoBackup;
+            Properties.Settings.Default.AutoRestore = AutoRestore;
+            Properties.Settings.Default.Save();
+
             Application.Exit();
         }
 
@@ -139,7 +223,7 @@ namespace Starfield_Tools
             string pathToFile = GetCatalog();
 
             // Launch Notepad and open the specified text file
-            Process.Start( pathToFile);
+            Process.Start(pathToFile);
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -199,13 +283,13 @@ The launch Starfield button is hard coded to the default Steam installation path
 
 Quit the game if it's running before using the Clean or Edit buttons.
 ";
-                
-            MessageBox.Show(AboutText,"Starfield Tools");
+
+            MessageBox.Show(AboutText, "Starfield Tools");
         }
 
         private void btnExplore_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+@"\Starfield");
+            Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield");
         }
 
         private void btnEditPlugins_Click(object sender, EventArgs e)
@@ -217,43 +301,64 @@ Quit the game if it's running before using the Clean or Edit buttons.
             Process.Start(pathToFile);
         }
 
+        private void BackupCatalog()
+        {
+            if (!CheckCatalog())
+            {
+                richTextBox2.Text = "Catalog is corrupted. Backup not made.\n";
+                toolStripStatusLabel1.Text = "Catalog is corrupted. Backup not made.";
+                return;
+            }
+
+            if (!CheckBackup())
+            {
+                string sourceFileName = GetCatalog();
+                string destFileName = sourceFileName + ".bak";
+
+                try
+                {
+                    // Copy the file
+                    File.Copy(sourceFileName, destFileName, true); // overwrite
+                    richTextBox2.Text += "Backup done\n";
+                    toolStripStatusLabel1.Text = "Backup done";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Backup failed");
+                }
+            }
+        }
+
         private void btnBackup_Click(object sender, EventArgs e)
         {
-            string sourceFileName = GetCatalog();
-            string destFileName = sourceFileName + ".bak";
+            BackupCatalog();
+        }
 
-            try
-            {
-                // Copy the file
-                File.Copy(sourceFileName, destFileName,true); // overwrite
-
-                toolStripStatusLabel1.Text="Backup done";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Error");
-            }
-        
-    }
-
-        private void btnRestore_Click(object sender, EventArgs e)
+        private bool RestoreCatalog()
         {
             string destFileName = GetCatalog();
-            string sourceFileName = destFileName+".bak";
-            
+            string sourceFileName = destFileName + ".bak";
 
             try
             {
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                Console.WriteLine("File copied successfully!");
+                richTextBox2.Text += "Restore done\n";
                 CheckCatalog();
+                return true;
             }
             catch (Exception ex)
             {
+                richTextBox2.Text += "Restore failed.\n";
                 MessageBox.Show($"Error: {ex.Message}", "Error");
+                return false;
             }
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            RestoreCatalog();
         }
     }
 }

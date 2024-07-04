@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStarfieldTools));
             this.grpCheckCatalog = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnQuit = new System.Windows.Forms.Button();
             this.cmdClean = new System.Windows.Forms.Button();
@@ -41,22 +42,29 @@
             this.btnExplore = new System.Windows.Forms.Button();
             this.btnEditPlugins = new System.Windows.Forms.Button();
             this.btnBackup = new System.Windows.Forms.Button();
+            this.btnRestore = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
-            this.btnRestore = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAbout = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpAuto = new System.Windows.Forms.GroupBox();
+            this.chkAutoRestore = new System.Windows.Forms.CheckBox();
+            this.chkAutoBackup = new System.Windows.Forms.CheckBox();
+            this.chkAutoClean = new System.Windows.Forms.CheckBox();
+            this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.grpAuto.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpCheckCatalog
             // 
+            this.grpCheckCatalog.Controls.Add(this.richTextBox2);
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
             this.grpCheckCatalog.Location = new System.Drawing.Point(22, 21);
             this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
@@ -65,7 +73,17 @@
             this.grpCheckCatalog.Size = new System.Drawing.Size(1136, 527);
             this.grpCheckCatalog.TabIndex = 1;
             this.grpCheckCatalog.TabStop = false;
-            this.grpCheckCatalog.Text = "Catalog Contents";
+            this.grpCheckCatalog.Text = "Catalog Contents and Log";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(10, 289);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
+            this.richTextBox2.Size = new System.Drawing.Size(1101, 244);
+            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.TabStop = false;
+            this.richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
@@ -73,7 +91,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1101, 458);
+            this.richTextBox1.Size = new System.Drawing.Size(1101, 244);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -172,12 +190,23 @@
             this.btnBackup.UseVisualStyleBackColor = true;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
+            // btnRestore
+            // 
+            this.btnRestore.Location = new System.Drawing.Point(487, 35);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(150, 50);
+            this.btnRestore.TabIndex = 6;
+            this.btnRestore.Text = "Restore";
+            this.toolTip1.SetToolTip(this.btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
+            this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 930);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1072);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1181, 42);
@@ -196,7 +225,7 @@
             this.grpActions.Controls.Add(this.btnBackup);
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
-            this.grpActions.Location = new System.Drawing.Point(18, 558);
+            this.grpActions.Location = new System.Drawing.Point(15, 558);
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
@@ -206,27 +235,16 @@
             this.grpActions.Text = "Actions";
             this.grpActions.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // btnRestore
-            // 
-            this.btnRestore.Location = new System.Drawing.Point(487, 35);
-            this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(150, 50);
-            this.btnRestore.TabIndex = 6;
-            this.btnRestore.Text = "Restore";
-            this.toolTip1.SetToolTip(this.btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
-            this.btnRestore.UseVisualStyleBackColor = true;
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Location = new System.Drawing.Point(18, 796);
+            this.groupBox1.Location = new System.Drawing.Point(15, 918);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1115, 112);
+            this.groupBox1.Size = new System.Drawing.Size(1140, 112);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
@@ -247,19 +265,74 @@
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
             this.groupBox2.Controls.Add(this.btnLoad);
-            this.groupBox2.Location = new System.Drawing.Point(18, 679);
+            this.groupBox2.Location = new System.Drawing.Point(15, 679);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1115, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1140, 112);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
+            // 
+            // grpAuto
+            // 
+            this.grpAuto.Controls.Add(this.chkAutoRestore);
+            this.grpAuto.Controls.Add(this.chkAutoBackup);
+            this.grpAuto.Controls.Add(this.chkAutoClean);
+            this.grpAuto.Controls.Add(this.chkAutoCheck);
+            this.grpAuto.Enabled = false;
+            this.grpAuto.Location = new System.Drawing.Point(15, 797);
+            this.grpAuto.Name = "grpAuto";
+            this.grpAuto.Size = new System.Drawing.Size(1140, 112);
+            this.grpAuto.TabIndex = 6;
+            this.grpAuto.TabStop = false;
+            this.grpAuto.Text = "Auto Functions";
+            // 
+            // chkAutoRestore
+            // 
+            this.chkAutoRestore.AutoSize = true;
+            this.chkAutoRestore.Location = new System.Drawing.Point(513, 31);
+            this.chkAutoRestore.Name = "chkAutoRestore";
+            this.chkAutoRestore.Size = new System.Drawing.Size(169, 29);
+            this.chkAutoRestore.TabIndex = 3;
+            this.chkAutoRestore.Text = "Auto Restore";
+            this.chkAutoRestore.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoBackup
+            // 
+            this.chkAutoBackup.AutoSize = true;
+            this.chkAutoBackup.Location = new System.Drawing.Point(340, 31);
+            this.chkAutoBackup.Name = "chkAutoBackup";
+            this.chkAutoBackup.Size = new System.Drawing.Size(166, 29);
+            this.chkAutoBackup.TabIndex = 2;
+            this.chkAutoBackup.Text = "Auto Backup";
+            this.chkAutoBackup.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoClean
+            // 
+            this.chkAutoClean.AutoSize = true;
+            this.chkAutoClean.Location = new System.Drawing.Point(184, 31);
+            this.chkAutoClean.Name = "chkAutoClean";
+            this.chkAutoClean.Size = new System.Drawing.Size(150, 29);
+            this.chkAutoClean.TabIndex = 1;
+            this.chkAutoClean.Text = "Auto Clean";
+            this.chkAutoClean.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoCheck
+            // 
+            this.chkAutoCheck.AutoSize = true;
+            this.chkAutoCheck.Location = new System.Drawing.Point(17, 31);
+            this.chkAutoCheck.Name = "chkAutoCheck";
+            this.chkAutoCheck.Size = new System.Drawing.Size(155, 29);
+            this.chkAutoCheck.TabIndex = 0;
+            this.chkAutoCheck.Text = "Auto Check";
+            this.chkAutoCheck.UseVisualStyleBackColor = true;
             // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1181, 972);
+            this.ClientSize = new System.Drawing.Size(1181, 1114);
+            this.Controls.Add(this.grpAuto);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpActions);
@@ -278,6 +351,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.grpAuto.ResumeLayout(false);
+            this.grpAuto.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +377,12 @@
         private System.Windows.Forms.Button btnEditPlugins;
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.Button btnBackup;
+        private System.Windows.Forms.GroupBox grpAuto;
+        private System.Windows.Forms.CheckBox chkAutoBackup;
+        private System.Windows.Forms.CheckBox chkAutoClean;
+        private System.Windows.Forms.CheckBox chkAutoCheck;
+        private System.Windows.Forms.CheckBox chkAutoRestore;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 
