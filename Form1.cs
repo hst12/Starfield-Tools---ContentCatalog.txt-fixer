@@ -25,7 +25,7 @@ namespace Starfield_Tools
         public frmStarfieldTools()
         {
             InitializeComponent();
-
+            
             // Initialise Checkboxes
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -334,6 +334,12 @@ Quit the game if it's running before using the Clean or Edit buttons.
                     MessageBox.Show($"Error: {ex.Message}", "Backup failed");
                 }
             }
+        }
+
+        private void btnLoadOrder_Click(object sender, EventArgs e)
+        {
+            frmLoadOrder frmLO=new frmLoadOrder();
+            frmLO.Show();
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

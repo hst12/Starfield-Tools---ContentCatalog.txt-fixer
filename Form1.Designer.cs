@@ -49,6 +49,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAbout = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLoadOrder = new System.Windows.Forms.Button();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
@@ -66,42 +67,43 @@
             // 
             this.grpCheckCatalog.Controls.Add(this.richTextBox2);
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
-            this.grpCheckCatalog.Location = new System.Drawing.Point(22, 21);
-            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
+            this.grpCheckCatalog.Location = new System.Drawing.Point(29, 26);
+            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(5);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
-            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(1136, 527);
+            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(5);
+            this.grpCheckCatalog.Size = new System.Drawing.Size(1515, 653);
             this.grpCheckCatalog.TabIndex = 0;
             this.grpCheckCatalog.TabStop = false;
             this.grpCheckCatalog.Text = "Catalog Contents and Log";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(10, 289);
+            this.richTextBox2.Location = new System.Drawing.Point(13, 358);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1101, 244);
+            this.richTextBox2.Size = new System.Drawing.Size(1467, 302);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(10, 35);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.richTextBox1.Location = new System.Drawing.Point(13, 43);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1101, 244);
+            this.richTextBox1.Size = new System.Drawing.Size(1467, 302);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(362, 34);
-            this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnQuit.Location = new System.Drawing.Point(483, 42);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(5);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(150, 50);
+            this.btnQuit.Size = new System.Drawing.Size(200, 62);
             this.btnQuit.TabIndex = 13;
             this.btnQuit.Text = "Quit";
             this.toolTip1.SetToolTip(this.btnQuit, "Quit");
@@ -110,10 +112,10 @@
             // 
             // cmdClean
             // 
-            this.cmdClean.Location = new System.Drawing.Point(170, 35);
-            this.cmdClean.Margin = new System.Windows.Forms.Padding(6);
+            this.cmdClean.Location = new System.Drawing.Point(227, 43);
+            this.cmdClean.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cmdClean.Name = "cmdClean";
-            this.cmdClean.Size = new System.Drawing.Size(150, 50);
+            this.cmdClean.Size = new System.Drawing.Size(200, 62);
             this.cmdClean.TabIndex = 5;
             this.cmdClean.Text = "Clean";
             this.toolTip1.SetToolTip(this.cmdClean, "Strip out corrupt characters");
@@ -122,10 +124,11 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(10, 31);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLoad.AutoSize = true;
+            this.btnLoad.Location = new System.Drawing.Point(13, 38);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(5);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(262, 50);
+            this.btnLoad.Size = new System.Drawing.Size(349, 62);
             this.btnLoad.TabIndex = 8;
             this.btnLoad.Text = "Edit ContentCatalog.txt";
             this.toolTip1.SetToolTip(this.btnLoad, "Edit with default text editor");
@@ -134,10 +137,10 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(10, 35);
-            this.btnCheck.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCheck.Location = new System.Drawing.Point(13, 43);
+            this.btnCheck.Margin = new System.Windows.Forms.Padding(5);
             this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(150, 50);
+            this.btnCheck.Size = new System.Drawing.Size(200, 62);
             this.btnCheck.TabIndex = 4;
             this.btnCheck.Text = "Check";
             this.toolTip1.SetToolTip(this.btnCheck, "Check for corruption");
@@ -147,10 +150,10 @@
             // btnStarfield
             // 
             this.btnStarfield.AutoSize = true;
-            this.btnStarfield.Location = new System.Drawing.Point(14, 34);
-            this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStarfield.Location = new System.Drawing.Point(19, 42);
+            this.btnStarfield.Margin = new System.Windows.Forms.Padding(5);
             this.btnStarfield.Name = "btnStarfield";
-            this.btnStarfield.Size = new System.Drawing.Size(178, 50);
+            this.btnStarfield.Size = new System.Drawing.Size(237, 62);
             this.btnStarfield.TabIndex = 11;
             this.btnStarfield.Text = "Launch Starfield";
             this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield (not recommended for normal play)");
@@ -159,9 +162,11 @@
             // 
             // btnExplore
             // 
-            this.btnExplore.Location = new System.Drawing.Point(465, 31);
+            this.btnExplore.AutoSize = true;
+            this.btnExplore.Location = new System.Drawing.Point(620, 38);
+            this.btnExplore.Margin = new System.Windows.Forms.Padding(4);
             this.btnExplore.Name = "btnExplore";
-            this.btnExplore.Size = new System.Drawing.Size(150, 50);
+            this.btnExplore.Size = new System.Drawing.Size(200, 62);
             this.btnExplore.TabIndex = 10;
             this.btnExplore.Text = "Explore";
             this.toolTip1.SetToolTip(this.btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
@@ -170,9 +175,11 @@
             // 
             // btnEditPlugins
             // 
-            this.btnEditPlugins.Location = new System.Drawing.Point(279, 31);
+            this.btnEditPlugins.AutoSize = true;
+            this.btnEditPlugins.Location = new System.Drawing.Point(372, 38);
+            this.btnEditPlugins.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditPlugins.Name = "btnEditPlugins";
-            this.btnEditPlugins.Size = new System.Drawing.Size(180, 50);
+            this.btnEditPlugins.Size = new System.Drawing.Size(240, 62);
             this.btnEditPlugins.TabIndex = 9;
             this.btnEditPlugins.Text = "Edit Plugins.txt";
             this.toolTip1.SetToolTip(this.btnEditPlugins, "Edit with default text editor");
@@ -181,9 +188,10 @@
             // 
             // btnBackup
             // 
-            this.btnBackup.Location = new System.Drawing.Point(330, 35);
+            this.btnBackup.Location = new System.Drawing.Point(440, 43);
+            this.btnBackup.Margin = new System.Windows.Forms.Padding(4);
             this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(150, 50);
+            this.btnBackup.Size = new System.Drawing.Size(200, 62);
             this.btnBackup.TabIndex = 6;
             this.btnBackup.Text = "Backup";
             this.toolTip1.SetToolTip(this.btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
@@ -192,9 +200,10 @@
             // 
             // btnRestore
             // 
-            this.btnRestore.Location = new System.Drawing.Point(487, 35);
+            this.btnRestore.Location = new System.Drawing.Point(649, 43);
+            this.btnRestore.Margin = new System.Windows.Forms.Padding(4);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(150, 50);
+            this.btnRestore.Size = new System.Drawing.Size(200, 62);
             this.btnRestore.TabIndex = 7;
             this.btnRestore.Text = "Restore";
             this.toolTip1.SetToolTip(this.btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
@@ -206,10 +215,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1072);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1339);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1181, 42);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1575, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -225,11 +234,11 @@
             this.grpActions.Controls.Add(this.btnBackup);
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
-            this.grpActions.Location = new System.Drawing.Point(15, 558);
-            this.grpActions.Margin = new System.Windows.Forms.Padding(6);
+            this.grpActions.Location = new System.Drawing.Point(20, 692);
+            this.grpActions.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.grpActions.Name = "grpActions";
-            this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1140, 112);
+            this.grpActions.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.grpActions.Size = new System.Drawing.Size(1520, 139);
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -240,21 +249,21 @@
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Location = new System.Drawing.Point(15, 918);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox1.Location = new System.Drawing.Point(20, 1138);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1140, 112);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.groupBox1.Size = new System.Drawing.Size(1520, 139);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(202, 34);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAbout.Location = new System.Drawing.Point(269, 42);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(150, 50);
+            this.btnAbout.Size = new System.Drawing.Size(200, 62);
             this.btnAbout.TabIndex = 12;
             this.btnAbout.Text = "About";
             this.btnAbout.UseVisualStyleBackColor = true;
@@ -262,15 +271,30 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnLoadOrder);
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
             this.groupBox2.Controls.Add(this.btnLoad);
-            this.groupBox2.Location = new System.Drawing.Point(15, 679);
+            this.groupBox2.Location = new System.Drawing.Point(20, 842);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1140, 112);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(1520, 139);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
+            // 
+            // btnLoadOrder
+            // 
+            this.btnLoadOrder.AutoSize = true;
+            this.btnLoadOrder.Location = new System.Drawing.Point(828, 38);
+            this.btnLoadOrder.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLoadOrder.Name = "btnLoadOrder";
+            this.btnLoadOrder.Size = new System.Drawing.Size(280, 62);
+            this.btnLoadOrder.TabIndex = 11;
+            this.btnLoadOrder.Text = "Enable/Disable Mods";
+            this.btnLoadOrder.UseVisualStyleBackColor = true;
+            this.btnLoadOrder.Click += new System.EventHandler(this.btnLoadOrder_Click);
             // 
             // grpAuto
             // 
@@ -279,9 +303,11 @@
             this.grpAuto.Controls.Add(this.chkAutoClean);
             this.grpAuto.Controls.Add(this.chkAutoCheck);
             this.grpAuto.Enabled = false;
-            this.grpAuto.Location = new System.Drawing.Point(15, 797);
+            this.grpAuto.Location = new System.Drawing.Point(20, 988);
+            this.grpAuto.Margin = new System.Windows.Forms.Padding(4);
             this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1140, 112);
+            this.grpAuto.Padding = new System.Windows.Forms.Padding(4);
+            this.grpAuto.Size = new System.Drawing.Size(1520, 139);
             this.grpAuto.TabIndex = 6;
             this.grpAuto.TabStop = false;
             this.grpAuto.Text = "Auto Functions";
@@ -289,9 +315,10 @@
             // chkAutoRestore
             // 
             this.chkAutoRestore.AutoSize = true;
-            this.chkAutoRestore.Location = new System.Drawing.Point(513, 31);
+            this.chkAutoRestore.Location = new System.Drawing.Point(684, 38);
+            this.chkAutoRestore.Margin = new System.Windows.Forms.Padding(4);
             this.chkAutoRestore.Name = "chkAutoRestore";
-            this.chkAutoRestore.Size = new System.Drawing.Size(169, 29);
+            this.chkAutoRestore.Size = new System.Drawing.Size(205, 35);
             this.chkAutoRestore.TabIndex = 3;
             this.chkAutoRestore.Text = "Auto Restore";
             this.chkAutoRestore.UseVisualStyleBackColor = true;
@@ -299,9 +326,10 @@
             // chkAutoBackup
             // 
             this.chkAutoBackup.AutoSize = true;
-            this.chkAutoBackup.Location = new System.Drawing.Point(340, 31);
+            this.chkAutoBackup.Location = new System.Drawing.Point(453, 38);
+            this.chkAutoBackup.Margin = new System.Windows.Forms.Padding(4);
             this.chkAutoBackup.Name = "chkAutoBackup";
-            this.chkAutoBackup.Size = new System.Drawing.Size(166, 29);
+            this.chkAutoBackup.Size = new System.Drawing.Size(200, 35);
             this.chkAutoBackup.TabIndex = 2;
             this.chkAutoBackup.Text = "Auto Backup";
             this.chkAutoBackup.UseVisualStyleBackColor = true;
@@ -309,9 +337,10 @@
             // chkAutoClean
             // 
             this.chkAutoClean.AutoSize = true;
-            this.chkAutoClean.Location = new System.Drawing.Point(184, 31);
+            this.chkAutoClean.Location = new System.Drawing.Point(245, 38);
+            this.chkAutoClean.Margin = new System.Windows.Forms.Padding(4);
             this.chkAutoClean.Name = "chkAutoClean";
-            this.chkAutoClean.Size = new System.Drawing.Size(150, 29);
+            this.chkAutoClean.Size = new System.Drawing.Size(180, 35);
             this.chkAutoClean.TabIndex = 1;
             this.chkAutoClean.Text = "Auto Clean";
             this.chkAutoClean.UseVisualStyleBackColor = true;
@@ -319,27 +348,28 @@
             // chkAutoCheck
             // 
             this.chkAutoCheck.AutoSize = true;
-            this.chkAutoCheck.Location = new System.Drawing.Point(17, 31);
+            this.chkAutoCheck.Location = new System.Drawing.Point(23, 38);
+            this.chkAutoCheck.Margin = new System.Windows.Forms.Padding(4);
             this.chkAutoCheck.Name = "chkAutoCheck";
-            this.chkAutoCheck.Size = new System.Drawing.Size(155, 29);
+            this.chkAutoCheck.Size = new System.Drawing.Size(187, 35);
             this.chkAutoCheck.TabIndex = 0;
             this.chkAutoCheck.Text = "Auto Check";
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             // 
             // frmStarfieldTools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1181, 1114);
+            this.ClientSize = new System.Drawing.Size(1575, 1381);
             this.Controls.Add(this.grpAuto);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpActions);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.grpCheckCatalog);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.Name = "frmStarfieldTools";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -351,6 +381,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.grpAuto.ResumeLayout(false);
             this.grpAuto.PerformLayout();
             this.ResumeLayout(false);
@@ -383,6 +414,7 @@
         private System.Windows.Forms.CheckBox chkAutoCheck;
         private System.Windows.Forms.CheckBox chkAutoRestore;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button btnLoadOrder;
     }
 }
 
