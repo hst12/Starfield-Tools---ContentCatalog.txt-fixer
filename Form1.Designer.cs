@@ -65,35 +65,38 @@
             // 
             // grpCheckCatalog
             // 
+            this.grpCheckCatalog.AutoSize = true;
             this.grpCheckCatalog.Controls.Add(this.richTextBox2);
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
             this.grpCheckCatalog.Location = new System.Drawing.Point(29, 26);
             this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(5);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
             this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(5);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(1515, 653);
+            this.grpCheckCatalog.Size = new System.Drawing.Size(1515, 633);
             this.grpCheckCatalog.TabIndex = 0;
             this.grpCheckCatalog.TabStop = false;
             this.grpCheckCatalog.Text = "Catalog Contents and Log";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(13, 358);
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox2.Location = new System.Drawing.Point(5, 438);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1467, 302);
+            this.richTextBox2.Size = new System.Drawing.Size(1505, 190);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 43);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.richTextBox1.Location = new System.Drawing.Point(5, 36);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1467, 302);
+            this.richTextBox1.Size = new System.Drawing.Size(1505, 372);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -215,7 +218,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1339);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1282);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(1575, 42);
@@ -249,11 +252,12 @@
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Location = new System.Drawing.Point(20, 1138);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 1143);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.groupBox1.Size = new System.Drawing.Size(1520, 139);
+            this.groupBox1.Size = new System.Drawing.Size(1575, 139);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
@@ -292,7 +296,8 @@
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(280, 62);
             this.btnLoadOrder.TabIndex = 11;
-            this.btnLoadOrder.Text = "Enable/Disable Mods";
+            this.btnLoadOrder.Text = "Load Order";
+            this.toolTip1.SetToolTip(this.btnLoadOrder, "Turn mods on or off");
             this.btnLoadOrder.UseVisualStyleBackColor = true;
             this.btnLoadOrder.Click += new System.EventHandler(this.btnLoadOrder_Click);
             // 
@@ -360,7 +365,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1575, 1381);
+            this.ClientSize = new System.Drawing.Size(1575, 1324);
             this.Controls.Add(this.grpAuto);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

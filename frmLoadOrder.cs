@@ -17,7 +17,7 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
-            
+
 
             string loText;
             bool ModEnabled;
@@ -75,6 +75,61 @@ namespace Starfield_Tools
 
             }
             this.Close();
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            int y = dataGridView1.CurrentCell.RowIndex;
+            if (y < 1) return;
+            bool CurrentModEnabled;
+            string CurrentModLine;
+            bool NewModEnabled;
+            string NewModLine;
+
+            CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells[0].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells[1].Value;
+            NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
+            NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+
+
+            dataGridView1.Rows[y ].Cells[0].Value = CurrentModEnabled;
+            dataGridView1.Rows[y ].Cells[1].Value = CurrentModLine;
+
+            dataGridView1.Rows[y-1].Cells[0].Value = NewModEnabled;
+            dataGridView1.Rows[y-1].Cells[1].Value = NewModLine;
+
+            dataGridView1.Rows[y].Selected = false;
+            dataGridView1.Rows[y-1].Selected = true;
+
+            dataGridView1.CurrentCell = dataGridView1.Rows[y - 1].Cells[0];
+
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            int y = dataGridView1.CurrentCell.RowIndex;
+            if (y > dataGridView1.Rows.Count-2) return;
+            bool CurrentModEnabled;
+            string CurrentModLine;
+            bool NewModEnabled;
+            string NewModLine;
+
+            CurrentModEnabled = (bool)dataGridView1.Rows[y + 1].Cells[0].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y + 1].Cells[1].Value;
+            NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
+            NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+
+
+            dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
+            dataGridView1.Rows[y].Cells[1].Value = CurrentModLine;
+
+            dataGridView1.Rows[y + 1].Cells[0].Value = NewModEnabled;
+            dataGridView1.Rows[y + 1].Cells[1].Value = NewModLine;
+
+            dataGridView1.Rows[y].Selected = false;
+            dataGridView1.Rows[y +1].Selected = true;
+
+            dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells[0];
         }
     }
 }
