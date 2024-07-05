@@ -20,6 +20,8 @@ No need to use the tool if you're just playing the game normally.
 You could manually edit the Plugins.txt file to enable or disable mods if needed.
 A * character indicates that a mod is enabled.
 
+<b>Enable/Disable Mods</b> button shows a list of mods and allows them to be turned on or off.
+
 You can alt-tab from the game to check the ContentCatalog file to see if corruption has occurred by pressing the Check button.
 
 The launch Starfield button is hard coded to the default Steam installation path at the moment and is only intended for quick testing.
