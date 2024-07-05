@@ -30,15 +30,26 @@ namespace Starfield_Tools
                 while ((line = reader.ReadLine()) != null)
                 {
                     // Process each line here
-                    if (line[0] == '*')
+                    try
                     {
-                        ModEnabled = true;
-                        line = line.Substring(1);
+                        if (line != "")
+                        {
+                            if (line[0] == '*')
+                            {
+                                ModEnabled = true;
+                                line = line.Substring(1);
+                            }
+                            else
+                                ModEnabled = false;
+
+                            if (line[0] != '#')
+                                dataGridView1.Rows.Add(ModEnabled, line);
+                        }
                     }
-                    else
-                        ModEnabled = false;
-                    if (line[0] != '#')
-                        dataGridView1.Rows.Add(ModEnabled, line);
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Error: {e.Message}");
+                    }
                 }
             }
         }
