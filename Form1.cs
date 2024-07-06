@@ -229,6 +229,7 @@ namespace Starfield_Tools
         private void btnCheck_Click(object sender, EventArgs e)
         {
             CheckCatalog();
+            CheckBackup();
         }
 
         private void btnStarfield_Click(object sender, EventArgs e)
@@ -246,8 +247,15 @@ namespace Starfield_Tools
                 // Use steam64path as needed
             }
             MessageBox.Show(steam64path.ToString());*/
+            this.WindowState = FormWindowState.Minimized;
             toolStripStatusLabel1.Text = "Launching Starfield";
             System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", "-applaunch 1716740");
+            if (AutoCheck)
+                CheckCatalog();
+            if (AutoBackup)
+                if (!CheckBackup()) // Backup if necessary
+                BackupCatalog();
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
