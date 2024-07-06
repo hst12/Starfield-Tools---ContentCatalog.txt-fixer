@@ -45,6 +45,7 @@ namespace Starfield_Tools
             chkAutoRestore.Checked = AutoRestore;
 
             richTextBox2.Text = "";
+
             if (AutoCheck) // Check catalog status if enabled
             {
                 if (!CheckCatalog()) // If not okay, then...
@@ -58,14 +59,11 @@ namespace Starfield_Tools
             }
             else toolStripStatusLabel1.Text = "Ready";
 
-
-
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
 
             DisplayCatalog();
-
         }
 
         private bool CheckBackup()
