@@ -17,8 +17,11 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+            InitDataGrid();
+        }
 
-
+        private void InitDataGrid()
+        {
             string loText;
             bool ModEnabled;
 
@@ -53,7 +56,6 @@ namespace Starfield_Tools
                 }
             }
         }
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -141,6 +143,50 @@ namespace Starfield_Tools
             dataGridView1.Rows[y +1].Selected = true;
 
             dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells[0];
+        }
+
+        private string GetStarfieldPath()
+        {
+            return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+          @"\Starfield");
+        }
+
+        private void btnBackupPlugins_Click(object sender, EventArgs e)
+        {
+            string sourceFileName = GetStarfieldPath() + @"\Plugins.txt";
+            string destFileName = sourceFileName + ".bak";
+
+            try
+            {
+                // Copy the file
+                File.Copy(sourceFileName, destFileName, true); // overwrite
+                
+                //toolStripStatusLabel1.Text = "Backup done";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Backup failed");
+            }
+        }
+
+        private void btnRestorePlugins_Click(object sender, EventArgs e)
+        {
+            string sourceFileName = GetStarfieldPath() + @"\Plugins.txt.bak";
+            string destFileName = GetStarfieldPath() + @"\Plugins.txt";
+
+            try
+            {
+                // Copy the file
+                File.Copy(sourceFileName, destFileName, true); // overwrite
+                dataGridView1.Rows.Clear();
+                InitDataGrid();
+                
+                //toolStripStatusLabel1.Text = "Restore done";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Restore failed");
+            }
         }
     }
 }

@@ -37,6 +37,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
+            this.btnBackupPlugins = new System.Windows.Forms.Button();
+            this.btnRestorePlugins = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -58,7 +60,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(702, 804);
+            this.dataGridView1.Size = new System.Drawing.Size(1059, 804);
             this.dataGridView1.TabIndex = 0;
             // 
             // ModEnabled
@@ -100,7 +102,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(710, 836);
+            this.groupBox1.Size = new System.Drawing.Size(1067, 836);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enable or disable mods or re-order";
@@ -108,7 +110,7 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(494, 31);
+            this.btnCancel.Location = new System.Drawing.Point(881, 31);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
@@ -119,6 +121,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnRestorePlugins);
+            this.groupBox2.Controls.Add(this.btnBackupPlugins);
             this.groupBox2.Controls.Add(this.btnDown);
             this.groupBox2.Controls.Add(this.btnUp);
             this.groupBox2.Controls.Add(this.btnOK);
@@ -128,7 +132,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(710, 113);
+            this.groupBox2.Size = new System.Drawing.Size(1067, 113);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Actions";
@@ -155,12 +159,32 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
+            // btnBackupPlugins
+            // 
+            this.btnBackupPlugins.Location = new System.Drawing.Point(494, 32);
+            this.btnBackupPlugins.Name = "btnBackupPlugins";
+            this.btnBackupPlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnBackupPlugins.TabIndex = 6;
+            this.btnBackupPlugins.Text = "Backup";
+            this.btnBackupPlugins.UseVisualStyleBackColor = true;
+            this.btnBackupPlugins.Click += new System.EventHandler(this.btnBackupPlugins_Click);
+            // 
+            // btnRestorePlugins
+            // 
+            this.btnRestorePlugins.Location = new System.Drawing.Point(690, 32);
+            this.btnRestorePlugins.Name = "btnRestorePlugins";
+            this.btnRestorePlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnRestorePlugins.TabIndex = 7;
+            this.btnRestorePlugins.Text = "Restore";
+            this.btnRestorePlugins.UseVisualStyleBackColor = true;
+            this.btnRestorePlugins.Click += new System.EventHandler(this.btnRestorePlugins_Click);
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(710, 836);
+            this.ClientSize = new System.Drawing.Size(1067, 836);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -186,5 +210,7 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
+        private System.Windows.Forms.Button btnRestorePlugins;
+        private System.Windows.Forms.Button btnBackupPlugins;
     }
 }

@@ -25,7 +25,7 @@ namespace Starfield_Tools
         public frmStarfieldTools()
         {
             InitializeComponent();
-            
+
             // Initialise Checkboxes
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -91,10 +91,17 @@ namespace Starfield_Tools
             richTextBox1.Text = File.ReadAllText(GetCatalog());
         }
 
+
         private string GetCatalog()
         {
+            return (GetStarfieldPath() + @"\ContentCatalog.txt");
+        }
+
+
+        private string GetStarfieldPath()
+        {
             return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-          @"\Starfield\ContentCatalog.txt");
+          @"\Starfield");
         }
 
         private bool CheckCatalog() // returns true if catalog good
@@ -254,7 +261,7 @@ namespace Starfield_Tools
                 CheckCatalog();
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
-                BackupCatalog();
+                    BackupCatalog();
             this.WindowState = FormWindowState.Normal;
         }
 
@@ -265,7 +272,7 @@ namespace Starfield_Tools
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            string AboutText = Application.ProductName+" "+Application.ProductVersion+"\n\n"+ @"Starfield ContentCatalog.txt checker
+            string AboutText = Application.ProductName + " " + Application.ProductVersion + "\n\n" + @"Starfield ContentCatalog.txt checker
 
 Checks ContentCatalog.txt file automatically when launched.
 
@@ -346,7 +353,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private void btnLoadOrder_Click(object sender, EventArgs e)
         {
-            frmLoadOrder frmLO=new frmLoadOrder();
+            frmLoadOrder frmLO = new frmLoadOrder();
             frmLO.Show();
         }
 
