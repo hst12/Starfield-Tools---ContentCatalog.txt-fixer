@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnBottom = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.btnRestorePlugins = new System.Windows.Forms.Button();
+            this.btnBackupPlugins = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
-            this.btnBackupPlugins = new System.Windows.Forms.Button();
-            this.btnRestorePlugins = new System.Windows.Forms.Button();
+            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -52,7 +57,8 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ModEnabled,
-            this.ModNamexx});
+            this.ModNamexx,
+            this.Descritpion});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 28);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
@@ -60,26 +66,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(1059, 804);
+            this.dataGridView1.Size = new System.Drawing.Size(1749, 1120);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // ModEnabled
-            // 
-            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ModEnabled.HeaderText = "Enabled";
-            this.ModEnabled.MinimumWidth = 10;
-            this.ModEnabled.Name = "ModEnabled";
-            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.Width = 97;
-            // 
-            // ModNamexx
-            // 
-            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ModNamexx.HeaderText = "Mod Name";
-            this.ModNamexx.MinimumWidth = 10;
-            this.ModNamexx.Name = "ModNamexx";
-            this.ModNamexx.ReadOnly = true;
-            this.ModNamexx.Width = 161;
             // 
             // btnOK
             // 
@@ -102,7 +90,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1067, 836);
+            this.groupBox1.Size = new System.Drawing.Size(1757, 1152);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enable or disable mods or re-order";
@@ -110,7 +98,7 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(881, 31);
+            this.btnCancel.Location = new System.Drawing.Point(1571, 31);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
@@ -121,6 +109,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnBottom);
+            this.groupBox2.Controls.Add(this.btnTop);
+            this.groupBox2.Controls.Add(this.btnTest);
             this.groupBox2.Controls.Add(this.btnRestorePlugins);
             this.groupBox2.Controls.Add(this.btnBackupPlugins);
             this.groupBox2.Controls.Add(this.btnDown);
@@ -128,14 +119,62 @@
             this.groupBox2.Controls.Add(this.btnOK);
             this.groupBox2.Controls.Add(this.btnCancel);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 723);
+            this.groupBox2.Location = new System.Drawing.Point(0, 1031);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1067, 113);
+            this.groupBox2.Size = new System.Drawing.Size(1757, 121);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Actions";
+            // 
+            // btnBottom
+            // 
+            this.btnBottom.Enabled = false;
+            this.btnBottom.Location = new System.Drawing.Point(677, 31);
+            this.btnBottom.Name = "btnBottom";
+            this.btnBottom.Size = new System.Drawing.Size(178, 67);
+            this.btnBottom.TabIndex = 10;
+            this.btnBottom.Text = "Bottom";
+            this.btnBottom.UseVisualStyleBackColor = true;
+            // 
+            // btnTop
+            // 
+            this.btnTop.Enabled = false;
+            this.btnTop.Location = new System.Drawing.Point(493, 31);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(178, 67);
+            this.btnTop.TabIndex = 9;
+            this.btnTop.Text = "Top";
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(0, 0);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 11;
+            // 
+            // btnRestorePlugins
+            // 
+            this.btnRestorePlugins.Location = new System.Drawing.Point(1202, 31);
+            this.btnRestorePlugins.Name = "btnRestorePlugins";
+            this.btnRestorePlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnRestorePlugins.TabIndex = 7;
+            this.btnRestorePlugins.Text = "Restore";
+            this.btnRestorePlugins.UseVisualStyleBackColor = true;
+            this.btnRestorePlugins.Click += new System.EventHandler(this.btnRestorePlugins_Click);
+            // 
+            // btnBackupPlugins
+            // 
+            this.btnBackupPlugins.Location = new System.Drawing.Point(1006, 31);
+            this.btnBackupPlugins.Name = "btnBackupPlugins";
+            this.btnBackupPlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnBackupPlugins.TabIndex = 6;
+            this.btnBackupPlugins.Text = "Backup";
+            this.btnBackupPlugins.UseVisualStyleBackColor = true;
+            this.btnBackupPlugins.Click += new System.EventHandler(this.btnBackupPlugins_Click);
             // 
             // btnDown
             // 
@@ -159,39 +198,45 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // btnBackupPlugins
+            // ModEnabled
             // 
-            this.btnBackupPlugins.Location = new System.Drawing.Point(494, 32);
-            this.btnBackupPlugins.Name = "btnBackupPlugins";
-            this.btnBackupPlugins.Size = new System.Drawing.Size(178, 67);
-            this.btnBackupPlugins.TabIndex = 6;
-            this.btnBackupPlugins.Text = "Backup";
-            this.btnBackupPlugins.UseVisualStyleBackColor = true;
-            this.btnBackupPlugins.Click += new System.EventHandler(this.btnBackupPlugins_Click);
+            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ModEnabled.HeaderText = "Enabled";
+            this.ModEnabled.MinimumWidth = 10;
+            this.ModEnabled.Name = "ModEnabled";
+            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModEnabled.Width = 97;
             // 
-            // btnRestorePlugins
+            // ModNamexx
             // 
-            this.btnRestorePlugins.Location = new System.Drawing.Point(690, 32);
-            this.btnRestorePlugins.Name = "btnRestorePlugins";
-            this.btnRestorePlugins.Size = new System.Drawing.Size(178, 67);
-            this.btnRestorePlugins.TabIndex = 7;
-            this.btnRestorePlugins.Text = "Restore";
-            this.btnRestorePlugins.UseVisualStyleBackColor = true;
-            this.btnRestorePlugins.Click += new System.EventHandler(this.btnRestorePlugins_Click);
+            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ModNamexx.HeaderText = "Plugin Name";
+            this.ModNamexx.MinimumWidth = 10;
+            this.ModNamexx.Name = "ModNamexx";
+            this.ModNamexx.ReadOnly = true;
+            this.ModNamexx.Width = 179;
+            // 
+            // Descritpion
+            // 
+            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Descritpion.HeaderText = "Creations Description";
+            this.Descritpion.MinimumWidth = 10;
+            this.Descritpion.Name = "Descritpion";
+            this.Descritpion.Width = 241;
             // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1067, 836);
+            this.ClientSize = new System.Drawing.Size(1757, 1152);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLoadOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Load Order";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -209,9 +254,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
         private System.Windows.Forms.Button btnRestorePlugins;
         private System.Windows.Forms.Button btnBackupPlugins;
+        private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnBottom;
+        private System.Windows.Forms.Button btnTop;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
     }
 }

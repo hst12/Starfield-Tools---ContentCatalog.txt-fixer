@@ -1,16 +1,7 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Starfield_Tools
@@ -21,6 +12,8 @@ namespace Starfield_Tools
 
         //private bool AutoCheck = true, AutoClean = true, AutoBackup = true, AutoRestore = true;
         private bool AutoCheck, AutoClean, AutoBackup, AutoRestore;
+
+        ContentCatalog CC = new ContentCatalog();
 
         public frmStarfieldTools()
         {
@@ -46,6 +39,7 @@ namespace Starfield_Tools
 
             richTextBox2.Text = "";
 
+
             if (AutoCheck) // Check catalog status if enabled
             {
                 if (!CheckCatalog()) // If not okay, then...
@@ -68,7 +62,7 @@ namespace Starfield_Tools
 
         private bool CheckBackup()
         {
-            string fileName1 = GetCatalog();
+            string fileName1 = CC.GetCatalog();
             string fileName2 = fileName1 + ".bak";
 
             DateTime lastWriteTime1 = File.GetLastWriteTime(fileName1);
@@ -88,25 +82,13 @@ namespace Starfield_Tools
 
         private void DisplayCatalog()
         {
-            richTextBox1.Text = File.ReadAllText(GetCatalog());
+            richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
         }
 
-
-        private string GetCatalog()
-        {
-            return (GetStarfieldPath() + @"\ContentCatalog.txt");
-        }
-
-
-        private string GetStarfieldPath()
-        {
-            return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-          @"\Starfield");
-        }
 
         private bool CheckCatalog() // returns true if catalog good
         {
-            string filePath = GetCatalog();
+            string filePath = CC.GetCatalog();
             // Read the file character by character
             StringBuilder cleanedContents = new StringBuilder();
             toolStripStatusLabel1.Text = "Checking...";
@@ -148,8 +130,7 @@ namespace Starfield_Tools
             catch (Exception e)
             {
                 MessageBox.Show($"Error: {e.Message}" + "\n\n Creating dummy file", "Error");
-                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-          @"\Starfield\ContentCatalog.txt", string.Empty);
+                File.WriteAllText(CC.GetCatalog(), string.Empty);
                 toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt file created";
                 return false;
             }
@@ -158,7 +139,7 @@ namespace Starfield_Tools
 
         private void CleanCatalog()
         {
-            string filePath = GetCatalog();
+            string filePath = CC.GetCatalog();
             richTextBox1.Text = "Checking...\n\n";
             toolStripStatusLabel1.Text = "Checking...";
             // Read the file character by character
@@ -227,7 +208,7 @@ namespace Starfield_Tools
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string pathToFile = GetCatalog();
+            string pathToFile = CC.GetCatalog();
 
             // Launch Notepad and open the specified text file
             Process.Start(pathToFile);
@@ -311,13 +292,13 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private void btnExplore_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield");
+            Process.Start("explorer.exe", CC.GetStarfieldPath());
         }
 
         private void btnEditPlugins_Click(object sender, EventArgs e)
         {
-            string pathToFile = (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-          @"\Starfield\Plugins.txt");
+            string pathToFile = (CC.GetStarfieldPath() +
+          @"\Plugins.txt");
 
             // Launch Notepad and open the specified text file
             Process.Start(pathToFile);
@@ -334,7 +315,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
             if (!CheckBackup())
             {
-                string sourceFileName = GetCatalog();
+                string sourceFileName = CC.GetCatalog();
                 string destFileName = sourceFileName + ".bak";
 
                 try
@@ -364,7 +345,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private bool RestoreCatalog()
         {
-            string destFileName = GetCatalog();
+            string destFileName = CC.GetCatalog();
             string sourceFileName = destFileName + ".bak";
 
             try
