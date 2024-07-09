@@ -64,7 +64,7 @@ namespace Starfield_Tools
 
             using (StreamReader reader = new StreamReader(loText))
             {
-                string line,Description,Files;
+                string line,Description;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -83,11 +83,10 @@ namespace Starfield_Tools
                             if (line[0] != '#')
                             {
                                 Description = "";
-                                Files = "";
 
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
-                                    if (CreationsPlugin[i] == line)  
+                                    if (CreationsPlugin[i].Substring(0,CreationsPlugin[i].IndexOf('.'))+".esm" == line)  
                                     {
                                         Description = CreationsTitle[i];
                                     }
