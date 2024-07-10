@@ -1,5 +1,7 @@
 Checks ContentCatalog.txt file automatically when launched.
 
+If downloading the compiled version of the tool, extract the files somewhere and run setup.exe. A desktop shortcut will be created and the tool can be un-installed via the Settings->Apps->Installed apps menu in Windows.
+
 The tool works automatically. Run it before going to the Creations menu and after exiting the Creations menu - quit the game and run the tool before loading a saved game if you've installed new mods or updated mods in the Creations menu. No need to use the tool if you're just playing the game normally.
 
 Check button re-checks the file.
