@@ -75,7 +75,8 @@
             this.ModEnabled.MinimumWidth = 10;
             this.ModEnabled.Name = "ModEnabled";
             this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.Width = 97;
+            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ModEnabled.Width = 136;
             // 
             // ModNamexx
             // 
@@ -108,6 +109,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -123,7 +125,7 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(1571, 31);
+            this.btnCancel.Location = new System.Drawing.Point(1566, 31);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
@@ -134,6 +136,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.btnBottom);
             this.groupBox2.Controls.Add(this.btnTop);
             this.groupBox2.Controls.Add(this.btnRestorePlugins);
@@ -143,28 +146,27 @@
             this.groupBox2.Controls.Add(this.btnOK);
             this.groupBox2.Controls.Add(this.btnCancel);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 1031);
+            this.groupBox2.Location = new System.Drawing.Point(0, 1022);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1757, 121);
+            this.groupBox2.Size = new System.Drawing.Size(1757, 130);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Actions";
             // 
             // btnBottom
             // 
-            this.btnBottom.Enabled = false;
             this.btnBottom.Location = new System.Drawing.Point(677, 31);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(178, 67);
             this.btnBottom.TabIndex = 10;
             this.btnBottom.Text = "Bottom";
             this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
             // 
             // btnTop
             // 
-            this.btnTop.Enabled = false;
             this.btnTop.Location = new System.Drawing.Point(493, 31);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(178, 67);
@@ -233,6 +235,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -228,15 +228,37 @@ namespace Starfield_Tools
             }
         }
 
-
-
-
-
-
-
         private void btnTop_Click(object sender, EventArgs e)
         {
+            int y = dataGridView1.CurrentCell.RowIndex;
+            if (y < 1) return;
+            bool CurrentModEnabled;
+            string CurrentModLine;
 
+            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+            dataGridView1.Rows.Insert(0);
+            
+            dataGridView1.Rows[0].Cells[0].Value = CurrentModEnabled;
+            dataGridView1.Rows[0].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+
+        }
+
+        private void btnBottom_Click(object sender, EventArgs e)
+        {
+            int y = dataGridView1.CurrentCell.RowIndex;
+            if (y > dataGridView1.Rows.Count - 1) return;
+            bool CurrentModEnabled;
+            string CurrentModLine;
+
+            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+            dataGridView1.Rows.Insert(dataGridView1.Rows.Count);
+
+            dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[0].Value = CurrentModEnabled;
+            dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
         }
     }
 }
