@@ -235,15 +235,15 @@ namespace Starfield_Tools
                 // Use steam64path as needed
             }
             MessageBox.Show(steam64path.ToString());*/
-            this.WindowState = FormWindowState.Minimized;
-            toolStripStatusLabel1.Text = "Launching Starfield";
+            //this.WindowState = FormWindowState.Minimized;
+            toolStripStatusLabel1.Text = "Launching Starfield...";
             System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", "-applaunch 1716740");
-            if (AutoCheck)
+            /*if (AutoCheck)
                 CheckCatalog();
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
-            this.WindowState = FormWindowState.Normal;
+            this.WindowState = FormWindowState.Normal;*/
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

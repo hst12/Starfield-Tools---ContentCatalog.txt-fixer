@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Text.Json;
+using System.Drawing;
 
 
 namespace Starfield_Tools
@@ -16,6 +17,8 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+            Font FontSize = new Font("Microsoft Sans Serif", 14);
+            this.Font = FontSize;
             InitDataGrid();
         }
 
@@ -32,6 +35,7 @@ namespace Starfield_Tools
         private void InitDataGrid()
         {
             bool ModEnabled;
+            int EnabledCount = 0;
             string loText;
             string jsonFilePath = CC.GetCatalog();
 
@@ -64,10 +68,10 @@ namespace Starfield_Tools
             {
                 MessageBox.Show(@"All your mods are busted
 Click Ok and Ok again to create a blank file or click Ok and Cancel to fix manually
-Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not found");
+Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not found");
                 return;
             }
-            using (var reader = new StreamReader(loText)) 
+            using (var reader = new StreamReader(loText))
             {
                 string line, Description;
 
@@ -80,6 +84,7 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
                             if (line[0] == '*')
                             {
                                 ModEnabled = true;
+                                EnabledCount++;
                                 line = line.Substring(1);
                             }
                             else
@@ -106,6 +111,7 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
                     }
                 }
             }
+            toolStripStatusLabel1.Text = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " + EnabledCount.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -218,7 +224,7 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                //toolStripStatusLabel1.Text = "Backup done";
+                toolStripStatusLabel1.Text = "Backup done";
             }
             catch (Exception ex)
             {
@@ -238,7 +244,7 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
                 dataGridView1.Rows.Clear();
                 InitDataGrid();
 
-                //toolStripStatusLabel1.Text = "Restore done";
+                toolStripStatusLabel1.Text = "Restore done";
             }
             catch (Exception ex)
             {
@@ -264,6 +270,7 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
             dataGridView1.Rows[0].Cells[2].Value = CurrentDescription;
 
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
         }
 
         private void btnBottom_Click(object sender, EventArgs e)
@@ -285,6 +292,21 @@ Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not fo
             dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2].Value = CurrentDescription;
 
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+        }
+
+        private void dataGridView1_Sorted(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Warning! - Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert";
+        }
+
+        private void btnDisable_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = false;
+            }
+            toolStripStatusLabel1.Text = "All mods disabled";
         }
     }
 }
