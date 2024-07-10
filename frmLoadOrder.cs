@@ -31,9 +31,8 @@ namespace Starfield_Tools
 
         private void InitDataGrid()
         {
-            string loText;
             bool ModEnabled;
-
+            string loText;
             string jsonFilePath = CC.GetCatalog();
 
             string json = File.ReadAllText(jsonFilePath);
@@ -61,8 +60,14 @@ namespace Starfield_Tools
             }
 
             loText = CC.GetStarfieldPath() + @"\plugins.txt";
-
-            using (StreamReader reader = new StreamReader(loText))
+            if (!File.Exists(loText))
+            {
+                MessageBox.Show(@"All your mods are busted
+Click Ok and Ok again to create a blank file or click Ok and Cancel to fix manually
+Click Restore if you have a backup of your Plugins.txt file","Plugins.txt not found");
+                return;
+            }
+            using (var reader = new StreamReader(loText)) 
             {
                 string line, Description;
 
@@ -147,11 +152,11 @@ namespace Starfield_Tools
 
             CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells[0].Value;
             CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells[1].Value;
-            CurrentDescription= (string)dataGridView1.Rows[y - 1].Cells[2].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y - 1].Cells[2].Value;
 
             NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
             NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-            NewDescription= (string)dataGridView1.Rows[y].Cells[2].Value;
+            NewDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
 
 
             dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
