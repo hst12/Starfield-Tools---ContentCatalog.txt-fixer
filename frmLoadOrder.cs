@@ -64,7 +64,7 @@ namespace Starfield_Tools
 
             using (StreamReader reader = new StreamReader(loText))
             {
-                string line,Description;
+                string line, Description;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -86,12 +86,12 @@ namespace Starfield_Tools
 
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
-                                    if (CreationsPlugin[i].Substring(0,CreationsPlugin[i].IndexOf('.'))+".esm" == line)  
+                                    if (CreationsPlugin[i].Substring(0, CreationsPlugin[i].IndexOf('.')) + ".esm" == line)
                                     {
                                         Description = CreationsTitle[i];
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line,Description);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description);
                             }
                         }
                     }
@@ -140,20 +140,27 @@ namespace Starfield_Tools
             if (y < 1) return;
             bool CurrentModEnabled;
             string CurrentModLine;
+            string CurrentDescription;
             bool NewModEnabled;
             string NewModLine;
+            string NewDescription;
 
             CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells[0].Value;
             CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells[1].Value;
+            CurrentDescription= (string)dataGridView1.Rows[y - 1].Cells[2].Value;
+
             NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
             NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+            NewDescription= (string)dataGridView1.Rows[y].Cells[2].Value;
 
 
             dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
             dataGridView1.Rows[y].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows[y].Cells[2].Value = CurrentDescription;
 
             dataGridView1.Rows[y - 1].Cells[0].Value = NewModEnabled;
             dataGridView1.Rows[y - 1].Cells[1].Value = NewModLine;
+            dataGridView1.Rows[y - 1].Cells[2].Value = NewDescription;
 
             dataGridView1.Rows[y].Selected = false;
             dataGridView1.Rows[y - 1].Selected = true;
@@ -168,20 +175,26 @@ namespace Starfield_Tools
             if (y > dataGridView1.Rows.Count - 2) return;
             bool CurrentModEnabled;
             string CurrentModLine;
+            string CurrentDescription;
             bool NewModEnabled;
             string NewModLine;
+            string NewDescription;
 
             CurrentModEnabled = (bool)dataGridView1.Rows[y + 1].Cells[0].Value;
             CurrentModLine = (string)dataGridView1.Rows[y + 1].Cells[1].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y + 1].Cells[2].Value;
+
             NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
             NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-
+            NewDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
 
             dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
             dataGridView1.Rows[y].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows[y].Cells[2].Value = CurrentDescription;
 
             dataGridView1.Rows[y + 1].Cells[0].Value = NewModEnabled;
             dataGridView1.Rows[y + 1].Cells[1].Value = NewModLine;
+            dataGridView1.Rows[y + 1].Cells[2].Value = NewDescription;
 
             dataGridView1.Rows[y].Selected = false;
             dataGridView1.Rows[y + 1].Selected = true;
@@ -234,15 +247,18 @@ namespace Starfield_Tools
             if (y < 1) return;
             bool CurrentModEnabled;
             string CurrentModLine;
+            string CurrentDescription;
 
             CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
             CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
             dataGridView1.Rows.Insert(0);
-            
+
             dataGridView1.Rows[0].Cells[0].Value = CurrentModEnabled;
             dataGridView1.Rows[0].Cells[1].Value = CurrentModLine;
-            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+            dataGridView1.Rows[0].Cells[2].Value = CurrentDescription;
 
+            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
         }
 
         private void btnBottom_Click(object sender, EventArgs e)
@@ -251,13 +267,18 @@ namespace Starfield_Tools
             if (y > dataGridView1.Rows.Count - 1) return;
             bool CurrentModEnabled;
             string CurrentModLine;
+            string CurrentDescription;
 
             CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
             CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
+
             dataGridView1.Rows.Insert(dataGridView1.Rows.Count);
 
-            dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[0].Value = CurrentModEnabled;
-            dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0].Value = CurrentModEnabled;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[1].Value = CurrentModLine;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2].Value = CurrentDescription;
+
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
         }
     }
