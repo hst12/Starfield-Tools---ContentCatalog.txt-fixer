@@ -69,9 +69,9 @@
             this.grpCheckCatalog.Controls.Add(this.richTextBox2);
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
             this.grpCheckCatalog.Location = new System.Drawing.Point(22, 21);
-            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
-            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4);
             this.grpCheckCatalog.Size = new System.Drawing.Size(1136, 510);
             this.grpCheckCatalog.TabIndex = 0;
             this.grpCheckCatalog.TabStop = false;
@@ -92,7 +92,7 @@
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.richTextBox1.Location = new System.Drawing.Point(4, 28);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(1128, 301);
@@ -103,7 +103,7 @@
             // btnQuit
             // 
             this.btnQuit.Location = new System.Drawing.Point(405, 34);
-            this.btnQuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
             this.btnQuit.TabIndex = 13;
@@ -115,7 +115,7 @@
             // cmdClean
             // 
             this.cmdClean.Location = new System.Drawing.Point(170, 35);
-            this.cmdClean.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmdClean.Margin = new System.Windows.Forms.Padding(6);
             this.cmdClean.Name = "cmdClean";
             this.cmdClean.Size = new System.Drawing.Size(150, 50);
             this.cmdClean.TabIndex = 5;
@@ -128,7 +128,7 @@
             // 
             this.btnLoad.AutoSize = true;
             this.btnLoad.Location = new System.Drawing.Point(10, 31);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(305, 50);
             this.btnLoad.TabIndex = 8;
@@ -140,7 +140,7 @@
             // btnCheck
             // 
             this.btnCheck.Location = new System.Drawing.Point(10, 35);
-            this.btnCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCheck.Margin = new System.Windows.Forms.Padding(4);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(150, 50);
             this.btnCheck.TabIndex = 4;
@@ -153,7 +153,7 @@
             // 
             this.btnStarfield.AutoSize = true;
             this.btnStarfield.Location = new System.Drawing.Point(14, 34);
-            this.btnStarfield.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
             this.btnStarfield.Name = "btnStarfield";
             this.btnStarfield.Size = new System.Drawing.Size(220, 50);
             this.btnStarfield.TabIndex = 11;
@@ -245,9 +245,9 @@
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
             this.grpActions.Location = new System.Drawing.Point(15, 558);
-            this.grpActions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
-            this.grpActions.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpActions.Padding = new System.Windows.Forms.Padding(6);
             this.grpActions.Size = new System.Drawing.Size(1140, 112);
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
@@ -261,9 +261,9 @@
             this.groupBox1.Controls.Add(this.btnQuit);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 914);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1181, 112);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -272,7 +272,7 @@
             // btnAbout
             // 
             this.btnAbout.Location = new System.Drawing.Point(245, 34);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
             this.btnAbout.TabIndex = 12;
@@ -299,7 +299,6 @@
             this.grpAuto.Controls.Add(this.chkAutoBackup);
             this.grpAuto.Controls.Add(this.chkAutoClean);
             this.grpAuto.Controls.Add(this.chkAutoCheck);
-            this.grpAuto.Enabled = false;
             this.grpAuto.Location = new System.Drawing.Point(15, 797);
             this.grpAuto.Name = "grpAuto";
             this.grpAuto.Size = new System.Drawing.Size(1140, 112);
@@ -359,7 +358,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.grpCheckCatalog);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmStarfieldTools";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -26,10 +26,10 @@ namespace Starfield_Tools
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
 
-            AutoCheck = true;
+            /*AutoCheck = true;
             AutoClean = true;
             AutoBackup = true;
-            AutoRestore = true;
+            AutoRestore = true;*/
 
 
             chkAutoCheck.Checked = AutoCheck;
@@ -189,12 +189,13 @@ namespace Starfield_Tools
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            // Set a values
+            // Save settings
 
-            Properties.Settings.Default.AutoCheck = AutoCheck;
-            Properties.Settings.Default.AutoClean = AutoClean;
-            Properties.Settings.Default.AutoBackup = AutoBackup;
-            Properties.Settings.Default.AutoRestore = AutoRestore;
+            
+            Properties.Settings.Default.AutoCheck = chkAutoCheck.Checked;
+            Properties.Settings.Default.AutoClean = chkAutoClean.Checked;
+            Properties.Settings.Default.AutoBackup = chkAutoBackup.Checked;
+            Properties.Settings.Default.AutoRestore = chkAutoRestore.Checked;
             Properties.Settings.Default.Save();
 
             Application.Exit();
