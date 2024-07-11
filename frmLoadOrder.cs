@@ -19,6 +19,7 @@ namespace Starfield_Tools
             InitializeComponent();
             Font FontSize = new Font("Microsoft Sans Serif", 14);
             this.Font = FontSize;
+            toolStripStatusLabel1.Font = FontSize;
             InitDataGrid();
         }
 
@@ -59,7 +60,6 @@ namespace Starfield_Tools
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error: {ex.Message}");
-
                 }
             }
 
@@ -244,6 +244,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                 dataGridView1.Rows.Clear();
                 InitDataGrid();
 
+                toolStripStatusLabel1.ForeColor = DefaultForeColor;
                 toolStripStatusLabel1.Text = "Restore done";
             }
             catch (Exception ex)
@@ -297,7 +298,9 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
+            //MessageBox.Show("Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert", "Warning!");
             toolStripStatusLabel1.Text = "Warning! - Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert";
+            toolStripStatusLabel1.ForeColor = Color.Red;
         }
 
         private void btnDisable_Click(object sender, EventArgs e)
