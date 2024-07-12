@@ -13,6 +13,7 @@ namespace Starfield_Tools
     public partial class frmLoadOrder : Form
     {
         ContentCatalog CC = new ContentCatalog();
+        bool isModified = false;
 
         public frmLoadOrder()
         {
@@ -149,6 +150,8 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y < 1) return;
+            isModified = true;
+
             bool CurrentModEnabled;
             string CurrentModLine;
             string CurrentDescription;
@@ -184,6 +187,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y > dataGridView1.Rows.Count - 2) return;
+            isModified = true;
             bool CurrentModEnabled;
             string CurrentModLine;
             string CurrentDescription;
@@ -218,6 +222,12 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         {
             string sourceFileName = CC.GetStarfieldPath() + @"\Plugins.txt";
             string destFileName = sourceFileName + ".bak";
+
+            if (isModified)
+            {
+                MessageBox.Show("Plugins have been modified\nClick Ok to save first or Cancel to revert", "Backkup not done");
+                return;
+            }
 
             try
             {
@@ -257,6 +267,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y < 1) return;
+            isModified = true;
             bool CurrentModEnabled;
             string CurrentModLine;
             string CurrentDescription;
@@ -278,6 +289,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y > dataGridView1.Rows.Count - 1) return;
+            isModified |= true;
             bool CurrentModEnabled;
             string CurrentModLine;
             string CurrentDescription;
@@ -310,6 +322,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                 dataGridView1.Rows[i].Cells[0].Value = false;
             }
             toolStripStatusLabel1.Text = "All mods disabled";
+            isModified = true;
         }
     }
 }
