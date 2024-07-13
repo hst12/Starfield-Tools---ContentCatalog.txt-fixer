@@ -45,11 +45,11 @@
             this.btnRestore = new System.Windows.Forms.Button();
             this.btnLoadOrder = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
+            this.txtSource = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtSource = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
@@ -103,7 +103,7 @@
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(717, 34);
+            this.btnQuit.Location = new System.Drawing.Point(1018, 34);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -166,7 +166,7 @@
             // btnExplore
             // 
             this.btnExplore.AutoSize = true;
-            this.btnExplore.Location = new System.Drawing.Point(744, 31);
+            this.btnExplore.Location = new System.Drawing.Point(660, 31);
             this.btnExplore.Name = "btnExplore";
             this.btnExplore.Size = new System.Drawing.Size(150, 50);
             this.btnExplore.TabIndex = 10;
@@ -212,12 +212,12 @@
             // btnLoadOrder
             // 
             this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(909, 31);
+            this.btnLoadOrder.Location = new System.Drawing.Point(943, 31);
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
             this.btnLoadOrder.TabIndex = 11;
             this.btnLoadOrder.Text = "Load Order";
-            this.toolTip1.SetToolTip(this.btnLoadOrder, "Turn mods on or off");
+            this.toolTip1.SetToolTip(this.btnLoadOrder, "Load Order Editor");
             this.btnLoadOrder.UseVisualStyleBackColor = true;
             this.btnLoadOrder.Click += new System.EventHandler(this.btnLoadOrder_Click);
             // 
@@ -232,6 +232,17 @@
             this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // txtSource
+            // 
+            this.txtSource.Location = new System.Drawing.Point(362, 34);
+            this.txtSource.Name = "txtSource";
+            this.txtSource.Size = new System.Drawing.Size(150, 50);
+            this.txtSource.TabIndex = 14;
+            this.txtSource.Text = "Github";
+            this.toolTip1.SetToolTip(this.txtSource, "Open GitHub page");
+            this.txtSource.UseVisualStyleBackColor = true;
+            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
             // statusStrip1
             // 
@@ -282,17 +293,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
-            // 
-            // txtSource
-            // 
-            this.txtSource.Location = new System.Drawing.Point(362, 34);
-            this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(150, 50);
-            this.txtSource.TabIndex = 14;
-            this.txtSource.Text = "Github";
-            this.toolTip1.SetToolTip(this.txtSource, "Open GitHub page");
-            this.txtSource.UseVisualStyleBackColor = true;
-            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
             // groupBox2
             // 

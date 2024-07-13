@@ -115,7 +115,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                 }
             }
 
-            string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
+            /*string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
             foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 esmCount++;
@@ -123,7 +123,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
             {
                 espCount++;
-            }
+            }*/
             toolStripStatusLabel1.Text = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " +
                 EnabledCount.ToString() + ", esm files found: " + esmCount.ToString() + ", esp files found: " + espCount; ;
 
