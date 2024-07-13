@@ -72,7 +72,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1613, 788);
+            this.dataGridView1.Size = new System.Drawing.Size(1633, 788);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             // 
@@ -197,7 +197,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 787);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1613, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1633, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -213,7 +213,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1613, 788);
+            this.panel1.Size = new System.Drawing.Size(1633, 788);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -231,7 +231,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 693);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1613, 94);
+            this.panel2.Size = new System.Drawing.Size(1633, 94);
             this.panel2.TabIndex = 6;
             // 
             // btnDisable
@@ -249,7 +249,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1613, 829);
+            this.ClientSize = new System.Drawing.Size(1633, 829);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);

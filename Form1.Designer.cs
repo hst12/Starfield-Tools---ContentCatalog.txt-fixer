@@ -50,13 +50,13 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
-            this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -70,11 +70,12 @@
             this.grpCheckCatalog.AutoSize = true;
             this.grpCheckCatalog.Controls.Add(this.richTextBox2);
             this.grpCheckCatalog.Controls.Add(this.richTextBox1);
-            this.grpCheckCatalog.Location = new System.Drawing.Point(22, 21);
+            this.grpCheckCatalog.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpCheckCatalog.Location = new System.Drawing.Point(0, 0);
             this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
             this.grpCheckCatalog.Name = "grpCheckCatalog";
             this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(1136, 510);
+            this.grpCheckCatalog.Size = new System.Drawing.Size(1303, 487);
             this.grpCheckCatalog.TabIndex = 0;
             this.grpCheckCatalog.TabStop = false;
             this.grpCheckCatalog.Text = "Catalog Contents and Log";
@@ -82,10 +83,10 @@
             // richTextBox2
             // 
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox2.Location = new System.Drawing.Point(4, 352);
+            this.richTextBox2.Location = new System.Drawing.Point(4, 329);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1128, 154);
+            this.richTextBox2.Size = new System.Drawing.Size(1295, 154);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
@@ -97,14 +98,14 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1128, 301);
+            this.richTextBox1.Size = new System.Drawing.Size(1295, 301);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(1018, 34);
+            this.btnQuit.Location = new System.Drawing.Point(988, 33);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -253,7 +254,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 1026);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1181, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1303, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -291,10 +292,20 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1181, 112);
+            this.groupBox1.Size = new System.Drawing.Size(1303, 112);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
+            // 
+            // cmdStarFieldPath
+            // 
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(511, 33);
+            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
+            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
+            this.cmdStarFieldPath.TabIndex = 15;
+            this.cmdStarFieldPath.Text = "Set Starfield Path";
+            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
+            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
             // 
             // groupBox2
             // 
@@ -366,21 +377,11 @@
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
             // 
-            // cmdStarFieldPath
-            // 
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(511, 33);
-            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
-            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
-            this.cmdStarFieldPath.TabIndex = 15;
-            this.cmdStarFieldPath.Text = "Set Starfield Path";
-            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
-            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
-            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1181, 1068);
+            this.ClientSize = new System.Drawing.Size(1303, 1068);
             this.Controls.Add(this.grpAuto);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
