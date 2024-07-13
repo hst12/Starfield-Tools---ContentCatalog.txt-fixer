@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Starfield_Tools
@@ -191,7 +193,7 @@ namespace Starfield_Tools
         {
             // Save settings
 
-            
+
             Properties.Settings.Default.AutoCheck = chkAutoCheck.Checked;
             Properties.Settings.Default.AutoClean = chkAutoClean.Checked;
             Properties.Settings.Default.AutoBackup = chkAutoBackup.Checked;
@@ -221,30 +223,41 @@ namespace Starfield_Tools
             CheckBackup();
         }
 
-        private void btnStarfield_Click(object sender, EventArgs e)
+
+
+        private void StartStarfield()
         {
-            /*string steam64 = @"SOFTWARE\Wow6432Node\Valve\";
+            const string userRoot = "HKEY_CURRENT_USER";
+            const string subkey = @"Software\Valve\Steam";
+            const string keyName = userRoot + "\\" + subkey;
 
-            string steam64path="";
-
-            RegistryKey key64 = Registry.LocalMachine.OpenSubKey(steam64);
-
-
-            if (key64 != null)
-            {
-                steam64path = key64.GetValue("InstallPath").ToString();
-                // Use steam64path as needed
-            }
-            MessageBox.Show(steam64path.ToString());*/
+            // Get Steam path from Registry
+            string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
+            Console.WriteLine($"String value: {stringValue}");
             //this.WindowState = FormWindowState.Minimized;
-            toolStripStatusLabel1.Text = "Launching Starfield...";
-            System.Diagnostics.Process.Start(@"C:\Program Files (x86)\Steam\steam.exe", "-applaunch 1716740");
-            /*if (AutoCheck)
+            //toolStripStatusLabel1.Text = "Launching Starfield...";
+
+            var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
+            // Launch Starfield and wait for exit
+            var process = Process.Start(processInfo);
+            toolStripStatusLabel1.Text = "Starfield launching";
+            //process.WaitForExit();
+
+            //toolStripStatusLabel1.Text="Starfield has exited. Doing checks...";
+
+            /* Do check after Starfield exits
+            if (AutoCheck)
                 CheckCatalog();
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
             this.WindowState = FormWindowState.Normal;*/
+        }
+
+        private void btnStarfield_Click(object sender, EventArgs e)
+        {
+            StartStarfield();
+            toolStripStatusLabel1.Text = "Ready";
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -258,7 +271,8 @@ namespace Starfield_Tools
 
 Checks ContentCatalog.txt file automatically when launched.
 
-Latest version works auotmatically.
+The tool works auotmatically if you enable all the check boxes in the Auto Functions section.
+
 Run it before going to the Creations menu and afer exiting the Creations menu
 Quit the game and run the tool before loading a saved game if you've installed new mods or updated mods in the Creations menu.
 No need to use the tool if you're just playing the game normally.
@@ -283,7 +297,7 @@ Load Order button shows a list of mods and allows them to be turned on or off or
 
 You can alt-tab from the game to check the ContentCatalog file to see if corruption has occurred by pressing the Check button.
 
-The launch Starfield button is hard coded to the default Steam installation path at the moment and is only intended for quick testing.
+The launch Starfield button is for a Steam installation and is only intended for quick testing.
 
 Quit the game if it's running before using the Clean or Edit buttons.
 ";
@@ -337,6 +351,31 @@ Quit the game if it's running before using the Clean or Edit buttons.
         {
             frmLoadOrder frmLO = new frmLoadOrder();
             frmLO.Show();
+        }
+
+        private void chkAutoCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoCheck = chkAutoCheck.Checked;
+        }
+
+        private void chkAutoClean_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoClean = chkAutoClean.Checked;
+        }
+
+        private void chkAutoBackup_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoBackup = chkAutoBackup.Checked;
+        }
+
+        private void chkAutoRestore_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoRestore = chkAutoRestore.Checked;
+        }
+
+        private void txtSource_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

@@ -45,6 +45,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnScan = new System.Windows.Forms.Button();
             this.btnDisable = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -72,7 +73,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1608, 788);
+            this.dataGridView1.Size = new System.Drawing.Size(1798, 788);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             // 
@@ -119,7 +120,7 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(1414, 23);
+            this.btnCancel.Location = new System.Drawing.Point(1598, 23);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
@@ -197,7 +198,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 787);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1608, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1798, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -213,12 +214,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1608, 788);
+            this.panel1.Size = new System.Drawing.Size(1798, 788);
             this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.btnScan);
             this.panel2.Controls.Add(this.btnDisable);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Controls.Add(this.btnRestorePlugins);
@@ -231,8 +233,18 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 693);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1608, 94);
+            this.panel2.Size = new System.Drawing.Size(1798, 94);
             this.panel2.TabIndex = 6;
+            // 
+            // btnScan
+            // 
+            this.btnScan.Location = new System.Drawing.Point(1413, 23);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(178, 67);
+            this.btnScan.TabIndex = 10;
+            this.btnScan.Text = "Experiments";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btnDisable
             // 
@@ -249,7 +261,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1608, 829);
+            this.ClientSize = new System.Drawing.Size(1798, 829);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
@@ -289,5 +301,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnDisable;
+        private System.Windows.Forms.Button btnScan;
     }
 }

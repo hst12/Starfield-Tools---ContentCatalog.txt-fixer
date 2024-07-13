@@ -55,6 +55,7 @@
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
+            this.txtSource = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -102,7 +103,7 @@
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(405, 34);
+            this.btnQuit.Location = new System.Drawing.Point(717, 34);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -155,10 +156,10 @@
             this.btnStarfield.Location = new System.Drawing.Point(14, 34);
             this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
             this.btnStarfield.Name = "btnStarfield";
-            this.btnStarfield.Size = new System.Drawing.Size(220, 50);
+            this.btnStarfield.Size = new System.Drawing.Size(178, 50);
             this.btnStarfield.TabIndex = 11;
             this.btnStarfield.Text = "Launch Starfield";
-            this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield (not recommended for normal play)");
+            this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield -Steam only and not recommended for normal play");
             this.btnStarfield.UseVisualStyleBackColor = true;
             this.btnStarfield.Click += new System.EventHandler(this.btnStarfield_Click);
             // 
@@ -256,6 +257,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtSource);
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
@@ -271,12 +273,13 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(245, 34);
+            this.btnAbout.Location = new System.Drawing.Point(202, 34);
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
             this.btnAbout.TabIndex = 12;
             this.btnAbout.Text = "About";
+            this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
@@ -315,6 +318,7 @@
             this.chkAutoRestore.TabIndex = 3;
             this.chkAutoRestore.Text = "Auto Restore";
             this.chkAutoRestore.UseVisualStyleBackColor = true;
+            this.chkAutoRestore.CheckedChanged += new System.EventHandler(this.chkAutoRestore_CheckedChanged);
             // 
             // chkAutoBackup
             // 
@@ -325,6 +329,7 @@
             this.chkAutoBackup.TabIndex = 2;
             this.chkAutoBackup.Text = "Auto Backup";
             this.chkAutoBackup.UseVisualStyleBackColor = true;
+            this.chkAutoBackup.CheckedChanged += new System.EventHandler(this.chkAutoBackup_CheckedChanged);
             // 
             // chkAutoClean
             // 
@@ -335,6 +340,7 @@
             this.chkAutoClean.TabIndex = 1;
             this.chkAutoClean.Text = "Auto Clean";
             this.chkAutoClean.UseVisualStyleBackColor = true;
+            this.chkAutoClean.CheckedChanged += new System.EventHandler(this.chkAutoClean_CheckedChanged);
             // 
             // chkAutoCheck
             // 
@@ -345,6 +351,17 @@
             this.chkAutoCheck.TabIndex = 0;
             this.chkAutoCheck.Text = "Auto Check";
             this.chkAutoCheck.UseVisualStyleBackColor = true;
+            this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
+            // 
+            // txtSource
+            // 
+            this.txtSource.Location = new System.Drawing.Point(362, 34);
+            this.txtSource.Name = "txtSource";
+            this.txtSource.Size = new System.Drawing.Size(150, 50);
+            this.txtSource.TabIndex = 14;
+            this.txtSource.Text = "Github";
+            this.txtSource.UseVisualStyleBackColor = true;
+            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
             // frmStarfieldTools
             // 
@@ -404,6 +421,7 @@
         private System.Windows.Forms.CheckBox chkAutoRestore;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button btnLoadOrder;
+        private System.Windows.Forms.Button txtSource;
     }
 }
 

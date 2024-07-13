@@ -324,5 +324,22 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             toolStripStatusLabel1.Text = "All mods disabled";
             isModified = true;
         }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
+            int esmCount = 0;
+            int espCount = 0;
+
+            foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            {
+                esmCount++;
+            }
+            foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            {
+                espCount++;
+            }
+            toolStripStatusLabel1.Text="esm files found: "+esmCount.ToString()+" esp files found: "+espCount;
+        }
     }
 }
