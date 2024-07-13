@@ -198,7 +198,6 @@ namespace Starfield_Tools
         {
             // Save settings
 
-
             Properties.Settings.Default.AutoCheck = chkAutoCheck.Checked;
             Properties.Settings.Default.AutoClean = chkAutoClean.Checked;
             Properties.Settings.Default.AutoBackup = chkAutoBackup.Checked;
@@ -240,24 +239,12 @@ namespace Starfield_Tools
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
             Console.WriteLine($"String value: {stringValue}");
-            //this.WindowState = FormWindowState.Minimized;
-            //toolStripStatusLabel1.Text = "Launching Starfield...";
+
 
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
             toolStripStatusLabel1.Text = "Starfield launching";
-            //process.WaitForExit();
-
-            //toolStripStatusLabel1.Text="Starfield has exited. Doing checks...";
-
-            /* Do check after Starfield exits
-            if (AutoCheck)
-                CheckCatalog();
-            if (AutoBackup)
-                if (!CheckBackup()) // Backup if necessary
-                    BackupCatalog();
-            this.WindowState = FormWindowState.Normal;*/
         }
 
         private void btnStarfield_Click(object sender, EventArgs e)
@@ -396,6 +383,13 @@ Quit the game if it's running before using the Clean or Edit buttons.
                     Properties.Settings.Default.StarfieldPath = selectedFolderPath;
                 }
             }
+        }
+
+        private void btnStarfieldStore_Click(object sender, EventArgs e)
+        {
+            var processInfo = new ProcessStartInfo("shell:AppsFolder\\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game");
+            Console.WriteLine(processInfo.FileName);
+
         }
 
         private void btnBackup_Click(object sender, EventArgs e)

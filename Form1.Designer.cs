@@ -57,6 +57,7 @@
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
+            this.btnStarfieldStore = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -158,9 +159,9 @@
             this.btnStarfield.Location = new System.Drawing.Point(14, 34);
             this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
             this.btnStarfield.Name = "btnStarfield";
-            this.btnStarfield.Size = new System.Drawing.Size(178, 50);
+            this.btnStarfield.Size = new System.Drawing.Size(199, 50);
             this.btnStarfield.TabIndex = 11;
-            this.btnStarfield.Text = "Launch Starfield";
+            this.btnStarfield.Text = "Starfield (Steam)";
             this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield -Steam only and not recommended for normal play");
             this.btnStarfield.UseVisualStyleBackColor = true;
             this.btnStarfield.Click += new System.EventHandler(this.btnStarfield_Click);
@@ -225,7 +226,7 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(202, 34);
+            this.btnAbout.Location = new System.Drawing.Point(444, 36);
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
@@ -237,7 +238,7 @@
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(355, 34);
+            this.txtSource.Location = new System.Drawing.Point(603, 34);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 50);
             this.txtSource.TabIndex = 14;
@@ -266,15 +267,17 @@
             // 
             // grpActions
             // 
+            this.grpActions.AutoSize = true;
             this.grpActions.Controls.Add(this.btnRestore);
             this.grpActions.Controls.Add(this.btnBackup);
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
-            this.grpActions.Location = new System.Drawing.Point(15, 558);
+            this.grpActions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpActions.Location = new System.Drawing.Point(0, 487);
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1140, 112);
+            this.grpActions.Size = new System.Drawing.Size(1303, 121);
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -282,6 +285,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnStarfieldStore);
             this.groupBox1.Controls.Add(this.cmdStarFieldPath);
             this.groupBox1.Controls.Add(this.txtSource);
             this.groupBox1.Controls.Add(this.btnAbout);
@@ -299,7 +303,7 @@
             // 
             // cmdStarFieldPath
             // 
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(511, 33);
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(759, 33);
             this.cmdStarFieldPath.Name = "cmdStarFieldPath";
             this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
             this.cmdStarFieldPath.TabIndex = 15;
@@ -309,26 +313,28 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.btnLoadOrder);
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
             this.groupBox2.Controls.Add(this.btnLoad);
             this.groupBox2.Location = new System.Drawing.Point(15, 679);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1140, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1254, 112);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
             // 
             // grpAuto
             // 
+            this.grpAuto.AutoSize = true;
             this.grpAuto.Controls.Add(this.chkAutoRestore);
             this.grpAuto.Controls.Add(this.chkAutoBackup);
             this.grpAuto.Controls.Add(this.chkAutoClean);
             this.grpAuto.Controls.Add(this.chkAutoCheck);
             this.grpAuto.Location = new System.Drawing.Point(15, 797);
             this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1140, 112);
+            this.grpAuto.Size = new System.Drawing.Size(1254, 112);
             this.grpAuto.TabIndex = 6;
             this.grpAuto.TabStop = false;
             this.grpAuto.Text = "Auto Functions";
@@ -376,6 +382,16 @@
             this.chkAutoCheck.Text = "Auto Check";
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
+            // 
+            // btnStarfieldStore
+            // 
+            this.btnStarfieldStore.Location = new System.Drawing.Point(219, 36);
+            this.btnStarfieldStore.Name = "btnStarfieldStore";
+            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
+            this.btnStarfieldStore.TabIndex = 16;
+            this.btnStarfieldStore.Text = "Starfield (MS)";
+            this.btnStarfieldStore.UseVisualStyleBackColor = true;
+            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
             // 
             // frmStarfieldTools
             // 
@@ -437,6 +453,7 @@
         private System.Windows.Forms.Button btnLoadOrder;
         private System.Windows.Forms.Button txtSource;
         private System.Windows.Forms.Button cmdStarFieldPath;
+        private System.Windows.Forms.Button btnStarfieldStore;
     }
 }
 
