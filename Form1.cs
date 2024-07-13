@@ -228,8 +228,6 @@ namespace Starfield_Tools
             CheckBackup();
         }
 
-
-
         private void StartStarfield()
         {
             const string userRoot = "HKEY_CURRENT_USER";
@@ -387,7 +385,10 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
-            var processInfo = new ProcessStartInfo("shell:AppsFolder\\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game");
+            string cmdLine = "shell:AppsFolder\\\\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game\"";
+
+            var processInfo = new ProcessStartInfo("cmd.exe /C start " + cmdLine);
+            //Process.Start(processInfo);
             Console.WriteLine(processInfo.FileName);
 
         }

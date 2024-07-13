@@ -106,7 +106,7 @@
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(988, 33);
+            this.btnQuit.Location = new System.Drawing.Point(988, 34);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -226,7 +226,7 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(444, 36);
+            this.btnAbout.Location = new System.Drawing.Point(444, 34);
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
@@ -303,7 +303,7 @@
             // 
             // cmdStarFieldPath
             // 
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(759, 33);
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(759, 34);
             this.cmdStarFieldPath.Name = "cmdStarFieldPath";
             this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
             this.cmdStarFieldPath.TabIndex = 15;
@@ -385,7 +385,7 @@
             // 
             // btnStarfieldStore
             // 
-            this.btnStarfieldStore.Location = new System.Drawing.Point(219, 36);
+            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
             this.btnStarfieldStore.Name = "btnStarfieldStore";
             this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
             this.btnStarfieldStore.TabIndex = 16;
