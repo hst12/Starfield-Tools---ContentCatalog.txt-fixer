@@ -44,18 +44,18 @@
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnRestore = new System.Windows.Forms.Button();
             this.btnLoadOrder = new System.Windows.Forms.Button();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAbout = new System.Windows.Forms.Button();
+            this.txtSource = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
-            this.txtSource = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -221,6 +221,18 @@
             this.btnLoadOrder.UseVisualStyleBackColor = true;
             this.btnLoadOrder.Click += new System.EventHandler(this.btnLoadOrder_Click);
             // 
+            // btnAbout
+            // 
+            this.btnAbout.Location = new System.Drawing.Point(202, 34);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(150, 50);
+            this.btnAbout.TabIndex = 12;
+            this.btnAbout.Text = "About";
+            this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -271,17 +283,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
             // 
-            // btnAbout
+            // txtSource
             // 
-            this.btnAbout.Location = new System.Drawing.Point(202, 34);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(150, 50);
-            this.btnAbout.TabIndex = 12;
-            this.btnAbout.Text = "About";
-            this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            this.txtSource.Location = new System.Drawing.Point(362, 34);
+            this.txtSource.Name = "txtSource";
+            this.txtSource.Size = new System.Drawing.Size(150, 50);
+            this.txtSource.TabIndex = 14;
+            this.txtSource.Text = "Github";
+            this.toolTip1.SetToolTip(this.txtSource, "Open GitHub page");
+            this.txtSource.UseVisualStyleBackColor = true;
+            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
             // groupBox2
             // 
@@ -352,16 +363,6 @@
             this.chkAutoCheck.Text = "Auto Check";
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
-            // 
-            // txtSource
-            // 
-            this.txtSource.Location = new System.Drawing.Point(362, 34);
-            this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(150, 50);
-            this.txtSource.TabIndex = 14;
-            this.txtSource.Text = "Github";
-            this.txtSource.UseVisualStyleBackColor = true;
-            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
             // frmStarfieldTools
             // 

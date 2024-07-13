@@ -49,6 +49,8 @@ namespace Starfield_Tools
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();
             int TitleCount = 0;
+            int esmCount = 0;
+            int espCount = 0;
 
             foreach (var kvp in data)
             {
@@ -112,7 +114,19 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                     }
                 }
             }
-            toolStripStatusLabel1.Text = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " + EnabledCount.ToString();
+
+            string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
+            foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            {
+                esmCount++;
+            }
+            foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            {
+                espCount++;
+            }
+            toolStripStatusLabel1.Text = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " +
+                EnabledCount.ToString() + ", esm files found: " + esmCount.ToString() + ", esp files found: " + espCount; ;
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -325,21 +339,6 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             isModified = true;
         }
 
-        private void btnScan_Click(object sender, EventArgs e)
-        {
-            string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
-            int esmCount = 0;
-            int espCount = 0;
 
-            foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
-            {
-                esmCount++;
-            }
-            foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
-            {
-                espCount++;
-            }
-            toolStripStatusLabel1.Text="esm files found: "+esmCount.ToString()+" esp files found: "+espCount;
-        }
     }
 }
