@@ -56,6 +56,7 @@
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
+            this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.grpCheckCatalog.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -212,7 +213,7 @@
             // btnLoadOrder
             // 
             this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(943, 31);
+            this.btnLoadOrder.Location = new System.Drawing.Point(913, 31);
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
             this.btnLoadOrder.TabIndex = 11;
@@ -235,7 +236,7 @@
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(362, 34);
+            this.txtSource.Location = new System.Drawing.Point(355, 34);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 50);
             this.txtSource.TabIndex = 14;
@@ -280,6 +281,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdStarFieldPath);
             this.groupBox1.Controls.Add(this.txtSource);
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
@@ -364,6 +366,16 @@
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
             // 
+            // cmdStarFieldPath
+            // 
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(511, 33);
+            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
+            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
+            this.cmdStarFieldPath.TabIndex = 15;
+            this.cmdStarFieldPath.Text = "Set Starfield Path";
+            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
+            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
+            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -423,6 +435,7 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button btnLoadOrder;
         private System.Windows.Forms.Button txtSource;
+        private System.Windows.Forms.Button cmdStarFieldPath;
     }
 }
 

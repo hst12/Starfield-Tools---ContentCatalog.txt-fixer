@@ -13,11 +13,13 @@ namespace Starfield_Tools
     public partial class frmLoadOrder : Form
     {
         ContentCatalog CC = new ContentCatalog();
+
         bool isModified = false;
 
         public frmLoadOrder()
         {
             InitializeComponent();
+            string StarfieldPath = CC.GetStarfieldPath();
             Font FontSize = new Font("Microsoft Sans Serif", 14);
             this.Font = FontSize;
             toolStripStatusLabel1.Font = FontSize;
@@ -42,35 +44,41 @@ namespace Starfield_Tools
             string jsonFilePath = CC.GetCatalog();
 
             string json = File.ReadAllText(jsonFilePath);
-            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
-            var data = JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
-            data.Remove("ContentCatalog");
 
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();
             int TitleCount = 0;
             int esmCount = 0;
             int espCount = 0;
+            string StatText = "";
 
-            foreach (var kvp in data)
+            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+            try
             {
-                try
+                var data = JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+                data.Remove("ContentCatalog");
+                foreach (var kvp in data)
                 {
-                    CreationsPlugin.Add(string.Join(",", kvp.Value.Files));
-                    CreationsTitle.Add(kvp.Value.Title);
-                    TitleCount++;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error: {ex.Message}");
+                    try
+                    {
+                        CreationsPlugin.Add(string.Join(",", kvp.Value.Files));
+                        CreationsTitle.Add(kvp.Value.Title);
+                        TitleCount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
                 }
             }
+            catch { }
 
             loText = CC.GetStarfieldPath() + @"\plugins.txt";
             if (!File.Exists(loText))
             {
-                MessageBox.Show(@"All your mods are busted
-Click Ok and Ok again to create a blank file or click Ok and Cancel to fix manually
+                MessageBox.Show(@"Missing Plugins.txt file
+
+Click Ok and Ok again to create a blank Plugins.txt file or click Ok and Cancel to fix manually
 Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not found");
                 return;
             }
@@ -115,18 +123,35 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                 }
             }
 
-            /*string directory = @"E:\SteamLibrary\steamapps\common\Starfield\Data";
-            foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            try
             {
-                esmCount++;
-            }
-            foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
-            {
-                espCount++;
-            }*/
-            toolStripStatusLabel1.Text = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " +
-                EnabledCount.ToString() + ", esm files found: " + esmCount.ToString() + ", esp files found: " + espCount; ;
+                string directory = Properties.Settings.Default.StarfieldPath + @"\Data";
+                foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+                {
+                    esmCount++;
+                }
+                foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+                {
+                    espCount++;
+                }
+                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " +
+            EnabledCount.ToString();
+                if (esmCount > 0)
+                {
+                    StatText += ", esm files found: " + esmCount.ToString();
 
+                }
+                if (espCount > 0)
+                {
+                    StatText += ", esp files found: " + espCount.ToString();
+                }
+
+                toolStripStatusLabel1.Text = StatText;
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = "Starfield path needs to be set";
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

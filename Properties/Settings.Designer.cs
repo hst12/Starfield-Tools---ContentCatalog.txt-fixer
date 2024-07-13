@@ -70,5 +70,17 @@ namespace Starfield_Tools.Properties {
                 this["AutoRestore"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StarfieldPath {
+            get {
+                return ((string)(this["StarfieldPath"]));
+            }
+            set {
+                this["StarfieldPath"] = value;
+            }
+        }
     }
 }

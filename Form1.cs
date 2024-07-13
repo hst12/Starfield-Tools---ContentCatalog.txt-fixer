@@ -27,6 +27,8 @@ namespace Starfield_Tools
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
+            CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
+            Console.WriteLine(CC.StarFieldPath);
 
             /*AutoCheck = true;
             AutoClean = true;
@@ -84,7 +86,10 @@ namespace Starfield_Tools
 
         private void DisplayCatalog()
         {
-            richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
+            try
+            { richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
+            }
+            catch { }
         }
 
 
@@ -198,6 +203,7 @@ namespace Starfield_Tools
             Properties.Settings.Default.AutoClean = chkAutoClean.Checked;
             Properties.Settings.Default.AutoBackup = chkAutoBackup.Checked;
             Properties.Settings.Default.AutoRestore = chkAutoRestore.Checked;
+            Properties.Settings.Default.StarfieldPath = CC.StarFieldPath;
             Properties.Settings.Default.Save();
 
             Application.Exit();
@@ -376,6 +382,20 @@ Quit the game if it's running before using the Clean or Edit buttons.
         private void txtSource_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+        }
+
+        private void cmdStarFieldPath_Click(object sender, EventArgs e)
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                folderBrowserDialog.SelectedPath = CC.StarFieldPath;
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                    CC.StarFieldPath = selectedFolderPath;
+                    Properties.Settings.Default.StarfieldPath = selectedFolderPath;
+                }
+            }
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
