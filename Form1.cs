@@ -87,7 +87,8 @@ namespace Starfield_Tools
         private void DisplayCatalog()
         {
             try
-            { richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
+            {
+                richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
             }
             catch { }
         }
@@ -387,9 +388,17 @@ Quit the game if it's running before using the Clean or Edit buttons.
         {
             string cmdLine = "shell:AppsFolder\\\\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game\"";
 
-            var processInfo = new ProcessStartInfo("cmd.exe /C start " + cmdLine);
-            //Process.Start(processInfo);
-            Console.WriteLine(processInfo.FileName);
+            var processInfo = new ProcessStartInfo("cmd.exe /C start " + cmdLine); // Method 1
+            try
+            {
+                Process.Start(cmdLine); // Method 2
+            }
+            catch
+            {
+
+            }
+
+            Console.WriteLine(cmdLine);
 
         }
 
