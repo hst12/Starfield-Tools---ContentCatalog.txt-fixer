@@ -386,7 +386,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
-            string cmdLine = @"shell:AppsFolder\\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game\";
+            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
             string altCmdLine = "cmd.exe /C start " + cmdLine;
 
             var processInfo = new ProcessStartInfo("cmd.exe /C start " + cmdLine); // Method 1
