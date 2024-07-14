@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStarfieldTools));
-            this.grpCheckCatalog = new System.Windows.Forms.GroupBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnQuit = new System.Windows.Forms.Button();
@@ -50,6 +49,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnStarfieldStore = new System.Windows.Forms.Button();
             this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
@@ -57,49 +57,34 @@
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
-            this.btnStarfieldStore = new System.Windows.Forms.Button();
-            this.grpCheckCatalog.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grpAuto.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // grpCheckCatalog
-            // 
-            this.grpCheckCatalog.AutoSize = true;
-            this.grpCheckCatalog.Controls.Add(this.richTextBox2);
-            this.grpCheckCatalog.Controls.Add(this.richTextBox1);
-            this.grpCheckCatalog.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpCheckCatalog.Location = new System.Drawing.Point(0, 0);
-            this.grpCheckCatalog.Margin = new System.Windows.Forms.Padding(4);
-            this.grpCheckCatalog.Name = "grpCheckCatalog";
-            this.grpCheckCatalog.Padding = new System.Windows.Forms.Padding(4);
-            this.grpCheckCatalog.Size = new System.Drawing.Size(1303, 487);
-            this.grpCheckCatalog.TabIndex = 0;
-            this.grpCheckCatalog.TabStop = false;
-            this.grpCheckCatalog.Text = "Catalog Contents and Log";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox2.Location = new System.Drawing.Point(4, 329);
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 317);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1295, 154);
+            this.richTextBox2.Size = new System.Drawing.Size(1297, 308);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 28);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(6, 6);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1295, 301);
+            this.richTextBox1.Size = new System.Drawing.Size(1291, 302);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -252,10 +237,10 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1026);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1100);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1303, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1180, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -272,12 +257,12 @@
             this.grpActions.Controls.Add(this.btnBackup);
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
-            this.grpActions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpActions.Location = new System.Drawing.Point(0, 487);
+            this.grpActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpActions.Location = new System.Drawing.Point(6, 634);
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1303, 121);
+            this.grpActions.Size = new System.Drawing.Size(1291, 121);
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -291,15 +276,25 @@
             this.groupBox1.Controls.Add(this.btnAbout);
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 914);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(6, 981);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1303, 112);
+            this.groupBox1.Size = new System.Drawing.Size(1291, 113);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
+            // 
+            // btnStarfieldStore
+            // 
+            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
+            this.btnStarfieldStore.Name = "btnStarfieldStore";
+            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
+            this.btnStarfieldStore.TabIndex = 16;
+            this.btnStarfieldStore.Text = "Starfield (MS)";
+            this.btnStarfieldStore.UseVisualStyleBackColor = true;
+            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
             // 
             // cmdStarFieldPath
             // 
@@ -318,9 +313,10 @@
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
             this.groupBox2.Controls.Add(this.btnLoad);
-            this.groupBox2.Location = new System.Drawing.Point(15, 679);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 764);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1254, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1297, 112);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
@@ -332,9 +328,10 @@
             this.grpAuto.Controls.Add(this.chkAutoBackup);
             this.grpAuto.Controls.Add(this.chkAutoClean);
             this.grpAuto.Controls.Add(this.chkAutoCheck);
-            this.grpAuto.Location = new System.Drawing.Point(15, 797);
+            this.grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpAuto.Location = new System.Drawing.Point(3, 882);
             this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1254, 112);
+            this.grpAuto.Size = new System.Drawing.Size(1297, 90);
             this.grpAuto.TabIndex = 6;
             this.grpAuto.TabStop = false;
             this.grpAuto.Text = "Auto Functions";
@@ -383,34 +380,41 @@
             this.chkAutoCheck.UseVisualStyleBackColor = true;
             this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
             // 
-            // btnStarfieldStore
+            // tableLayoutPanel1
             // 
-            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
-            this.btnStarfieldStore.Name = "btnStarfieldStore";
-            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
-            this.btnStarfieldStore.TabIndex = 16;
-            this.btnStarfieldStore.Text = "Starfield (MS)";
-            this.btnStarfieldStore.UseVisualStyleBackColor = true;
-            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.grpAuto, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.grpActions, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1180, 1100);
+            this.tableLayoutPanel1.TabIndex = 7;
             // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1303, 1068);
-            this.Controls.Add(this.grpAuto);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.grpActions);
+            this.ClientSize = new System.Drawing.Size(1180, 1142);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.grpCheckCatalog);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
             this.Name = "frmStarfieldTools";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Starfield Tools";
-            this.grpCheckCatalog.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.grpActions.ResumeLayout(false);
@@ -420,13 +424,14 @@
             this.groupBox2.PerformLayout();
             this.grpAuto.ResumeLayout(false);
             this.grpAuto.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox grpCheckCatalog;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Button cmdClean;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -454,6 +459,7 @@
         private System.Windows.Forms.Button txtSource;
         private System.Windows.Forms.Button cmdStarFieldPath;
         private System.Windows.Forms.Button btnStarfieldStore;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
