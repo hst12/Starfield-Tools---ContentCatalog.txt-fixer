@@ -114,7 +114,7 @@ namespace Starfield_Tools
                     while ((character = reader.Read()) != -1)
                     {
                         if (character == 'n' || character == '\r') lineCount++;
-                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r'))
+                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character=='\\')
                         {
                             errorCount++;
                             richTextBox1.Text += "Invalid character at line " + lineCount.ToString() + "\n";
