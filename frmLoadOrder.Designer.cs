@@ -130,6 +130,7 @@
             // 
             // btnBottom
             // 
+            this.btnBottom.AutoSize = true;
             this.btnBottom.Location = new System.Drawing.Point(676, 23);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(178, 67);
@@ -140,6 +141,7 @@
             // 
             // btnTop
             // 
+            this.btnTop.AutoSize = true;
             this.btnTop.Location = new System.Drawing.Point(492, 23);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(178, 67);
@@ -150,6 +152,7 @@
             // 
             // btnRestorePlugins
             // 
+            this.btnRestorePlugins.AutoSize = true;
             this.btnRestorePlugins.Location = new System.Drawing.Point(1044, 23);
             this.btnRestorePlugins.Name = "btnRestorePlugins";
             this.btnRestorePlugins.Size = new System.Drawing.Size(178, 67);
@@ -160,6 +163,7 @@
             // 
             // btnBackupPlugins
             // 
+            this.btnBackupPlugins.AutoSize = true;
             this.btnBackupPlugins.Location = new System.Drawing.Point(860, 23);
             this.btnBackupPlugins.Name = "btnBackupPlugins";
             this.btnBackupPlugins.Size = new System.Drawing.Size(178, 67);
@@ -170,6 +174,7 @@
             // 
             // btnDown
             // 
+            this.btnDown.AutoSize = true;
             this.btnDown.Location = new System.Drawing.Point(309, 23);
             this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
@@ -181,6 +186,7 @@
             // 
             // btnUp
             // 
+            this.btnUp.AutoSize = true;
             this.btnUp.Location = new System.Drawing.Point(127, 23);
             this.btnUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnUp.Name = "btnUp";
@@ -226,6 +232,7 @@
             // 
             // btnDisable
             // 
+            this.btnDisable.AutoSize = true;
             this.btnDisable.Location = new System.Drawing.Point(1229, 23);
             this.btnDisable.Name = "btnDisable";
             this.btnDisable.Size = new System.Drawing.Size(178, 67);

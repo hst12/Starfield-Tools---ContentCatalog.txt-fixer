@@ -58,6 +58,7 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chkForceClean = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,10 +70,10 @@
             // richTextBox2
             // 
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 317);
+            this.richTextBox2.Location = new System.Drawing.Point(3, 313);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1297, 308);
+            this.richTextBox2.Size = new System.Drawing.Size(1307, 304);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
@@ -84,14 +85,15 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1291, 302);
+            this.richTextBox1.Size = new System.Drawing.Size(1301, 298);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(988, 34);
+            this.btnQuit.AutoSize = true;
+            this.btnQuit.Location = new System.Drawing.Point(969, 34);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -103,7 +105,8 @@
             // 
             // cmdClean
             // 
-            this.cmdClean.Location = new System.Drawing.Point(170, 35);
+            this.cmdClean.AutoSize = true;
+            this.cmdClean.Location = new System.Drawing.Point(169, 35);
             this.cmdClean.Margin = new System.Windows.Forms.Padding(6);
             this.cmdClean.Name = "cmdClean";
             this.cmdClean.Size = new System.Drawing.Size(150, 50);
@@ -128,6 +131,7 @@
             // 
             // btnCheck
             // 
+            this.btnCheck.AutoSize = true;
             this.btnCheck.Location = new System.Drawing.Point(10, 35);
             this.btnCheck.Margin = new System.Windows.Forms.Padding(4);
             this.btnCheck.Name = "btnCheck";
@@ -154,7 +158,7 @@
             // btnExplore
             // 
             this.btnExplore.AutoSize = true;
-            this.btnExplore.Location = new System.Drawing.Point(660, 31);
+            this.btnExplore.Location = new System.Drawing.Point(681, 31);
             this.btnExplore.Name = "btnExplore";
             this.btnExplore.Size = new System.Drawing.Size(150, 50);
             this.btnExplore.TabIndex = 10;
@@ -166,7 +170,7 @@
             // btnEditPlugins
             // 
             this.btnEditPlugins.AutoSize = true;
-            this.btnEditPlugins.Location = new System.Drawing.Point(340, 31);
+            this.btnEditPlugins.Location = new System.Drawing.Point(396, 31);
             this.btnEditPlugins.Name = "btnEditPlugins";
             this.btnEditPlugins.Size = new System.Drawing.Size(204, 50);
             this.btnEditPlugins.TabIndex = 9;
@@ -177,7 +181,8 @@
             // 
             // btnBackup
             // 
-            this.btnBackup.Location = new System.Drawing.Point(330, 35);
+            this.btnBackup.AutoSize = true;
+            this.btnBackup.Location = new System.Drawing.Point(328, 35);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(150, 50);
             this.btnBackup.TabIndex = 6;
@@ -188,6 +193,7 @@
             // 
             // btnRestore
             // 
+            this.btnRestore.AutoSize = true;
             this.btnRestore.Location = new System.Drawing.Point(487, 35);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(150, 50);
@@ -200,7 +206,7 @@
             // btnLoadOrder
             // 
             this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(913, 31);
+            this.btnLoadOrder.Location = new System.Drawing.Point(912, 31);
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
             this.btnLoadOrder.TabIndex = 11;
@@ -211,7 +217,8 @@
             // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(444, 34);
+            this.btnAbout.AutoSize = true;
+            this.btnAbout.Location = new System.Drawing.Point(655, 34);
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
@@ -223,7 +230,8 @@
             // 
             // txtSource
             // 
-            this.txtSource.Location = new System.Drawing.Point(603, 34);
+            this.txtSource.AutoSize = true;
+            this.txtSource.Location = new System.Drawing.Point(812, 34);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 50);
             this.txtSource.TabIndex = 14;
@@ -240,7 +248,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 1100);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1180, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1313, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -258,11 +266,11 @@
             this.grpActions.Controls.Add(this.btnCheck);
             this.grpActions.Controls.Add(this.cmdClean);
             this.grpActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpActions.Location = new System.Drawing.Point(6, 634);
+            this.grpActions.Location = new System.Drawing.Point(6, 626);
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1291, 121);
+            this.grpActions.Size = new System.Drawing.Size(1301, 121);
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -270,6 +278,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.btnStarfieldStore);
             this.groupBox1.Controls.Add(this.cmdStarFieldPath);
             this.groupBox1.Controls.Add(this.txtSource);
@@ -277,17 +286,18 @@
             this.groupBox1.Controls.Add(this.btnStarfield);
             this.groupBox1.Controls.Add(this.btnQuit);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(6, 981);
+            this.groupBox1.Location = new System.Drawing.Point(6, 973);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1291, 113);
+            this.groupBox1.Size = new System.Drawing.Size(1301, 121);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
             // 
             // btnStarfieldStore
             // 
+            this.btnStarfieldStore.AutoSize = true;
             this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
             this.btnStarfieldStore.Name = "btnStarfieldStore";
             this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
@@ -298,7 +308,8 @@
             // 
             // cmdStarFieldPath
             // 
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(759, 34);
+            this.cmdStarFieldPath.AutoSize = true;
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(426, 34);
             this.cmdStarFieldPath.Name = "cmdStarFieldPath";
             this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
             this.cmdStarFieldPath.TabIndex = 15;
@@ -314,9 +325,9 @@
             this.groupBox2.Controls.Add(this.btnExplore);
             this.groupBox2.Controls.Add(this.btnLoad);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 764);
+            this.groupBox2.Location = new System.Drawing.Point(3, 756);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1297, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1307, 112);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
@@ -324,14 +335,15 @@
             // grpAuto
             // 
             this.grpAuto.AutoSize = true;
+            this.grpAuto.Controls.Add(this.chkForceClean);
             this.grpAuto.Controls.Add(this.chkAutoRestore);
             this.grpAuto.Controls.Add(this.chkAutoBackup);
             this.grpAuto.Controls.Add(this.chkAutoClean);
             this.grpAuto.Controls.Add(this.chkAutoCheck);
             this.grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpAuto.Location = new System.Drawing.Point(3, 882);
+            this.grpAuto.Location = new System.Drawing.Point(3, 874);
             this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1297, 90);
+            this.grpAuto.Size = new System.Drawing.Size(1307, 90);
             this.grpAuto.TabIndex = 6;
             this.grpAuto.TabStop = false;
             this.grpAuto.Text = "Auto Functions";
@@ -339,7 +351,7 @@
             // chkAutoRestore
             // 
             this.chkAutoRestore.AutoSize = true;
-            this.chkAutoRestore.Location = new System.Drawing.Point(584, 31);
+            this.chkAutoRestore.Location = new System.Drawing.Point(577, 31);
             this.chkAutoRestore.Name = "chkAutoRestore";
             this.chkAutoRestore.Size = new System.Drawing.Size(169, 29);
             this.chkAutoRestore.TabIndex = 3;
@@ -350,7 +362,7 @@
             // chkAutoBackup
             // 
             this.chkAutoBackup.AutoSize = true;
-            this.chkAutoBackup.Location = new System.Drawing.Point(384, 31);
+            this.chkAutoBackup.Location = new System.Drawing.Point(385, 31);
             this.chkAutoBackup.Name = "chkAutoBackup";
             this.chkAutoBackup.Size = new System.Drawing.Size(166, 29);
             this.chkAutoBackup.TabIndex = 2;
@@ -361,7 +373,7 @@
             // chkAutoClean
             // 
             this.chkAutoClean.AutoSize = true;
-            this.chkAutoClean.Location = new System.Drawing.Point(204, 31);
+            this.chkAutoClean.Location = new System.Drawing.Point(772, 31);
             this.chkAutoClean.Name = "chkAutoClean";
             this.chkAutoClean.Size = new System.Drawing.Size(150, 29);
             this.chkAutoClean.TabIndex = 1;
@@ -400,14 +412,25 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1180, 1100);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // chkForceClean
+            // 
+            this.chkForceClean.AutoSize = true;
+            this.chkForceClean.Location = new System.Drawing.Point(198, 31);
+            this.chkForceClean.Name = "chkForceClean";
+            this.chkForceClean.Size = new System.Drawing.Size(161, 29);
+            this.chkForceClean.TabIndex = 4;
+            this.chkForceClean.Text = "Force Clean";
+            this.chkForceClean.UseVisualStyleBackColor = true;
+            this.chkForceClean.CheckedChanged += new System.EventHandler(this.chkForceClean_CheckedChanged);
             // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1180, 1142);
+            this.ClientSize = new System.Drawing.Size(1313, 1142);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -418,6 +441,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.grpActions.ResumeLayout(false);
+            this.grpActions.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -460,6 +484,7 @@
         private System.Windows.Forms.Button cmdStarFieldPath;
         private System.Windows.Forms.Button btnStarfieldStore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckBox chkForceClean;
     }
 }
 

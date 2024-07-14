@@ -12,34 +12,33 @@ namespace Starfield_Tools
     public partial class frmStarfieldTools : Form
     {
 
-        //private bool AutoCheck = true, AutoClean = true, AutoBackup = true, AutoRestore = true;
-        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore;
+        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore,ForceClean;
 
         ContentCatalog CC = new ContentCatalog();
 
         public frmStarfieldTools()
         {
             InitializeComponent();
-
-            // Initialise Checkboxes
+            
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
             CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
-            Console.WriteLine(CC.StarFieldPath);
+            ForceClean= Properties.Settings.Default.ForceClean;
 
             /*AutoCheck = true;
             AutoClean = true;
             AutoBackup = true;
             AutoRestore = true;*/
 
-
+            // Initialise Checkboxes
             chkAutoCheck.Checked = AutoCheck;
             chkAutoClean.Checked = AutoClean;
             chkAutoBackup.Checked = AutoBackup;
             chkAutoRestore.Checked = AutoRestore;
+            chkForceClean.Checked = ForceClean;
 
             richTextBox2.Text = "";
 
@@ -114,7 +113,7 @@ namespace Starfield_Tools
                     while ((character = reader.Read()) != -1)
                     {
                         if (character == 'n' || character == '\r') lineCount++;
-                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character=='\\')
+                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\') // Look for potential problem chars
                         {
                             errorCount++;
                             richTextBox1.Text += "Invalid character at line " + lineCount.ToString() + "\n";
@@ -164,7 +163,7 @@ namespace Starfield_Tools
                         cleanedContents.Append((char)character);
                         richTextBox1.Text += (char)character;
                     }
-                    else if (character < 32 && character > 126 && character != '\n' && character != '\r')
+                    else if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\')
                         toolStripStatusLabel1.Text = "Error found\n";
                     else if (character >= 32 && character <= 126)
                     {
@@ -186,7 +185,7 @@ namespace Starfield_Tools
 
         private void cmdClean_Click(object sender, EventArgs e)
         {
-            if (!CheckCatalog())
+            if (!CheckCatalog() || ForceClean)
                 CleanCatalog();
             else
             {
@@ -199,11 +198,12 @@ namespace Starfield_Tools
         {
             // Save settings
 
-            Properties.Settings.Default.AutoCheck = chkAutoCheck.Checked;
-            Properties.Settings.Default.AutoClean = chkAutoClean.Checked;
-            Properties.Settings.Default.AutoBackup = chkAutoBackup.Checked;
-            Properties.Settings.Default.AutoRestore = chkAutoRestore.Checked;
+            Properties.Settings.Default.AutoCheck = AutoCheck;
+            Properties.Settings.Default.AutoClean = AutoClean;
+            Properties.Settings.Default.AutoBackup = AutoBackup;
+            Properties.Settings.Default.AutoRestore = AutoRestore;
             Properties.Settings.Default.StarfieldPath = CC.StarFieldPath;
+            Properties.Settings.Default.ForceClean = ForceClean;
             Properties.Settings.Default.Save();
 
             Application.Exit();
@@ -384,6 +384,11 @@ Quit the game if it's running before using the Clean or Edit buttons.
             }
         }
 
+        private void chkForceClean_CheckedChanged(object sender, EventArgs e)
+        {
+            ForceClean = chkForceClean.Checked;
+        }
+
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
@@ -395,7 +400,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message+"\n"+cmdLine,"Error");
+                MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
         }
 
