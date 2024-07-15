@@ -47,6 +47,9 @@ namespace Starfield_Tools
 
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();
+            List<string> CreationsFiles=new List<string>();
+            List<string> CreationsVersion=new List<string>();
+
             int TitleCount = 0;
             int esmCount = 0;
             int espCount = 0;
@@ -61,9 +64,20 @@ namespace Starfield_Tools
                 {
                     try
                     {
-                        CreationsPlugin.Add(string.Join(",", kvp.Value.Files));
-                        CreationsTitle.Add(kvp.Value.Title);
-                        TitleCount++;
+                        for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
+                        {
+                            //CreationsFiles.Add(kvp.Value.Files[i]); 
+                            if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
+                            {
+                                CreationsPlugin.Add(kvp.Value.Files[i]);
+                               
+                                TitleCount++;
+                            }
+                        }
+                        CreationsTitle.Add(kvp.Value.Title); // Add Creations description to datagrid
+                        CreationsVersion.Add(kvp.Value.Version);
+                        CreationsFiles.Add(string.Join(", ",  kvp.Value.Files));
+
                     }
                     catch (Exception ex)
                     {
@@ -84,7 +98,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             }
             using (var reader = new StreamReader(loText))
             {
-                string line, Description;
+                string line, Description,ModFiles,ModVersion;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -92,7 +106,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                     {
                         if (line != "")
                         {
-                            if (line[0] == '*')
+                            if (line[0] == '*') // * = Mod enabled
                             {
                                 ModEnabled = true;
                                 EnabledCount++;
@@ -101,18 +115,21 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                             else
                                 ModEnabled = false;
 
-                            if (line[0] != '#')
+                            if (line[0] != '#') // Ignore comment
                             {
                                 Description = "";
-
+                                ModFiles = "";
+                                ModVersion = "";
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i].Substring(0, CreationsPlugin[i].IndexOf('.')) + ".esm" == line)
                                     {
-                                        Description = CreationsTitle[i];
+                                        Description = CreationsTitle[i]; // Add Content Catalog description if available
+                                        ModVersion = CreationsVersion[i];
+                                        ModFiles = CreationsFiles[i];
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description,ModVersion,ModFiles);
                             }
                         }
                     }
@@ -138,7 +155,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             EnabledCount.ToString();
                 if (esmCount > 0)
                 {
-                    StatText += ", esm files found: " + esmCount.ToString();
+                    StatText += ", esm files found: " + esmCount.ToString()+" (includes some base game esm files) ";
 
                 }
                 if (espCount > 0)

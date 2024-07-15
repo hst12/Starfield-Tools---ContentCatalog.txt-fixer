@@ -45,6 +45,7 @@
             this.btnLoadOrder = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.txtSource = new System.Windows.Forms.Button();
+            this.chkForceClean = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
@@ -58,7 +59,6 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.chkForceClean = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -70,10 +70,10 @@
             // richTextBox2
             // 
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 313);
+            this.richTextBox2.Location = new System.Drawing.Point(3, 468);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1307, 304);
+            this.richTextBox2.Size = new System.Drawing.Size(1307, 149);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
@@ -85,7 +85,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1301, 298);
+            this.richTextBox1.Size = new System.Drawing.Size(1301, 453);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -240,6 +240,18 @@
             this.txtSource.UseVisualStyleBackColor = true;
             this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
             // 
+            // chkForceClean
+            // 
+            this.chkForceClean.AutoSize = true;
+            this.chkForceClean.Location = new System.Drawing.Point(749, 30);
+            this.chkForceClean.Name = "chkForceClean";
+            this.chkForceClean.Size = new System.Drawing.Size(161, 29);
+            this.chkForceClean.TabIndex = 4;
+            this.chkForceClean.Text = "Force Clean";
+            this.toolTip1.SetToolTip(this.chkForceClean, "Not normally needed");
+            this.chkForceClean.UseVisualStyleBackColor = true;
+            this.chkForceClean.CheckedChanged += new System.EventHandler(this.chkForceClean_CheckedChanged);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -351,7 +363,7 @@
             // chkAutoRestore
             // 
             this.chkAutoRestore.AutoSize = true;
-            this.chkAutoRestore.Location = new System.Drawing.Point(577, 31);
+            this.chkAutoRestore.Location = new System.Drawing.Point(557, 31);
             this.chkAutoRestore.Name = "chkAutoRestore";
             this.chkAutoRestore.Size = new System.Drawing.Size(169, 29);
             this.chkAutoRestore.TabIndex = 3;
@@ -362,7 +374,7 @@
             // chkAutoBackup
             // 
             this.chkAutoBackup.AutoSize = true;
-            this.chkAutoBackup.Location = new System.Drawing.Point(385, 31);
+            this.chkAutoBackup.Location = new System.Drawing.Point(368, 31);
             this.chkAutoBackup.Name = "chkAutoBackup";
             this.chkAutoBackup.Size = new System.Drawing.Size(166, 29);
             this.chkAutoBackup.TabIndex = 2;
@@ -373,7 +385,7 @@
             // chkAutoClean
             // 
             this.chkAutoClean.AutoSize = true;
-            this.chkAutoClean.Location = new System.Drawing.Point(772, 31);
+            this.chkAutoClean.Location = new System.Drawing.Point(195, 30);
             this.chkAutoClean.Name = "chkAutoClean";
             this.chkAutoClean.Size = new System.Drawing.Size(150, 29);
             this.chkAutoClean.TabIndex = 1;
@@ -406,25 +418,14 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // chkForceClean
-            // 
-            this.chkForceClean.AutoSize = true;
-            this.chkForceClean.Location = new System.Drawing.Point(198, 31);
-            this.chkForceClean.Name = "chkForceClean";
-            this.chkForceClean.Size = new System.Drawing.Size(161, 29);
-            this.chkForceClean.TabIndex = 4;
-            this.chkForceClean.Text = "Force Clean";
-            this.chkForceClean.UseVisualStyleBackColor = true;
-            this.chkForceClean.CheckedChanged += new System.EventHandler(this.chkForceClean_CheckedChanged);
             // 
             // frmStarfieldTools
             // 

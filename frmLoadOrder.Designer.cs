@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnBottom = new System.Windows.Forms.Button();
@@ -46,6 +43,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDisable = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -62,7 +64,9 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ModEnabled,
             this.ModNamexx,
-            this.Descritpion});
+            this.Descritpion,
+            this.Version,
+            this.Files});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 4);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
@@ -75,34 +79,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1631, 819);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
-            // 
-            // ModEnabled
-            // 
-            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ModEnabled.HeaderText = "Enabled";
-            this.ModEnabled.MinimumWidth = 10;
-            this.ModEnabled.Name = "ModEnabled";
-            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ModEnabled.Width = 136;
-            // 
-            // ModNamexx
-            // 
-            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ModNamexx.HeaderText = "Plugin Name";
-            this.ModNamexx.MinimumWidth = 10;
-            this.ModNamexx.Name = "ModNamexx";
-            this.ModNamexx.ReadOnly = true;
-            this.ModNamexx.Width = 165;
-            // 
-            // Descritpion
-            // 
-            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Descritpion.HeaderText = "Creations Description";
-            this.Descritpion.MinimumWidth = 10;
-            this.Descritpion.Name = "Descritpion";
-            this.Descritpion.ReadOnly = true;
-            this.Descritpion.Width = 241;
             // 
             // btnOK
             // 
@@ -257,6 +233,49 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1633, 927);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
+            // ModEnabled
+            // 
+            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ModEnabled.HeaderText = "Enabled";
+            this.ModEnabled.MinimumWidth = 10;
+            this.ModEnabled.Name = "ModEnabled";
+            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ModEnabled.Width = 136;
+            // 
+            // ModNamexx
+            // 
+            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ModNamexx.HeaderText = "Plugin Name";
+            this.ModNamexx.MinimumWidth = 10;
+            this.ModNamexx.Name = "ModNamexx";
+            this.ModNamexx.ReadOnly = true;
+            this.ModNamexx.Width = 179;
+            // 
+            // Descritpion
+            // 
+            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Descritpion.HeaderText = "Creations Description";
+            this.Descritpion.MinimumWidth = 10;
+            this.Descritpion.Name = "Descritpion";
+            this.Descritpion.ReadOnly = true;
+            this.Descritpion.Width = 241;
+            // 
+            // Version
+            // 
+            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Version.HeaderText = "Version";
+            this.Version.MinimumWidth = 10;
+            this.Version.Name = "Version";
+            this.Version.Width = 130;
+            // 
+            // Files
+            // 
+            this.Files.HeaderText = "Files";
+            this.Files.MinimumWidth = 10;
+            this.Files.Name = "Files";
+            this.Files.Width = 103;
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -292,13 +311,15 @@
         private System.Windows.Forms.Button btnBackupPlugins;
         private System.Windows.Forms.Button btnBottom;
         private System.Windows.Forms.Button btnTop;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnDisable;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
     }
 }
