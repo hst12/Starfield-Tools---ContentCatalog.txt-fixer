@@ -67,7 +67,6 @@ namespace Starfield_Tools
                     {
                         for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
                         {
-                            //CreationsFiles.Add(kvp.Value.Files[i]); 
                             if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
                             {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
@@ -76,7 +75,7 @@ namespace Starfield_Tools
                             }
                         }
                         CreationsTitle.Add(kvp.Value.Title); // Add Creations description to datagrid
-                                                             //if (double.TryParse(kvp.Value.Version, out _))
+
                         CreationsVersion.Add(kvp.Value.Version);
                         /*else
                             CreationsVersion.Add("Invalid version");*/
@@ -163,16 +162,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     espCount++;
                 }
-                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Enabled: " +
+                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString()+", Other: "+ (dataGridView1.RowCount-TitleCount).ToString()+", Enabled: " +
             EnabledCount.ToString();
                 if (esmCount > 0)
                 {
-                    StatText += ", esm files found: " + esmCount.ToString() + " (may include some base game esm files) ";
+                    StatText += ", esm files: " + esmCount.ToString() + " ";
 
                 }
                 if (espCount > 0)
                 {
-                    StatText += ", esp files found: " + espCount.ToString();
+                    StatText += ", esp files: " + espCount.ToString();
                 }
 
                 toolStripStatusLabel1.Text = StatText;

@@ -30,11 +30,6 @@ namespace Starfield_Tools
             CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
             ForceClean = Properties.Settings.Default.ForceClean;
 
-            /*AutoCheck = true;
-            AutoClean = true;
-            AutoBackup = true;
-            AutoRestore = true;*/
-
             // Initialise Checkboxes
             chkAutoCheck.Checked = AutoCheck;
             chkAutoClean.Checked = AutoClean;
@@ -50,7 +45,8 @@ namespace Starfield_Tools
                 {
                     if (AutoRestore) // Restore backup file if auto restore is on
                         RestoreCatalog();
-                    if (AutoClean && !RestoreCatalog()) // Clean if restore failed
+                    else
+                    if (AutoClean)
                         CleanCatalog();
                 }
                 else
@@ -106,6 +102,12 @@ namespace Starfield_Tools
             try
             {
                 string jsonFilePath = CC.GetCatalog();
+                if (jsonFilePath == null)
+                {
+                    toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                    richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                    return false;
+                }
                 string json = File.ReadAllText(jsonFilePath);
                 string TestString = "";
 
@@ -141,55 +143,32 @@ namespace Starfield_Tools
 
             catch (Exception e)
             {
-                MessageBox.Show($"Error: {e.Message}" + "\n\n Creating dummy file", "Error");
+                //MessageBox.Show("Start the game and enter the Creations menu to create a catalog file", "Missing Catalog File");
                 File.WriteAllText(CC.GetCatalog(), string.Empty);
-                toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt file created";
+                toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
                 return false;
             }
         }
 
         private void CleanCatalog()
         {
-            /* 
-             * Disabled old code
-             * 
-             * string filePath = CC.GetCatalog();
-             richTextBox1.Text = "Checking...\n\n";
-             toolStripStatusLabel1.Text = "Checking...";
-             // Read the file character by character
-             StringBuilder cleanedContents = new StringBuilder();
+            if (!File.Exists(CC.GetCatalog()))
+                File.WriteAllText(CC.GetCatalog(), string.Empty); // Create dummy catalog
+            else
+            {
+                long fileSize = new FileInfo(CC.GetCatalog()).Length;
 
-             using (StreamReader reader = new StreamReader(filePath))
-             {
-                 int character;
-                 while ((character = reader.Read()) != -1)
-                 {
-                     // Preserve newline characters
-                     if (character == '\n' || character == '\r')
-                     {
-                         cleanedContents.Append((char)character);
-                         richTextBox1.Text += (char)character;
-                     }
-                     else if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\')
-                         toolStripStatusLabel1.Text = "Error found\n";
-                     else if (character >= 32 && character <= 126)
-                     {
-                         cleanedContents.Append((char)character); // Keep printable characters
-                         richTextBox1.Text += (char)character;
-                     }
-                 }
-             }
-
-             // Write the cleaned contents back to the file
-             File.WriteAllText(filePath, cleanedContents.ToString());
-            */
-
-            NewFix();
-            toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
-            richTextBox2.Text += "Clean complete\n";
-            if (AutoBackup)
-                BackupCatalog();
-            DisplayCatalog();
+                if (fileSize > 0)
+                {
+                    NewFix();
+                    toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
+                    richTextBox2.Text += "Clean complete\n";
+                    if (AutoBackup)
+                        BackupCatalog();
+                    DisplayCatalog();
+                }
+            }
         }
 
         private void cmdClean_Click(object sender, EventArgs e)
@@ -218,7 +197,6 @@ namespace Starfield_Tools
 
             Application.Exit();
         }
-
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -328,7 +306,9 @@ Quit the game if it's running before using the Clean or Edit buttons.
             if (!CheckCatalog())
             {
                 richTextBox2.Text = "Catalog is corrupted. Backup not made.\n";
-                toolStripStatusLabel1.Text = "Catalog is corrupted. Backup not made.";
+                //toolStripStatusLabel1.Text = "Catalog is corrupted. Backup not made.";
+                if (AutoClean)
+                    CleanCatalog();
                 return;
             }
 
@@ -434,13 +414,11 @@ Quit the game if it's running before using the Clean or Edit buttons.
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
                 richTextBox2.Text += "Restore done\n";
-                CheckCatalog();
                 return true;
             }
             catch (Exception ex)
             {
                 richTextBox2.Text += "Restore failed.\n";
-                //MessageBox.Show($"Error: {ex.Message}", "Error");
                 toolStripStatusLabel1.Text = "Restore failed";
                 return false;
             }
@@ -455,6 +433,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
         private void NewFix()
         {
             string jsonFilePath = CC.GetCatalog();
+
             string json = File.ReadAllText(jsonFilePath);
             string TestString = "";
             bool FixVersion;
