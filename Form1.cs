@@ -129,6 +129,7 @@ namespace Starfield_Tools
                 if (!ErrorFound)
                 {
                     toolStripStatusLabel1.Text = "Catalog ok";
+                    richTextBox2.Text += "Catalog ok\n";
                     return true;
                 }
                 else
@@ -199,6 +200,7 @@ namespace Starfield_Tools
             {
                 richTextBox2.Text += "Cleaning not needed\n";
                 toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
+                DisplayCatalog();
             }
         }
 
@@ -258,7 +260,8 @@ namespace Starfield_Tools
         private void btnStarfield_Click(object sender, EventArgs e)
         {
             StartStarfield();
-            toolStripStatusLabel1.Text = "Ready";
+            Application.Exit();
+            //toolStripStatusLabel1.Text = "Ready";
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -411,11 +414,13 @@ Quit the game if it's running before using the Clean or Edit buttons.
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
+            Application.Exit();
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
         {
             BackupCatalog();
+            DisplayCatalog();
         }
 
         private bool RestoreCatalog()
@@ -444,6 +449,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
         private void btnRestore_Click(object sender, EventArgs e)
         {
             RestoreCatalog();
+            DisplayCatalog();
         }
 
         private void NewFix()

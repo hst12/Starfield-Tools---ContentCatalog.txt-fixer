@@ -151,7 +151,7 @@
             this.btnStarfield.Size = new System.Drawing.Size(199, 50);
             this.btnStarfield.TabIndex = 11;
             this.btnStarfield.Text = "Starfield (Steam)";
-            this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield -Steam only and not recommended for normal play");
+            this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield -Steam only");
             this.btnStarfield.UseVisualStyleBackColor = true;
             this.btnStarfield.Click += new System.EventHandler(this.btnStarfield_Click);
             // 
@@ -315,6 +315,7 @@
             this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
             this.btnStarfieldStore.TabIndex = 16;
             this.btnStarfieldStore.Text = "Starfield (MS)";
+            this.toolTip1.SetToolTip(this.btnStarfieldStore, "Launch Starfield - MS Store version");
             this.btnStarfieldStore.UseVisualStyleBackColor = true;
             this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
             // 
