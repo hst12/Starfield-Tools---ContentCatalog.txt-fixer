@@ -30,12 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnBottom = new System.Windows.Forms.Button();
@@ -49,6 +43,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDisable = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -78,62 +78,9 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1800, 819);
+            this.dataGridView1.Size = new System.Drawing.Size(1623, 819);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
-            // 
-            // ModEnabled
-            // 
-            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ModEnabled.HeaderText = "Enabled";
-            this.ModEnabled.MinimumWidth = 10;
-            this.ModEnabled.Name = "ModEnabled";
-            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ModEnabled.Width = 136;
-            // 
-            // ModNamexx
-            // 
-            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ModNamexx.HeaderText = "Plugin Name";
-            this.ModNamexx.MinimumWidth = 10;
-            this.ModNamexx.Name = "ModNamexx";
-            this.ModNamexx.ReadOnly = true;
-            this.ModNamexx.Width = 179;
-            // 
-            // Descritpion
-            // 
-            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Descritpion.HeaderText = "Description";
-            this.Descritpion.MinimumWidth = 10;
-            this.Descritpion.Name = "Descritpion";
-            this.Descritpion.Width = 165;
-            // 
-            // Version
-            // 
-            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Version.HeaderText = "Version";
-            this.Version.MinimumWidth = 10;
-            this.Version.Name = "Version";
-            this.Version.ReadOnly = true;
-            this.Version.Width = 130;
-            // 
-            // Files
-            // 
-            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Files.HeaderText = "Files";
-            this.Files.MinimumWidth = 10;
-            this.Files.Name = "Files";
-            this.Files.ReadOnly = true;
-            this.Files.Width = 103;
-            // 
-            // AS
-            // 
-            this.AS.HeaderText = "Achievements";
-            this.AS.MinimumWidth = 10;
-            this.AS.Name = "AS";
-            this.AS.ReadOnly = true;
-            this.AS.Width = 192;
             // 
             // btnOK
             // 
@@ -234,7 +181,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 927);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1621, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1631, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -258,7 +205,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 830);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1802, 94);
+            this.panel2.Size = new System.Drawing.Size(1625, 94);
             this.panel2.TabIndex = 6;
             // 
             // btnDisable
@@ -277,23 +224,77 @@
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1621, 927);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1631, 927);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // ModEnabled
+            // 
+            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ModEnabled.HeaderText = "Enabled";
+            this.ModEnabled.MinimumWidth = 10;
+            this.ModEnabled.Name = "ModEnabled";
+            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ModEnabled.Width = 136;
+            // 
+            // ModNamexx
+            // 
+            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ModNamexx.HeaderText = "Plugin Name";
+            this.ModNamexx.MinimumWidth = 10;
+            this.ModNamexx.Name = "ModNamexx";
+            this.ModNamexx.ReadOnly = true;
+            this.ModNamexx.Width = 179;
+            // 
+            // Descritpion
+            // 
+            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Descritpion.HeaderText = "Description";
+            this.Descritpion.MinimumWidth = 10;
+            this.Descritpion.Name = "Descritpion";
+            this.Descritpion.Width = 165;
+            // 
+            // Version
+            // 
+            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Version.HeaderText = "Version";
+            this.Version.MinimumWidth = 10;
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            this.Version.Width = 130;
+            // 
+            // Files
+            // 
+            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Files.HeaderText = "Files";
+            this.Files.MinimumWidth = 10;
+            this.Files.Name = "Files";
+            this.Files.ReadOnly = true;
+            this.Files.Width = 103;
+            // 
+            // AS
+            // 
+            this.AS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AS.HeaderText = "Achievements";
+            this.AS.MinimumWidth = 10;
+            this.AS.Name = "AS";
+            this.AS.ReadOnly = true;
+            this.AS.Width = 192;
             // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1621, 969);
+            this.ClientSize = new System.Drawing.Size(1631, 969);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
