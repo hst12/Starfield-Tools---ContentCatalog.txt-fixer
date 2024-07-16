@@ -1,10 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using static Starfield_Tools.frmLoadOrder;
 
 namespace Starfield_Tools
 {
@@ -12,21 +14,21 @@ namespace Starfield_Tools
     public partial class frmStarfieldTools : Form
     {
 
-        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore,ForceClean;
+        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
 
         ContentCatalog CC = new ContentCatalog();
 
         public frmStarfieldTools()
         {
             InitializeComponent();
-            
+
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
             CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
-            ForceClean= Properties.Settings.Default.ForceClean;
+            ForceClean = Properties.Settings.Default.ForceClean;
 
             /*AutoCheck = true;
             AutoClean = true;
@@ -42,24 +44,25 @@ namespace Starfield_Tools
 
             richTextBox2.Text = "";
 
-
             if (AutoCheck) // Check catalog status if enabled
             {
                 if (!CheckCatalog()) // If not okay, then...
                 {
                     if (AutoRestore) // Restore backup file if auto restore is on
-                        if (!RestoreCatalog()) // Check restore status
-                            if (AutoClean) // Clean if restore failed
-                                CleanCatalog();
+                        RestoreCatalog();
+                    if (AutoClean && !RestoreCatalog()) // Clean if restore failed
+                        CleanCatalog();
                 }
-                toolStripStatusLabel1.Text = "Checks complete";
+                else
+                    toolStripStatusLabel1.Text = "Checks complete";
             }
             else toolStripStatusLabel1.Text = "Ready";
 
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
-
+            /*if (ForceClean)
+                CleanCatalog();*/
             DisplayCatalog();
         }
 
@@ -95,45 +98,46 @@ namespace Starfield_Tools
 
         private bool CheckCatalog() // returns true if catalog good
         {
-            string filePath = CC.GetCatalog();
-            // Read the file character by character
-            StringBuilder cleanedContents = new StringBuilder();
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
-            int errorCount = 0, lineCount = 0;
-
+            bool ErrorFound = false;
             richTextBox2.Text += "Checking Catalog\n";
 
             try
             {
+                string jsonFilePath = CC.GetCatalog();
+                string json = File.ReadAllText(jsonFilePath);
+                string TestString = "";
 
-                using (StreamReader reader = new StreamReader(filePath))
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+
+                ErrorFound = false;
+                foreach (var kvp in data)
                 {
-                    int character;
-                    while ((character = reader.Read()) != -1)
+                    TestString = kvp.Value.Version;
+
+                    for (int i = 0; i < TestString.Length; i++)
                     {
-                        if (character == 'n' || character == '\r') lineCount++;
-                        if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\') // Look for potential problem chars
+                        if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                         {
-                            errorCount++;
-                            richTextBox1.Text += "Invalid character at line " + lineCount.ToString() + "\n";
+                            ErrorFound = true;
+                            break;
                         }
                     }
-                    if (errorCount > 0)
-                    {
-                        richTextBox2.Text = "Error(s) found\n";
-                        toolStripStatusLabel1.Text = errorCount.ToString() + " Error(s) found - Restore or Clean recommended";
-                        return false;
-                    }
-                    else
-                    {
-                        toolStripStatusLabel1.Text = "Content Catalog looks OK";
-                        richTextBox2.Text += "Catalog OK\n";
-                        DisplayCatalog();
-                        return true;
-                    }
+                }
+
+                if (!ErrorFound)
+                {
+                    toolStripStatusLabel1.Text = "Catalog ok";
+                    return true;
+                }
+                else
+                {
+                    toolStripStatusLabel1.Text = "Error(s) found";
+                    return false;
                 }
             }
+
             catch (Exception e)
             {
                 MessageBox.Show($"Error: {e.Message}" + "\n\n Creating dummy file", "Error");
@@ -141,41 +145,45 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt file created";
                 return false;
             }
-
         }
 
         private void CleanCatalog()
         {
-            string filePath = CC.GetCatalog();
-            richTextBox1.Text = "Checking...\n\n";
-            toolStripStatusLabel1.Text = "Checking...";
-            // Read the file character by character
-            StringBuilder cleanedContents = new StringBuilder();
+            /* 
+             * Disabled old code
+             * 
+             * string filePath = CC.GetCatalog();
+             richTextBox1.Text = "Checking...\n\n";
+             toolStripStatusLabel1.Text = "Checking...";
+             // Read the file character by character
+             StringBuilder cleanedContents = new StringBuilder();
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                int character;
-                while ((character = reader.Read()) != -1)
-                {
-                    // Preserve newline characters
-                    if (character == '\n' || character == '\r')
-                    {
-                        cleanedContents.Append((char)character);
-                        richTextBox1.Text += (char)character;
-                    }
-                    else if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\')
-                        toolStripStatusLabel1.Text = "Error found\n";
-                    else if (character >= 32 && character <= 126)
-                    {
-                        cleanedContents.Append((char)character); // Keep printable characters
-                        richTextBox1.Text += (char)character;
-                    }
-                }
-            }
+             using (StreamReader reader = new StreamReader(filePath))
+             {
+                 int character;
+                 while ((character = reader.Read()) != -1)
+                 {
+                     // Preserve newline characters
+                     if (character == '\n' || character == '\r')
+                     {
+                         cleanedContents.Append((char)character);
+                         richTextBox1.Text += (char)character;
+                     }
+                     else if ((character < 32 || character > 126) && (character != '\n' && character != '\r') || character == '\\')
+                         toolStripStatusLabel1.Text = "Error found\n";
+                     else if (character >= 32 && character <= 126)
+                     {
+                         cleanedContents.Append((char)character); // Keep printable characters
+                         richTextBox1.Text += (char)character;
+                     }
+                 }
+             }
 
-            // Write the cleaned contents back to the file
-            File.WriteAllText(filePath, cleanedContents.ToString());
+             // Write the cleaned contents back to the file
+             File.WriteAllText(filePath, cleanedContents.ToString());
+            */
 
+            NewFix();
             toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
             richTextBox2.Text += "Clean complete\n";
             if (AutoBackup)
@@ -226,7 +234,8 @@ namespace Starfield_Tools
         private void btnCheck_Click(object sender, EventArgs e)
         {
             CheckCatalog();
-            CheckBackup();
+            //CheckBackup();
+            DisplayCatalog();
         }
 
         private void StartStarfield()
@@ -426,7 +435,8 @@ Quit the game if it's running before using the Clean or Edit buttons.
             catch (Exception ex)
             {
                 richTextBox2.Text += "Restore failed.\n";
-                MessageBox.Show($"Error: {ex.Message}", "Error");
+                //MessageBox.Show($"Error: {ex.Message}", "Error");
+                toolStripStatusLabel1.Text = "Restore failed";
                 return false;
             }
         }
@@ -435,5 +445,47 @@ Quit the game if it's running before using the Clean or Edit buttons.
         {
             RestoreCatalog();
         }
+
+        private void NewFix()
+        {
+            string jsonFilePath = CC.GetCatalog();
+            string json = File.ReadAllText(jsonFilePath);
+            string TestString = "";
+            bool FixVersion;
+
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+
+            foreach (var kvp in data)
+            {
+                TestString = kvp.Value.Version;
+                FixVersion = false;
+                for (int i = 0; i < TestString.Length; i++)
+                {
+                    if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
+                    {
+                        FixVersion = true;
+                        break;
+                    }
+                }
+                if (FixVersion)
+                    kvp.Value.Version = "0.1"; // set version to 0.1
+            }
+            data.Remove("ContentCatalog"); // remove messed up content catalog section
+
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+            // Hack the Bethesda header back in
+            json = @"{
+  ""ContentCatalog"" : 
+  {
+    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
+    ""Version"" : ""1.1""
+  },
+" + json.Substring(1); // to strip out a bracket char
+
+            File.WriteAllText(jsonFilePath, json);
+        }
+
+
     }
 }

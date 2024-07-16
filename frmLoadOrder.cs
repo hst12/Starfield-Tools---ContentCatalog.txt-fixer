@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using System.Text.Json;
-using System.Drawing;
 
 
 namespace Starfield_Tools
@@ -24,6 +22,9 @@ namespace Starfield_Tools
             this.Font = FontSize;
             toolStripStatusLabel1.Font = FontSize;
             InitDataGrid();
+            /*#if DEBUG
+                        btnTest.Enabled = true;
+            #endif*/
         }
 
         public class Creation
@@ -42,13 +43,13 @@ namespace Starfield_Tools
             int EnabledCount = 0;
             string loText;
             string jsonFilePath = CC.GetCatalog();
-
             string json = File.ReadAllText(jsonFilePath);
 
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();
-            List<string> CreationsFiles=new List<string>();
-            List<string> CreationsVersion=new List<string>();
+            List<string> CreationsFiles = new List<string>();
+            List<string> CreationsVersion = new List<string>();
+            List<bool> AchievmentSafe = new List<bool>();
 
             int TitleCount = 0;
             int esmCount = 0;
@@ -58,7 +59,7 @@ namespace Starfield_Tools
             Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             try
             {
-                var data = JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
                 data.Remove("ContentCatalog");
                 foreach (var kvp in data)
                 {
@@ -70,13 +71,17 @@ namespace Starfield_Tools
                             if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
                             {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
-                               
+
                                 TitleCount++;
                             }
                         }
                         CreationsTitle.Add(kvp.Value.Title); // Add Creations description to datagrid
+                                                             //if (double.TryParse(kvp.Value.Version, out _))
                         CreationsVersion.Add(kvp.Value.Version);
-                        CreationsFiles.Add(string.Join(", ",  kvp.Value.Files));
+                        /*else
+                            CreationsVersion.Add("Invalid version");*/
+                        CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
+                        AchievmentSafe.Add(kvp.Value.AchievementSafe);
 
                     }
                     catch (Exception ex)
@@ -98,7 +103,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             }
             using (var reader = new StreamReader(loText))
             {
-                string line, Description,ModFiles,ModVersion;
+                string line, Description, ModFiles, ModVersion, ASafe;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -120,6 +125,8 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                                 Description = "";
                                 ModFiles = "";
                                 ModVersion = "";
+                                ASafe = "";
+
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i].Substring(0, CreationsPlugin[i].IndexOf('.')) + ".esm" == line)
@@ -127,9 +134,13 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         ModFiles = CreationsFiles[i];
+                                        if (AchievmentSafe[i])
+                                            ASafe = "Yes";
+                                        else
+                                            ASafe = "";
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description,ModVersion,ModFiles);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe);
                             }
                         }
                     }
@@ -155,7 +166,7 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
             EnabledCount.ToString();
                 if (esmCount > 0)
                 {
-                    StatText += ", esm files found: " + esmCount.ToString()+" (includes some base game esm files) ";
+                    StatText += ", esm files found: " + esmCount.ToString() + " (may include some base game esm files) ";
 
                 }
                 if (espCount > 0)
@@ -382,5 +393,9 @@ Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not f
         }
 
 
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            //NewFix();
+        }
     }
 }
