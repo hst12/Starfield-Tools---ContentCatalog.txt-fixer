@@ -98,7 +98,8 @@ namespace Starfield_Tools
                 MessageBox.Show(@"Missing Plugins.txt file
 
 Click Ok and Ok again to create a blank Plugins.txt file or click Ok and Cancel to fix manually
-Click Restore if you have a backup of your Plugins.txt file", "Plugins.txt not found");
+Click Restore if you have a backup of your Plugins.txt file
+Altenatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
                 return;
             }
             using (var reader = new StreamReader(loText))

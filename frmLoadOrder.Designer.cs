@@ -47,7 +47,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnTest = new System.Windows.Forms.Button();
             this.btnDisable = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -151,7 +150,7 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(1599, 23);
+            this.btnCancel.Location = new System.Drawing.Point(1416, 23);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
@@ -235,7 +234,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 927);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1808, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1621, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -247,7 +246,6 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnTest);
             this.panel2.Controls.Add(this.btnDisable);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Controls.Add(this.btnRestorePlugins);
@@ -262,17 +260,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1802, 94);
             this.panel2.TabIndex = 6;
-            // 
-            // btnTest
-            // 
-            this.btnTest.Enabled = false;
-            this.btnTest.Location = new System.Drawing.Point(1415, 23);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(178, 67);
-            this.btnTest.TabIndex = 10;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnDisable
             // 
@@ -298,7 +285,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1808, 927);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1621, 927);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // frmLoadOrder
@@ -306,7 +293,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1808, 969);
+            this.ClientSize = new System.Drawing.Size(1621, 969);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -347,6 +334,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Version;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn AS;
-        private System.Windows.Forms.Button btnTest;
     }
 }
