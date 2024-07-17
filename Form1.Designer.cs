@@ -46,11 +46,11 @@
             this.btnAbout = new System.Windows.Forms.Button();
             this.txtSource = new System.Windows.Forms.Button();
             this.chkForceClean = new System.Windows.Forms.CheckBox();
+            this.btnStarfieldStore = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnStarfieldStore = new System.Windows.Forms.Button();
             this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
@@ -252,6 +252,18 @@
             this.chkForceClean.UseVisualStyleBackColor = true;
             this.chkForceClean.CheckedChanged += new System.EventHandler(this.chkForceClean_CheckedChanged);
             // 
+            // btnStarfieldStore
+            // 
+            this.btnStarfieldStore.AutoSize = true;
+            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
+            this.btnStarfieldStore.Name = "btnStarfieldStore";
+            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
+            this.btnStarfieldStore.TabIndex = 16;
+            this.btnStarfieldStore.Text = "Starfield (MS)";
+            this.toolTip1.SetToolTip(this.btnStarfieldStore, "Launch Starfield - MS Store version");
+            this.btnStarfieldStore.UseVisualStyleBackColor = true;
+            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -306,18 +318,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
-            // 
-            // btnStarfieldStore
-            // 
-            this.btnStarfieldStore.AutoSize = true;
-            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
-            this.btnStarfieldStore.Name = "btnStarfieldStore";
-            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
-            this.btnStarfieldStore.TabIndex = 16;
-            this.btnStarfieldStore.Text = "Starfield (MS)";
-            this.toolTip1.SetToolTip(this.btnStarfieldStore, "Launch Starfield - MS Store version");
-            this.btnStarfieldStore.UseVisualStyleBackColor = true;
-            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
             // 
             // cmdStarFieldPath
             // 
@@ -440,6 +440,7 @@
             this.Name = "frmStarfieldTools";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Starfield Tools";
+            this.Activated += new System.EventHandler(this.frmStarfieldTools_Activated);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.grpActions.ResumeLayout(false);

@@ -39,6 +39,7 @@ namespace Starfield_Tools
 
             richTextBox2.Text = "";
 
+
             if (AutoCheck) // Check catalog status if enabled
             {
                 if (!CheckCatalog()) // If not okay, then...
@@ -59,6 +60,7 @@ namespace Starfield_Tools
                     BackupCatalog();
             /*if (ForceClean)
                 CleanCatalog();*/
+
             DisplayCatalog();
         }
 
@@ -183,7 +185,7 @@ namespace Starfield_Tools
             }
         }
 
-        private void btnQuit_Click(object sender, EventArgs e)
+        private void SaveSettings()
         {
             // Save settings
 
@@ -194,7 +196,11 @@ namespace Starfield_Tools
             Properties.Settings.Default.StarfieldPath = CC.StarFieldPath;
             Properties.Settings.Default.ForceClean = ForceClean;
             Properties.Settings.Default.Save();
+        }
 
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
             Application.Exit();
         }
 
@@ -237,6 +243,7 @@ namespace Starfield_Tools
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
+            SaveSettings();
             StartStarfield();
             Application.Exit();
             //toolStripStatusLabel1.Text = "Ready";
@@ -394,7 +401,32 @@ Quit the game if it's running before using the Clean or Edit buttons.
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
+            SaveSettings();
             Application.Exit();
+        }
+
+        private void frmStarfieldTools_Activated(object sender, EventArgs e)
+        {
+            bool cmdLineAuto = false;
+            bool cmdLineRun = false;
+
+
+            foreach (var arg in Environment.GetCommandLineArgs())
+            {
+                Console.WriteLine($"Argument: {arg}");
+                //MessageBox.Show(arg);
+                if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase))
+                    cmdLineAuto = true;
+                if (String.Equals(arg, "-run", StringComparison.OrdinalIgnoreCase))
+                    cmdLineRun = true;
+            }
+
+            if (cmdLineRun)
+            {
+                SaveSettings();
+                StartStarfield();
+                Application.Exit();
+            }
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
