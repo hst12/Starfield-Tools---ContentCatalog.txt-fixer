@@ -25,10 +25,10 @@ namespace Starfield_Tools
 
 
 
-//#if DEBUG
+            //#if DEBUG
             cmdDeleteStale.Enabled = true;
             cmdDeleteStale.Visible = true;
-//#endif
+            //#endif
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -642,6 +642,8 @@ Quit the game if it's running before using the Clean or Edit buttons.
             string TestString = "";
             bool FixVersion;
             int errorCount = 0;
+            double Version;
+            long TimeStamp;
 
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -649,14 +651,26 @@ Quit the game if it's running before using the Clean or Edit buttons.
             {
                 TestString = kvp.Value.Version;
                 FixVersion = false;
+                //MessageBox.Show(kvp.Value.Version + "\n" + kvp.Value.Timestamp);
+
                 for (int i = 0; i < TestString.Length; i++)
                 {
-                    // if "Version" > "TimeStamp" then overwrite "Version" with 1704067200.0
+
                     if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                     {
                         FixVersion = true;
                         break;
                     }
+                }
+
+
+
+                if (TestString != "1.1")
+                {
+                    Version = double.Parse((kvp.Value.Version.Substring(0,kvp.Value.Version.IndexOf('.'))));
+                    TimeStamp = kvp.Value.Timestamp;
+                    if (Version > kvp.Value.Timestamp)
+                        kvp.Value.Version = "1704067200.0";
                 }
                 if (FixVersion)
                 {
@@ -678,7 +692,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 " + json.Substring(1); // to strip out a brace char
 
             File.WriteAllText(jsonFilePath, json);
-            
+
         }
     }
 }
