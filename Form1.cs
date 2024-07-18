@@ -25,10 +25,10 @@ namespace Starfield_Tools
 
 
 
-            #if DEBUG
+//#if DEBUG
             cmdDeleteStale.Enabled = true;
             cmdDeleteStale.Visible = true;
-            #endif
+//#endif
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -189,7 +189,10 @@ namespace Starfield_Tools
         private void cmdClean_Click(object sender, EventArgs e)
         {
             if (!CheckCatalog() || ForceClean)
+            {
                 CleanCatalog();
+                //toolStripStatusLabel1.Text = errorCount.ToString() + " Errors found";
+            }
             else
             {
                 richTextBox2.Text += "Cleaning not needed\n";
@@ -590,22 +593,23 @@ Quit the game if it's running before using the Clean or Edit buttons.
                 index = 0;
                 richTextBox2.Text = "";
                 //string tempstring;
-
-                for (index = 0; index < missingStrings.Count; index++)
+                if (missingStrings.Count > 0)
                 {
-                    for (int i = 0; i < CreationsGUID.Count; i++)
+                    for (index = 0; index < missingStrings.Count; index++)
                     {
-                        if (CreationsPlugin[i] == missingStrings[index])
+                        for (int i = 0; i < CreationsGUID.Count; i++)
                         {
-                            richTextBox2.Text += "Removing " + CreationsGUID[i] + " " + CreationsTitle[i] + "\n";
-                            data.Remove(CreationsGUID[i]);
-                            unusedMods = true;
-                            RemovalCount++;
+                            if (CreationsPlugin[i] == missingStrings[index])
+                            {
+                                richTextBox2.Text += "Removing " + CreationsGUID[i] + " " + CreationsTitle[i] + "\n";
+                                data.Remove(CreationsGUID[i]);
+                                unusedMods = true;
+                                RemovalCount++;
+                            }
                         }
+
                     }
-
                 }
-
                 if (unusedMods)
                     toolStripStatusLabel1.Text = RemovalCount.ToString() + " Unused mods removed from catalog";
                 else
@@ -637,6 +641,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
             string json = File.ReadAllText(jsonFilePath);
             string TestString = "";
             bool FixVersion;
+            int errorCount = 0;
 
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -654,7 +659,10 @@ Quit the game if it's running before using the Clean or Edit buttons.
                     }
                 }
                 if (FixVersion)
+                {
                     kvp.Value.Version = "1704067200.0"; // set version to 1704067200.0
+                    errorCount++;
+                }
             }
             data.Remove("ContentCatalog"); // remove messed up content catalog section
 
@@ -670,8 +678,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 " + json.Substring(1); // to strip out a brace char
 
             File.WriteAllText(jsonFilePath, json);
+            
         }
-
-
     }
 }
