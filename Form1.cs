@@ -25,10 +25,10 @@ namespace Starfield_Tools
 
 
 
-            //#if DEBUG
+            #if DEBUG
             cmdDeleteStale.Enabled = true;
             cmdDeleteStale.Visible = true;
-            //#endif
+            #endif
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;

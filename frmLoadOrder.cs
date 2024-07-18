@@ -47,7 +47,11 @@ namespace Starfield_Tools
             string StatText = "";
             List<string> esmFiles = new List<string>();
 
-            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+            try
+            {
+                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+            }
+            catch { }
             try
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
