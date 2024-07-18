@@ -53,13 +53,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -183,7 +183,7 @@
             // btnBackup
             // 
             this.btnBackup.AutoSize = true;
-            this.btnBackup.Location = new System.Drawing.Point(328, 35);
+            this.btnBackup.Location = new System.Drawing.Point(544, 35);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(150, 50);
             this.btnBackup.TabIndex = 6;
@@ -195,7 +195,7 @@
             // btnRestore
             // 
             this.btnRestore.AutoSize = true;
-            this.btnRestore.Location = new System.Drawing.Point(487, 35);
+            this.btnRestore.Location = new System.Drawing.Point(700, 35);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(150, 50);
             this.btnRestore.TabIndex = 7;
@@ -207,7 +207,7 @@
             // btnLoadOrder
             // 
             this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(904, 31);
+            this.btnLoadOrder.Location = new System.Drawing.Point(688, 30);
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
             this.btnLoadOrder.TabIndex = 11;
@@ -286,6 +286,7 @@
             // grpActions
             // 
             this.grpActions.AutoSize = true;
+            this.grpActions.Controls.Add(this.cmdDeleteStale);
             this.grpActions.Controls.Add(this.btnRestore);
             this.grpActions.Controls.Add(this.btnBackup);
             this.grpActions.Controls.Add(this.btnCheck);
@@ -333,7 +334,6 @@
             // groupBox2
             // 
             this.groupBox2.AutoSize = true;
-            this.groupBox2.Controls.Add(this.cmdDeleteStale);
             this.groupBox2.Controls.Add(this.btnLoadOrder);
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
@@ -345,6 +345,18 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
+            // 
+            // cmdDeleteStale
+            // 
+            this.cmdDeleteStale.Enabled = false;
+            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
+            this.cmdDeleteStale.Name = "cmdDeleteStale";
+            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
+            this.cmdDeleteStale.TabIndex = 12;
+            this.cmdDeleteStale.Text = "Remove Unused";
+            this.cmdDeleteStale.UseVisualStyleBackColor = true;
+            this.cmdDeleteStale.Visible = false;
+            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
             // 
             // grpAuto
             // 
@@ -428,18 +440,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // cmdDeleteStale
-            // 
-            this.cmdDeleteStale.Enabled = false;
-            this.cmdDeleteStale.Location = new System.Drawing.Point(688, 31);
-            this.cmdDeleteStale.Name = "cmdDeleteStale";
-            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
-            this.cmdDeleteStale.TabIndex = 12;
-            this.cmdDeleteStale.Text = "Trim";
-            this.cmdDeleteStale.UseVisualStyleBackColor = true;
-            this.cmdDeleteStale.Visible = false;
-            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
             // 
             // frmStarfieldTools
             // 

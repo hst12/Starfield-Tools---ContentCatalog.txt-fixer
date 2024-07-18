@@ -25,10 +25,10 @@ namespace Starfield_Tools
 
 
 
-//#if DEBUG
+            //#if DEBUG
             cmdDeleteStale.Enabled = true;
             cmdDeleteStale.Visible = true;
-//#endif
+            //#endif
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -70,6 +70,10 @@ namespace Starfield_Tools
                 CleanCatalog();*/
 
             DisplayCatalog();
+            Console.WriteLine("Int32 Min " + Int32.MinValue.ToString());
+            Console.WriteLine("Int32 Max " + Int32.MaxValue.ToString());
+            Console.WriteLine("Int64 Min " + Int64.MinValue.ToString());
+            Console.WriteLine("Int64 Max " + Int64.MaxValue.ToString());
         }
 
         private bool CheckBackup()
@@ -444,6 +448,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
         private void cmdDeleteStale_Click(object sender, EventArgs e)
         {
             RemoveDeleteddEntries();
+            DisplayCatalog();
         }
 
         private bool RestoreCatalog()
@@ -487,7 +492,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
             List<string> CreationsTitle = new List<string>(); // Display title for .ems
             List<string> CreationsGUID = new List<string>(); // Creations GUID
             List<string> CreationsVersion = new List<string>(); // Version
-            int TitleCount = 0;
+            int RemovalCount = 0;
             int index;
             bool unusedMods = false;
 
@@ -531,7 +536,6 @@ Quit the game if it's running before using the Clean or Edit buttons.
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
                                 CreationsTitle.Add(kvp.Value.Title);
-                                TitleCount++;
                             }
                         }
 
@@ -554,16 +558,17 @@ Quit the game if it's running before using the Clean or Edit buttons.
                     {
                         if (CreationsPlugin[i] == missingStrings[index])
                         {
-                            richTextBox2.Text += "Removing "+CreationsGUID[i] + " " + CreationsTitle[i] + "\n";
+                            richTextBox2.Text += "Removing " + CreationsGUID[i] + " " + CreationsTitle[i] + "\n";
                             data.Remove(CreationsGUID[i]);
                             unusedMods = true;
+                            RemovalCount++;
                         }
                     }
 
                 }
 
                 if (unusedMods)
-                    toolStripStatusLabel1.Text = "Unused mods removed from catalog";
+                    toolStripStatusLabel1.Text = RemovalCount.ToString() + " Unused mods removed from catalog";
                 else
                     toolStripStatusLabel1.Text = "No unused mods found in catalog";
                 json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
@@ -609,7 +614,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
                     }
                 }
                 if (FixVersion)
-                    kvp.Value.Version = "0.1"; // set version to 0.1
+                    kvp.Value.Version = "1704067200.0"; // set version to 1704067200.0
             }
             data.Remove("ContentCatalog"); // remove messed up content catalog section
 
