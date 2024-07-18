@@ -50,16 +50,17 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
+            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnResetAll = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -183,7 +184,7 @@
             // btnBackup
             // 
             this.btnBackup.AutoSize = true;
-            this.btnBackup.Location = new System.Drawing.Point(544, 35);
+            this.btnBackup.Location = new System.Drawing.Point(770, 35);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(150, 50);
             this.btnBackup.TabIndex = 6;
@@ -195,7 +196,7 @@
             // btnRestore
             // 
             this.btnRestore.AutoSize = true;
-            this.btnRestore.Location = new System.Drawing.Point(700, 35);
+            this.btnRestore.Location = new System.Drawing.Point(926, 35);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(150, 50);
             this.btnRestore.TabIndex = 7;
@@ -286,6 +287,7 @@
             // grpActions
             // 
             this.grpActions.AutoSize = true;
+            this.grpActions.Controls.Add(this.btnResetAll);
             this.grpActions.Controls.Add(this.cmdDeleteStale);
             this.grpActions.Controls.Add(this.btnRestore);
             this.grpActions.Controls.Add(this.btnBackup);
@@ -300,6 +302,18 @@
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
+            // 
+            // cmdDeleteStale
+            // 
+            this.cmdDeleteStale.Enabled = false;
+            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
+            this.cmdDeleteStale.Name = "cmdDeleteStale";
+            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
+            this.cmdDeleteStale.TabIndex = 12;
+            this.cmdDeleteStale.Text = "Remove Unused";
+            this.cmdDeleteStale.UseVisualStyleBackColor = true;
+            this.cmdDeleteStale.Visible = false;
+            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
             // 
             // groupBox1
             // 
@@ -345,18 +359,6 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
-            // 
-            // cmdDeleteStale
-            // 
-            this.cmdDeleteStale.Enabled = false;
-            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
-            this.cmdDeleteStale.Name = "cmdDeleteStale";
-            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
-            this.cmdDeleteStale.TabIndex = 12;
-            this.cmdDeleteStale.Text = "Remove Unused";
-            this.cmdDeleteStale.UseVisualStyleBackColor = true;
-            this.cmdDeleteStale.Visible = false;
-            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
             // 
             // grpAuto
             // 
@@ -441,6 +443,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
+            // btnResetAll
+            // 
+            this.btnResetAll.Location = new System.Drawing.Point(554, 35);
+            this.btnResetAll.Name = "btnResetAll";
+            this.btnResetAll.Size = new System.Drawing.Size(210, 50);
+            this.btnResetAll.TabIndex = 13;
+            this.btnResetAll.Text = "Reset All Versions";
+            this.toolTip1.SetToolTip(this.btnResetAll, "Resets all version numbers to 1704067200.0. Should enable updates");
+            this.btnResetAll.UseVisualStyleBackColor = true;
+            this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
+            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -502,6 +515,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;
+        private System.Windows.Forms.Button btnResetAll;
     }
 }
 

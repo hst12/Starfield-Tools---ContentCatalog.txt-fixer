@@ -472,6 +472,45 @@ Quit the game if it's running before using the Clean or Edit buttons.
             }
         }
 
+        private void btnResetAll_Click(object sender, EventArgs e)
+        {
+
+            DialogResult result = MessageBox.Show("Do you want to continue?", "All version numbers will be reset. This will force all Creations to re-download", MessageBoxButtons.OKCancel);
+            if (result != DialogResult.OK)
+            {
+                toolStripStatusLabel1.Text = "Version numbers not reset";
+                return;
+            }
+
+            string jsonFilePath = CC.GetCatalog();
+
+            string json = File.ReadAllText(jsonFilePath);
+
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+
+            foreach (var kvp in data)
+            {
+                kvp.Value.Version = "1704067200.0"; // set version to 1704067200.0
+            }
+
+            data.Remove("ContentCatalog"); // remove messed up content catalog section
+
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+            // Hack the Bethesda header back in
+            json = @"{
+  ""ContentCatalog"" : 
+  {
+    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
+    ""Version"" : ""1.1""
+  },
+" + json.Substring(1); // to strip out a brace char
+
+            File.WriteAllText(CC.GetCatalog(), json);
+            DisplayCatalog();
+            toolStripStatusLabel1.Text = "Version numbers reset";
+        }
+
         private void btnRestore_Click(object sender, EventArgs e)
         {
             RestoreCatalog();
@@ -607,6 +646,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
                 FixVersion = false;
                 for (int i = 0; i < TestString.Length; i++)
                 {
+                    // if "Version" > "TimeStamp" then overwrite "Version" with 1704067200.0
                     if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                     {
                         FixVersion = true;
