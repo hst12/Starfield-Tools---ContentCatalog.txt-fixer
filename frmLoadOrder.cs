@@ -27,23 +27,13 @@ namespace Starfield_Tools
             #endif*/
         }
 
-        public class Creation
-        {
-            public bool AchievementSafe { get; set; }
-            public string[] Files { get; set; }
-            public long FilesSize { get; set; }
-            public long Timestamp { get; set; }
-            public string Title { get; set; }
-            public string Version { get; set; }
-        }
-
         private void InitDataGrid()
         {
             bool ModEnabled;
             int EnabledCount = 0;
             string loText;
             string jsonFilePath = CC.GetCatalog();
-            string json = File.ReadAllText(jsonFilePath);
+            string json = File.ReadAllText(jsonFilePath); // Read catalog
 
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();
@@ -55,11 +45,12 @@ namespace Starfield_Tools
             int esmCount = 0;
             int espCount = 0;
             string StatText = "";
+            List<string> esmFiles = new List<string>();
 
             Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             try
             {
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
                 data.Remove("ContentCatalog");
                 foreach (var kvp in data)
                 {
@@ -157,12 +148,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
                     esmCount++;
+                    esmFiles.Add(file);
                 }
                 foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
                 {
                     espCount++;
                 }
-                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString()+", Other: "+ (dataGridView1.RowCount-TitleCount).ToString()+", Enabled: " +
+                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " + (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " +
             EnabledCount.ToString();
                 if (esmCount > 0)
                 {
@@ -175,8 +167,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
 
                 toolStripStatusLabel1.Text = StatText;
+                foreach (var item in esmFiles)
+                {
+                    Console.WriteLine(item); // Do something here to automatically add missing .esm files to Plugins.txt
+                }
             }
-            catch (Exception ex)
+            catch
             {
                 toolStripStatusLabel1.Text = "Starfield path needs to be set";
             }

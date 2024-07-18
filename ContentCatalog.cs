@@ -18,5 +18,15 @@ namespace Starfield_Tools
             return (GetStarfieldPath() + @"\ContentCatalog.txt");
         }
 
+        public class Creation
+        {
+            public bool AchievementSafe { get; set; }
+            public string[] Files { get; set; }
+            public long FilesSize { get; set; }
+            public long Timestamp { get; set; }
+            public string Title { get; set; }
+            public string Version { get; set; }
+        }
+
     }
 }

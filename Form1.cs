@@ -1,12 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading;
+using System.Linq;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using static Starfield_Tools.frmLoadOrder;
+
 
 namespace Starfield_Tools
 {
@@ -21,6 +22,11 @@ namespace Starfield_Tools
         public frmStarfieldTools()
         {
             InitializeComponent();
+
+#if DEBUG
+            cmdDeleteStale.Enabled = true;
+            cmdDeleteStale.Visible = true;
+#endif
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -113,7 +119,7 @@ namespace Starfield_Tools
                 string json = File.ReadAllText(jsonFilePath);
                 string TestString = "";
 
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
                 ErrorFound = false;
                 foreach (var kvp in data)
@@ -139,11 +145,12 @@ namespace Starfield_Tools
                 else
                 {
                     toolStripStatusLabel1.Text = "Error(s) found";
+                    richTextBox2.Text += "Error(s) found\n";
                     return false;
                 }
             }
 
-            catch (Exception e)
+            catch
             {
                 //MessageBox.Show("Start the game and enter the Creations menu to create a catalog file", "Missing Catalog File");
                 File.WriteAllText(CC.GetCatalog(), string.Empty);
@@ -249,10 +256,7 @@ namespace Starfield_Tools
             //toolStripStatusLabel1.Text = "Ready";
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
@@ -407,7 +411,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
         {
-            bool cmdLineAuto = false;
+            //bool cmdLineAuto = false;
             bool cmdLineRun = false;
 
 
@@ -415,8 +419,8 @@ Quit the game if it's running before using the Clean or Edit buttons.
             {
                 Console.WriteLine($"Argument: {arg}");
                 //MessageBox.Show(arg);
-                if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase))
-                    cmdLineAuto = true;
+                /*  if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase))
+                      cmdLineAuto = true;*/
                 if (String.Equals(arg, "-run", StringComparison.OrdinalIgnoreCase))
                     cmdLineRun = true;
             }
@@ -435,6 +439,11 @@ Quit the game if it's running before using the Clean or Edit buttons.
             DisplayCatalog();
         }
 
+        private void cmdDeleteStale_Click(object sender, EventArgs e)
+        {
+            RemoveDeleteddEntries();
+        }
+
         private bool RestoreCatalog()
         {
             string destFileName = CC.GetCatalog();
@@ -448,7 +457,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
                 richTextBox2.Text += "Restore done\n";
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 richTextBox2.Text += "Restore failed.\n";
                 toolStripStatusLabel1.Text = "Restore failed";
@@ -462,6 +471,119 @@ Quit the game if it's running before using the Clean or Edit buttons.
             DisplayCatalog();
         }
 
+        public string GetStarfieldPath()
+        {
+            return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Starfield";
+        }
+
+        private void RemoveDeleteddEntries() // Remove left over entries from catalog
+        {
+            List<string> esmFiles = new List<string>();
+            string jsonFilePath = CC.GetCatalog();
+            string json = File.ReadAllText(jsonFilePath); // Read catalog
+            List<string> CreationsPlugin = new List<string>(); // filename of .esm
+            List<string> CreationsTitle = new List<string>(); // Display title for .ems
+            List<string> CreationsGUID = new List<string>(); // Creations GUID
+            List<string> CreationsVersion = new List<string>(); // Version
+            int TitleCount = 0;
+            int index;
+            bool unusedMods = false;
+
+            /*try
+            {*/
+            string filePath = GetStarfieldPath() + "\\Plugins.txt";
+            string fileContent = File.ReadAllText(filePath);
+            // Split the content into lines if necessary
+            List<string> lines = fileContent.Split('\n').ToList();
+
+            foreach (var file in lines)
+            {
+                if (file != "")
+                {
+                    if (file[0] != '#') // skip the comments
+                        if (file[0] == '*') // Make a list of .esm files
+                            esmFiles.Add(file.Substring(1)); // strip any *
+                        else
+                            esmFiles.Add(file);
+                }
+            }
+            /*}
+            catch
+            {
+                toolStripStatusLabel1.Text = "Error loading plugins file";
+            }*/
+
+            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+            try
+            {
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+                data.Remove("ContentCatalog");
+                foreach (var kvp in data)
+                {
+                    try
+                    {
+                        for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
+                        {
+                            if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
+                            {
+                                CreationsPlugin.Add(kvp.Value.Files[i]);
+                                CreationsGUID.Add(kvp.Key);
+                                CreationsTitle.Add(kvp.Value.Title);
+                                TitleCount++;
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
+                }
+
+                List<string> missingStrings = CreationsPlugin.Except(esmFiles).ToList();
+                richTextBox1.Text = "";
+                index = 0;
+                richTextBox2.Text = "";
+                //string tempstring;
+
+                for (index = 0; index < missingStrings.Count; index++)
+                {
+                    for (int i = 0; i < CreationsGUID.Count; i++)
+                    {
+                        if (CreationsPlugin[i] == missingStrings[index])
+                        {
+                            richTextBox2.Text += "Removing "+CreationsGUID[i] + " " + CreationsTitle[i] + "\n";
+                            data.Remove(CreationsGUID[i]);
+                            unusedMods = true;
+                        }
+                    }
+
+                }
+
+                if (unusedMods)
+                    toolStripStatusLabel1.Text = "Unused mods removed from catalog";
+                else
+                    toolStripStatusLabel1.Text = "No unused mods found in catalog";
+                json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+                // Hack the Bethesda header back in
+                json = @"{
+  ""ContentCatalog"" : 
+  {
+    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
+    ""Version"" : ""1.1""
+  },
+" + json.Substring(1); // to strip out a brace char
+
+                File.WriteAllText(CC.GetCatalog(), json);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
         private void NewFix()
         {
             string jsonFilePath = CC.GetCatalog();
@@ -470,7 +592,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
             string TestString = "";
             bool FixVersion;
 
-            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Creation>>(json);
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
             foreach (var kvp in data)
             {
@@ -498,7 +620,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
     ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
     ""Version"" : ""1.1""
   },
-" + json.Substring(1); // to strip out a bracket char
+" + json.Substring(1); // to strip out a brace char
 
             File.WriteAllText(jsonFilePath, json);
         }

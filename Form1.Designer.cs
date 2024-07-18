@@ -59,6 +59,7 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -158,7 +159,7 @@
             // btnExplore
             // 
             this.btnExplore.AutoSize = true;
-            this.btnExplore.Location = new System.Drawing.Point(681, 31);
+            this.btnExplore.Location = new System.Drawing.Point(532, 31);
             this.btnExplore.Name = "btnExplore";
             this.btnExplore.Size = new System.Drawing.Size(150, 50);
             this.btnExplore.TabIndex = 10;
@@ -170,7 +171,7 @@
             // btnEditPlugins
             // 
             this.btnEditPlugins.AutoSize = true;
-            this.btnEditPlugins.Location = new System.Drawing.Point(396, 31);
+            this.btnEditPlugins.Location = new System.Drawing.Point(322, 31);
             this.btnEditPlugins.Name = "btnEditPlugins";
             this.btnEditPlugins.Size = new System.Drawing.Size(204, 50);
             this.btnEditPlugins.TabIndex = 9;
@@ -206,7 +207,7 @@
             // btnLoadOrder
             // 
             this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(912, 31);
+            this.btnLoadOrder.Location = new System.Drawing.Point(904, 31);
             this.btnLoadOrder.Name = "btnLoadOrder";
             this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
             this.btnLoadOrder.TabIndex = 11;
@@ -298,7 +299,6 @@
             this.grpActions.TabIndex = 1;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
-            this.grpActions.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox1
             // 
@@ -333,6 +333,7 @@
             // groupBox2
             // 
             this.groupBox2.AutoSize = true;
+            this.groupBox2.Controls.Add(this.cmdDeleteStale);
             this.groupBox2.Controls.Add(this.btnLoadOrder);
             this.groupBox2.Controls.Add(this.btnEditPlugins);
             this.groupBox2.Controls.Add(this.btnExplore);
@@ -428,6 +429,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
+            // cmdDeleteStale
+            // 
+            this.cmdDeleteStale.Enabled = false;
+            this.cmdDeleteStale.Location = new System.Drawing.Point(688, 31);
+            this.cmdDeleteStale.Name = "cmdDeleteStale";
+            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
+            this.cmdDeleteStale.TabIndex = 12;
+            this.cmdDeleteStale.Text = "Trim";
+            this.cmdDeleteStale.UseVisualStyleBackColor = true;
+            this.cmdDeleteStale.Visible = false;
+            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
+            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -488,6 +501,7 @@
         private System.Windows.Forms.Button btnStarfieldStore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
+        private System.Windows.Forms.Button cmdDeleteStale;
     }
 }
 
