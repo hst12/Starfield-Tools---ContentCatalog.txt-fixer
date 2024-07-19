@@ -491,6 +491,7 @@ namespace Starfield_Tools
             File.WriteAllText(CC.GetCatalog(), json);
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Version numbers reset";
+            richTextBox2.Text = "";
         }
 
         private void btnRestore_Click(object sender, EventArgs e)

@@ -393,9 +393,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         }
 
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void btnEnableAll_Click(object sender, EventArgs e)
         {
-            //NewFix();
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = true;
+            }
+            toolStripStatusLabel1.Text = "All mods enabled";
+            isModified = true;
         }
     }
 }
