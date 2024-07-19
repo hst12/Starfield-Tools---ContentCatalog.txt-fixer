@@ -442,7 +442,8 @@ namespace Starfield_Tools
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                richTextBox2.Text += "Restore done\n";
+                richTextBox2.Text = "Restore done\n";
+                toolStripStatusLabel1.Text= "Restore done";
                 return true;
             }
             catch
