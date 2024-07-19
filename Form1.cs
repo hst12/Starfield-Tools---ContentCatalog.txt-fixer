@@ -262,7 +262,6 @@ namespace Starfield_Tools
             SaveSettings();
             StartStarfield();
             Application.Exit();
-            //toolStripStatusLabel1.Text = "Ready";
         }
 
 
@@ -405,6 +404,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
             string altCmdLine = "cmd.exe /C start " + cmdLine;
+            SaveSettings();
 
             try
             {
@@ -414,7 +414,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
-            SaveSettings();
+           
             Application.Exit();
         }
 
