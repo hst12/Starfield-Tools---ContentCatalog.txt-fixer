@@ -47,9 +47,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnEnableAll = new System.Windows.Forms.Button();
             this.btnDisable = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnEnableAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -79,7 +79,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1623, 786);
+            this.dataGridView1.Size = new System.Drawing.Size(1623, 800);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             // 
@@ -234,9 +234,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 927);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 948);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1266, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1270, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -258,11 +258,20 @@
             this.panel2.Controls.Add(this.btnUp);
             this.panel2.Controls.Add(this.btnTop);
             this.panel2.Controls.Add(this.btnDown);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 797);
+            this.panel2.Location = new System.Drawing.Point(3, 811);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1625, 127);
+            this.panel2.Size = new System.Drawing.Size(1625, 134);
             this.panel2.TabIndex = 6;
+            // 
+            // btnEnableAll
+            // 
+            this.btnEnableAll.Location = new System.Drawing.Point(1099, 3);
+            this.btnEnableAll.Name = "btnEnableAll";
+            this.btnEnableAll.Size = new System.Drawing.Size(150, 50);
+            this.btnEnableAll.TabIndex = 10;
+            this.btnEnableAll.Text = "Enable All";
+            this.btnEnableAll.UseVisualStyleBackColor = true;
+            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
             // 
             // btnDisable
             // 
@@ -288,25 +297,15 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1266, 927);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1270, 948);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // btnEnableAll
-            // 
-            this.btnEnableAll.Location = new System.Drawing.Point(1099, 3);
-            this.btnEnableAll.Name = "btnEnableAll";
-            this.btnEnableAll.Size = new System.Drawing.Size(150, 50);
-            this.btnEnableAll.TabIndex = 10;
-            this.btnEnableAll.Text = "Enable All";
-            this.btnEnableAll.UseVisualStyleBackColor = true;
-            this.btnEnableAll.Click += new System.EventHandler(this.btnEnableAll_Click);
             // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1266, 969);
+            this.ClientSize = new System.Drawing.Size(1270, 990);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

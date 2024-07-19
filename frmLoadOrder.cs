@@ -207,7 +207,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     }
                     else
                         writer.WriteLine(ModLine);
-
                 }
             }
             this.Close();
@@ -380,6 +379,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             //MessageBox.Show("Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert", "Warning!");
             toolStripStatusLabel1.Text = "Warning! - Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert";
             toolStripStatusLabel1.ForeColor = Color.Red;
+            
         }
 
         private void btnDisable_Click(object sender, EventArgs e)
