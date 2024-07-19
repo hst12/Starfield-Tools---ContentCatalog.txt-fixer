@@ -268,9 +268,8 @@ namespace Starfield_Tools
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            string Readme=File.ReadAllText("Readme.txt");
-            string AboutText = Application.ProductName + " " + Application.ProductVersion + "\n\n" + Readme;
-            MessageBox.Show(AboutText, "Starfield Tools");
+            Form AboutBox=new frmAbout();
+            AboutBox.Show();
         }
 
         private void btnExplore_Click(object sender, EventArgs e)
