@@ -163,6 +163,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Jonathan-Rey-Star-Wars-Characters-Vader-03.ico" />
     <Content Include="Screenshot.png" />
   </ItemGroup>
