@@ -556,6 +556,10 @@ Quit the game if it's running before using the Clean or Edit buttons.
                             esmFiles.Add(file);
                 }
             }
+            for (int i = 0; i < esmFiles.Count; i++)
+            {
+                esmFiles[i] = esmFiles[i].Trim();
+            }
             /*}
             catch
             {
@@ -667,7 +671,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
                 if (TestString != "1.1")
                 {
-                    Version = double.Parse((kvp.Value.Version.Substring(0,kvp.Value.Version.IndexOf('.'))));
+                    Version = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
                     if (Version > kvp.Value.Timestamp)
                         kvp.Value.Version = "1704067200.0";
