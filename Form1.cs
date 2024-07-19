@@ -131,6 +131,11 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
+                    if (TestString == "18446744073709551615.0")
+                    {
+                        ErrorFound = true;
+                        richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
+                    }
 
                     for (int i = 0; i < TestString.Length; i++)
                     {
@@ -268,7 +273,7 @@ namespace Starfield_Tools
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            Form AboutBox=new frmAbout();
+            Form AboutBox = new frmAbout();
             AboutBox.Show();
         }
 
@@ -380,7 +385,7 @@ namespace Starfield_Tools
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
-           
+
             Application.Exit();
         }
 
