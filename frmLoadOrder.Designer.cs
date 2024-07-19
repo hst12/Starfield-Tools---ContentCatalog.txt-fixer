@@ -79,7 +79,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1794, 819);
+            this.dataGridView1.Size = new System.Drawing.Size(1623, 786);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             // 
@@ -140,10 +140,10 @@
             // btnOK
             // 
             this.btnOK.AutoSize = true;
-            this.btnOK.Location = new System.Drawing.Point(23, 23);
+            this.btnOK.Location = new System.Drawing.Point(473, 69);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(98, 67);
+            this.btnOK.Size = new System.Drawing.Size(150, 50);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "Ok";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -152,10 +152,10 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(1600, 23);
+            this.btnCancel.Location = new System.Drawing.Point(631, 69);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(178, 67);
+            this.btnCancel.Size = new System.Drawing.Size(150, 50);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -164,9 +164,9 @@
             // btnBottom
             // 
             this.btnBottom.AutoSize = true;
-            this.btnBottom.Location = new System.Drawing.Point(679, 23);
+            this.btnBottom.Location = new System.Drawing.Point(475, 3);
             this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(178, 67);
+            this.btnBottom.Size = new System.Drawing.Size(150, 50);
             this.btnBottom.TabIndex = 5;
             this.btnBottom.Text = "Bottom";
             this.btnBottom.UseVisualStyleBackColor = true;
@@ -175,9 +175,9 @@
             // btnTop
             // 
             this.btnTop.AutoSize = true;
-            this.btnTop.Location = new System.Drawing.Point(495, 23);
+            this.btnTop.Location = new System.Drawing.Point(319, 3);
             this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(178, 67);
+            this.btnTop.Size = new System.Drawing.Size(150, 50);
             this.btnTop.TabIndex = 4;
             this.btnTop.Text = "Top";
             this.btnTop.UseVisualStyleBackColor = true;
@@ -186,9 +186,9 @@
             // btnRestorePlugins
             // 
             this.btnRestorePlugins.AutoSize = true;
-            this.btnRestorePlugins.Location = new System.Drawing.Point(1047, 23);
+            this.btnRestorePlugins.Location = new System.Drawing.Point(787, 3);
             this.btnRestorePlugins.Name = "btnRestorePlugins";
-            this.btnRestorePlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnRestorePlugins.Size = new System.Drawing.Size(150, 50);
             this.btnRestorePlugins.TabIndex = 7;
             this.btnRestorePlugins.Text = "Restore";
             this.btnRestorePlugins.UseVisualStyleBackColor = true;
@@ -197,9 +197,9 @@
             // btnBackupPlugins
             // 
             this.btnBackupPlugins.AutoSize = true;
-            this.btnBackupPlugins.Location = new System.Drawing.Point(863, 23);
+            this.btnBackupPlugins.Location = new System.Drawing.Point(631, 3);
             this.btnBackupPlugins.Name = "btnBackupPlugins";
-            this.btnBackupPlugins.Size = new System.Drawing.Size(178, 67);
+            this.btnBackupPlugins.Size = new System.Drawing.Size(150, 50);
             this.btnBackupPlugins.TabIndex = 6;
             this.btnBackupPlugins.Text = "Backup";
             this.btnBackupPlugins.UseVisualStyleBackColor = true;
@@ -208,10 +208,10 @@
             // btnDown
             // 
             this.btnDown.AutoSize = true;
-            this.btnDown.Location = new System.Drawing.Point(311, 23);
+            this.btnDown.Location = new System.Drawing.Point(164, 3);
             this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(178, 67);
+            this.btnDown.Size = new System.Drawing.Size(150, 50);
             this.btnDown.TabIndex = 3;
             this.btnDown.Text = "Down";
             this.btnDown.UseVisualStyleBackColor = true;
@@ -220,10 +220,10 @@
             // btnUp
             // 
             this.btnUp.AutoSize = true;
-            this.btnUp.Location = new System.Drawing.Point(127, 23);
+            this.btnUp.Location = new System.Drawing.Point(10, 3);
             this.btnUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(178, 67);
+            this.btnUp.Size = new System.Drawing.Size(150, 50);
             this.btnUp.TabIndex = 2;
             this.btnUp.Text = "Up";
             this.btnUp.UseVisualStyleBackColor = true;
@@ -236,7 +236,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 927);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1802, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1266, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -259,17 +259,17 @@
             this.panel2.Controls.Add(this.btnTop);
             this.panel2.Controls.Add(this.btnDown);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 830);
+            this.panel2.Location = new System.Drawing.Point(3, 797);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1796, 94);
+            this.panel2.Size = new System.Drawing.Size(1625, 127);
             this.panel2.TabIndex = 6;
             // 
             // btnDisable
             // 
             this.btnDisable.AutoSize = true;
-            this.btnDisable.Location = new System.Drawing.Point(1231, 23);
+            this.btnDisable.Location = new System.Drawing.Point(943, 3);
             this.btnDisable.Name = "btnDisable";
-            this.btnDisable.Size = new System.Drawing.Size(178, 67);
+            this.btnDisable.Size = new System.Drawing.Size(150, 50);
             this.btnDisable.TabIndex = 9;
             this.btnDisable.Text = "Disable All";
             this.btnDisable.UseVisualStyleBackColor = true;
@@ -288,14 +288,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1802, 927);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1266, 927);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // btnEnableAll
             // 
-            this.btnEnableAll.Location = new System.Drawing.Point(1415, 23);
+            this.btnEnableAll.Location = new System.Drawing.Point(1099, 3);
             this.btnEnableAll.Name = "btnEnableAll";
-            this.btnEnableAll.Size = new System.Drawing.Size(178, 67);
+            this.btnEnableAll.Size = new System.Drawing.Size(150, 50);
             this.btnEnableAll.TabIndex = 10;
             this.btnEnableAll.Text = "Enable All";
             this.btnEnableAll.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1802, 969);
+            this.ClientSize = new System.Drawing.Size(1266, 969);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

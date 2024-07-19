@@ -18,9 +18,9 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             string StarfieldPath = CC.GetStarfieldPath();
-            Font FontSize = new Font("Microsoft Sans Serif", 14);
+            /*Font FontSize = new Font("Microsoft Sans Serif", 14);
             this.Font = FontSize;
-            toolStripStatusLabel1.Font = FontSize;
+            toolStripStatusLabel1.Font = FontSize;*/
             InitDataGrid();
             /*#if DEBUG
                         btnTest.Enabled = true;

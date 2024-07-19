@@ -124,9 +124,9 @@
             this.btnLoad.Location = new System.Drawing.Point(10, 31);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(305, 50);
+            this.btnLoad.Size = new System.Drawing.Size(210, 50);
             this.btnLoad.TabIndex = 6;
-            this.btnLoad.Text = "Edit ContentCatalog.txt";
+            this.btnLoad.Text = "ContentCatalog.txt";
             this.toolTip1.SetToolTip(this.btnLoad, "Edit with default text editor");
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
@@ -160,9 +160,9 @@
             // btnExplore
             // 
             this.btnExplore.AutoSize = true;
-            this.btnExplore.Location = new System.Drawing.Point(532, 31);
+            this.btnExplore.Location = new System.Drawing.Point(462, 31);
             this.btnExplore.Name = "btnExplore";
-            this.btnExplore.Size = new System.Drawing.Size(150, 50);
+            this.btnExplore.Size = new System.Drawing.Size(210, 50);
             this.btnExplore.TabIndex = 8;
             this.btnExplore.Text = "Explore";
             this.toolTip1.SetToolTip(this.btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
@@ -172,11 +172,11 @@
             // btnEditPlugins
             // 
             this.btnEditPlugins.AutoSize = true;
-            this.btnEditPlugins.Location = new System.Drawing.Point(322, 31);
+            this.btnEditPlugins.Location = new System.Drawing.Point(236, 31);
             this.btnEditPlugins.Name = "btnEditPlugins";
-            this.btnEditPlugins.Size = new System.Drawing.Size(204, 50);
+            this.btnEditPlugins.Size = new System.Drawing.Size(210, 50);
             this.btnEditPlugins.TabIndex = 7;
-            this.btnEditPlugins.Text = "Edit Plugins.txt";
+            this.btnEditPlugins.Text = "Plugins.txt";
             this.toolTip1.SetToolTip(this.btnEditPlugins, "Edit with default text editor");
             this.btnEditPlugins.UseVisualStyleBackColor = true;
             this.btnEditPlugins.Click += new System.EventHandler(this.btnEditPlugins_Click);
@@ -460,6 +460,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1313, 1142);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);

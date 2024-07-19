@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -258,6 +259,7 @@ namespace Starfield_Tools
             const string subkey = @"Software\Valve\Steam";
             const string keyName = userRoot + "\\" + subkey;
 
+            toolStripStatusLabel1.Text = "Starfield launching";
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
             Console.WriteLine($"String value: {stringValue}");
@@ -266,7 +268,6 @@ namespace Starfield_Tools
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
-            toolStripStatusLabel1.Text = "Starfield launching";
         }
 
         private void btnStarfield_Click(object sender, EventArgs e)
@@ -275,7 +276,6 @@ namespace Starfield_Tools
             StartStarfield();
             Application.Exit();
         }
-
 
 
         private void btnAbout_Click(object sender, EventArgs e)
