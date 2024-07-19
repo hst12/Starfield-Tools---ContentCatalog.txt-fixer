@@ -1,5 +1,7 @@
 Checks ContentCatalog.txt file automatically when launched.
 
+This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
+
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game. This tool is intended to repair the catalog file. You could simply delete the catalog file and have the game rebuild it, but that will force a download of all your Creations mods next time you use the Creations menu.
 
 If downloading the compiled version of the tool, extract the files somewhere and run setup.exe. A desktop shortcut will be created and the tool can be un-installed via the Settings->Apps->Installed apps menu in Windows.
