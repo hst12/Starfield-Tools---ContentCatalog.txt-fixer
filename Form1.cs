@@ -23,8 +23,6 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-
-
             //#if DEBUG
             cmdDeleteStale.Enabled = true;
             cmdDeleteStale.Visible = true;
@@ -46,7 +44,6 @@ namespace Starfield_Tools
             chkForceClean.Checked = ForceClean;
 
             richTextBox2.Text = "";
-
 
             if (AutoCheck) // Check catalog status if enabled
             {
@@ -70,6 +67,7 @@ namespace Starfield_Tools
                 CleanCatalog();*/
 
             DisplayCatalog();
+            richTextBox2.Text = "";
             Console.WriteLine("Int32 Min " + Int32.MinValue.ToString());
             Console.WriteLine("Int32 Max " + Int32.MaxValue.ToString());
             Console.WriteLine("Int64 Min " + Int64.MinValue.ToString());
@@ -128,6 +126,7 @@ namespace Starfield_Tools
                 }
                 string json = File.ReadAllText(jsonFilePath);
                 string TestString = "";
+                richTextBox2.Text = "";
 
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -135,6 +134,7 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
+                    richTextBox2.Text += "Checking " + kvp.Value.Title+", "+ TestString + "\n";
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
@@ -443,7 +443,7 @@ namespace Starfield_Tools
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
                 richTextBox2.Text = "Restore done\n";
-                toolStripStatusLabel1.Text= "Restore done";
+                toolStripStatusLabel1.Text = "Restore done";
                 return true;
             }
             catch
@@ -516,6 +516,7 @@ namespace Starfield_Tools
             int RemovalCount = 0;
             int index;
             bool unusedMods = false;
+            richTextBox2.Text = "";
 
             /*try
             {*/
@@ -550,6 +551,7 @@ namespace Starfield_Tools
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
                 data.Remove("ContentCatalog");
+                
                 foreach (var kvp in data)
                 {
                     try
@@ -561,6 +563,7 @@ namespace Starfield_Tools
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
                                 CreationsTitle.Add(kvp.Value.Title);
+                                richTextBox2.Text += "Scanning: " + kvp.Value.Title + "\n";
                             }
                         }
 
@@ -574,8 +577,7 @@ namespace Starfield_Tools
                 List<string> missingStrings = CreationsPlugin.Except(esmFiles).ToList();
                 richTextBox1.Text = "";
                 index = 0;
-                richTextBox2.Text = "";
-                //string tempstring;
+
                 if (missingStrings.Count > 0)
                 {
                     for (index = 0; index < missingStrings.Count; index++)
@@ -636,7 +638,7 @@ namespace Starfield_Tools
             {
                 TestString = kvp.Value.Version;
                 FixVersion = false;
-                //MessageBox.Show(kvp.Value.Version + "\n" + kvp.Value.Timestamp);
+                richTextBox2.Text += "Checking "+ kvp.Value.Title + ", " + TestString + "\n";
 
                 for (int i = 0; i < TestString.Length; i++)
                 {

@@ -48,12 +48,12 @@
             this.chkForceClean = new System.Windows.Forms.CheckBox();
             this.btnStarfieldStore = new System.Windows.Forms.Button();
             this.btnResetAll = new System.Windows.Forms.Button();
+            this.cmdDeleteStale = new System.Windows.Forms.Button();
+            this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
-            this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmdStarFieldPath = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpAuto = new System.Windows.Forms.GroupBox();
             this.chkAutoRestore = new System.Windows.Forms.CheckBox();
@@ -277,6 +277,31 @@
             this.btnResetAll.UseVisualStyleBackColor = true;
             this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
             // 
+            // cmdDeleteStale
+            // 
+            this.cmdDeleteStale.Enabled = false;
+            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
+            this.cmdDeleteStale.Name = "cmdDeleteStale";
+            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
+            this.cmdDeleteStale.TabIndex = 2;
+            this.cmdDeleteStale.Text = "Remove Unused";
+            this.toolTip1.SetToolTip(this.cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
+            this.cmdDeleteStale.UseVisualStyleBackColor = true;
+            this.cmdDeleteStale.Visible = false;
+            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
+            // 
+            // cmdStarFieldPath
+            // 
+            this.cmdStarFieldPath.AutoSize = true;
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(426, 34);
+            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
+            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
+            this.cmdStarFieldPath.TabIndex = 17;
+            this.cmdStarFieldPath.Text = "Set Starfield Path";
+            this.toolTip1.SetToolTip(this.cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
+            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
+            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -314,19 +339,6 @@
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
             // 
-            // cmdDeleteStale
-            // 
-            this.cmdDeleteStale.Enabled = false;
-            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
-            this.cmdDeleteStale.Name = "cmdDeleteStale";
-            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
-            this.cmdDeleteStale.TabIndex = 2;
-            this.cmdDeleteStale.Text = "Remove Unused";
-            this.toolTip1.SetToolTip(this.cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
-            this.cmdDeleteStale.UseVisualStyleBackColor = true;
-            this.cmdDeleteStale.Visible = false;
-            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
@@ -345,18 +357,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
-            // 
-            // cmdStarFieldPath
-            // 
-            this.cmdStarFieldPath.AutoSize = true;
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(426, 34);
-            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
-            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
-            this.cmdStarFieldPath.TabIndex = 17;
-            this.cmdStarFieldPath.Text = "Set Starfield Path";
-            this.toolTip1.SetToolTip(this.cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
-            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
-            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
             // 
             // groupBox2
             // 
