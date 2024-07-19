@@ -111,7 +111,11 @@ namespace Starfield_Tools
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
             bool ErrorFound = false;
+            int ErrorCount = 0;
             richTextBox2.Text += "Checking Catalog\n";
+            double VersionCheck;
+            long TimeStamp;
+            richTextBox2.Text = "";
 
             try
             {
@@ -131,8 +135,11 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
-                    if (TestString == "18446744073709551615.0")
+                    VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
+                    TimeStamp = kvp.Value.Timestamp;
+                    if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
                     {
+                        ErrorCount++;
                         ErrorFound = true;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
                     }
@@ -155,8 +162,8 @@ namespace Starfield_Tools
                 }
                 else
                 {
-                    toolStripStatusLabel1.Text = "Error(s) found";
-                    richTextBox2.Text += "Error(s) found\n";
+                    toolStripStatusLabel1.Text = ErrorCount.ToString() + " Error(s) found";
+                    richTextBox2.Text += ErrorCount.ToString() + " Error(s) found\n";
                     return false;
                 }
             }
@@ -182,8 +189,8 @@ namespace Starfield_Tools
                 if (fileSize > 0)
                 {
                     NewFix();
-                    toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
-                    richTextBox2.Text += "Clean complete\n";
+                    //toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
+                    //richTextBox2.Text += "Clean complete\n";
                     if (AutoBackup)
                         BackupCatalog();
                     DisplayCatalog();
@@ -617,8 +624,10 @@ namespace Starfield_Tools
             string TestString = "";
             bool FixVersion;
             int errorCount = 0;
-            double Version;
+            double VersionCheck;
             long TimeStamp;
+            richTextBox2.Text = "";
+            int VersionReplacementCount = 0;
 
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -638,14 +647,15 @@ namespace Starfield_Tools
                     }
                 }
 
-
-
                 if (TestString != "1.1")
                 {
-                    Version = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
+                    VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
-                    if (Version > kvp.Value.Timestamp)
+                    if (VersionCheck > kvp.Value.Timestamp)
+                    {
                         kvp.Value.Version = "1704067200.0";
+                        VersionReplacementCount++;
+                    }
                 }
                 if (FixVersion)
                 {
@@ -667,7 +677,7 @@ namespace Starfield_Tools
 " + json.Substring(1); // to strip out a brace char
 
             File.WriteAllText(jsonFilePath, json);
-
+            toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";
         }
     }
 }
