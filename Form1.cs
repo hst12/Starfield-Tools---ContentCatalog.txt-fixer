@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -63,9 +64,19 @@ namespace Starfield_Tools
 
             DisplayCatalog();
             richTextBox2.Text = "";
+        }
 
-           /* Form SS = new frmSplashScreen();
-            SS.Show();*/
+        private void ShowSplashScreen()
+        {
+            Form SS = new frmSplashScreen();
+            
+            Rectangle resolution = Screen.PrimaryScreen.Bounds;
+            int screenWidth = resolution.Width;
+            int screenHeight = resolution.Height;
+            SS.Width = screenWidth/2;
+            SS.Height = screenHeight/2;
+            SS.StartPosition = FormStartPosition.CenterScreen;
+            SS.Show();
         }
 
         private void SetAutoCheckBoxes()
@@ -275,8 +286,7 @@ namespace Starfield_Tools
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-            Form SS= new frmSplashScreen();
-            SS.Show();
+            ShowSplashScreen();
             SaveSettings();
             StartStarfield();
             Thread.Sleep(10000);
@@ -287,6 +297,13 @@ namespace Starfield_Tools
         private void btnAbout_Click(object sender, EventArgs e)
         {
             Form AboutBox = new frmAbout();
+            Rectangle resolution = Screen.PrimaryScreen.Bounds;
+            int screenWidth = resolution.Width;
+            int screenHeight = resolution.Height;
+            AboutBox.Width = screenWidth / 2;
+            AboutBox.Height = screenHeight / 2;
+            AboutBox.StartPosition = FormStartPosition.CenterScreen;
+            
             AboutBox.Show();
         }
 
@@ -386,8 +403,7 @@ namespace Starfield_Tools
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
-            Form SS = new frmSplashScreen();
-            SS.Show();
+            ShowSplashScreen();
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
             string altCmdLine = "cmd.exe /C start " + cmdLine;
             SaveSettings();
@@ -421,15 +437,15 @@ namespace Starfield_Tools
                     cmdLineRun = true;
                 if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
                 {
-                    AutoCheck=false;
-                    AutoClean=false;
-                    AutoBackup=false;
-                    AutoRestore=false;
-                    ForceClean=false;
+                    AutoCheck = false;
+                    AutoClean = false;
+                    AutoBackup = false;
+                    AutoRestore = false;
+                    ForceClean = false;
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
-                    
+
             }
 
             if (cmdLineRun)
