@@ -201,7 +201,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
-                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + ConvertTime( VersionCheck) + "\n";
+                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + ConvertTime( VersionCheck) + " "+ TestString+ "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
