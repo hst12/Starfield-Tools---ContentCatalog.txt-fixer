@@ -47,7 +47,7 @@ namespace Starfield_Tools
                     cmdLineRunMS = true;
                 if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
                 {
-                    
+
                     AutoCheck = false;
                     AutoClean = false;
                     AutoBackup = false;
@@ -110,15 +110,22 @@ namespace Starfield_Tools
             richTextBox2.Text = "";
         }
 
+        private System.DateTime ConvertTime(double TimeToConvert)
+        {
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            start = start.AddSeconds(TimeToConvert);
+            return start;
+        }
+
         private void ShowSplashScreen()
         {
             Form SS = new frmSplashScreen();
-            
+
             Rectangle resolution = Screen.PrimaryScreen.Bounds;
             int screenWidth = resolution.Width;
             int screenHeight = resolution.Height;
-            SS.Width = screenWidth/2;
-            SS.Height = screenHeight/2;
+            SS.Width = screenWidth / 2;
+            SS.Height = screenHeight / 2;
             SS.StartPosition = FormStartPosition.CenterScreen;
             SS.Show();
         }
@@ -193,8 +200,9 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
-                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
+                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + ConvertTime( VersionCheck) + "\n";
+
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
                     {
@@ -319,7 +327,7 @@ namespace Starfield_Tools
             SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
             ShowSplashScreen();
-            
+
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
 
@@ -332,7 +340,7 @@ namespace Starfield_Tools
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-            
+
             StartStarfieldSteam();
 
         }
@@ -347,7 +355,7 @@ namespace Starfield_Tools
             AboutBox.Width = screenWidth / 2;
             AboutBox.Height = screenHeight / 2;
             AboutBox.StartPosition = FormStartPosition.CenterScreen;
-            
+
             AboutBox.Show();
         }
 
@@ -471,7 +479,7 @@ namespace Starfield_Tools
 
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
