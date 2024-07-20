@@ -40,8 +40,7 @@ namespace Starfield_Tools
 
             foreach (var arg in Environment.GetCommandLineArgs())
             {
-                Console.WriteLine(arg);
-                
+                //Console.WriteLine(arg);
                 if (String.Equals(arg, "-runSteam", StringComparison.OrdinalIgnoreCase))
                     cmdLineRunSteam = true;
                 if (String.Equals(arg, "-runMS", StringComparison.OrdinalIgnoreCase))
