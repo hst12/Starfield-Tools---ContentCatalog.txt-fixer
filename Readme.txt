@@ -50,4 +50,7 @@ Quit the game if it's running before using the Clean or Edit buttons.
 
 Command line options:
 -noauto Clears all the auto check boxes. This will stop any auto repair functions from running automatically when the tool starts.
--run Starts the tool with whatever auto settings were used last then launches the game
+-auto Sets recommended auto check boxes
+-runSteam or -runMS Starts the tool with whatever auto settings were used last then launches the game
+
+Example: "Starfield Tools.exe" -auto -runSteam will run auto checks and launch Starfield Steam version.

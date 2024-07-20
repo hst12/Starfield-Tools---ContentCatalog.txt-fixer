@@ -25,11 +25,6 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-            //#if DEBUG
-            cmdDeleteStale.Enabled = true;
-            cmdDeleteStale.Visible = true;
-            //#endif
-
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
@@ -38,6 +33,56 @@ namespace Starfield_Tools
             CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
+
+            //bool cmdLineAuto = false;
+            bool cmdLineRunSteam = false;
+            bool cmdLineRunMS = false;
+
+            foreach (var arg in Environment.GetCommandLineArgs())
+            {
+                Console.WriteLine(arg);
+                
+                if (String.Equals(arg, "-runSteam", StringComparison.OrdinalIgnoreCase))
+                    cmdLineRunSteam = true;
+                if (String.Equals(arg, "-runMS", StringComparison.OrdinalIgnoreCase))
+                    cmdLineRunMS = true;
+                if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
+                {
+                    
+                    AutoCheck = false;
+                    AutoClean = false;
+                    AutoBackup = false;
+                    AutoRestore = false;
+                    ForceClean = false;
+                    SaveSettings();
+                    SetAutoCheckBoxes();
+                }
+
+                if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase)) // Set recommended settings
+                {
+                    AutoCheck = true;
+                    AutoClean = true;
+                    AutoBackup = true;
+                    AutoRestore = true;
+                    ForceClean = false;
+                    SaveSettings();
+                    SetAutoCheckBoxes();
+                }
+            }
+
+            if (cmdLineRunSteam)
+            {
+                SaveSettings();
+                StartStarfieldSteam();
+                Application.Exit();
+            }
+
+            if (cmdLineRunMS)
+            {
+                SaveSettings();
+                StartStarfieldMS();
+                Application.Exit();
+            }
 
             richTextBox2.Text = "";
 
@@ -68,6 +113,7 @@ namespace Starfield_Tools
 
         private void ShowSplashScreen()
         {
+            this.WindowState = FormWindowState.Minimized;
             Form SS = new frmSplashScreen();
             
             Rectangle resolution = Screen.PrimaryScreen.Bounds;
@@ -267,12 +313,13 @@ namespace Starfield_Tools
             DisplayCatalog();
         }
 
-        private void StartStarfield()
+        private void StartStarfieldSteam()
         {
             const string userRoot = "HKEY_CURRENT_USER";
             const string subkey = @"Software\Valve\Steam";
             const string keyName = userRoot + "\\" + subkey;
 
+            ShowSplashScreen();
             toolStripStatusLabel1.Text = "Starfield launching";
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
@@ -286,9 +333,8 @@ namespace Starfield_Tools
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-            ShowSplashScreen();
             SaveSettings();
-            StartStarfield();
+            StartStarfieldSteam();
             Thread.Sleep(10000);
             Application.Exit();
         }
@@ -401,7 +447,7 @@ namespace Starfield_Tools
             ForceClean = chkForceClean.Checked;
         }
 
-        private void btnStarfieldStore_Click(object sender, EventArgs e)
+        private void StartStarfieldMS()
         {
             ShowSplashScreen();
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
@@ -420,40 +466,14 @@ namespace Starfield_Tools
             }
         }
 
+        private void btnStarfieldStore_Click(object sender, EventArgs e)
+        {
+            StartStarfieldMS();
+        }
+
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
         {
-            //bool cmdLineAuto = false;
-            bool cmdLineRun = false;
-
-
-            foreach (var arg in Environment.GetCommandLineArgs())
-            {
-                //Console.WriteLine($"Argument: {arg}");
-                //MessageBox.Show(arg);
-                /*  if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase))
-                      cmdLineAuto = true;*/
-
-                if (String.Equals(arg, "-run", StringComparison.OrdinalIgnoreCase))
-                    cmdLineRun = true;
-                if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
-                {
-                    AutoCheck = false;
-                    AutoClean = false;
-                    AutoBackup = false;
-                    AutoRestore = false;
-                    ForceClean = false;
-                    SaveSettings();
-                    SetAutoCheckBoxes();
-                }
-
-            }
-
-            if (cmdLineRun)
-            {
-                SaveSettings();
-                StartStarfield();
-                Application.Exit();
-            }
+            
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
