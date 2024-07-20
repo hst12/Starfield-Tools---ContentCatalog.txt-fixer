@@ -36,13 +36,7 @@ namespace Starfield_Tools
             AutoRestore = Properties.Settings.Default.AutoRestore;
             CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
             ForceClean = Properties.Settings.Default.ForceClean;
-
-            // Initialise Checkboxes
-            chkAutoCheck.Checked = AutoCheck;
-            chkAutoClean.Checked = AutoClean;
-            chkAutoBackup.Checked = AutoBackup;
-            chkAutoRestore.Checked = AutoRestore;
-            chkForceClean.Checked = ForceClean;
+            SetAutoCheckBoxes();
 
             richTextBox2.Text = "";
 
@@ -69,10 +63,19 @@ namespace Starfield_Tools
 
             DisplayCatalog();
             richTextBox2.Text = "";
-            Console.WriteLine("Int32 Min " + Int32.MinValue.ToString());
-            Console.WriteLine("Int32 Max " + Int32.MaxValue.ToString());
-            Console.WriteLine("Int64 Min " + Int64.MinValue.ToString());
-            Console.WriteLine("Int64 Max " + Int64.MaxValue.ToString());
+
+           /* Form SS = new frmSplashScreen();
+            SS.Show();*/
+        }
+
+        private void SetAutoCheckBoxes()
+        {
+            // Initialise Checkboxes
+            chkAutoCheck.Checked = AutoCheck;
+            chkAutoClean.Checked = AutoClean;
+            chkAutoBackup.Checked = AutoBackup;
+            chkAutoRestore.Checked = AutoRestore;
+            chkForceClean.Checked = ForceClean;
         }
 
         private bool CheckBackup()
@@ -135,7 +138,7 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
-                    richTextBox2.Text += "Checking " + kvp.Value.Title+", "+ TestString + "\n";
+                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
@@ -272,8 +275,11 @@ namespace Starfield_Tools
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
+            Form SS= new frmSplashScreen();
+            SS.Show();
             SaveSettings();
             StartStarfield();
+            Thread.Sleep(10000);
             Application.Exit();
         }
 
@@ -380,6 +386,8 @@ namespace Starfield_Tools
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
+            Form SS = new frmSplashScreen();
+            SS.Show();
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
             string altCmdLine = "cmd.exe /C start " + cmdLine;
             SaveSettings();
@@ -387,13 +395,13 @@ namespace Starfield_Tools
             try
             {
                 Process.Start(cmdLine);
+                Thread.Sleep(5000);
+                Application.Exit();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
-
-            Application.Exit();
         }
 
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
@@ -404,12 +412,24 @@ namespace Starfield_Tools
 
             foreach (var arg in Environment.GetCommandLineArgs())
             {
-                Console.WriteLine($"Argument: {arg}");
+                //Console.WriteLine($"Argument: {arg}");
                 //MessageBox.Show(arg);
                 /*  if (String.Equals(arg, "-auto", StringComparison.OrdinalIgnoreCase))
                       cmdLineAuto = true;*/
+
                 if (String.Equals(arg, "-run", StringComparison.OrdinalIgnoreCase))
                     cmdLineRun = true;
+                if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
+                {
+                    AutoCheck=false;
+                    AutoClean=false;
+                    AutoBackup=false;
+                    AutoRestore=false;
+                    ForceClean=false;
+                    SaveSettings();
+                    SetAutoCheckBoxes();
+                }
+                    
             }
 
             if (cmdLineRun)
@@ -552,7 +572,7 @@ namespace Starfield_Tools
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
                 data.Remove("ContentCatalog");
-                
+
                 foreach (var kvp in data)
                 {
                     try
@@ -639,7 +659,7 @@ namespace Starfield_Tools
             {
                 TestString = kvp.Value.Version;
                 FixVersion = false;
-                richTextBox2.Text += "Checking "+ kvp.Value.Title + ", " + TestString + "\n";
+                richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
 
                 for (int i = 0; i < TestString.Length; i++)
                 {
