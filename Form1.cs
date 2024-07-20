@@ -112,7 +112,6 @@ namespace Starfield_Tools
 
         private void ShowSplashScreen()
         {
-            this.WindowState = FormWindowState.Minimized;
             Form SS = new frmSplashScreen();
             
             Rectangle resolution = Screen.PrimaryScreen.Bounds;
@@ -308,7 +307,6 @@ namespace Starfield_Tools
         private void btnCheck_Click(object sender, EventArgs e)
         {
             CheckCatalog();
-            //CheckBackup();
             DisplayCatalog();
         }
 
@@ -318,24 +316,25 @@ namespace Starfield_Tools
             const string subkey = @"Software\Valve\Steam";
             const string keyName = userRoot + "\\" + subkey;
 
-            ShowSplashScreen();
+            SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
+            ShowSplashScreen();
+            
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
-            Console.WriteLine($"String value: {stringValue}");
-
 
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
+            Thread.Sleep(10000);
+            Application.Exit();
         }
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-            SaveSettings();
+            
             StartStarfieldSteam();
-            Thread.Sleep(10000);
-            Application.Exit();
+
         }
 
 

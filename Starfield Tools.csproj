@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Jonathan-Rey-Star-Wars-Characters-Vader-03.ico</ApplicationIcon>
+    <ApplicationIcon>SpaceShip.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>B71FBCC84C974CCAAAF233B502498E3B3F8C269C</ManifestCertificateThumbprint>
@@ -185,7 +185,7 @@
     <Content Include="Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Jonathan-Rey-Star-Wars-Characters-Vader-03.ico" />
+    <Content Include="SpaceShip.ico" />
     <None Include="Resources\ar91m.jpg" />
     <Content Include="Screenshot.png" />
   </ItemGroup>

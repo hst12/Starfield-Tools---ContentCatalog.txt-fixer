@@ -279,7 +279,6 @@
             // 
             // cmdDeleteStale
             // 
-            this.cmdDeleteStale.Enabled = false;
             this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
             this.cmdDeleteStale.Name = "cmdDeleteStale";
             this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
@@ -287,7 +286,6 @@
             this.cmdDeleteStale.Text = "Remove Unused";
             this.toolTip1.SetToolTip(this.cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
             this.cmdDeleteStale.UseVisualStyleBackColor = true;
-            this.cmdDeleteStale.Visible = false;
             this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
             // 
             // cmdStarFieldPath
