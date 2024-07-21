@@ -17,13 +17,14 @@
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer/releases/download/latest/Starfield.Tools.zip/</UpdateUrl>
     <SupportUrl>https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer</SupportUrl>
     <ProductName>Starfield Content Catalog Fixer</ProductName>
     <PublisherName>hst</PublisherName>

@@ -202,6 +202,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             // Create or overwrite the file
             using (StreamWriter writer = new StreamWriter(filePath))
             {
+                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
                 for (int y = 0; y < dataGridView1.Rows.Count; y++)
                 {
                     ModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
