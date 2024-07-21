@@ -194,7 +194,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
-                    if (TestString != "1.1")
+                    if (TestString != "1.1") // Skip catalog header, pull version info apart into date and actual version number
                         richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version:" + TestString.Substring(TestString.IndexOf('.')) + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;

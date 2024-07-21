@@ -46,6 +46,7 @@ namespace Starfield_Tools
             int esmCount = 0;
             int espCount = 0;
             string StatText = "";
+            double VersionCheck;
             List<string> esmFiles = new List<string>();
 
             try
@@ -129,6 +130,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     {
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
+                                        VersionCheck = double.Parse((ModVersion.Substring(0, ModVersion.IndexOf('.'))));
+                                        ModVersion=CC.ConvertTime(VersionCheck).ToString() + " " + ModVersion.Substring(ModVersion.IndexOf('.')) + "\n";
+                                        
                                         ModFiles = CreationsFiles[i];
                                         if (AchievmentSafe[i])
                                             ASafe = "Yes";
