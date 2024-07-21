@@ -40,6 +40,7 @@ namespace Starfield_Tools
             List<string> CreationsFiles = new List<string>();
             List<string> CreationsVersion = new List<string>();
             List<bool> AchievmentSafe = new List<bool>();
+            List<long> TimeStamp=new List<long>();
 
             int TitleCount = 0;
             int esmCount = 0;
@@ -72,10 +73,9 @@ namespace Starfield_Tools
                         CreationsTitle.Add(kvp.Value.Title); // Add Creations description to datagrid
 
                         CreationsVersion.Add(kvp.Value.Version);
-                        /*else
-                            CreationsVersion.Add("Invalid version");*/
                         CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
                         AchievmentSafe.Add(kvp.Value.AchievementSafe);
+                        TimeStamp.Add(kvp.Value.Timestamp);
 
                     }
                     catch (Exception ex)
@@ -98,7 +98,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string line, Description, ModFiles, ModVersion, ASafe;
+                string line, Description, ModFiles, ModVersion, ASafe,ModTimeStamp;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -121,6 +121,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 ModFiles = "";
                                 ModVersion = "";
                                 ASafe = "";
+                                ModTimeStamp = "";
 
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
@@ -133,9 +134,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                             ASafe = "Yes";
                                         else
                                             ASafe = "";
+                                        ModTimeStamp = CC.ConvertTime(TimeStamp[i]).ToString();
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe,ModTimeStamp);
                             }
                         }
                     }
@@ -376,10 +378,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            //MessageBox.Show("Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert", "Warning!");
-            toolStripStatusLabel1.Text = "Warning! - Plugins sorted - changes will be written to Plugins.txt if Ok button is pressed. Use Cancel button to revert";
+            toolStripStatusLabel1.Text = "Warning! - Plugins sorted - saving changes disabled";
             toolStripStatusLabel1.ForeColor = Color.Red;
-            
+            btnOK.Enabled = false;
         }
 
         private void btnDisable_Click(object sender, EventArgs e)

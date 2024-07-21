@@ -110,13 +110,6 @@ namespace Starfield_Tools
             richTextBox2.Text = "";
         }
 
-        private System.DateTime ConvertTime(double TimeToConvert)
-        {
-            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            start = start.AddSeconds(TimeToConvert);
-            return start;
-        }
-
         private void ShowSplashScreen()
         {
             Form SS = new frmSplashScreen();
@@ -201,7 +194,8 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
-                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + ConvertTime( VersionCheck) + " "+ TestString+ "\n";
+                    if (TestString != "1.1")
+                        richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version:" + TestString.Substring(TestString.IndexOf('.')) + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)

@@ -13,6 +13,13 @@ namespace Starfield_Tools
             return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Starfield";
         }
 
+        public System.DateTime ConvertTime(double TimeToConvert)
+        {
+            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            start = start.AddSeconds(TimeToConvert);
+            return start;
+        }
+
         public string GetCatalog()
         {
             return (GetStarfieldPath() + @"\ContentCatalog.txt");
