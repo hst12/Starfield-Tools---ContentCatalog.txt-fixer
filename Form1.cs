@@ -675,17 +675,15 @@ namespace Starfield_Tools
                                 RemovalCount++;
                             }
                         }
-
                     }
                 }
                 if (unusedMods)
+                {
                     toolStripStatusLabel1.Text = RemovalCount.ToString() + " Unused mods removed from catalog";
-                else
-                    toolStripStatusLabel1.Text = "No unused mods found in catalog";
-                json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+                    json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
-                // Hack the Bethesda header back in
-                json = @"{
+                    // Hack the Bethesda header back in
+                    json = @"{
   ""ContentCatalog"" : 
   {
     ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
@@ -693,8 +691,10 @@ namespace Starfield_Tools
   },
 " + json.Substring(1); // to strip out a brace char
 
-                File.WriteAllText(CC.GetCatalog(), json);
-
+                    File.WriteAllText(CC.GetCatalog(), json);
+                }
+                else
+                    toolStripStatusLabel1.Text = "No unused mods found in catalog";
             }
             catch (Exception ex)
             {
