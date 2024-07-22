@@ -61,6 +61,7 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCreations = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,7 +76,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(3, 468);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1307, 149);
+            this.richTextBox2.Size = new System.Drawing.Size(1310, 149);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
@@ -87,7 +88,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1301, 453);
+            this.richTextBox1.Size = new System.Drawing.Size(1304, 453);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
@@ -95,7 +96,7 @@
             // btnQuit
             // 
             this.btnQuit.AutoSize = true;
-            this.btnQuit.Location = new System.Drawing.Point(969, 34);
+            this.btnQuit.Location = new System.Drawing.Point(1144, 34);
             this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(150, 50);
@@ -220,7 +221,7 @@
             // btnAbout
             // 
             this.btnAbout.AutoSize = true;
-            this.btnAbout.Location = new System.Drawing.Point(655, 34);
+            this.btnAbout.Location = new System.Drawing.Point(664, 34);
             this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
@@ -233,7 +234,7 @@
             // txtSource
             // 
             this.txtSource.AutoSize = true;
-            this.txtSource.Location = new System.Drawing.Point(812, 34);
+            this.txtSource.Location = new System.Drawing.Point(824, 34);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(150, 50);
             this.txtSource.TabIndex = 19;
@@ -257,7 +258,7 @@
             // btnStarfieldStore
             // 
             this.btnStarfieldStore.AutoSize = true;
-            this.btnStarfieldStore.Location = new System.Drawing.Point(220, 34);
+            this.btnStarfieldStore.Location = new System.Drawing.Point(223, 34);
             this.btnStarfieldStore.Name = "btnStarfieldStore";
             this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
             this.btnStarfieldStore.TabIndex = 16;
@@ -291,7 +292,7 @@
             // cmdStarFieldPath
             // 
             this.cmdStarFieldPath.AutoSize = true;
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(426, 34);
+            this.cmdStarFieldPath.Location = new System.Drawing.Point(432, 34);
             this.cmdStarFieldPath.Name = "cmdStarFieldPath";
             this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
             this.cmdStarFieldPath.TabIndex = 17;
@@ -332,7 +333,7 @@
             this.grpActions.Margin = new System.Windows.Forms.Padding(6);
             this.grpActions.Name = "grpActions";
             this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1301, 121);
+            this.grpActions.Size = new System.Drawing.Size(1304, 121);
             this.grpActions.TabIndex = 0;
             this.grpActions.TabStop = false;
             this.grpActions.Text = "Actions";
@@ -340,6 +341,7 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.btnCreations);
             this.groupBox1.Controls.Add(this.btnStarfieldStore);
             this.groupBox1.Controls.Add(this.cmdStarFieldPath);
             this.groupBox1.Controls.Add(this.txtSource);
@@ -351,7 +353,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1301, 121);
+            this.groupBox1.Size = new System.Drawing.Size(1304, 121);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other";
@@ -366,7 +368,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 756);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1307, 112);
+            this.groupBox2.Size = new System.Drawing.Size(1310, 112);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit";
@@ -382,7 +384,7 @@
             this.grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpAuto.Location = new System.Drawing.Point(3, 874);
             this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1307, 90);
+            this.grpAuto.Size = new System.Drawing.Size(1310, 90);
             this.grpAuto.TabIndex = 0;
             this.grpAuto.TabStop = false;
             this.grpAuto.Text = "Auto Functions";
@@ -454,6 +456,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // btnCreations
+            // 
+            this.btnCreations.Location = new System.Drawing.Point(984, 34);
+            this.btnCreations.Name = "btnCreations";
+            this.btnCreations.Size = new System.Drawing.Size(150, 50);
+            this.btnCreations.TabIndex = 21;
+            this.btnCreations.Text = "Creations";
+            this.toolTip1.SetToolTip(this.btnCreations, "Open Creations website - show latest");
+            this.btnCreations.UseVisualStyleBackColor = true;
+            this.btnCreations.Click += new System.EventHandler(this.btnCreations_Click);
+            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -517,6 +530,7 @@
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;
         private System.Windows.Forms.Button btnResetAll;
+        private System.Windows.Forms.Button btnCreations;
     }
 }
 

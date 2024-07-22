@@ -446,7 +446,7 @@ namespace Starfield_Tools
 
         private void txtSource_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+            Process.Start("explorer.exe", "https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void cmdStarFieldPath_Click(object sender, EventArgs e)
@@ -569,6 +569,11 @@ namespace Starfield_Tools
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Version numbers reset";
             richTextBox2.Text = "";
+        }
+
+        private void btnCreations_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
