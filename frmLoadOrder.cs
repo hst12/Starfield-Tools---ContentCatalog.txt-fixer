@@ -30,8 +30,17 @@ namespace Starfield_Tools
             bool ModEnabled;
             int EnabledCount = 0;
             string loText;
+
+            if (!File.Exists(CC.GetCatalog()))
+            {
+                MessageBox.Show("Missing ContentCatalog.txt");
+                return;
+            }
+
+
             string jsonFilePath = CC.GetCatalog();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
+
 
             List<string> CreationsPlugin = new List<string>();
             List<string> CreationsTitle = new List<string>();

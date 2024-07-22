@@ -195,7 +195,7 @@ namespace Starfield_Tools
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     if (TestString != "1.1") // Skip catalog header, pull version info apart into date and actual version number
-                        richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version: " + TestString.Substring(TestString.IndexOf('.')+1) + "\n";
+                        richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version: " + TestString.Substring(TestString.IndexOf('.') + 1) + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
@@ -229,13 +229,30 @@ namespace Starfield_Tools
                 }
             }
 
-            catch (Exception ex)
+            catch
             {
-                //MessageBox.Show("Start the game and enter the Creations menu to create a catalog file", "Missing Catalog File");
-                //File.WriteAllText(CC.GetCatalog(), string.Empty);
-                toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
-                richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
-                MessageBox.Show(ex.Message);
+
+                DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+
+                    var CatalogHeader = @"{
+  ""ContentCatalog"" : 
+  {
+    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
+    ""Version"" : ""1.1""
+  }
+}
+";
+                    File.WriteAllText(CC.GetCatalog(), CatalogHeader);
+                    toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
+                    return false;
+                }
+                else
+                {
+                    toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                    richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                }
                 return false;
             }
         }
