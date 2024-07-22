@@ -94,5 +94,16 @@ namespace Starfield_Tools.Properties {
                 this["ForceClean"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Font FontSize {
+            get {
+                return ((global::System.Drawing.Font)(this["FontSize"]));
+            }
+            set {
+                this["FontSize"] = value;
+            }
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Starfield_Tools.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace Starfield_Tools
@@ -17,14 +19,10 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+            this.Font = Properties.Settings.Default.FontSize;
             string StarfieldPath = CC.GetStarfieldPath();
-            /*Font FontSize = new Font("Microsoft Sans Serif", 14);
-            this.Font = FontSize;
-            toolStripStatusLabel1.Font = FontSize;*/
             InitDataGrid();
-            /*#if DEBUG
-                        btnTest.Enabled = true;
-            #endif*/
+
         }
 
         private void InitDataGrid()
@@ -40,7 +38,7 @@ namespace Starfield_Tools
             List<string> CreationsFiles = new List<string>();
             List<string> CreationsVersion = new List<string>();
             List<bool> AchievmentSafe = new List<bool>();
-            List<long> TimeStamp=new List<long>();
+            List<long> TimeStamp = new List<long>();
 
             int TitleCount = 0;
             int esmCount = 0;
@@ -99,7 +97,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string line, Description, ModFiles, ModVersion, ASafe,ModTimeStamp;
+                string line, Description, ModFiles, ModVersion, ASafe, ModTimeStamp;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -131,8 +129,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         VersionCheck = double.Parse((ModVersion.Substring(0, ModVersion.IndexOf('.'))));
-                                        ModVersion=CC.ConvertTime(VersionCheck).ToString() + " " + ModVersion.Substring(ModVersion.IndexOf('.')+1) + "\n";
-                                        
+                                        ModVersion = CC.ConvertTime(VersionCheck).ToString() + " " + ModVersion.Substring(ModVersion.IndexOf('.') + 1) + "\n";
+
                                         ModFiles = CreationsFiles[i];
                                         if (AchievmentSafe[i])
                                             ASafe = "Yes";
@@ -141,7 +139,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = CC.ConvertTime(TimeStamp[i]).ToString();
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe,ModTimeStamp);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe, ModTimeStamp);
                             }
                         }
                     }
@@ -216,6 +214,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         writer.WriteLine(ModLine);
                 }
             }
+            Properties.Settings.Default.FontSize = this.Font;
             this.Close();
         }
 
@@ -407,6 +406,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             toolStripStatusLabel1.Text = "All mods enabled";
             isModified = true;
+        }
+
+        private void btnFont_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                this.Font = fontDialog1.Font;
+
+            }
+            this.CenterToScreen();
         }
     }
 }
