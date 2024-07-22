@@ -231,12 +231,13 @@ namespace Starfield_Tools
 
             catch
             {
-
-                DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
-                if (result == DialogResult.OK)
+                if (!File.Exists(CC.GetCatalog()))
                 {
+                    DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
+                    if (result == DialogResult.OK)
+                    {
 
-                    var CatalogHeader = @"{
+                        var CatalogHeader = @"{
   ""ContentCatalog"" : 
   {
     ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
@@ -244,14 +245,16 @@ namespace Starfield_Tools
   }
 }
 ";
-                    File.WriteAllText(CC.GetCatalog(), CatalogHeader);
-                    toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
-                    return false;
+                        File.WriteAllText(CC.GetCatalog(), CatalogHeader);
+                        toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
+                        return false;
+
+                    }
                 }
                 else
                 {
-                    toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
-                    richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                    toolStripStatusLabel1.Text = "Catalog corrupt";
+                    //richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
                 }
                 return false;
             }
