@@ -229,12 +229,13 @@ namespace Starfield_Tools
                 }
             }
 
-            catch
+            catch (Exception ex)
             {
                 //MessageBox.Show("Start the game and enter the Creations menu to create a catalog file", "Missing Catalog File");
                 //File.WriteAllText(CC.GetCatalog(), string.Empty);
                 toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
                 richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
