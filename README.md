@@ -76,7 +76,7 @@ Read only access is performed on the Data folder of Starfield to provide some st
 <div align="left">
     <img src="/Screenshot.png" align="left"</img> 
 </div>
-
+<p></p>
 <div align="left">
     <img src="/Screenshot2.png" align="left"</img> 
 </div>

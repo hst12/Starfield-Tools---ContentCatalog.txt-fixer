@@ -223,7 +223,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         writer.WriteLine(ModLine);
                 }
             }
-            Properties.Settings.Default.FontSize = this.Font;
             this.Close();
         }
 
@@ -425,6 +424,38 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             }
             this.CenterToScreen();
+            Properties.Settings.Default.FontSize = this.Font;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            int ModIndex;
+            string DataGridSring, TextBoxString;
+            if (txtSearchBox.Text == "")
+                return;
+            TextBoxString = txtSearchBox.Text.ToLower(); // Do lower case only search
+
+            for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
+            {
+                DataGridSring = dataGridView1.Rows[ModIndex].Cells[1].Value.ToString().ToLower();
+                Console.WriteLine(DataGridSring);
+                if (DataGridSring.Contains(TextBoxString))
+                {
+                    toolStripStatusLabel1.Text = "Found "+ txtSearchBox.Text;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells[1];
+                    break;
+                }
+                else
+                    toolStripStatusLabel1.Text = txtSearchBox.Text + " not found ";
+            }
+        }
+
+        private void frmLoadOrder_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+            }
         }
     }
 }

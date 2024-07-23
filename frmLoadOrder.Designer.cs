@@ -53,6 +53,9 @@
             this.btnDisable = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.txtSearchBox = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -151,7 +154,7 @@
             // btnOK
             // 
             this.btnOK.AutoSize = true;
-            this.btnOK.Location = new System.Drawing.Point(1030, 75);
+            this.btnOK.Location = new System.Drawing.Point(1030, 73);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(150, 67);
@@ -265,6 +268,9 @@
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Controls.Add(this.txtSearchBox);
             this.panel2.Controls.Add(this.btnFont);
             this.panel2.Controls.Add(this.btnEnableAll);
             this.panel2.Controls.Add(this.btnDisable);
@@ -334,8 +340,35 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1604, 948);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
+            // txtSearchBox
+            // 
+            this.txtSearchBox.Location = new System.Drawing.Point(350, 112);
+            this.txtSearchBox.Name = "txtSearchBox";
+            this.txtSearchBox.Size = new System.Drawing.Size(320, 31);
+            this.txtSearchBox.TabIndex = 12;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(690, 76);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(150, 67);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(345, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(297, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Search text <Enter> to search";
+            // 
             // frmLoadOrder
             // 
+            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
@@ -347,6 +380,7 @@
             this.Name = "frmLoadOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Load Order";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLoadOrder_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -385,5 +419,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearchBox;
+        private System.Windows.Forms.Label label1;
     }
 }
