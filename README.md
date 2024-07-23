@@ -72,6 +72,11 @@ Plugins.txt - Read and Write
 Plugins.txt.bak -  - Read and Write
 
 Read only access is performed on the Data folder of Starfield to provide some stats on installed mods.
+
 <div align="left">
     <img src="/Screenshot.png" align="left"</img> 
+</div>
+
+<div align="left">
+    <img src="/Screenshot2.png" align="left"</img> 
 </div>

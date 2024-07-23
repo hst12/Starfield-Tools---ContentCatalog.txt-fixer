@@ -177,6 +177,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
     <None Include="Starfield Tools_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
     <Content Include="Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Screenshot2.png" />
     <Content Include="SpaceShip.ico" />
     <None Include="Resources\ar91m.jpg" />
     <Content Include="Screenshot.png" />
