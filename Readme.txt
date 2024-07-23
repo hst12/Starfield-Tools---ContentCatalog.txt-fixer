@@ -5,8 +5,7 @@ This tool would not have been possible without the invaluable contributions of Z
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.
 This tool is intended to repair the catalog file. You could simply delete the catalog file and have the game rebuild it, but that will force a download of all your Creations mods next time you use the Creations menu.
 
-To install, run the msi installer. Un-install any version prior to 1.5 first before running the new installer.
-Updates will automatically un-install a previous version from version 1.5 and up.
+To install, extract the zip file and run the setup.exe installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
 
 Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically.
@@ -21,10 +20,13 @@ Use the Backup function after you've been in the Creations menu to backup the ca
 Use the Restore function to restore a backup up catalog if you've made a backup.
 Press the Check button if necessary to check if the catalog is ok.
 Press the Clean button if necessary to clean the catalog.
+Enable all the buttons under the Auto section except for Force Clean to have the tool automatically decide which action to take.
+When the auto functions are enabled, the tool will look for a backup of the catalog file first and try to restore that. If the restore fails, it will run a cleaning process.
 
-There is no need to use the tool if you're just playing the game normally.
+There is no need to use the tool if you're just playing the game normally and are not using the Creations menu.
 Use the catalog backup and restore features instead of the repair features when possible.
 
+Overview of buttons:
 Check button re-checks the file.
 
 Clean button repairs the file. It may take a while with a large mod list.
@@ -34,6 +36,7 @@ Backup button copies ContentCatalog.txt to ContentCatalog.txt.bak. A previous ba
 Restore button copies ContentCatalog.txt.bak to ContentCatalog.txt
 
 Remove Unused button checks for mods that you've deleted and removes them from the catalog. This is optional but might be useful for troubleshooting.
+
 Reset All Versions sets all the mod version numbers to a minimum value. This will force all your mods to re-download if you try to update in the Creation menu. Use it only for troubleshooting.
 
 Edit buttons are for opening ContentCatalog.txt or Plugins.txt files for editing with your default text editor.
