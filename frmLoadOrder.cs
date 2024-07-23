@@ -88,7 +88,7 @@ namespace Starfield_Tools
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error: {ex.Message}");
+                        toolStripStatusLabel1.Text = ex.Message;
                     }
                 }
             }
@@ -152,9 +152,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                             }
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show($"Error: {e.Message}");
+                        toolStripStatusLabel1.Text = ex.Message;
                     }
                 }
             }
@@ -191,7 +191,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             catch
             {
-                toolStripStatusLabel1.Text = "Starfield path needs to be set";
+                toolStripStatusLabel1.Text = "Starfield path needs to be set for mod stats";
             }
         }
 
