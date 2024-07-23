@@ -57,3 +57,16 @@ Command line options:
 -runSteam or -runMS Starts the tool with whatever auto settings were used last then launches the game
 
 Example: "Starfield Tools.exe" -auto -runSteam will run auto checks and launch Starfield Steam version.
+
+What files are affected by this tool?
+The tool reads and writes to %localappdata%\Starfield
+The following files are affected:
+ContentCatalog.txt - Read and Write
+ContentCatalog.txt.bak - Read and Write
+Plugins.txt - Read
+
+Applicable only when the Load Order Editor is used:
+Plugins.txt - Read and Write
+Plugins.txt.bak -  - Read and Write
+
+Read only access is performed on the Data folder of Starfield to provide some stats on installed mods.
