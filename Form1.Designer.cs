@@ -50,6 +50,7 @@
             this.btnResetAll = new System.Windows.Forms.Button();
             this.cmdDeleteStale = new System.Windows.Forms.Button();
             this.cmdStarFieldPath = new System.Windows.Forms.Button();
+            this.btnCreations = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grpActions = new System.Windows.Forms.GroupBox();
@@ -61,7 +62,6 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCreations = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -226,7 +226,7 @@
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(150, 50);
             this.btnAbout.TabIndex = 18;
-            this.btnAbout.Text = "About";
+            this.btnAbout.Text = "Help";
             this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
@@ -300,6 +300,17 @@
             this.toolTip1.SetToolTip(this.cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
             this.cmdStarFieldPath.UseVisualStyleBackColor = true;
             this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
+            // 
+            // btnCreations
+            // 
+            this.btnCreations.Location = new System.Drawing.Point(984, 34);
+            this.btnCreations.Name = "btnCreations";
+            this.btnCreations.Size = new System.Drawing.Size(150, 50);
+            this.btnCreations.TabIndex = 21;
+            this.btnCreations.Text = "Creations";
+            this.toolTip1.SetToolTip(this.btnCreations, "Open Creations website - show latest");
+            this.btnCreations.UseVisualStyleBackColor = true;
+            this.btnCreations.Click += new System.EventHandler(this.btnCreations_Click);
             // 
             // statusStrip1
             // 
@@ -455,17 +466,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnCreations
-            // 
-            this.btnCreations.Location = new System.Drawing.Point(984, 34);
-            this.btnCreations.Name = "btnCreations";
-            this.btnCreations.Size = new System.Drawing.Size(150, 50);
-            this.btnCreations.TabIndex = 21;
-            this.btnCreations.Text = "Creations";
-            this.toolTip1.SetToolTip(this.btnCreations, "Open Creations website - show latest");
-            this.btnCreations.UseVisualStyleBackColor = true;
-            this.btnCreations.Click += new System.EventHandler(this.btnCreations_Click);
             // 
             // frmStarfieldTools
             // 

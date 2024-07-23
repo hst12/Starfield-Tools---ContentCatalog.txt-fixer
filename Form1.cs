@@ -253,7 +253,7 @@ namespace Starfield_Tools
                 }
                 else
                 {
-                    toolStripStatusLabel1.Text = "Catalog corrupt";
+                    toolStripStatusLabel1.Text = "Catalog corrupt. Use the Restore or Clane functions to repair";
                     //richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
                 }
                 return false;
