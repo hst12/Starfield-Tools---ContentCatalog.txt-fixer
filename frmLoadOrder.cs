@@ -228,6 +228,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
             }
             toolStripStatusLabel1.Text = "Plugins.txt saved";
+            isModified = false;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -521,10 +522,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
-            SaveFileDialog SavePlugins = new SaveFileDialog();
+            string ProfileFolder;
 
-            SavePlugins.InitialDirectory = CC.GetStarfieldPath();
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+
+            SaveFileDialog SavePlugins = new SaveFileDialog();
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
+            if (ProfileFolder == null || ProfileFolder == "")
+                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            SavePlugins.InitialDirectory = ProfileFolder;
             SavePlugins.Filter = "Txt File|*.txt";
             SavePlugins.Title = "Save Profile";
 
@@ -533,18 +540,37 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 SaveLO(SavePlugins.FileName);
             }
+            if (SavePlugins.FileName != "")
+            {
+                Properties.Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(SavePlugins.FileName.LastIndexOf('\\'));
+                Properties.Settings.Default.Save();
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog OpenPlugins = new OpenFileDialog();
+            string ProfileFolder;
 
-            OpenPlugins.InitialDirectory = CC.GetStarfieldPath();
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
+            if (ProfileFolder == null || ProfileFolder == "")
+                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            OpenFileDialog OpenPlugins = new OpenFileDialog();
+            OpenPlugins.InitialDirectory = ProfileFolder;
+            OpenPlugins.Filter = "Txt File|*.txt";
+            OpenPlugins.Title = "Load Profile";
+
+
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result)
             {
                 File.Copy(OpenPlugins.FileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
                 InitDataGrid();
+            }
+            if (OpenPlugins.FileName != "")
+            {
+                Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName.Substring(OpenPlugins.FileName.LastIndexOf('\\'));
+                Properties.Settings.Default.Save();
             }
         }
     }

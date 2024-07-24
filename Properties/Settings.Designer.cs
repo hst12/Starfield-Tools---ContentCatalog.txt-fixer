@@ -105,5 +105,17 @@ namespace Starfield_Tools.Properties {
                 this["FontSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProfileFolder {
+            get {
+                return ((string)(this["ProfileFolder"]));
+            }
+            set {
+                this["ProfileFolder"] = value;
+            }
+        }
     }
 }
