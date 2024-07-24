@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Starfield_Tools
 {
-    
+
 
     internal class ContentCatalog
     {
@@ -35,5 +37,16 @@ namespace Starfield_Tools
             public string Version { get; set; }
         }
 
+        public void ShowAbout()
+        {
+            Form AboutBox = new frmAbout();
+            Rectangle resolution = Screen.PrimaryScreen.Bounds;
+            int screenWidth = resolution.Width;
+            int screenHeight = resolution.Height;
+            AboutBox.Width = screenWidth / 2;
+            AboutBox.Height = screenHeight / 2;
+            AboutBox.StartPosition = FormStartPosition.CenterScreen;
+            AboutBox.Show();
+        }
     }
 }

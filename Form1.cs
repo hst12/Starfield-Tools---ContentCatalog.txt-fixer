@@ -67,6 +67,11 @@ namespace Starfield_Tools
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
+                if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Set recommended settings
+                {
+                    frmLoadOrder frmLO = new frmLoadOrder();
+                    frmLO.Show();
+                }
             }
 
             if (cmdLineRunSteam)
@@ -103,8 +108,6 @@ namespace Starfield_Tools
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
-            /*if (ForceClean)
-                CleanCatalog();*/
 
             DisplayCatalog();
             richTextBox2.Text = "";
@@ -349,7 +352,7 @@ namespace Starfield_Tools
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
-            Thread.Sleep(10000);
+            Thread.Sleep(2000);
             Application.Exit();
         }
 
@@ -357,21 +360,13 @@ namespace Starfield_Tools
         {
 
             StartStarfieldSteam();
-
         }
+
 
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            Form AboutBox = new frmAbout();
-            Rectangle resolution = Screen.PrimaryScreen.Bounds;
-            int screenWidth = resolution.Width;
-            int screenHeight = resolution.Height;
-            AboutBox.Width = screenWidth / 2;
-            AboutBox.Height = screenHeight / 2;
-            AboutBox.StartPosition = FormStartPosition.CenterScreen;
-
-            AboutBox.Show();
+            CC.ShowAbout();
         }
 
         private void btnExplore_Click(object sender, EventArgs e)
@@ -519,8 +514,8 @@ namespace Starfield_Tools
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                richTextBox2.Text = "Restore done\n";
-                toolStripStatusLabel1.Text = "Restore done";
+                richTextBox2.Text = "Restore complete\n";
+                toolStripStatusLabel1.Text = "Restore complete";
                 return true;
             }
             catch

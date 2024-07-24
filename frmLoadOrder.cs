@@ -1,8 +1,10 @@
 ﻿using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -19,6 +21,8 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+
+            menuStrip1.Font = Properties.Settings.Default.FontSize;
             this.Font = Properties.Settings.Default.FontSize;
             string StarfieldPath = CC.GetStarfieldPath();
             InitDataGrid();
@@ -37,6 +41,7 @@ namespace Starfield_Tools
                 return;
             }
 
+            dataGridView1.Rows.Clear();
 
             string jsonFilePath = CC.GetCatalog();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
@@ -92,7 +97,10 @@ namespace Starfield_Tools
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel1.Text = ex.Message;
+            }
 
             loText = CC.GetStarfieldPath() + @"\plugins.txt";
             if (!File.Exists(loText))
@@ -184,10 +192,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
 
                 toolStripStatusLabel1.Text = StatText;
-                foreach (var item in esmFiles)
+                /*foreach (var item in esmFiles)
                 {
                     Console.WriteLine(item); // Do something here to automatically add missing .esm files to Plugins.txt
-                }
+                }*/
             }
             catch
             {
@@ -200,14 +208,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             this.Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void SaveLO(string PluginFileName)
         {
-            string filePath = CC.GetStarfieldPath() + @"\Plugins.txt";
+
             bool ModEnabled;
             string ModLine;
 
             // Create or overwrite the file
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(PluginFileName))
             {
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
                 for (int y = 0; y < dataGridView1.Rows.Count; y++)
@@ -215,14 +223,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     ModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
                     ModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
                     if (ModEnabled)
-                    {
-                        writer.Write("*");
-                        writer.WriteLine(dataGridView1.Rows[y].Cells[1].Value);
-                    }
-                    else
-                        writer.WriteLine(ModLine);
+                        writer.Write("*"); // Write a * for enalbed mods then write the mod filename
+                    writer.WriteLine(ModLine);
                 }
             }
+            toolStripStatusLabel1.Text = "Plugins.txt saved";
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             this.Close();
         }
 
@@ -297,8 +307,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells[0];
         }
 
-
-        private void btnBackupPlugins_Click(object sender, EventArgs e)
+        private void BackupPlugins()
         {
             string sourceFileName = CC.GetStarfieldPath() + @"\Plugins.txt";
             string destFileName = sourceFileName + ".bak";
@@ -322,7 +331,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void btnRestorePlugins_Click(object sender, EventArgs e)
+        private void btnBackupPlugins_Click(object sender, EventArgs e)
+        {
+            BackupPlugins();
+        }
+
+        private void RestorePlugins()
         {
             string sourceFileName = CC.GetStarfieldPath() + @"\Plugins.txt.bak";
             string destFileName = CC.GetStarfieldPath() + @"\Plugins.txt";
@@ -331,7 +345,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
-                dataGridView1.Rows.Clear();
                 InitDataGrid();
 
                 toolStripStatusLabel1.ForeColor = DefaultForeColor;
@@ -342,6 +355,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 MessageBox.Show($"Error: {ex.Message}", "Restore failed");
             }
         }
+
 
         private void btnTop_Click(object sender, EventArgs e)
         {
@@ -395,7 +409,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             btnOK.Enabled = false;
         }
 
-        private void btnDisable_Click(object sender, EventArgs e)
+        private void DisableAll()
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -405,8 +419,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             isModified = true;
         }
 
-
-        private void btnEnableAll_Click(object sender, EventArgs e)
+        private void EnableAll()
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -416,18 +429,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             isModified = true;
         }
 
-        private void btnFont_Click(object sender, EventArgs e)
+        private void FontSelect()
         {
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 this.Font = fontDialog1.Font;
-
+                menuStrip1.Font = fontDialog1.Font;
             }
             this.CenterToScreen();
             Properties.Settings.Default.FontSize = this.Font;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void SearchMod()
         {
             int ModIndex;
             string DataGridSring, TextBoxString;
@@ -441,7 +454,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Console.WriteLine(DataGridSring);
                 if (DataGridSring.Contains(TextBoxString))
                 {
-                    toolStripStatusLabel1.Text = "Found "+ txtSearchBox.Text;
+                    toolStripStatusLabel1.Text = "Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells[1].Value.ToString();
                     dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells[1];
                     break;
                 }
@@ -450,11 +463,88 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void frmLoadOrder_KeyDown(object sender, KeyEventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CC.ShowAbout();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+        }
+
+        private void toolStripMenuBackup_Click(object sender, EventArgs e)
+        {
+            BackupPlugins();
+        }
+
+        private void toolStripMenuRestore_Click(object sender, EventArgs e)
+        {
+            RestorePlugins();
+        }
+
+        private void toolStripMenuEnableAll_Click(object sender, EventArgs e)
+        {
+            EnableAll();
+        }
+
+        private void toolStripMenuDisableAll_Click(object sender, EventArgs e)
+        {
+            DisableAll();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontSelect();
+        }
+
+        private void toolStripMenuCreations_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
+        }
+
+        private void toolStripMenuNexus_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.nexusmods.com/starfield");
+        }
+
+        private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+                SearchMod();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            SaveFileDialog SavePlugins = new SaveFileDialog();
+
+            SavePlugins.InitialDirectory = CC.GetStarfieldPath();
+            SavePlugins.Filter = "Txt File|*.txt";
+            SavePlugins.Title = "Save Profile";
+
+            DialogResult result = SavePlugins.ShowDialog();
+            if (DialogResult.OK == result)
             {
-                btnSearch.PerformClick();
+                SaveLO(SavePlugins.FileName);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenPlugins = new OpenFileDialog();
+
+            OpenPlugins.InitialDirectory = CC.GetStarfieldPath();
+            DialogResult result = OpenPlugins.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                File.Copy(OpenPlugins.FileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
+                InitDataGrid();
             }
         }
     }
