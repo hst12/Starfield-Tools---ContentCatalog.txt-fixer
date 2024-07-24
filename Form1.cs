@@ -352,7 +352,7 @@ namespace Starfield_Tools
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             Application.Exit();
         }
 
@@ -361,8 +361,6 @@ namespace Starfield_Tools
 
             StartStarfieldSteam();
         }
-
-
 
         private void btnAbout_Click(object sender, EventArgs e)
         {

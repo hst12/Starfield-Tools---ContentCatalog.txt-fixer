@@ -560,7 +560,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             OpenPlugins.Filter = "Txt File|*.txt";
             OpenPlugins.Title = "Load Profile";
 
-
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result)
             {
@@ -572,6 +571,31 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName.Substring(OpenPlugins.FileName.LastIndexOf('\\'));
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void toolStripMenuAdd_Click(object sender, EventArgs e)
+        {
+            string SteamData;
+
+            SteamData=Settings.Default.StarfieldPath +"\\Data";
+            OpenFileDialog GetMod =new OpenFileDialog();
+            GetMod.Filter = "esm File|*.esm";
+            GetMod.Title = "Select mod";
+            GetMod.InitialDirectory = SteamData;
+
+            DialogResult result=GetMod.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                toolStripStatusLabel1.Text = GetMod.FileName;
+                SteamData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
+                dataGridView1.Rows.Add(true, SteamData.Substring(1));
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount-1].Cells[1];
+            }
+        }
+
+        private void toolStripMenuDelete_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
         }
     }
 }
