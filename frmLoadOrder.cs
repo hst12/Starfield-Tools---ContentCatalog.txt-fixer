@@ -604,5 +604,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
 
         }
+
+        private void toolStripMenuStats_Click(object sender, EventArgs e)
+        {
+            InitDataGrid();
+        }
     }
 }
