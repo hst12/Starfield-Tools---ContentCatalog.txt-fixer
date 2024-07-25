@@ -597,5 +597,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
         }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+
+        }
     }
 }
