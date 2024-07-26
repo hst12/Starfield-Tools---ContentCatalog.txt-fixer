@@ -74,12 +74,12 @@ namespace Starfield_Tools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string StarfieldPath {
+        public string StarfieldGamePath {
             get {
-                return ((string)(this["StarfieldPath"]));
+                return ((string)(this["StarfieldGamePath"]));
             }
             set {
-                this["StarfieldPath"] = value;
+                this["StarfieldGamePath"] = value;
             }
         }
         

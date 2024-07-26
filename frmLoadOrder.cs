@@ -19,17 +19,17 @@ namespace Starfield_Tools
     {
         ContentCatalog CC = new ContentCatalog();
 
+
         bool isModified = false;
 
         public frmLoadOrder()
         {
             InitializeComponent();
-
+            CC.StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             menuStrip1.Font = Properties.Settings.Default.FontSize;
             this.Font = Properties.Settings.Default.FontSize;
             string StarfieldPath = CC.GetStarfieldPath();
             InitDataGrid();
-
         }
 
         private void InitDataGrid()
@@ -172,7 +172,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             try
             {
-                string directory = Properties.Settings.Default.StarfieldPath + @"\Data";
+                string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
                 foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
                     esmCount++;
@@ -580,7 +580,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string SteamData;
 
-            SteamData = Settings.Default.StarfieldPath + "\\Data";
+            SteamData = Settings.Default.StarfieldGamePath + "\\Data";
             OpenFileDialog GetMod = new OpenFileDialog();
             GetMod.Filter = "esm File|*.esm";
             GetMod.Title = "Select mod";
@@ -619,12 +619,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             List<string> esmFiles = new List<string>();
             List<string> PluginFiles = new List<string>();
             List<string> BethFiles = new List<string>
-            
+
             {
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
 
-            string directory = Properties.Settings.Default.StarfieldPath + @"\Data";
+            string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 //esmCount++;
@@ -645,7 +645,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     dataGridView1.Rows.Add(true, FilesToAdd[i]);
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
-                toolStripStatusLabel1.Text = AddedFiles.ToString()+ " file(s) added";
+                toolStripStatusLabel1.Text = AddedFiles.ToString() + " file(s) added";
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to add";
@@ -653,7 +653,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuSetPath_Click(object sender, EventArgs e)
         {
-            CC.SetStarfieldPath();
+            CC.SetStarfieldGamePath();
         }
     }
 }

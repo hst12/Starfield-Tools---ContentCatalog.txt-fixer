@@ -10,6 +10,7 @@ namespace Starfield_Tools
     internal class ContentCatalog
     {
         public string StarFieldPath { get; set; }
+        public string StarfieldGamePath { get; set; }
 
         public string GetStarfieldPath()
         {
@@ -50,16 +51,16 @@ namespace Starfield_Tools
             AboutBox.Show();
         }
 
-        public void SetStarfieldPath()
+        public void SetStarfieldGamePath()
         {
             using (var folderBrowserDialog = new FolderBrowserDialog())
             {
-                folderBrowserDialog.SelectedPath = StarFieldPath;
+                folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                    StarFieldPath = selectedFolderPath;
-                    Properties.Settings.Default.StarfieldPath = selectedFolderPath;
+                    StarfieldGamePath = selectedFolderPath;
+                    Properties.Settings.Default.StarfieldGamePath = selectedFolderPath;
                     Settings.Default.Save();
                 }
             }

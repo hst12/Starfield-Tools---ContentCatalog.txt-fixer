@@ -29,7 +29,7 @@ namespace Starfield_Tools
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
-            CC.StarFieldPath = Properties.Settings.Default.StarfieldPath;
+            CC.StarFieldPath = Properties.Settings.Default.StarfieldGamePath;
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
 
@@ -307,7 +307,7 @@ namespace Starfield_Tools
             Properties.Settings.Default.AutoClean = AutoClean;
             Properties.Settings.Default.AutoBackup = AutoBackup;
             Properties.Settings.Default.AutoRestore = AutoRestore;
-            Properties.Settings.Default.StarfieldPath = CC.StarFieldPath;
+            Properties.Settings.Default.StarfieldGamePath = CC.StarfieldGamePath;
             Properties.Settings.Default.ForceClean = ForceClean;
             Properties.Settings.Default.Save();
         }
@@ -445,7 +445,7 @@ namespace Starfield_Tools
 
         private void cmdStarFieldPath_Click(object sender, EventArgs e)
         {
-            CC.SetStarfieldPath();
+            CC.SetStarfieldGamePath();
         }
 
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
