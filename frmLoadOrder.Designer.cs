@@ -75,12 +75,14 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuSetPath = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuEnableAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuDisableAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuScanMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuStats = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuLinks = new System.Windows.Forms.ToolStripMenuItem();
@@ -541,7 +543,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.toolStripMenuSetPath});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -549,9 +552,16 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(289, 44);
             this.optionsToolStripMenuItem.Text = "Font";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuSetPath
+            // 
+            this.toolStripMenuSetPath.Name = "toolStripMenuSetPath";
+            this.toolStripMenuSetPath.Size = new System.Drawing.Size(289, 44);
+            this.toolStripMenuSetPath.Text = "Starfield path";
+            this.toolStripMenuSetPath.Click += new System.EventHandler(this.toolStripMenuSetPath_Click);
             // 
             // toolStripMenuMods
             // 
@@ -561,6 +571,7 @@
             this.toolStripSeparator6,
             this.toolStripMenuAdd,
             this.toolStripMenuDelete,
+            this.toolStripMenuScanMods,
             this.toolStripSeparator7,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
@@ -600,6 +611,13 @@
             this.toolStripMenuDelete.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuDelete.Text = "Delete Mod";
             this.toolStripMenuDelete.Click += new System.EventHandler(this.toolStripMenuDelete_Click);
+            // 
+            // toolStripMenuScanMods
+            // 
+            this.toolStripMenuScanMods.Name = "toolStripMenuScanMods";
+            this.toolStripMenuScanMods.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuScanMods.Text = "Scan for Mods";
+            this.toolStripMenuScanMods.Click += new System.EventHandler(this.toolStripMenuScanMods_Click);
             // 
             // toolStripSeparator7
             // 
@@ -741,5 +759,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuStats;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuScanMods;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuSetPath;
     }
 }

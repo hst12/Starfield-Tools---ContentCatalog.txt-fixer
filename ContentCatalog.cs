@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Starfield_Tools.Properties;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -47,6 +48,21 @@ namespace Starfield_Tools
             AboutBox.Height = screenHeight / 2;
             AboutBox.StartPosition = FormStartPosition.CenterScreen;
             AboutBox.Show();
+        }
+
+        public void SetStarfieldPath()
+        {
+            using (var folderBrowserDialog = new FolderBrowserDialog())
+            {
+                folderBrowserDialog.SelectedPath = StarFieldPath;
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                    StarFieldPath = selectedFolderPath;
+                    Properties.Settings.Default.StarfieldPath = selectedFolderPath;
+                    Settings.Default.Save();
+                }
+            }
         }
     }
 }

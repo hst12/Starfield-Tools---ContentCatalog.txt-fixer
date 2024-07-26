@@ -39,7 +39,6 @@ namespace Starfield_Tools
 
             foreach (var arg in Environment.GetCommandLineArgs())
             {
-                //Console.WriteLine(arg);
                 if (String.Equals(arg, "-runSteam", StringComparison.OrdinalIgnoreCase))
                     cmdLineRunSteam = true;
                 if (String.Equals(arg, "-runMS", StringComparison.OrdinalIgnoreCase))
@@ -161,7 +160,10 @@ namespace Starfield_Tools
             {
                 richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
             }
-            catch { }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Catalog not found";
+            }
         }
 
 
@@ -443,16 +445,7 @@ namespace Starfield_Tools
 
         private void cmdStarFieldPath_Click(object sender, EventArgs e)
         {
-            using (var folderBrowserDialog = new FolderBrowserDialog())
-            {
-                folderBrowserDialog.SelectedPath = CC.StarFieldPath;
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                    CC.StarFieldPath = selectedFolderPath;
-                    Properties.Settings.Default.StarfieldPath = selectedFolderPath;
-                }
-            }
+            CC.SetStarfieldPath();
         }
 
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
@@ -585,7 +578,7 @@ namespace Starfield_Tools
             string jsonFilePath = CC.GetCatalog();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
             List<string> CreationsPlugin = new List<string>(); // filename of .esm
-            List<string> CreationsTitle = new List<string>(); // Display title for .ems
+            List<string> CreationsTitle = new List<string>(); // Display title for .esm
             List<string> CreationsGUID = new List<string>(); // Creations GUID
             List<string> CreationsVersion = new List<string>(); // Version
             int RemovalCount = 0;
@@ -593,8 +586,6 @@ namespace Starfield_Tools
             bool unusedMods = false;
             richTextBox2.Text = "";
 
-            /*try
-            {*/
             string filePath = GetStarfieldPath() + "\\Plugins.txt";
             string fileContent = File.ReadAllText(filePath);
             // Split the content into lines if necessary
@@ -615,11 +606,6 @@ namespace Starfield_Tools
             {
                 esmFiles[i] = esmFiles[i].Trim();
             }
-            /*}
-            catch
-            {
-                toolStripStatusLabel1.Text = "Error loading plugins file";
-            }*/
 
             Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             try

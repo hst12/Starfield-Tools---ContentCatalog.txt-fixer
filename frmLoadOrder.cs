@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 
 namespace Starfield_Tools
@@ -44,7 +47,7 @@ namespace Starfield_Tools
             dataGridView1.Rows.Clear();
 
             string jsonFilePath = CC.GetCatalog();
-            string json = File.ReadAllText(jsonFilePath); // Read catalog
+            string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
 
 
             List<string> CreationsPlugin = new List<string>();
@@ -577,19 +580,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string SteamData;
 
-            SteamData=Settings.Default.StarfieldPath +"\\Data";
-            OpenFileDialog GetMod =new OpenFileDialog();
+            SteamData = Settings.Default.StarfieldPath + "\\Data";
+            OpenFileDialog GetMod = new OpenFileDialog();
             GetMod.Filter = "esm File|*.esm";
             GetMod.Title = "Select mod";
             GetMod.InitialDirectory = SteamData;
 
-            DialogResult result=GetMod.ShowDialog();
+            DialogResult result = GetMod.ShowDialog();
             if (DialogResult.OK == result)
             {
                 toolStripStatusLabel1.Text = GetMod.FileName;
                 SteamData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
                 dataGridView1.Rows.Add(true, SteamData.Substring(1));
-                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount-1].Cells[1];
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
             }
         }
 
@@ -608,6 +611,49 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuStats_Click(object sender, EventArgs e)
         {
             InitDataGrid();
+        }
+
+        private void toolStripMenuScanMods_Click(object sender, EventArgs e)
+        {
+            int AddedFiles = 0;
+            List<string> esmFiles = new List<string>();
+            List<string> PluginFiles = new List<string>();
+            List<string> BethFiles = new List<string>
+            
+            {
+                "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
+            };
+
+            string directory = Properties.Settings.Default.StarfieldPath + @"\Data";
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            {
+                //esmCount++;
+                esmFiles.Add(missingFile.Substring(missingFile.LastIndexOf('\\') + 1));
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
+            List<string> MissingFiles = esmFiles.Except(PluginFiles).ToList();
+            /*for (int i = 0; i < MissingFiles.Count; i++)
+                Console.WriteLine(MissingFiles[i]);*/
+
+            List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();
+            if (FilesToAdd.Count > 0)
+            {
+                for (int i = 0; i < FilesToAdd.Count; i++)
+                {
+                    AddedFiles++;
+                    dataGridView1.Rows.Add(true, FilesToAdd[i]);
+                }
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
+                toolStripStatusLabel1.Text = AddedFiles.ToString()+ " file(s) added";
+            }
+            else
+                toolStripStatusLabel1.Text = "Nothing to add";
+        }
+
+        private void toolStripMenuSetPath_Click(object sender, EventArgs e)
+        {
+            CC.SetStarfieldPath();
         }
     }
 }
