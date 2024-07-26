@@ -15,20 +15,21 @@ using File = System.IO.File;
 
 namespace Starfield_Tools
 {
+    
+
     public partial class frmLoadOrder : Form
     {
         ContentCatalog CC = new ContentCatalog();
-
+        public string StarfieldGamePath;
 
         bool isModified = false;
 
         public frmLoadOrder()
         {
             InitializeComponent();
-            CC.StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             menuStrip1.Font = Properties.Settings.Default.FontSize;
             this.Font = Properties.Settings.Default.FontSize;
-            string StarfieldPath = CC.GetStarfieldPath();
+            StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             InitDataGrid();
         }
 
@@ -624,7 +625,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
 
-            string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
+            string directory = Properties.Settings.Default.StarfieldGamePath;
+            if (directory == "" || directory == null)
+                directory=CC.SetStarfieldGamePath();
+            directory = directory + @"\Data";
+            if (directory=="\\Data")
+            {
+                MessageBox.Show("Can't continue without game installation path");
+                return;
+            }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 //esmCount++;
@@ -653,7 +662,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuSetPath_Click(object sender, EventArgs e)
         {
-            CC.SetStarfieldGamePath();
+            StarfieldGamePath= CC.SetStarfieldGamePath();
         }
     }
 }

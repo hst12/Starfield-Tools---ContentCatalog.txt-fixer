@@ -552,14 +552,14 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(289, 44);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.optionsToolStripMenuItem.Text = "Font";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripMenuSetPath
             // 
             this.toolStripMenuSetPath.Name = "toolStripMenuSetPath";
-            this.toolStripMenuSetPath.Size = new System.Drawing.Size(289, 44);
+            this.toolStripMenuSetPath.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuSetPath.Text = "Starfield path";
             this.toolStripMenuSetPath.Click += new System.EventHandler(this.toolStripMenuSetPath_Click);
             // 
@@ -581,26 +581,26 @@
             // toolStripMenuEnableAll
             // 
             this.toolStripMenuEnableAll.Name = "toolStripMenuEnableAll";
-            this.toolStripMenuEnableAll.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuEnableAll.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuEnableAll.Text = "Enable All";
             this.toolStripMenuEnableAll.Click += new System.EventHandler(this.toolStripMenuEnableAll_Click);
             // 
             // toolStripMenuDisableAll
             // 
             this.toolStripMenuDisableAll.Name = "toolStripMenuDisableAll";
-            this.toolStripMenuDisableAll.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuDisableAll.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuDisableAll.Text = "Disable All";
             this.toolStripMenuDisableAll.Click += new System.EventHandler(this.toolStripMenuDisableAll_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(356, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(321, 6);
             // 
             // toolStripMenuAdd
             // 
             this.toolStripMenuAdd.Name = "toolStripMenuAdd";
-            this.toolStripMenuAdd.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuAdd.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuAdd.Text = "Add Mod";
             this.toolStripMenuAdd.Click += new System.EventHandler(this.toolStripMenuAdd_Click);
             // 
@@ -608,26 +608,26 @@
             // 
             this.toolStripMenuDelete.Name = "toolStripMenuDelete";
             this.toolStripMenuDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.toolStripMenuDelete.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuDelete.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuDelete.Text = "Delete Mod";
             this.toolStripMenuDelete.Click += new System.EventHandler(this.toolStripMenuDelete_Click);
             // 
             // toolStripMenuScanMods
             // 
             this.toolStripMenuScanMods.Name = "toolStripMenuScanMods";
-            this.toolStripMenuScanMods.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuScanMods.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuScanMods.Text = "Scan for Mods";
             this.toolStripMenuScanMods.Click += new System.EventHandler(this.toolStripMenuScanMods_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(356, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(321, 6);
             // 
             // toolStripMenuStats
             // 
             this.toolStripMenuStats.Name = "toolStripMenuStats";
-            this.toolStripMenuStats.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuStats.Size = new System.Drawing.Size(324, 44);
             this.toolStripMenuStats.Text = "Show Stats";
             this.toolStripMenuStats.Click += new System.EventHandler(this.toolStripMenuStats_Click);
             // 

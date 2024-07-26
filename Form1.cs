@@ -19,6 +19,7 @@ namespace Starfield_Tools
         private bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
 
         ContentCatalog CC = new ContentCatalog();
+        public string StarfieldGamePath;
 
         public frmStarfieldTools()
         {
@@ -29,7 +30,8 @@ namespace Starfield_Tools
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
-            CC.StarFieldPath = Properties.Settings.Default.StarfieldGamePath;
+            StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
 
@@ -307,7 +309,8 @@ namespace Starfield_Tools
             Properties.Settings.Default.AutoClean = AutoClean;
             Properties.Settings.Default.AutoBackup = AutoBackup;
             Properties.Settings.Default.AutoRestore = AutoRestore;
-            Properties.Settings.Default.StarfieldGamePath = CC.StarfieldGamePath;
+            if (StarfieldGamePath != "")
+                Properties.Settings.Default.StarfieldGamePath = StarfieldGamePath;
             Properties.Settings.Default.ForceClean = ForceClean;
             Properties.Settings.Default.Save();
         }
@@ -345,7 +348,7 @@ namespace Starfield_Tools
 
             SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
-            
+
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
 

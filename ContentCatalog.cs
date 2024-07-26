@@ -51,18 +51,21 @@ namespace Starfield_Tools
             AboutBox.Show();
         }
 
-        public void SetStarfieldGamePath()
+        public string SetStarfieldGamePath()
         {
             using (var folderBrowserDialog = new FolderBrowserDialog())
             {
                 folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
+                folderBrowserDialog.Description = "Choose path to the game installation folder";
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFolderPath = folderBrowserDialog.SelectedPath;
                     StarfieldGamePath = selectedFolderPath;
                     Properties.Settings.Default.StarfieldGamePath = selectedFolderPath;
                     Settings.Default.Save();
+                    return selectedFolderPath;
                 }
+                return ("");
             }
         }
     }
