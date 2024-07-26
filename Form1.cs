@@ -345,21 +345,19 @@ namespace Starfield_Tools
 
             SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
-            ShowSplashScreen();
-
+            
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
 
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
-            // Launch Starfield and wait for exit
             var process = Process.Start(processInfo);
+            ShowSplashScreen();
             Thread.Sleep(4000);
             Application.Exit();
         }
 
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-
             StartStarfieldSteam();
         }
 
@@ -455,15 +453,15 @@ namespace Starfield_Tools
 
         private void StartStarfieldMS()
         {
-            ShowSplashScreen();
-            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
-            string altCmdLine = "cmd.exe /C start " + cmdLine;
             SaveSettings();
+
+            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
 
             try
             {
                 Process.Start(cmdLine);
-                Thread.Sleep(5000);
+                ShowSplashScreen();
+                Thread.Sleep(2000);
                 Application.Exit();
             }
             catch (Exception ex)
