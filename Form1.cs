@@ -38,6 +38,7 @@ namespace Starfield_Tools
             //bool cmdLineAuto = false;
             bool cmdLineRunSteam = false;
             bool cmdLineRunMS = false;
+            richTextBox2.Text = "";
 
             foreach (var arg in Environment.GetCommandLineArgs())
             {
@@ -74,23 +75,25 @@ namespace Starfield_Tools
                 }
             }
 
-
-            richTextBox2.Text = "";
-
             if (AutoCheck) // Check catalog status if enabled
             {
                 if (!CheckCatalog()) // If not okay, then...
                 {
                     if (AutoRestore) // Restore backup file if auto restore is on
-                        RestoreCatalog();
+                    {
+                        if (RestoreCatalog())
+                            toolStripStatusLabel1.Text = "Catalog corrupt, backup restored";
+                    }
                     else
                     if (AutoClean)
                         CleanCatalog();
                 }
                 else
-                    toolStripStatusLabel1.Text = "Checks complete";
+                    toolStripStatusLabel1.Text = "Catalog Ok";
             }
             else toolStripStatusLabel1.Text = "Ready";
+            richTextBox2.SelectionStart = richTextBox2.Text.Length;
+            richTextBox2.ScrollToCaret();
 
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
@@ -98,7 +101,9 @@ namespace Starfield_Tools
 
             DisplayCatalog();
 
-            richTextBox2.Text = "";
+
+
+            // Command line params
             if (cmdLineRunSteam)
             {
                 SaveSettings();
@@ -118,7 +123,6 @@ namespace Starfield_Tools
                 else
                     Environment.Exit(1);
             }
-
         }
 
         private void ShowSplashScreen()
@@ -183,10 +187,9 @@ namespace Starfield_Tools
             richTextBox1.Text = "";
             bool ErrorFound = false;
             int ErrorCount = 0;
-            richTextBox2.Text += "Checking Catalog\n";
+            richTextBox2.Text = "Checking Catalog...\n";
             double VersionCheck;
             long TimeStamp;
-            richTextBox2.Text = "";
 
             try
             {
@@ -199,7 +202,6 @@ namespace Starfield_Tools
                 }
                 string json = File.ReadAllText(jsonFilePath);
                 string TestString = "";
-                richTextBox2.Text = "";
 
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -232,7 +234,7 @@ namespace Starfield_Tools
                 if (!ErrorFound)
                 {
                     toolStripStatusLabel1.Text = "Catalog ok";
-                    richTextBox2.Text += "Catalog ok\n";
+                    richTextBox2.Text += "\nCatalog ok\n";
                     return true;
                 }
                 else
