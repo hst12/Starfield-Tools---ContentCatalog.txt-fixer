@@ -664,5 +664,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             StarfieldGamePath= CC.SetStarfieldGamePath();
         }
+
+        private void toolStripMenuCleanup_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
