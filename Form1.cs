@@ -74,19 +74,6 @@ namespace Starfield_Tools
                 }
             }
 
-            if (cmdLineRunSteam)
-            {
-                SaveSettings();
-                StartStarfieldSteam();
-                Application.Exit();
-            }
-
-            if (cmdLineRunMS)
-            {
-                SaveSettings();
-                StartStarfieldMS();
-                Application.Exit();
-            }
 
             richTextBox2.Text = "";
 
@@ -110,7 +97,28 @@ namespace Starfield_Tools
                     BackupCatalog();
 
             DisplayCatalog();
+
             richTextBox2.Text = "";
+            if (cmdLineRunSteam)
+            {
+                SaveSettings();
+                StartStarfieldSteam();
+                if (Application.MessageLoop)
+                    Application.Exit();
+                else
+                    Environment.Exit(1);
+            }
+
+            if (cmdLineRunMS)
+            {
+                SaveSettings();
+                StartStarfieldMS();
+                if (Application.MessageLoop)
+                    Application.Exit();
+                else
+                    Environment.Exit(1);
+            }
+
         }
 
         private void ShowSplashScreen()
