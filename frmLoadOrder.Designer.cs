@@ -93,6 +93,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuAutoClean = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -116,14 +118,14 @@
             this.AS,
             this.TimeStamp});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 46);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1596, 812);
+            this.dataGridView1.Size = new System.Drawing.Size(1596, 814);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
@@ -347,7 +349,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1604, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1604, 40);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -572,12 +574,14 @@
             this.toolStripSeparator6,
             this.toolStripMenuAdd,
             this.toolStripMenuDelete,
+            this.toolStripSeparator8,
+            this.toolStripMenuAutoClean,
             this.toolStripMenuScanMods,
             this.toolStripMenuCleanup,
             this.toolStripSeparator7,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
-            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
+            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
             this.toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -617,7 +621,7 @@
             // toolStripMenuScanMods
             // 
             this.toolStripMenuScanMods.Name = "toolStripMenuScanMods";
-            this.toolStripMenuScanMods.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuScanMods.Size = new System.Drawing.Size(419, 44);
             this.toolStripMenuScanMods.Text = "Add Missing";
             this.toolStripMenuScanMods.Click += new System.EventHandler(this.toolStripMenuScanMods_Click);
             // 
@@ -677,6 +681,18 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(227, 44);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(356, 6);
+            // 
+            // toolStripMenuAutoClean
+            // 
+            this.toolStripMenuAutoClean.Name = "toolStripMenuAutoClean";
+            this.toolStripMenuAutoClean.Size = new System.Drawing.Size(419, 44);
+            this.toolStripMenuAutoClean.Text = "Add and Remove Missing";
+            this.toolStripMenuAutoClean.Click += new System.EventHandler(this.toolStripMenuAutoClean_Click);
             // 
             // frmLoadOrder
             // 
@@ -771,5 +787,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuScanMods;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuSetPath;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCleanup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoClean;
     }
 }

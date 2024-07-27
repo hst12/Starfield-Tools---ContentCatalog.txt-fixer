@@ -15,7 +15,7 @@ using File = System.IO.File;
 
 namespace Starfield_Tools
 {
-    
+
 
     public partial class frmLoadOrder : Form
     {
@@ -616,6 +616,21 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuScanMods_Click(object sender, EventArgs e)
         {
+            AddMissing();
+        }
+
+        private void toolStripMenuSetPath_Click(object sender, EventArgs e)
+        {
+            StarfieldGamePath = CC.SetStarfieldGamePath();
+        }
+
+        private void toolStripMenuCleanup_Click(object sender, EventArgs e)
+        {
+            RemoveMissing();
+        }
+
+        private int AddMissing()
+        {
             int AddedFiles = 0;
             List<string> esmFiles = new List<string>();
             List<string> PluginFiles = new List<string>();
@@ -627,12 +642,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
-                directory=CC.SetStarfieldGamePath();
+                directory = CC.SetStarfieldGamePath();
             directory = directory + @"\Data";
-            if (directory=="\\Data")
+            if (directory == "\\Data")
             {
                 MessageBox.Show("Can't continue without game installation path");
-                return;
+                return 0;
             }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
@@ -656,14 +671,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to add";
+            return AddedFiles;
         }
 
-        private void toolStripMenuSetPath_Click(object sender, EventArgs e)
-        {
-            StarfieldGamePath= CC.SetStarfieldGamePath();
-        }
 
-        private void toolStripMenuCleanup_Click(object sender, EventArgs e)
+        private int RemoveMissing()
         {
             int RemovedFiles = 0;
             List<string> esmFiles = new List<string>();
@@ -681,7 +693,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (directory == "\\Data")
             {
                 MessageBox.Show("Can't continue without game installation path");
-                return;
+                return 0;
             }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
@@ -697,7 +709,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (int i = 0; i < FilesToRemove.Count; i++)
                 {
                     RemovedFiles++;
-                    
+
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
                     {
                         if ((string)dataGridView1.Rows[j].Cells[1].Value == FilesToRemove[i])
@@ -705,7 +717,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                             Console.WriteLine(FilesToRemove[i]);
                             dataGridView1.Rows.RemoveAt(j);
                         }
-                            
+
                     }
                 }
                 //dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
@@ -713,6 +725,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to remove";
+            return RemovedFiles;
+        }
+
+        private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
+        {
+            int addedMods=0,removedMods=0;
+            addedMods=AddMissing();
+            removedMods=RemoveMissing();
+            toolStripStatusLabel1.Text = addedMods.ToString()+" Mods added, "+removedMods.ToString()+" Mods removed - Save changes if necessary";
         }
     }
 }
