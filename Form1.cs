@@ -92,16 +92,13 @@ namespace Starfield_Tools
                     toolStripStatusLabel1.Text = "Catalog Ok";
             }
             else toolStripStatusLabel1.Text = "Ready";
-            richTextBox2.SelectionStart = richTextBox2.Text.Length;
-            richTextBox2.ScrollToCaret();
+            ScrollToEnd();
 
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
 
             DisplayCatalog();
-
-
 
             // Command line params
             if (cmdLineRunSteam)
@@ -123,6 +120,12 @@ namespace Starfield_Tools
                 else
                     Environment.Exit(1);
             }
+        }
+
+        private void ScrollToEnd()
+        {
+            richTextBox2.SelectionStart = richTextBox2.Text.Length;
+            richTextBox2.ScrollToCaret();
         }
 
         private void ShowSplashScreen()
@@ -306,6 +309,7 @@ namespace Starfield_Tools
             else
             {
                 richTextBox2.Text += "Cleaning not needed\n";
+                ScrollToEnd();
                 toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
                 DisplayCatalog();
             }
@@ -347,6 +351,7 @@ namespace Starfield_Tools
         private void btnCheck_Click(object sender, EventArgs e)
         {
             CheckCatalog();
+            ScrollToEnd();
             DisplayCatalog();
         }
 
@@ -496,6 +501,7 @@ namespace Starfield_Tools
         private void btnBackup_Click(object sender, EventArgs e)
         {
             BackupCatalog();
+            ScrollToEnd();
             DisplayCatalog();
         }
 
@@ -595,7 +601,7 @@ namespace Starfield_Tools
             int RemovalCount = 0;
             int index;
             bool unusedMods = false;
-            richTextBox2.Text = "";
+            richTextBox2.Text = "Checking for unused items in catalog...\n";
 
             string filePath = GetStarfieldPath() + "\\Plugins.txt";
             string fileContent = File.ReadAllText(filePath);
@@ -635,7 +641,7 @@ namespace Starfield_Tools
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
                                 CreationsTitle.Add(kvp.Value.Title);
-                                richTextBox2.Text += "Scanning: " + kvp.Value.Title + "\n";
+                                richTextBox2.Text +=  kvp.Value.Title + "\n";
                             }
                         }
 
@@ -683,7 +689,11 @@ namespace Starfield_Tools
                     File.WriteAllText(CC.GetCatalog(), json);
                 }
                 else
+                {
+                    ScrollToEnd();
+                    richTextBox2.Text += "\nNo unused mods found in catalog";
                     toolStripStatusLabel1.Text = "No unused mods found in catalog";
+                }
             }
             catch (Exception ex)
             {
