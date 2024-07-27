@@ -720,8 +720,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                     }
                 }
-                //dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
-                toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removedd";
+                toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removed";
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to remove";
