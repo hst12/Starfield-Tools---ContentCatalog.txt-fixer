@@ -150,7 +150,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         VersionCheck = double.Parse((ModVersion.Substring(0, ModVersion.IndexOf('.'))));
-                                        ModVersion = CC.ConvertTime(VersionCheck).ToString() + " " + ModVersion.Substring(ModVersion.IndexOf('.') + 1) + "\n";
+                                        ModVersion = CC.ConvertTime(VersionCheck).ToString() + ", v" + ModVersion.Substring(ModVersion.IndexOf('.') + 1) + "\n";
 
                                         ModFiles = CreationsFiles[i];
                                         if (AchievmentSafe[i])
