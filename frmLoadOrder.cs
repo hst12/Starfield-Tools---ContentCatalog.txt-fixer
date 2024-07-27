@@ -636,14 +636,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
-                //esmCount++;
                 esmFiles.Add(missingFile.Substring(missingFile.LastIndexOf('\\') + 1));
             }
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
             List<string> MissingFiles = esmFiles.Except(PluginFiles).ToList();
-            /*for (int i = 0; i < MissingFiles.Count; i++)
-                Console.WriteLine(MissingFiles[i]);*/
+
 
             List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();
             if (FilesToAdd.Count > 0)
@@ -667,7 +665,54 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuCleanup_Click(object sender, EventArgs e)
         {
+            int RemovedFiles = 0;
+            List<string> esmFiles = new List<string>();
+            List<string> PluginFiles = new List<string>();
 
+            List<string> BethFiles = new List<string>
+            {
+                "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
+            };
+
+            string directory = Properties.Settings.Default.StarfieldGamePath;
+            if (directory == "" || directory == null)
+                directory = CC.SetStarfieldGamePath();
+            directory = directory + @"\Data";
+            if (directory == "\\Data")
+            {
+                MessageBox.Show("Can't continue without game installation path");
+                return;
+            }
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            {
+                esmFiles.Add(missingFile.Substring(missingFile.LastIndexOf('\\') + 1));
+            }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
+            List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
+
+            List<string> FilesToRemove = MissingFiles.Except(BethFiles).ToList();
+            if (FilesToRemove.Count > 0)
+            {
+                for (int i = 0; i < FilesToRemove.Count; i++)
+                {
+                    RemovedFiles++;
+                    
+                    for (int j = 0; j < dataGridView1.Rows.Count; j++)
+                    {
+                        if ((string)dataGridView1.Rows[j].Cells[1].Value == FilesToRemove[i])
+                        {
+                            Console.WriteLine(FilesToRemove[i]);
+                            dataGridView1.Rows.RemoveAt(j);
+                        }
+                            
+                    }
+                }
+                //dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
+                toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removedd";
+            }
+            else
+                toolStripStatusLabel1.Text = "Nothing to remove";
         }
     }
 }
