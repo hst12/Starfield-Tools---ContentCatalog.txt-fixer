@@ -44,6 +44,7 @@ Edit buttons are for opening ContentCatalog.txt or Plugins.txt files for editing
 Explore button opens the folder with your plugin and catalog files. You could manually edit the Plugins.txt file to enable or disable mods if needed. A * character indicates that a mod is enabled.
 
 Load Order button shows a list of mods and allows them to be turned on or off or moved up or down in the load order. Some stats about your mods will be shown if you've used the Set Starfield Path button on the main screen.
+There is a somewhat experimental mod profile switching feature in the load order editor. Backup your Plugins.txt file before trying it.
 
 You can alt-tab from the game to check the ContentCatalog file to see if corruption has occurred by pressing the Check button.
 
