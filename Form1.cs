@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +17,7 @@ namespace Starfield_Tools
     public partial class frmStarfieldTools : Form
     {
 
-        private bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
+        public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
 
         ContentCatalog CC = new ContentCatalog();
         public string StarfieldGamePath;
@@ -89,7 +90,7 @@ namespace Starfield_Tools
                         CleanCatalog();
                 }
                 else
-                    toolStripStatusLabel1.Text = "Catalog Ok";
+                    toolStripStatusLabel1.Text = "Catalog ok";
             }
             else toolStripStatusLabel1.Text = "Ready";
             ScrollToEnd();
@@ -104,7 +105,7 @@ namespace Starfield_Tools
             if (cmdLineRunSteam)
             {
                 SaveSettings();
-                StartStarfieldSteam();
+                CC.StartStarfieldSteam();
                 if (Application.MessageLoop)
                     Application.Exit();
                 else
@@ -114,7 +115,7 @@ namespace Starfield_Tools
             if (cmdLineRunMS)
             {
                 SaveSettings();
-                StartStarfieldMS();
+                CC.StartStarfieldMS();
                 if (Application.MessageLoop)
                     Application.Exit();
                 else
@@ -126,19 +127,6 @@ namespace Starfield_Tools
         {
             richTextBox2.SelectionStart = richTextBox2.Text.Length;
             richTextBox2.ScrollToCaret();
-        }
-
-        private void ShowSplashScreen()
-        {
-            Form SS = new frmSplashScreen();
-
-            Rectangle resolution = Screen.PrimaryScreen.Bounds;
-            int screenWidth = resolution.Width;
-            int screenHeight = resolution.Height;
-            SS.Width = screenWidth / 2;
-            SS.Height = screenHeight / 2;
-            SS.StartPosition = FormStartPosition.CenterScreen;
-            SS.Show();
         }
 
         private void SetAutoCheckBoxes()
@@ -310,23 +298,9 @@ namespace Starfield_Tools
             {
                 richTextBox2.Text += "Cleaning not needed\n";
                 ScrollToEnd();
-                toolStripStatusLabel1.Text = "Catalog is OK. Cleaning not needed.";
+                toolStripStatusLabel1.Text = "Catalog ok. Cleaning not needed.";
                 DisplayCatalog();
             }
-        }
-
-        private void SaveSettings()
-        {
-            // Save settings
-
-            Properties.Settings.Default.AutoCheck = AutoCheck;
-            Properties.Settings.Default.AutoClean = AutoClean;
-            Properties.Settings.Default.AutoBackup = AutoBackup;
-            Properties.Settings.Default.AutoRestore = AutoRestore;
-            if (StarfieldGamePath != "")
-                Properties.Settings.Default.StarfieldGamePath = StarfieldGamePath;
-            Properties.Settings.Default.ForceClean = ForceClean;
-            Properties.Settings.Default.Save();
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -355,28 +329,11 @@ namespace Starfield_Tools
             DisplayCatalog();
         }
 
-        private void StartStarfieldSteam()
-        {
-            const string userRoot = "HKEY_CURRENT_USER";
-            const string subkey = @"Software\Valve\Steam";
-            const string keyName = userRoot + "\\" + subkey;
-
-            SaveSettings();
-            toolStripStatusLabel1.Text = "Starfield launching";
-
-            // Get Steam path from Registry
-            string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
-
-            var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
-            var process = Process.Start(processInfo);
-            ShowSplashScreen();
-            Thread.Sleep(4000);
-            Application.Exit();
-        }
-
         private void btnStarfield_Click(object sender, EventArgs e)
         {
-            StartStarfieldSteam();
+            SaveSettings();
+            toolStripStatusLabel1.Text = "Starfield launching";
+            CC.StartStarfieldSteam();
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
@@ -469,28 +426,12 @@ namespace Starfield_Tools
             ForceClean = chkForceClean.Checked;
         }
 
-        private void StartStarfieldMS()
-        {
-            SaveSettings();
 
-            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
-
-            try
-            {
-                Process.Start(cmdLine);
-                ShowSplashScreen();
-                Thread.Sleep(2000);
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
-            }
-        }
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
-            StartStarfieldMS();
+            SaveSettings();
+            CC.StartStarfieldMS();
         }
 
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
@@ -567,7 +508,7 @@ namespace Starfield_Tools
   },
 " + json.Substring(1); // to strip out a brace char
 
-            File.WriteAllText(CC.GetCatalog(), json);
+            File.WriteAllText(CC.GetCatalog(), json); // Write updated cataalog
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Version numbers reset";
             richTextBox2.Text = "";
@@ -575,7 +516,7 @@ namespace Starfield_Tools
 
         private void btnCreations_Click(object sender, EventArgs e)
         {
-            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
+            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -604,11 +545,11 @@ namespace Starfield_Tools
             richTextBox2.Text = "Checking for unused items in catalog...\n";
 
             string filePath = GetStarfieldPath() + "\\Plugins.txt";
-            string fileContent = File.ReadAllText(filePath);
+            string fileContent = File.ReadAllText(filePath); // Load Plugins.txt
             // Split the content into lines if necessary
             List<string> lines = fileContent.Split('\n').ToList();
 
-            foreach (var file in lines)
+            foreach (var file in lines) // Process Plugins.txt to just a list of .esm files
             {
                 if (file != "")
                 {
@@ -627,7 +568,7 @@ namespace Starfield_Tools
             Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             try
             {
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json); // Process catalog
                 data.Remove("ContentCatalog");
 
                 foreach (var kvp in data)
@@ -641,7 +582,7 @@ namespace Starfield_Tools
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
                                 CreationsTitle.Add(kvp.Value.Title);
-                                richTextBox2.Text +=  kvp.Value.Title + "\n";
+                                richTextBox2.Text += kvp.Value.Title + "\n";
                             }
                         }
 
@@ -705,7 +646,7 @@ namespace Starfield_Tools
         {
             string jsonFilePath = CC.GetCatalog();
 
-            string json = File.ReadAllText(jsonFilePath);
+            string json = File.ReadAllText(jsonFilePath); // Load catalog
             string TestString = "";
             bool FixVersion;
             int errorCount = 0;
@@ -732,7 +673,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != "1.1")
+                if (TestString != "1.1") // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
@@ -742,7 +683,7 @@ namespace Starfield_Tools
                         VersionReplacementCount++;
                     }
                 }
-                if (FixVersion)
+                if (FixVersion) // Replace version numbers if they contain garbage characters.
                 {
                     kvp.Value.Version = "1704067200.0"; // set version to 1704067200.0
                     errorCount++;
@@ -752,7 +693,7 @@ namespace Starfield_Tools
 
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
-            // Hack the Bethesda header back in
+            // Hack the Bethesda header back in. This will probably break if the version no. is updated from 1.1
             json = @"{
   ""ContentCatalog"" : 
   {
@@ -763,6 +704,18 @@ namespace Starfield_Tools
 
             File.WriteAllText(jsonFilePath, json);
             toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";
+        }
+
+        public void SaveSettings()  // Save user settings
+        {
+            Settings.Default.AutoCheck = AutoCheck;
+            Settings.Default.AutoClean = AutoClean;
+            Settings.Default.AutoBackup = AutoBackup;
+            Settings.Default.AutoRestore = AutoRestore;
+            if (StarfieldGamePath != "")
+                Settings.Default.StarfieldGamePath = StarfieldGamePath;
+            Settings.Default.ForceClean = ForceClean;
+            Settings.Default.Save();
         }
     }
 }

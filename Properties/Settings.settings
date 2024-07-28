@@ -26,5 +26,8 @@
     <Setting Name="ProfileFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="LastProfile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default.txt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

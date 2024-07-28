@@ -6,10 +6,12 @@ using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using File = System.IO.File;
 
 
@@ -23,14 +25,15 @@ namespace Starfield_Tools
         public string StarfieldGamePath;
 
         bool isModified = false;
-
         public frmLoadOrder()
         {
             InitializeComponent();
-            menuStrip1.Font = Properties.Settings.Default.FontSize;
-            this.Font = Properties.Settings.Default.FontSize;
-            StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+
+            menuStrip1.Font = Settings.Default.FontSize;
+            this.Font = Settings.Default.FontSize;
+            StarfieldGamePath = Settings.Default.StarfieldGamePath;
             InitDataGrid();
+            GetProfiles();
         }
 
         private void InitDataGrid()
@@ -173,7 +176,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             try
             {
-                string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
+                string directory = Settings.Default.StarfieldGamePath + @"\Data";
                 foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
                     esmCount++;
@@ -205,6 +208,30 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 toolStripStatusLabel1.Text = "Starfield path needs to be set for mod stats";
             }
+        }
+
+        private void GetProfiles()
+        {
+            string ProfileFolder;
+            cmbProfile.Items.Clear();
+            ProfileFolder = Settings.Default.ProfileFolder;
+            if (ProfileFolder == null || ProfileFolder == "")
+                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            try
+            {
+                foreach (var profileName in Directory.EnumerateFiles(ProfileFolder, "*.txt", SearchOption.TopDirectoryOnly))
+                {
+                    cmbProfile.Items.Add(profileName.Substring(profileName.LastIndexOf('\\') + 1));
+
+                }
+                int index = cmbProfile.Items.IndexOf(Settings.Default.LastProfile);
+                if (index != -1)
+                {
+                    cmbProfile.SelectedIndex = index; // Set the ComboBox to the found index
+                }
+            }
+            catch { }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -442,7 +469,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 menuStrip1.Font = fontDialog1.Font;
             }
             this.CenterToScreen();
-            Properties.Settings.Default.FontSize = this.Font;
+            Settings.Default.FontSize = this.Font;
         }
 
         private void SearchMod()
@@ -531,7 +558,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
 
             SaveFileDialog SavePlugins = new SaveFileDialog();
-            ProfileFolder = Properties.Settings.Default.ProfileFolder;
+            ProfileFolder = Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -546,8 +573,23 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             if (SavePlugins.FileName != "")
             {
-                Properties.Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(SavePlugins.FileName.LastIndexOf('\\'));
-                Properties.Settings.Default.Save();
+                Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(0,SavePlugins.FileName.LastIndexOf('\\'));
+                Settings.Default.Save();
+                GetProfiles();
+            }
+        }
+
+        private void SwitchProfile(string ProfileName)
+        {
+            try
+            {
+                File.Copy(ProfileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
+                Settings.Default.LastProfile = ProfileName.Substring(ProfileName.LastIndexOf('\\')+1);
+                SaveSettings();
+            }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Error switching profile";
             }
         }
 
@@ -555,7 +597,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            ProfileFolder = Properties.Settings.Default.ProfileFolder;
+            ProfileFolder = Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -567,13 +609,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result)
             {
-                File.Copy(OpenPlugins.FileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
+                
                 InitDataGrid();
+                
             }
             if (OpenPlugins.FileName != "")
             {
-                Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName.Substring(OpenPlugins.FileName.LastIndexOf('\\'));
-                Properties.Settings.Default.Save();
+                Settings.Default.ProfileFolder = OpenPlugins.FileName.Substring(0, OpenPlugins.FileName.LastIndexOf('\\'));
+                SwitchProfile(OpenPlugins.FileName);
+                GetProfiles();
+                Settings.Default.Save();
             }
         }
 
@@ -612,6 +657,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuStats_Click(object sender, EventArgs e)
         {
             InitDataGrid();
+            GetProfiles();
         }
 
         private void toolStripMenuScanMods_Click(object sender, EventArgs e)
@@ -640,7 +686,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
 
-            string directory = Properties.Settings.Default.StarfieldGamePath;
+            string directory = Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = CC.SetStarfieldGamePath();
             directory = directory + @"\Data";
@@ -686,7 +732,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
 
-            string directory = Properties.Settings.Default.StarfieldGamePath;
+            string directory = Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = CC.SetStarfieldGamePath();
             directory = directory + @"\Data";
@@ -735,6 +781,25 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel1.Text = addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed";
             if (addedMods + removedMods > 0)
                 toolStripStatusLabel1.Text += " - Save changes to update Plugins.txt file";
+        }
+
+
+        private void frmLoadOrder_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            Settings.Default.Save();
+        }
+
+        private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("changed");
+
+            SwitchProfile(Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
+            InitDataGrid();
         }
     }
 }

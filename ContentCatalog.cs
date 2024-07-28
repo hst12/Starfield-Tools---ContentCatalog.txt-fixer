@@ -1,6 +1,9 @@
-﻿using Starfield_Tools.Properties;
+﻿using Microsoft.Win32;
+using Starfield_Tools.Properties;
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Starfield_Tools
@@ -61,12 +64,58 @@ namespace Starfield_Tools
                 {
                     string selectedFolderPath = folderBrowserDialog.SelectedPath;
                     StarfieldGamePath = selectedFolderPath;
-                    Properties.Settings.Default.StarfieldGamePath = selectedFolderPath;
+                    Settings.Default.StarfieldGamePath = selectedFolderPath;
                     Settings.Default.Save();
                     return selectedFolderPath;
                 }
                 return ("");
             }
+        }
+
+        public void ShowSplashScreen()
+        {
+            Form SS = new frmSplashScreen();
+
+            Rectangle resolution = Screen.PrimaryScreen.Bounds;
+            int screenWidth = resolution.Width;
+            int screenHeight = resolution.Height;
+            SS.Width = screenWidth / 2;
+            SS.Height = screenHeight / 2;
+            SS.StartPosition = FormStartPosition.CenterScreen;
+            SS.Show();
+        }
+
+        public void StartStarfieldMS()
+        {
+            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
+
+            try
+            {
+                Process.Start(cmdLine);
+                ShowSplashScreen();
+                Thread.Sleep(2000);
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
+            }
+        }
+
+        public void StartStarfieldSteam()
+        {
+            const string userRoot = "HKEY_CURRENT_USER";
+            const string subkey = @"Software\Valve\Steam";
+            const string keyName = userRoot + "\\" + subkey;
+
+            // Get Steam path from Registry
+            string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
+
+            var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
+            var process = Process.Start(processInfo);
+            ShowSplashScreen();
+            Thread.Sleep(4000);
+            Application.Exit();
         }
     }
 }
