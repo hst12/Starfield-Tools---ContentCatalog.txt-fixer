@@ -8,10 +8,8 @@ This tool is intended to repair the catalog file. You could simply delete the ca
 To install, extract the zip file and run the setup.exe installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
 
-Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically.
+Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically. This is the default.
 Force clean is an experimental option to make the tool run a cleaning process even if it considers the catalog to be ok.
-
-The tool no longer works automatically by default.
 
 Usage Instructions:
 Important: Quit the game and run the tool before loading a saved game if you've installed new mods or updated mods in the Creations menu.
@@ -20,7 +18,6 @@ Use the Backup function after you've been in the Creations menu to backup the ca
 Use the Restore function to restore a backup up catalog if you've made a backup.
 Press the Check button if necessary to check if the catalog is ok.
 Press the Clean button if necessary to clean the catalog.
-Enable all the buttons under the Auto section except for Force Clean to have the tool automatically decide which action to take.
 When the auto functions are enabled, the tool will look for a backup of the catalog file first and try to restore that. If the restore fails, it will run a cleaning process.
 
 There is no need to use the tool if you're just playing the game normally and are not using the Creations menu.

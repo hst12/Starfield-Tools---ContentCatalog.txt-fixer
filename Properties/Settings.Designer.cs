@@ -37,7 +37,7 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AutoClean {
             get {
                 return ((bool)(this["AutoClean"]));
@@ -49,7 +49,7 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AutoBackup {
             get {
                 return ((bool)(this["AutoBackup"]));
@@ -61,7 +61,7 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AutoRestore {
             get {
                 return ((bool)(this["AutoRestore"]));
