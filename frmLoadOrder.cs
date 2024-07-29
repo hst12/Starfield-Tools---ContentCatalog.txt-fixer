@@ -439,6 +439,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel1.Text = "Warning! - Plugins sorted - saving changes disabled";
             toolStripStatusLabel1.ForeColor = Color.Red;
             btnOK.Enabled = false;
+            saveToolStripMenuItem.Enabled = false;
         }
 
         private void DisableAll()
