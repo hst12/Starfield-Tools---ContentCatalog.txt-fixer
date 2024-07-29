@@ -25,10 +25,16 @@ namespace Starfield_Tools
         public string StarfieldGamePath;
 
         bool isModified = false;
+
         public frmLoadOrder()
         {
             InitializeComponent();
-
+            string PluginsPath = CC.GetStarfieldPath() + "\\Plugins.txt";
+            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt
+            {
+                toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
+                File.Copy(PluginsPath, PluginsPath + ".bak");
+            }
             menuStrip1.Font = Settings.Default.FontSize;
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
@@ -574,7 +580,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             if (SavePlugins.FileName != "")
             {
-                Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(0,SavePlugins.FileName.LastIndexOf('\\'));
+                Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(0, SavePlugins.FileName.LastIndexOf('\\'));
                 Settings.Default.Save();
                 GetProfiles();
             }
@@ -585,7 +591,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             try
             {
                 File.Copy(ProfileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
-                Settings.Default.LastProfile = ProfileName.Substring(ProfileName.LastIndexOf('\\')+1);
+                Settings.Default.LastProfile = ProfileName.Substring(ProfileName.LastIndexOf('\\') + 1);
                 SaveSettings();
             }
             catch
@@ -610,9 +616,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result)
             {
-                
+
                 InitDataGrid();
-                
+
             }
             if (OpenPlugins.FileName != "")
             {
