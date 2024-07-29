@@ -83,7 +83,7 @@ namespace Starfield_Tools
                     if (AutoRestore) // Restore backup file if auto restore is on
                     {
                         if (RestoreCatalog())
-                            toolStripStatusLabel1.Text = "Catalog corrupt, backup restored";
+                            toolStripStatusLabel1.Text = "Catalog backup restored";
                     }
                     else
                     if (AutoClean)
