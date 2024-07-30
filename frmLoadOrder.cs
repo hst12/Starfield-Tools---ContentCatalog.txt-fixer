@@ -2,12 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
@@ -24,11 +28,19 @@ namespace Starfield_Tools
         ContentCatalog CC = new ContentCatalog();
         public string StarfieldGamePath;
 
-        bool isModified = false;
+        bool isModified = false, Profiles = true;
 
         public frmLoadOrder()
         {
             InitializeComponent();
+
+
+#if DEBUG
+            toolStripMenuInstall.Enabled = true;
+            toolStripMenuUninstall.Enabled = true;
+#endif
+
+
             string PluginsPath = CC.GetStarfieldPath() + "\\Plugins.txt";
             if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt
             {
@@ -39,7 +51,8 @@ namespace Starfield_Tools
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
             InitDataGrid();
-            GetProfiles();
+            if (Profiles)
+                GetProfiles();
         }
 
         private void InitDataGrid()
@@ -251,7 +264,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             bool ModEnabled;
             string ModLine;
 
-            // Create or overwrite the file
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+
             using (StreamWriter writer = new StreamWriter(PluginFileName))
             {
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
@@ -260,7 +274,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     ModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
                     ModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
                     if (ModEnabled)
-                        writer.Write("*"); // Write a * for enalbed mods then write the mod filename
+                        writer.Write("*"); // Insert a * for enabled mods then write the mod filename
                     writer.WriteLine(ModLine);
                 }
             }
@@ -682,13 +696,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             RemoveMissing();
         }
 
-        private int AddMissing()
+        private int AddMissing() // Look for .esm files to add to Plugins.txt returns no. of file added
         {
             int AddedFiles = 0;
             List<string> esmFiles = new List<string>();
             List<string> PluginFiles = new List<string>();
-            List<string> BethFiles = new List<string>
-
+            List<string> BethFiles = new List<string> // Exclude game files - will probably need updating after DLC release
             {
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
@@ -710,8 +723,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
             List<string> MissingFiles = esmFiles.Except(PluginFiles).ToList();
 
-
-            List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();
+            List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();  // Exclude BGS esm files
             if (FilesToAdd.Count > 0)
             {
                 for (int i = 0; i < FilesToAdd.Count; i++)
@@ -728,13 +740,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         }
 
 
-        private int RemoveMissing()
+        private int RemoveMissing() // Remove entries from Plugins.txt for missing .esm files. Returns number of removals
         {
             int RemovedFiles = 0;
             List<string> esmFiles = new List<string>();
             List<string> PluginFiles = new List<string>();
 
-            List<string> BethFiles = new List<string>
+            List<string> BethFiles = new List<string>  // Exclude BGS files
             {
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             };
@@ -764,14 +776,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     RemovedFiles++;
 
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
-                    {
                         if ((string)dataGridView1.Rows[j].Cells[1].Value == FilesToRemove[i])
-                        {
-                            Console.WriteLine(FilesToRemove[i]);
                             dataGridView1.Rows.RemoveAt(j);
-                        }
-
-                    }
                 }
                 toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removed";
             }
@@ -780,7 +786,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             return RemovedFiles;
         }
 
-        private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
+        private void AddRemove()
         {
             int addedMods = 0, removedMods = 0;
             addedMods = AddMissing();
@@ -788,6 +794,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel1.Text = addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed";
             if (addedMods + removedMods > 0)
                 toolStripStatusLabel1.Text += " - Save changes to update Plugins.txt file";
+
+        }
+
+        private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
+        {
+            AddRemove();
         }
 
 
@@ -807,6 +819,58 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             SwitchProfile(Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
             InitDataGrid();
+        }
+
+        private void toolStripMenuInstall_Click(object sender, EventArgs e)
+        {
+            string ModPath;
+            string ExtractPath = Path.GetTempPath() + "hstTools";
+
+            OpenFileDialog OpenMod = new OpenFileDialog();
+            //OpenMod.InitialDirectory = ProfileFolder;
+            OpenMod.Filter = "ZIP File|*.zip";
+            OpenMod.Title = "Install Mod";
+
+            DialogResult result = OpenMod.ShowDialog();
+            ModPath = OpenMod.FileName;
+
+            if (OpenMod.FileName != "")
+            {
+                try
+                {
+                    ZipFile.ExtractToDirectory(ModPath, ExtractPath);
+
+                }
+                catch (Exception ex)
+                {
+                    toolStripStatusLabel1.Text = ex.Message;
+
+                }
+                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
+                {
+                    string fileName = Path.GetFileName(ModFile);
+                    string destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
+
+                    if (!File.Exists(destinationPath))
+                        File.Move(ModFile, destinationPath);
+                }
+
+                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.ba2", SearchOption.AllDirectories)) // Move archives
+                {
+                    string fileName = Path.GetFileName(ModFile);
+                    string destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
+
+                    if (!File.Exists(destinationPath))
+                        File.Move(ModFile, destinationPath);
+                }
+
+                AddMissing();
+            }
+        }
+
+        private void toolStripMenuUninstall_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
