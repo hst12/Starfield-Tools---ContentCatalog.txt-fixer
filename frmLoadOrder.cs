@@ -872,18 +872,23 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void toolStripMenuProfiles_Click(object sender, EventArgs e)
+        private void ToggleProfiles()
         {
-            toolStripMenuProfiles.Checked = !toolStripMenuProfiles.Checked;
-            if (toolStripMenuProfiles.Checked)
+        }
+
+        private void chkProfile_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkProfile.Checked)
             {
                 Profiles = true;
+                cmbProfile.Enabled = true;
                 GetProfiles();
-                
             }
             else
+            {
                 Profiles = false;
-            cmbProfile.Enabled = Profiles;
+                cmbProfile.Enabled = false;
+            }
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
