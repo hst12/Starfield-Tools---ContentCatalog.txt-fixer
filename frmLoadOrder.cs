@@ -28,7 +28,7 @@ namespace Starfield_Tools
         ContentCatalog CC = new ContentCatalog();
         public string StarfieldGamePath;
 
-        bool isModified = false, Profiles = true;
+        bool isModified = false, Profiles = false;
 
         public frmLoadOrder()
         {
@@ -51,8 +51,8 @@ namespace Starfield_Tools
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
             InitDataGrid();
-            if (Profiles)
-                GetProfiles();
+            cmbProfile.Enabled = Profiles;
+            GetProfiles();
         }
 
         private void InitDataGrid()
@@ -232,6 +232,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void GetProfiles()
         {
             string ProfileFolder;
+            if (!Profiles)
+                return;
             cmbProfile.Items.Clear();
             ProfileFolder = Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
@@ -602,6 +604,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void SwitchProfile(string ProfileName)
         {
+            if (!Profiles)
+                return;
             try
             {
                 File.Copy(ProfileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
@@ -866,6 +870,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 AddMissing();
             }
+        }
+
+        private void toolStripMenuProfiles_Click(object sender, EventArgs e)
+        {
+            toolStripMenuProfiles.Checked = !toolStripMenuProfiles.Checked;
+            if (toolStripMenuProfiles.Checked)
+            {
+                Profiles = true;
+                GetProfiles();
+                
+            }
+            else
+                Profiles = false;
+            cmbProfile.Enabled = Profiles;
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)

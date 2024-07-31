@@ -100,6 +100,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripMenuProfiles = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -573,7 +574,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
-            this.toolStripMenuSetPath});
+            this.toolStripMenuSetPath,
+            this.toolStripMenuProfiles});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -581,14 +583,14 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(289, 44);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.optionsToolStripMenuItem.Text = "Font";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripMenuSetPath
             // 
             this.toolStripMenuSetPath.Name = "toolStripMenuSetPath";
-            this.toolStripMenuSetPath.Size = new System.Drawing.Size(289, 44);
+            this.toolStripMenuSetPath.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuSetPath.Text = "Starfield path";
             this.toolStripMenuSetPath.Click += new System.EventHandler(this.toolStripMenuSetPath_Click);
             // 
@@ -718,14 +720,14 @@
             // toolStripMenuCreations
             // 
             this.toolStripMenuCreations.Name = "toolStripMenuCreations";
-            this.toolStripMenuCreations.Size = new System.Drawing.Size(347, 44);
+            this.toolStripMenuCreations.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuCreations.Text = "Creations (Newest)";
             this.toolStripMenuCreations.Click += new System.EventHandler(this.toolStripMenuCreations_Click);
             // 
             // toolStripMenuNexus
             // 
             this.toolStripMenuNexus.Name = "toolStripMenuNexus";
-            this.toolStripMenuNexus.Size = new System.Drawing.Size(347, 44);
+            this.toolStripMenuNexus.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuNexus.Text = "Starfield Nexus";
             this.toolStripMenuNexus.Click += new System.EventHandler(this.toolStripMenuNexus_Click);
             // 
@@ -743,6 +745,13 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(227, 44);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripMenuProfiles
+            // 
+            this.toolStripMenuProfiles.Name = "toolStripMenuProfiles";
+            this.toolStripMenuProfiles.Size = new System.Drawing.Size(359, 44);
+            this.toolStripMenuProfiles.Text = "Profiles";
+            this.toolStripMenuProfiles.Click += new System.EventHandler(this.toolStripMenuProfiles_Click);
             // 
             // frmLoadOrder
             // 
@@ -845,5 +854,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuInstall;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuUninstall;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuProfiles;
     }
 }
