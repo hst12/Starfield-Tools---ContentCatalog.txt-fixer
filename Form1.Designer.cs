@@ -62,6 +62,7 @@
             this.chkAutoClean = new System.Windows.Forms.CheckBox();
             this.chkAutoCheck = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnClearLog = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.grpActions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -109,7 +110,7 @@
             // cmdClean
             // 
             this.cmdClean.AutoSize = true;
-            this.cmdClean.Location = new System.Drawing.Point(169, 35);
+            this.cmdClean.Location = new System.Drawing.Point(168, 35);
             this.cmdClean.Margin = new System.Windows.Forms.Padding(6);
             this.cmdClean.Name = "cmdClean";
             this.cmdClean.Size = new System.Drawing.Size(150, 50);
@@ -185,7 +186,7 @@
             // btnBackup
             // 
             this.btnBackup.AutoSize = true;
-            this.btnBackup.Location = new System.Drawing.Point(770, 35);
+            this.btnBackup.Location = new System.Drawing.Point(762, 35);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(150, 50);
             this.btnBackup.TabIndex = 4;
@@ -197,7 +198,7 @@
             // btnRestore
             // 
             this.btnRestore.AutoSize = true;
-            this.btnRestore.Location = new System.Drawing.Point(926, 35);
+            this.btnRestore.Location = new System.Drawing.Point(920, 35);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(150, 50);
             this.btnRestore.TabIndex = 5;
@@ -269,7 +270,7 @@
             // 
             // btnResetAll
             // 
-            this.btnResetAll.Location = new System.Drawing.Point(554, 35);
+            this.btnResetAll.Location = new System.Drawing.Point(544, 35);
             this.btnResetAll.Name = "btnResetAll";
             this.btnResetAll.Size = new System.Drawing.Size(210, 50);
             this.btnResetAll.TabIndex = 3;
@@ -280,7 +281,7 @@
             // 
             // cmdDeleteStale
             // 
-            this.cmdDeleteStale.Location = new System.Drawing.Point(328, 35);
+            this.cmdDeleteStale.Location = new System.Drawing.Point(326, 35);
             this.cmdDeleteStale.Name = "cmdDeleteStale";
             this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
             this.cmdDeleteStale.TabIndex = 2;
@@ -333,6 +334,7 @@
             // grpActions
             // 
             this.grpActions.AutoSize = true;
+            this.grpActions.Controls.Add(this.btnClearLog);
             this.grpActions.Controls.Add(this.btnResetAll);
             this.grpActions.Controls.Add(this.cmdDeleteStale);
             this.grpActions.Controls.Add(this.btnRestore);
@@ -467,6 +469,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Location = new System.Drawing.Point(1078, 35);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(150, 50);
+            this.btnClearLog.TabIndex = 6;
+            this.btnClearLog.Text = "Clear Log";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
+            // 
             // frmStarfieldTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -531,6 +543,7 @@
         private System.Windows.Forms.Button cmdDeleteStale;
         private System.Windows.Forms.Button btnResetAll;
         private System.Windows.Forms.Button btnCreations;
+        private System.Windows.Forms.Button btnClearLog;
     }
 }
 

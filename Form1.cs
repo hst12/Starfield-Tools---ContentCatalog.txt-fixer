@@ -178,7 +178,7 @@ namespace Starfield_Tools
             richTextBox1.Text = "";
             bool ErrorFound = false;
             int ErrorCount = 0;
-            richTextBox2.Text = "Checking Catalog...\n";
+            richTextBox2.Text += "\nChecking Catalog...\n";
             double VersionCheck;
             long TimeStamp;
 
@@ -528,6 +528,11 @@ namespace Starfield_Tools
             DisplayCatalog();
         }
 
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "";
+        }
+
         public string GetStarfieldPath()
         {
             return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Starfield";
@@ -545,7 +550,7 @@ namespace Starfield_Tools
             int RemovalCount = 0;
             int index;
             bool unusedMods = false;
-            richTextBox2.Text = "Checking for unused items in catalog...\n";
+            richTextBox2.Text += "\nChecking for unused items in catalog...\n";
 
             string filePath = GetStarfieldPath() + "\\Plugins.txt";
             string fileContent = File.ReadAllText(filePath); // Load Plugins.txt
