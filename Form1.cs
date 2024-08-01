@@ -480,7 +480,7 @@ namespace Starfield_Tools
         private void btnResetAll_Click(object sender, EventArgs e)
         {
 
-            DialogResult result = MessageBox.Show("Do you want to continue?", "All version numbers will be reset. This will force all Creations to re-download", MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show("Do you want to continue?", "All version numbers will be reset. This will force all Creations to re-download", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
             if (result != DialogResult.OK)
             {
                 toolStripStatusLabel1.Text = "Version numbers not reset";

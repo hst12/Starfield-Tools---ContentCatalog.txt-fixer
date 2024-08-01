@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -888,6 +889,37 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 Profiles = false;
                 cmbProfile.Enabled = false;
+            }
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuExportActive_Click(object sender, EventArgs e)
+        {
+            int i;
+            string tempstr;
+            SaveFileDialog ExportActive = new SaveFileDialog();
+
+            ExportActive.Filter = "Txt File|*.txt";
+            ExportActive.Title = "Export Active Plugins";
+
+            DialogResult dlgResult = ExportActive.ShowDialog();
+            if (dlgResult == DialogResult.OK)
+            {
+                using (StreamWriter writer = new StreamWriter(ExportActive.FileName))
+                {
+                    for (i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        if ((bool)dataGridView1.Rows[i].Cells[0].Value)
+                        {
+                            tempstr = (string)dataGridView1.Rows[i].Cells[1].Value;
+                            writer.WriteLine(tempstr);
+                        }
+                    }
+                }
             }
         }
 
