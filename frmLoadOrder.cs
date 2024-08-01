@@ -925,7 +925,28 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
+            string ModName;
 
+            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value;
+            ModName = ModName.Substring(0, ModName.IndexOf("."));
+            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName+@"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel,MessageBoxIcon.Stop);
+
+
+            if (DialogResult == DialogResult.OK)
+            {
+                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+                string directoryPath = StarfieldGamePath+"\\Data";
+                string searchPattern = ModName+"*"; // Delete modname*
+
+                string[] matchingFiles = Directory.GetFiles(directoryPath, searchPattern);
+
+                foreach (string filePath in matchingFiles)
+                    File.Delete(filePath);
+
+                SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+            }
+            else
+                toolStripStatusLabel1.Text = "Un-install cancelled";
         }
     }
 }
