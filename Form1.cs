@@ -449,6 +449,9 @@ namespace Starfield_Tools
         private void cmdDeleteStale_Click(object sender, EventArgs e)
         {
             RemoveDeleteddEntries();
+            if (AutoBackup)
+                if (!CheckBackup()) // Backup if necessary
+                    BackupCatalog();
             DisplayCatalog();
         }
 
@@ -632,7 +635,7 @@ namespace Starfield_Tools
                 else
                 {
                     ScrollToEnd();
-                    richTextBox2.Text += "\nNo unused mods found in catalog";
+                    richTextBox2.Text += "\nNo unused mods found in catalog\n";
                     toolStripStatusLabel1.Text = "No unused mods found in catalog";
                 }
             }
