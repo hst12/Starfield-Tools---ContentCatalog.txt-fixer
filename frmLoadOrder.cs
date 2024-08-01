@@ -2,21 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using File = System.IO.File;
 
 
@@ -35,12 +26,8 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-
-#if DEBUG
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
-#endif
-
 
             string PluginsPath = CC.GetStarfieldPath() + "\\Plugins.txt";
             if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt
@@ -843,6 +830,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 try
                 {
+                    toolStripStatusLabel1.Text = "Installing mod...";
                     ZipFile.ExtractToDirectory(ModPath, ExtractPath);
 
                 }
@@ -870,6 +858,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
 
                 AddMissing();
+                SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             }
         }
 
@@ -892,10 +881,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void toolStripMenuExportActive_Click(object sender, EventArgs e)
         {
@@ -923,25 +908,33 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
+        private void toolStripMenuDeleteLine_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+        }
+
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
-            string ModName;
+            string ModName, ModFile;
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value;
             ModName = ModName.Substring(0, ModName.IndexOf("."));
-            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName+@"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel,MessageBoxIcon.Stop);
+            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
 
             if (DialogResult == DialogResult.OK)
             {
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-                string directoryPath = StarfieldGamePath+"\\Data";
-                string searchPattern = ModName+"*"; // Delete modname*
+                string directoryPath = StarfieldGamePath + "\\Data";
 
-                string[] matchingFiles = Directory.GetFiles(directoryPath, searchPattern);
-
-                foreach (string filePath in matchingFiles)
-                    File.Delete(filePath);
+                ModFile = directoryPath + "\\" + ModName;
+                Console.WriteLine(ModFile);
+                if (File.Exists(ModFile + ".esm"))
+                    File.Delete(ModFile + ".esm");
+                if (File.Exists(ModFile + " - textures.ba2"))
+                    File.Delete(ModFile + " - textures.ba2");
+                if (File.Exists(ModFile + " - main.ba2"))
+                    File.Delete(ModFile + " - main.ba2");
 
                 SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             }

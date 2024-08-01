@@ -1,12 +1,9 @@
-﻿using Microsoft.Win32;
-using Starfield_Tools.Properties;
+﻿using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
