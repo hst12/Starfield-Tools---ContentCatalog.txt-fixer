@@ -48,6 +48,8 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuDelContext = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuUninstallContext = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnBottom = new System.Windows.Forms.Button();
@@ -107,8 +109,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -144,6 +144,7 @@
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(798, 418);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
@@ -224,66 +225,78 @@
             this.toolStripSeparator11,
             this.toolStripMenuRefresh});
             this.contextMenuDatagrid.Name = "contextMenuDatagrid";
-            this.contextMenuDatagrid.Size = new System.Drawing.Size(181, 220);
+            this.contextMenuDatagrid.Size = new System.Drawing.Size(153, 198);
             // 
             // toolStripMenuEnableDisable
             // 
             this.toolStripMenuEnableDisable.Name = "toolStripMenuEnableDisable";
-            this.toolStripMenuEnableDisable.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuEnableDisable.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuEnableDisable.Text = "Enable/Disable";
             this.toolStripMenuEnableDisable.Click += new System.EventHandler(this.toolStripMenuEnableDisable_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(149, 6);
             // 
             // toolStripMenuUp
             // 
             this.toolStripMenuUp.Name = "toolStripMenuUp";
-            this.toolStripMenuUp.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuUp.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuUp.Text = "Up";
             this.toolStripMenuUp.Click += new System.EventHandler(this.toolStripMenuUp_Click);
             // 
             // toolStripMenuDown
             // 
             this.toolStripMenuDown.Name = "toolStripMenuDown";
-            this.toolStripMenuDown.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuDown.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuDown.Text = "Down";
             this.toolStripMenuDown.Click += new System.EventHandler(this.toolStripMenuDown_Click);
             // 
             // toolStripMenuTop
             // 
             this.toolStripMenuTop.Name = "toolStripMenuTop";
-            this.toolStripMenuTop.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuTop.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuTop.Text = "Top";
             this.toolStripMenuTop.Click += new System.EventHandler(this.toolStripMenuTop_Click);
             // 
             // toolStripMenuBottom
             // 
             this.toolStripMenuBottom.Name = "toolStripMenuBottom";
-            this.toolStripMenuBottom.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuBottom.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuBottom.Text = "Bottom";
             this.toolStripMenuBottom.Click += new System.EventHandler(this.toolStripMenuBottom_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // toolStripMenuDelContext
             // 
             this.toolStripMenuDelContext.Name = "toolStripMenuDelContext";
-            this.toolStripMenuDelContext.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuDelContext.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuDelContext.Text = "Del";
             this.toolStripMenuDelContext.Click += new System.EventHandler(this.toolStripMenuDelContext_Click);
             // 
             // toolStripMenuUninstallContext
             // 
             this.toolStripMenuUninstallContext.Name = "toolStripMenuUninstallContext";
-            this.toolStripMenuUninstallContext.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuUninstallContext.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuUninstallContext.Text = "Uninstall";
             this.toolStripMenuUninstallContext.Click += new System.EventHandler(this.toolStripMenuUninstallContext_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuRefresh
+            // 
+            this.toolStripMenuRefresh.Name = "toolStripMenuRefresh";
+            this.toolStripMenuRefresh.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuRefresh.Text = "Refresh";
+            this.toolStripMenuRefresh.Click += new System.EventHandler(this.toolStripMenuRefresh_Click);
             // 
             // btnOK
             // 
@@ -772,14 +785,14 @@
             // toolStripMenuCreations
             // 
             this.toolStripMenuCreations.Name = "toolStripMenuCreations";
-            this.toolStripMenuCreations.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuCreations.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuCreations.Text = "Creations (Newest)";
             this.toolStripMenuCreations.Click += new System.EventHandler(this.toolStripMenuCreations_Click);
             // 
             // toolStripMenuNexus
             // 
             this.toolStripMenuNexus.Name = "toolStripMenuNexus";
-            this.toolStripMenuNexus.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuNexus.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuNexus.Text = "Starfield Nexus";
             this.toolStripMenuNexus.Click += new System.EventHandler(this.toolStripMenuNexus_Click);
             // 
@@ -797,18 +810,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
-            // 
-            // toolStripMenuRefresh
-            // 
-            this.toolStripMenuRefresh.Name = "toolStripMenuRefresh";
-            this.toolStripMenuRefresh.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuRefresh.Text = "Refresh";
-            this.toolStripMenuRefresh.Click += new System.EventHandler(this.toolStripMenuRefresh_Click);
             // 
             // frmLoadOrder
             // 

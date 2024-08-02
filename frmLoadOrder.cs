@@ -1022,15 +1022,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             UninstallMod();
         }
 
-        private void toolStripMenuEnableDisable_Click(object sender, EventArgs e)
+        private void EnableDisable()
         {
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells[0].Value = !(bool)(currentRow.Cells[0].Value);
+
+        }
+
+        private void toolStripMenuEnableDisable_Click(object sender, EventArgs e)
+        {
+            EnableDisable();
         }
 
         private void toolStripMenuRefresh_Click(object sender, EventArgs e)
         {
             RefreshDataGrid();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EnableDisable();
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
