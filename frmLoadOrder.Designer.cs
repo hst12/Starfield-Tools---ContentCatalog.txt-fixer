@@ -95,6 +95,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuExploreData = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuExploreAppData = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -404,6 +405,7 @@
             this.toolStripSeparator1,
             this.toolStripMenuExportActive,
             this.toolStripSeparator2,
+            this.toolStripMenuExploreAppData,
             this.toolStripMenuExploreData,
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
@@ -524,14 +526,14 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(289, 44);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.optionsToolStripMenuItem.Text = "Font";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // toolStripMenuSetPath
             // 
             this.toolStripMenuSetPath.Name = "toolStripMenuSetPath";
-            this.toolStripMenuSetPath.Size = new System.Drawing.Size(289, 44);
+            this.toolStripMenuSetPath.Size = new System.Drawing.Size(359, 44);
             this.toolStripMenuSetPath.Text = "Starfield path";
             this.toolStripMenuSetPath.Click += new System.EventHandler(this.toolStripMenuSetPath_Click);
             // 
@@ -559,26 +561,26 @@
             // toolStripMenuEnableAll
             // 
             this.toolStripMenuEnableAll.Name = "toolStripMenuEnableAll";
-            this.toolStripMenuEnableAll.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuEnableAll.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuEnableAll.Text = "Enable All";
             this.toolStripMenuEnableAll.Click += new System.EventHandler(this.toolStripMenuEnableAll_Click);
             // 
             // toolStripMenuDisableAll
             // 
             this.toolStripMenuDisableAll.Name = "toolStripMenuDisableAll";
-            this.toolStripMenuDisableAll.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuDisableAll.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuDisableAll.Text = "Disable All";
             this.toolStripMenuDisableAll.Click += new System.EventHandler(this.toolStripMenuDisableAll_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(530, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(527, 6);
             // 
             // toolStripMenuAdd
             // 
             this.toolStripMenuAdd.Name = "toolStripMenuAdd";
-            this.toolStripMenuAdd.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuAdd.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuAdd.Text = "Add Mod";
             this.toolStripMenuAdd.Click += new System.EventHandler(this.toolStripMenuAdd_Click);
             // 
@@ -586,40 +588,40 @@
             // 
             this.toolStripMenuDelete.Name = "toolStripMenuDelete";
             this.toolStripMenuDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.toolStripMenuDelete.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuDelete.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuDelete.Text = "Delete Mod";
             this.toolStripMenuDelete.Click += new System.EventHandler(this.toolStripMenuDelete_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(530, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(527, 6);
             // 
             // toolStripMenuAutoClean
             // 
             this.toolStripMenuAutoClean.Name = "toolStripMenuAutoClean";
-            this.toolStripMenuAutoClean.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuAutoClean.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuAutoClean.Text = "Add and Remove Missing";
             this.toolStripMenuAutoClean.Click += new System.EventHandler(this.toolStripMenuAutoClean_Click);
             // 
             // toolStripMenuScanMods
             // 
             this.toolStripMenuScanMods.Name = "toolStripMenuScanMods";
-            this.toolStripMenuScanMods.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuScanMods.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuScanMods.Text = "Add Missing";
             this.toolStripMenuScanMods.Click += new System.EventHandler(this.toolStripMenuScanMods_Click);
             // 
             // toolStripMenuCleanup
             // 
             this.toolStripMenuCleanup.Name = "toolStripMenuCleanup";
-            this.toolStripMenuCleanup.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuCleanup.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuCleanup.Text = "Remove Missing";
             this.toolStripMenuCleanup.Click += new System.EventHandler(this.toolStripMenuCleanup_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(530, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(527, 6);
             // 
             // toolStripMenuInstall
             // 
@@ -633,19 +635,19 @@
             // 
             this.toolStripMenuUninstall.Enabled = false;
             this.toolStripMenuUninstall.Name = "toolStripMenuUninstall";
-            this.toolStripMenuUninstall.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuUninstall.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuUninstall.Text = "Un-install Mod";
             this.toolStripMenuUninstall.Click += new System.EventHandler(this.toolStripMenuUninstall_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(530, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(527, 6);
             // 
             // toolStripMenuStats
             // 
             this.toolStripMenuStats.Name = "toolStripMenuStats";
-            this.toolStripMenuStats.Size = new System.Drawing.Size(533, 44);
+            this.toolStripMenuStats.Size = new System.Drawing.Size(530, 44);
             this.toolStripMenuStats.Text = "Show Stats (Refresh)";
             this.toolStripMenuStats.Click += new System.EventHandler(this.toolStripMenuStats_Click);
             // 
@@ -698,6 +700,13 @@
             this.toolStripMenuExploreData.Size = new System.Drawing.Size(497, 44);
             this.toolStripMenuExploreData.Text = "Explore Game Data Folder";
             this.toolStripMenuExploreData.Click += new System.EventHandler(this.toolStripMenuExploreData_Click);
+            // 
+            // toolStripMenuExploreAppData
+            // 
+            this.toolStripMenuExploreAppData.Name = "toolStripMenuExploreAppData";
+            this.toolStripMenuExploreAppData.Size = new System.Drawing.Size(497, 44);
+            this.toolStripMenuExploreAppData.Text = "Explore AppData Folder";
+            this.toolStripMenuExploreAppData.Click += new System.EventHandler(this.toolStripMenuExploreAppData_Click);
             // 
             // frmLoadOrder
             // 
@@ -795,5 +804,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDeleteLine;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuExploreData;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuExploreAppData;
     }
 }

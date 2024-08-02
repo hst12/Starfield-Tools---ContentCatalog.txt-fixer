@@ -918,6 +918,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             Process.Start("explorer.exe", StarfieldGamePath + "\\Data");
         }
 
+        private void toolStripMenuExploreAppData_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", CC.GetStarfieldPath());
+        }
+
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
             string ModName, ModFile;
