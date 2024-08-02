@@ -913,6 +913,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
         }
 
+        private void toolStripMenuExploreData_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", StarfieldGamePath + "\\Data");
+        }
+
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
             string ModName, ModFile;
