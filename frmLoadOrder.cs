@@ -277,8 +277,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             this.Close();
         }
-
-        private void btnUp_Click(object sender, EventArgs e)
+        private void MoveUp()
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y < 1) return;
@@ -313,9 +312,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             dataGridView1.CurrentCell = dataGridView1.Rows[y - 1].Cells[0];
 
+
+        }
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            MoveUp();
         }
 
-        private void btnDown_Click(object sender, EventArgs e)
+        private void MoveDown()
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y > dataGridView1.Rows.Count - 2) return;
@@ -347,6 +351,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows[y + 1].Selected = true;
 
             dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells[0];
+
+        }
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            MoveDown();
         }
 
         private void BackupPlugins()
@@ -398,8 +407,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-
-        private void btnTop_Click(object sender, EventArgs e)
+        private void MoveTop()
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y < 1) return;
@@ -421,7 +429,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
         }
 
-        private void btnBottom_Click(object sender, EventArgs e)
+        private void MoveBottom()
         {
             int y = dataGridView1.CurrentCell.RowIndex;
             if (y > dataGridView1.Rows.Count - 1) return;
@@ -442,6 +450,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
             dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+        }
+        private void btnBottom_Click(object sender, EventArgs e)
+        {
+            MoveBottom();
+        }
+
+        private void btnTop_Click(object sender, EventArgs e)
+        {
+            MoveTop();
         }
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
@@ -637,27 +654,32 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuAdd_Click(object sender, EventArgs e)
         {
-            string SteamData;
+            string GameData;
 
-            SteamData = Settings.Default.StarfieldGamePath + "\\Data";
+            GameData = Settings.Default.StarfieldGamePath + "\\Data";
             OpenFileDialog GetMod = new OpenFileDialog();
             GetMod.Filter = "esm File|*.esm";
             GetMod.Title = "Select mod";
-            GetMod.InitialDirectory = SteamData;
+            GetMod.InitialDirectory = GameData;
 
             DialogResult result = GetMod.ShowDialog();
             if (DialogResult.OK == result)
             {
                 toolStripStatusLabel1.Text = GetMod.FileName;
-                SteamData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
-                dataGridView1.Rows.Add(true, SteamData.Substring(1));
+                GameData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
+                dataGridView1.Rows.Add(true, GameData.Substring(1));
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
             }
         }
 
-        private void toolStripMenuDelete_Click(object sender, EventArgs e)
+        private void DeleteLine()
         {
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+        }
+
+        private void toolStripMenuDelete_Click(object sender, EventArgs e)
+        {
+            DeleteLine();
         }
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
@@ -881,7 +903,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-
         private void toolStripMenuExportActive_Click(object sender, EventArgs e)
         {
             int i;
@@ -923,7 +944,38 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             Process.Start("explorer.exe", CC.GetStarfieldPath());
         }
 
-        private void toolStripMenuUninstall_Click(object sender, EventArgs e)
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuDatagrid.Show(this, new Point(e.X, e.Y));
+        }
+
+        private void toolStripMenuUp_Click(object sender, EventArgs e)
+        {
+            MoveUp();
+        }
+
+        private void toolStripMenuDown_Click(object sender, EventArgs e)
+        {
+            MoveDown();
+        }
+
+        private void toolStripMenuTop_Click(object sender, EventArgs e)
+        {
+            MoveTop();
+        }
+
+        private void toolStripMenuBottom_Click(object sender, EventArgs e)
+        {
+            MoveBottom();
+        }
+
+        private void toolStripMenuDelContext_Click(object sender, EventArgs e)
+        {
+            DeleteLine();
+        }
+
+        private void UninstallMod()
         {
             string ModName, ModFile;
 
@@ -950,6 +1002,22 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
                 toolStripStatusLabel1.Text = "Un-install cancelled";
+        }
+
+        private void toolStripMenuUninstallContext_Click(object sender, EventArgs e)
+        {
+            UninstallMod();
+        }
+
+        private void toolStripMenuEnableDisable_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            currentRow.Cells[0].Value = !(bool)(currentRow.Cells[0].Value);
+        }
+
+        private void toolStripMenuUninstall_Click(object sender, EventArgs e)
+        {
+            UninstallMod();
         }
     }
 }
