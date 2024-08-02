@@ -107,6 +107,8 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -218,9 +220,11 @@
             this.toolStripMenuBottom,
             this.toolStripSeparator4,
             this.toolStripMenuDelContext,
-            this.toolStripMenuUninstallContext});
+            this.toolStripMenuUninstallContext,
+            this.toolStripSeparator11,
+            this.toolStripMenuRefresh});
             this.contextMenuDatagrid.Name = "contextMenuDatagrid";
-            this.contextMenuDatagrid.Size = new System.Drawing.Size(181, 192);
+            this.contextMenuDatagrid.Size = new System.Drawing.Size(181, 220);
             // 
             // toolStripMenuEnableDisable
             // 
@@ -751,6 +755,7 @@
             // toolStripMenuStats
             // 
             this.toolStripMenuStats.Name = "toolStripMenuStats";
+            this.toolStripMenuStats.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.toolStripMenuStats.Size = new System.Drawing.Size(263, 22);
             this.toolStripMenuStats.Text = "Show Stats (Refresh)";
             this.toolStripMenuStats.Click += new System.EventHandler(this.toolStripMenuStats_Click);
@@ -767,14 +772,14 @@
             // toolStripMenuCreations
             // 
             this.toolStripMenuCreations.Name = "toolStripMenuCreations";
-            this.toolStripMenuCreations.Size = new System.Drawing.Size(174, 22);
+            this.toolStripMenuCreations.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuCreations.Text = "Creations (Newest)";
             this.toolStripMenuCreations.Click += new System.EventHandler(this.toolStripMenuCreations_Click);
             // 
             // toolStripMenuNexus
             // 
             this.toolStripMenuNexus.Name = "toolStripMenuNexus";
-            this.toolStripMenuNexus.Size = new System.Drawing.Size(174, 22);
+            this.toolStripMenuNexus.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuNexus.Text = "Starfield Nexus";
             this.toolStripMenuNexus.Click += new System.EventHandler(this.toolStripMenuNexus_Click);
             // 
@@ -793,6 +798,18 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripMenuRefresh
+            // 
+            this.toolStripMenuRefresh.Name = "toolStripMenuRefresh";
+            this.toolStripMenuRefresh.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuRefresh.Text = "Refresh";
+            this.toolStripMenuRefresh.Click += new System.EventHandler(this.toolStripMenuRefresh_Click);
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -802,6 +819,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmLoadOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -901,5 +919,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuBottom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuEnableDisable;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuRefresh;
     }
 }

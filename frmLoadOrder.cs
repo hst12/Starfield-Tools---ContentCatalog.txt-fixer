@@ -25,6 +25,7 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent);
 
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
@@ -41,6 +42,20 @@ namespace Starfield_Tools
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
+        }
+
+        private void RefreshDataGrid()
+        {
+            InitDataGrid();
+            GetProfiles();
+        }
+
+        private void KeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                RefreshDataGrid();
+            }
         }
 
         private void InitDataGrid()
@@ -691,8 +706,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuStats_Click(object sender, EventArgs e)
         {
-            InitDataGrid();
-            GetProfiles();
+            RefreshDataGrid();
         }
 
         private void toolStripMenuScanMods_Click(object sender, EventArgs e)
@@ -990,7 +1004,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 string directoryPath = StarfieldGamePath + "\\Data";
 
                 ModFile = directoryPath + "\\" + ModName;
-                Console.WriteLine(ModFile);
                 if (File.Exists(ModFile + ".esm"))
                     File.Delete(ModFile + ".esm");
                 if (File.Exists(ModFile + " - textures.ba2"))
@@ -1013,6 +1026,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells[0].Value = !(bool)(currentRow.Cells[0].Value);
+        }
+
+        private void toolStripMenuRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDataGrid();
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
