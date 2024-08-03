@@ -1088,6 +1088,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             InstallMod();
         }
 
+        private void toolStripMenuSave_Click(object sender, EventArgs e)
+        {
+            SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+        }
+
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
             UninstallMod();
