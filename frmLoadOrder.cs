@@ -856,7 +856,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             InitDataGrid();
         }
 
-        private void toolStripMenuInstall_Click(object sender, EventArgs e)
+        private void InstallMod()
         {
             string ModPath;
             string ExtractPath = Path.GetTempPath() + "hstTools";
@@ -903,6 +903,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 AddMissing();
                 SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             }
+
+        }
+        private void toolStripMenuInstall_Click(object sender, EventArgs e)
+        {
+            InstallMod();
         }
 
         private void ToggleProfiles()
@@ -1076,6 +1081,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             else
                 CC.StartStarfieldMS();
 
+        }
+
+        private void toolStripMenuInstallMod_Click(object sender, EventArgs e)
+        {
+            InstallMod();
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
