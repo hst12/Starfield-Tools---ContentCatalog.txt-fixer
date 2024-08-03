@@ -415,6 +415,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 toolStripStatusLabel1.ForeColor = DefaultForeColor;
                 toolStripStatusLabel1.Text = "Restore done";
+                isModified = false;
             }
             catch (Exception ex)
             {
@@ -619,6 +620,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Settings.Default.ProfileFolder = SavePlugins.FileName.Substring(0, SavePlugins.FileName.LastIndexOf('\\'));
                 Settings.Default.Save();
                 GetProfiles();
+                isModified = false;
             }
         }
 
@@ -631,6 +633,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 File.Copy(ProfileName, CC.GetStarfieldPath() + "\\Plugins.txt", true);
                 Settings.Default.LastProfile = ProfileName.Substring(ProfileName.LastIndexOf('\\') + 1);
                 SaveSettings();
+                isModified = false;
             }
             catch
             {
@@ -684,12 +687,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 GameData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
                 dataGridView1.Rows.Add(true, GameData.Substring(1));
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
+                isModified = true;
             }
         }
 
         private void DeleteLine()
         {
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            isModified = true;
         }
 
         private void toolStripMenuDelete_Click(object sender, EventArgs e)
@@ -761,6 +766,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
                 toolStripStatusLabel1.Text = AddedFiles.ToString() + " file(s) added";
+                isModified = true;
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to add";
@@ -808,6 +814,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                             dataGridView1.Rows.RemoveAt(j);
                 }
                 toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removed";
+                isModified = true;
             }
             else
                 toolStripStatusLabel1.Text = "Nothing to remove";
@@ -1000,6 +1007,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (DialogResult == DialogResult.OK)
             {
+                isModified = true;
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
                 string directoryPath = StarfieldGamePath + "\\Data";
 
@@ -1024,6 +1032,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void EnableDisable()
         {
+            isModified = true;
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells[0].Value = !(bool)(currentRow.Cells[0].Value);
 
@@ -1042,6 +1051,31 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             EnableDisable();
+        }
+
+        private void toolStripMenuRunSteam_Click(object sender, EventArgs e)
+        {
+            if (isModified)
+            {
+                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.OK)
+                    CC.StartStarfieldSteam();
+            }
+            else
+                CC.StartStarfieldSteam();
+        }
+
+        private void toolStripMenuRunMS_Click(object sender, EventArgs e)
+        {
+            if (isModified)
+            {
+                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.OK)
+                    CC.StartStarfieldMS();
+            }
+            else
+                CC.StartStarfieldMS();
+
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
