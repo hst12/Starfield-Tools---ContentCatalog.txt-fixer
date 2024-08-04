@@ -122,6 +122,8 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -147,7 +149,7 @@
             this.TimeStamp});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 52);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -155,7 +157,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1579, 809);
+            this.dataGridView1.Size = new System.Drawing.Size(1579, 817);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
@@ -364,11 +366,11 @@
             // btnOK
             // 
             this.btnOK.AutoSize = true;
-            this.btnOK.Location = new System.Drawing.Point(1208, 4);
+            this.btnOK.Location = new System.Drawing.Point(1244, 4);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(178, 67);
-            this.btnOK.TabIndex = 1;
+            this.btnOK.Size = new System.Drawing.Size(161, 67);
+            this.btnOK.TabIndex = 9;
             this.btnOK.Text = "Ok";
             this.toolTip1.SetToolTip(this.btnOK, "Save changes and close");
             this.btnOK.UseVisualStyleBackColor = true;
@@ -377,11 +379,11 @@
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
-            this.btnCancel.Location = new System.Drawing.Point(1396, 4);
+            this.btnCancel.Location = new System.Drawing.Point(1413, 4);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(178, 67);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.Size = new System.Drawing.Size(161, 67);
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancel";
             this.toolTip1.SetToolTip(this.btnCancel, "Cancel Changes");
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -390,12 +392,12 @@
             // btnBottom
             // 
             this.btnBottom.AutoSize = true;
-            this.btnBottom.Location = new System.Drawing.Point(544, 4);
+            this.btnBottom.Location = new System.Drawing.Point(298, 4);
             this.btnBottom.Margin = new System.Windows.Forms.Padding(4);
             this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(178, 67);
-            this.btnBottom.TabIndex = 5;
-            this.btnBottom.Text = "Bottom";
+            this.btnBottom.Size = new System.Drawing.Size(90, 67);
+            this.btnBottom.TabIndex = 3;
+            this.btnBottom.Text = "B";
             this.toolTip1.SetToolTip(this.btnBottom, "Move mod to the bottom");
             this.btnBottom.UseVisualStyleBackColor = true;
             this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
@@ -403,12 +405,12 @@
             // btnTop
             // 
             this.btnTop.AutoSize = true;
-            this.btnTop.Location = new System.Drawing.Point(366, 4);
+            this.btnTop.Location = new System.Drawing.Point(202, 4);
             this.btnTop.Margin = new System.Windows.Forms.Padding(4);
             this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(178, 67);
-            this.btnTop.TabIndex = 4;
-            this.btnTop.Text = "Top";
+            this.btnTop.Size = new System.Drawing.Size(90, 67);
+            this.btnTop.TabIndex = 2;
+            this.btnTop.Text = "T";
             this.toolTip1.SetToolTip(this.btnTop, "Move mod to the top");
             this.btnTop.UseVisualStyleBackColor = true;
             this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
@@ -416,12 +418,12 @@
             // btnDown
             // 
             this.btnDown.AutoSize = true;
-            this.btnDown.Location = new System.Drawing.Point(188, 4);
+            this.btnDown.Location = new System.Drawing.Point(106, 4);
             this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(178, 67);
-            this.btnDown.TabIndex = 3;
-            this.btnDown.Text = "Down";
+            this.btnDown.Size = new System.Drawing.Size(90, 67);
+            this.btnDown.TabIndex = 1;
+            this.btnDown.Text = "D";
             this.toolTip1.SetToolTip(this.btnDown, "Move mod down");
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
@@ -432,9 +434,9 @@
             this.btnUp.Location = new System.Drawing.Point(10, 4);
             this.btnUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(178, 67);
-            this.btnUp.TabIndex = 2;
-            this.btnUp.Text = "Up";
+            this.btnUp.Size = new System.Drawing.Size(90, 67);
+            this.btnUp.TabIndex = 0;
+            this.btnUp.Text = "U";
             this.toolTip1.SetToolTip(this.btnUp, "Move mod up");
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
@@ -460,6 +462,8 @@
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.btnRun);
+            this.panel2.Controls.Add(this.btnSave);
             this.panel2.Controls.Add(this.chkProfile);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.cmbProfile);
@@ -481,11 +485,11 @@
             // chkProfile
             // 
             this.chkProfile.AutoSize = true;
-            this.chkProfile.Location = new System.Drawing.Point(1028, 2);
+            this.chkProfile.Location = new System.Drawing.Point(1056, 2);
             this.chkProfile.Margin = new System.Windows.Forms.Padding(4);
             this.chkProfile.Name = "chkProfile";
             this.chkProfile.Size = new System.Drawing.Size(123, 29);
-            this.chkProfile.TabIndex = 17;
+            this.chkProfile.TabIndex = 7;
             this.chkProfile.Text = "Enabled";
             this.toolTip1.SetToolTip(this.chkProfile, "Enable/Disable Profiles");
             this.chkProfile.UseVisualStyleBackColor = true;
@@ -494,7 +498,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(948, 0);
+            this.label2.Location = new System.Drawing.Point(976, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 25);
@@ -504,18 +508,18 @@
             // cmbProfile
             // 
             this.cmbProfile.FormattingEnabled = true;
-            this.cmbProfile.Location = new System.Drawing.Point(948, 38);
+            this.cmbProfile.Location = new System.Drawing.Point(976, 38);
             this.cmbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfile.Name = "cmbProfile";
             this.cmbProfile.Size = new System.Drawing.Size(212, 33);
-            this.cmbProfile.TabIndex = 15;
+            this.cmbProfile.TabIndex = 8;
             this.toolTip1.SetToolTip(this.cmbProfile, "Profile select");
             this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(732, 2);
+            this.label1.Location = new System.Drawing.Point(760, 2);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(182, 25);
@@ -525,11 +529,11 @@
             // 
             // txtSearchBox
             // 
-            this.txtSearchBox.Location = new System.Drawing.Point(732, 40);
+            this.txtSearchBox.Location = new System.Drawing.Point(760, 40);
             this.txtSearchBox.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(182, 31);
-            this.txtSearchBox.TabIndex = 12;
+            this.txtSearchBox.TabIndex = 6;
             this.txtSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchBox_KeyDown);
             // 
             // tableLayoutPanel1
@@ -565,7 +569,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1587, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(1587, 40);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -930,6 +934,28 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(396, 4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(161, 67);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.toolTip1.SetToolTip(this.btnSave, "Save Plugins.txt");
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnRun
+            // 
+            this.btnRun.Location = new System.Drawing.Point(564, 4);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(161, 67);
+            this.btnRun.TabIndex = 5;
+            this.btnRun.Text = "Run";
+            this.toolTip1.SetToolTip(this.btnRun, "Run the game");
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1054,5 +1080,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuSteam;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuMS;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnRun;
     }
 }

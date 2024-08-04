@@ -26,7 +26,10 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent);
-
+            btnUp.Text = char.ConvertFromUtf32(0x2191);
+            btnDown.Text = char.ConvertFromUtf32(0x2193);
+            btnTop.Text = char.ConvertFromUtf32(0x2191) + char.ConvertFromUtf32(0x2191);
+            btnBottom.Text = char.ConvertFromUtf32(0x2193) + char.ConvertFromUtf32(0x2193); ;
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
 
@@ -1141,6 +1144,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             dataGridView1.CurrentCell = dgCurrent;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            if (GameVersion)
+                CC.StartStarfieldMS();
+            else
+                CC.StartStarfieldSteam();
         }
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)
