@@ -20,7 +20,7 @@ namespace Starfield_Tools
         ContentCatalog CC = new ContentCatalog();
         public string StarfieldGamePath;
 
-        bool isModified = false, Profiles = false;
+        bool isModified = false, Profiles = false, GameVersion = false;
 
         public frmLoadOrder()
         {
@@ -36,9 +36,20 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
-            menuStrip1.Font = Settings.Default.FontSize;
+            menuStrip1.Font = Settings.Default.FontSize; // Get settings
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
+            GameVersion = Settings.Default.GameVersion;
+            if (GameVersion == false)
+            {
+                toolStripMenuSteam.Checked = true;
+                toolStripMenuRunMSContext.Visible = false;
+            }
+            else
+            {
+                toolStripMenuMS.Checked = true;
+                toolStripMenuRunSteamContext.Visible = false;
+            }
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
@@ -1091,6 +1102,45 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuSave_Click(object sender, EventArgs e)
         {
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+        }
+
+        private void toolStripMenuRunSteamContext_Click(object sender, EventArgs e)
+        {
+            CC.StartStarfieldSteam();
+        }
+
+        private void toolStripMenuRunMSContext_Click(object sender, EventArgs e)
+        {
+            CC.StartStarfieldMS();
+        }
+
+        private void toolStripMenuSteam_Click(object sender, EventArgs e)
+        {
+            toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
+            if (toolStripMenuSteam.Checked)
+            {
+                toolStripMenuMS.Checked = false;
+                GameVersion = false;
+                Settings.Default.GameVersion= GameVersion;
+            }
+            else
+                toolStripMenuMS.Checked = true;
+            Settings.Default.GameVersion = GameVersion;
+            SaveSettings();
+        }
+
+        private void toolStripMenuMS_Click(object sender, EventArgs e)
+        {
+            toolStripMenuMS.Checked = !toolStripMenuMS.Checked;
+            if (toolStripMenuMS.Checked)
+            {
+                toolStripMenuSteam.Checked = false;
+                GameVersion = true;
+            }
+            else
+                toolStripMenuSteam.Checked = true;
+            Settings.Default.GameVersion = GameVersion;
+            SaveSettings();
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)

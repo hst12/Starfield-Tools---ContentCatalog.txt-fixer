@@ -129,5 +129,17 @@ namespace Starfield_Tools.Properties {
                 this["LastProfile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GameVersion {
+            get {
+                return ((bool)(this["GameVersion"]));
+            }
+            set {
+                this["GameVersion"] = value;
+            }
+        }
     }
 }
