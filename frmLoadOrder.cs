@@ -1119,6 +1119,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
             if (toolStripMenuSteam.Checked)
             {
+                toolStripMenuRunMSContext.Visible = false;
+                toolStripMenuRunSteamContext.Visible = true;
                 toolStripMenuMS.Checked = false;
                 GameVersion = false;
                 Settings.Default.GameVersion= GameVersion;
@@ -1135,6 +1137,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (toolStripMenuMS.Checked)
             {
                 toolStripMenuSteam.Checked = false;
+                toolStripMenuRunMSContext.Visible = true;
+                toolStripMenuRunSteamContext.Visible = false;
+
                 GameVersion = true;
             }
             else
@@ -1149,3 +1154,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         }
     }
 }
+
+
+/*
+ *                toolStripMenuRunMSContext.Visible = false;
+            }
+            else
+            {
+                toolStripMenuMS.Checked = true;
+                toolStripMenuRunSteamContext.Visible = false;
+ 
+ * */

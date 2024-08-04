@@ -93,6 +93,9 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuSetPath = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuSteam = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuMS = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuRunSteam = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuRunMS = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,9 +121,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuSteam = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuMS = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -146,15 +147,15 @@
             this.TimeStamp});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 52);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1672, 817);
+            this.dataGridView1.Size = new System.Drawing.Size(1672, 809);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
@@ -363,11 +364,12 @@
             // 
             this.btnOK.AutoSize = true;
             this.btnOK.Location = new System.Drawing.Point(1208, 4);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(178, 67);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "Ok";
+            this.toolTip1.SetToolTip(this.btnOK, "Save changes and close");
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -375,11 +377,12 @@
             // 
             this.btnCancel.AutoSize = true;
             this.btnCancel.Location = new System.Drawing.Point(1396, 4);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
             this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.btnCancel, "Cancel Changes");
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -387,11 +390,12 @@
             // 
             this.btnBottom.AutoSize = true;
             this.btnBottom.Location = new System.Drawing.Point(520, 4);
-            this.btnBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBottom.Margin = new System.Windows.Forms.Padding(4);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(178, 67);
             this.btnBottom.TabIndex = 5;
             this.btnBottom.Text = "Bottom";
+            this.toolTip1.SetToolTip(this.btnBottom, "Move mod to the bottom");
             this.btnBottom.UseVisualStyleBackColor = true;
             this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
             // 
@@ -399,11 +403,12 @@
             // 
             this.btnTop.AutoSize = true;
             this.btnTop.Location = new System.Drawing.Point(350, 4);
-            this.btnTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTop.Margin = new System.Windows.Forms.Padding(4);
             this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(150, 67);
+            this.btnTop.Size = new System.Drawing.Size(178, 67);
             this.btnTop.TabIndex = 4;
             this.btnTop.Text = "Top";
+            this.toolTip1.SetToolTip(this.btnTop, "Move mod to the top");
             this.btnTop.UseVisualStyleBackColor = true;
             this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
             // 
@@ -411,11 +416,12 @@
             // 
             this.btnDown.AutoSize = true;
             this.btnDown.Location = new System.Drawing.Point(180, 4);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(152, 67);
+            this.btnDown.Size = new System.Drawing.Size(178, 67);
             this.btnDown.TabIndex = 3;
             this.btnDown.Text = "Down";
+            this.toolTip1.SetToolTip(this.btnDown, "Move mod down");
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
@@ -423,11 +429,12 @@
             // 
             this.btnUp.AutoSize = true;
             this.btnUp.Location = new System.Drawing.Point(10, 4);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(150, 67);
+            this.btnUp.Size = new System.Drawing.Size(178, 67);
             this.btnUp.TabIndex = 2;
             this.btnUp.Text = "Up";
+            this.toolTip1.SetToolTip(this.btnUp, "Move mod up");
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
@@ -439,7 +446,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 948);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1604, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1608, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -463,21 +470,23 @@
             this.panel2.Controls.Add(this.btnUp);
             this.panel2.Controls.Add(this.btnTop);
             this.panel2.Controls.Add(this.btnDown);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(4, 869);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1578, 75);
+            this.panel2.Size = new System.Drawing.Size(1672, 75);
             this.panel2.TabIndex = 6;
             // 
             // chkProfile
             // 
             this.chkProfile.AutoSize = true;
             this.chkProfile.Location = new System.Drawing.Point(1028, 2);
-            this.chkProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkProfile.Margin = new System.Windows.Forms.Padding(4);
             this.chkProfile.Name = "chkProfile";
             this.chkProfile.Size = new System.Drawing.Size(123, 29);
             this.chkProfile.TabIndex = 17;
             this.chkProfile.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.chkProfile, "Enable/Disable Profiles");
             this.chkProfile.UseVisualStyleBackColor = true;
             this.chkProfile.CheckedChanged += new System.EventHandler(this.chkProfile_CheckedChanged);
             // 
@@ -495,10 +504,11 @@
             // 
             this.cmbProfile.FormattingEnabled = true;
             this.cmbProfile.Location = new System.Drawing.Point(948, 38);
-            this.cmbProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfile.Name = "cmbProfile";
             this.cmbProfile.Size = new System.Drawing.Size(212, 33);
             this.cmbProfile.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.cmbProfile, "Profile select");
             this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
             // 
             // label1
@@ -510,11 +520,12 @@
             this.label1.Size = new System.Drawing.Size(182, 25);
             this.label1.TabIndex = 14;
             this.label1.Text = "<Enter> to search";
+            this.toolTip1.SetToolTip(this.label1, "Type text below and press <enter> to search");
             // 
             // txtSearchBox
             // 
             this.txtSearchBox.Location = new System.Drawing.Point(732, 40);
-            this.txtSearchBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchBox.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(182, 31);
             this.txtSearchBox.TabIndex = 12;
@@ -530,18 +541,17 @@
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1604, 948);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1608, 948);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -553,8 +563,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1680, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1680, 48);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -577,7 +586,7 @@
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 44);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -689,7 +698,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuDeleteLine});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 44);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -709,7 +718,7 @@
             this.toolStripMenuSteam,
             this.toolStripMenuMS});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 44);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -726,13 +735,32 @@
             this.toolStripMenuSetPath.Text = "Starfield path";
             this.toolStripMenuSetPath.Click += new System.EventHandler(this.toolStripMenuSetPath_Click);
             // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(381, 6);
+            // 
+            // toolStripMenuSteam
+            // 
+            this.toolStripMenuSteam.Name = "toolStripMenuSteam";
+            this.toolStripMenuSteam.Size = new System.Drawing.Size(384, 44);
+            this.toolStripMenuSteam.Text = "Game Version - Steam";
+            this.toolStripMenuSteam.Click += new System.EventHandler(this.toolStripMenuSteam_Click);
+            // 
+            // toolStripMenuMS
+            // 
+            this.toolStripMenuMS.Name = "toolStripMenuMS";
+            this.toolStripMenuMS.Size = new System.Drawing.Size(384, 44);
+            this.toolStripMenuMS.Text = "Game Version - MS";
+            this.toolStripMenuMS.Click += new System.EventHandler(this.toolStripMenuMS_Click);
+            // 
             // toolStripMenuGame
             // 
             this.toolStripMenuGame.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuRunSteam,
             this.toolStripMenuRunMS});
             this.toolStripMenuGame.Name = "toolStripMenuGame";
-            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 38);
+            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 44);
             this.toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRunSteam
@@ -767,7 +795,7 @@
             this.toolStripSeparator9,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
-            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
+            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 44);
             this.toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -868,7 +896,7 @@
             this.toolStripMenuCreations,
             this.toolStripMenuNexus});
             this.toolStripMenuLinks.Name = "toolStripMenuLinks";
-            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 38);
+            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 44);
             this.toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -890,7 +918,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 44);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -900,36 +928,17 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(381, 6);
-            // 
-            // toolStripMenuSteam
-            // 
-            this.toolStripMenuSteam.Name = "toolStripMenuSteam";
-            this.toolStripMenuSteam.Size = new System.Drawing.Size(384, 44);
-            this.toolStripMenuSteam.Text = "Game Version - Steam";
-            this.toolStripMenuSteam.Click += new System.EventHandler(this.toolStripMenuSteam_Click);
-            // 
-            // toolStripMenuMS
-            // 
-            this.toolStripMenuMS.Name = "toolStripMenuMS";
-            this.toolStripMenuMS.Size = new System.Drawing.Size(384, 44);
-            this.toolStripMenuMS.Text = "Game Version - MS";
-            this.toolStripMenuMS.Click += new System.EventHandler(this.toolStripMenuMS_Click);
-            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1604, 990);
+            this.ClientSize = new System.Drawing.Size(1608, 990);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLoadOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Load Order";
@@ -1042,5 +1051,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuSteam;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuMS;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
