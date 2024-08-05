@@ -175,7 +175,7 @@ namespace Starfield_Tools
             richTextBox1.Text = "";
             bool ErrorFound = false;
             int ErrorCount = 0;
-            richTextBox2.Text += "\nChecking Catalog...\n";
+            richTextBox2.Text += "Checking Catalog...\n";
             double VersionCheck;
             long TimeStamp;
 
@@ -510,8 +510,7 @@ namespace Starfield_Tools
 
             File.WriteAllText(CC.GetCatalog(), json); // Write updated cataalog
             DisplayCatalog();
-            toolStripStatusLabel1.Text = "Version numbers reset";
-            richTextBox2.Text = "";
+            toolStripStatusLabel1.Text = "Version numbers reset\n";
         }
 
         private void btnCreations_Click(object sender, EventArgs e)
@@ -657,7 +656,7 @@ namespace Starfield_Tools
             int errorCount = 0;
             double VersionCheck;
             long TimeStamp;
-            richTextBox2.Text = "";
+            //richTextBox2.Text = "";
             int VersionReplacementCount = 0;
 
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);

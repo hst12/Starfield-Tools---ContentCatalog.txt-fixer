@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -1136,6 +1137,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 CC.StartStarfieldMS();
             else
                 CC.StartStarfieldSteam();
+        }
+
+        private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)
+        {
+            AddRemove();
         }
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)
