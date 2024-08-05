@@ -69,5 +69,45 @@ namespace Starfield_Tools.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Github_Octicons_Arrow_down_24_32 {
+            get {
+                object obj = ResourceManager.GetObject("Github-Octicons-Arrow-down-24.32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Github_Octicons_Arrow_up_24_32 {
+            get {
+                object obj = ResourceManager.GetObject("Github-Octicons-Arrow-up-24.32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Github_Octicons_Move_to_bottom_24_32 {
+            get {
+                object obj = ResourceManager.GetObject("Github-Octicons-Move-to-bottom-24.32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Github_Octicons_Move_to_top_24_32 {
+            get {
+                object obj = ResourceManager.GetObject("Github-Octicons-Move-to-top-24.32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

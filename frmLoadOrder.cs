@@ -26,10 +26,6 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent);
-            btnUp.Text = char.ConvertFromUtf32(0x2191);
-            btnDown.Text = char.ConvertFromUtf32(0x2193);
-            btnTop.Text = char.ConvertFromUtf32(0x2191) + char.ConvertFromUtf32(0x2191);
-            btnBottom.Text = char.ConvertFromUtf32(0x2193) + char.ConvertFromUtf32(0x2193); ;
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
 
@@ -46,13 +42,11 @@ namespace Starfield_Tools
             if (GameVersion == false)
             {
                 toolStripMenuSteam.Checked = true;
-                toolStripMenuRunMSContext.Visible = false;
                 toolStripMenuRunMS.Visible = false;
             }
             else
             {
                 toolStripMenuMS.Checked = true;
-                toolStripMenuRunSteamContext.Visible = false;
                 toolStripMenuRunSteam.Visible = false;
             }
             InitDataGrid();
@@ -1104,29 +1098,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             InstallMod();
         }
 
-        private void toolStripMenuSave_Click(object sender, EventArgs e)
-        {
-            SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
-        }
-
-        private void toolStripMenuRunSteamContext_Click(object sender, EventArgs e)
-        {
-            CC.StartStarfieldSteam();
-        }
-
-        private void toolStripMenuRunMSContext_Click(object sender, EventArgs e)
-        {
-            CC.StartStarfieldMS();
-        }
-
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
             toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
             if (toolStripMenuSteam.Checked)
             {
-                toolStripMenuRunMSContext.Visible = false;
                 toolStripMenuRunMS.Visible = false;
-                toolStripMenuRunSteamContext.Visible = true;
                 toolStripMenuRunSteam.Visible = true;
                 toolStripMenuMS.Checked = false;
                 GameVersion = false;
@@ -1148,7 +1125,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+            dataGridView1.CurrentCell = dgCurrent;
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -1165,9 +1144,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (toolStripMenuMS.Checked)
             {
                 toolStripMenuSteam.Checked = false;
-                toolStripMenuRunMSContext.Visible = true;
                 toolStripMenuRunMS.Visible = true;
-                toolStripMenuRunSteamContext.Visible = false;
                 toolStripMenuRunSteam.Visible = false;
 
                 GameVersion = true;

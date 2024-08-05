@@ -50,36 +50,27 @@
             this.toolStripMenuInstallMod = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuUninstallContext = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuRunSteamContext = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuRunMSContext = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnBottom = new System.Windows.Forms.Button();
-            this.btnTop = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnRun = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.chkProfile = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbProfile = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchBox = new System.Windows.Forms.TextBox();
+            this.btnBottom = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuExportActive = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,8 +113,12 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnRun = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -149,7 +144,7 @@
             this.TimeStamp});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 52);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -157,7 +152,7 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1579, 817);
+            this.dataGridView1.Size = new System.Drawing.Size(1579, 809);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
@@ -243,14 +238,9 @@
             this.toolStripMenuInstallMod,
             this.toolStripMenuUninstallContext,
             this.toolStripSeparator11,
-            this.toolStripMenuSave,
-            this.toolStripSeparator12,
-            this.toolStripMenuRunSteamContext,
-            this.toolStripMenuRunMSContext,
-            this.toolStripSeparator13,
             this.toolStripMenuRefresh});
             this.contextMenuDatagrid.Name = "contextMenuDatagrid";
-            this.contextMenuDatagrid.Size = new System.Drawing.Size(507, 490);
+            this.contextMenuDatagrid.Size = new System.Drawing.Size(507, 364);
             // 
             // toolStripMenuEnableDisable
             // 
@@ -324,37 +314,6 @@
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(503, 6);
             // 
-            // toolStripMenuSave
-            // 
-            this.toolStripMenuSave.Name = "toolStripMenuSave";
-            this.toolStripMenuSave.Size = new System.Drawing.Size(506, 38);
-            this.toolStripMenuSave.Text = "Save";
-            this.toolStripMenuSave.Click += new System.EventHandler(this.toolStripMenuSave_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(503, 6);
-            // 
-            // toolStripMenuRunSteamContext
-            // 
-            this.toolStripMenuRunSteamContext.Name = "toolStripMenuRunSteamContext";
-            this.toolStripMenuRunSteamContext.Size = new System.Drawing.Size(506, 38);
-            this.toolStripMenuRunSteamContext.Text = "Run (Steam)";
-            this.toolStripMenuRunSteamContext.Click += new System.EventHandler(this.toolStripMenuRunSteamContext_Click);
-            // 
-            // toolStripMenuRunMSContext
-            // 
-            this.toolStripMenuRunMSContext.Name = "toolStripMenuRunMSContext";
-            this.toolStripMenuRunMSContext.Size = new System.Drawing.Size(506, 38);
-            this.toolStripMenuRunMSContext.Text = "Run (MS)";
-            this.toolStripMenuRunMSContext.Click += new System.EventHandler(this.toolStripMenuRunMSContext_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(503, 6);
-            // 
             // toolStripMenuRefresh
             // 
             this.toolStripMenuRefresh.Name = "toolStripMenuRefresh";
@@ -388,58 +347,6 @@
             this.toolTip1.SetToolTip(this.btnCancel, "Cancel Changes");
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnBottom
-            // 
-            this.btnBottom.AutoSize = true;
-            this.btnBottom.Location = new System.Drawing.Point(298, 4);
-            this.btnBottom.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(90, 67);
-            this.btnBottom.TabIndex = 3;
-            this.btnBottom.Text = "B";
-            this.toolTip1.SetToolTip(this.btnBottom, "Move mod to the bottom");
-            this.btnBottom.UseVisualStyleBackColor = true;
-            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
-            // 
-            // btnTop
-            // 
-            this.btnTop.AutoSize = true;
-            this.btnTop.Location = new System.Drawing.Point(202, 4);
-            this.btnTop.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(90, 67);
-            this.btnTop.TabIndex = 2;
-            this.btnTop.Text = "T";
-            this.toolTip1.SetToolTip(this.btnTop, "Move mod to the top");
-            this.btnTop.UseVisualStyleBackColor = true;
-            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
-            // 
-            // btnDown
-            // 
-            this.btnDown.AutoSize = true;
-            this.btnDown.Location = new System.Drawing.Point(106, 4);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(90, 67);
-            this.btnDown.TabIndex = 1;
-            this.btnDown.Text = "D";
-            this.toolTip1.SetToolTip(this.btnDown, "Move mod down");
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-            // 
-            // btnUp
-            // 
-            this.btnUp.AutoSize = true;
-            this.btnUp.Location = new System.Drawing.Point(10, 4);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(2);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(90, 67);
-            this.btnUp.TabIndex = 0;
-            this.btnUp.Text = "U";
-            this.toolTip1.SetToolTip(this.btnUp, "Move mod up");
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // statusStrip1
             // 
@@ -481,6 +388,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1579, 75);
             this.panel2.TabIndex = 6;
+            // 
+            // btnRun
+            // 
+            this.btnRun.Location = new System.Drawing.Point(564, 4);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(161, 67);
+            this.btnRun.TabIndex = 5;
+            this.btnRun.Text = "Run";
+            this.toolTip1.SetToolTip(this.btnRun, "Run the game");
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(396, 4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(161, 67);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.toolTip1.SetToolTip(this.btnSave, "Save Plugins.txt");
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // chkProfile
             // 
@@ -536,6 +465,19 @@
             this.txtSearchBox.TabIndex = 6;
             this.txtSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchBox_KeyDown);
             // 
+            // btnBottom
+            // 
+            this.btnBottom.AutoSize = true;
+            this.btnBottom.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Move_to_bottom_24_32;
+            this.btnBottom.Location = new System.Drawing.Point(298, 4);
+            this.btnBottom.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBottom.Name = "btnBottom";
+            this.btnBottom.Size = new System.Drawing.Size(90, 67);
+            this.btnBottom.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnBottom, "Move mod to the bottom");
+            this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -569,7 +511,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1587, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1587, 48);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -592,28 +534,8 @@
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 44);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 40);
             this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Enabled = false;
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
-            this.newToolStripMenuItem.Text = "&New";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
-            this.openToolStripMenuItem.Text = "&Open Profile";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
@@ -638,16 +560,6 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(494, 6);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
-            this.saveToolStripMenuItem.Text = "&Save Plugins.txt";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -704,7 +616,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuDeleteLine});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 44);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 40);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -724,7 +636,7 @@
             this.toolStripMenuSteam,
             this.toolStripMenuMS});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 44);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 40);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -766,7 +678,7 @@
             this.toolStripMenuRunSteam,
             this.toolStripMenuRunMS});
             this.toolStripMenuGame.Name = "toolStripMenuGame";
-            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 44);
+            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 40);
             this.toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRunSteam
@@ -801,7 +713,7 @@
             this.toolStripSeparator9,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
-            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 44);
+            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 40);
             this.toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -902,7 +814,7 @@
             this.toolStripMenuCreations,
             this.toolStripMenuNexus});
             this.toolStripMenuLinks.Name = "toolStripMenuLinks";
-            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 44);
+            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 40);
             this.toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -924,7 +836,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 44);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 40);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -934,27 +846,74 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // btnSave
+            // btnUp
             // 
-            this.btnSave.Location = new System.Drawing.Point(396, 4);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(161, 67);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Save";
-            this.toolTip1.SetToolTip(this.btnSave, "Save Plugins.txt");
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnUp.AutoSize = true;
+            this.btnUp.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Arrow_up_24_32;
+            this.btnUp.Location = new System.Drawing.Point(10, 4);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(2);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(90, 67);
+            this.btnUp.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btnUp, "Move mod up");
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // btnRun
+            // btnTop
             // 
-            this.btnRun.Location = new System.Drawing.Point(564, 4);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(161, 67);
-            this.btnRun.TabIndex = 5;
-            this.btnRun.Text = "Run";
-            this.toolTip1.SetToolTip(this.btnRun, "Run the game");
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            this.btnTop.AutoSize = true;
+            this.btnTop.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Move_to_top_24_32;
+            this.btnTop.Location = new System.Drawing.Point(202, 4);
+            this.btnTop.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(90, 67);
+            this.btnTop.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnTop, "Move mod to the top");
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.AutoSize = true;
+            this.btnDown.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Arrow_down_24_32;
+            this.btnDown.Location = new System.Drawing.Point(106, 4);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(90, 67);
+            this.btnDown.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnDown, "Move mod down");
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Enabled = false;
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
+            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            this.newToolStripMenuItem.Text = "&New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            this.openToolStripMenuItem.Text = "&Open Profile";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
+            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            this.saveToolStripMenuItem.Text = "&Save Plugins.txt";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // frmLoadOrder
             // 
@@ -1071,11 +1030,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunSteam;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunMS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuInstallMod;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuSave;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunSteamContext;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunMSContext;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuSteam;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuMS;
