@@ -236,7 +236,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     StatText += ", esp files: " + espCount.ToString();
                 }
                 if (ba2Count > 0)
-                    StatText += ", archive files: " + ba2Count.ToString();
+                    StatText += ", Archive files: " + ba2Count.ToString();
 
                 toolStripStatusLabel1.Text = StatText;
                 /*foreach (var item in esmFiles)
@@ -1149,6 +1149,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)
         {
             AddRemove();
+        }
+
+        private void toolStripMenuBGSStarfield_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://discord.com/channels/784542837596225567/1083043812949110825");
+        }
+
+        private void toolStripMenuBGSX_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://x.com/StarfieldGame");
         }
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)
