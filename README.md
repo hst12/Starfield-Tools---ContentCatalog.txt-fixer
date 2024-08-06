@@ -1,4 +1,4 @@
-Starfield Tools 1.5.0.0
+Starfield Tools 1.6.0.0
 
 Checks ContentCatalog.txt file automatically when launched.
 
