@@ -77,6 +77,7 @@ namespace Starfield_Tools
             {
                 if (!CheckCatalog()) // If not okay, then...
                 {
+                    richTextBox2.Text += "\nCatalog corrupt\n";
                     if (AutoRestore) // Restore backup file if auto restore is on
                     {
                         if (RestoreCatalog())
@@ -356,8 +357,7 @@ namespace Starfield_Tools
         {
             if (!CheckCatalog())
             {
-                richTextBox2.Text = "Catalog is corrupted. Backup not made.\n";
-                //toolStripStatusLabel1.Text = "Catalog is corrupted. Backup not made.";
+                richTextBox2.Text += "\nCatalog is corrupted. Backup not made.\n";
                 if (AutoClean)
                     CleanCatalog();
                 return;
@@ -372,7 +372,7 @@ namespace Starfield_Tools
                 {
                     // Copy the file
                     File.Copy(sourceFileName, destFileName, true); // overwrite
-                    richTextBox2.Text += "Backup done\n";
+                    richTextBox2.Text += "\nBackup done\n";
                     toolStripStatusLabel1.Text = "Backup done";
                 }
                 catch (Exception ex)
@@ -450,6 +450,7 @@ namespace Starfield_Tools
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
             DisplayCatalog();
+            ScrollToEnd();
         }
 
         private bool RestoreCatalog()
@@ -462,13 +463,13 @@ namespace Starfield_Tools
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                richTextBox2.Text = "Restore complete\n";
+                richTextBox2.Text += "\nRestore complete\n";
                 toolStripStatusLabel1.Text = "Restore complete";
                 return true;
             }
             catch
             {
-                richTextBox2.Text += "Restore failed.\n";
+                richTextBox2.Text += "\nRestore failed.\n";
                 toolStripStatusLabel1.Text = "Restore failed";
                 return false;
             }
@@ -477,7 +478,7 @@ namespace Starfield_Tools
         private void btnResetAll_Click(object sender, EventArgs e)
         {
 
-            DialogResult result = MessageBox.Show("Do you want to continue?", "All version numbers will be reset. This will force all Creations to re-download", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Do you want to continue?", "All version numbers will be reset. This will force all Creations to re-download", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (result != DialogResult.OK)
             {
                 toolStripStatusLabel1.Text = "Version numbers not reset";
@@ -635,8 +636,8 @@ namespace Starfield_Tools
                 }
                 else
                 {
-                    ScrollToEnd();
                     richTextBox2.Text += "\nNo unused mods found in catalog\n";
+                    ScrollToEnd();
                     toolStripStatusLabel1.Text = "No unused mods found in catalog";
                 }
             }
