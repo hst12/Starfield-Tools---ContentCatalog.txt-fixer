@@ -97,6 +97,7 @@ namespace Starfield_Tools
             int TitleCount = 0;
             int esmCount = 0;
             int espCount = 0;
+            int ba2Count = 0;
             string StatText = "";
             double VersionCheck;
             List<string> esmFiles = new List<string>();
@@ -219,6 +220,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     espCount++;
                 }
+                foreach (var file in Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly))
+                {
+                    ba2Count++;
+                }
                 StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " + (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " +
             EnabledCount.ToString();
                 if (esmCount > 0)
@@ -230,6 +235,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     StatText += ", esp files: " + espCount.ToString();
                 }
+                if (ba2Count > 0)
+                    StatText += ", archive files: " + ba2Count.ToString();
 
                 toolStripStatusLabel1.Text = StatText;
                 /*foreach (var item in esmFiles)
