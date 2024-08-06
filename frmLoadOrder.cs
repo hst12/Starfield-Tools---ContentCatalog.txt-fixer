@@ -224,25 +224,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     ba2Count++;
                 }
-                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " + (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " +
-            EnabledCount.ToString();
-                if (esmCount > 0)
-                {
-                    StatText += ", esm files: " + esmCount.ToString() + " ";
+                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
+                    (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " + 
+                    esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
 
-                }
                 if (espCount > 0)
                 {
                     StatText += ", esp files: " + espCount.ToString();
                 }
-                if (ba2Count > 0)
-                    StatText += ", Archive files: " + ba2Count.ToString();
 
                 toolStripStatusLabel1.Text = StatText;
-                /*foreach (var item in esmFiles)
-                {
-                    Console.WriteLine(item); // Do something here to automatically add missing .esm files to Plugins.txt
-                }*/
             }
             catch
             {

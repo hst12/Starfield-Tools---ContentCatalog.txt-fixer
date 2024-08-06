@@ -115,13 +115,13 @@
             this.toolStripMenuLinks = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuCreations = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuNexus = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuBGSStarfield = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuBGSX = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripMenuBGSStarfield = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuBGSX = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -147,15 +147,15 @@
             this.TimeStamp});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 46);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1594, 809);
+            this.dataGridView1.Size = new System.Drawing.Size(1615, 811);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
@@ -337,7 +337,7 @@
             // 
             this.btnOK.AutoSize = true;
             this.btnOK.Location = new System.Drawing.Point(1244, 4);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(160, 67);
             this.btnOK.TabIndex = 9;
@@ -350,7 +350,7 @@
             // 
             this.btnCancel.AutoSize = true;
             this.btnCancel.Location = new System.Drawing.Point(1412, 4);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(178, 67);
             this.btnCancel.TabIndex = 10;
@@ -367,7 +367,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 948);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1588, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1623, 42);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "Starting up";
             // 
@@ -395,15 +395,15 @@
             this.panel2.Controls.Add(this.btnDown);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(4, 863);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1594, 81);
+            this.panel2.Size = new System.Drawing.Size(1615, 81);
             this.panel2.TabIndex = 6;
             // 
             // btnRun
             // 
             this.btnRun.Location = new System.Drawing.Point(564, 4);
-            this.btnRun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRun.Margin = new System.Windows.Forms.Padding(4);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(160, 67);
             this.btnRun.TabIndex = 5;
@@ -415,7 +415,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(396, 4);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(160, 67);
             this.btnSave.TabIndex = 4;
@@ -428,7 +428,7 @@
             // 
             this.chkProfile.AutoSize = true;
             this.chkProfile.Location = new System.Drawing.Point(1056, 4);
-            this.chkProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkProfile.Margin = new System.Windows.Forms.Padding(4);
             this.chkProfile.Name = "chkProfile";
             this.chkProfile.Size = new System.Drawing.Size(123, 29);
             this.chkProfile.TabIndex = 7;
@@ -451,7 +451,7 @@
             // 
             this.cmbProfile.FormattingEnabled = true;
             this.cmbProfile.Location = new System.Drawing.Point(976, 38);
-            this.cmbProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfile.Name = "cmbProfile";
             this.cmbProfile.Size = new System.Drawing.Size(212, 33);
             this.cmbProfile.TabIndex = 8;
@@ -472,7 +472,7 @@
             // txtSearchBox
             // 
             this.txtSearchBox.Location = new System.Drawing.Point(760, 40);
-            this.txtSearchBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchBox.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(182, 31);
             this.txtSearchBox.TabIndex = 6;
@@ -483,7 +483,7 @@
             this.btnBottom.AutoSize = true;
             this.btnBottom.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Move_to_bottom_24_32;
             this.btnBottom.Location = new System.Drawing.Point(298, 4);
-            this.btnBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBottom.Margin = new System.Windows.Forms.Padding(4);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(90, 73);
             this.btnBottom.TabIndex = 3;
@@ -496,7 +496,7 @@
             this.btnUp.AutoSize = true;
             this.btnUp.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Arrow_up_24_32;
             this.btnUp.Location = new System.Drawing.Point(10, 4);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(2);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(90, 73);
             this.btnUp.TabIndex = 0;
@@ -509,7 +509,7 @@
             this.btnTop.AutoSize = true;
             this.btnTop.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Move_to_top_24_32;
             this.btnTop.Location = new System.Drawing.Point(202, 4);
-            this.btnTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTop.Margin = new System.Windows.Forms.Padding(4);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(90, 73);
             this.btnTop.TabIndex = 2;
@@ -522,7 +522,7 @@
             this.btnDown.AutoSize = true;
             this.btnDown.Image = global::Starfield_Tools.Properties.Resources.Github_Octicons_Arrow_down_24_32;
             this.btnDown.Location = new System.Drawing.Point(106, 4);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(90, 73);
             this.btnDown.TabIndex = 1;
@@ -540,13 +540,13 @@
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1588, 948);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1623, 948);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
@@ -563,8 +563,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1602, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1623, 40);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -587,7 +586,7 @@
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -699,7 +698,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuDeleteLine});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -719,7 +718,7 @@
             this.toolStripMenuSteam,
             this.toolStripMenuMS});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -761,7 +760,7 @@
             this.toolStripMenuRunSteam,
             this.toolStripMenuRunMS});
             this.toolStripMenuGame.Name = "toolStripMenuGame";
-            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 38);
+            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 36);
             this.toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRunSteam
@@ -796,7 +795,7 @@
             this.toolStripSeparator9,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
-            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
+            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
             this.toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -899,7 +898,7 @@
             this.toolStripMenuBGSStarfield,
             this.toolStripMenuBGSX});
             this.toolStripMenuLinks.Name = "toolStripMenuLinks";
-            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 38);
+            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 36);
             this.toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -916,21 +915,6 @@
             this.toolStripMenuNexus.Text = "Starfield Nexus";
             this.toolStripMenuNexus.Click += new System.EventHandler(this.toolStripMenuNexus_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(227, 44);
-            this.aboutToolStripMenuItem.Text = "&About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // toolStripMenuBGSStarfield
             // 
             this.toolStripMenuBGSStarfield.Name = "toolStripMenuBGSStarfield";
@@ -945,17 +929,32 @@
             this.toolStripMenuBGSX.Text = "BGS Starfield (X.com)";
             this.toolStripMenuBGSX.Click += new System.EventHandler(this.toolStripMenuBGSX_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(227, 44);
+            this.aboutToolStripMenuItem.Text = "&About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1588, 990);
+            this.ClientSize = new System.Drawing.Size(1623, 990);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLoadOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Load Order";
@@ -1049,13 +1048,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRefresh;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuGame;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunSteam;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunMS;
@@ -1069,5 +1061,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenAddRemoveContext;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuBGSStarfield;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuBGSX;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
     }
 }

@@ -15,6 +15,7 @@ namespace Starfield_Tools
     {
 
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
+        public const string CatalogVersion = "1.1";
 
         ContentCatalog CC = new ContentCatalog();
         public string StarfieldGamePath;
@@ -169,6 +170,27 @@ namespace Starfield_Tools
             }
         }
 
+        private string MakeHeaderBlank()
+        {
+            string HeaderString = @"{
+  ""ContentCatalog"" : 
+  {
+    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
+    ""Version"" : ";
+            HeaderString += @"""" + CatalogVersion + @"""";
+            HeaderString += @"
+  }
+}
+";
+            return HeaderString;
+        }
+
+        private string MakeHeader()
+        {
+            string HeaderString = MakeHeaderBlank();
+            HeaderString = HeaderString.Substring(0, HeaderString.Length-5) + ",";
+            return HeaderString;
+        }
 
         private bool CheckCatalog() // returns true if catalog good
         {
@@ -190,6 +212,11 @@ namespace Starfield_Tools
                     return false;
                 }
                 string json = File.ReadAllText(jsonFilePath);
+                if (json=="")
+                {
+                    toolStripStatusLabel1.Text = "Catalog file is empty, nothing to check";
+                    return false;
+                }
                 string TestString = "";
 
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
@@ -199,7 +226,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
-                    if (TestString != "1.1") // Skip catalog header, pull version info apart into date and actual version number
+                    if (TestString != CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
                         richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version: " + TestString.Substring(TestString.IndexOf('.') + 1) + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
@@ -242,14 +269,7 @@ namespace Starfield_Tools
                     if (result == DialogResult.OK)
                     {
 
-                        var CatalogHeader = @"{
-  ""ContentCatalog"" : 
-  {
-    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
-    ""Version"" : ""1.1""
-  }
-}
-";
+                        var CatalogHeader = MakeHeaderBlank();
                         File.WriteAllText(CC.GetCatalog(), CatalogHeader);
                         toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
                         return false;
@@ -276,8 +296,7 @@ namespace Starfield_Tools
                 if (fileSize > 0)
                 {
                     NewFix();
-                    //toolStripStatusLabel1.Text = "File cleaned and rewritten successfully";
-                    //richTextBox2.Text += "Clean complete\n";
+
                     if (AutoBackup)
                         BackupCatalog();
                     DisplayCatalog();
@@ -501,13 +520,7 @@ namespace Starfield_Tools
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
             // Hack the Bethesda header back in
-            json = @"{
-  ""ContentCatalog"" : 
-  {
-    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
-    ""Version"" : ""1.1""
-  },
-" + json.Substring(1); // to strip out a brace char
+            json = MakeHeader() + json.Substring(1);
 
             File.WriteAllText(CC.GetCatalog(), json); // Write updated cataalog
             DisplayCatalog();
@@ -624,13 +637,7 @@ namespace Starfield_Tools
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
                     // Hack the Bethesda header back in
-                    json = @"{
-  ""ContentCatalog"" : 
-  {
-    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
-    ""Version"" : ""1.1""
-  },
-" + json.Substring(1); // to strip out a brace char
+                    json = MakeHeader() + json.Substring(1);
 
                     File.WriteAllText(CC.GetCatalog(), json);
                 }
@@ -652,13 +659,16 @@ namespace Starfield_Tools
             string jsonFilePath = CC.GetCatalog();
 
             string json = File.ReadAllText(jsonFilePath); // Load catalog
-            string TestString = "";
+            if (json == "")
+            {
+                toolStripStatusLabel1.Text = "Catalog file is empty, nothing to clean";
+                return;
+            }
+                string TestString = "";
             bool FixVersion;
-            int errorCount = 0;
+            int errorCount = 0, VersionReplacementCount = 0;
             double VersionCheck;
             long TimeStamp;
-            //richTextBox2.Text = "";
-            int VersionReplacementCount = 0;
 
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
 
@@ -678,7 +688,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != "1.1") // Skip the catalog header then check for valid timestamps
+                if (TestString != CatalogVersion) // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
                     TimeStamp = kvp.Value.Timestamp;
@@ -694,18 +704,16 @@ namespace Starfield_Tools
                     errorCount++;
                 }
             }
-            data.Remove("ContentCatalog"); // remove messed up content catalog section
+            data.Remove("ContentCatalog"); // remove content catalog section in case it's corrupted
 
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
-
-            // Hack the Bethesda header back in. This will probably break if the version no. is updated from 1.1
-            json = @"{
-  ""ContentCatalog"" : 
-  {
-    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
-    ""Version"" : ""1.1""
-  },
-" + json.Substring(1); // to strip out a brace char
+            if (json == "{}")
+            {
+                toolStripStatusLabel1.Text = "Catalog is empty";
+                return;
+            }
+            // Insert the Bethesda header back in. This will probably break if the version no. is updated from 1.1
+            json = MakeHeader() + json.Substring(1); // Remove a { char
 
             File.WriteAllText(jsonFilePath, json);
             toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";
