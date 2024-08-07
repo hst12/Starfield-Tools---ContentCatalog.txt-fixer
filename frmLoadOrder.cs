@@ -536,7 +536,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
             {
                 DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
-                Console.WriteLine(DataGridSring);
                 if (DataGridSring.Contains(TextBoxString))
                 {
                     toolStripStatusLabel1.Text = "Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString();
@@ -860,8 +859,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("changed");
-
             SwitchProfile(Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
             InitDataGrid();
         }
@@ -1050,7 +1047,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             isModified = true;
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
-
+            SaveOnDblClick();
         }
 
         private void toolStripMenuEnableDisable_Click(object sender, EventArgs e)
@@ -1115,12 +1112,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SaveSettings();
         }
 
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void SaveOnDblClick()
         {
-            Console.WriteLine("Double Click");
             var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
+            isModified = false;
             dataGridView1.CurrentCell = dgCurrent;
+        }
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SaveOnDblClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
