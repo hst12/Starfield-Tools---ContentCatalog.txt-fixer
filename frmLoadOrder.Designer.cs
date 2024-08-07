@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.PluginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuDatagrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuEnableDisable = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -115,13 +122,6 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.PluginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -147,7 +147,7 @@
             this.Files});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 44);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 46);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -155,13 +155,76 @@
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1615, 811);
+            this.dataGridView1.Size = new System.Drawing.Size(1615, 809);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
+            // 
+            // ModEnabled
+            // 
+            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ModEnabled.HeaderText = "Enabled";
+            this.ModEnabled.MinimumWidth = 10;
+            this.ModEnabled.Name = "ModEnabled";
+            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ModEnabled.Width = 136;
+            // 
+            // PluginName
+            // 
+            this.PluginName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.PluginName.HeaderText = "Plugin Name";
+            this.PluginName.MinimumWidth = 10;
+            this.PluginName.Name = "PluginName";
+            this.PluginName.ReadOnly = true;
+            this.PluginName.Width = 179;
+            // 
+            // Descritpion
+            // 
+            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Descritpion.HeaderText = "Description";
+            this.Descritpion.MinimumWidth = 10;
+            this.Descritpion.Name = "Descritpion";
+            this.Descritpion.ReadOnly = true;
+            this.Descritpion.Width = 165;
+            // 
+            // Version
+            // 
+            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Version.HeaderText = "Version";
+            this.Version.MinimumWidth = 10;
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            this.Version.Width = 130;
+            // 
+            // TimeStamp
+            // 
+            this.TimeStamp.HeaderText = "Time Stamp";
+            this.TimeStamp.MinimumWidth = 10;
+            this.TimeStamp.Name = "TimeStamp";
+            this.TimeStamp.ReadOnly = true;
+            this.TimeStamp.Width = 171;
+            // 
+            // AS
+            // 
+            this.AS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AS.HeaderText = "Achievements";
+            this.AS.MinimumWidth = 10;
+            this.AS.Name = "AS";
+            this.AS.ReadOnly = true;
+            this.AS.Width = 192;
+            // 
+            // Files
+            // 
+            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Files.HeaderText = "Files";
+            this.Files.MinimumWidth = 10;
+            this.Files.Name = "Files";
+            this.Files.ReadOnly = true;
+            this.Files.Width = 103;
             // 
             // contextMenuDatagrid
             // 
@@ -500,7 +563,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1623, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1623, 42);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -523,7 +586,7 @@
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -635,7 +698,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuDeleteLine});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -655,7 +718,7 @@
             this.toolStripMenuSteam,
             this.toolStripMenuMS});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -697,7 +760,7 @@
             this.toolStripMenuRunSteam,
             this.toolStripMenuRunMS});
             this.toolStripMenuGame.Name = "toolStripMenuGame";
-            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 36);
+            this.toolStripMenuGame.Size = new System.Drawing.Size(96, 38);
             this.toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRunSteam
@@ -732,7 +795,7 @@
             this.toolStripSeparator9,
             this.toolStripMenuStats});
             this.toolStripMenuMods.Name = "toolStripMenuMods";
-            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
+            this.toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
             this.toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -835,7 +898,7 @@
             this.toolStripMenuBGSStarfield,
             this.toolStripMenuBGSX});
             this.toolStripMenuLinks.Name = "toolStripMenuLinks";
-            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 36);
+            this.toolStripMenuLinks.Size = new System.Drawing.Size(87, 38);
             this.toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -871,7 +934,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -880,69 +943,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(227, 44);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // ModEnabled
-            // 
-            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ModEnabled.HeaderText = "Enabled";
-            this.ModEnabled.MinimumWidth = 10;
-            this.ModEnabled.Name = "ModEnabled";
-            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ModEnabled.Width = 136;
-            // 
-            // PluginName
-            // 
-            this.PluginName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.PluginName.HeaderText = "Plugin Name";
-            this.PluginName.MinimumWidth = 10;
-            this.PluginName.Name = "PluginName";
-            this.PluginName.ReadOnly = true;
-            this.PluginName.Width = 179;
-            // 
-            // Descritpion
-            // 
-            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Descritpion.HeaderText = "Description";
-            this.Descritpion.MinimumWidth = 10;
-            this.Descritpion.Name = "Descritpion";
-            this.Descritpion.ReadOnly = true;
-            this.Descritpion.Width = 165;
-            // 
-            // Version
-            // 
-            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Version.HeaderText = "Version";
-            this.Version.MinimumWidth = 10;
-            this.Version.Name = "Version";
-            this.Version.ReadOnly = true;
-            this.Version.Width = 130;
-            // 
-            // TimeStamp
-            // 
-            this.TimeStamp.HeaderText = "Time Stamp";
-            this.TimeStamp.MinimumWidth = 10;
-            this.TimeStamp.Name = "TimeStamp";
-            this.TimeStamp.ReadOnly = true;
-            this.TimeStamp.Width = 171;
-            // 
-            // AS
-            // 
-            this.AS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.AS.HeaderText = "Achievements";
-            this.AS.MinimumWidth = 10;
-            this.AS.Name = "AS";
-            this.AS.ReadOnly = true;
-            this.AS.Width = 192;
-            // 
-            // Files
-            // 
-            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Files.HeaderText = "Files";
-            this.Files.MinimumWidth = 10;
-            this.Files.Name = "Files";
-            this.Files.ReadOnly = true;
-            this.Files.Width = 103;
             // 
             // frmLoadOrder
             // 

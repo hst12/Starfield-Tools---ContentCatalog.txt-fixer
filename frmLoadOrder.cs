@@ -555,7 +555,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            SaveSettings();
+            Application.Exit();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

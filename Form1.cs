@@ -34,7 +34,7 @@ namespace Starfield_Tools
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
 
-            //bool cmdLineAuto = false;
+            bool cmdLineLO = false;
             bool cmdLineRunSteam = false;
             bool cmdLineRunMS = false;
             richTextBox2.Text = "";
@@ -67,11 +67,8 @@ namespace Starfield_Tools
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
-                if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Set recommended settings
-                {
-                    frmLoadOrder frmLO = new frmLoadOrder();
-                    frmLO.Show();
-                }
+                if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Open Load order editor
+                    cmdLineLO = true;
             }
 
             if (AutoCheck) // Check catalog status if enabled
@@ -100,7 +97,14 @@ namespace Starfield_Tools
 
             DisplayCatalog();
 
-            // Command line params
+            if (cmdLineLO) // Go to mod manager
+            {
+                frmLoadOrder frmLO = new frmLoadOrder();
+                frmLO.Show();
+                this.WindowState = FormWindowState.Minimized;
+            }
+
+            // Run  Command line params
             if (cmdLineRunSteam)
             {
                 SaveSettings();
@@ -188,7 +192,7 @@ namespace Starfield_Tools
         private string MakeHeader()
         {
             string HeaderString = MakeHeaderBlank();
-            HeaderString = HeaderString.Substring(0, HeaderString.Length-5) + ",";
+            HeaderString = HeaderString.Substring(0, HeaderString.Length - 5) + ",";
             return HeaderString;
         }
 
@@ -212,7 +216,7 @@ namespace Starfield_Tools
                     return false;
                 }
                 string json = File.ReadAllText(jsonFilePath);
-                if (json=="")
+                if (json == "")
                 {
                     toolStripStatusLabel1.Text = "Catalog file is empty, nothing to check";
                     return false;
@@ -664,7 +668,7 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Catalog file is empty, nothing to clean";
                 return;
             }
-                string TestString = "";
+            string TestString = "";
             bool FixVersion;
             int errorCount = 0, VersionReplacementCount = 0;
             double VersionCheck;
