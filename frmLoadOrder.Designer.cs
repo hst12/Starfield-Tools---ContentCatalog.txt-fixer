@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ModNamexx = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuDatagrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuEnableDisable = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -122,6 +115,13 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.PluginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descritpion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuDatagrid.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -139,12 +139,12 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ModEnabled,
-            this.ModNamexx,
+            this.PluginName,
             this.Descritpion,
             this.Version,
-            this.Files,
+            this.TimeStamp,
             this.AS,
-            this.TimeStamp});
+            this.Files});
             this.dataGridView1.ContextMenuStrip = this.contextMenuDatagrid;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 44);
@@ -162,69 +162,6 @@
             this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
-            // 
-            // ModEnabled
-            // 
-            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ModEnabled.HeaderText = "Enabled";
-            this.ModEnabled.MinimumWidth = 10;
-            this.ModEnabled.Name = "ModEnabled";
-            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ModEnabled.Width = 136;
-            // 
-            // ModNamexx
-            // 
-            this.ModNamexx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ModNamexx.HeaderText = "Plugin Name";
-            this.ModNamexx.MinimumWidth = 10;
-            this.ModNamexx.Name = "ModNamexx";
-            this.ModNamexx.ReadOnly = true;
-            this.ModNamexx.Width = 179;
-            // 
-            // Descritpion
-            // 
-            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Descritpion.HeaderText = "Description";
-            this.Descritpion.MinimumWidth = 10;
-            this.Descritpion.Name = "Descritpion";
-            this.Descritpion.ReadOnly = true;
-            this.Descritpion.Width = 165;
-            // 
-            // Version
-            // 
-            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Version.HeaderText = "Version";
-            this.Version.MinimumWidth = 10;
-            this.Version.Name = "Version";
-            this.Version.ReadOnly = true;
-            this.Version.Width = 130;
-            // 
-            // Files
-            // 
-            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Files.HeaderText = "Files";
-            this.Files.MinimumWidth = 10;
-            this.Files.Name = "Files";
-            this.Files.ReadOnly = true;
-            this.Files.Width = 103;
-            // 
-            // AS
-            // 
-            this.AS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.AS.HeaderText = "Achievements";
-            this.AS.MinimumWidth = 10;
-            this.AS.Name = "AS";
-            this.AS.ReadOnly = true;
-            this.AS.Width = 192;
-            // 
-            // TimeStamp
-            // 
-            this.TimeStamp.HeaderText = "Time Stamp";
-            this.TimeStamp.MinimumWidth = 10;
-            this.TimeStamp.Name = "TimeStamp";
-            this.TimeStamp.ReadOnly = true;
-            this.TimeStamp.Width = 171;
             // 
             // contextMenuDatagrid
             // 
@@ -944,6 +881,69 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // ModEnabled
+            // 
+            this.ModEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ModEnabled.HeaderText = "Enabled";
+            this.ModEnabled.MinimumWidth = 10;
+            this.ModEnabled.Name = "ModEnabled";
+            this.ModEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ModEnabled.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ModEnabled.Width = 136;
+            // 
+            // PluginName
+            // 
+            this.PluginName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.PluginName.HeaderText = "Plugin Name";
+            this.PluginName.MinimumWidth = 10;
+            this.PluginName.Name = "PluginName";
+            this.PluginName.ReadOnly = true;
+            this.PluginName.Width = 179;
+            // 
+            // Descritpion
+            // 
+            this.Descritpion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Descritpion.HeaderText = "Description";
+            this.Descritpion.MinimumWidth = 10;
+            this.Descritpion.Name = "Descritpion";
+            this.Descritpion.ReadOnly = true;
+            this.Descritpion.Width = 165;
+            // 
+            // Version
+            // 
+            this.Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Version.HeaderText = "Version";
+            this.Version.MinimumWidth = 10;
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            this.Version.Width = 130;
+            // 
+            // TimeStamp
+            // 
+            this.TimeStamp.HeaderText = "Time Stamp";
+            this.TimeStamp.MinimumWidth = 10;
+            this.TimeStamp.Name = "TimeStamp";
+            this.TimeStamp.ReadOnly = true;
+            this.TimeStamp.Width = 171;
+            // 
+            // AS
+            // 
+            this.AS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AS.HeaderText = "Achievements";
+            this.AS.MinimumWidth = 10;
+            this.AS.Name = "AS";
+            this.AS.ReadOnly = true;
+            this.AS.Width = 192;
+            // 
+            // Files
+            // 
+            this.Files.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Files.HeaderText = "Files";
+            this.Files.MinimumWidth = 10;
+            this.Files.Name = "Files";
+            this.Files.ReadOnly = true;
+            this.Files.Width = 103;
+            // 
             // frmLoadOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1062,11 +1062,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuBGSStarfield;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuBGSX;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ModNamexx;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descritpion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Version;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AS;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
     }
 }

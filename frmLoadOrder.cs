@@ -197,7 +197,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = CC.ConvertTime(TimeStamp[i]).ToString();
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModFiles, ASafe, ModTimeStamp);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModTimeStamp, ASafe,ModFiles );
                             }
                         }
                     }
@@ -278,15 +278,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             bool ModEnabled;
             string ModLine;
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             using (StreamWriter writer = new StreamWriter(PluginFileName))
             {
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
                 for (int y = 0; y < dataGridView1.Rows.Count; y++)
                 {
-                    ModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
-                    ModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
+                    ModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
+                    ModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
                     if (ModEnabled)
                         writer.Write("*"); // Insert a * for enabled mods then write the mod filename
                     writer.WriteLine(ModLine);
@@ -314,27 +314,27 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string NewModLine;
             string NewDescription;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells[0].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells[1].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y - 1].Cells[2].Value;
+            CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells["ModEnabled"].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells["PluginName"].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y - 1].Cells["Description"].Value;
 
-            NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
-            NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-            NewDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
+            NewModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
+            NewModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
+            NewDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
 
 
-            dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
-            dataGridView1.Rows[y].Cells[1].Value = CurrentModLine;
-            dataGridView1.Rows[y].Cells[2].Value = CurrentDescription;
+            dataGridView1.Rows[y].Cells["ModEnabled"].Value = CurrentModEnabled;
+            dataGridView1.Rows[y].Cells["PluginName"].Value = CurrentModLine;
+            dataGridView1.Rows[y].Cells["Description"].Value = CurrentDescription;
 
-            dataGridView1.Rows[y - 1].Cells[0].Value = NewModEnabled;
-            dataGridView1.Rows[y - 1].Cells[1].Value = NewModLine;
-            dataGridView1.Rows[y - 1].Cells[2].Value = NewDescription;
+            dataGridView1.Rows[y - 1].Cells["ModEnabled"].Value = NewModEnabled;
+            dataGridView1.Rows[y - 1].Cells["PluginName"].Value = NewModLine;
+            dataGridView1.Rows[y - 1].Cells["Description"].Value = NewDescription;
 
             dataGridView1.Rows[y].Selected = false;
             dataGridView1.Rows[y - 1].Selected = true;
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[y - 1].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[y - 1].Cells["ModEnabled"];
 
 
         }
@@ -355,26 +355,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string NewModLine;
             string NewDescription;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y + 1].Cells[0].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y + 1].Cells[1].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y + 1].Cells[2].Value;
+            CurrentModEnabled = (bool)dataGridView1.Rows[y + 1].Cells["ModEnabled"].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y + 1].Cells["PluginName"].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y + 1].Cells["Description"].Value;
 
-            NewModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
-            NewModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-            NewDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
+            NewModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
+            NewModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
+            NewDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
 
-            dataGridView1.Rows[y].Cells[0].Value = CurrentModEnabled;
-            dataGridView1.Rows[y].Cells[1].Value = CurrentModLine;
-            dataGridView1.Rows[y].Cells[2].Value = CurrentDescription;
+            dataGridView1.Rows[y].Cells["ModEnabled"].Value = CurrentModEnabled;
+            dataGridView1.Rows[y].Cells["PluginName"].Value = CurrentModLine;
+            dataGridView1.Rows[y].Cells["Description"].Value = CurrentDescription;
 
-            dataGridView1.Rows[y + 1].Cells[0].Value = NewModEnabled;
-            dataGridView1.Rows[y + 1].Cells[1].Value = NewModLine;
-            dataGridView1.Rows[y + 1].Cells[2].Value = NewDescription;
+            dataGridView1.Rows[y + 1].Cells["ModEnabled"].Value = NewModEnabled;
+            dataGridView1.Rows[y + 1].Cells["PluginName"].Value = NewModLine;
+            dataGridView1.Rows[y + 1].Cells["Description"].Value = NewDescription;
 
             dataGridView1.Rows[y].Selected = false;
             dataGridView1.Rows[y + 1].Selected = true;
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells["ModEnabled"];
 
         }
         private void btnDown_Click(object sender, EventArgs e)
@@ -441,17 +441,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string CurrentModLine;
             string CurrentDescription;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
+            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
             dataGridView1.Rows.Insert(0);
 
-            dataGridView1.Rows[0].Cells[0].Value = CurrentModEnabled;
-            dataGridView1.Rows[0].Cells[1].Value = CurrentModLine;
-            dataGridView1.Rows[0].Cells[2].Value = CurrentDescription;
+            dataGridView1.Rows[0].Cells["ModEnabled"].Value = CurrentModEnabled;
+            dataGridView1.Rows[0].Cells["PluginName"].Value = CurrentModLine;
+            dataGridView1.Rows[0].Cells["Description"].Value = CurrentDescription;
 
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
         }
 
         private void MoveBottom()
@@ -463,18 +463,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string CurrentModLine;
             string CurrentDescription;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells[0].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y].Cells[1].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y].Cells[2].Value;
+            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
+            CurrentModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
+            CurrentDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
 
             dataGridView1.Rows.Insert(dataGridView1.Rows.Count);
 
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0].Value = CurrentModEnabled;
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[1].Value = CurrentModLine;
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2].Value = CurrentDescription;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["ModEnabled"].Value = CurrentModEnabled;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["PluginName"].Value = CurrentModLine;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Description"].Value = CurrentDescription;
 
             dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["ModEnabled"];
         }
         private void btnBottom_Click(object sender, EventArgs e)
         {
@@ -498,7 +498,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = false;
+                dataGridView1.Rows[i].Cells["ModEnabled"].Value = false;
             }
             toolStripStatusLabel1.Text = "All mods disabled";
             isModified = true;
@@ -508,7 +508,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = true;
+                dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
             }
             toolStripStatusLabel1.Text = "All mods enabled";
             isModified = true;
@@ -535,12 +535,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
             {
-                DataGridSring = dataGridView1.Rows[ModIndex].Cells[1].Value.ToString().ToLower();
+                DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
                 Console.WriteLine(DataGridSring);
                 if (DataGridSring.Contains(TextBoxString))
                 {
-                    toolStripStatusLabel1.Text = "Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells[1].Value.ToString();
-                    dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells[1];
+                    toolStripStatusLabel1.Text = "Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString();
+                    dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
                     break;
                 }
                 else
@@ -608,7 +608,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             SaveFileDialog SavePlugins = new SaveFileDialog();
             ProfileFolder = Settings.Default.ProfileFolder;
@@ -695,7 +695,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripStatusLabel1.Text = GetMod.FileName;
                 GameData = GetMod.FileName.Substring(GetMod.FileName.LastIndexOf('\\'));
                 dataGridView1.Rows.Add(true, GameData.Substring(1));
-                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
                 isModified = true;
             }
         }
@@ -762,7 +762,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 esmFiles.Add(missingFile.Substring(missingFile.LastIndexOf('\\') + 1));
             }
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
+                PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
             List<string> MissingFiles = esmFiles.Except(PluginFiles).ToList();
 
             List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();  // Exclude BGS esm files
@@ -773,7 +773,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     AddedFiles++;
                     dataGridView1.Rows.Add(true, FilesToAdd[i]);
                 }
-                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[1];
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
                 toolStripStatusLabel1.Text = AddedFiles.ToString() + " file(s) added";
                 isModified = true;
             }
@@ -808,7 +808,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 esmFiles.Add(missingFile.Substring(missingFile.LastIndexOf('\\') + 1));
             }
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                PluginFiles.Add((string)dataGridView1.Rows[i].Cells[1].Value);
+                PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
             List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
 
             List<string> FilesToRemove = MissingFiles.Except(BethFiles).ToList();
@@ -819,7 +819,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     RemovedFiles++;
 
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
-                        if ((string)dataGridView1.Rows[j].Cells[1].Value == FilesToRemove[i])
+                        if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
                 }
                 toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removed";
@@ -954,9 +954,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     for (i = 0; i < dataGridView1.Rows.Count; i++)
                     {
-                        if ((bool)dataGridView1.Rows[i].Cells[0].Value)
+                        if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value)
                         {
-                            tempstr = (string)dataGridView1.Rows[i].Cells[1].Value;
+                            tempstr = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                             writer.WriteLine(tempstr);
                         }
                     }
@@ -1014,7 +1014,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ModName, ModFile;
 
-            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value;
+            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName.Substring(0, ModName.IndexOf("."));
             DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
@@ -1048,7 +1048,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             isModified = true;
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
-            currentRow.Cells[0].Value = !(bool)(currentRow.Cells[0].Value);
+            currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
 
         }
 
