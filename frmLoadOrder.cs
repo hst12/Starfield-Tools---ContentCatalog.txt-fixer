@@ -78,6 +78,10 @@ namespace Starfield_Tools
             int EnabledCount = 0;
             string loText;
 
+            toolStripStatusLabel1.ForeColor = DefaultForeColor;
+            btnOK.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+
             if (!File.Exists(CC.GetCatalog()))
             {
                 MessageBox.Show("Missing ContentCatalog.txt");
