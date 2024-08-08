@@ -17,7 +17,7 @@ namespace Starfield_Tools
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
         public const string CatalogVersion = "1.1";
 
-        ContentCatalog CC = new ContentCatalog();
+        Tools CC = new Tools();
         public string StarfieldGamePath;
 
         public frmStarfieldTools()
@@ -223,7 +223,7 @@ namespace Starfield_Tools
                 }
                 string TestString = "";
 
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
 
                 ErrorFound = false;
                 foreach (var kvp in data)
@@ -512,7 +512,7 @@ namespace Starfield_Tools
 
             string json = File.ReadAllText(jsonFilePath);
 
-            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
 
             foreach (var kvp in data)
             {
@@ -590,7 +590,7 @@ namespace Starfield_Tools
             Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             try
             {
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json); // Process catalog
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Process catalog
                 data.Remove("ContentCatalog");
 
                 foreach (var kvp in data)
@@ -674,7 +674,7 @@ namespace Starfield_Tools
             double VersionCheck;
             long TimeStamp;
 
-            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
 
             foreach (var kvp in data)
             {

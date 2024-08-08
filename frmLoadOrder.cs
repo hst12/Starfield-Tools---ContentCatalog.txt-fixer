@@ -18,7 +18,7 @@ namespace Starfield_Tools
 
     public partial class frmLoadOrder : Form
     {
-        ContentCatalog CC = new ContentCatalog();
+        Tools CC = new Tools();
         public string StarfieldGamePath;
 
         bool isModified = false, Profiles = false, GameVersion = false;
@@ -53,6 +53,9 @@ namespace Starfield_Tools
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
+#if DEBUG
+            testToolStripMenu.Visible = true;
+#endif
         }
 
         private void RefreshDataGrid()
@@ -93,6 +96,7 @@ namespace Starfield_Tools
             List<string> CreationsVersion = new List<string>();
             List<bool> AchievmentSafe = new List<bool>();
             List<long> TimeStamp = new List<long>();
+            List<string> CreationsID = new List<string>();
 
             int TitleCount = 0;
             int esmCount = 0;
@@ -106,10 +110,13 @@ namespace Starfield_Tools
             {
                 Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             try
             {
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ContentCatalog.Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
                 data.Remove("ContentCatalog");
                 foreach (var kvp in data)
                 {
@@ -130,6 +137,7 @@ namespace Starfield_Tools
                         CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
                         AchievmentSafe.Add(kvp.Value.AchievementSafe);
                         TimeStamp.Add(kvp.Value.Timestamp);
+                        CreationsID.Add(kvp.Key.ToString());
 
                     }
                     catch (Exception ex)
@@ -155,7 +163,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string line, Description, ModFiles, ModVersion, ASafe, ModTimeStamp;
+                string line, Description, ModFiles, ModVersion, ASafe, ModTimeStamp, ModID;
 
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -179,6 +187,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 ModVersion = "";
                                 ASafe = "";
                                 ModTimeStamp = "";
+                                ModID = "";
 
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
@@ -195,9 +204,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         else
                                             ASafe = "";
                                         ModTimeStamp = CC.ConvertTime(TimeStamp[i]).ToString();
+                                        ModID = CreationsID[i];
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModTimeStamp, ASafe,ModFiles );
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModTimeStamp, ASafe,  ModFiles, ModID);
                             }
                         }
                     }
@@ -225,7 +235,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     ba2Count++;
                 }
                 StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
-                    (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " + 
+                    (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
                     esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
 
                 if (espCount > 0)
@@ -871,7 +881,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             OpenFileDialog OpenMod = new OpenFileDialog();
             //OpenMod.InitialDirectory = ProfileFolder;
             OpenMod.Filter = "ZIP File|*.zip";
-            OpenMod.Title = "Install Mod";
+            OpenMod.Title = "Install Mod - Zip files only. Loose files not supported";
 
             DialogResult result = OpenMod.ShowDialog();
             ModPath = OpenMod.FileName;
@@ -1152,6 +1162,27 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuBGSX_Click(object sender, EventArgs e)
         {
             Process.Start("https://x.com/StarfieldGame");
+        }
+
+        private void toolStripMenuTestJson_Click(object sender, EventArgs e)
+        {
+            var modMetaData = new Tools.ModMetaData();
+            string jsonPath = "Z:\\test.txt", json;
+
+            modMetaData.ModName = "Test";
+            modMetaData.SourceURL = "http://127.0.0.1";
+            modMetaData.ModVersion = "1.0";
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(modMetaData, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(jsonPath, json);
+        }
+
+        private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
+        {
+            string CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
+            if (CreationsID != "")
+                Process.Start("https://creations.bethesda.net/en/starfield/details/" + CreationsID.Substring(3));  // Open Creations web site
+            else
+                toolStripStatusLabel1.Text = "Not a Creations mod";
         }
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)

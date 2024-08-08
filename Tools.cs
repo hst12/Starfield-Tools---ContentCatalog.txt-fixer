@@ -10,7 +10,7 @@ namespace Starfield_Tools
 {
 
 
-    internal class ContentCatalog
+    internal class Tools
     {
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
@@ -40,6 +40,14 @@ namespace Starfield_Tools
             public long Timestamp { get; set; }
             public string Title { get; set; }
             public string Version { get; set; }
+        }
+
+        public class ModMetaData
+        {
+            public string ModName { get; set; }
+            public string ModVersion { get; set; }
+            public string SourceURL { get; set; }
+           
         }
 
         public void ShowAbout()
