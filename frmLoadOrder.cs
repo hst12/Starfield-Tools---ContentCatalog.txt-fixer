@@ -1230,6 +1230,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SaveSettings();
             Application.Exit();
         }
+
+        private void toolStripMenuGitHub_Click(object sender, EventArgs e)
+        {
+            CC.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+        }
     }
 }
 
