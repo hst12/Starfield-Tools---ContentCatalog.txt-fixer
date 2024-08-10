@@ -1,16 +1,14 @@
-﻿using Starfield_Tools.Properties;
+﻿using Newtonsoft.Json;
+using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using File = System.IO.File;
-
 
 namespace Starfield_Tools
 {
@@ -26,12 +24,19 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent);
+            Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
+            double screenWidth = resolution.Width;
+            double screenHeight = resolution.Height;
+            this.Width = (int)(screenWidth * 0.75);
+            this.Height = (int)(screenHeight * 0.75);
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
 
             string PluginsPath = CC.GetStarfieldPath() + "\\Plugins.txt";
-            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt
+            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt if it doesn't exist
             {
                 toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
                 File.Copy(PluginsPath, PluginsPath + ".bak");
@@ -40,7 +45,7 @@ namespace Starfield_Tools
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
             GameVersion = Settings.Default.GameVersion;
-            if (GameVersion == false)
+            if (!GameVersion) // 0=Steam, 1=MS game version
             {
                 toolStripMenuSteam.Checked = true;
                 toolStripMenuRunMS.Visible = false;
@@ -112,7 +117,8 @@ namespace Starfield_Tools
 
             try
             {
-                Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                //Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+                dynamic json_Dictionary = JsonConvert.DeserializeObject<dynamic>(json);
             }
             catch (Exception ex)
             {
@@ -211,7 +217,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModID = CreationsID[i];
                                     }
                                 }
-                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModTimeStamp, ASafe,  ModFiles, ModID);
+                                dataGridView1.Rows.Add(ModEnabled, line, Description, ModVersion, ModTimeStamp, ASafe, ModFiles, ModID);
                             }
                         }
                     }
@@ -604,12 +610,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuCreations_Click(object sender, EventArgs e)
         {
-            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
+
+            CC.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
         }
 
         private void toolStripMenuNexus_Click(object sender, EventArgs e)
         {
-            Process.Start("https://www.nexusmods.com/starfield");
+            CC.OpenUrl("https://www.nexusmods.com/starfield");
         }
 
         private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
@@ -1160,12 +1167,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuBGSStarfield_Click(object sender, EventArgs e)
         {
-            Process.Start("https://discord.com/channels/784542837596225567/1083043812949110825");
+            CC.OpenUrl("https://discord.com/channels/784542837596225567/1083043812949110825");
         }
 
         private void toolStripMenuBGSX_Click(object sender, EventArgs e)
         {
-            Process.Start("https://x.com/StarfieldGame");
+            CC.OpenUrl("https://x.com/StarfieldGame");
         }
 
         private void toolStripMenuTestJson_Click(object sender, EventArgs e)
@@ -1183,8 +1190,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
             string CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
+            string url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID.Substring(3);
+
             if (CreationsID != "")
-                Process.Start("https://creations.bethesda.net/en/starfield/details/" + CreationsID.Substring(3));  // Open Creations web site
+                CC.OpenUrl(url);  // Open Creations web site
             else
                 toolStripStatusLabel1.Text = "Not a Creations mod";
         }
@@ -1209,6 +1218,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
         {
             UninstallMod();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+            Application.Exit();
         }
     }
 }

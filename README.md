@@ -1,4 +1,6 @@
-Starfield Tools 1.6.0.0
+Starfield Tools 1.7.0.0
+
+What's new: Switched to .NET 8.0. Some UI changes mostly in load order editor.
 
 Checks ContentCatalog.txt file automatically when launched.
 

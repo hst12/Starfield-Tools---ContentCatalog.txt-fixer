@@ -108,6 +108,18 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GameVersion {
+            get {
+                return ((bool)(this["GameVersion"]));
+            }
+            set {
+                this["GameVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ProfileFolder {
             get {
@@ -120,25 +132,13 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Default.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastProfile {
             get {
                 return ((string)(this["LastProfile"]));
             }
             set {
                 this["LastProfile"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool GameVersion {
-            get {
-                return ((bool)(this["GameVersion"]));
-            }
-            set {
-                this["GameVersion"] = value;
             }
         }
     }

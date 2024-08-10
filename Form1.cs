@@ -1,10 +1,10 @@
-﻿using Starfield_Tools.Properties;
+﻿using Newtonsoft.Json;
+using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 
@@ -338,9 +338,7 @@ namespace Starfield_Tools
         private void btnLoad_Click(object sender, EventArgs e)
         {
             string pathToFile = CC.GetCatalog();
-
-            // Launch Notepad and open the specified text file
-            Process.Start(pathToFile);
+            Process.Start("explorer",pathToFile);
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -372,8 +370,7 @@ namespace Starfield_Tools
             string pathToFile = (CC.GetStarfieldPath() +
           @"\Plugins.txt");
 
-            // Launch Notepad and open the specified text file
-            Process.Start(pathToFile);
+            Process.Start("explorer",pathToFile);
         }
 
         private void BackupCatalog()
@@ -433,7 +430,7 @@ namespace Starfield_Tools
 
         private void txtSource_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", "https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+            CC.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void cmdStarFieldPath_Click(object sender, EventArgs e)
@@ -533,7 +530,8 @@ namespace Starfield_Tools
 
         private void btnCreations_Click(object sender, EventArgs e)
         {
-            Process.Start("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
+           CC.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
+            
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -587,7 +585,8 @@ namespace Starfield_Tools
                 esmFiles[i] = esmFiles[i].Trim();
             }
 
-            Dictionary<string, object> json_Dictionary = (new JavaScriptSerializer()).Deserialize<Dictionary<string, object>>(json);
+            //Dictionary<string, object> json_Dictionary = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(json);
+            dynamic json_Dictionary=JsonConvert.DeserializeObject<dynamic>(json);
             try
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Process catalog

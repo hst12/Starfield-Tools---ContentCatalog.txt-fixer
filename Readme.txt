@@ -1,5 +1,7 @@
 Checks ContentCatalog.txt file automatically when launched.
 
+What's new: Switched to .NET 8.0. Some UI changes mostly in load order editor.
+
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
 
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.

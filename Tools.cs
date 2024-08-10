@@ -20,6 +20,11 @@ namespace Starfield_Tools
             return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Starfield";
         }
 
+        public void OpenUrl(string url)
+        {
+            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+        }
+
         public System.DateTime ConvertTime(double TimeToConvert)
         {
             DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
@@ -47,7 +52,7 @@ namespace Starfield_Tools
             public string ModName { get; set; }
             public string ModVersion { get; set; }
             public string SourceURL { get; set; }
-           
+
         }
 
         public void ShowAbout()

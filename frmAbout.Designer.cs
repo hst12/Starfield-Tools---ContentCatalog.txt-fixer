@@ -29,32 +29,33 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbout));
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.SuspendLayout();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
+            SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1087, 877);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            richTextBox1.Location = new System.Drawing.Point(0, 0);
+            richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new System.Drawing.Size(1178, 1123);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
             // 
             // frmAbout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1087, 877);
-            this.Controls.Add(this.richTextBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmAbout";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            ClientSize = new System.Drawing.Size(1178, 1123);
+            Controls.Add(richTextBox1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "frmAbout";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "About";
+            ResumeLayout(false);
         }
 
         #endregion

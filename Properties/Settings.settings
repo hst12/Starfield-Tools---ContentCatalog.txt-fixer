@@ -23,14 +23,14 @@
     <Setting Name="FontSize" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="GameVersion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ProfileFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LastProfile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Default.txt</Value>
-    </Setting>
-    <Setting Name="GameVersion" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

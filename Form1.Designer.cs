@@ -28,486 +28,485 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStarfieldTools));
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.btnQuit = new System.Windows.Forms.Button();
-            this.cmdClean = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.btnCheck = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnStarfield = new System.Windows.Forms.Button();
-            this.btnExplore = new System.Windows.Forms.Button();
-            this.btnEditPlugins = new System.Windows.Forms.Button();
-            this.btnBackup = new System.Windows.Forms.Button();
-            this.btnRestore = new System.Windows.Forms.Button();
-            this.btnLoadOrder = new System.Windows.Forms.Button();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.txtSource = new System.Windows.Forms.Button();
-            this.chkForceClean = new System.Windows.Forms.CheckBox();
-            this.btnStarfieldStore = new System.Windows.Forms.Button();
-            this.btnResetAll = new System.Windows.Forms.Button();
-            this.cmdDeleteStale = new System.Windows.Forms.Button();
-            this.cmdStarFieldPath = new System.Windows.Forms.Button();
-            this.btnCreations = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.grpActions = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.grpAuto = new System.Windows.Forms.GroupBox();
-            this.chkAutoRestore = new System.Windows.Forms.CheckBox();
-            this.chkAutoBackup = new System.Windows.Forms.CheckBox();
-            this.chkAutoClean = new System.Windows.Forms.CheckBox();
-            this.chkAutoCheck = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClearLog = new System.Windows.Forms.Button();
-            this.statusStrip1.SuspendLayout();
-            this.grpActions.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.grpAuto.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            richTextBox2 = new System.Windows.Forms.RichTextBox();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
+            btnQuit = new System.Windows.Forms.Button();
+            cmdClean = new System.Windows.Forms.Button();
+            btnLoad = new System.Windows.Forms.Button();
+            btnCheck = new System.Windows.Forms.Button();
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            btnStarfield = new System.Windows.Forms.Button();
+            btnExplore = new System.Windows.Forms.Button();
+            btnEditPlugins = new System.Windows.Forms.Button();
+            btnBackup = new System.Windows.Forms.Button();
+            btnRestore = new System.Windows.Forms.Button();
+            btnLoadOrder = new System.Windows.Forms.Button();
+            btnAbout = new System.Windows.Forms.Button();
+            txtSource = new System.Windows.Forms.Button();
+            chkForceClean = new System.Windows.Forms.CheckBox();
+            btnStarfieldStore = new System.Windows.Forms.Button();
+            btnResetAll = new System.Windows.Forms.Button();
+            cmdDeleteStale = new System.Windows.Forms.Button();
+            cmdStarFieldPath = new System.Windows.Forms.Button();
+            btnCreations = new System.Windows.Forms.Button();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            grpActions = new System.Windows.Forms.GroupBox();
+            btnClearLog = new System.Windows.Forms.Button();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            grpAuto = new System.Windows.Forms.GroupBox();
+            chkAutoRestore = new System.Windows.Forms.CheckBox();
+            chkAutoBackup = new System.Windows.Forms.CheckBox();
+            chkAutoClean = new System.Windows.Forms.CheckBox();
+            chkAutoCheck = new System.Windows.Forms.CheckBox();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            statusStrip1.SuspendLayout();
+            grpActions.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            grpAuto.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(3, 313);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(1310, 304);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.TabStop = false;
-            this.richTextBox2.Text = "";
+            richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            richTextBox2.Location = new System.Drawing.Point(3, 279);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.ReadOnly = true;
+            richTextBox2.Size = new System.Drawing.Size(1614, 270);
+            richTextBox2.TabIndex = 1;
+            richTextBox2.TabStop = false;
+            richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(6, 6);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(1304, 298);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.TabStop = false;
-            this.richTextBox1.Text = "";
+            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            richTextBox1.Location = new System.Drawing.Point(6, 6);
+            richTextBox1.Margin = new System.Windows.Forms.Padding(6);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new System.Drawing.Size(1608, 264);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.TabStop = false;
+            richTextBox1.Text = "";
             // 
             // btnQuit
             // 
-            this.btnQuit.AutoSize = true;
-            this.btnQuit.Location = new System.Drawing.Point(1144, 34);
-            this.btnQuit.Margin = new System.Windows.Forms.Padding(4);
-            this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(150, 50);
-            this.btnQuit.TabIndex = 20;
-            this.btnQuit.Text = "Quit";
-            this.toolTip1.SetToolTip(this.btnQuit, "Quit");
-            this.btnQuit.UseVisualStyleBackColor = true;
-            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            btnQuit.AutoSize = true;
+            btnQuit.Location = new System.Drawing.Point(1372, 42);
+            btnQuit.Margin = new System.Windows.Forms.Padding(4);
+            btnQuit.Name = "btnQuit";
+            btnQuit.Size = new System.Drawing.Size(223, 50);
+            btnQuit.TabIndex = 20;
+            btnQuit.Text = "Quit";
+            toolTip1.SetToolTip(btnQuit, "Quit");
+            btnQuit.UseVisualStyleBackColor = true;
+            btnQuit.Click += btnQuit_Click;
             // 
             // cmdClean
             // 
-            this.cmdClean.AutoSize = true;
-            this.cmdClean.Location = new System.Drawing.Point(168, 35);
-            this.cmdClean.Margin = new System.Windows.Forms.Padding(6);
-            this.cmdClean.Name = "cmdClean";
-            this.cmdClean.Size = new System.Drawing.Size(150, 50);
-            this.cmdClean.TabIndex = 1;
-            this.cmdClean.Text = "Clean";
-            this.toolTip1.SetToolTip(this.cmdClean, "Strip out corrupt characters");
-            this.cmdClean.UseVisualStyleBackColor = true;
-            this.cmdClean.Click += new System.EventHandler(this.cmdClean_Click);
+            cmdClean.AutoSize = true;
+            cmdClean.Location = new System.Drawing.Point(232, 50);
+            cmdClean.Margin = new System.Windows.Forms.Padding(6);
+            cmdClean.Name = "cmdClean";
+            cmdClean.Size = new System.Drawing.Size(223, 50);
+            cmdClean.TabIndex = 1;
+            cmdClean.Text = "Clean";
+            toolTip1.SetToolTip(cmdClean, "Strip out corrupt characters");
+            cmdClean.UseVisualStyleBackColor = true;
+            cmdClean.Click += cmdClean_Click;
             // 
             // btnLoad
             // 
-            this.btnLoad.AutoSize = true;
-            this.btnLoad.Location = new System.Drawing.Point(10, 31);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(210, 50);
-            this.btnLoad.TabIndex = 6;
-            this.btnLoad.Text = "ContentCatalog.txt";
-            this.toolTip1.SetToolTip(this.btnLoad, "Edit with default text editor");
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            btnLoad.AutoSize = true;
+            btnLoad.Location = new System.Drawing.Point(17, 38);
+            btnLoad.Margin = new System.Windows.Forms.Padding(4);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new System.Drawing.Size(223, 50);
+            btnLoad.TabIndex = 6;
+            btnLoad.Text = "ContentCatalog.txt";
+            toolTip1.SetToolTip(btnLoad, "Edit with default text editor");
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
             // 
             // btnCheck
             // 
-            this.btnCheck.AutoSize = true;
-            this.btnCheck.Location = new System.Drawing.Point(10, 35);
-            this.btnCheck.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(150, 50);
-            this.btnCheck.TabIndex = 0;
-            this.btnCheck.Text = "Check";
-            this.toolTip1.SetToolTip(this.btnCheck, "Check for corruption");
-            this.btnCheck.UseVisualStyleBackColor = true;
-            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            btnCheck.AutoSize = true;
+            btnCheck.Location = new System.Drawing.Point(9, 50);
+            btnCheck.Margin = new System.Windows.Forms.Padding(4);
+            btnCheck.Name = "btnCheck";
+            btnCheck.Size = new System.Drawing.Size(223, 50);
+            btnCheck.TabIndex = 0;
+            btnCheck.Text = "Check";
+            toolTip1.SetToolTip(btnCheck, "Check for corruption");
+            btnCheck.UseVisualStyleBackColor = true;
+            btnCheck.Click += btnCheck_Click;
             // 
             // btnStarfield
             // 
-            this.btnStarfield.AutoSize = true;
-            this.btnStarfield.Location = new System.Drawing.Point(14, 34);
-            this.btnStarfield.Margin = new System.Windows.Forms.Padding(4);
-            this.btnStarfield.Name = "btnStarfield";
-            this.btnStarfield.Size = new System.Drawing.Size(199, 50);
-            this.btnStarfield.TabIndex = 15;
-            this.btnStarfield.Text = "Starfield (Steam)";
-            this.toolTip1.SetToolTip(this.btnStarfield, "Launch Starfield -Steam version");
-            this.btnStarfield.UseVisualStyleBackColor = true;
-            this.btnStarfield.Click += new System.EventHandler(this.btnStarfield_Click);
+            btnStarfield.AutoSize = true;
+            btnStarfield.Location = new System.Drawing.Point(10, 42);
+            btnStarfield.Margin = new System.Windows.Forms.Padding(4);
+            btnStarfield.Name = "btnStarfield";
+            btnStarfield.Size = new System.Drawing.Size(223, 50);
+            btnStarfield.TabIndex = 15;
+            btnStarfield.Text = "Starfield (Steam)";
+            toolTip1.SetToolTip(btnStarfield, "Launch Starfield -Steam version");
+            btnStarfield.UseVisualStyleBackColor = true;
+            btnStarfield.Click += btnStarfield_Click;
             // 
             // btnExplore
             // 
-            this.btnExplore.AutoSize = true;
-            this.btnExplore.Location = new System.Drawing.Point(462, 31);
-            this.btnExplore.Name = "btnExplore";
-            this.btnExplore.Size = new System.Drawing.Size(210, 50);
-            this.btnExplore.TabIndex = 8;
-            this.btnExplore.Text = "Explore";
-            this.toolTip1.SetToolTip(this.btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
-            this.btnExplore.UseVisualStyleBackColor = true;
-            this.btnExplore.Click += new System.EventHandler(this.btnExplore_Click);
+            btnExplore.AutoSize = true;
+            btnExplore.Location = new System.Drawing.Point(476, 38);
+            btnExplore.Name = "btnExplore";
+            btnExplore.Size = new System.Drawing.Size(223, 50);
+            btnExplore.TabIndex = 8;
+            btnExplore.Text = "Explore";
+            toolTip1.SetToolTip(btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
+            btnExplore.UseVisualStyleBackColor = true;
+            btnExplore.Click += btnExplore_Click;
             // 
             // btnEditPlugins
             // 
-            this.btnEditPlugins.AutoSize = true;
-            this.btnEditPlugins.Location = new System.Drawing.Point(236, 31);
-            this.btnEditPlugins.Name = "btnEditPlugins";
-            this.btnEditPlugins.Size = new System.Drawing.Size(210, 50);
-            this.btnEditPlugins.TabIndex = 7;
-            this.btnEditPlugins.Text = "Plugins.txt";
-            this.toolTip1.SetToolTip(this.btnEditPlugins, "Edit with default text editor");
-            this.btnEditPlugins.UseVisualStyleBackColor = true;
-            this.btnEditPlugins.Click += new System.EventHandler(this.btnEditPlugins_Click);
+            btnEditPlugins.AutoSize = true;
+            btnEditPlugins.Location = new System.Drawing.Point(247, 38);
+            btnEditPlugins.Name = "btnEditPlugins";
+            btnEditPlugins.Size = new System.Drawing.Size(223, 50);
+            btnEditPlugins.TabIndex = 7;
+            btnEditPlugins.Text = "Plugins.txt";
+            toolTip1.SetToolTip(btnEditPlugins, "Edit with default text editor");
+            btnEditPlugins.UseVisualStyleBackColor = true;
+            btnEditPlugins.Click += btnEditPlugins_Click;
             // 
             // btnBackup
             // 
-            this.btnBackup.AutoSize = true;
-            this.btnBackup.Location = new System.Drawing.Point(762, 35);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(150, 50);
-            this.btnBackup.TabIndex = 4;
-            this.btnBackup.Text = "Backup";
-            this.toolTip1.SetToolTip(this.btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
-            this.btnBackup.UseVisualStyleBackColor = true;
-            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
+            btnBackup.AutoSize = true;
+            btnBackup.Location = new System.Drawing.Point(901, 50);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new System.Drawing.Size(223, 50);
+            btnBackup.TabIndex = 4;
+            btnBackup.Text = "Backup";
+            toolTip1.SetToolTip(btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
             // 
             // btnRestore
             // 
-            this.btnRestore.AutoSize = true;
-            this.btnRestore.Location = new System.Drawing.Point(920, 35);
-            this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(150, 50);
-            this.btnRestore.TabIndex = 5;
-            this.btnRestore.Text = "Restore";
-            this.toolTip1.SetToolTip(this.btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
-            this.btnRestore.UseVisualStyleBackColor = true;
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            btnRestore.AutoSize = true;
+            btnRestore.Location = new System.Drawing.Point(1124, 50);
+            btnRestore.Name = "btnRestore";
+            btnRestore.Size = new System.Drawing.Size(223, 50);
+            btnRestore.TabIndex = 5;
+            btnRestore.Text = "Restore";
+            toolTip1.SetToolTip(btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
+            btnRestore.UseVisualStyleBackColor = true;
+            btnRestore.Click += btnRestore_Click;
             // 
             // btnLoadOrder
             // 
-            this.btnLoadOrder.AutoSize = true;
-            this.btnLoadOrder.Location = new System.Drawing.Point(688, 30);
-            this.btnLoadOrder.Name = "btnLoadOrder";
-            this.btnLoadOrder.Size = new System.Drawing.Size(210, 50);
-            this.btnLoadOrder.TabIndex = 9;
-            this.btnLoadOrder.Text = "Load Order";
-            this.toolTip1.SetToolTip(this.btnLoadOrder, "Load Order Editor");
-            this.btnLoadOrder.UseVisualStyleBackColor = true;
-            this.btnLoadOrder.Click += new System.EventHandler(this.btnLoadOrder_Click);
+            btnLoadOrder.AutoSize = true;
+            btnLoadOrder.Location = new System.Drawing.Point(705, 38);
+            btnLoadOrder.Name = "btnLoadOrder";
+            btnLoadOrder.Size = new System.Drawing.Size(223, 50);
+            btnLoadOrder.TabIndex = 9;
+            btnLoadOrder.Text = "Load Order";
+            toolTip1.SetToolTip(btnLoadOrder, "Load Order Editor");
+            btnLoadOrder.UseVisualStyleBackColor = true;
+            btnLoadOrder.Click += btnLoadOrder_Click;
             // 
             // btnAbout
             // 
-            this.btnAbout.AutoSize = true;
-            this.btnAbout.Location = new System.Drawing.Point(664, 34);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(6);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(150, 50);
-            this.btnAbout.TabIndex = 18;
-            this.btnAbout.Text = "Help";
-            this.toolTip1.SetToolTip(this.btnAbout, "Brief info");
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            btnAbout.AutoSize = true;
+            btnAbout.Location = new System.Drawing.Point(691, 42);
+            btnAbout.Margin = new System.Windows.Forms.Padding(6);
+            btnAbout.Name = "btnAbout";
+            btnAbout.Size = new System.Drawing.Size(223, 50);
+            btnAbout.TabIndex = 18;
+            btnAbout.Text = "Help";
+            toolTip1.SetToolTip(btnAbout, "Brief info");
+            btnAbout.UseVisualStyleBackColor = true;
+            btnAbout.Click += btnAbout_Click;
             // 
             // txtSource
             // 
-            this.txtSource.AutoSize = true;
-            this.txtSource.Location = new System.Drawing.Point(824, 34);
-            this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(150, 50);
-            this.txtSource.TabIndex = 19;
-            this.txtSource.Text = "Github";
-            this.toolTip1.SetToolTip(this.txtSource, "Open GitHub page");
-            this.txtSource.UseVisualStyleBackColor = true;
-            this.txtSource.Click += new System.EventHandler(this.txtSource_Click);
+            txtSource.AutoSize = true;
+            txtSource.Location = new System.Drawing.Point(918, 42);
+            txtSource.Name = "txtSource";
+            txtSource.Size = new System.Drawing.Size(223, 50);
+            txtSource.TabIndex = 19;
+            txtSource.Text = "Github";
+            toolTip1.SetToolTip(txtSource, "Open GitHub page");
+            txtSource.UseVisualStyleBackColor = true;
+            txtSource.Click += txtSource_Click;
             // 
             // chkForceClean
             // 
-            this.chkForceClean.AutoSize = true;
-            this.chkForceClean.Location = new System.Drawing.Point(749, 30);
-            this.chkForceClean.Name = "chkForceClean";
-            this.chkForceClean.Size = new System.Drawing.Size(161, 29);
-            this.chkForceClean.TabIndex = 14;
-            this.chkForceClean.Text = "Force Clean";
-            this.toolTip1.SetToolTip(this.chkForceClean, "Not normally needed");
-            this.chkForceClean.UseVisualStyleBackColor = true;
-            this.chkForceClean.CheckedChanged += new System.EventHandler(this.chkForceClean_CheckedChanged);
+            chkForceClean.AutoSize = true;
+            chkForceClean.Location = new System.Drawing.Point(749, 30);
+            chkForceClean.Name = "chkForceClean";
+            chkForceClean.Size = new System.Drawing.Size(171, 36);
+            chkForceClean.TabIndex = 14;
+            chkForceClean.Text = "Force Clean";
+            toolTip1.SetToolTip(chkForceClean, "Not normally needed");
+            chkForceClean.UseVisualStyleBackColor = true;
+            chkForceClean.CheckedChanged += chkForceClean_CheckedChanged;
             // 
             // btnStarfieldStore
             // 
-            this.btnStarfieldStore.AutoSize = true;
-            this.btnStarfieldStore.Location = new System.Drawing.Point(223, 34);
-            this.btnStarfieldStore.Name = "btnStarfieldStore";
-            this.btnStarfieldStore.Size = new System.Drawing.Size(199, 50);
-            this.btnStarfieldStore.TabIndex = 16;
-            this.btnStarfieldStore.Text = "Starfield (MS)";
-            this.toolTip1.SetToolTip(this.btnStarfieldStore, "Launch Starfield - MS Store version");
-            this.btnStarfieldStore.UseVisualStyleBackColor = true;
-            this.btnStarfieldStore.Click += new System.EventHandler(this.btnStarfieldStore_Click);
+            btnStarfieldStore.AutoSize = true;
+            btnStarfieldStore.Location = new System.Drawing.Point(237, 42);
+            btnStarfieldStore.Name = "btnStarfieldStore";
+            btnStarfieldStore.Size = new System.Drawing.Size(223, 50);
+            btnStarfieldStore.TabIndex = 16;
+            btnStarfieldStore.Text = "Starfield (MS)";
+            toolTip1.SetToolTip(btnStarfieldStore, "Launch Starfield - MS Store version");
+            btnStarfieldStore.UseVisualStyleBackColor = true;
+            btnStarfieldStore.Click += btnStarfieldStore_Click;
             // 
             // btnResetAll
             // 
-            this.btnResetAll.Location = new System.Drawing.Point(544, 35);
-            this.btnResetAll.Name = "btnResetAll";
-            this.btnResetAll.Size = new System.Drawing.Size(210, 50);
-            this.btnResetAll.TabIndex = 3;
-            this.btnResetAll.Text = "Reset All Versions";
-            this.toolTip1.SetToolTip(this.btnResetAll, "Resets all version numbers to 1704067200.0. Should enable updates");
-            this.btnResetAll.UseVisualStyleBackColor = true;
-            this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
+            btnResetAll.Location = new System.Drawing.Point(678, 50);
+            btnResetAll.Name = "btnResetAll";
+            btnResetAll.Size = new System.Drawing.Size(223, 50);
+            btnResetAll.TabIndex = 3;
+            btnResetAll.Text = "Reset All Versions";
+            toolTip1.SetToolTip(btnResetAll, "Resets all version numbers to 1704067200.0. Should enable updates");
+            btnResetAll.UseVisualStyleBackColor = true;
+            btnResetAll.Click += btnResetAll_Click;
             // 
             // cmdDeleteStale
             // 
-            this.cmdDeleteStale.Location = new System.Drawing.Point(326, 35);
-            this.cmdDeleteStale.Name = "cmdDeleteStale";
-            this.cmdDeleteStale.Size = new System.Drawing.Size(210, 50);
-            this.cmdDeleteStale.TabIndex = 2;
-            this.cmdDeleteStale.Text = "Remove Unused";
-            this.toolTip1.SetToolTip(this.cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
-            this.cmdDeleteStale.UseVisualStyleBackColor = true;
-            this.cmdDeleteStale.Click += new System.EventHandler(this.cmdDeleteStale_Click);
+            cmdDeleteStale.Location = new System.Drawing.Point(455, 50);
+            cmdDeleteStale.Name = "cmdDeleteStale";
+            cmdDeleteStale.Size = new System.Drawing.Size(223, 50);
+            cmdDeleteStale.TabIndex = 2;
+            cmdDeleteStale.Text = "Remove Unused";
+            toolTip1.SetToolTip(cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
+            cmdDeleteStale.UseVisualStyleBackColor = true;
+            cmdDeleteStale.Click += cmdDeleteStale_Click;
             // 
             // cmdStarFieldPath
             // 
-            this.cmdStarFieldPath.AutoSize = true;
-            this.cmdStarFieldPath.Location = new System.Drawing.Point(432, 34);
-            this.cmdStarFieldPath.Name = "cmdStarFieldPath";
-            this.cmdStarFieldPath.Size = new System.Drawing.Size(222, 50);
-            this.cmdStarFieldPath.TabIndex = 17;
-            this.cmdStarFieldPath.Text = "Set Starfield Path";
-            this.toolTip1.SetToolTip(this.cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
-            this.cmdStarFieldPath.UseVisualStyleBackColor = true;
-            this.cmdStarFieldPath.Click += new System.EventHandler(this.cmdStarFieldPath_Click);
+            cmdStarFieldPath.AutoSize = true;
+            cmdStarFieldPath.Location = new System.Drawing.Point(464, 42);
+            cmdStarFieldPath.Name = "cmdStarFieldPath";
+            cmdStarFieldPath.Size = new System.Drawing.Size(223, 50);
+            cmdStarFieldPath.TabIndex = 17;
+            cmdStarFieldPath.Text = "Set Starfield Path";
+            toolTip1.SetToolTip(cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
+            cmdStarFieldPath.UseVisualStyleBackColor = true;
+            cmdStarFieldPath.Click += cmdStarFieldPath_Click;
             // 
             // btnCreations
             // 
-            this.btnCreations.Location = new System.Drawing.Point(984, 34);
-            this.btnCreations.Name = "btnCreations";
-            this.btnCreations.Size = new System.Drawing.Size(150, 50);
-            this.btnCreations.TabIndex = 21;
-            this.btnCreations.Text = "Creations";
-            this.toolTip1.SetToolTip(this.btnCreations, "Open Creations website - show latest");
-            this.btnCreations.UseVisualStyleBackColor = true;
-            this.btnCreations.Click += new System.EventHandler(this.btnCreations_Click);
+            btnCreations.Location = new System.Drawing.Point(1145, 42);
+            btnCreations.Name = "btnCreations";
+            btnCreations.Size = new System.Drawing.Size(223, 50);
+            btnCreations.TabIndex = 21;
+            btnCreations.Text = "Creations";
+            toolTip1.SetToolTip(btnCreations, "Open Creations website - show latest");
+            btnCreations.UseVisualStyleBackColor = true;
+            btnCreations.Click += btnCreations_Click;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1100);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1313, 42);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Location = new System.Drawing.Point(0, 1100);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
+            statusStrip1.Size = new System.Drawing.Size(1620, 42);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 32);
-            this.toolStripStatusLabel1.Text = "Starting up";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(131, 32);
+            toolStripStatusLabel1.Text = "Starting up";
             // 
             // grpActions
             // 
-            this.grpActions.AutoSize = true;
-            this.grpActions.Controls.Add(this.btnClearLog);
-            this.grpActions.Controls.Add(this.btnResetAll);
-            this.grpActions.Controls.Add(this.cmdDeleteStale);
-            this.grpActions.Controls.Add(this.btnRestore);
-            this.grpActions.Controls.Add(this.btnBackup);
-            this.grpActions.Controls.Add(this.btnCheck);
-            this.grpActions.Controls.Add(this.cmdClean);
-            this.grpActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpActions.Location = new System.Drawing.Point(6, 626);
-            this.grpActions.Margin = new System.Windows.Forms.Padding(6);
-            this.grpActions.Name = "grpActions";
-            this.grpActions.Padding = new System.Windows.Forms.Padding(6);
-            this.grpActions.Size = new System.Drawing.Size(1304, 121);
-            this.grpActions.TabIndex = 0;
-            this.grpActions.TabStop = false;
-            this.grpActions.Text = "Actions";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.AutoSize = true;
-            this.groupBox1.Controls.Add(this.btnCreations);
-            this.groupBox1.Controls.Add(this.btnStarfieldStore);
-            this.groupBox1.Controls.Add(this.cmdStarFieldPath);
-            this.groupBox1.Controls.Add(this.txtSource);
-            this.groupBox1.Controls.Add(this.btnAbout);
-            this.groupBox1.Controls.Add(this.btnStarfield);
-            this.groupBox1.Controls.Add(this.btnQuit);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(6, 973);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox1.Size = new System.Drawing.Size(1304, 121);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Other";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.AutoSize = true;
-            this.groupBox2.Controls.Add(this.btnLoadOrder);
-            this.groupBox2.Controls.Add(this.btnEditPlugins);
-            this.groupBox2.Controls.Add(this.btnExplore);
-            this.groupBox2.Controls.Add(this.btnLoad);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 756);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1310, 112);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Edit";
-            // 
-            // grpAuto
-            // 
-            this.grpAuto.AutoSize = true;
-            this.grpAuto.Controls.Add(this.chkForceClean);
-            this.grpAuto.Controls.Add(this.chkAutoRestore);
-            this.grpAuto.Controls.Add(this.chkAutoBackup);
-            this.grpAuto.Controls.Add(this.chkAutoClean);
-            this.grpAuto.Controls.Add(this.chkAutoCheck);
-            this.grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpAuto.Location = new System.Drawing.Point(3, 874);
-            this.grpAuto.Name = "grpAuto";
-            this.grpAuto.Size = new System.Drawing.Size(1310, 90);
-            this.grpAuto.TabIndex = 0;
-            this.grpAuto.TabStop = false;
-            this.grpAuto.Text = "Auto Functions";
-            // 
-            // chkAutoRestore
-            // 
-            this.chkAutoRestore.AutoSize = true;
-            this.chkAutoRestore.Location = new System.Drawing.Point(557, 31);
-            this.chkAutoRestore.Name = "chkAutoRestore";
-            this.chkAutoRestore.Size = new System.Drawing.Size(169, 29);
-            this.chkAutoRestore.TabIndex = 13;
-            this.chkAutoRestore.Text = "Auto Restore";
-            this.chkAutoRestore.UseVisualStyleBackColor = true;
-            this.chkAutoRestore.CheckedChanged += new System.EventHandler(this.chkAutoRestore_CheckedChanged);
-            // 
-            // chkAutoBackup
-            // 
-            this.chkAutoBackup.AutoSize = true;
-            this.chkAutoBackup.Location = new System.Drawing.Point(368, 31);
-            this.chkAutoBackup.Name = "chkAutoBackup";
-            this.chkAutoBackup.Size = new System.Drawing.Size(166, 29);
-            this.chkAutoBackup.TabIndex = 12;
-            this.chkAutoBackup.Text = "Auto Backup";
-            this.chkAutoBackup.UseVisualStyleBackColor = true;
-            this.chkAutoBackup.CheckedChanged += new System.EventHandler(this.chkAutoBackup_CheckedChanged);
-            // 
-            // chkAutoClean
-            // 
-            this.chkAutoClean.AutoSize = true;
-            this.chkAutoClean.Location = new System.Drawing.Point(195, 30);
-            this.chkAutoClean.Name = "chkAutoClean";
-            this.chkAutoClean.Size = new System.Drawing.Size(150, 29);
-            this.chkAutoClean.TabIndex = 11;
-            this.chkAutoClean.Text = "Auto Clean";
-            this.chkAutoClean.UseVisualStyleBackColor = true;
-            this.chkAutoClean.CheckedChanged += new System.EventHandler(this.chkAutoClean_CheckedChanged);
-            // 
-            // chkAutoCheck
-            // 
-            this.chkAutoCheck.AutoSize = true;
-            this.chkAutoCheck.Location = new System.Drawing.Point(17, 31);
-            this.chkAutoCheck.Name = "chkAutoCheck";
-            this.chkAutoCheck.Size = new System.Drawing.Size(155, 29);
-            this.chkAutoCheck.TabIndex = 10;
-            this.chkAutoCheck.Text = "Auto Check";
-            this.chkAutoCheck.UseVisualStyleBackColor = true;
-            this.chkAutoCheck.CheckedChanged += new System.EventHandler(this.chkAutoCheck_CheckedChanged);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.grpAuto, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.grpActions, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 1100);
-            this.tableLayoutPanel1.TabIndex = 0;
+            grpActions.AutoSize = true;
+            grpActions.Controls.Add(btnClearLog);
+            grpActions.Controls.Add(btnResetAll);
+            grpActions.Controls.Add(cmdDeleteStale);
+            grpActions.Controls.Add(btnRestore);
+            grpActions.Controls.Add(btnBackup);
+            grpActions.Controls.Add(btnCheck);
+            grpActions.Controls.Add(cmdClean);
+            grpActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            grpActions.Location = new System.Drawing.Point(6, 558);
+            grpActions.Margin = new System.Windows.Forms.Padding(6);
+            grpActions.Name = "grpActions";
+            grpActions.Padding = new System.Windows.Forms.Padding(6);
+            grpActions.Size = new System.Drawing.Size(1608, 144);
+            grpActions.TabIndex = 0;
+            grpActions.TabStop = false;
+            grpActions.Text = "Actions";
             // 
             // btnClearLog
             // 
-            this.btnClearLog.Location = new System.Drawing.Point(1078, 35);
-            this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(150, 50);
-            this.btnClearLog.TabIndex = 6;
-            this.btnClearLog.Text = "Clear Log";
-            this.btnClearLog.UseVisualStyleBackColor = true;
-            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
+            btnClearLog.Location = new System.Drawing.Point(1347, 50);
+            btnClearLog.Name = "btnClearLog";
+            btnClearLog.Size = new System.Drawing.Size(223, 50);
+            btnClearLog.TabIndex = 6;
+            btnClearLog.Text = "Clear Log";
+            btnClearLog.UseVisualStyleBackColor = true;
+            btnClearLog.Click += btnClearLog_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.AutoSize = true;
+            groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            groupBox1.Controls.Add(btnCreations);
+            groupBox1.Controls.Add(btnStarfieldStore);
+            groupBox1.Controls.Add(cmdStarFieldPath);
+            groupBox1.Controls.Add(txtSource);
+            groupBox1.Controls.Add(btnAbout);
+            groupBox1.Controls.Add(btnStarfield);
+            groupBox1.Controls.Add(btnQuit);
+            groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox1.Location = new System.Drawing.Point(6, 958);
+            groupBox1.Margin = new System.Windows.Forms.Padding(6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(6);
+            groupBox1.Size = new System.Drawing.Size(1608, 136);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Other";
+            // 
+            // groupBox2
+            // 
+            groupBox2.AutoSize = true;
+            groupBox2.Controls.Add(btnLoadOrder);
+            groupBox2.Controls.Add(btnEditPlugins);
+            groupBox2.Controls.Add(btnExplore);
+            groupBox2.Controls.Add(btnLoad);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox2.Location = new System.Drawing.Point(3, 711);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(1614, 127);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Edit";
+            // 
+            // grpAuto
+            // 
+            grpAuto.AutoSize = true;
+            grpAuto.Controls.Add(chkForceClean);
+            grpAuto.Controls.Add(chkAutoRestore);
+            grpAuto.Controls.Add(chkAutoBackup);
+            grpAuto.Controls.Add(chkAutoClean);
+            grpAuto.Controls.Add(chkAutoCheck);
+            grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
+            grpAuto.Location = new System.Drawing.Point(3, 844);
+            grpAuto.Name = "grpAuto";
+            grpAuto.Size = new System.Drawing.Size(1614, 105);
+            grpAuto.TabIndex = 0;
+            grpAuto.TabStop = false;
+            grpAuto.Text = "Auto Functions";
+            // 
+            // chkAutoRestore
+            // 
+            chkAutoRestore.AutoSize = true;
+            chkAutoRestore.Location = new System.Drawing.Point(557, 31);
+            chkAutoRestore.Name = "chkAutoRestore";
+            chkAutoRestore.Size = new System.Drawing.Size(183, 36);
+            chkAutoRestore.TabIndex = 13;
+            chkAutoRestore.Text = "Auto Restore";
+            chkAutoRestore.UseVisualStyleBackColor = true;
+            chkAutoRestore.CheckedChanged += chkAutoRestore_CheckedChanged;
+            // 
+            // chkAutoBackup
+            // 
+            chkAutoBackup.AutoSize = true;
+            chkAutoBackup.Location = new System.Drawing.Point(368, 31);
+            chkAutoBackup.Name = "chkAutoBackup";
+            chkAutoBackup.Size = new System.Drawing.Size(181, 36);
+            chkAutoBackup.TabIndex = 12;
+            chkAutoBackup.Text = "Auto Backup";
+            chkAutoBackup.UseVisualStyleBackColor = true;
+            chkAutoBackup.CheckedChanged += chkAutoBackup_CheckedChanged;
+            // 
+            // chkAutoClean
+            // 
+            chkAutoClean.AutoSize = true;
+            chkAutoClean.Location = new System.Drawing.Point(195, 30);
+            chkAutoClean.Name = "chkAutoClean";
+            chkAutoClean.Size = new System.Drawing.Size(164, 36);
+            chkAutoClean.TabIndex = 11;
+            chkAutoClean.Text = "Auto Clean";
+            chkAutoClean.UseVisualStyleBackColor = true;
+            chkAutoClean.CheckedChanged += chkAutoClean_CheckedChanged;
+            // 
+            // chkAutoCheck
+            // 
+            chkAutoCheck.AutoSize = true;
+            chkAutoCheck.Location = new System.Drawing.Point(17, 31);
+            chkAutoCheck.Name = "chkAutoCheck";
+            chkAutoCheck.Size = new System.Drawing.Size(169, 36);
+            chkAutoCheck.TabIndex = 10;
+            chkAutoCheck.Text = "Auto Check";
+            chkAutoCheck.UseVisualStyleBackColor = true;
+            chkAutoCheck.CheckedChanged += chkAutoCheck_CheckedChanged;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel1.Controls.Add(richTextBox2, 0, 1);
+            tableLayoutPanel1.Controls.Add(groupBox1, 0, 5);
+            tableLayoutPanel1.Controls.Add(grpAuto, 0, 4);
+            tableLayoutPanel1.Controls.Add(richTextBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(groupBox2, 0, 3);
+            tableLayoutPanel1.Controls.Add(grpActions, 0, 2);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.Size = new System.Drawing.Size(1620, 1100);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // frmStarfieldTools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1313, 1142);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.statusStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "frmStarfieldTools";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Starfield Tools";
-            this.Activated += new System.EventHandler(this.frmStarfieldTools_Activated);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.grpActions.ResumeLayout(false);
-            this.grpActions.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.grpAuto.ResumeLayout(false);
-            this.grpAuto.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            ClientSize = new System.Drawing.Size(1620, 1142);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(statusStrip1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4);
+            Name = "frmStarfieldTools";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Starfield Tools";
+            Activated += frmStarfieldTools_Activated;
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            grpActions.ResumeLayout(false);
+            grpActions.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            grpAuto.ResumeLayout(false);
+            grpAuto.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Starfield Tools": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
