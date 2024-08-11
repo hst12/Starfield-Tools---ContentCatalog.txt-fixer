@@ -9,7 +9,7 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             string Readme = File.ReadAllText("Readme.txt");
-            string AboutText = Application.ProductName + " " +  "\n\n" + Readme;
+            string AboutText = Application.ProductName + " " + "\n\n" + Readme;
             richTextBox1.Text = AboutText;
         }
     }

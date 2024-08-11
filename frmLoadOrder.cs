@@ -31,9 +31,6 @@ namespace Starfield_Tools
             this.Height = (int)(screenHeight * 0.75);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            /*dataGridView1.Columns["Achievements"].Visible = false;
-            dataGridView1.Columns["CreationsID"].Visible = false;*/
-
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
@@ -63,7 +60,6 @@ namespace Starfield_Tools
             GetProfiles();
 #if DEBUG
             testToolStripMenu.Visible = true;
-            toolStripMenuColumns.Visible=true;
 #endif
         }
 
@@ -756,6 +752,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuSetPath_Click(object sender, EventArgs e)
         {
             StarfieldGamePath = CC.SetStarfieldGamePath();
+            InitDataGrid();
         }
 
         private void toolStripMenuCleanup_Click(object sender, EventArgs e)
@@ -1238,6 +1235,33 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuGitHub_Click(object sender, EventArgs e)
         {
             CC.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+        }
+
+        private void toolStripMenuAchievements_Click(object sender, EventArgs e)
+        {
+            toolStripMenuAchievements.Checked = !toolStripMenuAchievements.Checked;
+            if (toolStripMenuAchievements.Checked)
+                dataGridView1.Columns["Achievements"].Visible = true;
+            else
+                dataGridView1.Columns["Achievements"].Visible = false;
+        }
+
+        private void toolStripMenuCreationsID_Click(object sender, EventArgs e)
+        {
+            toolStripMenuCreationsID.Checked = !toolStripMenuCreationsID.Checked;
+            if (toolStripMenuCreationsID.Checked)
+                dataGridView1.Columns["CreationsID"].Visible = true;
+            else
+                dataGridView1.Columns["CreationsID"].Visible = false;
+        }
+
+        private void toolStripMenuFiles_Click(object sender, EventArgs e)
+        {
+            toolStripMenuFiles.Checked = !toolStripMenuFiles.Checked;
+            if (toolStripMenuFiles.Checked)
+                dataGridView1.Columns["Files"].Visible = true;
+            else
+                dataGridView1.Columns["Files"].Visible = false;
         }
     }
 }

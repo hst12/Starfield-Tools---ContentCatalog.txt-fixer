@@ -338,7 +338,7 @@ namespace Starfield_Tools
         private void btnLoad_Click(object sender, EventArgs e)
         {
             string pathToFile = CC.GetCatalog();
-            Process.Start("explorer",pathToFile);
+            Process.Start("explorer", pathToFile);
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -370,7 +370,7 @@ namespace Starfield_Tools
             string pathToFile = (CC.GetStarfieldPath() +
           @"\Plugins.txt");
 
-            Process.Start("explorer",pathToFile);
+            Process.Start("explorer", pathToFile);
         }
 
         private void BackupCatalog()
@@ -530,8 +530,8 @@ namespace Starfield_Tools
 
         private void btnCreations_Click(object sender, EventArgs e)
         {
-           CC.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
-            
+            CC.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
+
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -586,7 +586,7 @@ namespace Starfield_Tools
             }
 
             //Dictionary<string, object> json_Dictionary = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(json);
-            dynamic json_Dictionary=JsonConvert.DeserializeObject<dynamic>(json);
+            dynamic json_Dictionary = JsonConvert.DeserializeObject<dynamic>(json);
             try
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Process catalog
