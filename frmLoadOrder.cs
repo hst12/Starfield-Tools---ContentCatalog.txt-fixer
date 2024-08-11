@@ -31,6 +31,9 @@ namespace Starfield_Tools
             this.Height = (int)(screenHeight * 0.75);
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            /*dataGridView1.Columns["Achievements"].Visible = false;
+            dataGridView1.Columns["CreationsID"].Visible = false;*/
+
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
@@ -60,6 +63,7 @@ namespace Starfield_Tools
             GetProfiles();
 #if DEBUG
             testToolStripMenu.Visible = true;
+            toolStripMenuColumns.Visible=true;
 #endif
         }
 
