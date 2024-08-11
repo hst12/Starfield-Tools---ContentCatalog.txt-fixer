@@ -246,57 +246,57 @@
             contextMenuDatagrid.ImageScalingSize = new System.Drawing.Size(32, 32);
             contextMenuDatagrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableDisable, toolStripSeparator10, toolStripMenuUp, toolStripMenuDown, toolStripMenuTop, toolStripMenuBottom, toolStripSeparator4, toolStripMenAddRemoveContext, toolStripMenuDelContext, toolStripMenuInstallMod, toolStripMenuUninstallContext, toolStripSeparator11, toolStripMenuViewOnCreations, toolStripSeparator12, toolStripMenuRefresh });
             contextMenuDatagrid.Name = "contextMenuDatagrid";
-            contextMenuDatagrid.Size = new System.Drawing.Size(606, 446);
+            contextMenuDatagrid.Size = new System.Drawing.Size(507, 446);
             // 
             // toolStripMenuEnableDisable
             // 
             toolStripMenuEnableDisable.Name = "toolStripMenuEnableDisable";
-            toolStripMenuEnableDisable.Size = new System.Drawing.Size(605, 38);
-            toolStripMenuEnableDisable.Text = "Enable/Disable - Saves Plugins.txt (Double-Click)";
+            toolStripMenuEnableDisable.Size = new System.Drawing.Size(506, 38);
+            toolStripMenuEnableDisable.Text = "Enable/Disable - Saves Plugins.txt";
             toolStripMenuEnableDisable.Click += toolStripMenuEnableDisable_Click;
             // 
             // toolStripSeparator10
             // 
             toolStripSeparator10.Name = "toolStripSeparator10";
-            toolStripSeparator10.Size = new System.Drawing.Size(602, 6);
+            toolStripSeparator10.Size = new System.Drawing.Size(503, 6);
             // 
             // toolStripMenuUp
             // 
             toolStripMenuUp.Name = "toolStripMenuUp";
-            toolStripMenuUp.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuUp.Size = new System.Drawing.Size(506, 38);
             toolStripMenuUp.Text = "Up";
             toolStripMenuUp.Click += toolStripMenuUp_Click;
             // 
             // toolStripMenuDown
             // 
             toolStripMenuDown.Name = "toolStripMenuDown";
-            toolStripMenuDown.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuDown.Size = new System.Drawing.Size(506, 38);
             toolStripMenuDown.Text = "Down";
             toolStripMenuDown.Click += toolStripMenuDown_Click;
             // 
             // toolStripMenuTop
             // 
             toolStripMenuTop.Name = "toolStripMenuTop";
-            toolStripMenuTop.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuTop.Size = new System.Drawing.Size(506, 38);
             toolStripMenuTop.Text = "Top";
             toolStripMenuTop.Click += toolStripMenuTop_Click;
             // 
             // toolStripMenuBottom
             // 
             toolStripMenuBottom.Name = "toolStripMenuBottom";
-            toolStripMenuBottom.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuBottom.Size = new System.Drawing.Size(506, 38);
             toolStripMenuBottom.Text = "Bottom";
             toolStripMenuBottom.Click += toolStripMenuBottom_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(602, 6);
+            toolStripSeparator4.Size = new System.Drawing.Size(503, 6);
             // 
             // toolStripMenAddRemoveContext
             // 
             toolStripMenAddRemoveContext.Name = "toolStripMenAddRemoveContext";
-            toolStripMenAddRemoveContext.Size = new System.Drawing.Size(605, 38);
+            toolStripMenAddRemoveContext.Size = new System.Drawing.Size(506, 38);
             toolStripMenAddRemoveContext.Text = "Add/Remove Missing";
             toolStripMenAddRemoveContext.Click += toolStripMenAddRemoveContext_Click;
             // 
@@ -304,46 +304,46 @@
             // 
             toolStripMenuDelContext.Name = "toolStripMenuDelContext";
             toolStripMenuDelContext.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            toolStripMenuDelContext.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuDelContext.Size = new System.Drawing.Size(506, 38);
             toolStripMenuDelContext.Text = "Delete";
             toolStripMenuDelContext.Click += toolStripMenuDelContext_Click;
             // 
             // toolStripMenuInstallMod
             // 
             toolStripMenuInstallMod.Name = "toolStripMenuInstallMod";
-            toolStripMenuInstallMod.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuInstallMod.Size = new System.Drawing.Size(506, 38);
             toolStripMenuInstallMod.Text = "Install";
             toolStripMenuInstallMod.Click += toolStripMenuInstallMod_Click;
             // 
             // toolStripMenuUninstallContext
             // 
             toolStripMenuUninstallContext.Name = "toolStripMenuUninstallContext";
-            toolStripMenuUninstallContext.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuUninstallContext.Size = new System.Drawing.Size(506, 38);
             toolStripMenuUninstallContext.Text = "Uninstall";
             toolStripMenuUninstallContext.Click += toolStripMenuUninstallContext_Click;
             // 
             // toolStripSeparator11
             // 
             toolStripSeparator11.Name = "toolStripSeparator11";
-            toolStripSeparator11.Size = new System.Drawing.Size(602, 6);
+            toolStripSeparator11.Size = new System.Drawing.Size(503, 6);
             // 
             // toolStripMenuViewOnCreations
             // 
             toolStripMenuViewOnCreations.Name = "toolStripMenuViewOnCreations";
-            toolStripMenuViewOnCreations.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuViewOnCreations.Size = new System.Drawing.Size(506, 38);
             toolStripMenuViewOnCreations.Text = "View on Creations site";
             toolStripMenuViewOnCreations.Click += toolStripMenuViewOnCreations_Click;
             // 
             // toolStripSeparator12
             // 
             toolStripSeparator12.Name = "toolStripSeparator12";
-            toolStripSeparator12.Size = new System.Drawing.Size(602, 6);
+            toolStripSeparator12.Size = new System.Drawing.Size(503, 6);
             // 
             // toolStripMenuRefresh
             // 
             toolStripMenuRefresh.Name = "toolStripMenuRefresh";
             toolStripMenuRefresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            toolStripMenuRefresh.Size = new System.Drawing.Size(605, 38);
+            toolStripMenuRefresh.Size = new System.Drawing.Size(506, 38);
             toolStripMenuRefresh.Text = "Refresh (Discards unsaved changes)";
             toolStripMenuRefresh.Click += toolStripMenuRefresh_Click;
             // 
