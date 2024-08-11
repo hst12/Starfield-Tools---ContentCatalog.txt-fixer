@@ -121,14 +121,11 @@
   <data name="Github-Octicons-Arrow-down-24.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Github-Octicons-Arrow-down-24.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Github-Octicons-Move-to-top-24.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Github-Octicons-Move-to-top-24.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Github-Octicons-Move-to-bottom-24.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Github-Octicons-Move-to-bottom-24.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ar91m" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ar91m.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Github-Octicons-Move-to-top-24.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Github-Octicons-Move-to-top-24.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Github-Octicons-Arrow-up-24.32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Github-Octicons-Arrow-up-24.32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

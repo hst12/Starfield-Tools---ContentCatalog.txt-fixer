@@ -36,11 +36,7 @@ namespace Starfield_Tools
             toolStripMenuUninstall.Enabled = true;
 
             string PluginsPath = CC.GetStarfieldPath() + "\\Plugins.txt";
-            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt if it doesn't exist
-            {
-                toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
-                File.Copy(PluginsPath, PluginsPath + ".bak");
-            }
+
             menuStrip1.Font = Settings.Default.FontSize; // Get settings
             this.Font = Settings.Default.FontSize;
             StarfieldGamePath = Settings.Default.StarfieldGamePath;
@@ -58,6 +54,11 @@ namespace Starfield_Tools
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
+            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt if it doesn't exist
+            {
+                toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
+                File.Copy(PluginsPath, PluginsPath + ".bak");
+            }
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif

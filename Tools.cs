@@ -88,13 +88,6 @@ namespace Starfield_Tools
         public void ShowSplashScreen()
         {
             Form SS = new frmSplashScreen();
-
-            Rectangle resolution = Screen.PrimaryScreen.Bounds;
-            int screenWidth = resolution.Width;
-            int screenHeight = resolution.Height;
-            SS.Width = screenWidth / 2;
-            SS.Height = screenHeight / 2;
-            SS.StartPosition = FormStartPosition.CenterScreen;
             SS.Show();
         }
 
@@ -106,11 +99,12 @@ namespace Starfield_Tools
             {
                 Process.Start(cmdLine);
                 ShowSplashScreen();
-                Thread.Sleep(2000);
+                Thread.Sleep(4000);
                 Application.Exit();
             }
             catch (Exception ex)
             {
+                
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
         }
@@ -125,6 +119,7 @@ namespace Starfield_Tools
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
 
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
+
             var process = Process.Start(processInfo);
             ShowSplashScreen();
             Thread.Sleep(4000);

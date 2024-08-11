@@ -39,7 +39,7 @@
             richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new System.Drawing.Size(1178, 1123);
+            richTextBox1.Size = new System.Drawing.Size(1894, 1009);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
@@ -47,8 +47,8 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            ClientSize = new System.Drawing.Size(1178, 1123);
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            ClientSize = new System.Drawing.Size(1894, 1009);
             Controls.Add(richTextBox1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
