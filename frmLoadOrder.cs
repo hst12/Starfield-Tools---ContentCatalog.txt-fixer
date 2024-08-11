@@ -19,7 +19,7 @@ namespace Starfield_Tools
         Tools CC = new Tools();
         public string StarfieldGamePath;
 
-        bool isModified = false, Profiles = false, GameVersion = false;
+        bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
 
         public frmLoadOrder()
         {
@@ -68,6 +68,7 @@ namespace Starfield_Tools
         {
             InitDataGrid();
             GetProfiles();
+            GridSorted = false;
         }
 
         private void KeyEvent(object sender, KeyEventArgs e)
@@ -86,6 +87,7 @@ namespace Starfield_Tools
 
             toolStripStatusLabel1.ForeColor = DefaultForeColor;
             btnOK.Enabled = true;
+            btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
             if (!File.Exists(CC.GetCatalog()))
@@ -299,6 +301,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             bool ModEnabled;
             string ModLine;
 
+            if (GridSorted)
+                return;
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             using (StreamWriter writer = new StreamWriter(PluginFileName))
@@ -512,7 +516,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel1.Text = "Warning! - Plugins sorted - saving changes disabled";
             toolStripStatusLabel1.ForeColor = Color.Red;
             btnOK.Enabled = false;
+            btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
+            GridSorted = true;
         }
 
         private void DisableAll()
@@ -1067,6 +1073,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void EnableDisable()
         {
+            if (GridSorted)
+                return;
             isModified = true;
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
@@ -1085,7 +1093,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            EnableDisable();
+            //EnableDisable();
+            //MessageBox.Show("CellDoubleCkick");
         }
 
         private void toolStripMenuRunSteam_Click(object sender, EventArgs e)
@@ -1141,10 +1150,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SaveLO(CC.GetStarfieldPath() + @"\Plugins.txt");
             isModified = false;
             dataGridView1.CurrentCell = dgCurrent;
-        }
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            SaveOnDblClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
