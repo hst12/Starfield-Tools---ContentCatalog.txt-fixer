@@ -12,6 +12,7 @@ namespace Starfield_Tools
 
     internal class Tools
     {
+        public string ToolVersion = "1.7.2";
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
 
@@ -122,7 +123,7 @@ namespace Starfield_Tools
 
             var process = Process.Start(processInfo);
             ShowSplashScreen();
-            Thread.Sleep(4000);
+            Thread.Sleep(5000);
             Application.Exit();
         }
     }

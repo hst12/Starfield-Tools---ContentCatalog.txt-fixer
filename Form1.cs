@@ -241,18 +241,16 @@ namespace Starfield_Tools
                         ErrorFound = true;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
                     }
-
-                    /*for (int i = 0; i < TestString.Length; i++)
+                    for (int i = 0; i < TestString.IndexOf('.')+1; i++)
                     {
                         if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                         {
                             ErrorCount++;
                             richTextBox2.Text += "Non numeric version number detected in " + kvp.Value.Title + "\n";
                             ErrorFound = true;
-                            
                             break;
                         }
-                    }*/
+                    }
                 }
 
                 if (!ErrorFound)
@@ -683,7 +681,7 @@ namespace Starfield_Tools
                 FixVersion = false;
                 richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
 
-                for (int i = 0; i < TestString.Length; i++)
+                for (int i = 0; i < TestString.IndexOf('.'); i++)
                 {
 
                     if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
