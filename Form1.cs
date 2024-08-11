@@ -3,6 +3,7 @@ using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -241,14 +242,17 @@ namespace Starfield_Tools
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
                     }
 
-                    for (int i = 0; i < TestString.Length; i++)
+                    /*for (int i = 0; i < TestString.Length; i++)
                     {
                         if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                         {
+                            ErrorCount++;
+                            richTextBox2.Text += "Non numeric version number detected in " + kvp.Value.Title + "\n";
                             ErrorFound = true;
+                            
                             break;
                         }
-                    }
+                    }*/
                 }
 
                 if (!ErrorFound)
@@ -442,8 +446,6 @@ namespace Starfield_Tools
         {
             ForceClean = chkForceClean.Checked;
         }
-
-
 
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {

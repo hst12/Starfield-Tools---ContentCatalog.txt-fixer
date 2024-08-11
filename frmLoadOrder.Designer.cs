@@ -202,7 +202,7 @@
             // 
             // Version
             // 
-            Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             Version.HeaderText = "Version";
             Version.MinimumWidth = 10;
             Version.Name = "Version";
