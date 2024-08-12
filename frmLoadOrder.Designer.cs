@@ -83,6 +83,8 @@
             toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuSteam = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuMS = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuLoadingScreen = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuColumns = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuAchievements = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +136,7 @@
             fontDialog1 = new System.Windows.Forms.FontDialog();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -521,7 +524,7 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuSteam, toolStripMenuMS });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuSteam, toolStripMenuMS, toolStripSeparator13, toolStripMenuLoadingScreen });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -558,6 +561,18 @@
             toolStripMenuMS.Size = new System.Drawing.Size(384, 44);
             toolStripMenuMS.Text = "Game Version - MS";
             toolStripMenuMS.Click += toolStripMenuMS_Click;
+            // 
+            // toolStripSeparator13
+            // 
+            toolStripSeparator13.Name = "toolStripSeparator13";
+            toolStripSeparator13.Size = new System.Drawing.Size(381, 6);
+            // 
+            // toolStripMenuLoadingScreen
+            // 
+            toolStripMenuLoadingScreen.Name = "toolStripMenuLoadingScreen";
+            toolStripMenuLoadingScreen.Size = new System.Drawing.Size(384, 44);
+            toolStripMenuLoadingScreen.Text = "Loading Screen";
+            toolStripMenuLoadingScreen.Click += toolStripMenuLoadingScreen_Click;
             // 
             // toolStripMenuColumns
             // 
@@ -1025,6 +1040,10 @@
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
             // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmLoadOrder
             // 
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1170,5 +1189,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadingScreen;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

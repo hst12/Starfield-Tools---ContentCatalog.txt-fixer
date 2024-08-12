@@ -118,12 +118,18 @@ namespace Starfield_Tools
 
             // Get Steam path from Registry
             string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
-
             var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
-
-            var process = Process.Start(processInfo);
+            try
+            {
+                var process = Process.Start(processInfo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Unable tostart game");
+                return;
+            }
             ShowSplashScreen();
-            Thread.Sleep(5000);
+            Thread.Sleep(6000);
             Application.Exit();
         }
     }
