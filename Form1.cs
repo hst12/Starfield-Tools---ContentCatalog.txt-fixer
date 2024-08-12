@@ -3,7 +3,6 @@ using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -241,7 +240,7 @@ namespace Starfield_Tools
                         ErrorFound = true;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
                     }
-                    for (int i = 0; i < TestString.IndexOf('.')+1; i++)
+                    for (int i = 0; i < TestString.IndexOf('.') + 1; i++)
                     {
                         if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
                         {

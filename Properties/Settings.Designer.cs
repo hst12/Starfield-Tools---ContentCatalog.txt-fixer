@@ -141,5 +141,29 @@ namespace Starfield_Tools.Properties {
                 this["LastProfile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LoadScreenFilename {
+            get {
+                return ((string)(this["LoadScreenFilename"]));
+            }
+            set {
+                this["LoadScreenFilename"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastUsedScreenshot {
+            get {
+                return ((int)(this["LastUsedScreenshot"]));
+            }
+            set {
+                this["LastUsedScreenshot"] = value;
+            }
+        }
     }
 }

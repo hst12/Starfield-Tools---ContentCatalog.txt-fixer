@@ -51,9 +51,10 @@ namespace Starfield_Tools
         public class ModMetaData
         {
             public string ModName { get; set; }
+            public string[] ModFiles { get; set; }
             public string ModVersion { get; set; }
             public string SourceURL { get; set; }
-
+            public string MainCategory { get; set; }
         }
 
         public void ShowAbout()
@@ -100,12 +101,12 @@ namespace Starfield_Tools
             {
                 Process.Start(cmdLine);
                 ShowSplashScreen();
-                Thread.Sleep(4000);
+                Thread.Sleep(2000);
                 Application.Exit();
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
             }
         }
@@ -116,20 +117,19 @@ namespace Starfield_Tools
             const string subkey = @"Software\Valve\Steam";
             const string keyName = userRoot + "\\" + subkey;
 
-            // Get Steam path from Registry
-            string stringValue = (string)Registry.GetValue(keyName, "SteamExe", "");
-            var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
             try
             {
+                string stringValue = (string)Registry.GetValue(keyName, "SteamExe", ""); // Get Steam path from Registry
+                var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
                 var process = Process.Start(processInfo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Unable tostart game");
+                MessageBox.Show(ex.Message, "Unable tostart game");
                 return;
             }
             ShowSplashScreen();
-            Thread.Sleep(6000);
+            Thread.Sleep(7000);
             Application.Exit();
         }
     }
