@@ -1,4 +1,4 @@
-Starfield Tools 1.7.0.0
+Starfield Tools 1.7.2.0
 
 What's new: Switched to .NET 8.0. Some UI changes mostly in load order editor.
 
