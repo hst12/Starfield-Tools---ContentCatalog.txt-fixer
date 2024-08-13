@@ -17,7 +17,7 @@ namespace Starfield_Tools
     public partial class frmLoadOrder : Form
     {
         Tools CC = new Tools();
-        public string StarfieldGamePath="",LoadScreenPic="";
+        public string StarfieldGamePath = "", LoadScreenPic = "";
 
         bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
 
@@ -51,6 +51,43 @@ namespace Starfield_Tools
                 toolStripMenuMS.Checked = true;
                 toolStripMenuRunSteam.Visible = false;
             }
+
+            if (Settings.Default.Achievements)
+            {
+                toolStripMenuAchievements.Checked = true;
+                dataGridView1.Columns["Achievements"].Visible = true;
+            }
+            else
+            {
+                toolStripMenuAchievements.Checked = false;
+                dataGridView1.Columns["Achievements"].Visible = false;
+            }
+
+            if (Settings.Default.CreationsID)
+            {
+                toolStripMenuCreationsID.Checked = true;
+                dataGridView1.Columns["CreationsID"].Visible = true;
+            }
+            else
+            {
+                dataGridView1.Columns["CreationsID"].Visible = false;
+                toolStripMenuCreationsID.Checked = false;
+            }
+
+            if (Settings.Default.Files)
+            {
+                toolStripMenuFiles.Checked = true;
+                dataGridView1.Columns["Files"].Visible = true;
+            }
+            else
+            {
+                dataGridView1.Columns["Files"].Visible = false;
+                toolStripMenuFiles.Checked = false;
+            }
+
+
+
+
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
@@ -560,7 +597,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 return;
             TextBoxString = txtSearchBox.Text.ToLower(); // Do lower case only search
 
-            for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
+            for (ModIndex = 0; ModIndex <= dataGridView1.RowCount; ModIndex++)
             {
                 DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
                 if (DataGridSring.Contains(TextBoxString))
@@ -1093,8 +1130,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //EnableDisable();
-            //MessageBox.Show("CellDoubleCkick");
+            EnableDisable();
         }
 
         private void toolStripMenuRunSteam_Click(object sender, EventArgs e)
@@ -1227,10 +1263,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             UninstallMod();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
@@ -1250,6 +1282,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Achievements"].Visible = true;
             else
                 dataGridView1.Columns["Achievements"].Visible = false;
+            Settings.Default.Achievements = toolStripMenuAchievements.Checked;
         }
 
         private void toolStripMenuCreationsID_Click(object sender, EventArgs e)
@@ -1259,6 +1292,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["CreationsID"].Visible = true;
             else
                 dataGridView1.Columns["CreationsID"].Visible = false;
+            Settings.Default.CreationsID= toolStripMenuCreationsID.Checked;
         }
 
         private void toolStripMenuFiles_Click(object sender, EventArgs e)
@@ -1268,6 +1302,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Files"].Visible = true;
             else
                 dataGridView1.Columns["Files"].Visible = false;
+            Settings.Default.Files= toolStripMenuFiles.Checked;
         }
 
         private void toolStripMenuLoadingScreen_Click(object sender, EventArgs e)
@@ -1276,8 +1311,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult LoadScreen = openFileDialog1.ShowDialog();
             if (LoadScreen == DialogResult.OK)
             {
-                if (openFileDialog1.FileName!="")
-                    Settings.Default.LoadScreenFilename=openFileDialog1.FileName;
+                if (openFileDialog1.FileName != "")
+                    Settings.Default.LoadScreenFilename = openFileDialog1.FileName;
             }
         }
     }

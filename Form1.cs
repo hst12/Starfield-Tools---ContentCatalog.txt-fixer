@@ -152,12 +152,14 @@ namespace Starfield_Tools
 
             if (lastWriteTime1 == lastWriteTime2)
             {
-                richTextBox2.Text += "Backup is up to date.\n";
+                richTextBox2.Text += "\nBackup is up to date.\n";
+                ScrollToEnd();
                 return true;
             }
             else
             {
-                richTextBox2.Text += "Backup is out of date.\n";
+                richTextBox2.Text += "\nBackup is out of date.\n";
+                ScrollToEnd();
                 return false;
             }
         }

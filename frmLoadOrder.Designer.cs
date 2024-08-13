@@ -214,6 +214,7 @@
             // 
             // TimeStamp
             // 
+            TimeStamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             TimeStamp.HeaderText = "Time Stamp";
             TimeStamp.MinimumWidth = 10;
             TimeStamp.Name = "TimeStamp";
@@ -1015,7 +1016,6 @@
             label1.TabIndex = 14;
             label1.Text = "Search";
             toolTip1.SetToolTip(label1, "Type text below and press <enter> to search");
-            label1.Click += label1_Click;
             // 
             // txtSearchBox
             // 
@@ -1181,6 +1181,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAchievements;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCreationsID;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuFiles;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadingScreen;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
@@ -1189,8 +1192,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadingScreen;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

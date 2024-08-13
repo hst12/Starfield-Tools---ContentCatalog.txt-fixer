@@ -165,5 +165,41 @@ namespace Starfield_Tools.Properties {
                 this["LastUsedScreenshot"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Achievements {
+            get {
+                return ((bool)(this["Achievements"]));
+            }
+            set {
+                this["Achievements"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreationsID {
+            get {
+                return ((bool)(this["CreationsID"]));
+            }
+            set {
+                this["CreationsID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Files {
+            get {
+                return ((bool)(this["Files"]));
+            }
+            set {
+                this["Files"] = value;
+            }
+        }
     }
 }
