@@ -24,6 +24,13 @@ namespace Starfield_Tools
         public frmLoadOrder()
         {
             InitializeComponent();
+
+            if (!Directory.Exists(CC.GetStarfieldPath())) // Check if Starfield is installed
+            {
+                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Application.Exit();
+            }
+
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;

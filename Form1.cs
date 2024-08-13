@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Windows.Media.Playback;
 
 
 namespace Starfield_Tools
@@ -24,6 +25,11 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
+            if (!Directory.Exists(CC.GetStarfieldPath())) // Check if Starfield is installed
+            {
+                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Application.Exit();
+            }
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
