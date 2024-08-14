@@ -7,7 +7,7 @@ This tool would not have been possible without the invaluable contributions of Z
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.
 This tool is intended to repair the catalog file. You could simply delete the catalog file and have the game rebuild it, but that will force a download of all your Creations mods next time you use the Creations menu.
 
-To install, extract the zip file and run the setup.exe installer. Un-install any version before running the new installer.
+To install, extract the zip file and run the msi installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
 
 Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically. This is the default.
@@ -16,14 +16,14 @@ Force clean is an experimental option to make the tool run a cleaning process ev
 Usage Instructions:
 Important: Quit the game and run the tool before loading a saved game if you've installed new mods or updated mods in the Creations menu.
 Run it before going to the Creations menu and after exiting the Creations menu.
-Use the Backup function after you've been in the Creations menu to backup the catalog file.
-Use the Restore function to restore a backup up catalog if you've made a backup.
+Use the Backup function after you've been in the Creations menu to backup the catalog file - on by default.
+Use the Restore function to restore a backup up catalog if you've made a backup - on by default.
 Press the Check button if necessary to check if the catalog is ok.
 Press the Clean button if necessary to clean the catalog.
 When the auto functions are enabled, the tool will look for a backup of the catalog file first and try to restore that. If the restore fails, it will run a cleaning process.
 
 There is no need to use the tool if you're just playing the game normally and are not using the Creations menu.
-Use the catalog backup and restore features instead of the repair features when possible.
+Use the catalog backup and restore features instead of the repair features when possible. These functions are on by default.
 
 Overview of buttons:
 Check button re-checks the file.
@@ -44,12 +44,12 @@ Explore button opens the folder with your plugin and catalog files. You could ma
 
 Load Order button shows a list of mods and allows them to be turned on or off or moved up or down in the load order. Some stats about your mods will be shown if you've used the Set Starfield Path button on the main screen.
 There is a somewhat experimental mod profile switching feature in the load order editor. Backup your Plugins.txt file before trying it.
+A one-time only automatic backup of your Plugins.txt file is made the first time you open the load editor. Use the File->restore menu to restore this backup if necessary.
 
-You can alt-tab from the game to check the ContentCatalog file to see if corruption has occurred by pressing the Check button.
 
 Two Starfield launch buttons are provided. One for the Steam version of the game and another for the MS Store version. The tool will close after using either of these launch buttons.
+You can also launch the game from within the Load Order Editor. Set the game version in the Tools menu first - it defaults to Steam.
 
-Quit the game if it's running before using the Clean or Edit buttons.
 
 Command line options:
 -noauto Clears all the auto check boxes. This will stop any auto repair functions from running automatically when the tool starts.
@@ -70,3 +70,14 @@ Plugins.txt - Read and Write
 Plugins.txt.bak -  - Read and Write
 
 Read only access is performed on the Data folder of Starfield to provide some stats on installed mods.
+
+The Load Order Editor can install or un-install mods from a folder with the following limitations:
+1. Zip files only
+2. The contents of the Zip archive are limited to .esm and .ba2 files only. Loose file are not supported. FOMOD files are not supported.
+
+Profile switching: An experimental feature allowing you to switch mod profiles. Backup your Plugins.txt file before trying this out.
+Pick an empty folder or create a folder somewhere in My Documents to save your profiles.
+Profile switching is always off by default until the checkbox next to Profiles is checked.
+
+When launching a game from the Load Order Editor a load screen is displayed for a few seconds while the game loads.
+A custom load screen picture can be set in the Tools menu.

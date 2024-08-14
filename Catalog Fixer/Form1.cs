@@ -19,18 +19,15 @@ namespace Starfield_Tools
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
         public const string CatalogVersion = "1.1";
 
-        Tools CC = new Tools();
+        Tools tools = new();
         public string StarfieldGamePath;
 
         public frmStarfieldTools()
         {
             InitializeComponent();
-
-            if (!Directory.Exists(CC.GetStarfieldPath())) // Check if Starfield is installed
-            {
-                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            if (!tools.CheckGame())
                 Application.Exit();
-            }
+
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
@@ -106,7 +103,7 @@ namespace Starfield_Tools
 
             if (cmdLineLO) // Go to mod manager
             {
-                frmLoadOrder frmLO = new frmLoadOrder();
+                frmLoadOrder frmLO = new();
                 frmLO.Show();
                 this.WindowState = FormWindowState.Minimized;
                 
@@ -116,7 +113,7 @@ namespace Starfield_Tools
             if (cmdLineRunSteam)
             {
                 SaveSettings();
-                CC.StartStarfieldSteam();
+                Tools.StartStarfieldSteam();
                 if (Application.MessageLoop)
                     Application.Exit();
                 else
@@ -126,7 +123,7 @@ namespace Starfield_Tools
             if (cmdLineRunMS)
             {
                 SaveSettings();
-                CC.StartStarfieldMS();
+                Tools.StartStarfieldMS();
                 if (Application.MessageLoop)
                     Application.Exit();
                 else
@@ -152,7 +149,7 @@ namespace Starfield_Tools
 
         private bool CheckBackup()
         {
-            string fileName1 = CC.GetCatalog();
+            string fileName1 = tools.GetCatalog();
             string fileName2 = fileName1 + ".bak";
 
             DateTime lastWriteTime1 = File.GetLastWriteTime(fileName1);
@@ -176,7 +173,7 @@ namespace Starfield_Tools
         {
             try
             {
-                richTextBox1.Text = File.ReadAllText(CC.GetCatalog());
+                richTextBox1.Text = File.ReadAllText(tools.GetCatalog());
             }
             catch
             {
@@ -184,7 +181,7 @@ namespace Starfield_Tools
             }
         }
 
-        private string MakeHeaderBlank()
+        private static string MakeHeaderBlank()
         {
             string HeaderString = @"{
   ""ContentCatalog"" : 
@@ -199,10 +196,10 @@ namespace Starfield_Tools
             return HeaderString;
         }
 
-        private string MakeHeader()
+        private static string MakeHeader()
         {
             string HeaderString = MakeHeaderBlank();
-            HeaderString = HeaderString.Substring(0, HeaderString.Length - 5) + ",";
+            HeaderString = HeaderString[..^5] + ",";
             return HeaderString;
         }
 
@@ -218,7 +215,7 @@ namespace Starfield_Tools
 
             try
             {
-                string jsonFilePath = CC.GetCatalog();
+                string jsonFilePath = tools.GetCatalog();
                 if (jsonFilePath == null)
                 {
                     toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
@@ -239,9 +236,9 @@ namespace Starfield_Tools
                 foreach (var kvp in data)
                 {
                     TestString = kvp.Value.Version;
-                    VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
+                    VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     if (TestString != CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
-                        richTextBox2.Text += kvp.Value.Title + ", date: " + CC.ConvertTime(VersionCheck) + " version: " + TestString.Substring(TestString.IndexOf('.') + 1) + "\n";
+                        richTextBox2.Text += kvp.Value.Title + ", date: " + tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
@@ -278,14 +275,14 @@ namespace Starfield_Tools
 
             catch
             {
-                if (!File.Exists(CC.GetCatalog()))
+                if (!File.Exists(tools.GetCatalog()))
                 {
                     DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
                     if (result == DialogResult.OK)
                     {
 
                         var CatalogHeader = MakeHeaderBlank();
-                        File.WriteAllText(CC.GetCatalog(), CatalogHeader);
+                        File.WriteAllText(tools.GetCatalog(), CatalogHeader);
                         toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
                         return false;
 
@@ -302,11 +299,11 @@ namespace Starfield_Tools
 
         private void CleanCatalog()
         {
-            if (!File.Exists(CC.GetCatalog()))
-                File.WriteAllText(CC.GetCatalog(), string.Empty); // Create dummy catalog
+            if (!File.Exists(tools.GetCatalog()))
+                File.WriteAllText(tools.GetCatalog(), string.Empty); // Create dummy catalog
             else
             {
-                long fileSize = new FileInfo(CC.GetCatalog()).Length;
+                long fileSize = new FileInfo(tools.GetCatalog()).Length;
 
                 if (fileSize > 0)
                 {
@@ -348,7 +345,7 @@ namespace Starfield_Tools
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string pathToFile = CC.GetCatalog();
+            string pathToFile = tools.GetCatalog();
             Process.Start("explorer", pathToFile);
         }
 
@@ -363,22 +360,22 @@ namespace Starfield_Tools
         {
             SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
-            CC.StartStarfieldSteam();
+            Tools.StartStarfieldSteam();
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            CC.ShowAbout();
+            Tools.ShowAbout();
         }
 
         private void btnExplore_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", CC.GetStarfieldPath());
+            Process.Start("explorer.exe", tools.GetStarfieldPath());
         }
 
         private void btnEditPlugins_Click(object sender, EventArgs e)
         {
-            string pathToFile = (CC.GetStarfieldPath() +
+            string pathToFile = (tools.GetStarfieldPath() +
           @"\Plugins.txt");
 
             Process.Start("explorer", pathToFile);
@@ -396,7 +393,7 @@ namespace Starfield_Tools
 
             if (!CheckBackup())
             {
-                string sourceFileName = CC.GetCatalog();
+                string sourceFileName = tools.GetCatalog();
                 string destFileName = sourceFileName + ".bak";
 
                 try
@@ -415,7 +412,7 @@ namespace Starfield_Tools
 
         private void btnLoadOrder_Click(object sender, EventArgs e)
         {
-            frmLoadOrder frmLO = new frmLoadOrder();
+            frmLoadOrder frmLO = new();
             frmLO.Show();
         }
 
@@ -441,12 +438,12 @@ namespace Starfield_Tools
 
         private void txtSource_Click(object sender, EventArgs e)
         {
-            CC.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+            tools.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void cmdStarFieldPath_Click(object sender, EventArgs e)
         {
-            CC.SetStarfieldGamePath();
+            tools.SetStarfieldGamePath();
         }
 
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
@@ -457,7 +454,7 @@ namespace Starfield_Tools
         private void btnStarfieldStore_Click(object sender, EventArgs e)
         {
             SaveSettings();
-            CC.StartStarfieldMS();
+            Tools.StartStarfieldMS();
         }
 
         private void frmStarfieldTools_Activated(object sender, EventArgs e)
@@ -484,7 +481,7 @@ namespace Starfield_Tools
 
         private bool RestoreCatalog()
         {
-            string destFileName = CC.GetCatalog();
+            string destFileName = tools.GetCatalog();
             string sourceFileName = destFileName + ".bak";
 
             try
@@ -514,7 +511,7 @@ namespace Starfield_Tools
                 return;
             }
 
-            string jsonFilePath = CC.GetCatalog();
+            string jsonFilePath = tools.GetCatalog();
 
             string json = File.ReadAllText(jsonFilePath);
 
@@ -530,16 +527,16 @@ namespace Starfield_Tools
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
             // Hack the Bethesda header back in
-            json = MakeHeader() + json.Substring(1);
+            json = MakeHeader() + json[1..];
 
-            File.WriteAllText(CC.GetCatalog(), json); // Write updated cataalog
+            File.WriteAllText(tools.GetCatalog(), json); // Write updated cataalog
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Version numbers reset\n";
         }
 
         private void btnCreations_Click(object sender, EventArgs e)
         {
-            CC.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
+            tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
 
         }
 
@@ -561,13 +558,13 @@ namespace Starfield_Tools
 
         private void RemoveDeleteddEntries() // Remove left over entries from catalog
         {
-            List<string> esmFiles = new List<string>();
-            string jsonFilePath = CC.GetCatalog();
+            List<string> esmFiles = new();
+            string jsonFilePath = tools.GetCatalog();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
-            List<string> CreationsPlugin = new List<string>(); // filename of .esm
-            List<string> CreationsTitle = new List<string>(); // Display title for .esm
-            List<string> CreationsGUID = new List<string>(); // Creations GUID
-            List<string> CreationsVersion = new List<string>(); // Version
+            List<string> CreationsPlugin = new(); // filename of .esm
+            List<string> CreationsTitle = new(); // Display title for .esm
+            List<string> CreationsGUID = new(); // Creations GUID
+            List<string> CreationsVersion = new(); // Version
             int RemovalCount = 0;
             int index;
             bool unusedMods = false;
@@ -576,7 +573,7 @@ namespace Starfield_Tools
             string filePath = GetStarfieldPath() + "\\Plugins.txt";
             string fileContent = File.ReadAllText(filePath); // Load Plugins.txt
             // Split the content into lines if necessary
-            List<string> lines = fileContent.Split('\n').ToList();
+            List<string> lines = [.. fileContent.Split('\n')];
 
             foreach (var file in lines) // Process Plugins.txt to just a list of .esm files
             {
@@ -584,7 +581,7 @@ namespace Starfield_Tools
                 {
                     if (file[0] != '#') // skip the comments
                         if (file[0] == '*') // Make a list of .esm files
-                            esmFiles.Add(file.Substring(1)); // strip any *
+                            esmFiles.Add(file[1..]); // strip any *
                         else
                             esmFiles.Add(file);
                 }
@@ -649,9 +646,9 @@ namespace Starfield_Tools
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
                     // Hack the Bethesda header back in
-                    json = MakeHeader() + json.Substring(1);
+                    json = MakeHeader() + json[1..];
 
-                    File.WriteAllText(CC.GetCatalog(), json);
+                    File.WriteAllText(tools.GetCatalog(), json);
                 }
                 else
                 {
@@ -668,7 +665,7 @@ namespace Starfield_Tools
 
         private void NewFix()
         {
-            string jsonFilePath = CC.GetCatalog();
+            string jsonFilePath = tools.GetCatalog();
 
             string json = File.ReadAllText(jsonFilePath); // Load catalog
             if (json == "")
@@ -702,7 +699,7 @@ namespace Starfield_Tools
 
                 if (TestString != CatalogVersion) // Skip the catalog header then check for valid timestamps
                 {
-                    VersionCheck = double.Parse((kvp.Value.Version.Substring(0, kvp.Value.Version.IndexOf('.'))));
+                    VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp)
                     {
@@ -725,7 +722,7 @@ namespace Starfield_Tools
                 return;
             }
             // Insert the Bethesda header back in. This will probably break if the version no. is updated from 1.1
-            json = MakeHeader() + json.Substring(1); // Remove a { char
+            json = MakeHeader() + json[1..]; // Remove a { char
 
             File.WriteAllText(jsonFilePath, json);
             toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";

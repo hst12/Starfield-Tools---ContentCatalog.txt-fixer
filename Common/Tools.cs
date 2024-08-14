@@ -3,6 +3,7 @@ using Starfield_Tools.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -28,7 +29,7 @@ namespace Starfield_Tools.Common
 
         public DateTime ConvertTime(double TimeToConvert)
         {
-            DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
             start = start.AddSeconds(TimeToConvert);
             return start;
         }
@@ -57,7 +58,17 @@ namespace Starfield_Tools.Common
             public string MainCategory { get; set; }
         }
 
-        public void ShowAbout()
+        public bool CheckGame()
+        {
+            if (!Directory.Exists(GetStarfieldPath())) // Check if Starfield is installed
+            {
+                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+            else
+                return true;
+        }
+        public static void ShowAbout()
         {
             Form AboutBox = new frmAbout();
             Rectangle resolution = Screen.PrimaryScreen.Bounds;
@@ -71,29 +82,27 @@ namespace Starfield_Tools.Common
 
         public string SetStarfieldGamePath()
         {
-            using (var folderBrowserDialog = new FolderBrowserDialog())
+            using FolderBrowserDialog folderBrowserDialog = new();
+            folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
+            folderBrowserDialog.Description = "Choose path to the game installation folder";
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
-                folderBrowserDialog.Description = "Choose path to the game installation folder";
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                    StarfieldGamePath = selectedFolderPath;
-                    Settings.Default.StarfieldGamePath = selectedFolderPath;
-                    Settings.Default.Save();
-                    return selectedFolderPath;
-                }
-                return "";
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                StarfieldGamePath = selectedFolderPath;
+                Settings.Default.StarfieldGamePath = selectedFolderPath;
+                Settings.Default.Save();
+                return selectedFolderPath;
             }
+            return "";
         }
 
-        public void ShowSplashScreen()
+        public static void ShowSplashScreen()
         {
             Form SS = new frmSplashScreen();
             SS.Show();
         }
 
-        public void StartStarfieldMS()
+        public static void StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
 
@@ -111,7 +120,7 @@ namespace Starfield_Tools.Common
             }
         }
 
-        public void StartStarfieldSteam()
+        public static void StartStarfieldSteam()
         {
             const string userRoot = "HKEY_CURRENT_USER";
             const string subkey = @"Software\Valve\Steam";
