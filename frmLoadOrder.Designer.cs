@@ -838,8 +838,7 @@
             // 
             btnUp.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnUp.Image = Properties.Resources.Github_Octicons_Arrow_up_24_32;
-            btnUp.Location = new System.Drawing.Point(2, 23);
-            btnUp.Margin = new System.Windows.Forms.Padding(2);
+            btnUp.Location = new System.Drawing.Point(3, 23);
             btnUp.Name = "btnUp";
             btnUp.Size = new System.Drawing.Size(68, 68);
             btnUp.TabIndex = 0;
@@ -852,8 +851,7 @@
             btnDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnDown.AutoSize = true;
             btnDown.Image = Properties.Resources.Github_Octicons_Arrow_down_24_32;
-            btnDown.Location = new System.Drawing.Point(74, 23);
-            btnDown.Margin = new System.Windows.Forms.Padding(2);
+            btnDown.Location = new System.Drawing.Point(77, 23);
             btnDown.Name = "btnDown";
             btnDown.Size = new System.Drawing.Size(68, 68);
             btnDown.TabIndex = 1;
@@ -866,8 +864,7 @@
             btnTop.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnTop.AutoSize = true;
             btnTop.Image = Properties.Resources.Github_Octicons_Move_to_top_24_32;
-            btnTop.Location = new System.Drawing.Point(148, 23);
-            btnTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnTop.Location = new System.Drawing.Point(151, 23);
             btnTop.Name = "btnTop";
             btnTop.Size = new System.Drawing.Size(68, 68);
             btnTop.TabIndex = 2;
@@ -878,8 +875,7 @@
             // btnSave
             // 
             btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnSave.Location = new System.Drawing.Point(905, 23);
-            btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnSave.Location = new System.Drawing.Point(904, 23);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(132, 68);
             btnSave.TabIndex = 4;
@@ -891,8 +887,7 @@
             // btnRun
             // 
             btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRun.Location = new System.Drawing.Point(1045, 23);
-            btnRun.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnRun.Location = new System.Drawing.Point(1042, 23);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(132, 68);
             btnRun.TabIndex = 5;
@@ -905,8 +900,7 @@
             // 
             btnOK.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnOK.AutoSize = true;
-            btnOK.Location = new System.Drawing.Point(1185, 23);
-            btnOK.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnOK.Location = new System.Drawing.Point(1180, 23);
             btnOK.Name = "btnOK";
             btnOK.Size = new System.Drawing.Size(132, 68);
             btnOK.TabIndex = 9;
@@ -919,8 +913,7 @@
             // 
             btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnCancel.AutoSize = true;
-            btnCancel.Location = new System.Drawing.Point(1325, 23);
-            btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnCancel.Location = new System.Drawing.Point(1318, 23);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(132, 68);
             btnCancel.TabIndex = 10;
@@ -978,8 +971,7 @@
             btnBottom.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnBottom.AutoSize = true;
             btnBottom.Image = Properties.Resources.Github_Octicons_Move_to_bottom_24_32;
-            btnBottom.Location = new System.Drawing.Point(224, 23);
-            btnBottom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            btnBottom.Location = new System.Drawing.Point(225, 23);
             btnBottom.Name = "btnBottom";
             btnBottom.Size = new System.Drawing.Size(68, 68);
             btnBottom.TabIndex = 3;
@@ -1031,7 +1023,7 @@
             // 
             btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1464, 23);
+            btnQuit.Location = new System.Drawing.Point(1456, 23);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(132, 68);
             btnQuit.TabIndex = 17;

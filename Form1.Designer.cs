@@ -54,30 +54,38 @@
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             grpActions = new System.Windows.Forms.GroupBox();
+            flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             btnClearLog = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             groupBox2 = new System.Windows.Forms.GroupBox();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             grpAuto = new System.Windows.Forms.GroupBox();
-            chkAutoRestore = new System.Windows.Forms.CheckBox();
-            chkAutoBackup = new System.Windows.Forms.CheckBox();
-            chkAutoClean = new System.Windows.Forms.CheckBox();
+            flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             chkAutoCheck = new System.Windows.Forms.CheckBox();
+            chkAutoClean = new System.Windows.Forms.CheckBox();
+            chkAutoBackup = new System.Windows.Forms.CheckBox();
+            chkAutoRestore = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
+            flowLayoutPanel3.SuspendLayout();
             groupBox1.SuspendLayout();
+            flowLayoutPanel4.SuspendLayout();
             groupBox2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             grpAuto.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // richTextBox2
             // 
             richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            richTextBox2.Location = new System.Drawing.Point(3, 279);
+            richTextBox2.Location = new System.Drawing.Point(3, 348);
             richTextBox2.Name = "richTextBox2";
             richTextBox2.ReadOnly = true;
-            richTextBox2.Size = new System.Drawing.Size(1614, 270);
+            richTextBox2.Size = new System.Drawing.Size(1636, 339);
             richTextBox2.TabIndex = 1;
             richTextBox2.TabStop = false;
             richTextBox2.Text = "";
@@ -89,7 +97,7 @@
             richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new System.Drawing.Size(1608, 264);
+            richTextBox1.Size = new System.Drawing.Size(1630, 333);
             richTextBox1.TabIndex = 0;
             richTextBox1.TabStop = false;
             richTextBox1.Text = "";
@@ -97,8 +105,7 @@
             // btnQuit
             // 
             btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1372, 42);
-            btnQuit.Margin = new System.Windows.Forms.Padding(4);
+            btnQuit.Location = new System.Drawing.Point(1377, 3);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(223, 50);
             btnQuit.TabIndex = 20;
@@ -110,8 +117,7 @@
             // cmdClean
             // 
             cmdClean.AutoSize = true;
-            cmdClean.Location = new System.Drawing.Point(232, 50);
-            cmdClean.Margin = new System.Windows.Forms.Padding(6);
+            cmdClean.Location = new System.Drawing.Point(232, 3);
             cmdClean.Name = "cmdClean";
             cmdClean.Size = new System.Drawing.Size(223, 50);
             cmdClean.TabIndex = 1;
@@ -123,8 +129,7 @@
             // btnLoad
             // 
             btnLoad.AutoSize = true;
-            btnLoad.Location = new System.Drawing.Point(17, 38);
-            btnLoad.Margin = new System.Windows.Forms.Padding(4);
+            btnLoad.Location = new System.Drawing.Point(3, 3);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new System.Drawing.Size(223, 50);
             btnLoad.TabIndex = 6;
@@ -136,8 +141,7 @@
             // btnCheck
             // 
             btnCheck.AutoSize = true;
-            btnCheck.Location = new System.Drawing.Point(9, 50);
-            btnCheck.Margin = new System.Windows.Forms.Padding(4);
+            btnCheck.Location = new System.Drawing.Point(3, 3);
             btnCheck.Name = "btnCheck";
             btnCheck.Size = new System.Drawing.Size(223, 50);
             btnCheck.TabIndex = 0;
@@ -149,8 +153,7 @@
             // btnStarfield
             // 
             btnStarfield.AutoSize = true;
-            btnStarfield.Location = new System.Drawing.Point(10, 42);
-            btnStarfield.Margin = new System.Windows.Forms.Padding(4);
+            btnStarfield.Location = new System.Drawing.Point(3, 3);
             btnStarfield.Name = "btnStarfield";
             btnStarfield.Size = new System.Drawing.Size(223, 50);
             btnStarfield.TabIndex = 15;
@@ -162,7 +165,7 @@
             // btnExplore
             // 
             btnExplore.AutoSize = true;
-            btnExplore.Location = new System.Drawing.Point(476, 38);
+            btnExplore.Location = new System.Drawing.Point(461, 3);
             btnExplore.Name = "btnExplore";
             btnExplore.Size = new System.Drawing.Size(223, 50);
             btnExplore.TabIndex = 8;
@@ -174,7 +177,7 @@
             // btnEditPlugins
             // 
             btnEditPlugins.AutoSize = true;
-            btnEditPlugins.Location = new System.Drawing.Point(247, 38);
+            btnEditPlugins.Location = new System.Drawing.Point(232, 3);
             btnEditPlugins.Name = "btnEditPlugins";
             btnEditPlugins.Size = new System.Drawing.Size(223, 50);
             btnEditPlugins.TabIndex = 7;
@@ -186,7 +189,7 @@
             // btnBackup
             // 
             btnBackup.AutoSize = true;
-            btnBackup.Location = new System.Drawing.Point(901, 50);
+            btnBackup.Location = new System.Drawing.Point(919, 3);
             btnBackup.Name = "btnBackup";
             btnBackup.Size = new System.Drawing.Size(223, 50);
             btnBackup.TabIndex = 4;
@@ -198,7 +201,7 @@
             // btnRestore
             // 
             btnRestore.AutoSize = true;
-            btnRestore.Location = new System.Drawing.Point(1124, 50);
+            btnRestore.Location = new System.Drawing.Point(1148, 3);
             btnRestore.Name = "btnRestore";
             btnRestore.Size = new System.Drawing.Size(223, 50);
             btnRestore.TabIndex = 5;
@@ -210,7 +213,7 @@
             // btnLoadOrder
             // 
             btnLoadOrder.AutoSize = true;
-            btnLoadOrder.Location = new System.Drawing.Point(705, 38);
+            btnLoadOrder.Location = new System.Drawing.Point(690, 3);
             btnLoadOrder.Name = "btnLoadOrder";
             btnLoadOrder.Size = new System.Drawing.Size(223, 50);
             btnLoadOrder.TabIndex = 9;
@@ -222,8 +225,7 @@
             // btnAbout
             // 
             btnAbout.AutoSize = true;
-            btnAbout.Location = new System.Drawing.Point(691, 42);
-            btnAbout.Margin = new System.Windows.Forms.Padding(6);
+            btnAbout.Location = new System.Drawing.Point(690, 3);
             btnAbout.Name = "btnAbout";
             btnAbout.Size = new System.Drawing.Size(223, 50);
             btnAbout.TabIndex = 18;
@@ -235,7 +237,7 @@
             // txtSource
             // 
             txtSource.AutoSize = true;
-            txtSource.Location = new System.Drawing.Point(918, 42);
+            txtSource.Location = new System.Drawing.Point(919, 3);
             txtSource.Name = "txtSource";
             txtSource.Size = new System.Drawing.Size(223, 50);
             txtSource.TabIndex = 19;
@@ -247,7 +249,7 @@
             // chkForceClean
             // 
             chkForceClean.AutoSize = true;
-            chkForceClean.Location = new System.Drawing.Point(749, 30);
+            chkForceClean.Location = new System.Drawing.Point(724, 3);
             chkForceClean.Name = "chkForceClean";
             chkForceClean.Size = new System.Drawing.Size(171, 36);
             chkForceClean.TabIndex = 14;
@@ -259,7 +261,7 @@
             // btnStarfieldStore
             // 
             btnStarfieldStore.AutoSize = true;
-            btnStarfieldStore.Location = new System.Drawing.Point(237, 42);
+            btnStarfieldStore.Location = new System.Drawing.Point(232, 3);
             btnStarfieldStore.Name = "btnStarfieldStore";
             btnStarfieldStore.Size = new System.Drawing.Size(223, 50);
             btnStarfieldStore.TabIndex = 16;
@@ -270,7 +272,7 @@
             // 
             // btnResetAll
             // 
-            btnResetAll.Location = new System.Drawing.Point(678, 50);
+            btnResetAll.Location = new System.Drawing.Point(690, 3);
             btnResetAll.Name = "btnResetAll";
             btnResetAll.Size = new System.Drawing.Size(223, 50);
             btnResetAll.TabIndex = 3;
@@ -281,7 +283,7 @@
             // 
             // cmdDeleteStale
             // 
-            cmdDeleteStale.Location = new System.Drawing.Point(455, 50);
+            cmdDeleteStale.Location = new System.Drawing.Point(461, 3);
             cmdDeleteStale.Name = "cmdDeleteStale";
             cmdDeleteStale.Size = new System.Drawing.Size(223, 50);
             cmdDeleteStale.TabIndex = 2;
@@ -293,7 +295,7 @@
             // cmdStarFieldPath
             // 
             cmdStarFieldPath.AutoSize = true;
-            cmdStarFieldPath.Location = new System.Drawing.Point(464, 42);
+            cmdStarFieldPath.Location = new System.Drawing.Point(461, 3);
             cmdStarFieldPath.Name = "cmdStarFieldPath";
             cmdStarFieldPath.Size = new System.Drawing.Size(223, 50);
             cmdStarFieldPath.TabIndex = 17;
@@ -304,7 +306,7 @@
             // 
             // btnCreations
             // 
-            btnCreations.Location = new System.Drawing.Point(1145, 42);
+            btnCreations.Location = new System.Drawing.Point(1148, 3);
             btnCreations.Name = "btnCreations";
             btnCreations.Size = new System.Drawing.Size(223, 50);
             btnCreations.TabIndex = 21;
@@ -320,7 +322,7 @@
             statusStrip1.Location = new System.Drawing.Point(0, 1100);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 14, 0);
-            statusStrip1.Size = new System.Drawing.Size(1620, 42);
+            statusStrip1.Size = new System.Drawing.Size(1637, 42);
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -333,26 +335,36 @@
             // grpActions
             // 
             grpActions.AutoSize = true;
-            grpActions.Controls.Add(btnClearLog);
-            grpActions.Controls.Add(btnResetAll);
-            grpActions.Controls.Add(cmdDeleteStale);
-            grpActions.Controls.Add(btnRestore);
-            grpActions.Controls.Add(btnBackup);
-            grpActions.Controls.Add(btnCheck);
-            grpActions.Controls.Add(cmdClean);
+            grpActions.Controls.Add(flowLayoutPanel3);
             grpActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            grpActions.Location = new System.Drawing.Point(6, 558);
+            grpActions.Location = new System.Drawing.Point(6, 696);
             grpActions.Margin = new System.Windows.Forms.Padding(6);
             grpActions.Name = "grpActions";
             grpActions.Padding = new System.Windows.Forms.Padding(6);
-            grpActions.Size = new System.Drawing.Size(1608, 144);
+            grpActions.Size = new System.Drawing.Size(1630, 100);
             grpActions.TabIndex = 0;
             grpActions.TabStop = false;
             grpActions.Text = "Actions";
             // 
+            // flowLayoutPanel3
+            // 
+            flowLayoutPanel3.AutoSize = true;
+            flowLayoutPanel3.Controls.Add(btnCheck);
+            flowLayoutPanel3.Controls.Add(cmdClean);
+            flowLayoutPanel3.Controls.Add(cmdDeleteStale);
+            flowLayoutPanel3.Controls.Add(btnResetAll);
+            flowLayoutPanel3.Controls.Add(btnBackup);
+            flowLayoutPanel3.Controls.Add(btnRestore);
+            flowLayoutPanel3.Controls.Add(btnClearLog);
+            flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel3.Location = new System.Drawing.Point(6, 38);
+            flowLayoutPanel3.Name = "flowLayoutPanel3";
+            flowLayoutPanel3.Size = new System.Drawing.Size(1618, 56);
+            flowLayoutPanel3.TabIndex = 7;
+            // 
             // btnClearLog
             // 
-            btnClearLog.Location = new System.Drawing.Point(1347, 50);
+            btnClearLog.Location = new System.Drawing.Point(1377, 3);
             btnClearLog.Name = "btnClearLog";
             btnClearLog.Size = new System.Drawing.Size(223, 50);
             btnClearLog.TabIndex = 6;
@@ -364,80 +376,99 @@
             // 
             groupBox1.AutoSize = true;
             groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            groupBox1.Controls.Add(btnCreations);
-            groupBox1.Controls.Add(btnStarfieldStore);
-            groupBox1.Controls.Add(cmdStarFieldPath);
-            groupBox1.Controls.Add(txtSource);
-            groupBox1.Controls.Add(btnAbout);
-            groupBox1.Controls.Add(btnStarfield);
-            groupBox1.Controls.Add(btnQuit);
+            groupBox1.Controls.Add(flowLayoutPanel4);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox1.Location = new System.Drawing.Point(6, 958);
+            groupBox1.Location = new System.Drawing.Point(6, 994);
             groupBox1.Margin = new System.Windows.Forms.Padding(6);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(6);
-            groupBox1.Size = new System.Drawing.Size(1608, 136);
+            groupBox1.Size = new System.Drawing.Size(1630, 100);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Other";
             // 
+            // flowLayoutPanel4
+            // 
+            flowLayoutPanel4.AutoSize = true;
+            flowLayoutPanel4.Controls.Add(btnStarfield);
+            flowLayoutPanel4.Controls.Add(btnStarfieldStore);
+            flowLayoutPanel4.Controls.Add(cmdStarFieldPath);
+            flowLayoutPanel4.Controls.Add(btnAbout);
+            flowLayoutPanel4.Controls.Add(txtSource);
+            flowLayoutPanel4.Controls.Add(btnCreations);
+            flowLayoutPanel4.Controls.Add(btnQuit);
+            flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel4.Location = new System.Drawing.Point(6, 38);
+            flowLayoutPanel4.Name = "flowLayoutPanel4";
+            flowLayoutPanel4.Size = new System.Drawing.Size(1618, 56);
+            flowLayoutPanel4.TabIndex = 22;
+            // 
             // groupBox2
             // 
             groupBox2.AutoSize = true;
-            groupBox2.Controls.Add(btnLoadOrder);
-            groupBox2.Controls.Add(btnEditPlugins);
-            groupBox2.Controls.Add(btnExplore);
-            groupBox2.Controls.Add(btnLoad);
+            groupBox2.Controls.Add(flowLayoutPanel1);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Location = new System.Drawing.Point(3, 711);
+            groupBox2.Location = new System.Drawing.Point(3, 805);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(1614, 127);
+            groupBox2.Size = new System.Drawing.Size(1636, 94);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Edit";
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.Controls.Add(btnLoad);
+            flowLayoutPanel1.Controls.Add(btnEditPlugins);
+            flowLayoutPanel1.Controls.Add(btnExplore);
+            flowLayoutPanel1.Controls.Add(btnLoadOrder);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel1.Location = new System.Drawing.Point(3, 35);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(1630, 56);
+            flowLayoutPanel1.TabIndex = 10;
+            // 
             // grpAuto
             // 
             grpAuto.AutoSize = true;
-            grpAuto.Controls.Add(chkForceClean);
-            grpAuto.Controls.Add(chkAutoRestore);
-            grpAuto.Controls.Add(chkAutoBackup);
-            grpAuto.Controls.Add(chkAutoClean);
-            grpAuto.Controls.Add(chkAutoCheck);
+            grpAuto.Controls.Add(flowLayoutPanel2);
             grpAuto.Dock = System.Windows.Forms.DockStyle.Fill;
-            grpAuto.Location = new System.Drawing.Point(3, 844);
+            grpAuto.Location = new System.Drawing.Point(3, 905);
             grpAuto.Name = "grpAuto";
-            grpAuto.Size = new System.Drawing.Size(1614, 105);
+            grpAuto.Size = new System.Drawing.Size(1636, 80);
             grpAuto.TabIndex = 0;
             grpAuto.TabStop = false;
             grpAuto.Text = "Auto Functions";
             // 
-            // chkAutoRestore
+            // flowLayoutPanel2
             // 
-            chkAutoRestore.AutoSize = true;
-            chkAutoRestore.Location = new System.Drawing.Point(557, 31);
-            chkAutoRestore.Name = "chkAutoRestore";
-            chkAutoRestore.Size = new System.Drawing.Size(183, 36);
-            chkAutoRestore.TabIndex = 13;
-            chkAutoRestore.Text = "Auto Restore";
-            chkAutoRestore.UseVisualStyleBackColor = true;
-            chkAutoRestore.CheckedChanged += chkAutoRestore_CheckedChanged;
+            flowLayoutPanel2.AutoSize = true;
+            flowLayoutPanel2.Controls.Add(chkAutoCheck);
+            flowLayoutPanel2.Controls.Add(chkAutoClean);
+            flowLayoutPanel2.Controls.Add(chkAutoBackup);
+            flowLayoutPanel2.Controls.Add(chkAutoRestore);
+            flowLayoutPanel2.Controls.Add(chkForceClean);
+            flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel2.Location = new System.Drawing.Point(3, 35);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new System.Drawing.Size(1630, 42);
+            flowLayoutPanel2.TabIndex = 15;
             // 
-            // chkAutoBackup
+            // chkAutoCheck
             // 
-            chkAutoBackup.AutoSize = true;
-            chkAutoBackup.Location = new System.Drawing.Point(368, 31);
-            chkAutoBackup.Name = "chkAutoBackup";
-            chkAutoBackup.Size = new System.Drawing.Size(181, 36);
-            chkAutoBackup.TabIndex = 12;
-            chkAutoBackup.Text = "Auto Backup";
-            chkAutoBackup.UseVisualStyleBackColor = true;
-            chkAutoBackup.CheckedChanged += chkAutoBackup_CheckedChanged;
+            chkAutoCheck.AutoSize = true;
+            chkAutoCheck.Location = new System.Drawing.Point(3, 3);
+            chkAutoCheck.Name = "chkAutoCheck";
+            chkAutoCheck.Size = new System.Drawing.Size(169, 36);
+            chkAutoCheck.TabIndex = 10;
+            chkAutoCheck.Text = "Auto Check";
+            chkAutoCheck.UseVisualStyleBackColor = true;
+            chkAutoCheck.CheckedChanged += chkAutoCheck_CheckedChanged;
             // 
             // chkAutoClean
             // 
             chkAutoClean.AutoSize = true;
-            chkAutoClean.Location = new System.Drawing.Point(195, 30);
+            chkAutoClean.Location = new System.Drawing.Point(178, 3);
             chkAutoClean.Name = "chkAutoClean";
             chkAutoClean.Size = new System.Drawing.Size(164, 36);
             chkAutoClean.TabIndex = 11;
@@ -445,16 +476,27 @@
             chkAutoClean.UseVisualStyleBackColor = true;
             chkAutoClean.CheckedChanged += chkAutoClean_CheckedChanged;
             // 
-            // chkAutoCheck
+            // chkAutoBackup
             // 
-            chkAutoCheck.AutoSize = true;
-            chkAutoCheck.Location = new System.Drawing.Point(17, 31);
-            chkAutoCheck.Name = "chkAutoCheck";
-            chkAutoCheck.Size = new System.Drawing.Size(169, 36);
-            chkAutoCheck.TabIndex = 10;
-            chkAutoCheck.Text = "Auto Check";
-            chkAutoCheck.UseVisualStyleBackColor = true;
-            chkAutoCheck.CheckedChanged += chkAutoCheck_CheckedChanged;
+            chkAutoBackup.AutoSize = true;
+            chkAutoBackup.Location = new System.Drawing.Point(348, 3);
+            chkAutoBackup.Name = "chkAutoBackup";
+            chkAutoBackup.Size = new System.Drawing.Size(181, 36);
+            chkAutoBackup.TabIndex = 12;
+            chkAutoBackup.Text = "Auto Backup";
+            chkAutoBackup.UseVisualStyleBackColor = true;
+            chkAutoBackup.CheckedChanged += chkAutoBackup_CheckedChanged;
+            // 
+            // chkAutoRestore
+            // 
+            chkAutoRestore.AutoSize = true;
+            chkAutoRestore.Location = new System.Drawing.Point(535, 3);
+            chkAutoRestore.Name = "chkAutoRestore";
+            chkAutoRestore.Size = new System.Drawing.Size(183, 36);
+            chkAutoRestore.TabIndex = 13;
+            chkAutoRestore.Text = "Auto Restore";
+            chkAutoRestore.UseVisualStyleBackColor = true;
+            chkAutoRestore.CheckedChanged += chkAutoRestore_CheckedChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -476,7 +518,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1620, 1100);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // frmStarfieldTools
@@ -484,7 +526,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            ClientSize = new System.Drawing.Size(1620, 1142);
+            ClientSize = new System.Drawing.Size(1637, 1142);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(statusStrip1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
@@ -497,12 +539,20 @@
             statusStrip1.PerformLayout();
             grpActions.ResumeLayout(false);
             grpActions.PerformLayout();
+            flowLayoutPanel3.ResumeLayout(false);
+            flowLayoutPanel3.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            flowLayoutPanel4.ResumeLayout(false);
+            flowLayoutPanel4.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             grpAuto.ResumeLayout(false);
             grpAuto.PerformLayout();
+            flowLayoutPanel2.ResumeLayout(false);
+            flowLayoutPanel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -543,6 +593,10 @@
         private System.Windows.Forms.Button btnResetAll;
         private System.Windows.Forms.Button btnCreations;
         private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
     }
 }
 
