@@ -1,30 +1,29 @@
 Checks ContentCatalog.txt file automatically when launched.
 
-What's new: Switched to .NET 8.0. Some UI changes mostly in load order editor.
-
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
 
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.
-This tool is intended to repair the catalog file. You could simply delete the catalog file and have the game rebuild it, but that will force a download of all your Creations mods next time you use the Creations menu.
+This tool is intended to repair and then automatically perform a backup/restore of the catalog file.
+You could simply delete the catalog file and have the game rebuild it, but that will force a download of all your Creations mods next time you use the Creations menu.
 
 To install, extract the zip file and run the msi installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
 
 Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically. This is the default.
-Force clean is an experimental option to make the tool run a cleaning process even if it considers the catalog to be ok.
+Force clean is an experimental option to make the tool run a cleaning process even if it considers the catalog to be ok. Force clean should be off for normal use.
 
 Usage Instructions:
 First time usage: Run the tool once to have it repair the catalog file. You should now be able to enter the Creations menu without a lockup.
-Important: Quit the game and run the tool again before loading a saved game if you've installed new mods or updated mods in the Creations menu.
+Important: Quit the game and run the tool again before loading a saved game if you've been in the Creations menu.
 In other words, run it before going to the Creations menu and after exiting the Creations menu. Don't load a save or you'll be back to square one.
 
-Main button functions - you don't have to use these if the auto functions are on:
+Main button functions - Skip to the next section if the auto functions are on:
 Use the Backup function after you've been in the Creations menu to backup the catalog file - on by default.
 Use the Restore function to restore a backup of the catalog if you've made a backup - on by default.
 Press the Check button if necessary to check if the catalog is ok.
 Press the Clean button if necessary to clean the catalog.
 
-When the auto functions are enabled, the tool will look for a backup of the catalog file first and try to restore that.
+When the auto functions are enabled, the tool will look for a backup of the catalog first and try to restore that.
 If the restore fails, it will run a cleaning process.
 
 There is no need to use the tool if you're just playing the game normally and are not using the Creations menu.
@@ -32,6 +31,7 @@ Use the catalog backup and restore features instead of the repair features when 
 These functions are on by default and the tool will automatically decide what action to take.
 
 You can skip reading from here on or keep going for more detail.
+
 
 Overview of buttons:
 Check button re-checks the file.
@@ -75,7 +75,9 @@ Applicable only when the Load Order Editor is used:
 Plugins.txt - Read and Write
 Plugins.txt.bak -  - Read and Write
 
-Read only access is performed on the Data folder of Starfield to provide some stats on installed mods.
+Game Data folder Read-only if mod install and un-install features are not used. Used to display some mod stats.
+Installing mods from the menu will copy .esm and .ba2 files to the game data folder.
+Un-install will permanently DELETE the highlighted mod .esm and .ba2 files.
 
 The Load Order Editor can install or un-install mods from a folder with the following limitations:
 1. Zip files only
