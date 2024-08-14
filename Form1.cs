@@ -107,7 +107,8 @@ namespace Starfield_Tools
             {
                 frmLoadOrder frmLO = new frmLoadOrder();
                 frmLO.Show();
-                frmLO.TopMost = true;
+                this.WindowState = FormWindowState.Minimized;
+                
             }
 
             // Run  Command line params

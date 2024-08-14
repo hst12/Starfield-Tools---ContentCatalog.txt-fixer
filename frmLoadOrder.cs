@@ -1299,7 +1299,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["CreationsID"].Visible = true;
             else
                 dataGridView1.Columns["CreationsID"].Visible = false;
-            Settings.Default.CreationsID= toolStripMenuCreationsID.Checked;
+            Settings.Default.CreationsID = toolStripMenuCreationsID.Checked;
         }
 
         private void toolStripMenuFiles_Click(object sender, EventArgs e)
@@ -1309,7 +1309,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Files"].Visible = true;
             else
                 dataGridView1.Columns["Files"].Visible = false;
-            Settings.Default.Files= toolStripMenuFiles.Checked;
+            Settings.Default.Files = toolStripMenuFiles.Checked;
         }
 
         private void toolStripMenuLoadingScreen_Click(object sender, EventArgs e)
