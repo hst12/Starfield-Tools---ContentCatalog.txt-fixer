@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Starfield_Tools
+namespace Starfield_Tools.Common
 {
 
 
@@ -18,7 +18,7 @@ namespace Starfield_Tools
 
         public string GetStarfieldPath()
         {
-            return (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Starfield";
+            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
         }
 
         public void OpenUrl(string url)
@@ -26,7 +26,7 @@ namespace Starfield_Tools
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
         }
 
-        public System.DateTime ConvertTime(double TimeToConvert)
+        public DateTime ConvertTime(double TimeToConvert)
         {
             DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             start = start.AddSeconds(TimeToConvert);
@@ -35,7 +35,7 @@ namespace Starfield_Tools
 
         public string GetCatalog()
         {
-            return (GetStarfieldPath() + @"\ContentCatalog.txt");
+            return GetStarfieldPath() + @"\ContentCatalog.txt";
         }
 
         public class Creation
@@ -83,7 +83,7 @@ namespace Starfield_Tools
                     Settings.Default.Save();
                     return selectedFolderPath;
                 }
-                return ("");
+                return "";
             }
         }
 

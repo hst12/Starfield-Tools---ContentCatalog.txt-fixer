@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Starfield_Tools.Common;
 using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using File = System.IO.File;
 
@@ -1321,6 +1323,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (openFileDialog1.FileName != "")
                     Settings.Default.LoadScreenFilename = openFileDialog1.FileName;
             }
+        }
+
+        private void toolStripMenuLoot_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"C:\Program files\loot\loot.exe","--game Starfield --auto-sort");
+            Thread.Sleep(2000);
+            InitDataGrid();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Starfield_Tools.Common;
 using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
