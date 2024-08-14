@@ -604,7 +604,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 return;
             TextBoxString = txtSearchBox.Text.ToLower(); // Do lower case only search
 
-            for (ModIndex = 0; ModIndex <= dataGridView1.RowCount; ModIndex++)
+            for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
             {
                 DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
                 if (DataGridSring.Contains(TextBoxString))
