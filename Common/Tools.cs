@@ -10,31 +10,30 @@ using System.Windows.Forms;
 namespace Starfield_Tools.Common
 {
 
-
     internal class Tools
     {
-        public string ToolVersion = "1.7.2";
+        public const string ToolVersion = "1.7.2";
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
 
-        public string GetStarfieldPath()
+        public static string GetStarfieldPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
         }
 
-        public void OpenUrl(string url)
+        public static void OpenUrl(string url)
         {
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
         }
 
-        public DateTime ConvertTime(double TimeToConvert)
+        public static DateTime ConvertTime(double TimeToConvert)
         {
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
             start = start.AddSeconds(TimeToConvert);
             return start;
         }
 
-        public string GetCatalog()
+        public static string GetCatalog()
         {
             return GetStarfieldPath() + @"\ContentCatalog.txt";
         }
@@ -58,7 +57,7 @@ namespace Starfield_Tools.Common
             public string MainCategory { get; set; }
         }
 
-        public bool CheckGame()
+        public static bool CheckGame()
         {
             if (!Directory.Exists(GetStarfieldPath())) // Check if Starfield is installed
             {

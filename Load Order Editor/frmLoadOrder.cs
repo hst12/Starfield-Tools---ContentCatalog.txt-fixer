@@ -18,7 +18,7 @@ namespace Starfield_Tools
 
     public partial class frmLoadOrder : Form
     {
-        Tools tools = new();
+        readonly Tools tools = new();
         public string StarfieldGamePath = "", LoadScreenPic = "";
 
         bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
@@ -27,10 +27,10 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-            if (!tools.CheckGame())
+            if (!Tools.CheckGame())
                 Application.Exit();
 
-            if (!Directory.Exists(tools.GetStarfieldPath())) // Check if Starfield is installed
+            if (!Directory.Exists(Tools.GetStarfieldPath())) // Check if Starfield is installed
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Application.Exit();
@@ -47,7 +47,7 @@ namespace Starfield_Tools
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
 
-            string PluginsPath = tools.GetStarfieldPath() + "\\Plugins.txt";
+            string PluginsPath = Tools.GetStarfieldPath() + "\\Plugins.txt";
 
             menuStrip1.Font = Settings.Default.FontSize; // Get settings
             this.Font = Settings.Default.FontSize;
@@ -136,7 +136,7 @@ namespace Starfield_Tools
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
-            if (!File.Exists(tools.GetCatalog()))
+            if (!File.Exists(Tools.GetCatalog()))
             {
                 MessageBox.Show("Missing ContentCatalog.txt");
                 return;
@@ -144,7 +144,7 @@ namespace Starfield_Tools
 
             dataGridView1.Rows.Clear();
 
-            string jsonFilePath = tools.GetCatalog();
+            string jsonFilePath = Tools.GetCatalog();
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
 
 
@@ -210,7 +210,7 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = ex.Message;
             }
 
-            loText = tools.GetStarfieldPath() + @"\plugins.txt";
+            loText = Tools.GetStarfieldPath() + @"\plugins.txt";
             if (!File.Exists(loText))
             {
                 MessageBox.Show(@"Missing Plugins.txt file
@@ -255,14 +255,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         VersionCheck = double.Parse((ModVersion[..ModVersion.IndexOf('.')]));
-                                        ModVersion = tools.ConvertTime(VersionCheck).ToString() + ", v" + ModVersion[(ModVersion.IndexOf('.') + 1)..] + "\n";
+                                        ModVersion = Tools.ConvertTime(VersionCheck).ToString() + ", v" + ModVersion[(ModVersion.IndexOf('.') + 1)..] + "\n";
 
                                         ModFiles = CreationsFiles[i];
                                         if (AchievmentSafe[i])
                                             ASafe = "Yes";
                                         else
                                             ASafe = "";
-                                        ModTimeStamp = tools.ConvertTime(TimeStamp[i]).ToString();
+                                        ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                     }
                                 }
@@ -369,7 +369,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             this.Close();
         }
         private void MoveUp()
@@ -455,7 +455,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void BackupPlugins()
         {
-            string sourceFileName = tools.GetStarfieldPath() + @"\Plugins.txt";
+            string sourceFileName = Tools.GetStarfieldPath() + @"\Plugins.txt";
             string destFileName = sourceFileName + ".bak";
 
             if (isModified)
@@ -484,8 +484,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void RestorePlugins()
         {
-            string sourceFileName = tools.GetStarfieldPath() + @"\Plugins.txt.bak";
-            string destFileName = tools.GetStarfieldPath() + @"\Plugins.txt";
+            string sourceFileName = Tools.GetStarfieldPath() + @"\Plugins.txt.bak";
+            string destFileName = Tools.GetStarfieldPath() + @"\Plugins.txt";
 
             try
             {
@@ -633,7 +633,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
         }
 
         private void toolStripMenuBackup_Click(object sender, EventArgs e)
@@ -664,12 +664,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuCreations_Click(object sender, EventArgs e)
         {
 
-            tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
+            Tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
         }
 
         private void toolStripMenuNexus_Click(object sender, EventArgs e)
         {
-            tools.OpenUrl("https://www.nexusmods.com/starfield");
+            Tools.OpenUrl("https://www.nexusmods.com/starfield");
         }
 
         private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
@@ -713,7 +713,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 return;
             try
             {
-                File.Copy(ProfileName, tools.GetStarfieldPath() + "\\Plugins.txt", true);
+                File.Copy(ProfileName, Tools.GetStarfieldPath() + "\\Plugins.txt", true);
                 Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
@@ -933,7 +933,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SaveSettings();
         }
 
-        private void SaveSettings()
+        private static void SaveSettings()
         {
             Settings.Default.Save();
         }
@@ -991,7 +991,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 }
 
                 AddMissing();
-                SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+                SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             }
 
         }
@@ -1054,7 +1054,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuExploreAppData_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", tools.GetStarfieldPath());
+            Process.Start("explorer.exe", Tools.GetStarfieldPath());
         }
 
         private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
@@ -1093,7 +1093,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string ModName, ModFile;
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
-            ModName = ModName[..ModName.IndexOf(".")];
+            ModName = ModName[..ModName.IndexOf('.')];
             DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
 
@@ -1111,7 +1111,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (File.Exists(ModFile + " - main.ba2"))
                     File.Delete(ModFile + " - main.ba2");
 
-                SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+                SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             }
             else
                 toolStripStatusLabel1.Text = "Un-install cancelled";
@@ -1197,7 +1197,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void SaveOnDblClick()
         {
             var dgCurrent = dataGridView1.CurrentCell;
-            SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             isModified = false;
             dataGridView1.CurrentCell = dgCurrent;
         }
@@ -1205,7 +1205,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void btnSave_Click(object sender, EventArgs e)
         {
             var dgCurrent = dataGridView1.CurrentCell;
-            SaveLO(tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             dataGridView1.CurrentCell = dgCurrent;
         }
 
@@ -1224,12 +1224,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuBGSStarfield_Click(object sender, EventArgs e)
         {
-            tools.OpenUrl("https://discord.com/channels/784542837596225567/1083043812949110825");
+            Tools.OpenUrl("https://discord.com/channels/784542837596225567/1083043812949110825");
         }
 
         private void toolStripMenuBGSX_Click(object sender, EventArgs e)
         {
-            tools.OpenUrl("https://x.com/StarfieldGame");
+            Tools.OpenUrl("https://x.com/StarfieldGame");
         }
 
         private void toolStripMenuTestJson_Click(object sender, EventArgs e)
@@ -1250,7 +1250,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID[3..];
 
             if (CreationsID != "")
-                tools.OpenUrl(url);  // Open Creations web site
+                Tools.OpenUrl(url);  // Open Creations web site
             else
                 toolStripStatusLabel1.Text = "Not a Creations mod";
         }
@@ -1286,7 +1286,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuGitHub_Click(object sender, EventArgs e)
         {
-            tools.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
+            Tools.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void toolStripMenuAchievements_Click(object sender, EventArgs e)
