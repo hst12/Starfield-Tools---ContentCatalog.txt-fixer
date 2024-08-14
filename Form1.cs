@@ -27,7 +27,7 @@ namespace Starfield_Tools
 
             if (!Directory.Exists(CC.GetStarfieldPath())) // Check if Starfield is installed
             {
-                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Application.Exit();
             }
             // Retrieve settings
@@ -107,7 +107,7 @@ namespace Starfield_Tools
             {
                 frmLoadOrder frmLO = new frmLoadOrder();
                 frmLO.Show();
-                this.WindowState = FormWindowState.Minimized;
+                frmLO.TopMost = true;
             }
 
             // Run  Command line params
