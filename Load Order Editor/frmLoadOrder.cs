@@ -19,7 +19,7 @@ namespace Starfield_Tools
     public partial class frmLoadOrder : Form
     {
         readonly Tools tools = new();
-        public string StarfieldGamePath = "", LoadScreenPic = "";
+        public string StarfieldGamePath = "", LoadScreenPic = "", LastProfile;
 
         bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
 
@@ -319,7 +319,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             ProfileFolder = Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
+            if (LastProfile == null)
+                LastProfile = Settings.Default.LastProfile;
             try
             {
                 foreach (var profileName in Directory.EnumerateFiles(ProfileFolder, "*.txt", SearchOption.TopDirectoryOnly))
@@ -330,7 +331,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 int index = cmbProfile.Items.IndexOf(Settings.Default.LastProfile);
                 if (index != -1)
                 {
-                    cmbProfile.SelectedIndex = index; // Set the ComboBox to the found index
+                    cmbProfile.SelectedIndex = index;
+                    LastProfile = cmbProfile.Items[index].ToString(); ;  
                 }
             }
             catch { }
@@ -717,6 +719,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
+                //SavePlugings();
+                InitDataGrid();
             }
             catch
             {
@@ -1204,7 +1208,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             if (Profiles)
+            {
                 SaveLO(Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
+                toolStripStatusLabel1.Text += ", " + cmbProfile.Text + " profile saved";
+            }
             dataGridView1.CurrentCell = dgCurrent;
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -1334,9 +1341,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void toolStripMenuLoot_Click(object sender, EventArgs e)
+        private void RunLOOT(bool LOOTMode) // True for autosort
         {
-            string LOOTPath = Settings.Default.LOOTPath;
+            string LOOTPath = Settings.Default.LOOTPath, cmdLine = "";
             if (LOOTPath == "")
             {
                 if (!SetLOOTPath())
@@ -1348,10 +1355,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (LOOTPath != "")
             {
-                Process.Start(LOOTPath, "--game Starfield --auto-sort");
+                if (LOOTMode)
+                    cmdLine = " --auto-sort";
+                Process.Start(LOOTPath, "--game Starfield" + cmdLine);
                 Thread.Sleep(2000);
                 InitDataGrid();
             }
+
+        }
+        private void toolStripMenuLoot_Click(object sender, EventArgs e)
+        {
+            RunLOOT(true);
         }
 
         private bool SetLOOTPath()
@@ -1380,6 +1394,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void sbar(string StatusBarMessage)
         {
             toolStripStatusLabel1.Text = StatusBarMessage;
+        }
+
+        private void toolStripMenuLoot_Click_1(object sender, EventArgs e)
+        {
+            RunLOOT(false);
+        }
+
+        private void toolStripMenuEditPlugins_Click(object sender, EventArgs e)
+        {
+            string pathToFile = (Tools.GetStarfieldPath() + @"\Plugins.txt");
+            Process.Start("explorer", pathToFile);
         }
     }
 }

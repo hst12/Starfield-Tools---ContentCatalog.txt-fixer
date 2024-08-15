@@ -16,7 +16,7 @@ namespace Starfield_Tools
     public partial class frmStarfieldTools : Form
     {
 
-        public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean;
+        public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean, Verbose;
         public const string CatalogVersion = "1.1";
 
         readonly Tools tools = new();
@@ -34,6 +34,8 @@ namespace Starfield_Tools
             AutoBackup = Properties.Settings.Default.AutoBackup;
             AutoRestore = Properties.Settings.Default.AutoRestore;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+            Verbose = Properties.Settings.Default.Verbose;
+            chkVerbose.Checked = Properties.Settings.Default.Verbose;
 
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
@@ -106,7 +108,7 @@ namespace Starfield_Tools
                 frmLoadOrder frmLO = new();
                 frmLO.Show();
                 this.WindowState = FormWindowState.Minimized;
-                
+
             }
 
             // Run  Command line params
@@ -238,7 +240,8 @@ namespace Starfield_Tools
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     if (TestString != CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
-                        richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
+                        if (Verbose)
+                            richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
@@ -289,10 +292,7 @@ namespace Starfield_Tools
                     }
                 }
                 else
-                {
                     toolStripStatusLabel1.Text = "Catalog corrupt. Use the Restore or Clean functions to repair";
-                    //richTextBox2.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
-                }
                 return false;
             }
         }
@@ -375,9 +375,7 @@ namespace Starfield_Tools
 
         private void btnEditPlugins_Click(object sender, EventArgs e)
         {
-            string pathToFile = (Tools.GetStarfieldPath() +
-          @"\Plugins.txt");
-
+            string pathToFile = (Tools.GetStarfieldPath() + @"\Plugins.txt");
             Process.Start("explorer", pathToFile);
         }
 
@@ -543,6 +541,7 @@ namespace Starfield_Tools
         private void btnRestore_Click(object sender, EventArgs e)
         {
             RestoreCatalog();
+            ScrollToEnd();
             DisplayCatalog();
         }
 
@@ -609,7 +608,8 @@ namespace Starfield_Tools
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
                                 CreationsTitle.Add(kvp.Value.Title);
-                                richTextBox2.Text += kvp.Value.Title + "\n";
+                                if (Verbose)
+                                    richTextBox2.Text += kvp.Value.Title + "\n";
                             }
                         }
 
@@ -685,7 +685,8 @@ namespace Starfield_Tools
             {
                 TestString = kvp.Value.Version;
                 FixVersion = false;
-                richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
+                if (Verbose)
+                    richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
 
                 for (int i = 0; i < TestString.IndexOf('.'); i++)
                 {
@@ -737,7 +738,17 @@ namespace Starfield_Tools
             if (StarfieldGamePath != "")
                 Settings.Default.StarfieldGamePath = StarfieldGamePath;
             Settings.Default.ForceClean = ForceClean;
+            Settings.Default.Verbose = Verbose;
             Settings.Default.Save();
+        }
+
+        private void chkVerbose_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.Verbose = chkVerbose.Checked;
+            if (chkVerbose.Checked)
+                Verbose = true;
+            else
+                Verbose = false;
         }
     }
 }

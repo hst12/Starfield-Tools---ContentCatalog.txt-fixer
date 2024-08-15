@@ -66,6 +66,7 @@
             chkAutoClean = new System.Windows.Forms.CheckBox();
             chkAutoBackup = new System.Windows.Forms.CheckBox();
             chkAutoRestore = new System.Windows.Forms.CheckBox();
+            chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
@@ -448,6 +449,7 @@
             flowLayoutPanel2.Controls.Add(chkAutoBackup);
             flowLayoutPanel2.Controls.Add(chkAutoRestore);
             flowLayoutPanel2.Controls.Add(chkForceClean);
+            flowLayoutPanel2.Controls.Add(chkVerbose);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel2.Location = new System.Drawing.Point(3, 35);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -497,6 +499,17 @@
             chkAutoRestore.Text = "Auto Restore";
             chkAutoRestore.UseVisualStyleBackColor = true;
             chkAutoRestore.CheckedChanged += chkAutoRestore_CheckedChanged;
+            // 
+            // chkVerbose
+            // 
+            chkVerbose.AutoSize = true;
+            chkVerbose.Location = new System.Drawing.Point(901, 3);
+            chkVerbose.Name = "chkVerbose";
+            chkVerbose.Size = new System.Drawing.Size(242, 36);
+            chkVerbose.TabIndex = 15;
+            chkVerbose.Text = "Verbose Messages";
+            chkVerbose.UseVisualStyleBackColor = true;
+            chkVerbose.CheckedChanged += chkVerbose_CheckedChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -597,6 +610,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.CheckBox chkVerbose;
     }
 }
 

@@ -74,6 +74,8 @@
             toolStripMenuExploreAppData = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuExploreData = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuEditPlugins = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuDeleteLine = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,6 +111,7 @@
             toolStripMenuUninstall = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuLoot = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuLootSort = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuStats = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuLinks = new System.Windows.Forms.ToolStripMenuItem();
@@ -403,7 +406,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, toolStripMenuExploreAppData, toolStripMenuExploreData, toolStripSeparator3, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, toolStripMenuExploreAppData, toolStripMenuExploreData, toolStripSeparator3, toolStripMenuEditPlugins, toolStripSeparator17, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
             fileToolStripMenuItem.Text = "&File";
@@ -504,6 +507,18 @@
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new System.Drawing.Size(494, 6);
+            // 
+            // toolStripMenuEditPlugins
+            // 
+            toolStripMenuEditPlugins.Name = "toolStripMenuEditPlugins";
+            toolStripMenuEditPlugins.Size = new System.Drawing.Size(497, 44);
+            toolStripMenuEditPlugins.Text = "Edit Plugins.txt";
+            toolStripMenuEditPlugins.Click += toolStripMenuEditPlugins_Click;
+            // 
+            // toolStripSeparator17
+            // 
+            toolStripSeparator17.Name = "toolStripSeparator17";
+            toolStripSeparator17.Size = new System.Drawing.Size(494, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -654,7 +669,7 @@
             // 
             // toolStripMenuMods
             // 
-            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripSeparator15, toolStripMenuStats });
+            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort, toolStripSeparator15, toolStripMenuStats });
             toolStripMenuMods.Name = "toolStripMenuMods";
             toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
             toolStripMenuMods.Text = "Mods";
@@ -748,8 +763,16 @@
             toolStripMenuLoot.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLoot.Image");
             toolStripMenuLoot.Name = "toolStripMenuLoot";
             toolStripMenuLoot.Size = new System.Drawing.Size(689, 44);
-            toolStripMenuLoot.Text = "Loot Autosort";
-            toolStripMenuLoot.Click += toolStripMenuLoot_Click;
+            toolStripMenuLoot.Text = "LOOT";
+            toolStripMenuLoot.Click += toolStripMenuLoot_Click_1;
+            // 
+            // toolStripMenuLootSort
+            // 
+            toolStripMenuLootSort.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLootSort.Image");
+            toolStripMenuLootSort.Name = "toolStripMenuLootSort";
+            toolStripMenuLootSort.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuLootSort.Text = "LOOT Autosort";
+            toolStripMenuLootSort.Click += toolStripMenuLoot_Click;
             // 
             // toolStripSeparator15
             // 
@@ -1220,9 +1243,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoot;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLootSort;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLootPath;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoot;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuEditPlugins;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
     }
 }
