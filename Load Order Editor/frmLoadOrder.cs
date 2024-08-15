@@ -633,7 +633,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
+            SavePlugings();
         }
 
         private void toolStripMenuBackup_Click(object sender, EventArgs e)
@@ -1196,17 +1196,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void SaveOnDblClick()
         {
-            var dgCurrent = dataGridView1.CurrentCell;
-            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
-            isModified = false;
-            dataGridView1.CurrentCell = dgCurrent;
+            SavePlugings();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void SavePlugings()
         {
             var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
+            if (Profiles)
+                SaveLO(Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
             dataGridView1.CurrentCell = dgCurrent;
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SavePlugings();
         }
 
         private void btnRun_Click(object sender, EventArgs e)
