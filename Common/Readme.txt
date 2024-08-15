@@ -57,10 +57,11 @@ A one-time only automatic backup of your Plugins.txt file is made the first time
 Two Starfield launch buttons are provided. One for the Steam version of the game and another for the MS Store version. The tool will close after using either of these launch buttons.
 You can also launch the game from within the Load Order Editor. Set the game version in the Tools menu first - it defaults to Steam.
 
-Command line options:
+Command line options - not case sensitive:
 -noauto Clears all the auto check boxes. This will stop any auto repair functions from running automatically when the tool starts.
--auto Sets recommended auto check boxes
--runSteam or -runMS Starts the tool with whatever auto settings were used last then launches the game
+-auto Sets recommended auto check boxes.
+-runSteam or -runMS Starts the tool with whatever auto settings were used last then launches the game.
+-lo Starts the load order editor and minimises the main window.
 
 Example: "Starfield Tools.exe" -auto -runSteam will run auto checks and launch Starfield Steam version.
 

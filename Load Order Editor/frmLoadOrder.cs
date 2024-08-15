@@ -102,7 +102,7 @@ namespace Starfield_Tools
             GetProfiles();
             if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt if it doesn't exist
             {
-                toolStripStatusLabel1.Text = "Plugins.txt backed up to Plugins.txt.bak";
+                sbar("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
 #if DEBUG
@@ -201,13 +201,13 @@ namespace Starfield_Tools
                     }
                     catch (Exception ex)
                     {
-                        toolStripStatusLabel1.Text = ex.Message;
+                        sbar(ex.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                toolStripStatusLabel1.Text = ex.Message;
+                sbar(ex.Message);
             }
 
             loText = Tools.GetStarfieldPath() + @"\plugins.txt";
@@ -272,7 +272,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     }
                     catch (Exception ex)
                     {
-                        toolStripStatusLabel1.Text = ex.Message;
+                        sbar(ex.Message);
                     }
                 }
             }
@@ -302,11 +302,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     StatText += ", esp files: " + espCount.ToString();
                 }
 
-                toolStripStatusLabel1.Text = StatText;
+                sbar(StatText);
             }
             catch
             {
-                toolStripStatusLabel1.Text = "Starfield path needs to be set for mod stats";
+                sbar("Starfield path needs to be set for mod stats");
             }
         }
 
@@ -363,7 +363,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     writer.WriteLine(ModLine);
                 }
             }
-            toolStripStatusLabel1.Text = "Plugins.txt saved";
+            sbar("Plugins.txt saved");
             isModified = false;
         }
 
@@ -469,7 +469,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
 
-                toolStripStatusLabel1.Text = "Backup done";
+                sbar("Backup done");
             }
             catch (Exception ex)
             {
@@ -494,7 +494,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 InitDataGrid();
 
                 toolStripStatusLabel1.ForeColor = DefaultForeColor;
-                toolStripStatusLabel1.Text = "Restore done";
+                sbar("Restore done");
                 isModified = false;
             }
             catch (Exception ex)
@@ -559,7 +559,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "Warning! - Plugins sorted - saving changes disabled";
+            sbar("Warning! - Plugins sorted - saving changes disabled");
             toolStripStatusLabel1.ForeColor = Color.Red;
             btnOK.Enabled = false;
             btnSave.Enabled = false;
@@ -573,7 +573,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 dataGridView1.Rows[i].Cells["ModEnabled"].Value = false;
             }
-            toolStripStatusLabel1.Text = "All mods disabled";
+            sbar("All mods disabled");
             isModified = true;
         }
 
@@ -583,7 +583,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
             }
-            toolStripStatusLabel1.Text = "All mods enabled";
+            sbar("All mods enabled");
             isModified = true;
         }
 
@@ -611,12 +611,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
                 if (DataGridSring.Contains(TextBoxString))
                 {
-                    toolStripStatusLabel1.Text = "Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString();
+                    sbar("Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString());
                     dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
                     break;
                 }
                 else
-                    toolStripStatusLabel1.Text = txtSearchBox.Text + " not found ";
+                    sbar(txtSearchBox.Text + " not found ");
             }
         }
 
@@ -720,7 +720,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             catch
             {
-                toolStripStatusLabel1.Text = "Error switching profile";
+                sbar("Error switching profile");
             }
         }
 
@@ -770,7 +770,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult result = GetMod.ShowDialog();
             if (DialogResult.OK == result)
             {
-                toolStripStatusLabel1.Text = GetMod.FileName;
+                sbar(GetMod.FileName);
                 GameData = GetMod.FileName[GetMod.FileName.LastIndexOf('\\')..];
                 dataGridView1.Rows.Add(true, GameData[1..]);
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
@@ -854,11 +854,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     dataGridView1.Rows.Add(true, FilesToAdd[i]);
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
-                toolStripStatusLabel1.Text = AddedFiles.ToString() + " file(s) added";
+                sbar(AddedFiles.ToString() + " file(s) added");
                 isModified = true;
             }
             else
-                toolStripStatusLabel1.Text = "Nothing to add";
+                sbar("Nothing to add");
             return AddedFiles;
         }
 
@@ -903,11 +903,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
                 }
-                toolStripStatusLabel1.Text = RemovedFiles.ToString() + " file(s) removed";
+                sbar(RemovedFiles.ToString() + " file(s) removed");
                 isModified = true;
             }
             else
-                toolStripStatusLabel1.Text = "Nothing to remove";
+                sbar("Nothing to remove");
             return RemovedFiles;
         }
 
@@ -916,7 +916,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int addedMods = 0, removedMods = 0;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
-            toolStripStatusLabel1.Text = addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed";
+            sbar(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
             if (addedMods + removedMods > 0)
                 toolStripStatusLabel1.Text += " - Save changes to update Plugins.txt file";
 
@@ -963,13 +963,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 try
                 {
-                    toolStripStatusLabel1.Text = "Installing mod...";
+                    sbar("Installing mod...");
                     ZipFile.ExtractToDirectory(ModPath, ExtractPath);
 
                 }
                 catch (Exception ex)
                 {
-                    toolStripStatusLabel1.Text = ex.Message;
+                    sbar(ex.Message);
 
                 }
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
@@ -1114,7 +1114,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
             }
             else
-                toolStripStatusLabel1.Text = "Un-install cancelled";
+                sbar("Un-install cancelled");
         }
 
         private void toolStripMenuUninstallContext_Click(object sender, EventArgs e)
@@ -1252,7 +1252,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (CreationsID != "")
                 Tools.OpenUrl(url);  // Open Creations web site
             else
-                toolStripStatusLabel1.Text = "Not a Creations mod";
+                sbar("Not a Creations mod");
         }
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)
@@ -1322,6 +1322,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuLoadingScreen_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            openFileDialog1.Title = "Choose a loadscreen image";
             DialogResult LoadScreen = openFileDialog1.ShowDialog();
             if (LoadScreen == DialogResult.OK)
             {
@@ -1332,9 +1333,50 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
         {
-            Process.Start(@"C:\Program files\loot\loot.exe","--game Starfield --auto-sort");
-            Thread.Sleep(2000);
-            InitDataGrid();
+            string LOOTPath = Settings.Default.LOOTPath;
+            if (LOOTPath == "")
+            {
+                if (!SetLOOTPath())
+                {
+                    sbar("LOOT path is required to run LOOT");
+                    return;
+                }
+            }
+
+            if (LOOTPath != "")
+            {
+                Process.Start(LOOTPath, "--game Starfield --auto-sort");
+                Thread.Sleep(2000);
+                InitDataGrid();
+            }
+        }
+
+        private bool SetLOOTPath()
+        {
+            openFileDialog1.Filter = "Executable Files|*.exe";
+            openFileDialog1.Title = "Set the path to the LOOT executable";
+            openFileDialog1.FileName = "LOOT.exe";
+            DialogResult LOOTPath = openFileDialog1.ShowDialog();
+            if (LOOTPath == DialogResult.OK)
+            {
+                if (openFileDialog1.FileName != "")
+                {
+                    Settings.Default.LOOTPath = openFileDialog1.FileName;
+                    return true;
+                }
+                else return false;
+            }
+            else
+                return false;
+        }
+        private void toolStripMenuLootPath_Click(object sender, EventArgs e)
+        {
+            SetLOOTPath();
+        }
+
+        private void sbar(string StatusBarMessage)
+        {
+            toolStripStatusLabel1.Text = StatusBarMessage;
         }
     }
 }
