@@ -23,7 +23,7 @@ namespace Starfield_Tools
 
         bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
 
-        public frmLoadOrder()
+        public frmLoadOrder(string parameter)
         {
             InitializeComponent();
 
@@ -105,6 +105,8 @@ namespace Starfield_Tools
                 sbar("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
+            if (parameter != "")
+                sbar(parameter);
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif

@@ -105,7 +105,8 @@ namespace Starfield_Tools
 
             if (cmdLineLO) // Go to mod manager
             {
-                frmLoadOrder frmLO = new();
+                string paramater = toolStripStatusLabel1.Text;
+                frmLoadOrder frmLO = new(paramater);
                 frmLO.Show();
                 this.WindowState = FormWindowState.Minimized;
 
@@ -410,7 +411,7 @@ namespace Starfield_Tools
 
         private void btnLoadOrder_Click(object sender, EventArgs e)
         {
-            frmLoadOrder frmLO = new();
+            frmLoadOrder frmLO = new(toolStripStatusLabel1.Text);
             frmLO.Show();
         }
 
