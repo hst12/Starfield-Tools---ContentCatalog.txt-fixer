@@ -1257,6 +1257,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
             string CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
+            if (CreationsID==null || CreationsID=="")
+            {
+                sbar("Not a Creations mod");
+                return;
+            }
             string url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID[3..];
 
             if (CreationsID != "")

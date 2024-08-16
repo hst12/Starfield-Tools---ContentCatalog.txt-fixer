@@ -27,10 +27,10 @@ ArchitecturesAllowed=x64compatible
 ; meaning it should use the native 64-bit Program Files directory and
 ; the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64compatible
-DisableProgramGroupPage=yes
+DisableProgramGroupPage=no
 InfoAfterFile=C:\Users\hst12\source\repos\Starfield Tools\bin\Release\net8.0-windows10.0.17763.0\Common\Readme.txt
 ; Remove the following line to run in administrative install mode (install for all users.)
-PrivilegesRequired=lowest
+;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=Z:\Starfield Tools Setup
 OutputBaseFilename=Starfield Tools Setup
