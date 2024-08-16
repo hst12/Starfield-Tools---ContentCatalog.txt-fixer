@@ -83,12 +83,13 @@
             optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuSetPath = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuLootPath = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuSteam = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuMS = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuLoadingScreen = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripMenuLootPath = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuColumns = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuAchievements = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
@@ -544,7 +545,7 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuSteam, toolStripMenuMS, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripSeparator16, toolStripMenuLootPath });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, toolStripSeparator18, toolStripMenuSteam, toolStripMenuMS, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripSeparator16 });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -569,6 +570,19 @@
             toolStripSeparator14.Name = "toolStripSeparator14";
             toolStripSeparator14.Size = new System.Drawing.Size(381, 6);
             // 
+            // toolStripMenuLootPath
+            // 
+            toolStripMenuLootPath.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLootPath.Image");
+            toolStripMenuLootPath.Name = "toolStripMenuLootPath";
+            toolStripMenuLootPath.Size = new System.Drawing.Size(384, 44);
+            toolStripMenuLootPath.Text = "LOOT Path";
+            toolStripMenuLootPath.Click += toolStripMenuLootPath_Click;
+            // 
+            // toolStripSeparator18
+            // 
+            toolStripSeparator18.Name = "toolStripSeparator18";
+            toolStripSeparator18.Size = new System.Drawing.Size(381, 6);
+            // 
             // toolStripMenuSteam
             // 
             toolStripMenuSteam.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuSteam.Image");
@@ -592,6 +606,7 @@
             // 
             // toolStripMenuLoadingScreen
             // 
+            toolStripMenuLoadingScreen.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLoadingScreen.Image");
             toolStripMenuLoadingScreen.Name = "toolStripMenuLoadingScreen";
             toolStripMenuLoadingScreen.Size = new System.Drawing.Size(384, 44);
             toolStripMenuLoadingScreen.Text = "Loading Screen";
@@ -601,14 +616,6 @@
             // 
             toolStripSeparator16.Name = "toolStripSeparator16";
             toolStripSeparator16.Size = new System.Drawing.Size(381, 6);
-            // 
-            // toolStripMenuLootPath
-            // 
-            toolStripMenuLootPath.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLootPath.Image");
-            toolStripMenuLootPath.Name = "toolStripMenuLootPath";
-            toolStripMenuLootPath.Size = new System.Drawing.Size(384, 44);
-            toolStripMenuLootPath.Text = "LOOT Path";
-            toolStripMenuLootPath.Click += toolStripMenuLootPath_Click;
             // 
             // toolStripMenuColumns
             // 
@@ -1250,5 +1257,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoot;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuEditPlugins;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
     }
 }
