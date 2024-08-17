@@ -9,6 +9,11 @@ You could simply delete the catalog file and have the game rebuild it, but that 
 To install, extract the zip file and run the msi installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
 
+Alternate installation using Winget:
+winget source update
+winget install hst.Starfieldtools
+
+
 Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically. This is the default.
 Force clean is an experimental option to make the tool run a cleaning process even if it considers the catalog to be ok. Force clean should be off for normal use.
 
