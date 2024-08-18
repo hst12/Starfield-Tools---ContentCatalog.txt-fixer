@@ -22,7 +22,8 @@ namespace Starfield_Tools.Common
 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
 ];
 
-        public static string GetStarfieldPath()
+
+        public static string GetStarfieldAppData()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
         }
@@ -41,10 +42,37 @@ namespace Starfield_Tools.Common
 
         public static string GetCatalog()
         {
-            return GetStarfieldPath() + @"\ContentCatalog.txt";
+            return GetStarfieldAppData() + @"\ContentCatalog.txt";
         }
 
-        public class Creation
+        public class Group // LOOT
+        {
+            public string name { get; set; }
+            public List<string> after { get; set; }
+        }
+
+        public class Plugin // LOOT
+        {
+            public string name { get; set; }
+            public string group { get; set; }
+            public List<string> after { get; set; }
+            public List<string> inc { get; set; }
+            public List<string> req { get; set; }
+            public List<Url> url { get; set; }
+        }
+
+        public class Url // LOOT
+        {
+            public string link { get; set; }
+            public string name { get; set; }
+        }
+
+        public class Configuration // LOOT
+        {
+            public List<Group> groups { get; set; }
+            public List<Plugin> plugins { get; set; }
+        }
+        public class Creation // ContentCatalog.txt format
         {
             public bool AchievementSafe { get; set; }
             public string[] Files { get; set; }
@@ -54,7 +82,7 @@ namespace Starfield_Tools.Common
             public string Version { get; set; }
         }
 
-        public class ModMetaData
+        public class ModMetaData // Testing
         {
             public string ModName { get; set; }
             public string[] ModFiles { get; set; }
@@ -65,7 +93,7 @@ namespace Starfield_Tools.Common
 
         public static bool CheckGame()
         {
-            if (!Directory.Exists(GetStarfieldPath())) // Check if Starfield is installed
+            if (!Directory.Exists(GetStarfieldAppData())) // Check if Starfield is installed
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;

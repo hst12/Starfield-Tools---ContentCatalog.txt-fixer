@@ -3,14 +3,17 @@ using Starfield_Tools.Common;
 using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
+
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.IO.Pipes;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using YamlDotNet.Core;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -31,7 +34,7 @@ namespace Starfield_Tools
             if (!Tools.CheckGame())
                 Application.Exit();
 
-            if (!Directory.Exists(Tools.GetStarfieldPath())) // Check if Starfield is installed
+            if (!Directory.Exists(Tools.GetStarfieldAppData())) // Check if Starfield is installed
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Application.Exit();
@@ -48,12 +51,12 @@ namespace Starfield_Tools
             toolStripMenuInstall.Enabled = true;
             toolStripMenuUninstall.Enabled = true;
 
-            string PluginsPath = Tools.GetStarfieldPath() + "\\Plugins.txt";
+            string PluginsPath = Tools.GetStarfieldAppData() + "\\Plugins.txt";
 
-            menuStrip1.Font = Settings.Default.FontSize; // Get settings
-            this.Font = Settings.Default.FontSize;
-            StarfieldGamePath = Settings.Default.StarfieldGamePath;
-            GameVersion = Settings.Default.GameVersion;
+            menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
+            this.Font = Properties.Settings.Default.FontSize;
+            StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+            GameVersion = Properties.Settings.Default.GameVersion;
             if (!GameVersion) // 0=Steam, 1=MS game version
             {
                 toolStripMenuSteam.Checked = true;
@@ -65,7 +68,7 @@ namespace Starfield_Tools
                 toolStripMenuRunSteam.Visible = false;
             }
 
-            if (Settings.Default.Achievements)
+            if (Properties.Settings.Default.Achievements)
             {
                 toolStripMenuAchievements.Checked = true;
                 dataGridView1.Columns["Achievements"].Visible = true;
@@ -76,7 +79,7 @@ namespace Starfield_Tools
                 dataGridView1.Columns["Achievements"].Visible = false;
             }
 
-            if (Settings.Default.CreationsID)
+            if (Properties.Settings.Default.CreationsID)
             {
                 toolStripMenuCreationsID.Checked = true;
                 dataGridView1.Columns["CreationsID"].Visible = true;
@@ -87,7 +90,7 @@ namespace Starfield_Tools
                 toolStripMenuCreationsID.Checked = false;
             }
 
-            if (Settings.Default.Files)
+            if (Properties.Settings.Default.Files)
             {
                 toolStripMenuFiles.Checked = true;
                 dataGridView1.Columns["Files"].Visible = true;
@@ -98,7 +101,7 @@ namespace Starfield_Tools
                 toolStripMenuFiles.Checked = false;
             }
 
-            if (Settings.Default.Group)
+            if (Properties.Settings.Default.Group)
             {
                 toolStripMenuGroup.Checked = true;
                 dataGridView1.Columns["Group"].Visible = true;
@@ -160,7 +163,20 @@ namespace Starfield_Tools
 
             string jsonFilePath = Tools.GetCatalog();
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
-
+            Tools.Configuration Groups = new();
+            if (toolStripMenuGroup.Checked && Properties.Settings.Default.LOOTPath != "") // Read LOOT groups
+            {
+                try
+                {
+                    var deserializer = new DeserializerBuilder().Build();
+                    var yamlContent = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LOOT\games\Starfield\userlist.yaml");
+                    Groups = deserializer.Deserialize<Tools.Configuration>(yamlContent);
+                }
+                catch (Exception ex)
+                {
+                    sbar(ex.Message);
+                }
+            }
 
             List<string> CreationsPlugin = [];
             List<string> CreationsTitle = [];
@@ -177,7 +193,6 @@ namespace Starfield_Tools
             string StatText = "";
             double VersionCheck;
             List<string> esmFiles = [];
-            string[] Groups = { "Default", "BGS", "NPC", "Cosmetic" };
 
             try
             {
@@ -223,7 +238,7 @@ namespace Starfield_Tools
                 sbar(ex.Message);
             }
 
-            loText = Tools.GetStarfieldPath() + @"\plugins.txt";
+            loText = Tools.GetStarfieldAppData() + @"\plugins.txt";
             if (!File.Exists(loText))
             {
                 MessageBox.Show(@"Missing Plugins.txt file
@@ -280,15 +295,25 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     }
                                 }
                                 /* Disable combobox code for the time being
-                                 
-                                  if (toolStripMenuGroup.Checked)
-                                {
+
+
                                     ComboBox GroupCombo = new();
                                     GroupCombo.Items.AddRange(Groups);
                                     ((DataGridViewComboBoxColumn)dataGridView1.Columns["Group"]).DataSource = GroupCombo.Items;
-                                }*/
+                                */
+
+
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
+
+                                if (Properties.Settings.Default.LOOTPath != "")
+                                {
+                                    for (int i = 0; i < Groups.plugins.Count; i++)
+                                        if (Groups.plugins[i].name == PluginName)
+                                            row.Cells["Group"].Value = Groups.plugins[i].group;
+                                    if (PluginName.Contains("sfbgs")) // Assume Bethesda plugin
+                                        row.Cells["Group"].Value = "Bethesda";
+                                }
                                 row.Cells["ModEnabled"].Value = ModEnabled;
                                 row.Cells["PluginName"].Value = PluginName;
                                 row.Cells["Description"].Value = Description;
@@ -309,7 +334,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             try
             {
-                string directory = Settings.Default.StarfieldGamePath + @"\Data";
+                string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
                 foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
                     esmCount++;
@@ -346,10 +371,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (!Profiles)
                 return;
             cmbProfile.Items.Clear();
-            ProfileFolder = Settings.Default.ProfileFolder;
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            LastProfile ??= Settings.Default.LastProfile;
+            LastProfile ??= Properties.Settings.Default.LastProfile;
             try
             {
                 foreach (var profileName in Directory.EnumerateFiles(ProfileFolder, "*.txt", SearchOption.TopDirectoryOnly))
@@ -357,7 +382,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     cmbProfile.Items.Add(profileName[(profileName.LastIndexOf('\\') + 1)..]);
 
                 }
-                int index = cmbProfile.Items.IndexOf(Settings.Default.LastProfile);
+                int index = cmbProfile.Items.IndexOf(Properties.Settings.Default.LastProfile);
                 if (index != -1)
                 {
                     cmbProfile.SelectedIndex = index;
@@ -400,45 +425,24 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldAppData() + @"\Plugins.txt");
             this.Close();
         }
         private void MoveUp()
         {
-            int y = dataGridView1.CurrentCell.RowIndex;
-            if (y < 1) return;
-            isModified = true;
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            if (rowIndex < 1)
+                return;
+            if (rowIndex == 0)
+                return; // Already at the top
 
-            bool CurrentModEnabled;
-            string CurrentModLine;
-            string CurrentDescription;
-            bool NewModEnabled;
-            string NewModLine;
-            string NewDescription;
-
-            CurrentModEnabled = (bool)dataGridView1.Rows[y - 1].Cells["ModEnabled"].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y - 1].Cells["PluginName"].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y - 1].Cells["Description"].Value;
-
-            NewModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
-            NewModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
-            NewDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
-
-
-            dataGridView1.Rows[y].Cells["ModEnabled"].Value = CurrentModEnabled;
-            dataGridView1.Rows[y].Cells["PluginName"].Value = CurrentModLine;
-            dataGridView1.Rows[y].Cells["Description"].Value = CurrentDescription;
-
-            dataGridView1.Rows[y - 1].Cells["ModEnabled"].Value = NewModEnabled;
-            dataGridView1.Rows[y - 1].Cells["PluginName"].Value = NewModLine;
-            dataGridView1.Rows[y - 1].Cells["Description"].Value = NewDescription;
-
-            dataGridView1.Rows[y].Selected = false;
-            dataGridView1.Rows[y - 1].Selected = true;
-
-            dataGridView1.CurrentCell = dataGridView1.Rows[y - 1].Cells["ModEnabled"];
-
-
+            DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
+            dataGridView1.Rows.Remove(selectedRow);
+            dataGridView1.Rows.Insert(rowIndex - 1, selectedRow);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[rowIndex - 1].Selected = true;
+            dataGridView1.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
         }
         private void btnUp_Click(object sender, EventArgs e)
         {
@@ -447,36 +451,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void MoveDown()
         {
-            int y = dataGridView1.CurrentCell.RowIndex;
-            if (y > dataGridView1.Rows.Count - 2) return;
-            isModified = true;
-            bool CurrentModEnabled;
-            string CurrentModLine;
-            string CurrentDescription;
-            bool NewModEnabled;
-            string NewModLine;
-            string NewDescription;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y + 1].Cells["ModEnabled"].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y + 1].Cells["PluginName"].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y + 1].Cells["Description"].Value;
+            int rowIndex = dataGridView1.SelectedCells[0].OwningRow.Index;
+            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
 
-            NewModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
-            NewModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
-            NewDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
+            if (rowIndex == dataGridView1.Rows.Count - 1)
+                return; // Already at the bottom
 
-            dataGridView1.Rows[y].Cells["ModEnabled"].Value = CurrentModEnabled;
-            dataGridView1.Rows[y].Cells["PluginName"].Value = CurrentModLine;
-            dataGridView1.Rows[y].Cells["Description"].Value = CurrentDescription;
-
-            dataGridView1.Rows[y + 1].Cells["ModEnabled"].Value = NewModEnabled;
-            dataGridView1.Rows[y + 1].Cells["PluginName"].Value = NewModLine;
-            dataGridView1.Rows[y + 1].Cells["Description"].Value = NewDescription;
-
-            dataGridView1.Rows[y].Selected = false;
-            dataGridView1.Rows[y + 1].Selected = true;
-
-            dataGridView1.CurrentCell = dataGridView1.Rows[y + 1].Cells["ModEnabled"];
+            DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
+            dataGridView1.Rows.Remove(selectedRow);
+            dataGridView1.Rows.Insert(rowIndex + 1, selectedRow);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[rowIndex + 1].Selected = true;
+            dataGridView1.Rows[rowIndex + 1].Cells[colIndex].Selected = true;
 
         }
         private void btnDown_Click(object sender, EventArgs e)
@@ -486,7 +473,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void BackupPlugins()
         {
-            string sourceFileName = Tools.GetStarfieldPath() + @"\Plugins.txt";
+            string sourceFileName = Tools.GetStarfieldAppData() + @"\Plugins.txt";
             string destFileName = sourceFileName + ".bak";
 
             if (isModified)
@@ -515,8 +502,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void RestorePlugins()
         {
-            string sourceFileName = Tools.GetStarfieldPath() + @"\Plugins.txt.bak";
-            string destFileName = Tools.GetStarfieldPath() + @"\Plugins.txt";
+            string sourceFileName = Tools.GetStarfieldAppData() + @"\Plugins.txt.bak";
+            string destFileName = Tools.GetStarfieldAppData() + @"\Plugins.txt";
 
             try
             {
@@ -536,47 +523,29 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void MoveTop()
         {
-            int y = dataGridView1.CurrentCell.RowIndex;
-            if (y < 1) return;
-            isModified = true;
-            bool CurrentModEnabled;
-            string CurrentModLine;
-            string CurrentDescription;
+            int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
+            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
-            dataGridView1.Rows.Insert(0);
+            dataGridView1.Rows.Remove(selectedRow);
+            dataGridView1.Rows.Insert(0, selectedRow);
+            dataGridView1.ClearSelection();
+            //dataGridView1.Rows[0].Selected = true;
+            dataGridView1.Rows[0].Cells[colIndex].Selected = true;
 
-            dataGridView1.Rows[0].Cells["ModEnabled"].Value = CurrentModEnabled;
-            dataGridView1.Rows[0].Cells["PluginName"].Value = CurrentModLine;
-            dataGridView1.Rows[0].Cells["Description"].Value = CurrentDescription;
-
-            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
         }
 
         private void MoveBottom()
         {
-            int y = dataGridView1.CurrentCell.RowIndex;
-            if (y > dataGridView1.Rows.Count - 1) return;
-            isModified |= true;
-            bool CurrentModEnabled;
-            string CurrentModLine;
-            string CurrentDescription;
+            int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
+            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
 
-            CurrentModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
-            CurrentModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
-            CurrentDescription = (string)dataGridView1.Rows[y].Cells["Description"].Value;
-
-            dataGridView1.Rows.Insert(dataGridView1.Rows.Count);
-
-            dataGridView1.Rows[^1].Cells["ModEnabled"].Value = CurrentModEnabled;
-            dataGridView1.Rows[^1].Cells["PluginName"].Value = CurrentModLine;
-            dataGridView1.Rows[^1].Cells["Description"].Value = CurrentDescription;
-
-            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-            dataGridView1.CurrentCell = dataGridView1.Rows[^1].Cells["ModEnabled"];
+            dataGridView1.Rows.Remove(selectedRow);
+            dataGridView1.Rows.Insert(dataGridView1.Rows.Count, selectedRow);
+            dataGridView1.ClearSelection();
+            //dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true;
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[colIndex].Selected = true;
         }
         private void btnBottom_Click(object sender, EventArgs e)
         {
@@ -626,7 +595,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 menuStrip1.Font = fontDialog1.Font;
             }
             this.CenterToScreen();
-            Settings.Default.FontSize = this.Font;
+            Properties.Settings.Default.FontSize = this.Font;
         }
 
         private void SearchMod()
@@ -716,7 +685,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             SaveFileDialog SavePlugins = new();
-            ProfileFolder = Settings.Default.ProfileFolder;
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -731,8 +700,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             if (SavePlugins.FileName != "")
             {
-                Settings.Default.ProfileFolder = SavePlugins.FileName[..SavePlugins.FileName.LastIndexOf('\\')];
-                Settings.Default.Save();
+                Properties.Settings.Default.ProfileFolder = SavePlugins.FileName[..SavePlugins.FileName.LastIndexOf('\\')];
+                Properties.Settings.Default.Save();
                 GetProfiles();
                 isModified = false;
             }
@@ -744,8 +713,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 return;
             try
             {
-                File.Copy(ProfileName, Tools.GetStarfieldPath() + "\\Plugins.txt", true);
-                Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
+                File.Copy(ProfileName, Tools.GetStarfieldAppData() + "\\Plugins.txt", true);
+                Properties.Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
                 //SavePlugings();
@@ -761,7 +730,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            ProfileFolder = Settings.Default.ProfileFolder;
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
                 ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
@@ -781,10 +750,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             if (OpenPlugins.FileName != "")
             {
-                Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
+                Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
                 SwitchProfile(OpenPlugins.FileName);
                 GetProfiles();
-                Settings.Default.Save();
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -792,7 +761,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string GameData;
 
-            GameData = Settings.Default.StarfieldGamePath + "\\Data";
+            GameData = Properties.Settings.Default.StarfieldGamePath + "\\Data";
             OpenFileDialog GetMod = new()
             {
                 Filter = "esm File|*.esm",
@@ -861,7 +830,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
             ];
 
-            string directory = Settings.Default.StarfieldGamePath;
+            string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
             directory += @"\Data";
@@ -906,7 +875,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             List<string> esmFiles = [];
             List<string> PluginFiles = [];
 
-            string directory = Settings.Default.StarfieldGamePath;
+            string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
             directory += @"\Data";
@@ -966,12 +935,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private static void SaveSettings()
         {
-            Settings.Default.Save();
+            Properties.Settings.Default.Save();
         }
 
         private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SwitchProfile(Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
+            SwitchProfile(Properties.Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
             InitDataGrid();
         }
 
@@ -1085,7 +1054,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuExploreAppData_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Tools.GetStarfieldPath());
+            Process.Start("explorer.exe", Tools.GetStarfieldAppData());
         }
 
         private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
@@ -1217,11 +1186,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripMenuRunSteam.Visible = true;
                 toolStripMenuMS.Checked = false;
                 GameVersion = false;
-                Settings.Default.GameVersion = GameVersion;
+                Properties.Settings.Default.GameVersion = GameVersion;
             }
             else
                 toolStripMenuMS.Checked = true;
-            Settings.Default.GameVersion = GameVersion;
+            Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
         }
 
@@ -1233,10 +1202,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void SavePlugings()
         {
             var dgCurrent = dataGridView1.CurrentCell;
-            SaveLO(Tools.GetStarfieldPath() + @"\Plugins.txt");
+            SaveLO(Tools.GetStarfieldAppData() + @"\Plugins.txt");
             if (Profiles)
             {
-                SaveLO(Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
+                SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 toolStripStatusLabel1.Text += ", " + cmbProfile.Text + " profile saved";
             }
             dataGridView1.CurrentCell = dgCurrent;
@@ -1310,7 +1279,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
                 toolStripMenuSteam.Checked = true;
-            Settings.Default.GameVersion = GameVersion;
+            Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
         }
 
@@ -1338,7 +1307,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Achievements"].Visible = true;
             else
                 dataGridView1.Columns["Achievements"].Visible = false;
-            Settings.Default.Achievements = toolStripMenuAchievements.Checked;
+            Properties.Settings.Default.Achievements = toolStripMenuAchievements.Checked;
         }
 
         private void toolStripMenuCreationsID_Click(object sender, EventArgs e)
@@ -1348,7 +1317,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["CreationsID"].Visible = true;
             else
                 dataGridView1.Columns["CreationsID"].Visible = false;
-            Settings.Default.CreationsID = toolStripMenuCreationsID.Checked;
+            Properties.Settings.Default.CreationsID = toolStripMenuCreationsID.Checked;
         }
 
         private void toolStripMenuFiles_Click(object sender, EventArgs e)
@@ -1358,7 +1327,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Files"].Visible = true;
             else
                 dataGridView1.Columns["Files"].Visible = false;
-            Settings.Default.Files = toolStripMenuFiles.Checked;
+            Properties.Settings.Default.Files = toolStripMenuFiles.Checked;
         }
 
         private void toolStripMenuLoadingScreen_Click(object sender, EventArgs e)
@@ -1369,13 +1338,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (LoadScreen == DialogResult.OK)
             {
                 if (openFileDialog1.FileName != "")
-                    Settings.Default.LoadScreenFilename = openFileDialog1.FileName;
+                    Properties.Settings.Default.LoadScreenFilename = openFileDialog1.FileName;
             }
         }
 
         private void RunLOOT(bool LOOTMode) // True for autosort
         {
-            string LOOTPath = Settings.Default.LOOTPath, cmdLine = "";
+            string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine = "";
             if (LOOTPath == "")
             {
                 if (!SetLOOTPath())
@@ -1410,7 +1379,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 if (openFileDialog1.FileName != "")
                 {
-                    Settings.Default.LOOTPath = openFileDialog1.FileName;
+                    Properties.Settings.Default.LOOTPath = openFileDialog1.FileName;
                     return true;
                 }
                 else return false;
@@ -1435,7 +1404,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuEditPlugins_Click(object sender, EventArgs e)
         {
-            string pathToFile = (Tools.GetStarfieldPath() + @"\Plugins.txt");
+            string pathToFile = (Tools.GetStarfieldAppData() + @"\Plugins.txt");
             Process.Start("explorer", pathToFile);
         }
 
@@ -1446,7 +1415,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Columns["Group"].Visible = true;
             else
                 dataGridView1.Columns["Group"].Visible = false;
-            Settings.Default.Group = toolStripMenuGroup.Checked;
+            Properties.Settings.Default.Group = toolStripMenuGroup.Checked;
         }
 
         private void toolStripMenuLootAutoSort_Click(object sender, EventArgs e)
