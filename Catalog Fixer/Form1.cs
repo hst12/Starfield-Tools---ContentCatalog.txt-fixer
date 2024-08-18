@@ -704,12 +704,14 @@ namespace Starfield_Tools
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp)
                     {
+                        richTextBox2.Text += "Replacing version no for " + kvp.Value.Title+"\n";
                         kvp.Value.Version = "1704067200.0";
                         VersionReplacementCount++;
                     }
                 }
                 if (FixVersion) // Replace version numbers if they contain garbage characters.
                 {
+                    richTextBox2.Text += "Invalid characters in " + kvp.Value.Title + "\n";
                     kvp.Value.Version = "1704067200.0"; // set version to 1704067200.0
                     errorCount++;
                 }
