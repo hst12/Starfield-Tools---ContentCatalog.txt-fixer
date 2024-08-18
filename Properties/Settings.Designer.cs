@@ -225,5 +225,17 @@ namespace Starfield_Tools.Properties {
                 this["Verbose"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Group {
+            get {
+                return ((bool)(this["Group"]));
+            }
+            set {
+                this["Group"] = value;
+            }
+        }
     }
 }

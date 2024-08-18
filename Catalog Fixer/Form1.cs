@@ -17,7 +17,6 @@ namespace Starfield_Tools
     {
 
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean, Verbose;
-        public const string CatalogVersion = "1.1";
 
         readonly Tools tools = new();
         public string StarfieldGamePath;
@@ -191,7 +190,7 @@ namespace Starfield_Tools
   {
     ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
     ""Version"" : ";
-            HeaderString += @"""" + CatalogVersion + @"""";
+            HeaderString += @"""" + Tools.CatalogVersion + @"""";
             HeaderString += @"
   }
 }
@@ -240,7 +239,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
-                    if (TestString != CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
+                    if (TestString != Tools.CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
                         if (Verbose)
                             richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
@@ -699,7 +698,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != CatalogVersion) // Skip the catalog header then check for valid timestamps
+                if (TestString != Tools.CatalogVersion) // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     TimeStamp = kvp.Value.Timestamp;
