@@ -13,7 +13,7 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
-        public const string ToolVersion = "1.7.2"; // App version no.
+        public const string ToolVersion = "1.8.0"; // App version no.
         public const string CatalogVersion = "1.1"; // Content catalog version no.
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }

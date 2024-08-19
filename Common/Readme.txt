@@ -32,6 +32,8 @@ These functions are on by default and the tool will automatically decide what ac
 
 You can skip reading from here on or keep going for more detail.
 
+What's new: Experimental Support for reading LOOT groups and load order sorting.
+In the load order editor enable the Group column, then in the Tools menu set the path to the LOOT executable.
 
 Overview of buttons:
 Check button re-checks the file.
