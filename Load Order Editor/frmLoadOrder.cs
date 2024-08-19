@@ -1427,6 +1427,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield");
         }
+
+        private void toolStripMenuDeleteCCC_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Starfieldccc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\Starfield.ccc";
+                if (File.Exists(Starfieldccc))
+                {
+                    File.Delete(Starfieldccc);
+                    sbar("Starfield.ccc deleted");
+                }
+                else
+                    sbar("Starfield.ccc not found");
+
+            }
+            catch (Exception ex) 
+            {
+                sbar("Error deleting Starfield.ccc "+ex.Message);
+            }
+        }
     }
 }
 
