@@ -36,7 +36,14 @@ namespace Starfield_Tools.Common
         public static DateTime ConvertTime(double TimeToConvert)
         {
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
-            start = start.AddSeconds(TimeToConvert);
+            try
+            {
+                start = start.AddSeconds(TimeToConvert);
+            }
+            catch
+            {
+                start = new(1970, 1, 1, 0, 0, 0, 0);
+            }
             return start;
         }
 

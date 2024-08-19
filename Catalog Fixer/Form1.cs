@@ -165,6 +165,7 @@ namespace Starfield_Tools
             }
             else
             {
+                //MessageBox.Show(lastWriteTime1 + " " + lastWriteTime2 , "Backup timestamp mismatch");
                 richTextBox2.Text += "\nBackup is out of date.\n";
                 ScrollToEnd();
                 return false;
@@ -213,7 +214,7 @@ namespace Starfield_Tools
             int ErrorCount = 0;
             richTextBox2.Text += "Checking Catalog\n";
             double VersionCheck;
-            long TimeStamp;
+            double TimeStamp;
 
             try
             {
@@ -248,7 +249,7 @@ namespace Starfield_Tools
                     {
                         ErrorCount++;
                         ErrorFound = true;
-                        richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + "\n";
+                        richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + ": " + TestString + ", " + Tools.ConvertTime(VersionCheck) + "\n";
                     }
                     for (int i = 0; i < TestString.IndexOf('.') + 1; i++)
                     {
@@ -276,7 +277,7 @@ namespace Starfield_Tools
                 }
             }
 
-            catch
+            catch (Exception ex)
             {
                 if (!File.Exists(Tools.GetCatalog()))
                 {
@@ -288,11 +289,13 @@ namespace Starfield_Tools
                         File.WriteAllText(Tools.GetCatalog(), CatalogHeader);
                         toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
                         return false;
-
                     }
                 }
                 else
+                {
+                    //      MessageBox.Show(ex.Message);
                     toolStripStatusLabel1.Text = "Catalog corrupt. Use the Restore or Clean functions to repair";
+                }
                 return false;
             }
         }
@@ -704,7 +707,7 @@ namespace Starfield_Tools
                     TimeStamp = kvp.Value.Timestamp;
                     if (VersionCheck > kvp.Value.Timestamp)
                     {
-                        richTextBox2.Text += "Replacing version no for " + kvp.Value.Title+"\n";
+                        richTextBox2.Text += "Replacing version no for " + kvp.Value.Title + "\n";
                         kvp.Value.Version = "1704067200.0";
                         VersionReplacementCount++;
                     }
