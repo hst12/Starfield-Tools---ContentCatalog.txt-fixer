@@ -20,6 +20,7 @@ namespace Starfield_Tools
 
         readonly Tools tools = new();
         public string StarfieldGamePath;
+        private bool GameVersion;
 
         public frmStarfieldTools()
         {
@@ -35,6 +36,11 @@ namespace Starfield_Tools
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             Verbose = Properties.Settings.Default.Verbose;
             chkVerbose.Checked = Properties.Settings.Default.Verbose;
+            GameVersion = Properties.Settings.Default.GameVersion;
+            if (GameVersion)
+                radMS.Checked = true;
+            else
+                radSteam.Checked = true;
 
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
@@ -363,7 +369,10 @@ namespace Starfield_Tools
         {
             SaveSettings();
             toolStripStatusLabel1.Text = "Starfield launching";
-            Tools.StartStarfieldSteam();
+            if (GameVersion) // MS Store start game
+                Tools.StartStarfieldMS();
+            else
+                Tools.StartStarfieldSteam();
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
@@ -754,6 +763,16 @@ namespace Starfield_Tools
                 Verbose = true;
             else
                 Verbose = false;
+        }
+
+        private void radSteam_CheckedChanged(object sender, EventArgs e)
+        {
+            GameVersion = false;
+        }
+
+        private void radMS_CheckedChanged(object sender, EventArgs e)
+        {
+            GameVersion = true;
         }
     }
 }

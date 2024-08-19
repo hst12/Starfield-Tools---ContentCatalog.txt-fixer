@@ -237,5 +237,17 @@ namespace Starfield_Tools.Properties {
                 this["Group"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoDelccc {
+            get {
+                return ((bool)(this["AutoDelccc"]));
+            }
+            set {
+                this["AutoDelccc"] = value;
+            }
+        }
     }
 }

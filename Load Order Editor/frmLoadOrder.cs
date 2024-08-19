@@ -68,6 +68,11 @@ namespace Starfield_Tools
                 toolStripMenuRunSteam.Visible = false;
             }
 
+            if (Properties.Settings.Default.AutoDelccc)
+            {
+                toolStripMenuAutoDelccc.Checked = true;
+            }
+
             if (Properties.Settings.Default.Achievements)
             {
                 toolStripMenuAchievements.Checked = true;
@@ -301,7 +306,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     GroupCombo.Items.AddRange(Groups);
                                     ((DataGridViewComboBoxColumn)dataGridView1.Columns["Group"]).DataSource = GroupCombo.Items;
                                 */
-
 
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
@@ -1361,6 +1365,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Process.Start(LOOTPath, "--game Starfield" + cmdLine);
                 Thread.Sleep(2000);
                 InitDataGrid();
+                if (Properties.Settings.Default.AutoDelccc)
+                    Delccc();
             }
 
         }
@@ -1428,7 +1434,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield");
         }
 
-        private void toolStripMenuDeleteCCC_Click(object sender, EventArgs e)
+        private void Delccc()
         {
             try
             {
@@ -1442,10 +1448,22 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     sbar("Starfield.ccc not found");
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                sbar("Error deleting Starfield.ccc "+ex.Message);
+                sbar("Error deleting Starfield.ccc " + ex.Message);
             }
+
+        }
+        private void toolStripMenuDeleteCCC_Click(object sender, EventArgs e)
+        {
+            Delccc();
+        }
+
+        private void toolStripMenuAutoDelccc_Click(object sender, EventArgs e)
+        {
+            toolStripMenuAutoDelccc.Checked = !toolStripMenuAutoDelccc.Checked;
+            Properties.Settings.Default.AutoDelccc= toolStripMenuAutoDelccc.Checked; ;
+
         }
     }
 }

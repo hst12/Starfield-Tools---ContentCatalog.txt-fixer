@@ -46,7 +46,6 @@
             btnAbout = new System.Windows.Forms.Button();
             txtSource = new System.Windows.Forms.Button();
             chkForceClean = new System.Windows.Forms.CheckBox();
-            btnStarfieldStore = new System.Windows.Forms.Button();
             btnResetAll = new System.Windows.Forms.Button();
             cmdDeleteStale = new System.Windows.Forms.Button();
             cmdStarFieldPath = new System.Windows.Forms.Button();
@@ -60,6 +59,9 @@
             flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             groupBox2 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            label1 = new System.Windows.Forms.Label();
+            radSteam = new System.Windows.Forms.RadioButton();
+            radMS = new System.Windows.Forms.RadioButton();
             grpAuto = new System.Windows.Forms.GroupBox();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             chkAutoCheck = new System.Windows.Forms.CheckBox();
@@ -106,7 +108,7 @@
             // btnQuit
             // 
             btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1377, 3);
+            btnQuit.Location = new System.Drawing.Point(1148, 3);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(223, 50);
             btnQuit.TabIndex = 20;
@@ -158,7 +160,7 @@
             btnStarfield.Name = "btnStarfield";
             btnStarfield.Size = new System.Drawing.Size(223, 50);
             btnStarfield.TabIndex = 15;
-            btnStarfield.Text = "Starfield (Steam)";
+            btnStarfield.Text = "Starfield";
             toolTip1.SetToolTip(btnStarfield, "Launch Starfield -Steam version");
             btnStarfield.UseVisualStyleBackColor = true;
             btnStarfield.Click += btnStarfield_Click;
@@ -226,7 +228,7 @@
             // btnAbout
             // 
             btnAbout.AutoSize = true;
-            btnAbout.Location = new System.Drawing.Point(690, 3);
+            btnAbout.Location = new System.Drawing.Point(461, 3);
             btnAbout.Name = "btnAbout";
             btnAbout.Size = new System.Drawing.Size(223, 50);
             btnAbout.TabIndex = 18;
@@ -238,7 +240,7 @@
             // txtSource
             // 
             txtSource.AutoSize = true;
-            txtSource.Location = new System.Drawing.Point(919, 3);
+            txtSource.Location = new System.Drawing.Point(690, 3);
             txtSource.Name = "txtSource";
             txtSource.Size = new System.Drawing.Size(223, 50);
             txtSource.TabIndex = 19;
@@ -258,18 +260,6 @@
             toolTip1.SetToolTip(chkForceClean, "Not normally needed");
             chkForceClean.UseVisualStyleBackColor = true;
             chkForceClean.CheckedChanged += chkForceClean_CheckedChanged;
-            // 
-            // btnStarfieldStore
-            // 
-            btnStarfieldStore.AutoSize = true;
-            btnStarfieldStore.Location = new System.Drawing.Point(232, 3);
-            btnStarfieldStore.Name = "btnStarfieldStore";
-            btnStarfieldStore.Size = new System.Drawing.Size(223, 50);
-            btnStarfieldStore.TabIndex = 16;
-            btnStarfieldStore.Text = "Starfield (MS)";
-            toolTip1.SetToolTip(btnStarfieldStore, "Launch Starfield - MS Store version");
-            btnStarfieldStore.UseVisualStyleBackColor = true;
-            btnStarfieldStore.Click += btnStarfieldStore_Click;
             // 
             // btnResetAll
             // 
@@ -296,7 +286,7 @@
             // cmdStarFieldPath
             // 
             cmdStarFieldPath.AutoSize = true;
-            cmdStarFieldPath.Location = new System.Drawing.Point(461, 3);
+            cmdStarFieldPath.Location = new System.Drawing.Point(232, 3);
             cmdStarFieldPath.Name = "cmdStarFieldPath";
             cmdStarFieldPath.Size = new System.Drawing.Size(223, 50);
             cmdStarFieldPath.TabIndex = 17;
@@ -307,7 +297,7 @@
             // 
             // btnCreations
             // 
-            btnCreations.Location = new System.Drawing.Point(1148, 3);
+            btnCreations.Location = new System.Drawing.Point(919, 3);
             btnCreations.Name = "btnCreations";
             btnCreations.Size = new System.Drawing.Size(223, 50);
             btnCreations.TabIndex = 21;
@@ -392,7 +382,6 @@
             // 
             flowLayoutPanel4.AutoSize = true;
             flowLayoutPanel4.Controls.Add(btnStarfield);
-            flowLayoutPanel4.Controls.Add(btnStarfieldStore);
             flowLayoutPanel4.Controls.Add(cmdStarFieldPath);
             flowLayoutPanel4.Controls.Add(btnAbout);
             flowLayoutPanel4.Controls.Add(txtSource);
@@ -423,11 +412,51 @@
             flowLayoutPanel1.Controls.Add(btnEditPlugins);
             flowLayoutPanel1.Controls.Add(btnExplore);
             flowLayoutPanel1.Controls.Add(btnLoadOrder);
+            flowLayoutPanel1.Controls.Add(label1);
+            flowLayoutPanel1.Controls.Add(radSteam);
+            flowLayoutPanel1.Controls.Add(radMS);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 35);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(1630, 56);
             flowLayoutPanel1.TabIndex = 10;
+            // 
+            // label1
+            // 
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(919, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(161, 56);
+            label1.TabIndex = 12;
+            label1.Text = "Game Version";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // radSteam
+            // 
+            radSteam.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            radSteam.AutoSize = true;
+            radSteam.Location = new System.Drawing.Point(1086, 3);
+            radSteam.Name = "radSteam";
+            radSteam.Size = new System.Drawing.Size(111, 50);
+            radSteam.TabIndex = 10;
+            radSteam.TabStop = true;
+            radSteam.Text = "Steam";
+            radSteam.UseVisualStyleBackColor = true;
+            radSteam.CheckedChanged += radSteam_CheckedChanged;
+            // 
+            // radMS
+            // 
+            radMS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            radMS.AutoSize = true;
+            radMS.Location = new System.Drawing.Point(1203, 3);
+            radMS.Name = "radMS";
+            radMS.Size = new System.Drawing.Size(142, 50);
+            radMS.TabIndex = 11;
+            radMS.TabStop = true;
+            radMS.Text = "MS Store";
+            radMS.UseVisualStyleBackColor = true;
+            radMS.CheckedChanged += radMS_CheckedChanged;
             // 
             // grpAuto
             // 
@@ -599,7 +628,6 @@
         private System.Windows.Forms.Button btnLoadOrder;
         private System.Windows.Forms.Button txtSource;
         private System.Windows.Forms.Button cmdStarFieldPath;
-        private System.Windows.Forms.Button btnStarfieldStore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;
@@ -611,6 +639,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.CheckBox chkVerbose;
+        private System.Windows.Forms.RadioButton radSteam;
+        private System.Windows.Forms.RadioButton radMS;
+        private System.Windows.Forms.Label label1;
     }
 }
 
