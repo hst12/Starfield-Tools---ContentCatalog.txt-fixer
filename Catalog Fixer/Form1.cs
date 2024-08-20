@@ -27,7 +27,9 @@ namespace Starfield_Tools
             InitializeComponent();
             if (!Tools.CheckGame())
                 Application.Exit();
-
+# if DEBUG
+            btnTest.Visible = true;
+#endif
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
@@ -753,7 +755,7 @@ namespace Starfield_Tools
                 Settings.Default.StarfieldGamePath = StarfieldGamePath;
             Settings.Default.ForceClean = ForceClean;
             Settings.Default.Verbose = Verbose;
-            Settings.Default.GameVersion= GameVersion; ;
+            Settings.Default.GameVersion = GameVersion; ;
             Settings.Default.Save();
         }
 
@@ -774,6 +776,11 @@ namespace Starfield_Tools
         private void radMS_CheckedChanged(object sender, EventArgs e)
         {
             GameVersion = true;
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            Tools.ShowSplashScreen();
         }
     }
 }

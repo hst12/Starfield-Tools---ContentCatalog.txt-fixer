@@ -70,6 +70,7 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            btnTest = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -387,6 +388,7 @@
             flowLayoutPanel4.Controls.Add(txtSource);
             flowLayoutPanel4.Controls.Add(btnCreations);
             flowLayoutPanel4.Controls.Add(btnQuit);
+            flowLayoutPanel4.Controls.Add(btnTest);
             flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel4.Location = new System.Drawing.Point(6, 38);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -563,6 +565,17 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // btnTest
+            // 
+            btnTest.Location = new System.Drawing.Point(1377, 3);
+            btnTest.Name = "btnTest";
+            btnTest.Size = new System.Drawing.Size(223, 50);
+            btnTest.TabIndex = 22;
+            btnTest.Text = "Test";
+            btnTest.UseVisualStyleBackColor = true;
+            btnTest.Visible = false;
+            btnTest.Click += btnTest_Click;
+            // 
             // frmStarfieldTools
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -642,6 +655,7 @@
         private System.Windows.Forms.RadioButton radSteam;
         private System.Windows.Forms.RadioButton radMS;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnTest;
     }
 }
 

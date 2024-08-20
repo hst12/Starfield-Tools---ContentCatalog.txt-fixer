@@ -1,4 +1,5 @@
 ﻿using Starfield_Tools.Properties;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,16 +13,26 @@ namespace Starfield_Tools
             string LoadScreen = Settings.Default.LoadScreenFilename;
             if (LoadScreen != null)
             {
-                var bmp = new Bitmap(LoadScreen);
-                this.BackgroundImage = null;
-                this.BackgroundImage = bmp;
+
+                Rectangle screen = Screen.PrimaryScreen.Bounds;
+                var bitmap = new Bitmap(LoadScreen);
+                float screenWidth = screen.Width * 0.75f;
+                float screenHeight = screen.Height * 0.75f;
+
+                // Calculate the scaling factor to maintain aspect ratio
+                float scale = Math.Min(screenWidth / bitmap.Width, screenHeight / bitmap.Height);
+
+                // Calculate the new dimensions
+                int newWidth = (int)(bitmap.Width * scale);
+                int newHeight = (int)(bitmap.Height * scale);
+
+                // Set the form size to the new dimensions
+
+                this.BackgroundImage = bitmap;
+                this.ClientSize = new Size(newWidth, newHeight);
             }
-            Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
-            double screenWidth = resolution.Width;
-            double screenHeight = resolution.Height;
-            this.Width = (int)(screenWidth * 0.75);
-            this.Height = (int)(screenHeight * 0.75);
             this.StartPosition = FormStartPosition.CenterScreen;
+
         }
     }
 }
