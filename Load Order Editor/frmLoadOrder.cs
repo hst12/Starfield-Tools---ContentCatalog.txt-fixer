@@ -823,9 +823,24 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
-
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+                    break;
+                case Keys.S:
+                    MoveDown();
+                    break;
+                case Keys.W:
+                    MoveUp();
+                    break;
+                case Keys.A:
+                    MoveTop();
+                    break;
+                case Keys.D:
+                    MoveBottom();
+                    break;
+            }
         }
 
         private void toolStripMenuStats_Click(object sender, EventArgs e)
@@ -1216,7 +1231,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripMenuRunSteam.Visible = true;
                 toolStripMenuMS.Checked = false;
                 GameVersion = false;
-                Properties.Settings.Default.GameVersion = GameVersion;
+                Properties.Settings.Default.GameVersion = false;
+                sbar("Game version set to Steam");
             }
             else
                 toolStripMenuMS.Checked = true;
@@ -1304,7 +1320,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripMenuSteam.Checked = false;
                 toolStripMenuRunMS.Visible = true;
                 toolStripMenuRunSteam.Visible = false;
-
+                sbar("Game version set to MS Store");
                 GameVersion = true;
             }
             else
