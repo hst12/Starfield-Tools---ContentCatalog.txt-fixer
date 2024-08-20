@@ -287,6 +287,7 @@
             toolStripMenuEnableDisable.Name = "toolStripMenuEnableDisable";
             toolStripMenuEnableDisable.Size = new System.Drawing.Size(522, 40);
             toolStripMenuEnableDisable.Text = "Enable/Disable - Saves Plugins.txt";
+            toolStripMenuEnableDisable.ToolTipText = "Space";
             toolStripMenuEnableDisable.Click += toolStripMenuEnableDisable_Click;
             // 
             // toolStripSeparator10
@@ -996,7 +997,7 @@
             btnUp.Name = "btnUp";
             btnUp.Size = new System.Drawing.Size(68, 68);
             btnUp.TabIndex = 0;
-            toolTip1.SetToolTip(btnUp, "Move mod up");
+            toolTip1.SetToolTip(btnUp, "Move mod up (W)");
             btnUp.UseVisualStyleBackColor = true;
             btnUp.Click += btnUp_Click;
             // 
@@ -1009,7 +1010,7 @@
             btnDown.Name = "btnDown";
             btnDown.Size = new System.Drawing.Size(68, 68);
             btnDown.TabIndex = 1;
-            toolTip1.SetToolTip(btnDown, "Move mod down");
+            toolTip1.SetToolTip(btnDown, "Move mod down (S)");
             btnDown.UseVisualStyleBackColor = true;
             btnDown.Click += btnDown_Click;
             // 
@@ -1022,7 +1023,7 @@
             btnTop.Name = "btnTop";
             btnTop.Size = new System.Drawing.Size(68, 68);
             btnTop.TabIndex = 2;
-            toolTip1.SetToolTip(btnTop, "Move mod to the top");
+            toolTip1.SetToolTip(btnTop, "Move mod to the top (A)");
             btnTop.UseVisualStyleBackColor = true;
             btnTop.Click += btnTop_Click;
             // 
@@ -1129,7 +1130,7 @@
             btnBottom.Name = "btnBottom";
             btnBottom.Size = new System.Drawing.Size(68, 68);
             btnBottom.TabIndex = 3;
-            toolTip1.SetToolTip(btnBottom, "Move mod to the bottom");
+            toolTip1.SetToolTip(btnBottom, "Move mod to the bottom (D)");
             btnBottom.UseVisualStyleBackColor = true;
             btnBottom.Click += btnBottom_Click;
             // 

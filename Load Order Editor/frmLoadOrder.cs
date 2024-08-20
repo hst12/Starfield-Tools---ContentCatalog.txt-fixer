@@ -840,6 +840,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 case Keys.D:
                     MoveBottom();
                     break;
+                case Keys.Space:
+                    EnableDisable();
+                    break;
             }
         }
 
