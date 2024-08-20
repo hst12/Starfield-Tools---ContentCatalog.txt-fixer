@@ -56,7 +56,8 @@ Load Order button shows a list of mods and allows them to be turned on or off or
 There is a somewhat experimental mod profile switching feature in the load order editor. Backup your Plugins.txt file before trying it.
 A one-time only automatic backup of your Plugins.txt file is made the first time you open the load editor. Use the File->restore menu to restore this backup if necessary.
 
-Two Starfield launch buttons are provided. One for the Steam version of the game and another for the MS Store version. The tool will close after using either of these launch buttons.
+The tool can be used to launch Starfield. Click one of the radio buttons to choose either the Steam or MS versions of the game first.
+The tool will close a few seconds after launching the game.
 You can also launch the game from within the Load Order Editor. Set the game version in the Tools menu first - it defaults to Steam.
 
 Command line options - not case sensitive:
