@@ -753,6 +753,7 @@ namespace Starfield_Tools
                 Settings.Default.StarfieldGamePath = StarfieldGamePath;
             Settings.Default.ForceClean = ForceClean;
             Settings.Default.Verbose = Verbose;
+            Settings.Default.GameVersion= GameVersion; ;
             Settings.Default.Save();
         }
 

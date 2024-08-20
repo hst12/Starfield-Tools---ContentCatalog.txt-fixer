@@ -161,7 +161,7 @@
             btnStarfield.Size = new System.Drawing.Size(223, 50);
             btnStarfield.TabIndex = 15;
             btnStarfield.Text = "Starfield";
-            toolTip1.SetToolTip(btnStarfield, "Launch Starfield -Steam version");
+            toolTip1.SetToolTip(btnStarfield, "Launch Starfield");
             btnStarfield.UseVisualStyleBackColor = true;
             btnStarfield.Click += btnStarfield_Click;
             // 
