@@ -249,5 +249,17 @@ namespace Starfield_Tools.Properties {
                 this["AutoDelccc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProflieOn {
+            get {
+                return ((bool)(this["ProflieOn"]));
+            }
+            set {
+                this["ProflieOn"] = value;
+            }
+        }
     }
 }

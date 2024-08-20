@@ -73,6 +73,19 @@ namespace Starfield_Tools
                 toolStripMenuAutoDelccc.Checked = true;
             }
 
+            if (Properties.Settings.Default.ProflieOn)
+            {
+                toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProflieOn;
+                if (toolStripMenuProfilesOn.Checked)
+                {
+                    Profiles = true;
+                    chkProfile.Checked = true;
+                }
+                else Profiles = false;
+            }
+
+            // Setup columns
+
             if (Properties.Settings.Default.Achievements)
             {
                 toolStripMenuAchievements.Checked = true;
@@ -310,14 +323,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
 
-                                if (Properties.Settings.Default.LOOTPath != "")
+                                if (Properties.Settings.Default.LOOTPath != "" && Groups.groups!=null)
                                 {
-                                    for (int i = 0; i < Groups.plugins.Count; i++)
-                                        if (Groups.plugins[i].name == PluginName)
-                                            row.Cells["Group"].Value = Groups.plugins[i].group;
-                                    if (PluginName.Contains("sfbgs")) // Assume Bethesda plugin
-                                        row.Cells["Group"].Value = "Bethesda";
+                                        for (int i = 0; i < Groups.plugins.Count; i++)
+                                            if (Groups.plugins[i].name == PluginName)
+                                                row.Cells["Group"].Value = Groups.plugins[i].group;
+
                                 }
+                                if (PluginName.Contains("sfbgs")) // Assume Bethesda plugin
+                                    row.Cells["Group"].Value = "Bethesda";
                                 row.Cells["ModEnabled"].Value = ModEnabled;
                                 row.Cells["PluginName"].Value = PluginName;
                                 row.Cells["Description"].Value = Description;
@@ -1462,8 +1476,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuAutoDelccc_Click(object sender, EventArgs e)
         {
             toolStripMenuAutoDelccc.Checked = !toolStripMenuAutoDelccc.Checked;
-            Properties.Settings.Default.AutoDelccc= toolStripMenuAutoDelccc.Checked; ;
+            Properties.Settings.Default.AutoDelccc = toolStripMenuAutoDelccc.Checked; ;
 
+        }
+
+        private void toolStripMenuProfilesOn_Click(object sender, EventArgs e)
+        {
+            toolStripMenuProfilesOn.Checked = !toolStripMenuProfilesOn.Checked;
+            Properties.Settings.Default.ProflieOn = toolStripMenuProfilesOn.Checked;
         }
     }
 }
