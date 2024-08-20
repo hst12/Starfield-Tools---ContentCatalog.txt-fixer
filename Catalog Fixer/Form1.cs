@@ -194,16 +194,17 @@ namespace Starfield_Tools
 
         private static string MakeHeaderBlank()
         {
-            string HeaderString = @"{
-  ""ContentCatalog"" : 
-  {
-    ""Description"" : ""This file holds a database of any Creations downloaded or installed, in JSON format"",
-    ""Version"" : ";
-            HeaderString += @"""" + Tools.CatalogVersion + @"""";
-            HeaderString += @"
-  }
-}
-";
+            string HeaderString = "";
+
+            try
+            {
+                HeaderString = File.ReadAllText("Common\\header.txt"); // Read the header from file
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Missing Header.txt file - unable to continue. Re-install or repair the tool");
+                Application.Exit();
+            }
             return HeaderString;
         }
 
@@ -743,6 +744,7 @@ namespace Starfield_Tools
 
             File.WriteAllText(jsonFilePath, json);
             toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";
+            ScrollToEnd();
         }
 
         public void SaveSettings()  // Save user settings
@@ -780,6 +782,8 @@ namespace Starfield_Tools
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            /*Properties.Settings.Default.LoadScreenFilename = "";
+            SaveSettings();*/
             Tools.ShowSplashScreen();
         }
     }

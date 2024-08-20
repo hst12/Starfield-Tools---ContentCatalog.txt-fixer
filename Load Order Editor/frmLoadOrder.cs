@@ -192,6 +192,9 @@ namespace Starfield_Tools
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
+                    MessageBox.Show(ex.Message);
+#endif
                     sbar(ex.Message);
                 }
             }
@@ -268,9 +271,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string PluginName, Description, ModFiles, ModVersion, ASafe, ModTimeStamp, ModID; // Read Plugins.txt
+                string PluginName, Description, ModFiles, ModVersion, ASafe, ModTimeStamp, ModID;
 
-                while ((PluginName = reader.ReadLine()) != null)
+                while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
                     try
                     {
@@ -323,14 +326,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
 
-                                if (Properties.Settings.Default.LOOTPath != "" && Groups.groups!=null)
+                                // Populate datagrid
+                                if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null)
                                 {
-                                        for (int i = 0; i < Groups.plugins.Count; i++)
-                                            if (Groups.plugins[i].name == PluginName)
-                                                row.Cells["Group"].Value = Groups.plugins[i].group;
-
+                                    for (int i = 0; i < Groups.plugins.Count; i++)
+                                        if (Groups.plugins[i].name == PluginName)
+                                            row.Cells["Group"].Value = Groups.plugins[i].group;
                                 }
-                                if (PluginName.Contains("sfbgs")) // Assume Bethesda plugin
+                                else
+                                {
+#if DEBUG
+                                    Debug.WriteLine(PluginName, "Null Group");
+#endif
+                                }
+                                if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                     row.Cells["Group"].Value = "Bethesda";
                                 row.Cells["ModEnabled"].Value = ModEnabled;
                                 row.Cells["PluginName"].Value = PluginName;
@@ -345,11 +354,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     }
                     catch (Exception ex)
                     {
+
                         sbar(ex.Message);
+#if DEBUG
+                        MessageBox.Show(ex.Message);
+#endif
                     }
                 }
             }
 
+            // Get mod stats
             try
             {
                 string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
@@ -371,9 +385,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
 
                 if (espCount > 0)
-                {
                     StatText += ", esp files: " + espCount.ToString();
-                }
 
                 sbar(StatText);
             }
@@ -1484,6 +1496,23 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             toolStripMenuProfilesOn.Checked = !toolStripMenuProfilesOn.Checked;
             Properties.Settings.Default.ProflieOn = toolStripMenuProfilesOn.Checked;
+            if (toolStripMenuProfilesOn.Checked)
+            {
+                Profiles = true;
+                chkProfile.Checked = true;
+                GetProfiles();
+            }
+            else
+            {
+                Profiles = false;
+                chkProfile.Checked = false;
+
+            }
+        }
+
+        private void toolStripMenuLoadScreenPreview_Click(object sender, EventArgs e)
+        {
+            Tools.ShowSplashScreen();
         }
     }
 }
