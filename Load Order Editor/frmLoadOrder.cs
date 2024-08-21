@@ -130,10 +130,23 @@ namespace Starfield_Tools
                 dataGridView1.Columns["Group"].Visible = false;
             }
 
+            if (Properties.Settings.Default.Index)
+            {
+                toolStripMenuIndex.Checked = true;
+                dataGridView1.Columns["Index"].Visible = true;
+            }
+            else
+            {
+                toolStripMenuIndex.Checked = false;
+                dataGridView1.Columns["Index"].Visible = false;
+            }
+
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
-            if (!File.Exists(PluginsPath + ".bak")) // Do a 1-time backup of Plugins.txt if it doesn't exist
+
+            // Do a 1-time backup of Plugins.txt if it doesn't exist
+            if (!File.Exists(PluginsPath + ".bak"))
             {
                 sbar("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
@@ -163,7 +176,7 @@ namespace Starfield_Tools
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0;
+            int EnabledCount = 0, IndexCount = 1;
             string loText;
 
             toolStripStatusLabel1.ForeColor = DefaultForeColor;
@@ -181,6 +194,7 @@ namespace Starfield_Tools
 
             string jsonFilePath = Tools.GetCatalog();
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
+
             Tools.Configuration Groups = new();
             if (toolStripMenuGroup.Checked && Properties.Settings.Default.LOOTPath != "") // Read LOOT groups
             {
@@ -349,6 +363,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["Achievements"].Value = ASafe;
                                 row.Cells["Files"].Value = ModFiles;
                                 row.Cells["CreationsID"].Value = ModID;
+                                row.Cells["Index"].Value = IndexCount++;
                             }
                         }
                     }
@@ -1529,6 +1544,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuLoadScreenPreview_Click(object sender, EventArgs e)
         {
             Tools.ShowSplashScreen();
+        }
+
+        private void toolStripMenuIndex_Click(object sender, EventArgs e)
+        {
+            toolStripMenuIndex.Checked = !toolStripMenuIndex.Checked;
+            if (toolStripMenuIndex.Checked)
+                dataGridView1.Columns["Index"].Visible = true;
+            else
+                dataGridView1.Columns["Index"].Visible = false;
+            Properties.Settings.Default.Index = toolStripMenuIndex.Checked;
         }
     }
 }

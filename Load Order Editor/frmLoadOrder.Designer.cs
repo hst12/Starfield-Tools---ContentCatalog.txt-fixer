@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             dataGridView1 = new System.Windows.Forms.DataGridView();
+            Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ModEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             PluginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,6 +102,7 @@
             toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuProfilesOn = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuColumns = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuIndex = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuAchievements = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuFiles = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,7 +180,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeight = 46;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { ModEnabled, PluginName, Description, Group, Version, TimeStamp, Achievements, Files, CreationsID });
+            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Index, ModEnabled, PluginName, Description, Group, Version, TimeStamp, Achievements, Files, CreationsID });
             dataGridView1.ContextMenuStrip = contextMenuDatagrid;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(4, 45);
@@ -195,6 +197,15 @@
             dataGridView1.Sorted += dataGridView1_Sorted;
             dataGridView1.KeyDown += dataGridView1_KeyDown;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
+            // 
+            // Index
+            // 
+            Index.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Index.HeaderText = "Index";
+            Index.MinimumWidth = 10;
+            Index.Name = "Index";
+            Index.ReadOnly = true;
+            Index.Width = 117;
             // 
             // ModEnabled
             // 
@@ -701,10 +712,17 @@
             // 
             // toolStripMenuColumns
             // 
-            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuGroup });
+            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuGroup });
             toolStripMenuColumns.Name = "toolStripMenuColumns";
             toolStripMenuColumns.Size = new System.Drawing.Size(128, 36);
             toolStripMenuColumns.Text = "Columns";
+            // 
+            // toolStripMenuIndex
+            // 
+            toolStripMenuIndex.Name = "toolStripMenuIndex";
+            toolStripMenuIndex.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuIndex.Text = "Index";
+            toolStripMenuIndex.Click += toolStripMenuIndex_Click;
             // 
             // toolStripMenuAchievements
             // 
@@ -1349,6 +1367,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuProfilesOn;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadScreenPreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;

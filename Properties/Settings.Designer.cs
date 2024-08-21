@@ -261,5 +261,17 @@ namespace Starfield_Tools.Properties {
                 this["ProflieOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Index {
+            get {
+                return ((bool)(this["Index"]));
+            }
+            set {
+                this["Index"] = value;
+            }
+        }
     }
 }
