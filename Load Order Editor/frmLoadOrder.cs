@@ -275,6 +275,9 @@ namespace Starfield_Tools
             catch (Exception ex)
             {
                 sbar(ex.Message);
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
             }
 
             loText = Tools.GetStarfieldAppData() + @"\plugins.txt";
@@ -407,6 +410,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     StatText += ", esp files: " + espCount.ToString();
 
                 sbar(StatText);
+                dataGridView1.EndEdit();
+
             }
             catch
             {
@@ -579,7 +584,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(0, selectedRow);
             dataGridView1.ClearSelection();
-            //dataGridView1.Rows[0].Selected = true;
             dataGridView1.Rows[0].Cells[colIndex].Selected = true;
 
         }
@@ -593,7 +597,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(dataGridView1.Rows.Count, selectedRow);
             dataGridView1.ClearSelection();
-            //dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true;
             dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[colIndex].Selected = true;
         }
         private void btnBottom_Click(object sender, EventArgs e)
@@ -917,7 +920,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (int i = 0; i < FilesToAdd.Count; i++)
                 {
                     AddedFiles++;
-                    //dataGridView1.Rows.Add(true, FilesToAdd[i]);
                     int rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
                     row.Cells["ModEnabled"].Value = true;
