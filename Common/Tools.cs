@@ -17,10 +17,7 @@ namespace Starfield_Tools.Common
         public const string CatalogVersion = "1.1"; // Content catalog version no.
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
-        public readonly List<string> BethFiles = // Exclude BGS files
-[
-"BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
-];
+        public readonly List<string> BethFiles = new List<string> (File.ReadAllLines("Common\\BGS Exclude.txt"));
 
 
         public static string GetStarfieldAppData()

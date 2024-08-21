@@ -1,0 +1,9 @@
+﻿BlueprintShips-Starfield.esm
+Constellation.esm
+OldMars.esm
+SFBGS003.esm
+SFBGS006.esm
+SFBGS007.esm
+SFBGS008.esm
+Starfield.esm
+SFBGS004.esm

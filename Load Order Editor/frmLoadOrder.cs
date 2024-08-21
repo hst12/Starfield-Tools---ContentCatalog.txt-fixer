@@ -872,11 +872,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int AddedFiles = 0;
             List<string> esmFiles = [];
             List<string> PluginFiles = [];
-            List<string> BethFiles =
+            List<string> BethFiles = tools.BethFiles;
             // Exclude game files - will probably need updating after DLC release
-            [
-                "BlueprintShips-Starfield.esm","Constellation.esm","OldMars.esm","SFBGS003.esm","SFBGS006.esm","SFBGS007.esm","SFBGS008.esm","Starfield.esm"
-            ];
 
             string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)

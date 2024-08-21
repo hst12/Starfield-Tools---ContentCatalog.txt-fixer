@@ -99,6 +99,9 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
+		<None Update="Common\BGS Exclude.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Common\Header.txt">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
