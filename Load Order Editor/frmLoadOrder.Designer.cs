@@ -176,6 +176,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowDrop = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
@@ -195,8 +196,11 @@
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
+            dataGridView1.DragDrop += dataGridView1_DragDrop;
+            dataGridView1.DragOver += dataGridView1_DragOver;
             dataGridView1.KeyDown += dataGridView1_KeyDown;
             dataGridView1.MouseDown += dataGridView1_MouseDown;
+            dataGridView1.MouseMove += dataGridView1_MouseMove;
             // 
             // Index
             // 

@@ -22,6 +22,10 @@ namespace Starfield_Tools
 
     public partial class frmLoadOrder : Form
     {
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+
         readonly Tools tools = new();
         public string StarfieldGamePath = "", LoadScreenPic = "", LastProfile;
 
@@ -1121,6 +1125,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             if (e.Button == MouseButtons.Right)
                 contextMenuDatagrid.Show(this, new Point(e.X, e.Y));
+
+            // Get the index of the item the mouse is below
+            rowIndexFromMouseDown = dataGridView1.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1)
+            {
+                // Remember the point where the mouse down occurred
+                Size dragSize = SystemInformation.DragSize;
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+            {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
         }
 
         private void toolStripMenuUp_Click(object sender, EventArgs e)
@@ -1554,6 +1571,38 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             else
                 dataGridView1.Columns["Index"].Visible = false;
             Properties.Settings.Default.Index = toolStripMenuIndex.Checked;
+        }
+
+        private void dataGridView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                // If the mouse moves outside the rectangle, start the drag
+                if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
+                    DragDropEffects dropEffect = dataGridView1.DoDragDrop(dataGridView1.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void dataGridView1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dataGridView1_DragDrop(object sender, DragEventArgs e)
+        {
+            // Convert screen coordinates to client coordinates
+            Point clientPoint = dataGridView1.PointToClient(new Point(e.X, e.Y));
+            rowIndexOfItemUnderMouseToDrop = dataGridView1.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move, remove and insert the row
+            if (e.Effect == DragDropEffects.Move)
+            {
+                DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
+                dataGridView1.Rows.RemoveAt(rowIndexFromMouseDown);
+                dataGridView1.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+            }
         }
     }
 }
