@@ -843,7 +843,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DeleteLine();
         }
 
-        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e) // Keyboard shortcuts
         {
             switch (e.KeyCode)
             {
@@ -864,6 +864,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     break;
                 case Keys.Space:
                     EnableDisable();
+                    break;
+                case Keys.R:
+                    tools.StartGame(GameVersion);
                     break;
             }
         }
@@ -1297,10 +1300,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            if (GameVersion)
-                Tools.StartStarfieldMS();
-            else
-                Tools.StartStarfieldSteam();
+            tools.StartGame(GameVersion);
         }
 
         private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)

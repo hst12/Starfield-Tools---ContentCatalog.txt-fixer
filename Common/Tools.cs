@@ -17,7 +17,7 @@ namespace Starfield_Tools.Common
         public const string CatalogVersion = "1.1"; // Content catalog version no.
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
-        public readonly List<string> BethFiles = new List<string> (File.ReadAllLines("Common\\BGS Exclude.txt"));
+        public readonly List<string> BethFiles = new List<string>(File.ReadAllLines("Common\\BGS Exclude.txt"));
 
 
         public static string GetStarfieldAppData()
@@ -43,7 +43,6 @@ namespace Starfield_Tools.Common
             }
             return start;
         }
-
         public static string GetCatalog()
         {
             return GetStarfieldAppData() + @"\ContentCatalog.txt";
@@ -157,6 +156,13 @@ namespace Starfield_Tools.Common
             }
         }
 
+        public void StartGame(bool GameVersion)
+        {
+            if (GameVersion)
+                StartStarfieldMS();
+            else
+                StartStarfieldSteam();
+        }
         public static void StartStarfieldSteam()
         {
             const string userRoot = "HKEY_CURRENT_USER";

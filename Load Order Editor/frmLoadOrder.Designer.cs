@@ -1068,7 +1068,7 @@
             btnRun.Size = new System.Drawing.Size(132, 68);
             btnRun.TabIndex = 5;
             btnRun.Text = "Run";
-            toolTip1.SetToolTip(btnRun, "Run the game");
+            toolTip1.SetToolTip(btnRun, "Run the game (R)");
             btnRun.UseVisualStyleBackColor = true;
             btnRun.Click += btnRun_Click;
             // 
