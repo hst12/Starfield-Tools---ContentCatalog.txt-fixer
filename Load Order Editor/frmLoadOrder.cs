@@ -485,16 +485,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void MoveUp()
         {
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
-            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
-            if (rowIndex < 1)
-                return;
+            int colIndex = dataGridView1.CurrentCell.ColumnIndex;
+            //SelectedCells[0].ColumnIndex;
             if (rowIndex == 0)
                 return; // Already at the top
 
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(rowIndex - 1, selectedRow);
-            dataGridView1.ClearSelection();
+            //dataGridView1.ClearSelection();
             dataGridView1.Rows[rowIndex - 1].Selected = true;
             dataGridView1.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
         }
