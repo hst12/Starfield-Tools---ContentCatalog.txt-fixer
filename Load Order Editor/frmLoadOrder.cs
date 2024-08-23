@@ -991,11 +991,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int addedMods = 0, removedMods = 0;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
-            sbar(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
-            if (addedMods + removedMods > 0)
-                toolStripStatusLabel1.Text += " - Save changes to update Plugins.txt file";
             SavePlugings();
             InitDataGrid();
+            sbar(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
