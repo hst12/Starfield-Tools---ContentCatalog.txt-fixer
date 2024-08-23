@@ -942,6 +942,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int RemovedFiles = 0;
             List<string> esmFiles = [];
             List<string> PluginFiles = [];
+            List<string> FilesToRemove = [];
 
             string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
@@ -958,15 +959,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
+
             List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
 
-            List<string> FilesToRemove = MissingFiles.Except(tools.BethFiles).ToList();
+            for (int i = 0; i <tools.BethFiles.Count; i++) // Remove base game files
+                FilesToRemove.Add(tools.BethFiles[i]);
+            for (int i=0; i<MissingFiles.Count;i++)
+            {
+                FilesToRemove.Add(MissingFiles[i]);
+                RemovedFiles++;
+            }
             if (FilesToRemove.Count > 0)
             {
                 for (int i = 0; i < FilesToRemove.Count; i++)
                 {
-                    RemovedFiles++;
-
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
@@ -974,7 +980,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 sbar(RemovedFiles.ToString() + " file(s) removed");
                 isModified = true;
             }
-            else
+
+            if (RemovedFiles == 0)
                 sbar("Nothing to remove");
             return RemovedFiles;
         }
@@ -987,7 +994,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             sbar(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
             if (addedMods + removedMods > 0)
                 toolStripStatusLabel1.Text += " - Save changes to update Plugins.txt file";
-
+            SavePlugings();
+            InitDataGrid();
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
