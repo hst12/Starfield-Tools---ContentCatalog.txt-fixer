@@ -962,9 +962,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
 
-            for (int i = 0; i <tools.BethFiles.Count; i++) // Remove base game files
+            for (int i = 0; i < tools.BethFiles.Count; i++) // Remove base game files
                 FilesToRemove.Add(tools.BethFiles[i]);
-            for (int i=0; i<MissingFiles.Count;i++)
+            for (int i = 0; i < MissingFiles.Count; i++)
             {
                 FilesToRemove.Add(MissingFiles[i]);
                 RemovedFiles++;
@@ -1105,10 +1105,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (dlgResult == DialogResult.OK)
             {
                 using StreamWriter writer = new(ExportActive.FileName);
+
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value)
                     {
+                        if ((string)dataGridView1.Rows[i].Cells["Group"].Value != "")
+                            writer.WriteLine("#" + dataGridView1.Rows[i].Cells["Group"].Value);
                         tempstr = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                         writer.WriteLine(tempstr);
                     }
