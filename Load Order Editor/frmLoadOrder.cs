@@ -156,7 +156,8 @@ namespace Starfield_Tools
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
             if (parameter != "")
-                sbar(parameter);
+                if (parameter != "Catalog ok")
+                    sbar(parameter);
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif

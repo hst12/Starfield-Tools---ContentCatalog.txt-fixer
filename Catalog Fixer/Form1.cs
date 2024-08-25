@@ -156,16 +156,43 @@ namespace Starfield_Tools
             chkAutoRestore.Checked = AutoRestore;
             chkForceClean.Checked = ForceClean;
         }
+        static bool FileCompare(string file1, string file2)
+        {
+            // Check if the same file was referenced two times.
+            if (file1 == file2)
+            {
+                return true;
+            }
 
+            // Open the two files.
+            using (FileStream fs1 = new FileStream(file1, FileMode.Open),
+                              fs2 = new FileStream(file2, FileMode.Open))
+            {
+                // Check the file sizes. If they are not the same, the files are not the same.
+                if (fs1.Length != fs2.Length)
+                {
+                    return false;
+                }
+
+                // Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached.
+                int file1byte, file2byte;
+                do
+                {
+                    file1byte = fs1.ReadByte();
+                    file2byte = fs2.ReadByte();
+                }
+                while ((file1byte == file2byte) && (file1byte != -1));
+
+                // Return the success of the comparison.
+                return file1byte == file2byte;
+            }
+        }
         private bool CheckBackup()
         {
             string fileName1 = Tools.GetCatalog();
             string fileName2 = fileName1 + ".bak";
 
-            DateTime lastWriteTime1 = File.GetLastWriteTime(fileName1);
-            DateTime lastWriteTime2 = File.GetLastWriteTime(fileName2);
-
-            if (lastWriteTime1 == lastWriteTime2)
+            if (FileCompare(fileName1,fileName2))
             {
                 richTextBox2.Text += "\nBackup is up to date.\n";
                 ScrollToEnd();
@@ -173,7 +200,6 @@ namespace Starfield_Tools
             }
             else
             {
-                //MessageBox.Show(lastWriteTime1 + " " + lastWriteTime2 , "Backup timestamp mismatch");
                 richTextBox2.Text += "\nBackup is out of date.\n";
                 ScrollToEnd();
                 return false;
