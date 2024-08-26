@@ -19,9 +19,8 @@ namespace Starfield_Tools
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean, Verbose;
 
         readonly Tools tools = new();
-        public string StarfieldGamePath;
+        private string StarfieldGamePath;
         private bool GameVersion;
-
         public frmStarfieldTools()
         {
             InitializeComponent();
@@ -275,7 +274,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
-                    if (TestString != Tools.CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
+                    if (TestString != tools.GetCatalogVersion()) // Skip catalog header, pull version info apart into date and actual version number
                         if (Verbose)
                             richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
@@ -739,7 +738,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != Tools.CatalogVersion) // Skip the catalog header then check for valid timestamps
+                if (TestString != tools.GetCatalogVersion()) // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     TimeStamp = kvp.Value.Timestamp;

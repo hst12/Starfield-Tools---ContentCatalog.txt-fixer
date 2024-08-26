@@ -99,7 +99,13 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
+		<None Update="Common\App Version.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Common\BGS Exclude.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Common\Catalog Version.txt">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Common\Header.txt">

@@ -13,13 +13,16 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
-        public const string ToolVersion = "1.8.3"; // App version no.
-        public const string CatalogVersion = "1.1"; // Content catalog version no.
+        public string ToolVersion; // App version no.
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
         public readonly List<string> BethFiles = new List<string>(File.ReadAllLines("Common\\BGS Exclude.txt"));
 
-
+        public string GetCatalogVersion()
+        {
+            string CatalogVersion = File.ReadAllText("Common\\Catalog Version.txt");
+            return CatalogVersion;
+        }
         public static string GetStarfieldAppData()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
