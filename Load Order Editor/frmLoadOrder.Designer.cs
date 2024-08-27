@@ -59,7 +59,8 @@
             toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLeft = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusRight = new System.Windows.Forms.ToolStripStatusLabel();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -408,7 +409,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLeft, toolStripStatusRight });
             statusStrip1.Location = new System.Drawing.Point(0, 1150);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
@@ -416,11 +417,18 @@
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "Starting up";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLeft
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(131, 32);
-            toolStripStatusLabel1.Text = "Starting up";
+            toolStripStatusLeft.Name = "toolStripStatusLeft";
+            toolStripStatusLeft.Size = new System.Drawing.Size(131, 32);
+            toolStripStatusLeft.Text = "Starting up";
+            // 
+            // toolStripStatusRight
+            // 
+            toolStripStatusRight.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            toolStripStatusRight.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
+            toolStripStatusRight.Name = "toolStripStatusRight";
+            toolStripStatusRight.Size = new System.Drawing.Size(4, 32);
             // 
             // tableLayoutPanel1
             // 
@@ -1256,7 +1264,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLeft;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -1382,5 +1390,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusRight;
     }
 }
