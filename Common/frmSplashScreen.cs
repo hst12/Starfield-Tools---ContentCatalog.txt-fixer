@@ -1,6 +1,5 @@
 ﻿using Starfield_Tools.Properties;
 using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Windows.Forms;
 

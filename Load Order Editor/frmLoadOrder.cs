@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Starfield_Tools.Common;
-using Starfield_Tools.Properties;
 using System;
 using System.Collections.Generic;
-
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -11,9 +9,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using YamlDotNet.Core;
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -23,13 +19,12 @@ namespace Starfield_Tools
     public partial class frmLoadOrder : Form
     {
         private Rectangle dragBoxFromMouseDown;
-        private int rowIndexFromMouseDown;
-        private int rowIndexOfItemUnderMouseToDrop;
+        private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = 0;
 
         readonly Tools tools = new();
         public string StarfieldGamePath = "", LoadScreenPic = "", LastProfile;
 
-        bool isModified = false, Profiles = false, GameVersion = false, GridSorted = false;
+        bool isModified = false, Profiles = false, GridSorted = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -61,21 +56,30 @@ namespace Starfield_Tools
             this.Font = Properties.Settings.Default.FontSize;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
-            if (!GameVersion) // 0=Steam, 1=MS game version
+            switch (GameVersion)
             {
-                toolStripMenuSteam.Checked = true;
-                toolStripMenuRunMS.Visible = false;
-            }
-            else
-            {
-                toolStripMenuMS.Checked = true;
-                toolStripMenuRunSteam.Visible = false;
+                case 0: // Steam
+                    toolStripMenuSteam.Checked = true;
+                    toolStripMenuRunMS.Visible = false;
+                    toolStripMenuRunCustom.Visible = false;
+                    toolStripMenuRunSteam.Visible = true;
+                    break;
+                case 1: // MS
+                    toolStripMenuMS.Checked = true;
+                    toolStripMenuRunSteam.Visible = false;
+                    toolStripMenuRunMS.Visible = true;
+                    toolStripMenuRunCustom.Visible = false;
+                    break;
+                case 2: // Custom
+                    toolStripMenuCustom.Checked = true;
+                    toolStripMenuRunMS.Visible = false;
+                    toolStripMenuRunSteam.Visible = false;
+                    toolStripMenuRunCustom.Visible = true;
+                    break;
             }
 
             if (Properties.Settings.Default.AutoDelccc)
-            {
                 toolStripMenuAutoDelccc.Checked = true;
-            }
 
             if (Properties.Settings.Default.ProflieOn)
             {
@@ -145,6 +149,13 @@ namespace Starfield_Tools
                 dataGridView1.Columns["Index"].Visible = false;
             }
 
+            frmStarfieldTools StarfieldTools = new();
+            sbar2(StarfieldTools.CatalogStatus);
+            if (StarfieldTools.CatalogStatus.Contains("Error"))
+            {
+                StarfieldTools.Show();
+            }
+
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
@@ -156,8 +167,7 @@ namespace Starfield_Tools
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
             if (parameter != "")
-                if (parameter != "Catalog ok")
-                    sbar2(parameter);
+                sbar2(parameter); // Show result from catalog check
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif
@@ -174,9 +184,7 @@ namespace Starfield_Tools
         private void KeyEvent(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
-            {
                 RefreshDataGrid();
-            }
         }
 
         private void InitDataGrid()
@@ -598,7 +606,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(dataGridView1.Rows.Count, selectedRow);
             dataGridView1.ClearSelection();
-            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[colIndex].Selected = true;
+            dataGridView1.Rows[^1].Cells[colIndex].Selected = true;
         }
         private void btnBottom_Click(object sender, EventArgs e)
         {
@@ -866,7 +874,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     EnableDisable();
                     break;
                 case Keys.R:
-                    tools.StartGame(GameVersion);
+                    Tools.StartGame(GameVersion);
                     break;
             }
         }
@@ -989,12 +997,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void AddRemove()
         {
-            int addedMods = 0, removedMods = 0;
+            int addedMods, removedMods;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
             SavePlugings();
             InitDataGrid();
-           sbar2(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+            sbar2(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
@@ -1074,8 +1082,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             InstallMod();
         }
-
-
 
         private void chkProfile_CheckedChanged(object sender, EventArgs e)
         {
@@ -1274,10 +1280,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (toolStripMenuSteam.Checked)
             {
                 toolStripMenuRunMS.Visible = false;
+                toolStripMenuRunCustom.Visible = false;
                 toolStripMenuRunSteam.Visible = true;
+
                 toolStripMenuMS.Checked = false;
-                GameVersion = false;
-                Properties.Settings.Default.GameVersion = false;
+                toolStripMenuCustom.Checked = false;
+                GameVersion = 0;
+                Properties.Settings.Default.GameVersion = 0;
                 sbar2("Game version set to Steam");
             }
             else
@@ -1309,7 +1318,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            tools.StartGame(GameVersion);
+            Tools.StartGame(GameVersion);
         }
 
         private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)
@@ -1361,13 +1370,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (toolStripMenuMS.Checked)
             {
                 toolStripMenuSteam.Checked = false;
+                toolStripMenuCustom.Checked = false;
                 toolStripMenuRunMS.Visible = true;
                 toolStripMenuRunSteam.Visible = false;
+                toolStripMenuRunCustom.Visible = false;
                 sbar2("Game version set to MS Store");
-                GameVersion = true;
+                GameVersion = 1;
             }
             else
+            {
                 toolStripMenuSteam.Checked = true;
+            }
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
         }
@@ -1619,6 +1632,55 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.Rows.RemoveAt(rowIndexFromMouseDown);
                 dataGridView1.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
             }
+        }
+
+        private void toolStripMenuCustom_Click(object sender, EventArgs e)
+        {
+
+            toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
+            if (toolStripMenuCustom.Checked)
+            {
+                toolStripMenuSteam.Checked = false;
+                toolStripMenuMS.Checked = false;
+
+                toolStripMenuRunMS.Visible = false;
+                toolStripMenuRunSteam.Visible = false;
+                sbar2("Game version set to Custom");
+                GameVersion = 2;
+            }
+            else
+            {
+                toolStripMenuSteam.Checked = false;
+                toolStripMenuSteam.Checked = false;
+            }
+
+            Properties.Settings.Default.GameVersion = GameVersion;
+            SaveSettings();
+        }
+
+        private void toolStripMenuRunCustom_Click(object sender, EventArgs e)
+        {
+            if (isModified)
+            {
+                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.OK)
+                    Tools.StartGame(GameVersion);
+                else
+                    return;
+            }
+            Tools.StartGame(GameVersion);
+        }
+
+        private string CheckCatalog()
+        {
+            frmStarfieldTools StarfieldTools = new();
+            StarfieldTools.Show();
+            sbar2(StarfieldTools.CatalogStatus);
+            return StarfieldTools.CatalogStatus;
+        }
+        private void toolStripMenuCatalog_Click(object sender, EventArgs e)
+        {
+            CheckCatalog();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Windows.Forms;
-using Starfield_Tools.Common;
 
 namespace Starfield_Tools
 {
@@ -10,7 +9,7 @@ namespace Starfield_Tools
         {
             InitializeComponent();
             string Readme = File.ReadAllText("Common\\Readme.txt");
-            string AboutText =  Application.ProductName + " " + File.ReadAllText("Common\\App Version.txt") +  "\n\n" + Readme;
+            string AboutText = Application.ProductName + " " + File.ReadAllText("Common\\App Version.txt") + "\n\n" + Readme;
             richTextBox1.Text = AboutText;
         }
     }

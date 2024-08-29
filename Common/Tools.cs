@@ -13,12 +13,11 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
-        public string ToolVersion; // App version no.
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
-        public readonly List<string> BethFiles = new List<string>(File.ReadAllLines("Common\\BGS Exclude.txt"));
+        public readonly List<string> BethFiles = new(File.ReadAllLines("Common\\BGS Exclude.txt"));
 
-        public string GetCatalogVersion()
+        public static string GetCatalogVersion()
         {
             string CatalogVersion = File.ReadAllText("Common\\Catalog Version.txt");
             return CatalogVersion;
@@ -141,6 +140,23 @@ namespace Starfield_Tools.Common
             SS.Show();
         }
 
+        public static void StartStarfieldCustom()
+        {
+            string cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\starfield.exe";
+
+            try
+            {
+                Process.Start(cmdLine);
+                ShowSplashScreen();
+                Thread.Sleep(2000);
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
+            }
+        }
+
         public static void StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
@@ -159,13 +175,22 @@ namespace Starfield_Tools.Common
             }
         }
 
-        public void StartGame(bool GameVersion)
+        public static void StartGame(int GameVersion)
         {
-            if (GameVersion)
-                StartStarfieldMS();
-            else
-                StartStarfieldSteam();
+            switch (GameVersion)
+            {
+                case 0:
+                    StartStarfieldSteam();
+                    break;
+                case 1:
+                    StartStarfieldMS();
+                    break;
+                case 2:
+                    StartStarfieldCustom();
+                    break;
+            }
         }
+
         public static void StartStarfieldSteam()
         {
             const string userRoot = "HKEY_CURRENT_USER";

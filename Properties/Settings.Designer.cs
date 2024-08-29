@@ -108,10 +108,10 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool GameVersion {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int GameVersion {
             get {
-                return ((bool)(this["GameVersion"]));
+                return ((int)(this["GameVersion"]));
             }
             set {
                 this["GameVersion"] = value;

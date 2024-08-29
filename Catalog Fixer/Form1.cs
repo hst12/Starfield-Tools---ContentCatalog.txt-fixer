@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Windows.Media.Playback;
 
 
 namespace Starfield_Tools
@@ -17,18 +16,16 @@ namespace Starfield_Tools
     {
 
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean, Verbose;
+        public string CatalogStatus;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath;
-        private bool GameVersion;
+        private readonly string StarfieldGamePath;
         public frmStarfieldTools()
         {
             InitializeComponent();
             if (!Tools.CheckGame())
                 Application.Exit();
-# if DEBUG
-            btnTest.Visible = true;
-#endif
+
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
@@ -37,16 +34,11 @@ namespace Starfield_Tools
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             Verbose = Properties.Settings.Default.Verbose;
             chkVerbose.Checked = Properties.Settings.Default.Verbose;
-            GameVersion = Properties.Settings.Default.GameVersion;
-            if (GameVersion)
-                radMS.Checked = true;
-            else
-                radSteam.Checked = true;
 
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
 
-            bool cmdLineLO = false;
+            //bool cmdLineLO = false;
             bool cmdLineRunSteam = false;
             bool cmdLineRunMS = false;
             richTextBox2.Text = "";
@@ -79,8 +71,8 @@ namespace Starfield_Tools
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
-                if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Open Load order editor
-                    cmdLineLO = true;
+                /*if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Open Load order editor
+                    cmdLineLO = true;*/
             }
 
             if (AutoCheck) // Check catalog status if enabled
@@ -109,14 +101,13 @@ namespace Starfield_Tools
 
             DisplayCatalog();
 
-            if (cmdLineLO) // Go to mod manager
-            {
-                string paramater = toolStripStatusLabel1.Text;
-                frmLoadOrder frmLO = new(paramater);
-                frmLO.Show();
-                this.WindowState = FormWindowState.Minimized;
-
-            }
+            /* if (cmdLineLO) // Go to mod manager
+             {
+                 string paramater = toolStripStatusLabel1.Text;
+                 frmLoadOrder frmLO = new(paramater);
+                 frmLO.Show();
+                 this.WindowState = FormWindowState.Minimized;
+             }*/
 
             // Run  Command line params
             if (cmdLineRunSteam)
@@ -164,34 +155,32 @@ namespace Starfield_Tools
             }
 
             // Open the two files.
-            using (FileStream fs1 = new FileStream(file1, FileMode.Open),
-                              fs2 = new FileStream(file2, FileMode.Open))
+            using FileStream fs1 = new(file1, FileMode.Open),
+                              fs2 = new(file2, FileMode.Open);
+            // Check the file sizes. If they are not the same, the files are not the same.
+            if (fs1.Length != fs2.Length)
             {
-                // Check the file sizes. If they are not the same, the files are not the same.
-                if (fs1.Length != fs2.Length)
-                {
-                    return false;
-                }
-
-                // Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached.
-                int file1byte, file2byte;
-                do
-                {
-                    file1byte = fs1.ReadByte();
-                    file2byte = fs2.ReadByte();
-                }
-                while ((file1byte == file2byte) && (file1byte != -1));
-
-                // Return the success of the comparison.
-                return file1byte == file2byte;
+                return false;
             }
+
+            // Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached.
+            int file1byte, file2byte;
+            do
+            {
+                file1byte = fs1.ReadByte();
+                file2byte = fs2.ReadByte();
+            }
+            while ((file1byte == file2byte) && (file1byte != -1));
+
+            // Return the success of the comparison.
+            return file1byte == file2byte;
         }
         private bool CheckBackup()
         {
             string fileName1 = Tools.GetCatalog();
             string fileName2 = fileName1 + ".bak";
 
-            if (FileCompare(fileName1,fileName2))
+            if (FileCompare(fileName1, fileName2))
             {
                 richTextBox2.Text += "\nBackup is up to date.\n";
                 ScrollToEnd();
@@ -244,7 +233,7 @@ namespace Starfield_Tools
         {
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
-            bool ErrorFound = false;
+            bool ErrorFound;
             int ErrorCount = 0;
             richTextBox2.Text += "Checking Catalog\n";
             double VersionCheck;
@@ -274,7 +263,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
-                    if (TestString != tools.GetCatalogVersion()) // Skip catalog header, pull version info apart into date and actual version number
+                    if (TestString != Tools.GetCatalogVersion()) // Skip catalog header, pull version info apart into date and actual version number
                         if (Verbose)
                             richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
@@ -300,12 +289,14 @@ namespace Starfield_Tools
                 if (!ErrorFound)
                 {
                     toolStripStatusLabel1.Text = "Catalog ok";
+                    CatalogStatus = toolStripStatusLabel1.Text;
                     richTextBox2.Text += "\nCatalog ok\n";
                     return true;
                 }
                 else
                 {
                     toolStripStatusLabel1.Text = ErrorCount.ToString() + " Error(s) found";
+                    CatalogStatus = toolStripStatusLabel1.Text;
                     richTextBox2.Text += ErrorCount.ToString() + " Error(s) found\n";
                     return false;
                 }
@@ -327,7 +318,7 @@ namespace Starfield_Tools
                 }
                 else
                 {
-                    //      MessageBox.Show(ex.Message);
+                    richTextBox2.Text += "\n" + (ex.Message);
                     toolStripStatusLabel1.Text = "Catalog corrupt. Use the Restore or Clean functions to repair";
                 }
                 return false;
@@ -372,12 +363,7 @@ namespace Starfield_Tools
         private void btnQuit_Click(object sender, EventArgs e)
         {
             SaveSettings();
-            Application.Exit();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -393,30 +379,9 @@ namespace Starfield_Tools
             DisplayCatalog();
         }
 
-        private void btnStarfield_Click(object sender, EventArgs e)
-        {
-            SaveSettings();
-            toolStripStatusLabel1.Text = "Starfield launching";
-            if (GameVersion) // MS Store start game
-                Tools.StartStarfieldMS();
-            else
-                Tools.StartStarfieldSteam();
-        }
-
         private void btnAbout_Click(object sender, EventArgs e)
         {
             Tools.ShowAbout();
-        }
-
-        private void btnExplore_Click(object sender, EventArgs e)
-        {
-            Process.Start("explorer.exe", Tools.GetStarfieldAppData());
-        }
-
-        private void btnEditPlugins_Click(object sender, EventArgs e)
-        {
-            string pathToFile = (Tools.GetStarfieldAppData() + @"\Plugins.txt");
-            Process.Start("explorer", pathToFile);
         }
 
         private void BackupCatalog()
@@ -479,25 +444,9 @@ namespace Starfield_Tools
             Tools.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
-        private void cmdStarFieldPath_Click(object sender, EventArgs e)
-        {
-            tools.SetStarfieldGamePath();
-        }
-
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
         {
             ForceClean = chkForceClean.Checked;
-        }
-
-        private void btnStarfieldStore_Click(object sender, EventArgs e)
-        {
-            SaveSettings();
-            Tools.StartStarfieldMS();
-        }
-
-        private void frmStarfieldTools_Activated(object sender, EventArgs e)
-        {
-
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
@@ -572,12 +521,6 @@ namespace Starfield_Tools
             toolStripStatusLabel1.Text = "Version numbers reset\n";
         }
 
-        private void btnCreations_Click(object sender, EventArgs e)
-        {
-            Tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");  // Open Creations web site
-
-        }
-
         private void btnRestore_Click(object sender, EventArgs e)
         {
             RestoreCatalog();
@@ -603,7 +546,6 @@ namespace Starfield_Tools
             List<string> CreationsPlugin = []; // filename of .esm
             List<string> CreationsTitle = []; // Display title for .esm
             List<string> CreationsGUID = []; // Creations GUID
-            List<string> CreationsVersion = []; // Version
             int RemovalCount = 0;
             int index;
             bool unusedMods = false;
@@ -713,7 +655,7 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Catalog file is empty, nothing to clean";
                 return;
             }
-            string TestString = "";
+            string TestString;
             bool FixVersion;
             int errorCount = 0, VersionReplacementCount = 0;
             double VersionCheck;
@@ -738,7 +680,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != tools.GetCatalogVersion()) // Skip the catalog header then check for valid timestamps
+                if (TestString != Tools.GetCatalogVersion()) // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     TimeStamp = kvp.Value.Timestamp;
@@ -782,7 +724,6 @@ namespace Starfield_Tools
                 Settings.Default.StarfieldGamePath = StarfieldGamePath;
             Settings.Default.ForceClean = ForceClean;
             Settings.Default.Verbose = Verbose;
-            Settings.Default.GameVersion = GameVersion; ;
             Settings.Default.Save();
         }
 
@@ -795,21 +736,9 @@ namespace Starfield_Tools
                 Verbose = false;
         }
 
-        private void radSteam_CheckedChanged(object sender, EventArgs e)
+        private void frmStarfieldTools_Shown(object sender, EventArgs e)
         {
-            GameVersion = false;
-        }
-
-        private void radMS_CheckedChanged(object sender, EventArgs e)
-        {
-            GameVersion = true;
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            /*Properties.Settings.Default.LoadScreenFilename = "";
-            SaveSettings();*/
-            Tools.ShowSplashScreen();
+            this.Focus();
         }
     }
 }

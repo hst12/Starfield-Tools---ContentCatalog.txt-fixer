@@ -23,8 +23,8 @@
     <Setting Name="FontSize" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="GameVersion" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="GameVersion" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ProfileFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

@@ -68,7 +68,6 @@ Command line options - not case sensitive:
 -noauto Clears all the auto check boxes. This will stop any auto repair functions from running automatically when the tool starts.
 -auto Sets recommended auto check boxes.
 -runSteam or -runMS Starts the tool with whatever auto settings were used last then launches the game.
--lo Starts the load order editor and minimises the main window.
 
 Example: "Starfield Tools.exe" -auto -runSteam will run auto checks and launch Starfield Steam version.
 

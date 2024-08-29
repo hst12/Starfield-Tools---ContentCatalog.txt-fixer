@@ -37,9 +37,6 @@
             btnLoad = new System.Windows.Forms.Button();
             btnCheck = new System.Windows.Forms.Button();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
-            btnStarfield = new System.Windows.Forms.Button();
-            btnExplore = new System.Windows.Forms.Button();
-            btnEditPlugins = new System.Windows.Forms.Button();
             btnBackup = new System.Windows.Forms.Button();
             btnRestore = new System.Windows.Forms.Button();
             btnLoadOrder = new System.Windows.Forms.Button();
@@ -48,8 +45,6 @@
             chkForceClean = new System.Windows.Forms.CheckBox();
             btnResetAll = new System.Windows.Forms.Button();
             cmdDeleteStale = new System.Windows.Forms.Button();
-            cmdStarFieldPath = new System.Windows.Forms.Button();
-            btnCreations = new System.Windows.Forms.Button();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             grpActions = new System.Windows.Forms.GroupBox();
@@ -59,9 +54,6 @@
             flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             groupBox2 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            label1 = new System.Windows.Forms.Label();
-            radSteam = new System.Windows.Forms.RadioButton();
-            radMS = new System.Windows.Forms.RadioButton();
             grpAuto = new System.Windows.Forms.GroupBox();
             flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             chkAutoCheck = new System.Windows.Forms.CheckBox();
@@ -70,7 +62,6 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            btnTest = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -109,11 +100,11 @@
             // btnQuit
             // 
             btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1148, 3);
+            btnQuit.Location = new System.Drawing.Point(461, 3);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(223, 50);
             btnQuit.TabIndex = 20;
-            btnQuit.Text = "Quit";
+            btnQuit.Text = "Close";
             toolTip1.SetToolTip(btnQuit, "Quit");
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
@@ -154,42 +145,6 @@
             btnCheck.UseVisualStyleBackColor = true;
             btnCheck.Click += btnCheck_Click;
             // 
-            // btnStarfield
-            // 
-            btnStarfield.AutoSize = true;
-            btnStarfield.Location = new System.Drawing.Point(3, 3);
-            btnStarfield.Name = "btnStarfield";
-            btnStarfield.Size = new System.Drawing.Size(223, 50);
-            btnStarfield.TabIndex = 15;
-            btnStarfield.Text = "Starfield";
-            toolTip1.SetToolTip(btnStarfield, "Launch Starfield");
-            btnStarfield.UseVisualStyleBackColor = true;
-            btnStarfield.Click += btnStarfield_Click;
-            // 
-            // btnExplore
-            // 
-            btnExplore.AutoSize = true;
-            btnExplore.Location = new System.Drawing.Point(461, 3);
-            btnExplore.Name = "btnExplore";
-            btnExplore.Size = new System.Drawing.Size(223, 50);
-            btnExplore.TabIndex = 8;
-            btnExplore.Text = "Explore";
-            toolTip1.SetToolTip(btnExplore, "Open folder containing Plugins.txt and ContentCatalog.txt");
-            btnExplore.UseVisualStyleBackColor = true;
-            btnExplore.Click += btnExplore_Click;
-            // 
-            // btnEditPlugins
-            // 
-            btnEditPlugins.AutoSize = true;
-            btnEditPlugins.Location = new System.Drawing.Point(232, 3);
-            btnEditPlugins.Name = "btnEditPlugins";
-            btnEditPlugins.Size = new System.Drawing.Size(223, 50);
-            btnEditPlugins.TabIndex = 7;
-            btnEditPlugins.Text = "Plugins.txt";
-            toolTip1.SetToolTip(btnEditPlugins, "Edit with default text editor");
-            btnEditPlugins.UseVisualStyleBackColor = true;
-            btnEditPlugins.Click += btnEditPlugins_Click;
-            // 
             // btnBackup
             // 
             btnBackup.AutoSize = true;
@@ -217,7 +172,7 @@
             // btnLoadOrder
             // 
             btnLoadOrder.AutoSize = true;
-            btnLoadOrder.Location = new System.Drawing.Point(690, 3);
+            btnLoadOrder.Location = new System.Drawing.Point(232, 3);
             btnLoadOrder.Name = "btnLoadOrder";
             btnLoadOrder.Size = new System.Drawing.Size(223, 50);
             btnLoadOrder.TabIndex = 9;
@@ -229,7 +184,7 @@
             // btnAbout
             // 
             btnAbout.AutoSize = true;
-            btnAbout.Location = new System.Drawing.Point(461, 3);
+            btnAbout.Location = new System.Drawing.Point(3, 3);
             btnAbout.Name = "btnAbout";
             btnAbout.Size = new System.Drawing.Size(223, 50);
             btnAbout.TabIndex = 18;
@@ -241,7 +196,7 @@
             // txtSource
             // 
             txtSource.AutoSize = true;
-            txtSource.Location = new System.Drawing.Point(690, 3);
+            txtSource.Location = new System.Drawing.Point(232, 3);
             txtSource.Name = "txtSource";
             txtSource.Size = new System.Drawing.Size(223, 50);
             txtSource.TabIndex = 19;
@@ -283,29 +238,6 @@
             toolTip1.SetToolTip(cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
             cmdDeleteStale.UseVisualStyleBackColor = true;
             cmdDeleteStale.Click += cmdDeleteStale_Click;
-            // 
-            // cmdStarFieldPath
-            // 
-            cmdStarFieldPath.AutoSize = true;
-            cmdStarFieldPath.Location = new System.Drawing.Point(232, 3);
-            cmdStarFieldPath.Name = "cmdStarFieldPath";
-            cmdStarFieldPath.Size = new System.Drawing.Size(223, 50);
-            cmdStarFieldPath.TabIndex = 17;
-            cmdStarFieldPath.Text = "Set Starfield Path";
-            toolTip1.SetToolTip(cmdStarFieldPath, "Set the path to the game folder - used for stats display in load order editor");
-            cmdStarFieldPath.UseVisualStyleBackColor = true;
-            cmdStarFieldPath.Click += cmdStarFieldPath_Click;
-            // 
-            // btnCreations
-            // 
-            btnCreations.Location = new System.Drawing.Point(919, 3);
-            btnCreations.Name = "btnCreations";
-            btnCreations.Size = new System.Drawing.Size(223, 50);
-            btnCreations.TabIndex = 21;
-            btnCreations.Text = "Creations";
-            toolTip1.SetToolTip(btnCreations, "Open Creations website - show latest");
-            btnCreations.UseVisualStyleBackColor = true;
-            btnCreations.Click += btnCreations_Click;
             // 
             // statusStrip1
             // 
@@ -382,13 +314,9 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(btnStarfield);
-            flowLayoutPanel4.Controls.Add(cmdStarFieldPath);
             flowLayoutPanel4.Controls.Add(btnAbout);
             flowLayoutPanel4.Controls.Add(txtSource);
-            flowLayoutPanel4.Controls.Add(btnCreations);
             flowLayoutPanel4.Controls.Add(btnQuit);
-            flowLayoutPanel4.Controls.Add(btnTest);
             flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel4.Location = new System.Drawing.Point(6, 38);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -411,54 +339,12 @@
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.Controls.Add(btnLoad);
-            flowLayoutPanel1.Controls.Add(btnEditPlugins);
-            flowLayoutPanel1.Controls.Add(btnExplore);
             flowLayoutPanel1.Controls.Add(btnLoadOrder);
-            flowLayoutPanel1.Controls.Add(label1);
-            flowLayoutPanel1.Controls.Add(radSteam);
-            flowLayoutPanel1.Controls.Add(radMS);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 35);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(1630, 56);
             flowLayoutPanel1.TabIndex = 10;
-            // 
-            // label1
-            // 
-            label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(919, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(161, 56);
-            label1.TabIndex = 12;
-            label1.Text = "Game Version";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // radSteam
-            // 
-            radSteam.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            radSteam.AutoSize = true;
-            radSteam.Location = new System.Drawing.Point(1086, 3);
-            radSteam.Name = "radSteam";
-            radSteam.Size = new System.Drawing.Size(111, 50);
-            radSteam.TabIndex = 10;
-            radSteam.TabStop = true;
-            radSteam.Text = "Steam";
-            radSteam.UseVisualStyleBackColor = true;
-            radSteam.CheckedChanged += radSteam_CheckedChanged;
-            // 
-            // radMS
-            // 
-            radMS.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            radMS.AutoSize = true;
-            radMS.Location = new System.Drawing.Point(1203, 3);
-            radMS.Name = "radMS";
-            radMS.Size = new System.Drawing.Size(142, 50);
-            radMS.TabIndex = 11;
-            radMS.TabStop = true;
-            radMS.Text = "MS Store";
-            radMS.UseVisualStyleBackColor = true;
-            radMS.CheckedChanged += radMS_CheckedChanged;
             // 
             // grpAuto
             // 
@@ -565,17 +451,6 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // btnTest
-            // 
-            btnTest.Location = new System.Drawing.Point(1377, 3);
-            btnTest.Name = "btnTest";
-            btnTest.Size = new System.Drawing.Size(223, 50);
-            btnTest.TabIndex = 22;
-            btnTest.Text = "Test";
-            btnTest.UseVisualStyleBackColor = true;
-            btnTest.Visible = false;
-            btnTest.Click += btnTest_Click;
-            // 
             // frmStarfieldTools
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -589,7 +464,7 @@
             Name = "frmStarfieldTools";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Starfield Tools";
-            Activated += frmStarfieldTools_Activated;
+            Shown += frmStarfieldTools_Shown;
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             grpActions.ResumeLayout(false);
@@ -621,15 +496,12 @@
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btnStarfield;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.GroupBox grpActions;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAbout;
-        private System.Windows.Forms.Button btnExplore;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnEditPlugins;
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.GroupBox grpAuto;
@@ -640,22 +512,16 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button btnLoadOrder;
         private System.Windows.Forms.Button txtSource;
-        private System.Windows.Forms.Button cmdStarFieldPath;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;
         private System.Windows.Forms.Button btnResetAll;
-        private System.Windows.Forms.Button btnCreations;
         private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.CheckBox chkVerbose;
-        private System.Windows.Forms.RadioButton radSteam;
-        private System.Windows.Forms.RadioButton radMS;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnTest;
     }
 }
 
