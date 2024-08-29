@@ -40,8 +40,6 @@
             btnBackup = new System.Windows.Forms.Button();
             btnRestore = new System.Windows.Forms.Button();
             btnLoadOrder = new System.Windows.Forms.Button();
-            btnAbout = new System.Windows.Forms.Button();
-            txtSource = new System.Windows.Forms.Button();
             chkForceClean = new System.Windows.Forms.CheckBox();
             btnResetAll = new System.Windows.Forms.Button();
             cmdDeleteStale = new System.Windows.Forms.Button();
@@ -100,7 +98,7 @@
             // btnQuit
             // 
             btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(461, 3);
+            btnQuit.Location = new System.Drawing.Point(3, 3);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(223, 50);
             btnQuit.TabIndex = 20;
@@ -180,30 +178,6 @@
             toolTip1.SetToolTip(btnLoadOrder, "Load Order Editor");
             btnLoadOrder.UseVisualStyleBackColor = true;
             btnLoadOrder.Click += btnLoadOrder_Click;
-            // 
-            // btnAbout
-            // 
-            btnAbout.AutoSize = true;
-            btnAbout.Location = new System.Drawing.Point(3, 3);
-            btnAbout.Name = "btnAbout";
-            btnAbout.Size = new System.Drawing.Size(223, 50);
-            btnAbout.TabIndex = 18;
-            btnAbout.Text = "Help";
-            toolTip1.SetToolTip(btnAbout, "Brief info");
-            btnAbout.UseVisualStyleBackColor = true;
-            btnAbout.Click += btnAbout_Click;
-            // 
-            // txtSource
-            // 
-            txtSource.AutoSize = true;
-            txtSource.Location = new System.Drawing.Point(232, 3);
-            txtSource.Name = "txtSource";
-            txtSource.Size = new System.Drawing.Size(223, 50);
-            txtSource.TabIndex = 19;
-            txtSource.Text = "Github";
-            toolTip1.SetToolTip(txtSource, "Open GitHub page");
-            txtSource.UseVisualStyleBackColor = true;
-            txtSource.Click += txtSource_Click;
             // 
             // chkForceClean
             // 
@@ -314,8 +288,6 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(btnAbout);
-            flowLayoutPanel4.Controls.Add(txtSource);
             flowLayoutPanel4.Controls.Add(btnQuit);
             flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel4.Location = new System.Drawing.Point(6, 38);
@@ -500,7 +472,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.GroupBox grpActions;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.Button btnBackup;
@@ -511,7 +482,6 @@
         private System.Windows.Forms.CheckBox chkAutoRestore;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button btnLoadOrder;
-        private System.Windows.Forms.Button txtSource;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;

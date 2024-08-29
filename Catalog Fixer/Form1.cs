@@ -378,12 +378,6 @@ namespace Starfield_Tools
             ScrollToEnd();
             DisplayCatalog();
         }
-
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            Tools.ShowAbout();
-        }
-
         private void BackupCatalog()
         {
             if (!CheckCatalog())
@@ -437,11 +431,6 @@ namespace Starfield_Tools
         private void chkAutoRestore_CheckedChanged(object sender, EventArgs e)
         {
             AutoRestore = chkAutoRestore.Checked;
-        }
-
-        private void txtSource_Click(object sender, EventArgs e)
-        {
-            Tools.OpenUrl("https://github.com/hst12/Starfield-Tools---ContentCatalog.txt-fixer");
         }
 
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
