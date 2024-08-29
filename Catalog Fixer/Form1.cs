@@ -407,12 +407,6 @@ namespace Starfield_Tools
             }
         }
 
-        private void btnLoadOrder_Click(object sender, EventArgs e)
-        {
-            frmLoadOrder frmLO = new(toolStripStatusLabel1.Text);
-            frmLO.Show();
-        }
-
         private void chkAutoCheck_CheckedChanged(object sender, EventArgs e)
         {
             AutoCheck = chkAutoCheck.Checked;

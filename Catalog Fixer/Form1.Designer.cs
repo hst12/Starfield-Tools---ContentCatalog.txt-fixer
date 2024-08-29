@@ -39,7 +39,6 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             btnBackup = new System.Windows.Forms.Button();
             btnRestore = new System.Windows.Forms.Button();
-            btnLoadOrder = new System.Windows.Forms.Button();
             chkForceClean = new System.Windows.Forms.CheckBox();
             btnResetAll = new System.Windows.Forms.Button();
             cmdDeleteStale = new System.Windows.Forms.Button();
@@ -166,18 +165,6 @@
             toolTip1.SetToolTip(btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
             btnRestore.UseVisualStyleBackColor = true;
             btnRestore.Click += btnRestore_Click;
-            // 
-            // btnLoadOrder
-            // 
-            btnLoadOrder.AutoSize = true;
-            btnLoadOrder.Location = new System.Drawing.Point(232, 3);
-            btnLoadOrder.Name = "btnLoadOrder";
-            btnLoadOrder.Size = new System.Drawing.Size(223, 50);
-            btnLoadOrder.TabIndex = 9;
-            btnLoadOrder.Text = "Load Order";
-            toolTip1.SetToolTip(btnLoadOrder, "Load Order Editor");
-            btnLoadOrder.UseVisualStyleBackColor = true;
-            btnLoadOrder.Click += btnLoadOrder_Click;
             // 
             // chkForceClean
             // 
@@ -311,7 +298,6 @@
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.Controls.Add(btnLoad);
-            flowLayoutPanel1.Controls.Add(btnLoadOrder);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 35);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -481,7 +467,6 @@
         private System.Windows.Forms.CheckBox chkAutoCheck;
         private System.Windows.Forms.CheckBox chkAutoRestore;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button btnLoadOrder;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkForceClean;
         private System.Windows.Forms.Button cmdDeleteStale;

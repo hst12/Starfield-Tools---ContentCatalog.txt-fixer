@@ -36,7 +36,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LastUsedScreenshot" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Achievements" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

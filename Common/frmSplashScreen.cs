@@ -16,10 +16,7 @@ namespace Starfield_Tools
             float screenHeight = screen.Height * 0.75f;
             if (LoadScreen != null && LoadScreen != "")
             {
-
-
                 var bitmap = new Bitmap(LoadScreen);
-
 
                 // Calculate the scaling factor to maintain aspect ratio
                 float scale = Math.Min(screenWidth / bitmap.Width, screenHeight / bitmap.Height);
