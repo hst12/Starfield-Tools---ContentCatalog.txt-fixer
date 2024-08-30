@@ -716,6 +716,7 @@
             // 
             // toolStripMenuCatalog
             // 
+            toolStripMenuCatalog.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuCatalog.Image");
             toolStripMenuCatalog.Name = "toolStripMenuCatalog";
             toolStripMenuCatalog.Size = new System.Drawing.Size(407, 44);
             toolStripMenuCatalog.Text = "Content Catalog Check";
