@@ -142,7 +142,11 @@ namespace Starfield_Tools.Common
 
         public static void StartStarfieldCustom()
         {
-            string cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\starfield.exe";
+            string cmdLine = Properties.Settings.Default.CustomEXE;
+            if (cmdLine == null)
+            {
+                return;
+            }
 
             try
             {

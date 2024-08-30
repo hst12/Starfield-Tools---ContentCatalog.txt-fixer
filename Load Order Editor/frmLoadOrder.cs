@@ -22,7 +22,7 @@ namespace Starfield_Tools
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = 0;
 
         readonly Tools tools = new();
-        public string StarfieldGamePath = "", LoadScreenPic = "", LastProfile;
+        private string StarfieldGamePath, LoadScreenPic, LastProfile, CustomEXE;
 
         bool isModified = false, Profiles = false, GridSorted = false;
 
@@ -56,6 +56,8 @@ namespace Starfield_Tools
             this.Font = Properties.Settings.Default.FontSize;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
+            CustomEXE = Properties.Settings.Default.CustomEXE;
+
             switch (GameVersion)
             {
                 case 0: // Steam
@@ -149,11 +151,11 @@ namespace Starfield_Tools
                 dataGridView1.Columns["Index"].Visible = false;
             }
 
-            frmStarfieldTools StarfieldTools = new();
+            frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar2(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus.Contains("Error"))
             {
-                StarfieldTools.Show();
+                StarfieldTools.Show(); // Show catalog fixer if catalog broken
             }
 
             InitDataGrid();
@@ -166,8 +168,7 @@ namespace Starfield_Tools
                 sbar2("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
-            if (parameter != "")
-                sbar2(parameter); // Show result from catalog check
+
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif
@@ -178,6 +179,7 @@ namespace Starfield_Tools
             InitDataGrid();
             GetProfiles();
             GridSorted = false;
+            isModified = false;
             sbar2("");
         }
 
@@ -1636,6 +1638,30 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuCustom_Click(object sender, EventArgs e)
         {
+            string CustomEXEFolder;
+
+            CustomEXEFolder = Properties.Settings.Default.CustomEXE;
+            
+            
+                CustomEXEFolder = tools.StarfieldGamePath;
+
+                OpenFileDialog OpenEXE = new()
+                {
+                    InitialDirectory = CustomEXEFolder,
+                    Filter = "exe File|*.exe",
+                    Title = "Select custom game executable"
+                };
+
+                DialogResult result = OpenEXE.ShowDialog();
+                if (DialogResult.OK == result)
+                {
+                     if (OpenEXE.FileName != "")
+                    {
+                        Properties.Settings.Default.CustomEXE = OpenEXE.FileName;
+                        Properties.Settings.Default.Save();
+                    }
+            
+            }
 
             toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
             if (toolStripMenuCustom.Checked)

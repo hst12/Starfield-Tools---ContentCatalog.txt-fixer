@@ -272,5 +272,17 @@ namespace Starfield_Tools.Properties {
                 this["Index"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomEXE {
+            get {
+                return ((string)(this["CustomEXE"]));
+            }
+            set {
+                this["CustomEXE"] = value;
+            }
+        }
     }
 }
