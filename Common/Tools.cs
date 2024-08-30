@@ -144,9 +144,7 @@ namespace Starfield_Tools.Common
         {
             string cmdLine = Properties.Settings.Default.CustomEXE;
             if (cmdLine == null)
-            {
                 return;
-            }
 
             try
             {
