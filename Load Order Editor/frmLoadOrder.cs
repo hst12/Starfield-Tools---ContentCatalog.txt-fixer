@@ -153,10 +153,11 @@ namespace Starfield_Tools
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar2(StarfieldTools.CatalogStatus);
+            if (StarfieldTools.CatalogStatus != null)
             if (StarfieldTools.CatalogStatus.Contains("Error"))
-            {
+            
                 StarfieldTools.Show(); // Show catalog fixer if catalog broken
-            }
+            
 
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
@@ -1641,26 +1642,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string CustomEXEFolder;
 
             CustomEXEFolder = Properties.Settings.Default.CustomEXE;
-            
-            
-                CustomEXEFolder = tools.StarfieldGamePath;
 
-                OpenFileDialog OpenEXE = new()
-                {
-                    InitialDirectory = CustomEXEFolder,
-                    Filter = "exe File|*.exe",
-                    Title = "Select custom game executable"
-                };
 
-                DialogResult result = OpenEXE.ShowDialog();
-                if (DialogResult.OK == result)
+            CustomEXEFolder = tools.StarfieldGamePath;
+
+            OpenFileDialog OpenEXE = new()
+            {
+                InitialDirectory = CustomEXEFolder,
+                Filter = "exe File|*.exe",
+                Title = "Select custom game executable"
+            };
+
+            DialogResult result = OpenEXE.ShowDialog();
+            if (DialogResult.OK == result)
+            {
+                if (OpenEXE.FileName != "")
                 {
-                     if (OpenEXE.FileName != "")
-                    {
-                        Properties.Settings.Default.CustomEXE = OpenEXE.FileName;
-                        Properties.Settings.Default.Save();
-                    }
-            
+                    Properties.Settings.Default.CustomEXE = OpenEXE.FileName;
+                    Properties.Settings.Default.Save();
+                }
+
             }
 
             toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
