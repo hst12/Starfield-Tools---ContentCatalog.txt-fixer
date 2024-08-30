@@ -71,7 +71,6 @@
 		</Content>
 		<Content Include="Screenshot2.png" />
 		<Content Include="SpaceShip.ico" />
-		<Content Include="Screenshot.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<BootstrapperPackage Include=".NETFramework,Version=v4.8">

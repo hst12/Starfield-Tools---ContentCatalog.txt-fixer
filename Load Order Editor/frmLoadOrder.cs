@@ -1661,7 +1661,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     Properties.Settings.Default.CustomEXE = OpenEXE.FileName;
                     Properties.Settings.Default.Save();
                 }
-
             }
 
             toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
