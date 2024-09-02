@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStarfieldTools));
             richTextBox2 = new System.Windows.Forms.RichTextBox();
             richTextBox1 = new System.Windows.Forms.RichTextBox();
-            btnQuit = new System.Windows.Forms.Button();
+            btnClose = new System.Windows.Forms.Button();
             cmdClean = new System.Windows.Forms.Button();
             btnLoad = new System.Windows.Forms.Button();
             btnCheck = new System.Windows.Forms.Button();
@@ -94,17 +94,17 @@
             richTextBox1.TabStop = false;
             richTextBox1.Text = "";
             // 
-            // btnQuit
+            // btnClose
             // 
-            btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(3, 3);
-            btnQuit.Name = "btnQuit";
-            btnQuit.Size = new System.Drawing.Size(223, 50);
-            btnQuit.TabIndex = 20;
-            btnQuit.Text = "Close";
-            toolTip1.SetToolTip(btnQuit, "Quit");
-            btnQuit.UseVisualStyleBackColor = true;
-            btnQuit.Click += btnQuit_Click;
+            btnClose.AutoSize = true;
+            btnClose.Location = new System.Drawing.Point(3, 3);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(223, 50);
+            btnClose.TabIndex = 20;
+            btnClose.Text = "Close";
+            toolTip1.SetToolTip(btnClose, "Quit");
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnQuit_Click;
             // 
             // cmdClean
             // 
@@ -275,7 +275,7 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.AutoSize = true;
-            flowLayoutPanel4.Controls.Add(btnQuit);
+            flowLayoutPanel4.Controls.Add(btnClose);
             flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel4.Location = new System.Drawing.Point(6, 38);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -448,7 +448,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button cmdClean;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnLoad;

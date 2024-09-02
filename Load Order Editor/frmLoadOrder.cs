@@ -7,15 +7,16 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
+
 namespace Starfield_Tools
 {
-
-
     public partial class frmLoadOrder : Form
     {
         private Rectangle dragBoxFromMouseDown;
@@ -81,7 +82,12 @@ namespace Starfield_Tools
             }
 
             if (Properties.Settings.Default.AutoDelccc)
+            {
                 toolStripMenuAutoDelccc.Checked = true;
+                sbarCCCOn();
+            }
+            else
+                sbarCCCOff();
 
             if (Properties.Settings.Default.ProflieOn)
             {
@@ -154,10 +160,9 @@ namespace Starfield_Tools
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar2(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus != null)
-            if (StarfieldTools.CatalogStatus.Contains("Error"))
-            
-                StarfieldTools.Show(); // Show catalog fixer if catalog broken
-            
+                if (StarfieldTools.CatalogStatus.Contains("Error"))
+                    StarfieldTools.Show(); // Show catalog fixer if catalog broken
+
 
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
@@ -182,6 +187,7 @@ namespace Starfield_Tools
             GridSorted = false;
             isModified = false;
             sbar2("");
+            sbar3("");
         }
 
         private void KeyEvent(object sender, KeyEventArgs e)
@@ -196,7 +202,8 @@ namespace Starfield_Tools
             int EnabledCount = 0, IndexCount = 1;
             string loText;
 
-            toolStripStatusLeft.ForeColor = DefaultForeColor;
+            toolStripStatusTertiary.ForeColor = DefaultForeColor;
+
             btnOK.Enabled = true;
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
@@ -267,7 +274,6 @@ namespace Starfield_Tools
                             if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
                             {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
-
                                 TitleCount++;
                             }
                         }
@@ -349,18 +355,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModID = CreationsID[i];
                                     }
                                 }
-                                /* Disable combobox code for the time being
-
-
-                                    ComboBox GroupCombo = new();
-                                    GroupCombo.Items.AddRange(Groups);
-                                    ((DataGridViewComboBoxColumn)dataGridView1.Columns["Group"]).DataSource = GroupCombo.Items;
-                                */
 
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
 
-                                // Populate datagrid
+                                // Populate datagrid from LOOT groups
                                 if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null)
                                 {
                                     for (int i = 0; i < Groups.plugins.Count; i++)
@@ -402,19 +401,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             try
             {
                 string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
-                foreach (var file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly), file =>
                 {
                     esmCount++;
                     esmFiles.Add(file);
-                }
-                foreach (var file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+                });
+                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly), file =>
                 {
                     espCount++;
-                }
-                foreach (var file in Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly))
+                });
+                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly), file =>
                 {
                     ba2Count++;
-                }
+                });
                 StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
                     (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
                     esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
@@ -424,7 +423,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 sbar(StatText);
                 dataGridView1.EndEdit();
-
             }
             catch
             {
@@ -499,14 +497,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int colIndex = dataGridView1.CurrentCell.ColumnIndex;
-            //SelectedCells[0].ColumnIndex;
             if (rowIndex == 0)
                 return; // Already at the top
 
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(rowIndex - 1, selectedRow);
-            //dataGridView1.ClearSelection();
             dataGridView1.Rows[rowIndex - 1].Selected = true;
             dataGridView1.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
         }
@@ -550,9 +546,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             try
             {
-                // Copy the file
                 File.Copy(sourceFileName, destFileName, true); // overwrite
-
                 sbar2("Backup done");
             }
             catch (Exception ex)
@@ -577,7 +571,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 File.Copy(sourceFileName, destFileName, true); // overwrite
                 InitDataGrid();
 
-                toolStripStatusLeft.ForeColor = DefaultForeColor;
+                toolStripStatusTertiary.ForeColor = DefaultForeColor;
                 sbar2("Restore done");
                 isModified = false;
             }
@@ -623,8 +617,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            sbar2("Warning! - Plugins sorted - saving changes disabled");
-            toolStripStatusLeft.ForeColor = Color.Red;
+            sbar3("Warning! - Plugins sorted - saving changes disabled");
+            toolStripStatusTertiary.ForeColor = Color.Red;
             btnOK.Enabled = false;
             btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
@@ -948,7 +942,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             return AddedFiles;
         }
 
-
         private int RemoveMissing() // Remove entries from Plugins.txt for missing .esm files. Returns number of removals
         {
             int RemovedFiles = 0;
@@ -973,14 +966,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
 
             List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
-
-            for (int i = 0; i < tools.BethFiles.Count; i++) // Remove base game files
-                FilesToRemove.Add(tools.BethFiles[i]);
-            for (int i = 0; i < MissingFiles.Count; i++)
+            //int i;
+            Parallel.For(0, tools.BethFiles.Count, i => // Remove base game files
             {
-                FilesToRemove.Add(MissingFiles[i]);
-                RemovedFiles++;
-            }
+                FilesToRemove.Add(tools.BethFiles[i]);
+            });
+            Parallel.For(0, MissingFiles.Count, i =>
+             {
+                 FilesToRemove.Add(MissingFiles[i]);
+                 RemovedFiles++;
+             });
             if (FilesToRemove.Count > 0)
             {
                 for (int i = 0; i < FilesToRemove.Count; i++)
@@ -1078,6 +1073,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 AddMissing();
                 SavePlugings();
+                sbar3("Mod installed");
             }
 
         }
@@ -1194,7 +1190,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName[..ModName.IndexOf('.')];
-            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete mod. Are you sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete" + ModName + " - Are you sure?",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
 
             if (DialogResult == DialogResult.OK)
@@ -1212,6 +1209,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     File.Delete(ModFile + " - main.ba2");
 
                 SavePlugings();
+                sbar3("Mod uninstalled");
             }
             else
                 sbar2("Un-install cancelled");
@@ -1310,7 +1308,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (Profiles)
             {
                 SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
-                toolStripStatusRight.Text += ", " + cmbProfile.Text + " profile saved";
+                toolStripStatusSecondary.Text += ", " + cmbProfile.Text + " profile saved";
             }
             dataGridView1.CurrentCell = dgCurrent;
         }
@@ -1469,7 +1467,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
             }
-
         }
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
         {
@@ -1501,14 +1498,28 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void sbar(string StatusBarMessage)
         {
-            toolStripStatusLeft.Text = StatusBarMessage;
+            toolStripStatusStats.Text = StatusBarMessage;
         }
 
         private void sbar2(string StatusBarMessage)
         {
-            toolStripStatusRight.Text = StatusBarMessage;
+            toolStripStatusSecondary.Text = StatusBarMessage;
         }
 
+        private void sbar3(string StatusBarMessage)
+        {
+            toolStripStatusTertiary.Text = StatusBarMessage;
+        }
+
+        private void sbarCCCOn()
+        {
+            toolStripStatusDelCCC.Text = "Auto delete Starfield.ccc: On";
+        }
+
+        private void sbarCCCOff()
+        {
+            toolStripStatusDelCCC.Text = "Auto delete Starfield.ccc: Off";
+        }
         private void toolStripMenuLoot_Click_1(object sender, EventArgs e)
         {
             RunLOOT(false);
@@ -1568,8 +1579,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuAutoDelccc_Click(object sender, EventArgs e)
         {
             toolStripMenuAutoDelccc.Checked = !toolStripMenuAutoDelccc.Checked;
+            if (toolStripMenuAutoDelccc.Checked)
+                sbarCCCOn();
+            else
+                sbarCCCOff();
             Properties.Settings.Default.AutoDelccc = toolStripMenuAutoDelccc.Checked; ;
-
         }
 
         private void toolStripMenuProfilesOn_Click(object sender, EventArgs e)
@@ -1586,7 +1600,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 Profiles = false;
                 chkProfile.Checked = false;
-
             }
         }
 

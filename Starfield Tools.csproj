@@ -88,6 +88,7 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Data.SQLite" Version="1.0.118" />
 		<PackageReference Include="YamlDotNet" Version="16.0.0" />
 	</ItemGroup>
 	<ItemGroup>
