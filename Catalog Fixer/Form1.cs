@@ -395,7 +395,6 @@ namespace Starfield_Tools
 
                 try
                 {
-                    // Copy the file
                     File.Copy(sourceFileName, destFileName, true); // overwrite
                     richTextBox2.Text += "\nBackup done\n";
                     toolStripStatusLabel1.Text = "Backup done";
@@ -555,7 +554,6 @@ namespace Starfield_Tools
                 esmFiles[i] = esmFiles[i].Trim();
             }
 
-            //Dictionary<string, object> json_Dictionary = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(json);
             dynamic json_Dictionary = JsonConvert.DeserializeObject<dynamic>(json);
             try
             {

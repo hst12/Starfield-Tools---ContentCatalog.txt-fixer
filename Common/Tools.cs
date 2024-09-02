@@ -148,7 +148,13 @@ namespace Starfield_Tools.Common
 
             try
             {
-                Process.Start(cmdLine);
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = cmdLine,
+                    WorkingDirectory = Properties.Settings.Default.StarfieldGamePath,
+                    UseShellExecute = false // or true, depending on your needs
+                };
+                Process.Start(startInfo);
                 ShowSplashScreen();
                 Thread.Sleep(2000);
                 Application.Exit();

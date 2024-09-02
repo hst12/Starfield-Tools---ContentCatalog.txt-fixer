@@ -59,8 +59,10 @@
             toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
-            toolStripStatusLeft = new System.Windows.Forms.ToolStripStatusLabel();
-            toolStripStatusRight = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusStats = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusDelCCC = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusSecondary = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusTertiary = new System.Windows.Forms.ToolStripStatusLabel();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -352,7 +354,7 @@
             // 
             toolStripMenAddRemoveContext.Name = "toolStripMenAddRemoveContext";
             toolStripMenAddRemoveContext.Size = new System.Drawing.Size(522, 40);
-            toolStripMenAddRemoveContext.Text = "Add/Remove Missing";
+            toolStripMenAddRemoveContext.Text = "Add/Remove Missing Mod(s)";
             toolStripMenAddRemoveContext.Click += toolStripMenAddRemoveContext_Click;
             // 
             // toolStripMenuDelContext
@@ -413,7 +415,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLeft, toolStripStatusRight });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusStats, toolStripStatusDelCCC, toolStripStatusSecondary, toolStripStatusTertiary });
             statusStrip1.Location = new System.Drawing.Point(0, 1150);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
@@ -421,18 +423,29 @@
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "Starting up";
             // 
-            // toolStripStatusLeft
+            // toolStripStatusStats
             // 
-            toolStripStatusLeft.Name = "toolStripStatusLeft";
-            toolStripStatusLeft.Size = new System.Drawing.Size(131, 32);
-            toolStripStatusLeft.Text = "Starting up";
+            toolStripStatusStats.Name = "toolStripStatusStats";
+            toolStripStatusStats.Size = new System.Drawing.Size(131, 32);
+            toolStripStatusStats.Text = "Starting up";
             // 
-            // toolStripStatusRight
+            // toolStripStatusDelCCC
             // 
-            toolStripStatusRight.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            toolStripStatusRight.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
-            toolStripStatusRight.Name = "toolStripStatusRight";
-            toolStripStatusRight.Size = new System.Drawing.Size(4, 32);
+            toolStripStatusDelCCC.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
+            toolStripStatusDelCCC.Name = "toolStripStatusDelCCC";
+            toolStripStatusDelCCC.Size = new System.Drawing.Size(0, 32);
+            // 
+            // toolStripStatusSecondary
+            // 
+            toolStripStatusSecondary.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
+            toolStripStatusSecondary.Name = "toolStripStatusSecondary";
+            toolStripStatusSecondary.Size = new System.Drawing.Size(0, 32);
+            // 
+            // toolStripStatusTertiary
+            // 
+            toolStripStatusTertiary.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
+            toolStripStatusTertiary.Name = "toolStripStatusTertiary";
+            toolStripStatusTertiary.Size = new System.Drawing.Size(0, 32);
             // 
             // tableLayoutPanel1
             // 
@@ -1295,7 +1308,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLeft;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusStats;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -1421,10 +1434,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Files;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusRight;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSecondary;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCustom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuRunCustom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCatalog;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusTertiary;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusDelCCC;
     }
 }
