@@ -22,7 +22,7 @@ namespace Starfield_Tools
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = 0;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath, LoadScreenPic, LastProfile, CustomEXE;
+        private string StarfieldGamePath, LastProfile, CustomEXE;
 
         bool isModified = false, Profiles = false, GridSorted = false;
 
@@ -935,11 +935,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     row.Cells["PluginName"].Value = FilesToAdd[i];
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
-                sbar2(AddedFiles.ToString() + " file(s) added");
+                sbar3(AddedFiles.ToString() + " file(s) added");
                 isModified = true;
             }
             else
-                sbar2("Nothing to add");
+                sbar3("Nothing to add");
             return AddedFiles;
         }
 
@@ -985,12 +985,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
                 }
-                sbar2(RemovedFiles.ToString() + " file(s) removed");
+                sbar3(RemovedFiles.ToString() + " file(s) removed");
                 isModified = true;
             }
 
             if (RemovedFiles == 0)
-                sbar2("Nothing to remove");
+                sbar3("Nothing to remove");
             return RemovedFiles;
         }
 
@@ -999,8 +999,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int addedMods, removedMods;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
-            SavePlugings();
-            InitDataGrid();
+            if (addedMods != 0 && removedMods != 0)
+            {
+                SavePlugings();
+                InitDataGrid();
+            }
             sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
         }
 
@@ -1749,7 +1752,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     sbar2("Game version - Custom - " + Properties.Settings.Default.CustomEXE);
                     break;
             }
-
         }
 
         private void toolStripMenuResetStarfieldCustom_Click(object sender, EventArgs e)
@@ -1771,6 +1773,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
                 sbar3("StarfieldCustom.ini not modified");
+        }
+
+        private void editStarfieldCustominiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathToFile = (Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini");
+            Process.Start("explorer", pathToFile);
+        }
+
+        private void editContentCatalogtxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathToFile = Tools.GetCatalog();
+            Process.Start("explorer", pathToFile);
         }
     }
 }
