@@ -12,8 +12,8 @@ namespace Starfield_Tools
             InitializeComponent();
             string LoadScreen = Settings.Default.LoadScreenFilename;
             Rectangle screen = Screen.PrimaryScreen.Bounds;
-            float screenWidth = screen.Width * 0.75f;
-            float screenHeight = screen.Height * 0.75f;
+            float screenWidth = screen.Width * 0.85f;
+            float screenHeight = screen.Height * 0.85f;
             if (LoadScreen != null && LoadScreen != "")
             {
                 var bitmap = new Bitmap(LoadScreen);
