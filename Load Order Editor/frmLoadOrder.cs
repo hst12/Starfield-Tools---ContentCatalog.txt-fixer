@@ -43,8 +43,8 @@ namespace Starfield_Tools
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
-            this.Width = (int)(screenWidth * 0.75);
-            this.Height = (int)(screenHeight * 0.75);
+            this.Width = (int)(screenWidth * 0.85);
+            this.Height = (int)(screenHeight * 0.85);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
