@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,10 +83,13 @@ namespace Starfield_Tools
             if (Properties.Settings.Default.AutoDelccc)
             {
                 toolStripMenuAutoDelccc.Checked = true;
+                Delccc();
                 sbarCCCOn();
             }
             else
                 sbarCCCOff();
+
+            GameVersionDisplay();
 
             if (Properties.Settings.Default.ProflieOn)
             {
@@ -158,7 +160,7 @@ namespace Starfield_Tools
             }
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
-            sbar2(StarfieldTools.CatalogStatus);
+            sbar3(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
@@ -186,7 +188,7 @@ namespace Starfield_Tools
             GetProfiles();
             GridSorted = false;
             isModified = false;
-            sbar2("");
+            GameVersionDisplay();
             sbar3("");
         }
 
@@ -203,7 +205,6 @@ namespace Starfield_Tools
             string loText;
 
             toolStripStatusTertiary.ForeColor = DefaultForeColor;
-
             btnOK.Enabled = true;
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
@@ -421,8 +422,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (espCount > 0)
                     StatText += ", esp files: " + espCount.ToString();
 
-                sbar(StatText);
                 dataGridView1.EndEdit();
+                sbar(StatText);
             }
             catch
             {
@@ -1000,7 +1001,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             removedMods = RemoveMissing();
             SavePlugings();
             InitDataGrid();
-            sbar2(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+            sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
@@ -1720,6 +1721,56 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuCatalog_Click(object sender, EventArgs e)
         {
             CheckCatalog();
+        }
+
+        private void toolStripMenuShortcuts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("explorer.exe", "Common\\Shortcuts.txt");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error opening Shortcuts.txt");
+            }
+        }
+
+        private void GameVersionDisplay()
+        {
+            switch (GameVersion)
+            {
+                case 0:
+                    sbar2("Game version - Steam");
+                    break;
+                case 1:
+                    sbar2("Game version - MS");
+                    break;
+                case 2:
+                    sbar2("Game version - Custom - " + Properties.Settings.Default.CustomEXE);
+                    break;
+            }
+
+        }
+
+        private void toolStripMenuResetStarfieldCustom_Click(object sender, EventArgs e)
+        {
+            DialogResult DialogResult = MessageBox.Show("This will restore your StarfieldCustom.ini to a basic version", "Are you sure?",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+
+            if (DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    File.Copy("Common\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
+                    sbar3("StarfieldCustom.ini restored");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error restoring StarfieldCustom.ini");
+                }
+            }
+            else
+                sbar3("StarfieldCustom.ini not modified");
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿Toggle mod enable/disable - Space, Double-Click
+Delete from Plugins.txt - Del - Does not automatically save or delete the mod from the Data folder
+
+Mod move order keys:
+Move Up - W
+Move Down -S
+Move Top - A
+Move Bottom -D
+Drag and drop with mouse
+
+Run game - R
+Save Plugins - Ctrl-S
+Open Profile - Ctrl-O
+
+Misc:
+Right-click for context menu
+Refresh - F5 - discards unsaved changes
