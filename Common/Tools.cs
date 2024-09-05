@@ -15,16 +15,40 @@ namespace Starfield_Tools.Common
     {
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
-        public readonly List<string> BethFiles = new(File.ReadAllLines("Common\\BGS Exclude.txt"));
+        public List<string> BethFiles { get; set; }
+        public static string CatalogVersion { get; set; }
+        public static string StarfieldAppData { get; set; }
 
-        public static string GetCatalogVersion()
+        public Tools() // Constructor
         {
-            string CatalogVersion = File.ReadAllText("Common\\Catalog Version.txt");
-            return CatalogVersion;
-        }
-        public static string GetStarfieldAppData()
-        {
-            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
+            try
+            {
+                BethFiles = new(File.ReadAllLines("Common\\BGS Exclude.txt"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "BGS Exclude file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Environment.Exit(1);
+            }
+            try
+            {
+                CatalogVersion = File.ReadAllText("Common\\Catalog Version.txt");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Catalog Version file missing. Repair or re-install the app",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Environment.Exit(1);
+            }
+            try
+            {
+                StarfieldAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Starfield AppData folder missing. Repair the game", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Environment.Exit(1);
+            }
         }
 
         public static string MakeHeaderBlank()
@@ -69,7 +93,7 @@ namespace Starfield_Tools.Common
         }
         public static string GetCatalog()
         {
-            return GetStarfieldAppData() + @"\ContentCatalog.txt";
+            return StarfieldAppData + @"\ContentCatalog.txt";
         }
 
         public class Group // LOOT
@@ -120,7 +144,7 @@ namespace Starfield_Tools.Common
 
         public static bool CheckGame()
         {
-            if (!Directory.Exists(GetStarfieldAppData())) // Check if Starfield is installed
+            if (!Directory.Exists(StarfieldAppData)) // Check if Starfield is installed
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
@@ -179,7 +203,6 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
-
         public static bool StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
@@ -195,10 +218,9 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
-
         public static bool StartGame(int GameVersion)
         {
-            bool result=false;
+            bool result = false;
             switch (GameVersion)
             {
                 case 0:

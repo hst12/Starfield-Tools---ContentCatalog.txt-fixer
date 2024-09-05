@@ -240,7 +240,7 @@ namespace Starfield_Tools
                 {
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
-                    if (TestString != Tools.GetCatalogVersion()) // Skip catalog header, pull version info apart into date and actual version number
+                    if (TestString != Tools.CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
                         if (Verbose)
                             richTextBox2.Text += kvp.Value.Title + ", date: " + Tools.ConvertTime(VersionCheck) + " version: " + TestString[(TestString.IndexOf('.') + 1)..] + "\n";
 
@@ -643,7 +643,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (TestString != Tools.GetCatalogVersion()) // Skip the catalog header then check for valid timestamps
+                if (TestString != Tools.CatalogVersion) // Skip the catalog header then check for valid timestamps
                 {
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     TimeStamp = kvp.Value.Timestamp;
