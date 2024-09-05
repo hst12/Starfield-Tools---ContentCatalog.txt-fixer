@@ -27,6 +27,28 @@ namespace Starfield_Tools.Common
             return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
         }
 
+        public static string MakeHeaderBlank()
+        {
+            string HeaderString = "";
+
+            try
+            {
+                HeaderString = File.ReadAllText("Common\\header.txt"); // Read the header from file
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Missing Header.txt file - unable to continue. Re-install or repair the tool");
+                Application.Exit();
+            }
+            return HeaderString;
+        }
+
+        public static string MakeHeader()
+        {
+            string HeaderString = MakeHeaderBlank();
+            HeaderString = HeaderString[..^5] + ",";
+            return HeaderString;
+        }
         public static void OpenUrl(string url)
         {
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });

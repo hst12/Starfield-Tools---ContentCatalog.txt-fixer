@@ -294,7 +294,11 @@ namespace Starfield_Tools
             }
             catch (Exception ex)
             {
+                
                 sbar(ex.Message);
+                json = Tools.MakeHeaderBlank();
+                File.WriteAllText(Tools.GetCatalog(), json);
+
 #if DEBUG
                 MessageBox.Show(ex.Message);
 #endif
@@ -471,7 +475,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (GridSorted)
                 return;
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
+            if (dataGridView1.Rows.Count > 0)
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             using (StreamWriter writer = new(PluginFileName))
             {
@@ -741,7 +746,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
+            if (dataGridView1.Rows.Count > 0)
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
 
             SaveFileDialog SavePlugins = new();
             ProfileFolder = Properties.Settings.Default.ProfileFolder;

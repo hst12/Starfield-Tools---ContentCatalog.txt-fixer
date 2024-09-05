@@ -90,6 +90,7 @@
             resetDeleteFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuDeleteCCC = new System.Windows.Forms.ToolStripMenuItem();
             resetStarfieldCustominiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuDeleteLine = new System.Windows.Forms.ToolStripMenuItem();
@@ -484,7 +485,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, toolStripSeparator17, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
             fileToolStripMenuItem.Text = "&File";
@@ -653,6 +654,11 @@
             resetStarfieldCustominiToolStripMenuItem.Size = new System.Drawing.Size(411, 44);
             resetStarfieldCustominiToolStripMenuItem.Text = "Reset StarfieldCustom.ini";
             resetStarfieldCustominiToolStripMenuItem.Click += toolStripMenuResetStarfieldCustom_Click;
+            // 
+            // toolStripSeparator17
+            // 
+            toolStripSeparator17.Name = "toolStripSeparator17";
+            toolStripSeparator17.Size = new System.Drawing.Size(494, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -1497,5 +1503,6 @@
         private System.Windows.Forms.ToolStripMenuItem resetDeleteFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDeleteCCC;
         private System.Windows.Forms.ToolStripMenuItem resetStarfieldCustominiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
     }
 }

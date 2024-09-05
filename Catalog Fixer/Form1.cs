@@ -206,29 +206,6 @@ namespace Starfield_Tools
             }
         }
 
-        private static string MakeHeaderBlank()
-        {
-            string HeaderString = "";
-
-            try
-            {
-                HeaderString = File.ReadAllText("Common\\header.txt"); // Read the header from file
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Missing Header.txt file - unable to continue. Re-install or repair the tool");
-                Application.Exit();
-            }
-            return HeaderString;
-        }
-
-        private static string MakeHeader()
-        {
-            string HeaderString = MakeHeaderBlank();
-            HeaderString = HeaderString[..^5] + ",";
-            return HeaderString;
-        }
-
         private bool CheckCatalog() // returns true if catalog good
         {
             toolStripStatusLabel1.Text = "Checking...";
@@ -310,7 +287,7 @@ namespace Starfield_Tools
                     if (result == DialogResult.OK)
                     {
 
-                        var CatalogHeader = MakeHeaderBlank();
+                        var CatalogHeader = Tools.MakeHeaderBlank();
                         File.WriteAllText(Tools.GetCatalog(), CatalogHeader);
                         toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
                         return false;
@@ -496,7 +473,7 @@ namespace Starfield_Tools
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
             // Hack the Bethesda header back in
-            json = MakeHeader() + json[1..];
+            json = Tools.MakeHeader() + json[1..];
 
             File.WriteAllText(Tools.GetCatalog(), json); // Write updated cataalog
             DisplayCatalog();
@@ -538,7 +515,7 @@ namespace Starfield_Tools
             // Split the content into lines if necessary
             List<string> lines = [.. fileContent.Split('\n')];
 
-            foreach (var file in lines) // Process Plugins.txt to just a list of .esm files
+            foreach (var file in lines) // Process Plugins.txt to a list of .esm files
             {
                 if (file != "")
                 {
@@ -609,7 +586,7 @@ namespace Starfield_Tools
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
 
                     // Hack the Bethesda header back in
-                    json = MakeHeader() + json[1..];
+                    json = Tools.MakeHeader() + json[1..];
 
                     File.WriteAllText(Tools.GetCatalog(), json);
                 }
@@ -622,7 +599,12 @@ namespace Starfield_Tools
             }
             catch (Exception ex)
             {
+                toolStripStatusLabel1.Text = (ex.Message);
+                json=Tools.MakeHeaderBlank();
+                File.WriteAllText(Tools.GetCatalog(), json);
+#if DEBUG
                 MessageBox.Show($"Error: {ex.Message}");
+#endif
             }
         }
 
@@ -688,7 +670,7 @@ namespace Starfield_Tools
                 return;
             }
             // Insert the Bethesda header back in. This will probably break if the version no. is updated from 1.1
-            json = MakeHeader() + json[1..]; // Remove a { char
+            json = Tools.MakeHeader() + json[1..]; // Remove a { char
 
             File.WriteAllText(jsonFilePath, json);
             toolStripStatusLabel1.Text = VersionReplacementCount.ToString() + " Version replacements";
