@@ -1311,8 +1311,8 @@
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(108, 68);
             btnQuit.TabIndex = 17;
-            btnQuit.Text = "Quit";
-            toolTip1.SetToolTip(btnQuit, "Save changes and Quit");
+            btnQuit.Text = "Exit";
+            toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
             // 
