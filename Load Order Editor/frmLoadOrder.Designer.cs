@@ -165,10 +165,9 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             label1 = new System.Windows.Forms.Label();
             txtSearchBox = new System.Windows.Forms.TextBox();
-            btnQuit = new System.Windows.Forms.Button();
             btnCheckCatalog = new System.Windows.Forms.Button();
-            btnOK = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
+            btnQuit = new System.Windows.Forms.Button();
             fontDialog1 = new System.Windows.Forms.FontDialog();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
@@ -1089,8 +1088,7 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 12;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel2.ColumnCount = 11;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -1110,10 +1108,9 @@
             tableLayoutPanel2.Controls.Add(splitContainer2, 5, 0);
             tableLayoutPanel2.Controls.Add(btnBottom, 3, 0);
             tableLayoutPanel2.Controls.Add(splitContainer1, 4, 0);
-            tableLayoutPanel2.Controls.Add(btnQuit, 11, 0);
             tableLayoutPanel2.Controls.Add(btnCheckCatalog, 8, 0);
-            tableLayoutPanel2.Controls.Add(btnOK, 9, 0);
-            tableLayoutPanel2.Controls.Add(btnCancel, 10, 0);
+            tableLayoutPanel2.Controls.Add(btnCancel, 9, 0);
+            tableLayoutPanel2.Controls.Add(btnQuit, 10, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 901);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -1281,19 +1278,6 @@
             txtSearchBox.TabIndex = 6;
             txtSearchBox.KeyDown += txtSearchBox_KeyDown;
             // 
-            // btnQuit
-            // 
-            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1594, 23);
-            btnQuit.Name = "btnQuit";
-            btnQuit.Size = new System.Drawing.Size(108, 68);
-            btnQuit.TabIndex = 17;
-            btnQuit.Text = "Quit";
-            toolTip1.SetToolTip(btnQuit, "Quit");
-            btnQuit.UseVisualStyleBackColor = true;
-            btnQuit.Click += btnQuit_Click;
-            // 
             // btnCheckCatalog
             // 
             btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -1306,31 +1290,31 @@
             btnCheckCatalog.UseVisualStyleBackColor = true;
             btnCheckCatalog.Click += btnCheckCatalog_Click;
             // 
-            // btnOK
-            // 
-            btnOK.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnOK.AutoSize = true;
-            btnOK.Location = new System.Drawing.Point(1318, 23);
-            btnOK.Name = "btnOK";
-            btnOK.Size = new System.Drawing.Size(132, 68);
-            btnOK.TabIndex = 9;
-            btnOK.Text = "Ok";
-            toolTip1.SetToolTip(btnOK, "Save changes and close");
-            btnOK.UseVisualStyleBackColor = true;
-            btnOK.Click += btnOK_Click;
-            // 
             // btnCancel
             // 
             btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnCancel.AutoSize = true;
-            btnCancel.Location = new System.Drawing.Point(1456, 23);
+            btnCancel.Location = new System.Drawing.Point(1318, 23);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(132, 68);
+            btnCancel.Size = new System.Drawing.Size(131, 68);
             btnCancel.TabIndex = 10;
             btnCancel.Text = "Cancel";
             toolTip1.SetToolTip(btnCancel, "Cancel Changes");
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
+            // 
+            // btnQuit
+            // 
+            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnQuit.AutoSize = true;
+            btnQuit.Location = new System.Drawing.Point(1455, 23);
+            btnQuit.Name = "btnQuit";
+            btnQuit.Size = new System.Drawing.Size(108, 68);
+            btnQuit.TabIndex = 17;
+            btnQuit.Text = "Quit";
+            toolTip1.SetToolTip(btnQuit, "Save changes and Quit");
+            btnQuit.UseVisualStyleBackColor = true;
+            btnQuit.Click += btnQuit_Click;
             // 
             // openFileDialog1
             // 
@@ -1456,7 +1440,6 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cmbProfile;
@@ -1465,7 +1448,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuGitHub;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuColumns;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAchievements;
@@ -1520,5 +1502,6 @@
         private System.Windows.Forms.ToolStripMenuItem resetStarfieldCustominiToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.Button btnCheckCatalog;
+        private System.Windows.Forms.Button btnQuit;
     }
 }

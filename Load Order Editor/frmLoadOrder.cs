@@ -205,7 +205,6 @@ namespace Starfield_Tools
             string loText;
 
             toolStripStatusTertiary.ForeColor = DefaultForeColor;
-            btnOK.Enabled = true;
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
@@ -309,7 +308,7 @@ namespace Starfield_Tools
             {
                 MessageBox.Show(@"Missing Plugins.txt file
 
-Click Ok and Ok again to create a blank Plugins.txt file or click Ok and Cancel to fix manually
+Click Ok and Quit to create a blank Plugins.txt file or click Ok and Cancel to fix manually
 Click File->Restore if you have a backup of your Plugins.txt file
 Altenatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
                 return;
@@ -496,7 +495,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            SaveLO(Tools.GetStarfieldAppData() + @"\Plugins.txt");
+            
             this.Close();
         }
         private void MoveUp()
@@ -625,7 +624,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             sbar3("Warning! - Plugins sorted - saving changes disabled");
             toolStripStatusTertiary.ForeColor = Color.Red;
-            btnOK.Enabled = false;
             btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
             GridSorted = true;
@@ -1404,6 +1402,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
+            SaveLO(Tools.GetStarfieldAppData() + @"\Plugins.txt");
             SaveSettings();
             Application.Exit();
         }
@@ -1572,12 +1571,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     sbar2("Starfield.ccc deleted");
                 }
                 else
-                    sbar2("Starfield.ccc not found");
+                    sbar3("Starfield.ccc not found");
 
             }
             catch (Exception ex)
             {
-                sbar2("Error deleting Starfield.ccc " + ex.Message);
+                sbar3("Error deleting Starfield.ccc " + ex.Message);
             }
 
         }
