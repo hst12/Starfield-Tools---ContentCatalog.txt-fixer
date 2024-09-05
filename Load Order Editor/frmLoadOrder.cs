@@ -58,27 +58,7 @@ namespace Starfield_Tools
             GameVersion = Properties.Settings.Default.GameVersion;
             CustomEXE = Properties.Settings.Default.CustomEXE;
 
-            switch (GameVersion)
-            {
-                case 0: // Steam
-                    toolStripMenuSteam.Checked = true;
-                    toolStripMenuRunMS.Visible = false;
-                    toolStripMenuRunCustom.Visible = false;
-                    toolStripMenuRunSteam.Visible = true;
-                    break;
-                case 1: // MS
-                    toolStripMenuMS.Checked = true;
-                    toolStripMenuRunSteam.Visible = false;
-                    toolStripMenuRunMS.Visible = true;
-                    toolStripMenuRunCustom.Visible = false;
-                    break;
-                case 2: // Custom
-                    toolStripMenuCustom.Checked = true;
-                    toolStripMenuRunMS.Visible = false;
-                    toolStripMenuRunSteam.Visible = false;
-                    toolStripMenuRunCustom.Visible = true;
-                    break;
-            }
+
 
             if (Properties.Settings.Default.AutoDelccc)
             {
@@ -89,6 +69,18 @@ namespace Starfield_Tools
             else
                 sbarCCCOff();
 
+            switch (GameVersion)
+            {
+                case 0:
+                    toolStripMenuSteam.Checked = true;
+                    break;
+                case 1:
+                    toolStripMenuMS.Checked = true;
+                    break;
+                case 2:
+                    toolStripMenuCustom.Checked = true;
+                    break;
+            }
             GameVersionDisplay();
 
             if (Properties.Settings.Default.ProflieOn)
@@ -495,7 +487,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            
+
             this.Close();
         }
         private void MoveUp()
@@ -1253,57 +1245,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             EnableDisable();
         }
 
-        private void toolStripMenuRunSteam_Click(object sender, EventArgs e)
-        {
-            if (isModified)
-            {
-                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.OK)
-                    Tools.StartStarfieldSteam();
-            }
-            else
-                Tools.StartStarfieldSteam();
-        }
-
         private void toolStripMenuRunMS_Click(object sender, EventArgs e)
         {
-            if (isModified)
-            {
-                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.OK)
-                    Tools.StartStarfieldMS();
-            }
-            else
-                Tools.StartStarfieldMS();
-
+            RunGame();
         }
 
         private void toolStripMenuInstallMod_Click(object sender, EventArgs e)
         {
             InstallMod();
         }
-
-        private void toolStripMenuSteam_Click(object sender, EventArgs e)
-        {
-            toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
-            if (toolStripMenuSteam.Checked)
-            {
-                toolStripMenuRunMS.Visible = false;
-                toolStripMenuRunCustom.Visible = false;
-                toolStripMenuRunSteam.Visible = true;
-
-                toolStripMenuMS.Checked = false;
-                toolStripMenuCustom.Checked = false;
-                GameVersion = 0;
-                Properties.Settings.Default.GameVersion = 0;
-                sbar2("Game version set to Steam");
-            }
-            else
-                toolStripMenuMS.Checked = true;
-            Properties.Settings.Default.GameVersion = GameVersion;
-            SaveSettings();
-        }
-
         private void SaveOnDblClick()
         {
             SavePlugings();
@@ -1327,7 +1277,48 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            Tools.StartGame(GameVersion);
+            RunGame();
+        }
+        private static void ShowSplashScreen()
+        {
+            Form SS = new frmSplashScreen();
+            SS.Show();
+        }
+        private void RunGame()
+        {
+            Properties.Settings.Default.GameVersion = GameVersion;
+            SaveSettings();
+            bool result;
+            Form SS = new frmSplashScreen();
+            SS.Show();
+
+            if (isModified)
+            {
+                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.OK)
+                {
+                    timer1.Start();
+                    if (Tools.StartGame(GameVersion))
+                        result = true;
+                    else
+                        result = false;
+                }
+                else
+                    result = false;
+            }
+            else
+            {
+                timer1.Start();
+                if (Tools.StartGame(GameVersion))
+                    result = true;
+                else
+                    result= false;
+            }
+            if (!result)
+            {
+                timer1.Stop();
+                SS.Close();
+            }
         }
 
         private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)
@@ -1371,27 +1362,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Tools.OpenUrl(url);  // Open Creations web site
             else
                 sbar2("Not a Creations mod");
-        }
-
-        private void toolStripMenuMS_Click(object sender, EventArgs e)
-        {
-            toolStripMenuMS.Checked = !toolStripMenuMS.Checked;
-            if (toolStripMenuMS.Checked)
-            {
-                toolStripMenuSteam.Checked = false;
-                toolStripMenuCustom.Checked = false;
-                toolStripMenuRunMS.Visible = true;
-                toolStripMenuRunSteam.Visible = false;
-                toolStripMenuRunCustom.Visible = false;
-                sbar2("Game version set to MS Store");
-                GameVersion = 1;
-            }
-            else
-            {
-                toolStripMenuSteam.Checked = true;
-            }
-            Properties.Settings.Default.GameVersion = GameVersion;
-            SaveSettings();
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
@@ -1614,7 +1584,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuLoadScreenPreview_Click(object sender, EventArgs e)
         {
-            Tools.ShowSplashScreen();
+            ShowSplashScreen();
         }
 
         private void toolStripMenuIndex_Click(object sender, EventArgs e)
@@ -1688,18 +1658,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
             if (toolStripMenuCustom.Checked)
             {
-                toolStripMenuSteam.Checked = false;
-                toolStripMenuMS.Checked = false;
-
-                toolStripMenuRunMS.Visible = false;
-                toolStripMenuRunSteam.Visible = false;
                 sbar2("Game version set to Custom");
                 GameVersion = 2;
             }
             else
             {
                 toolStripMenuSteam.Checked = false;
-                toolStripMenuSteam.Checked = false;
+                toolStripMenuMS.Checked = false;
             }
 
             Properties.Settings.Default.GameVersion = GameVersion;
@@ -1708,15 +1673,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuRunCustom_Click(object sender, EventArgs e)
         {
-            if (isModified)
-            {
-                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.OK)
-                    Tools.StartGame(GameVersion);
-                else
-                    return;
-            }
-            Tools.StartGame(GameVersion);
+            RunGame();
         }
 
         private string CheckCatalog()
@@ -1795,6 +1752,41 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void btnCheckCatalog_Click(object sender, EventArgs e)
         {
             CheckCatalog();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            this.Close();
+        }
+
+        private void toolStripMenuRun_Click(object sender, EventArgs e)
+        {
+            RunGame();
+        }
+
+        private void toolStripMenuSteam_Click(object sender, EventArgs e)
+        {
+            toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
+            if (toolStripMenuSteam.Checked)
+            {
+                toolStripMenuMS.Checked = false;
+                toolStripMenuCustom.Checked = false;
+                GameVersion = 0;
+                sbar2("Game version set to Steam");
+            }
+        }
+
+        private void toolStripMenuMS_Click(object sender, EventArgs e)
+        {
+            toolStripMenuMS.Checked = !toolStripMenuMS.Checked;
+            if (toolStripMenuMS.Checked)
+            {
+                toolStripMenuSteam.Checked = false;
+                toolStripMenuCustom.Checked = false;
+                GameVersion = 1;
+                sbar2("Game version set to MS");
+            }
         }
     }
 }

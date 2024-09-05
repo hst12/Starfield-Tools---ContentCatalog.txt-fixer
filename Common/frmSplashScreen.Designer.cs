@@ -40,7 +40,8 @@ namespace Starfield_Tools
             AutoSize = true;
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            ClientSize = new System.Drawing.Size(1374, 774);
+            ClientSize = new System.Drawing.Size(1377, 754);
+            DoubleBuffered = true;
             Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             ForeColor = System.Drawing.SystemColors.ActiveBorder;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

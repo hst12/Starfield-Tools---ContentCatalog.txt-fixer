@@ -156,17 +156,11 @@ namespace Starfield_Tools.Common
             return "";
         }
 
-        public static void ShowSplashScreen()
-        {
-            Form SS = new frmSplashScreen();
-            SS.Show();
-        }
-
-        public static void StartStarfieldCustom()
+        public static bool StartStarfieldCustom()
         {
             string cmdLine = Properties.Settings.Default.CustomEXE;
             if (cmdLine == null)
-                return;
+                return false;
 
             try
             {
@@ -174,54 +168,53 @@ namespace Starfield_Tools.Common
                 {
                     FileName = cmdLine,
                     WorkingDirectory = Properties.Settings.Default.StarfieldGamePath,
-                    UseShellExecute = false // or true, depending on your needs
+                    UseShellExecute = false //
                 };
                 Process.Start(startInfo);
-                ShowSplashScreen();
-                Thread.Sleep(7000);
-                Application.Exit();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
+                return false;
             }
         }
 
-        public static void StartStarfieldMS()
+        public static bool StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
 
             try
             {
                 Process.Start(cmdLine);
-                ShowSplashScreen();
-                Thread.Sleep(2000);
-                Application.Exit();
+                return true;
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
+                return false;
             }
         }
 
-        public static void StartGame(int GameVersion)
+        public static bool StartGame(int GameVersion)
         {
+            bool result=false;
             switch (GameVersion)
             {
                 case 0:
-                    StartStarfieldSteam();
+                    result = StartStarfieldSteam();
                     break;
                 case 1:
-                    StartStarfieldMS();
+                    result = StartStarfieldMS();
                     break;
                 case 2:
-                    StartStarfieldCustom();
+                    result = StartStarfieldCustom();
                     break;
             }
+            return result;
         }
 
-        public static void StartStarfieldSteam()
+        public static bool StartStarfieldSteam()
         {
             const string userRoot = "HKEY_CURRENT_USER";
             const string subkey = @"Software\Valve\Steam";
@@ -232,15 +225,13 @@ namespace Starfield_Tools.Common
                 string stringValue = (string)Registry.GetValue(keyName, "SteamExe", ""); // Get Steam path from Registry
                 var processInfo = new ProcessStartInfo(stringValue, "-applaunch 1716740");
                 var process = Process.Start(processInfo);
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Unable tostart game");
-                return;
+                MessageBox.Show(ex.Message, "Unable to start game");
+                return false;
             }
-            ShowSplashScreen();
-            Thread.Sleep(7000);
-            Application.Exit();
         }
     }
 }
