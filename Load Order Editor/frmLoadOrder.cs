@@ -294,7 +294,7 @@ namespace Starfield_Tools
             }
             catch (Exception ex)
             {
-                
+
                 sbar(ex.Message);
                 json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
@@ -1791,6 +1791,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string pathToFile = Tools.GetCatalog();
             Process.Start("explorer", pathToFile);
+        }
+
+        private void btnCheckCatalog_Click(object sender, EventArgs e)
+        {
+            CheckCatalog();
         }
     }
 }
