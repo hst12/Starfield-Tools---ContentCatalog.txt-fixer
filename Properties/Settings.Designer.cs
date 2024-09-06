@@ -284,5 +284,17 @@ namespace Starfield_Tools.Properties {
                 this["CustomEXE"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FileSize {
+            get {
+                return ((bool)(this["FileSize"]));
+            }
+            set {
+                this["FileSize"] = value;
+            }
+        }
     }
 }

@@ -57,8 +57,6 @@ namespace Starfield_Tools
             GameVersion = Properties.Settings.Default.GameVersion;
             CustomEXE = Properties.Settings.Default.CustomEXE;
 
-
-
             if (Properties.Settings.Default.AutoDelccc)
             {
                 toolStripMenuAutoDelccc.Checked = true;
@@ -150,12 +148,22 @@ namespace Starfield_Tools
                 dataGridView1.Columns["Index"].Visible = false;
             }
 
+            if (Properties.Settings.Default.FileSize)
+            {
+                toolStripMenuFileSize.Checked = true;
+                dataGridView1.Columns["FileSize"].Visible = true;
+            }
+            else
+            {
+                toolStripMenuFileSize.Checked = false;
+                dataGridView1.Columns["FileSize"].Visible = false;
+            }
+
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar3(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
-
 
             InitDataGrid();
             cmbProfile.Enabled = Profiles;
@@ -189,6 +197,12 @@ namespace Starfield_Tools
                 RefreshDataGrid();
         }
 
+        private bool CheckStarfieldCustom()
+        {
+            bool result = Tools.FileCompare(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                "\\My Games\\Starfield\\StarfieldCustom.ini", "Common\\StarfieldCustom.ini");
+            return result;
+        }
         private void InitDataGrid()
         {
             bool ModEnabled;
@@ -1668,6 +1682,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 sbar2("Game version set to Custom");
                 GameVersion = 2;
+                Properties.Settings.Default.GameVersion = GameVersion;
             }
             else
             {
@@ -1782,6 +1797,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripMenuCustom.Checked = false;
                 GameVersion = 0;
                 sbar2("Game version set to Steam");
+                Properties.Settings.Default.GameVersion = GameVersion;
             }
         }
 
@@ -1794,7 +1810,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 toolStripMenuCustom.Checked = false;
                 GameVersion = 1;
                 sbar2("Game version set to MS");
+                Properties.Settings.Default.GameVersion = GameVersion;
             }
+        }
+
+        private void toolStripMenuFileSize_Click(object sender, EventArgs e)
+        {
+            toolStripMenuFileSize.Checked = !toolStripMenuFileSize.Checked;
+            if (toolStripMenuFileSize.Checked)
+                dataGridView1.Columns["FileSize"].Visible = true;
+            else
+                dataGridView1.Columns["FileSize"].Visible = false;
+            Properties.Settings.Default.FileSize = toolStripMenuFileSize.Checked;
+        }
+
+        private void compareStarfieldCustominiToBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CheckStarfieldCustom())
+                sbar3("Same");
+            else
+                sbar3("Modified");
         }
     }
 }
