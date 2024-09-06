@@ -30,8 +30,7 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-            if (!Tools.CheckGame())
-                Application.Exit();
+            //CheckGame();
 
             if (!Directory.Exists(Tools.StarfieldAppData)) // Check if Starfield is installed
             {
@@ -236,6 +235,7 @@ namespace Starfield_Tools
             List<bool> AchievmentSafe = [];
             List<long> TimeStamp = [];
             List<string> CreationsID = [];
+            List<long> FileSize = [];
 
             int TitleCount = 0;
             int esmCount = 0;
@@ -275,7 +275,7 @@ namespace Starfield_Tools
                         AchievmentSafe.Add(kvp.Value.AchievementSafe);
                         TimeStamp.Add(kvp.Value.Timestamp);
                         CreationsID.Add(kvp.Key.ToString());
-
+                        FileSize.Add(kvp.Value.FilesSize);
                     }
                     catch (Exception ex)
                     {
@@ -308,6 +308,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             using (var reader = new StreamReader(loText))
             {
                 string PluginName, Description, ModFiles, ModVersion, ASafe, ModTimeStamp, ModID;
+                long ModFileSize;
 
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
@@ -332,6 +333,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 ASafe = "";
                                 ModTimeStamp = "";
                                 ModID = "";
+                                ModFileSize = 0;
 
                                 for (int i = 0; i < CreationsPlugin.Count; i++)
                                 {
@@ -349,6 +351,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                             ASafe = "";
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
+                                        ModFileSize = FileSize[i] / 1024;
                                     }
                                 }
 
@@ -360,7 +363,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 {
                                     for (int i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
+                                        {
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
+
+                                        }
                                 }
                                 else
                                 {
@@ -377,6 +383,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["TimeStamp"].Value = ModTimeStamp;
                                 row.Cells["Achievements"].Value = ASafe;
                                 row.Cells["Files"].Value = ModFiles;
+                                if (ModFileSize != 0)
+                                    row.Cells["FileSize"].Value = ModFileSize;
                                 row.Cells["CreationsID"].Value = ModID;
                                 row.Cells["Index"].Value = IndexCount++;
                             }
@@ -1297,7 +1305,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (DialogResult == DialogResult.OK)
                 {
-                    timer1.Start();
                     if (Tools.StartGame(GameVersion))
                         result = true;
                     else
@@ -1308,17 +1315,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
             {
-                timer1.Start();
                 if (Tools.StartGame(GameVersion))
                     result = true;
                 else
-                    result= false;
+                    result = false;
             }
             if (!result)
             {
                 timer1.Stop();
                 SS.Close();
             }
+            else
+                timer1.Start();
         }
 
         private void toolStripMenAddRemoveContext_Click(object sender, EventArgs e)

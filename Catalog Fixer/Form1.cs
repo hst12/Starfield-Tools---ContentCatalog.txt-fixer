@@ -23,8 +23,8 @@ namespace Starfield_Tools
         public frmStarfieldTools()
         {
             InitializeComponent();
-            if (!Tools.CheckGame())
-                Application.Exit();
+
+           Tools.CheckGame();
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;

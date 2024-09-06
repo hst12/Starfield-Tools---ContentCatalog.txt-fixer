@@ -142,15 +142,13 @@ namespace Starfield_Tools.Common
             public string MainCategory { get; set; }
         }
 
-        public static bool CheckGame()
+        public static void CheckGame()
         {
             if (!Directory.Exists(StarfieldAppData)) // Check if Starfield is installed
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
+                Environment.Exit(1);
             }
-            else
-                return true;
         }
         public static void ShowAbout()
         {

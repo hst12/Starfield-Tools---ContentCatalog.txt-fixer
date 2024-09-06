@@ -41,6 +41,8 @@
             Achievements = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Files = new System.Windows.Forms.DataGridViewTextBoxColumn();
             CreationsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            FileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            URL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             contextMenuDatagrid = new System.Windows.Forms.ContextMenuStrip(components);
             toolStripMenuEnableDisable = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -194,7 +196,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.ColumnHeadersHeight = 46;
-            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Index, ModEnabled, PluginName, Description, Group, Version, TimeStamp, Achievements, Files, CreationsID });
+            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Index, ModEnabled, PluginName, Description, Group, Version, TimeStamp, Achievements, Files, CreationsID, FileSize, URL });
             dataGridView1.ContextMenuStrip = contextMenuDatagrid;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataGridView1.Location = new System.Drawing.Point(4, 45);
@@ -204,7 +206,6 @@
             dataGridView1.RowHeadersWidth = 82;
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.ShowEditingIcon = false;
             dataGridView1.Size = new System.Drawing.Size(1765, 848);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
@@ -302,6 +303,23 @@
             CreationsID.Name = "CreationsID";
             CreationsID.ReadOnly = true;
             CreationsID.Width = 189;
+            // 
+            // FileSize
+            // 
+            FileSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            FileSize.HeaderText = "File Size (MB)";
+            FileSize.MinimumWidth = 10;
+            FileSize.Name = "FileSize";
+            FileSize.ReadOnly = true;
+            FileSize.Width = 203;
+            // 
+            // URL
+            // 
+            URL.HeaderText = "URL";
+            URL.MinimumWidth = 10;
+            URL.Name = "URL";
+            URL.Visible = false;
+            URL.Width = 200;
             // 
             // contextMenuDatagrid
             // 
@@ -1459,16 +1477,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadScreenPreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuIndex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Group;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSecondary;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCustom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCatalog;
@@ -1491,5 +1499,17 @@
         private System.Windows.Forms.Button btnCheckCatalog;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Index;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Group;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Achievements;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Files;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreationsID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn URL;
     }
 }
