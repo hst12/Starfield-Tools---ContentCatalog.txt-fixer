@@ -13,17 +13,20 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
+        public static string CommonFolder { get; set; }
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
         public List<string> BethFiles { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
+        
 
         public Tools() // Constructor
         {
+            CommonFolder = Environment.CurrentDirectory + "\\Common";
             try
             {
-                BethFiles = new(File.ReadAllLines("Common\\BGS Exclude.txt"));
+                BethFiles = new(File.ReadAllLines(CommonFolder+"\\BGS Exclude.txt"));
             }
             catch (Exception ex)
             {
@@ -32,7 +35,7 @@ namespace Starfield_Tools.Common
             }
             try
             {
-                CatalogVersion = File.ReadAllText("Common\\Catalog Version.txt");
+                CatalogVersion = File.ReadAllText(CommonFolder + "\\Catalog Version.txt");
             }
             catch (Exception ex)
             {
@@ -41,7 +44,7 @@ namespace Starfield_Tools.Common
             }
             try
             {
-                StarfieldAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Starfield";
+                StarfieldAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Starfield";
             }
 
             catch (Exception ex)
@@ -57,7 +60,7 @@ namespace Starfield_Tools.Common
 
             try
             {
-                HeaderString = File.ReadAllText("Common\\header.txt"); // Read the header from file
+                HeaderString = File.ReadAllText(CommonFolder+"\\header.txt"); // Read the header from file
             }
             catch (Exception ex)
             {

@@ -30,14 +30,7 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-            //CheckGame();
-
-            if (!Directory.Exists(Tools.StarfieldAppData)) // Check if Starfield is installed
-            {
-                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                Environment.Exit(1);
-            }
-
+            Tools.CheckGame();
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -200,7 +193,7 @@ namespace Starfield_Tools
         private bool CheckStarfieldCustom()
         {
             bool result = Tools.FileCompare(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                "\\My Games\\Starfield\\StarfieldCustom.ini", "Common\\StarfieldCustom.ini");
+                "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder+"\\StarfieldCustom.ini");
             return result;
         }
         private void InitDataGrid()
@@ -1715,7 +1708,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             try
             {
-                Process.Start("explorer.exe", "Common\\Shortcuts.txt");
+                Process.Start("explorer.exe", Tools.CommonFolder+"\\Shortcuts.txt");
             }
             catch (Exception ex)
             {
@@ -1748,7 +1741,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 try
                 {
-                    File.Copy("Common\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
+                    File.Copy(Tools.CommonFolder+"\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
                     sbar3("StarfieldCustom.ini restored");
                 }
                 catch (Exception ex)
