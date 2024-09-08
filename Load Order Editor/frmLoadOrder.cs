@@ -193,7 +193,7 @@ namespace Starfield_Tools
         private bool CheckStarfieldCustom()
         {
             bool result = Tools.FileCompare(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder+"\\StarfieldCustom.ini");
+                "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder + "\\StarfieldCustom.ini");
             return result;
         }
         private void InitDataGrid()
@@ -538,7 +538,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.ClearSelection();
             dataGridView1.Rows[rowIndex + 1].Selected = true;
             dataGridView1.Rows[rowIndex + 1].Cells[colIndex].Selected = true;
-
         }
         private void btnDown_Click(object sender, EventArgs e)
         {
@@ -603,7 +602,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             dataGridView1.Rows.Insert(0, selectedRow);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[0].Cells[colIndex].Selected = true;
-
         }
 
         private void MoveBottom()
@@ -674,7 +672,26 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (txtSearchBox.Text == "")
                 return;
             TextBoxString = txtSearchBox.Text.ToLower(); // Do lower case only search
-
+            int currentIndex = dataGridView1.CurrentCell.RowIndex;
+            int nextIndex = currentIndex + 1;
+            DataGridSring = dataGridView1.Rows[currentIndex].Cells["PluginName"].Value.ToString().ToLower();
+            if (DataGridSring.Contains(TextBoxString))
+            {
+                if (nextIndex < dataGridView1.Rows.Count)
+                {
+                    DataGridViewRow nextRow = dataGridView1.Rows[nextIndex];
+                    for (ModIndex = nextRow.Index; ModIndex < dataGridView1.RowCount; ModIndex++)
+                    {
+                        DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
+                        if (DataGridSring.Contains(TextBoxString))
+                        {
+                            sbar2("Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString());
+                            dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
+                            return;
+                        }
+                    }
+                }
+            }
             for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
             {
                 DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
@@ -1010,12 +1027,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             int addedMods, removedMods;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
-            if (addedMods != 0 && removedMods != 0)
+            if (addedMods != 0 || removedMods != 0)
             {
                 SavePlugings();
                 InitDataGrid();
+                isModified = false;
+                sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
             }
-            sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+            else
+            {
+                isModified = false;
+                sbar3("No mods found to add or delete");
+            }
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
@@ -1205,7 +1228,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName[..ModName.IndexOf('.')];
-            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete" + ModName + " - Are you sure?",
+            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
 
@@ -1708,7 +1731,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             try
             {
-                Process.Start("explorer.exe", Tools.CommonFolder+"\\Shortcuts.txt");
+                Process.Start("explorer.exe", Tools.CommonFolder + "\\Shortcuts.txt");
             }
             catch (Exception ex)
             {
@@ -1741,7 +1764,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 try
                 {
-                    File.Copy(Tools.CommonFolder+"\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
+                    File.Copy(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
                     sbar3("StarfieldCustom.ini restored");
                 }
                 catch (Exception ex)
