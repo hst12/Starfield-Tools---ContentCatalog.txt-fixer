@@ -1138,7 +1138,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuExportActive_Click(object sender, EventArgs e)
         {
             int i;
-            string tempstr;
+            string tempstr="", Group = "";
+            List<string> ExportMods = new();
             SaveFileDialog ExportActive = new()
             {
                 Filter = "Txt File|*.txt",
@@ -1148,17 +1149,27 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult dlgResult = ExportActive.ShowDialog();
             if (dlgResult == DialogResult.OK)
             {
-                using StreamWriter writer = new(ExportActive.FileName);
+
 
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value)
                     {
-                        if ((string)dataGridView1.Rows[i].Cells["Group"].Value != "")
-                            writer.WriteLine("#" + dataGridView1.Rows[i].Cells["Group"].Value);
+                        tempstr = (string)dataGridView1.Rows[i].Cells["Group"].Value;
+                        if (tempstr != "" && tempstr!=null && tempstr!=Group)
+                        {
+                            Group = tempstr;
+                            ExportMods.Add("#" + Group);
+                        }
                         tempstr = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
-                        writer.WriteLine(tempstr);
+                        ExportMods.Add(tempstr);
                     }
+                }
+
+                using StreamWriter writer = new(ExportActive.FileName);
+                for (i = 0; i < ExportMods.Count; i++)
+                {
+                    writer.WriteLine(ExportMods[i]);
                 }
             }
         }
