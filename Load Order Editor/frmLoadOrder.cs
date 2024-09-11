@@ -1861,10 +1861,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 sbar3("Modified");
         }
 
-        private void editBGSExcludetxtToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuExploreCommon_Click(object sender, EventArgs e)
         {
-
-            string pathToFile = (Tools.CommonFolder + "\\BGS Exclude.txt");
+            string pathToFile = (Tools.CommonFolder);
             Process.Start("explorer", pathToFile);
             sbar3("Restart the application for changes to take effect");
         }
