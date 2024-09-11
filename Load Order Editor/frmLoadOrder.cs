@@ -52,8 +52,9 @@ namespace Starfield_Tools
             if (Properties.Settings.Default.AutoDelccc)
             {
                 toolStripMenuAutoDelccc.Checked = true;
-                Delccc();
                 sbarCCCOn();
+                if (Delccc())
+                    toolStripStatusDelCCC.Text = ("Starfield.ccc deleted");
             }
             else
                 sbarCCCOff();
@@ -1582,7 +1583,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             Process.Start("explorer.exe", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield");
         }
 
-        private void Delccc()
+        private bool Delccc()
         {
             try
             {
@@ -1590,15 +1591,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (File.Exists(Starfieldccc))
                 {
                     File.Delete(Starfieldccc);
-                    sbar2("Starfield.ccc deleted");
+                    sbar3("Starfield.ccc deleted");
+                    return true;
                 }
                 else
+                {
                     sbar3("Starfield.ccc not found");
-
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 sbar3("Error deleting Starfield.ccc " + ex.Message);
+                return false;
             }
 
         }
