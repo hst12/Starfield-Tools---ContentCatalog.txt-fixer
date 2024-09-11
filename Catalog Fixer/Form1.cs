@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-
 namespace Starfield_Tools
 {
 
@@ -100,7 +99,6 @@ namespace Starfield_Tools
                     BackupCatalog();
 
             DisplayCatalog();
-
 
             // Run  Command line params
             if (cmdLineRunSteam)

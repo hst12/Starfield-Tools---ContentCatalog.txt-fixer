@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
-
 namespace Starfield_Tools
 {
     public partial class frmLoadOrder : Form
@@ -199,7 +198,7 @@ namespace Starfield_Tools
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1;
+            int EnabledCount = 0, IndexCount = 1, i;
             string loText;
 
             toolStripStatusTertiary.ForeColor = DefaultForeColor;
@@ -268,7 +267,7 @@ namespace Starfield_Tools
                 {
                     try
                     {
-                        for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
+                        for (i = 0; i < kvp.Value.Files.Length - 0; i++)
                         {
                             if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
                             {
@@ -276,7 +275,7 @@ namespace Starfield_Tools
                                 TitleCount++;
                             }
                         }
-                        CreationsTitle.Add(kvp.Value.Title); // Add Creations description to datagrid
+                        CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
                         CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
                         AchievmentSafe.Add(kvp.Value.AchievementSafe);
@@ -342,7 +341,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 ModID = "";
                                 ModFileSize = 0;
 
-                                for (int i = 0; i < CreationsPlugin.Count; i++)
+                                for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esm" == PluginName)
                                     {
@@ -368,7 +367,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 // Populate datagrid from LOOT groups
                                 if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null)
                                 {
-                                    for (int i = 0; i < Groups.plugins.Count; i++)
+                                    for (i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
                                         {
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
@@ -394,6 +393,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     row.Cells["FileSize"].Value = ModFileSize;
                                 row.Cells["CreationsID"].Value = ModID;
                                 row.Cells["Index"].Value = IndexCount++;
+
+                                for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
+                                    if (tools.BethFiles[i] == row.Cells["PluginName"].Value.ToString())
+                                        dataGridView1.Rows.Remove(row);
                             }
                         }
                     }
@@ -991,23 +994,27 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 esmFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            int i;
+            for (i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
 
             List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
-            //int i;
-            Parallel.For(0, tools.BethFiles.Count, i => // Remove base game files
+
+            for (i = 0; i < MissingFiles.Count; i++)
+            {
+                FilesToRemove.Add(MissingFiles[i]);
+                RemovedFiles++;
+            }
+
+            for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
             {
                 FilesToRemove.Add(tools.BethFiles[i]);
-            });
-            Parallel.For(0, MissingFiles.Count, i =>
-             {
-                 FilesToRemove.Add(MissingFiles[i]);
-                 RemovedFiles++;
-             });
+                Debug.WriteLine(FilesToRemove[i]);
+            }
+
             if (FilesToRemove.Count > 0)
             {
-                for (int i = 0; i < FilesToRemove.Count; i++)
+                for (i = 0; i < FilesToRemove.Count; i++)
                 {
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
@@ -1045,7 +1052,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             AddRemove();
         }
-
 
         private void frmLoadOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1138,7 +1144,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuExportActive_Click(object sender, EventArgs e)
         {
             int i;
-            string tempstr="", Group = "";
+            string tempstr = "", Group = "";
             List<string> ExportMods = new();
             SaveFileDialog ExportActive = new()
             {
@@ -1150,13 +1156,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (dlgResult == DialogResult.OK)
             {
 
-
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value)
                     {
                         tempstr = (string)dataGridView1.Rows[i].Cells["Group"].Value;
-                        if (tempstr != "" && tempstr!=null && tempstr!=Group)
+                        if (tempstr != "" && tempstr != null && tempstr != Group)
                         {
                             Group = tempstr;
                             ExportMods.Add("#" + Group);
@@ -1241,7 +1246,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             ModName = ModName[..ModName.IndexOf('.')];
             DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-
 
             if (DialogResult == DialogResult.OK)
             {
@@ -1417,7 +1421,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             UninstallMod();
         }
-
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
@@ -1684,7 +1687,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             CustomEXEFolder = Properties.Settings.Default.CustomEXE;
 
-
             CustomEXEFolder = tools.StarfieldGamePath;
 
             OpenFileDialog OpenEXE = new()
@@ -1858,6 +1860,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             else
                 sbar3("Modified");
         }
+
+        private void editBGSExcludetxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string pathToFile = (Tools.CommonFolder + "\\BGS Exclude.txt");
+            Process.Start("explorer", pathToFile);
+            sbar3("Restart the application for changes to take effect");
+        }
     }
 }
-
