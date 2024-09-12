@@ -314,7 +314,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string PluginName, Description, ModFiles, ModVersion, ASafe, ModTimeStamp, ModID;
+                string PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID;
                 long ModFileSize;
 
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
@@ -337,6 +337,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 Description = "";
                                 ModFiles = "";
                                 ModVersion = "";
+                                AuthorVersion = "";
                                 ASafe = "";
                                 ModTimeStamp = "";
                                 ModID = "";
@@ -349,7 +350,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         VersionCheck = double.Parse((ModVersion[..ModVersion.IndexOf('.')]));
-                                        ModVersion = Tools.ConvertTime(VersionCheck).ToString() + ", v" + ModVersion[(ModVersion.IndexOf('.') + 1)..] + "\n";
+                                        AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
+                                        ModVersion = Tools.ConvertTime(VersionCheck).ToString();
 
                                         ModFiles = CreationsFiles[i];
                                         if (AchievmentSafe[i])
@@ -387,6 +389,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["PluginName"].Value = PluginName;
                                 row.Cells["Description"].Value = Description;
                                 row.Cells["Version"].Value = ModVersion;
+                                row.Cells["AuthorVersion"].Value = AuthorVersion;
                                 row.Cells["TimeStamp"].Value = ModTimeStamp;
                                 row.Cells["Achievements"].Value = ASafe;
                                 row.Cells["Files"].Value = ModFiles;
