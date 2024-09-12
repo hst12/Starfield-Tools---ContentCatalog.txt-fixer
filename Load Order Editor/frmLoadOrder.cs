@@ -1170,7 +1170,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         if (tempstr != "" && tempstr != null && tempstr != Group)
                         {
                             Group = tempstr;
-                            ExportMods.Add("\n#" + Group);
+                            ExportMods.Add("\n# " + Group);
                         }
                         tempstr = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                         ExportMods.Add(tempstr);
@@ -1182,13 +1182,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     return;
                 }
                 if (ExportMods != null)
-                    if (ExportMods[0].StartsWith("\n#"))
-                        ExportMods[0] = ExportMods[0].Substring(1, ExportMods[0].Length-1);
+                    if (ExportMods[0].StartsWith("\n# "))
+                        ExportMods[0] = ExportMods[0][1..];
                 using StreamWriter writer = new(ExportActive.FileName);
-                writer.WriteLine("#Exported active mod list\n");
+                writer.WriteLine("# Exported active mod list\n");
                 for (i = 0; i < ExportMods.Count; i++)
                     writer.WriteLine(ExportMods[i]);
                 sbar3("Export done");
+                Process.Start("explorer.exe",(ExportActive.FileName));
             }
         }
 
