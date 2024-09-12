@@ -279,10 +279,11 @@
             // 
             // AuthorVersion
             // 
-            AuthorVersion.HeaderText = "Author Version";
+            AuthorVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            AuthorVersion.HeaderText = "Author Ver";
             AuthorVersion.MinimumWidth = 10;
             AuthorVersion.Name = "AuthorVersion";
-            AuthorVersion.Width = 200;
+            AuthorVersion.Width = 173;
             // 
             // TimeStamp
             // 
@@ -332,6 +333,7 @@
             URL.HeaderText = "URL";
             URL.MinimumWidth = 10;
             URL.Name = "URL";
+            URL.Visible = false;
             URL.Width = 200;
             // 
             // contextMenuDatagrid
@@ -433,7 +435,7 @@
             // 
             toolStripMenuViewOnCreations.Name = "toolStripMenuViewOnCreations";
             toolStripMenuViewOnCreations.Size = new System.Drawing.Size(522, 40);
-            toolStripMenuViewOnCreations.Text = "View on Creations site";
+            toolStripMenuViewOnCreations.Text = "View Web Site";
             toolStripMenuViewOnCreations.Click += toolStripMenuViewOnCreations_Click;
             // 
             // toolStripSeparator12

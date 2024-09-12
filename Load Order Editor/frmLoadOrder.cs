@@ -219,8 +219,7 @@ namespace Starfield_Tools
 
             Tools.Configuration Groups = new();
 
-
-            if (toolStripMenuGroup.Checked && Properties.Settings.Default.LOOTPath != "") // Read LOOT groups
+            if (toolStripMenuGroup.Checked && Properties.Settings.Default.LOOTPath != "" && dataGridView1.Columns["Group"].Visible) // Read LOOT groups
             {
                 try
                 {
@@ -364,8 +363,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
-                                        if (Groups.plugins != null  && Groups.plugins[i].url!=null)
+                                        if (Groups.plugins != null && Groups.plugins[i].url != null && dataGridView1.Columns["URL"].Visible)
+                                        {
                                             URL = Groups.plugins[i].url[0].link.ToString();
+                                            Debug.WriteLine(PluginName + " " + URL);
+                                        }
                                     }
                                 }
 
@@ -373,8 +375,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 var row = this.dataGridView1.Rows[rowIndex];
                                 ;
                                 // Populate datagrid from LOOT groups
-                                if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null)
-
+                                if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
                                     for (i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
@@ -387,12 +388,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["Version"].Value = ModVersion;
                                 row.Cells["AuthorVersion"].Value = AuthorVersion;
                                 row.Cells["TimeStamp"].Value = ModTimeStamp;
-                                row.Cells["Achievements"].Value = ASafe;
-                                row.Cells["Files"].Value = ModFiles;
-                                if (ModFileSize != 0)
+                                if (dataGridView1.Columns["Achievements"].Visible)
+                                    row.Cells["Achievements"].Value = ASafe;
+                                if (dataGridView1.Columns["Files"].Visible)
+                                    row.Cells["Files"].Value = ModFiles;
+                                if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
                                     row.Cells["FileSize"].Value = ModFileSize;
-                                row.Cells["CreationsID"].Value = ModID;
-                                row.Cells["Index"].Value = IndexCount++;
+                                if (dataGridView1.Columns["CreationsID"].Visible)
+                                    row.Cells["CreationsID"].Value = ModID;
+                                if (dataGridView1.Columns["Index"].Visible)
+                                    row.Cells["Index"].Value = IndexCount++;
                                 row.Cells["URL"].Value = URL;
 
                                 for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
@@ -1165,18 +1170,25 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         if (tempstr != "" && tempstr != null && tempstr != Group)
                         {
                             Group = tempstr;
-                            ExportMods.Add("#" + Group);
+                            ExportMods.Add("\n#" + Group);
                         }
                         tempstr = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                         ExportMods.Add(tempstr);
                     }
                 }
-
-                using StreamWriter writer = new(ExportActive.FileName);
-                for (i = 0; i < ExportMods.Count; i++)
+                if (ExportMods.Count==0)
                 {
-                    writer.WriteLine(ExportMods[i]);
+                    sbar3("Nothing to export");
+                    return;
                 }
+                if (ExportMods != null)
+                    if (ExportMods[0].StartsWith("\n#"))
+                        ExportMods[0] = ExportMods[0].Substring(1, ExportMods[0].Length-1);
+                using StreamWriter writer = new(ExportActive.FileName);
+                writer.WriteLine("#Exported active mod list\n");
+                for (i = 0; i < ExportMods.Count; i++)
+                    writer.WriteLine(ExportMods[i]);
+                sbar3("Export done");
             }
         }
 
@@ -1405,17 +1417,22 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
             string CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
-            if (CreationsID == null || CreationsID == "")
+            string OtherURL = dataGridView1.CurrentRow.Cells["URL"].Value.ToString(), url = "";
+
+            if (CreationsID == null || CreationsID == "" || OtherURL == "")
             {
-                sbar3("Not a Creations mod");
+                sbar3("No link for mod");
                 return;
             }
-            string url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID[3..];
 
-            if (CreationsID != "")
+            if (CreationsID != null && CreationsID != "")
+            {
+                url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID[3..];
                 Tools.OpenUrl(url);  // Open Creations web site
+            }
             else
-                sbar3("Not a Creations mod");
+                if (url != "")
+                Tools.OpenUrl(url);
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
