@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             dataGridView1 = new System.Windows.Forms.DataGridView();
             Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -268,11 +269,13 @@
             // Version
             // 
             Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            Version.HeaderText = "Version";
+            dataGridViewCellStyle1.NullValue = null;
+            Version.DefaultCellStyle = dataGridViewCellStyle1;
+            Version.HeaderText = "Version Date";
             Version.MinimumWidth = 10;
             Version.Name = "Version";
             Version.ReadOnly = true;
-            Version.Width = 137;
+            Version.Width = 194;
             // 
             // AuthorVersion
             // 
@@ -329,7 +332,6 @@
             URL.HeaderText = "URL";
             URL.MinimumWidth = 10;
             URL.Name = "URL";
-            URL.Visible = false;
             URL.Width = 200;
             // 
             // contextMenuDatagrid

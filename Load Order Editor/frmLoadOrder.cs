@@ -218,6 +218,8 @@ namespace Starfield_Tools
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
 
             Tools.Configuration Groups = new();
+
+
             if (toolStripMenuGroup.Checked && Properties.Settings.Default.LOOTPath != "") // Read LOOT groups
             {
                 try
@@ -314,7 +316,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID;
+                string PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL;
                 long ModFileSize;
 
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
@@ -342,6 +344,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 ModTimeStamp = "";
                                 ModID = "";
                                 ModFileSize = 0;
+                                URL = "";
 
                                 for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
@@ -361,28 +364,21 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
+                                        if (Groups.plugins != null  && Groups.plugins[i].url!=null)
+                                            URL = Groups.plugins[i].url[0].link.ToString();
                                     }
                                 }
 
                                 int rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
-
+                                ;
                                 // Populate datagrid from LOOT groups
                                 if (Properties.Settings.Default.LOOTPath != "" && Groups.groups != null)
-                                {
+
                                     for (i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
-                                        {
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
 
-                                        }
-                                }
-                                else
-                                {
-#if DEBUG
-                                    Debug.WriteLine(PluginName, "Null Group");
-#endif
-                                }
                                 if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                     row.Cells["Group"].Value = "Bethesda";
                                 row.Cells["ModEnabled"].Value = ModEnabled;
@@ -397,6 +393,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     row.Cells["FileSize"].Value = ModFileSize;
                                 row.Cells["CreationsID"].Value = ModID;
                                 row.Cells["Index"].Value = IndexCount++;
+                                row.Cells["URL"].Value = URL;
 
                                 for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
                                     if (tools.BethFiles[i] == row.Cells["PluginName"].Value.ToString())
