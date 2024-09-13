@@ -126,6 +126,7 @@
             toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuFiles = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuFileSize = new System.Windows.Forms.ToolStripMenuItem();
+            timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuRun = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -283,6 +284,7 @@
             AuthorVersion.HeaderText = "Author Ver";
             AuthorVersion.MinimumWidth = 10;
             AuthorVersion.Name = "AuthorVersion";
+            AuthorVersion.ReadOnly = true;
             AuthorVersion.Width = 173;
             // 
             // TimeStamp
@@ -333,6 +335,7 @@
             URL.HeaderText = "URL";
             URL.MinimumWidth = 10;
             URL.Name = "URL";
+            URL.ReadOnly = true;
             URL.Visible = false;
             URL.Width = 200;
             // 
@@ -856,7 +859,7 @@
             // 
             // toolStripMenuColumns
             // 
-            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize });
+            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem });
             toolStripMenuColumns.Name = "toolStripMenuColumns";
             toolStripMenuColumns.Size = new System.Drawing.Size(128, 36);
             toolStripMenuColumns.Text = "Columns";
@@ -908,6 +911,13 @@
             toolStripMenuFileSize.Size = new System.Drawing.Size(297, 44);
             toolStripMenuFileSize.Text = "File Size";
             toolStripMenuFileSize.Click += toolStripMenuFileSize_Click;
+            // 
+            // timeStampToolStripMenuItem
+            // 
+            timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
+            timeStampToolStripMenuItem.Size = new System.Drawing.Size(297, 44);
+            timeStampToolStripMenuItem.Text = "Time Stamp";
+            timeStampToolStripMenuItem.Click += timeStampToolStripMenuItem_Click;
             // 
             // toolStripMenuGame
             // 
@@ -1538,6 +1548,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuFileSize;
         private System.Windows.Forms.ToolStripMenuItem compareStarfieldCustominiToBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuExploreCommon;
+        private System.Windows.Forms.ToolStripMenuItem timeStampToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Index;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;

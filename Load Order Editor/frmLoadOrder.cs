@@ -86,6 +86,18 @@ namespace Starfield_Tools
 
             // Setup columns
 
+            if (Properties.Settings.Default.TimeStamp)
+            {
+                timeStampToolStripMenuItem.Checked = true;
+                dataGridView1.Columns["TimeStamp"].Visible = true;
+            }
+            else
+            {
+                timeStampToolStripMenuItem.Checked = false;
+                dataGridView1.Columns["TimeStamp"].Visible = false;
+            }
+
+
             if (Properties.Settings.Default.Achievements)
             {
                 toolStripMenuAchievements.Checked = true;
@@ -387,7 +399,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["Description"].Value = Description;
                                 row.Cells["Version"].Value = ModVersion;
                                 row.Cells["AuthorVersion"].Value = AuthorVersion;
-                                row.Cells["TimeStamp"].Value = ModTimeStamp;
+                                if (dataGridView1.Columns["TimeStamp"].Visible)
+                                    row.Cells["TimeStamp"].Value = ModTimeStamp;
                                 if (dataGridView1.Columns["Achievements"].Visible)
                                     row.Cells["Achievements"].Value = ASafe;
                                 if (dataGridView1.Columns["Files"].Visible)
@@ -1176,7 +1189,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         ExportMods.Add(tempstr);
                     }
                 }
-                if (ExportMods.Count==0)
+                if (ExportMods.Count == 0)
                 {
                     sbar3("Nothing to export");
                     return;
@@ -1189,7 +1202,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (i = 0; i < ExportMods.Count; i++)
                     writer.WriteLine(ExportMods[i]);
                 sbar3("Export done");
-                Process.Start("explorer.exe",(ExportActive.FileName));
+                Process.Start("explorer.exe", (ExportActive.FileName));
             }
         }
 
@@ -1889,6 +1902,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string pathToFile = (Tools.CommonFolder);
             Process.Start("explorer", pathToFile);
             sbar3("Restart the application for changes to take effect");
+        }
+
+        private void timeStampToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timeStampToolStripMenuItem.Checked = !timeStampToolStripMenuItem.Checked;
+            if (timeStampToolStripMenuItem.Checked)
+                dataGridView1.Columns["TimeStamp"].Visible = true;
+            else
+                dataGridView1.Columns["TimeStamp"].Visible = false;
+            Properties.Settings.Default.TimeStamp = timeStampToolStripMenuItem.Checked;
         }
     }
 }

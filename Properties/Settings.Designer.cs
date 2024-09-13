@@ -296,5 +296,17 @@ namespace Starfield_Tools.Properties {
                 this["FileSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TimeStamp {
+            get {
+                return ((bool)(this["TimeStamp"]));
+            }
+            set {
+                this["TimeStamp"] = value;
+            }
+        }
     }
 }
