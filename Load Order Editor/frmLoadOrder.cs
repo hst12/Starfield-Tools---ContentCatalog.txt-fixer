@@ -97,7 +97,6 @@ namespace Starfield_Tools
                 dataGridView1.Columns["TimeStamp"].Visible = false;
             }
 
-
             if (Properties.Settings.Default.Achievements)
             {
                 toolStripMenuAchievements.Checked = true;
@@ -411,7 +410,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     row.Cells["CreationsID"].Value = ModID;
                                 if (dataGridView1.Columns["Index"].Visible)
                                     row.Cells["Index"].Value = IndexCount++;
-                                row.Cells["URL"].Value = URL;
+                                if (dataGridView1.Columns["URL"].Visible)
+                                    row.Cells["URL"].Value = URL;
 
                                 for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
                                     if (tools.BethFiles[i] == row.Cells["PluginName"].Value.ToString())
