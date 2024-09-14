@@ -19,14 +19,14 @@ namespace Starfield_Tools.Common
         public List<string> BethFiles { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
-        
+
 
         public Tools() // Constructor
         {
             CommonFolder = Environment.CurrentDirectory + "\\Common";
             try
             {
-                BethFiles = new(File.ReadAllLines(CommonFolder+"\\BGS Exclude.txt"));
+                BethFiles = new(File.ReadAllLines(CommonFolder + "\\BGS Exclude.txt"));
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace Starfield_Tools.Common
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Catalog Version file missing. Repair or re-install the app",MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(ex.Message, "Catalog Version file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Environment.Exit(1);
             }
             try
@@ -60,7 +60,7 @@ namespace Starfield_Tools.Common
 
             try
             {
-                HeaderString = File.ReadAllText(CommonFolder+"\\header.txt"); // Read the header from file
+                HeaderString = File.ReadAllText(CommonFolder + "\\header.txt"); // Read the header from file
             }
             catch (Exception ex)
             {
@@ -154,25 +154,37 @@ namespace Starfield_Tools.Common
             }
 
             // Open the two files.
-            using FileStream fs1 = new(file1, FileMode.Open),
-                              fs2 = new(file2, FileMode.Open);
-            // Check the file sizes. If they are not the same, the files are not the same.
-            if (fs1.Length != fs2.Length)
+            try
             {
-                return false;
+                using FileStream fs1 = new(file1, FileMode.Open),
+                                  fs2 = new(file2, FileMode.Open);
+                // Check the file sizes. If they are not the same, the files are not the same.
+                if (fs1.Length != fs2.Length)
+                {
+                    return false;
+                }
+
+                // Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached.
+                int file1byte, file2byte;
+                do
+                {
+                    file1byte = fs1.ReadByte();
+                    file2byte = fs2.ReadByte();
+                }
+                while ((file1byte == file2byte) && (file1byte != -1));
+
+                // Return the success of the comparison.
+                return file1byte == file2byte;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
+                return false; ;
             }
 
-            // Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached.
-            int file1byte, file2byte;
-            do
-            {
-                file1byte = fs1.ReadByte();
-                file2byte = fs2.ReadByte();
-            }
-            while ((file1byte == file2byte) && (file1byte != -1));
 
-            // Return the success of the comparison.
-            return file1byte == file2byte;
         }
         public static void CheckGame()
         {

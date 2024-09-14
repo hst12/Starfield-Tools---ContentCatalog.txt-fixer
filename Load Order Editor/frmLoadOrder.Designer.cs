@@ -259,7 +259,7 @@
             // 
             // Group
             // 
-            Group.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Group.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             Group.HeaderText = "Group";
             Group.MinimumWidth = 10;
             Group.Name = "Group";
