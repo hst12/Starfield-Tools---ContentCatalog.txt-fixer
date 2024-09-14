@@ -407,7 +407,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
                                     row.Cells["FileSize"].Value = ModFileSize;
                                 //if (dataGridView1.Columns["CreationsID"].Visible)
-                                    row.Cells["CreationsID"].Value = ModID;
+                                row.Cells["CreationsID"].Value = ModID;
                                 if (dataGridView1.Columns["Index"].Visible)
                                     row.Cells["Index"].Value = IndexCount++;
                                 if (dataGridView1.Columns["URL"].Visible)
