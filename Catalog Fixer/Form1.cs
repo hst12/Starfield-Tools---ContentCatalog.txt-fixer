@@ -23,7 +23,7 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-           Tools.CheckGame();
+            Tools.CheckGame();
 
             // Retrieve settings
             AutoCheck = Properties.Settings.Default.AutoCheck;
@@ -212,14 +212,17 @@ namespace Starfield_Tools
                         ErrorFound = true;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + ": " + TestString + ", " + Tools.ConvertTime(VersionCheck) + "\n";
                     }
-                    for (int i = 0; i < TestString.IndexOf('.') + 1; i++)
+                    for (int i = 0; i < TestString.Length ; i++)
                     {
-                        if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
+                        if (!char.IsLetterOrDigit(TestString[i])) // Check for numbers or . in Version
                         {
-                            ErrorCount++;
-                            richTextBox2.Text += "Non numeric version number detected in " + kvp.Value.Title + "\n";
-                            ErrorFound = true;
-                            break;
+                            if (TestString[i] != '.')
+                            {
+                                ErrorCount++;
+                                richTextBox2.Text += "Non numeric version number detected in " + kvp.Value.Title + "\n";
+                                ErrorFound = true;
+                                break;
+                            }
                         }
                     }
                 }
@@ -561,7 +564,7 @@ namespace Starfield_Tools
             catch (Exception ex)
             {
                 toolStripStatusLabel1.Text = (ex.Message);
-                json=Tools.MakeHeaderBlank();
+                json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
 #if DEBUG
                 MessageBox.Show($"Error: {ex.Message}");
@@ -594,13 +597,16 @@ namespace Starfield_Tools
                 if (Verbose)
                     richTextBox2.Text += "Checking " + kvp.Value.Title + ", " + TestString + "\n";
 
-                for (int i = 0; i < TestString.IndexOf('.'); i++)
+                for (int i = 0; i < TestString.Length; i++)
                 {
 
-                    if (!char.IsDigit(TestString[i]) && TestString[i] != '.') // Check for numbers or . in Version
+                    if (!char.IsLetterOrDigit(TestString[i])) // Check for numbers or . in Version
                     {
-                        FixVersion = true;
-                        break;
+                        if (TestString[i] != '.')
+                        {
+                            FixVersion = true;
+                            break;
+                        }
                     }
                 }
 
