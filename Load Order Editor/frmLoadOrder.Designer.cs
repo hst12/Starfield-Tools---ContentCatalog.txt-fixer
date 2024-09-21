@@ -163,7 +163,6 @@
             btnDown = new System.Windows.Forms.Button();
             btnTop = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
-            btnRun = new System.Windows.Forms.Button();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             chkProfile = new System.Windows.Forms.CheckBox();
             cmbProfile = new System.Windows.Forms.ComboBox();
@@ -171,9 +170,10 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             label1 = new System.Windows.Forms.Label();
             txtSearchBox = new System.Windows.Forms.TextBox();
-            btnCheckCatalog = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             btnQuit = new System.Windows.Forms.Button();
+            btnRun = new System.Windows.Forms.Button();
+            btnCheckCatalog = new System.Windows.Forms.Button();
             fontDialog1 = new System.Windows.Forms.FontDialog();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
@@ -1152,13 +1152,13 @@
             tableLayoutPanel2.Controls.Add(btnDown, 1, 0);
             tableLayoutPanel2.Controls.Add(btnTop, 2, 0);
             tableLayoutPanel2.Controls.Add(btnSave, 6, 0);
-            tableLayoutPanel2.Controls.Add(btnRun, 7, 0);
             tableLayoutPanel2.Controls.Add(splitContainer2, 5, 0);
             tableLayoutPanel2.Controls.Add(btnBottom, 3, 0);
             tableLayoutPanel2.Controls.Add(splitContainer1, 4, 0);
-            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 8, 0);
             tableLayoutPanel2.Controls.Add(btnCancel, 9, 0);
             tableLayoutPanel2.Controls.Add(btnQuit, 10, 0);
+            tableLayoutPanel2.Controls.Add(btnRun, 8, 0);
+            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 7, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 901);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -1216,18 +1216,6 @@
             toolTip1.SetToolTip(btnSave, "Save Plugins.txt");
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
-            // 
-            // btnRun
-            // 
-            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRun.Location = new System.Drawing.Point(1042, 23);
-            btnRun.Name = "btnRun";
-            btnRun.Size = new System.Drawing.Size(132, 68);
-            btnRun.TabIndex = 5;
-            btnRun.Text = "Run";
-            toolTip1.SetToolTip(btnRun, "Run the game (R)");
-            btnRun.UseVisualStyleBackColor = true;
-            btnRun.Click += btnRun_Click;
             // 
             // splitContainer2
             // 
@@ -1326,18 +1314,6 @@
             txtSearchBox.TabIndex = 6;
             txtSearchBox.KeyDown += txtSearchBox_KeyDown;
             // 
-            // btnCheckCatalog
-            // 
-            btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnCheckCatalog.Location = new System.Drawing.Point(1180, 23);
-            btnCheckCatalog.Name = "btnCheckCatalog";
-            btnCheckCatalog.Size = new System.Drawing.Size(132, 68);
-            btnCheckCatalog.TabIndex = 18;
-            btnCheckCatalog.Text = "Catalog";
-            toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
-            btnCheckCatalog.UseVisualStyleBackColor = true;
-            btnCheckCatalog.Click += btnCheckCatalog_Click;
-            // 
             // btnCancel
             // 
             btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -1363,6 +1339,30 @@
             toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
+            // 
+            // btnRun
+            // 
+            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnRun.Location = new System.Drawing.Point(1180, 23);
+            btnRun.Name = "btnRun";
+            btnRun.Size = new System.Drawing.Size(132, 68);
+            btnRun.TabIndex = 5;
+            btnRun.Text = "Run";
+            toolTip1.SetToolTip(btnRun, "Run the game (R)");
+            btnRun.UseVisualStyleBackColor = true;
+            btnRun.Click += btnRun_Click;
+            // 
+            // btnCheckCatalog
+            // 
+            btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnCheckCatalog.Location = new System.Drawing.Point(1042, 23);
+            btnCheckCatalog.Name = "btnCheckCatalog";
+            btnCheckCatalog.Size = new System.Drawing.Size(132, 68);
+            btnCheckCatalog.TabIndex = 18;
+            btnCheckCatalog.Text = "Catalog";
+            toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
+            btnCheckCatalog.UseVisualStyleBackColor = true;
+            btnCheckCatalog.Click += btnCheckCatalog_Click;
             // 
             // openFileDialog1
             // 
