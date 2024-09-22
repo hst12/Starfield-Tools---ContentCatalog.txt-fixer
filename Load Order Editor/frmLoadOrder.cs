@@ -280,9 +280,9 @@ namespace Starfield_Tools
                 {
                     try
                     {
-                        for (i = 0; i < kvp.Value.Files.Length - 0; i++)
+                        for (i = 0; i < kvp.Value.Files.Length; i++)
                         {
-                            if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
+                            if (kvp.Value.Files[i].IndexOf(".esm") > 0 || kvp.Value.Files[i].IndexOf(".esp") > 0) // Look for .esm or .esp files
                             {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 TitleCount++;
@@ -299,12 +299,14 @@ namespace Starfield_Tools
                     catch (Exception ex)
                     {
                         sbar(ex.Message);
+#if DEBUG
+                        MessageBox.Show(ex.Message);
+#endif
                     }
                 }
             }
             catch (Exception ex)
             {
-
                 sbar(ex.Message);
                 json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
@@ -333,7 +335,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     try
                     {
-                        if (PluginName != "")
+                        if (PluginName != "" && !tools.BethFiles.Contains(PluginName))
                         {
                             if (PluginName[0] == '*') // * = Mod enabled
                             {
@@ -358,7 +360,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                                 for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
-                                    if (CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esm" == PluginName)
+                                    if (CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esm" == PluginName ||
+                                        CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esp" == PluginName)
                                     {
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
@@ -413,9 +416,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 if (dataGridView1.Columns["URL"].Visible)
                                     row.Cells["URL"].Value = URL;
 
-                                for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
-                                    if (tools.BethFiles[i] == row.Cells["PluginName"].Value.ToString())
-                                        dataGridView1.Rows.Remove(row);
                             }
                         }
                     }

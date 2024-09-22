@@ -78,7 +78,7 @@ namespace Starfield_Tools
             {
                 if (!CheckCatalog()) // If not okay, then...
                 {
-                    richTextBox2.Text += "\nCatalog corrupt\n";
+                    richTextBox2.Text += "\nCatalog issues(s) found\n";
                     if (AutoRestore) // Restore backup file if auto restore is on
                     {
                         if (RestoreCatalog())
@@ -171,8 +171,8 @@ namespace Starfield_Tools
         {
             toolStripStatusLabel1.Text = "Checking...";
             richTextBox1.Text = "";
-            bool ErrorFound;
             int ErrorCount = 0;
+            int WarningCount = 0;
             richTextBox2.Text += "Checking Catalog\n";
             double VersionCheck;
             double TimeStamp;
@@ -195,10 +195,19 @@ namespace Starfield_Tools
                 string TestString = "";
 
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
+                data.Remove("ContentCatalog"); // remove header
 
-                ErrorFound = false;
                 foreach (var kvp in data)
                 {
+                    for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
+                    {
+                        if (kvp.Value.Files[i].IndexOf(".esp") > 0)
+                        {
+                            richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i]+"\n";
+                            WarningCount++;
+                        }
+                    }
+
                     TestString = kvp.Value.Version;
                     VersionCheck = double.Parse((kvp.Value.Version[..kvp.Value.Version.IndexOf('.')]));
                     if (TestString != Tools.CatalogVersion) // Skip catalog header, pull version info apart into date and actual version number
@@ -209,7 +218,6 @@ namespace Starfield_Tools
                     if (VersionCheck > kvp.Value.Timestamp && VersionCheck != 1)
                     {
                         ErrorCount++;
-                        ErrorFound = true;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + ": " + TestString + ", " + Tools.ConvertTime(VersionCheck) + "\n";
                     }
                     for (int i = 0; i < TestString.Length ; i++)
@@ -220,19 +228,27 @@ namespace Starfield_Tools
                             {
                                 ErrorCount++;
                                 richTextBox2.Text += "Non numeric version number detected in " + kvp.Value.Title + "\n";
-                                ErrorFound = true;
                                 break;
                             }
                         }
                     }
                 }
 
-                if (!ErrorFound)
+                if (ErrorCount==0)
                 {
-                    toolStripStatusLabel1.Text = "Catalog ok";
-                    CatalogStatus = toolStripStatusLabel1.Text;
-                    richTextBox2.Text += "\nCatalog ok\n";
-                    return true;
+                    if (WarningCount == 0)
+                    {
+                        toolStripStatusLabel1.Text = "Catalog ok";
+                        CatalogStatus = toolStripStatusLabel1.Text;
+                        richTextBox2.Text += "\nCatalog ok\n";
+                        return true;
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = WarningCount+ " Warning(s) Press the Catalog button for details";
+                        CatalogStatus = toolStripStatusLabel1.Text;
+                        return true;
+                    }
                 }
                 else
                 {
@@ -515,6 +531,8 @@ namespace Starfield_Tools
                                 if (Verbose)
                                     richTextBox2.Text += kvp.Value.Title + "\n";
                             }
+                            if (kvp.Value.Files[i].IndexOf(".esp") > 0)
+                                richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i];
                         }
 
                     }
