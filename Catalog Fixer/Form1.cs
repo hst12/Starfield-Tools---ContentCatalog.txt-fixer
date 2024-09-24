@@ -203,7 +203,7 @@ namespace Starfield_Tools
                     {
                         if (kvp.Value.Files[i].IndexOf(".esp") > 0)
                         {
-                            richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i]+"\n";
+                            richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i] + "\n";
                             WarningCount++;
                         }
                     }
@@ -220,7 +220,7 @@ namespace Starfield_Tools
                         ErrorCount++;
                         richTextBox2.Text += "Out of range version number detected in " + kvp.Value.Title + ": " + TestString + ", " + Tools.ConvertTime(VersionCheck) + "\n";
                     }
-                    for (int i = 0; i < TestString.Length ; i++)
+                    for (int i = 0; i < TestString.Length; i++)
                     {
                         if (!char.IsLetterOrDigit(TestString[i])) // Check for numbers or . in Version
                         {
@@ -234,7 +234,7 @@ namespace Starfield_Tools
                     }
                 }
 
-                if (ErrorCount==0)
+                if (ErrorCount == 0)
                 {
                     if (WarningCount == 0)
                     {
@@ -245,7 +245,7 @@ namespace Starfield_Tools
                     }
                     else
                     {
-                        toolStripStatusLabel1.Text = WarningCount+ " Warning(s) Press the Catalog button for details";
+                        toolStripStatusLabel1.Text = WarningCount + " Warning(s) Press the Catalog button for details";
                         CatalogStatus = toolStripStatusLabel1.Text;
                         return true;
                     }
@@ -523,7 +523,7 @@ namespace Starfield_Tools
                     {
                         for (int i = 0; i < kvp.Value.Files.Length - 0; i++)
                         {
-                            if (kvp.Value.Files[i].IndexOf(".esm") > 0) // Look for .esm files
+                            if (kvp.Value.Files[i].IndexOf(".esm") > 0 || kvp.Value.Files[i].IndexOf(".esp") > 0) // Look for .esm or .esp files
                             {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
                                 CreationsGUID.Add(kvp.Key);
@@ -532,7 +532,7 @@ namespace Starfield_Tools
                                     richTextBox2.Text += kvp.Value.Title + "\n";
                             }
                             if (kvp.Value.Files[i].IndexOf(".esp") > 0)
-                                richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i];
+                                richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i]+"\n";
                         }
 
                     }
