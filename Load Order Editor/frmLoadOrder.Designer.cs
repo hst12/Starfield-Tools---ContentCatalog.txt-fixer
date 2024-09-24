@@ -315,6 +315,7 @@
             // 
             // CreationsID
             // 
+            CreationsID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             CreationsID.HeaderText = "Creations ID";
             CreationsID.MinimumWidth = 10;
             CreationsID.Name = "CreationsID";

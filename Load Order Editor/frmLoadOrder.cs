@@ -948,10 +948,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             RemoveMissing();
         }
 
-        private int AddMissing() // Look for .esm files to add to Plugins.txt returns no. of file added
+        private int AddMissing() // Look for .esm or .esp files to add to Plugins.txt returns no. of file added
         {
             int AddedFiles = 0;
-            List<string> esmFiles = [];
+            List<string> esmespFiles = [];
             List<string> PluginFiles = [];
             List<string> BethFiles = tools.BethFiles;
             // Exclude game files - will probably need updating after DLC release
@@ -967,11 +967,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
-                esmFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+            }
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            {
+                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
-            List<string> MissingFiles = esmFiles.Except(PluginFiles).ToList();
+            List<string> MissingFiles = esmespFiles.Except(PluginFiles).ToList();
 
             List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();  // Exclude BGS esm files
             if (FilesToAdd.Count > 0)
@@ -996,7 +1000,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private int RemoveMissing() // Remove entries from Plugins.txt for missing .esm files. Returns number of removals
         {
             int RemovedFiles = 0;
-            List<string> esmFiles = [];
+            List<string> esmespFiles = [];
             List<string> PluginFiles = [];
             List<string> FilesToRemove = [];
 
@@ -1011,13 +1015,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
-                esmFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+            }
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            {
+                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
             int i;
             for (i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
 
-            List<string> MissingFiles = PluginFiles.Except(esmFiles).ToList();
+            List<string> MissingFiles = PluginFiles.Except(esmespFiles).ToList();
 
             for (i = 0; i < MissingFiles.Count; i++)
             {
