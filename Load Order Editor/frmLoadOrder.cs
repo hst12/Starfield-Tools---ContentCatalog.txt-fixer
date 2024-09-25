@@ -985,7 +985,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     AddedFiles++;
                     int rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
-                    row.Cells["ModEnabled"].Value = true;
+                    if (FilesToAdd[i].Contains(".esm"))
+                        row.Cells["ModEnabled"].Value = true;
+                    else
+                        row.Cells["ModEnabled"].Value = false;
                     row.Cells["PluginName"].Value = FilesToAdd[i];
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];

@@ -16,19 +16,28 @@ namespace Starfield_Tools
             float screenHeight = screen.Height * 0.85f;
             if (LoadScreen != null && LoadScreen != "")
             {
-                var bitmap = new Bitmap(LoadScreen);
+                try
+                {
+                    var bitmap = new Bitmap(LoadScreen);
+                    // Calculate the scaling factor to maintain aspect ratio
+                    float scale = Math.Min(screenWidth / bitmap.Width, screenHeight / bitmap.Height);
 
-                // Calculate the scaling factor to maintain aspect ratio
-                float scale = Math.Min(screenWidth / bitmap.Width, screenHeight / bitmap.Height);
+                    // Calculate the new dimensions
+                    int newWidth = (int)(bitmap.Width * scale);
+                    int newHeight = (int)(bitmap.Height * scale);
 
-                // Calculate the new dimensions
-                int newWidth = (int)(bitmap.Width * scale);
-                int newHeight = (int)(bitmap.Height * scale);
+                    // Set the form size to the new dimensions
 
-                // Set the form size to the new dimensions
-
-                this.BackgroundImage = bitmap;
-                this.ClientSize = new Size(newWidth, newHeight);
+                    this.BackgroundImage = bitmap;
+                    this.ClientSize = new Size(newWidth, newHeight);
+                }
+                catch
+                {
+                    Settings.Default.LoadScreenFilename="";
+                    Settings.Default.Save();
+                    this.Width = (int)(screen.Width * 0.75f);
+                    this.Height = (int)(screen.Height * 0.75f);
+                }
             }
             else
             {
