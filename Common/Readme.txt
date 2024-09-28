@@ -1,10 +1,15 @@
+This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor
+
 It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug, at least on my side so far.
 
 The mod manager section of the tool will continue to be updated and will move to a stand-alone tool later.
 
 For keyboard shortcuts see Help->Shortcut keys
 
-Checks ContentCatalog.txt file automatically when launched.
+To update the tool without downloading a new version to cater for future game updates peform the following steps:
+File menu->Explore App Common Folder
+Open the file BGS Exclude.txt. Identify and add any new Bethesda files to the this text file.
+Save the file then restart the app.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
 

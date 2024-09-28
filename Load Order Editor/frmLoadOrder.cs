@@ -1915,7 +1915,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string pathToFile = (Tools.CommonFolder);
             Process.Start("explorer", pathToFile);
-            sbar3("Restart the application for changes to take effect");
+            sbar3("Restart the application for any changes to take effect");
         }
 
         private void timeStampToolStripMenuItem_Click(object sender, EventArgs e)
