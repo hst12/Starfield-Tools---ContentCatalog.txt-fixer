@@ -2,6 +2,8 @@ It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug,
 
 The mod manager section of the tool will continue to be updated and will move to a stand-alone tool later.
 
+For keyboard shortcuts see Help->Shortcut keys
+
 Checks ContentCatalog.txt file automatically when launched.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
