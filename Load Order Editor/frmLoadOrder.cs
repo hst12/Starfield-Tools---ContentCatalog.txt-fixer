@@ -484,10 +484,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (index != -1)
                 {
                     cmbProfile.SelectedIndex = index;
-                    LastProfile = cmbProfile.Items[index].ToString(); ;
+                    LastProfile = cmbProfile.Items[index].ToString();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -1926,6 +1931,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             else
                 dataGridView1.Columns["TimeStamp"].Visible = false;
             Properties.Settings.Default.TimeStamp = timeStampToolStripMenuItem.Checked;
+        }
+
+        private void resetLoadScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LoadScreenFilename = "";
+            Properties.Settings.Default.Save();
         }
     }
 }
