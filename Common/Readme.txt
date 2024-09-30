@@ -1,5 +1,7 @@
 This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor
 
+This version is compatible with the Shattered Space expansion.
+
 It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug, at least on my side so far.
 
 The mod manager section of the tool will continue to be updated and will move to a stand-alone tool later.

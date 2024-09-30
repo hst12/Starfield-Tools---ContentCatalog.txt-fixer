@@ -2,6 +2,7 @@
 BlueprintShips-Starfield.esm
 Constellation.esm
 OldMars.esm
+ShatteredSpace.esm
 SFBGS003.esm
 SFBGS004.esm
 SFBGS006.esm
