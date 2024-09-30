@@ -532,7 +532,7 @@ namespace Starfield_Tools
                                     richTextBox2.Text += kvp.Value.Title + "\n";
                             }
                             if (kvp.Value.Files[i].IndexOf(".esp") > 0)
-                                richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i]+"\n";
+                                richTextBox2.Text += "\nWarning - esp file found in catalog file - " + kvp.Value.Files[i] + "\n";
                         }
 
                     }

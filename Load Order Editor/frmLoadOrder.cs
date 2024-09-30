@@ -932,11 +932,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
         }
 
-        private void toolStripMenuStats_Click(object sender, EventArgs e)
-        {
-            RefreshDataGrid();
-        }
-
         private void toolStripMenuScanMods_Click(object sender, EventArgs e)
         {
             AddMissing();
@@ -1201,7 +1196,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                             Group = tempstr;
                             ExportMods.Add("\n# " + Group);
                         }
-                        tempstr = "*"+(string)dataGridView1.Rows[i].Cells["PluginName"].Value;
+                        tempstr = "*" + (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                         ExportMods.Add(tempstr);
                     }
                 }
@@ -1937,6 +1932,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             Properties.Settings.Default.LoadScreenFilename = "";
             Properties.Settings.Default.Save();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshDataGrid();
         }
     }
 }

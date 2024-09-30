@@ -33,7 +33,7 @@ namespace Starfield_Tools
                 }
                 catch
                 {
-                    Settings.Default.LoadScreenFilename="";
+                    Settings.Default.LoadScreenFilename = "";
                     Settings.Default.Save();
                     this.Width = (int)(screen.Width * 0.75f);
                     this.Height = (int)(screen.Height * 0.75f);

@@ -100,6 +100,16 @@
             exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuDeleteLine = new System.Windows.Forms.ToolStripMenuItem();
+            viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuColumns = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuIndex = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuGroup = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuAchievements = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuFiles = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuFileSize = new System.Windows.Forms.ToolStripMenuItem();
+            timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -120,14 +130,6 @@
             toolStripMenuAutoDelccc = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuProfilesOn = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuColumns = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuIndex = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuGroup = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuAchievements = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuCreationsID = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuFiles = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuFileSize = new System.Windows.Forms.ToolStripMenuItem();
-            timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuRun = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,8 +148,6 @@
             toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuLoot = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuLootSort = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            toolStripMenuStats = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuLinks = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuCreations = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuNexus = new System.Windows.Forms.ToolStripMenuItem();
@@ -206,14 +206,14 @@
             dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Index, ModEnabled, PluginName, Description, Group, Version, AuthorVersion, TimeStamp, Achievements, Files, CreationsID, FileSize, URL });
             dataGridView1.ContextMenuStrip = contextMenuDatagrid;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(4, 45);
+            dataGridView1.Location = new System.Drawing.Point(4, 47);
             dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            dataGridView1.Size = new System.Drawing.Size(1765, 848);
+            dataGridView1.Size = new System.Drawing.Size(1765, 846);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
@@ -513,10 +513,10 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, toolStripMenuColumns, toolStripMenuGame, toolStripMenuMods, toolStripMenuLinks, helpToolStripMenuItem, testToolStripMenu });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, viewToolStripMenuItem, toolsToolStripMenuItem, toolStripMenuGame, toolStripMenuMods, toolStripMenuLinks, helpToolStripMenuItem, testToolStripMenu });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new System.Drawing.Size(1773, 40);
+            menuStrip1.Size = new System.Drawing.Size(1773, 42);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -524,7 +524,7 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, toolStripSeparator17, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
+            fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
             fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -722,7 +722,7 @@
             // 
             editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuDeleteLine });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
+            editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
             editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -733,11 +733,88 @@
             toolStripMenuDeleteLine.Text = "Delete";
             toolStripMenuDeleteLine.Click += toolStripMenuDeleteLine_Click;
             // 
+            // viewToolStripMenuItem
+            // 
+            viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { refreshToolStripMenuItem, toolStripMenuColumns });
+            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            viewToolStripMenuItem.Size = new System.Drawing.Size(85, 38);
+            viewToolStripMenuItem.Text = "View";
+            // 
+            // refreshToolStripMenuItem
+            // 
+            refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            refreshToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            refreshToolStripMenuItem.Text = "Refresh";
+            refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
+            // 
+            // toolStripMenuColumns
+            // 
+            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem });
+            toolStripMenuColumns.Name = "toolStripMenuColumns";
+            toolStripMenuColumns.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuColumns.Text = "Columns";
+            // 
+            // toolStripMenuIndex
+            // 
+            toolStripMenuIndex.Name = "toolStripMenuIndex";
+            toolStripMenuIndex.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuIndex.Text = "Index";
+            toolStripMenuIndex.Click += toolStripMenuIndex_Click;
+            // 
+            // toolStripMenuGroup
+            // 
+            toolStripMenuGroup.Name = "toolStripMenuGroup";
+            toolStripMenuGroup.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuGroup.Text = "Group";
+            toolStripMenuGroup.Click += toolStripMenuGroup_Click;
+            // 
+            // toolStripMenuAchievements
+            // 
+            toolStripMenuAchievements.Checked = true;
+            toolStripMenuAchievements.CheckState = System.Windows.Forms.CheckState.Checked;
+            toolStripMenuAchievements.Name = "toolStripMenuAchievements";
+            toolStripMenuAchievements.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuAchievements.Text = "Achievements";
+            toolStripMenuAchievements.Click += toolStripMenuAchievements_Click;
+            // 
+            // toolStripMenuCreationsID
+            // 
+            toolStripMenuCreationsID.Checked = true;
+            toolStripMenuCreationsID.CheckState = System.Windows.Forms.CheckState.Checked;
+            toolStripMenuCreationsID.Name = "toolStripMenuCreationsID";
+            toolStripMenuCreationsID.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuCreationsID.Text = "Creations ID";
+            toolStripMenuCreationsID.Click += toolStripMenuCreationsID_Click;
+            // 
+            // toolStripMenuFiles
+            // 
+            toolStripMenuFiles.Checked = true;
+            toolStripMenuFiles.CheckState = System.Windows.Forms.CheckState.Checked;
+            toolStripMenuFiles.Name = "toolStripMenuFiles";
+            toolStripMenuFiles.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuFiles.Text = "Files";
+            toolStripMenuFiles.Click += toolStripMenuFiles_Click;
+            // 
+            // toolStripMenuFileSize
+            // 
+            toolStripMenuFileSize.Name = "toolStripMenuFileSize";
+            toolStripMenuFileSize.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuFileSize.Text = "File Size";
+            toolStripMenuFileSize.Click += toolStripMenuFileSize_Click;
+            // 
+            // timeStampToolStripMenuItem
+            // 
+            timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
+            timeStampToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            timeStampToolStripMenuItem.Text = "Time Stamp";
+            timeStampToolStripMenuItem.Click += timeStampToolStripMenuItem_Click;
+            // 
             // toolsToolStripMenuItem
             // 
             toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, toolStripSeparator13, toolStripMenuSteam, toolStripMenuMS, toolStripMenuCustom, toolStripSeparator16, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuAutoDelccc, toolStripSeparator22, toolStripMenuProfilesOn });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
+            toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -867,73 +944,11 @@
             toolStripMenuProfilesOn.Text = "Profiles Enabled";
             toolStripMenuProfilesOn.Click += toolStripMenuProfilesOn_Click;
             // 
-            // toolStripMenuColumns
-            // 
-            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem });
-            toolStripMenuColumns.Name = "toolStripMenuColumns";
-            toolStripMenuColumns.Size = new System.Drawing.Size(128, 36);
-            toolStripMenuColumns.Text = "Columns";
-            // 
-            // toolStripMenuIndex
-            // 
-            toolStripMenuIndex.Name = "toolStripMenuIndex";
-            toolStripMenuIndex.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuIndex.Text = "Index";
-            toolStripMenuIndex.Click += toolStripMenuIndex_Click;
-            // 
-            // toolStripMenuGroup
-            // 
-            toolStripMenuGroup.Name = "toolStripMenuGroup";
-            toolStripMenuGroup.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuGroup.Text = "Group";
-            toolStripMenuGroup.Click += toolStripMenuGroup_Click;
-            // 
-            // toolStripMenuAchievements
-            // 
-            toolStripMenuAchievements.Checked = true;
-            toolStripMenuAchievements.CheckState = System.Windows.Forms.CheckState.Checked;
-            toolStripMenuAchievements.Name = "toolStripMenuAchievements";
-            toolStripMenuAchievements.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuAchievements.Text = "Achievements";
-            toolStripMenuAchievements.Click += toolStripMenuAchievements_Click;
-            // 
-            // toolStripMenuCreationsID
-            // 
-            toolStripMenuCreationsID.Checked = true;
-            toolStripMenuCreationsID.CheckState = System.Windows.Forms.CheckState.Checked;
-            toolStripMenuCreationsID.Name = "toolStripMenuCreationsID";
-            toolStripMenuCreationsID.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuCreationsID.Text = "Creations ID";
-            toolStripMenuCreationsID.Click += toolStripMenuCreationsID_Click;
-            // 
-            // toolStripMenuFiles
-            // 
-            toolStripMenuFiles.Checked = true;
-            toolStripMenuFiles.CheckState = System.Windows.Forms.CheckState.Checked;
-            toolStripMenuFiles.Name = "toolStripMenuFiles";
-            toolStripMenuFiles.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuFiles.Text = "Files";
-            toolStripMenuFiles.Click += toolStripMenuFiles_Click;
-            // 
-            // toolStripMenuFileSize
-            // 
-            toolStripMenuFileSize.Name = "toolStripMenuFileSize";
-            toolStripMenuFileSize.Size = new System.Drawing.Size(297, 44);
-            toolStripMenuFileSize.Text = "File Size";
-            toolStripMenuFileSize.Click += toolStripMenuFileSize_Click;
-            // 
-            // timeStampToolStripMenuItem
-            // 
-            timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
-            timeStampToolStripMenuItem.Size = new System.Drawing.Size(297, 44);
-            timeStampToolStripMenuItem.Text = "Time Stamp";
-            timeStampToolStripMenuItem.Click += timeStampToolStripMenuItem_Click;
-            // 
             // toolStripMenuGame
             // 
             toolStripMenuGame.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuRun });
             toolStripMenuGame.Name = "toolStripMenuGame";
-            toolStripMenuGame.Size = new System.Drawing.Size(96, 36);
+            toolStripMenuGame.Size = new System.Drawing.Size(96, 38);
             toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRun
@@ -946,34 +961,34 @@
             // 
             // toolStripMenuMods
             // 
-            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort, toolStripSeparator15, toolStripMenuStats });
+            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort });
             toolStripMenuMods.Name = "toolStripMenuMods";
-            toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
+            toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
             toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
             // 
             toolStripMenuEnableAll.Name = "toolStripMenuEnableAll";
-            toolStripMenuEnableAll.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuEnableAll.Size = new System.Drawing.Size(419, 44);
             toolStripMenuEnableAll.Text = "Enable All";
             toolStripMenuEnableAll.Click += toolStripMenuEnableAll_Click;
             // 
             // toolStripMenuDisableAll
             // 
             toolStripMenuDisableAll.Name = "toolStripMenuDisableAll";
-            toolStripMenuDisableAll.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuDisableAll.Size = new System.Drawing.Size(419, 44);
             toolStripMenuDisableAll.Text = "Disable All";
             toolStripMenuDisableAll.Click += toolStripMenuDisableAll_Click;
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(686, 6);
+            toolStripSeparator6.Size = new System.Drawing.Size(416, 6);
             // 
             // toolStripMenuAdd
             // 
             toolStripMenuAdd.Name = "toolStripMenuAdd";
-            toolStripMenuAdd.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuAdd.Size = new System.Drawing.Size(419, 44);
             toolStripMenuAdd.Text = "Add Mod";
             toolStripMenuAdd.Click += toolStripMenuAdd_Click;
             // 
@@ -981,65 +996,65 @@
             // 
             toolStripMenuDelete.Name = "toolStripMenuDelete";
             toolStripMenuDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            toolStripMenuDelete.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuDelete.Size = new System.Drawing.Size(419, 44);
             toolStripMenuDelete.Text = "Delete Mod";
             toolStripMenuDelete.Click += toolStripMenuDelete_Click;
             // 
             // toolStripSeparator8
             // 
             toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new System.Drawing.Size(686, 6);
+            toolStripSeparator8.Size = new System.Drawing.Size(416, 6);
             // 
             // toolStripMenuAutoClean
             // 
             toolStripMenuAutoClean.Name = "toolStripMenuAutoClean";
-            toolStripMenuAutoClean.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuAutoClean.Size = new System.Drawing.Size(419, 44);
             toolStripMenuAutoClean.Text = "Add and Remove Missing";
             toolStripMenuAutoClean.Click += toolStripMenuAutoClean_Click;
             // 
             // toolStripMenuScanMods
             // 
             toolStripMenuScanMods.Name = "toolStripMenuScanMods";
-            toolStripMenuScanMods.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuScanMods.Size = new System.Drawing.Size(419, 44);
             toolStripMenuScanMods.Text = "Add Missing";
             toolStripMenuScanMods.Click += toolStripMenuScanMods_Click;
             // 
             // toolStripMenuCleanup
             // 
             toolStripMenuCleanup.Name = "toolStripMenuCleanup";
-            toolStripMenuCleanup.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuCleanup.Size = new System.Drawing.Size(419, 44);
             toolStripMenuCleanup.Text = "Remove Missing";
             toolStripMenuCleanup.Click += toolStripMenuCleanup_Click;
             // 
             // toolStripSeparator7
             // 
             toolStripSeparator7.Name = "toolStripSeparator7";
-            toolStripSeparator7.Size = new System.Drawing.Size(686, 6);
+            toolStripSeparator7.Size = new System.Drawing.Size(416, 6);
             // 
             // toolStripMenuInstall
             // 
             toolStripMenuInstall.Name = "toolStripMenuInstall";
-            toolStripMenuInstall.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuInstall.Size = new System.Drawing.Size(419, 44);
             toolStripMenuInstall.Text = "Install Mod";
             toolStripMenuInstall.Click += toolStripMenuInstall_Click;
             // 
             // toolStripMenuUninstall
             // 
             toolStripMenuUninstall.Name = "toolStripMenuUninstall";
-            toolStripMenuUninstall.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuUninstall.Size = new System.Drawing.Size(419, 44);
             toolStripMenuUninstall.Text = "Un-install Mod";
             toolStripMenuUninstall.Click += toolStripMenuUninstall_Click;
             // 
             // toolStripSeparator9
             // 
             toolStripSeparator9.Name = "toolStripSeparator9";
-            toolStripSeparator9.Size = new System.Drawing.Size(686, 6);
+            toolStripSeparator9.Size = new System.Drawing.Size(416, 6);
             // 
             // toolStripMenuLoot
             // 
             toolStripMenuLoot.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLoot.Image");
             toolStripMenuLoot.Name = "toolStripMenuLoot";
-            toolStripMenuLoot.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuLoot.Size = new System.Drawing.Size(419, 44);
             toolStripMenuLoot.Text = "LOOT";
             toolStripMenuLoot.Click += toolStripMenuLoot_Click_1;
             // 
@@ -1047,28 +1062,15 @@
             // 
             toolStripMenuLootSort.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLootSort.Image");
             toolStripMenuLootSort.Name = "toolStripMenuLootSort";
-            toolStripMenuLootSort.Size = new System.Drawing.Size(689, 44);
+            toolStripMenuLootSort.Size = new System.Drawing.Size(419, 44);
             toolStripMenuLootSort.Text = "LOOT Autosort";
             toolStripMenuLootSort.Click += toolStripMenuLoot_Click;
-            // 
-            // toolStripSeparator15
-            // 
-            toolStripSeparator15.Name = "toolStripSeparator15";
-            toolStripSeparator15.Size = new System.Drawing.Size(686, 6);
-            // 
-            // toolStripMenuStats
-            // 
-            toolStripMenuStats.Name = "toolStripMenuStats";
-            toolStripMenuStats.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            toolStripMenuStats.Size = new System.Drawing.Size(689, 44);
-            toolStripMenuStats.Text = "Show Stats (Refresh, discards unsaved changes)";
-            toolStripMenuStats.Click += toolStripMenuStats_Click;
             // 
             // toolStripMenuLinks
             // 
             toolStripMenuLinks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuCreations, toolStripMenuNexus, toolStripMenuBGSStarfield, toolStripMenuBGSX, toolStripMenuGitHub });
             toolStripMenuLinks.Name = "toolStripMenuLinks";
-            toolStripMenuLinks.Size = new System.Drawing.Size(87, 36);
+            toolStripMenuLinks.Size = new System.Drawing.Size(87, 38);
             toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -1110,7 +1112,7 @@
             // 
             helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuShortcuts, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            helpToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
             helpToolStripMenuItem.Text = "&Help";
             // 
             // toolStripMenuShortcuts
@@ -1132,7 +1134,7 @@
             // 
             testToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuTestJson });
             testToolStripMenu.Name = "testToolStripMenu";
-            testToolStripMenu.Size = new System.Drawing.Size(76, 36);
+            testToolStripMenu.Size = new System.Drawing.Size(76, 38);
             testToolStripMenu.Text = "Test";
             testToolStripMenu.Visible = false;
             // 
@@ -1486,7 +1488,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuInstall;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuUninstall;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuStats;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLinks;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCreations;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuNexus;
@@ -1511,19 +1512,13 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuGitHub;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuColumns;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuAchievements;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuCreationsID;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFiles;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadingScreen;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLootSort;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLootPath;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoot;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuGroup;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLootAutoSort;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoDelccc;
@@ -1532,7 +1527,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuProfilesOn;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadScreenPreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuIndex;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSecondary;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCustom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCatalog;
@@ -1555,10 +1549,8 @@
         private System.Windows.Forms.Button btnCheckCatalog;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFileSize;
         private System.Windows.Forms.ToolStripMenuItem compareStarfieldCustominiToBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuExploreCommon;
-        private System.Windows.Forms.ToolStripMenuItem timeStampToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Index;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ModEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn PluginName;
@@ -1573,5 +1565,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FileSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn URL;
         private System.Windows.Forms.ToolStripMenuItem resetLoadScreenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuColumns;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuIndex;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuGroup;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuAchievements;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuCreationsID;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFiles;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuFileSize;
+        private System.Windows.Forms.ToolStripMenuItem timeStampToolStripMenuItem;
     }
 }
