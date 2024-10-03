@@ -1345,6 +1345,7 @@
             btnUpdate.Size = new System.Drawing.Size(108, 68);
             btnUpdate.TabIndex = 19;
             btnUpdate.Text = "Update";
+            toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt");
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 

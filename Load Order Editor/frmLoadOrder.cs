@@ -1939,14 +1939,21 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             RefreshDataGrid();
         }
 
-        private void CheckAndDeleteINI(string FileName)
+        private int CheckAndDeleteINI(string FileName)
         {
             string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\";
             if (File.Exists(FolderPath + FileName))
+            {
                 File.Delete(FolderPath + FileName);
+                return 1;
+            }
+            else
+                return 0;
         }
         private void undoVortexChangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int ChangeCount=0;
+
             DialogResult DialogResult = MessageBox.Show("Are you sure?", "This will remove all changes made by Vortex",
     MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
             if (DialogResult == DialogResult.OK)
@@ -1956,26 +1963,29 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     File.Copy(FolderPath + "StarfieldCustom.ini.base", FolderPath + "StarfieldCustom.ini", true);
                     File.Delete(FolderPath + "StarfieldCustom.ini.base");
+                    ChangeCount++;
                 }
                 if (File.Exists(FolderPath + "StarfieldPrefs.ini.base"))
                 {
                     File.Copy(FolderPath + "StarfieldPrefs.ini.base", FolderPath + "StarfieldPrefs.ini", true);
                     File.Delete(FolderPath + "StarfieldPrefs.ini.base");
+                    ChangeCount++;
                 }
-                CheckAndDeleteINI("Starfield.ini");
-                CheckAndDeleteINI("Starfield.ini.base");
-                CheckAndDeleteINI("Starfield.ini.baked");
-                CheckAndDeleteINI("StarfieldCustom.ini.baked");
-                CheckAndDeleteINI("StarfieldPrefs.ini.baked");
-                Delccc();
-                sbar3("Vortex files restored and deleted");
+                ChangeCount+=CheckAndDeleteINI("Starfield.ini");
+                ChangeCount += CheckAndDeleteINI("Starfield.ini.baked");
+                ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
+                ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
+                if (Delccc())
+                    ChangeCount ++;
+                sbar3(ChangeCount+" Change(s) made to Vortex created files");
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             AddRemove();
-            SavePlugings();
+            if (isModified)
+                SavePlugings();
         }
     }
 }
