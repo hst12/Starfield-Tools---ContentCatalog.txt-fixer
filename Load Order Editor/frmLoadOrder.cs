@@ -23,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -161,6 +161,17 @@ namespace Starfield_Tools
             {
                 toolStripMenuFileSize.Checked = false;
                 dataGridView1.Columns["FileSize"].Visible = false;
+            }
+
+            if (Properties.Settings.Default.LooseFiles)
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                LooseFiles = true;
+            }
+            else
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                LooseFiles = false;
             }
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
@@ -360,8 +371,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                                 for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
-                                    if (CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esm" == PluginName ||
-                                        CreationsPlugin[i][..CreationsPlugin[i].IndexOf('.')] + ".esp" == PluginName)
+                                    if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
+                                        CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
                                     {
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
@@ -954,7 +965,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             List<string> esmespFiles = [];
             List<string> PluginFiles = [];
             List<string> BethFiles = tools.BethFiles;
-            // Exclude game files - will probably need updating after DLC release
+            // Exclude game files - will probably need updating after updates
 
             string directory = Properties.Settings.Default.StarfieldGamePath;
             if (directory == "" || directory == null)
@@ -1039,7 +1050,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
             {
                 FilesToRemove.Add(tools.BethFiles[i]);
+#if DEBUG
                 Debug.WriteLine(FilesToRemove[i]);
+#endif
             }
 
             if (FilesToRemove.Count > 0)
@@ -1048,7 +1061,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     for (int j = 0; j < dataGridView1.Rows.Count; j++)
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
+                        {
                             dataGridView1.Rows.RemoveAt(j);
+                            Debug.WriteLine("Removing " + FilesToRemove[i]);
+                        }
                 }
                 sbar3(RemovedFiles.ToString() + " file(s) removed");
                 isModified = true;
@@ -1952,7 +1968,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         }
         private void undoVortexChangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int ChangeCount=0;
+            int ChangeCount = 0;
 
             DialogResult DialogResult = MessageBox.Show("Are you sure?", "This will remove all changes made by Vortex",
     MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
@@ -1971,13 +1987,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     File.Delete(FolderPath + "StarfieldPrefs.ini.base");
                     ChangeCount++;
                 }
-                ChangeCount+=CheckAndDeleteINI("Starfield.ini");
+                ChangeCount += CheckAndDeleteINI("Starfield.ini");
                 ChangeCount += CheckAndDeleteINI("Starfield.ini.baked");
                 ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
                 ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
                 if (Delccc())
-                    ChangeCount ++;
-                sbar3(ChangeCount+" Change(s) made to Vortex created files");
+                    ChangeCount++;
+                sbar3(ChangeCount + " Change(s) made to Vortex created files");
             }
         }
 
@@ -1986,6 +2002,27 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             AddRemove();
             if (isModified)
                 SavePlugings();
+        }
+
+        private void looseFilesDisabledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\";
+            LooseFiles = !LooseFiles;
+            if (LooseFiles)
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                File.Copy("Common\\LooseFilesOn.txt", LooseFilesDir + "StarfieldCustom.ini",true);
+                sbar3("Loose Files Enabled");
+            }
+            else
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                File.Copy("Common\\LooseFilesOff.txt",LooseFilesDir + "StarfieldCustom.ini", true);
+                sbar3("Loose Files Disabled");
+            }
+            
+            Properties.Settings.Default.LooseFiles = LooseFiles;
+
         }
     }
 }
