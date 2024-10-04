@@ -1,0 +1,7 @@
+﻿[General]
+sIntroSequence=
+uMainMenuDelayBeforeAllowSkip=0
+
+[Archive]
+bInvalidateOlderFiles=1
+sResourceDataDirsFinal=

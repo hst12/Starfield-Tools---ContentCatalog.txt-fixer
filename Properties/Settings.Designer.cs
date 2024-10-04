@@ -308,5 +308,17 @@ namespace Starfield_Tools.Properties {
                 this["TimeStamp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LooseFiles {
+            get {
+                return ((bool)(this["LooseFiles"]));
+            }
+            set {
+                this["LooseFiles"] = value;
+            }
+        }
     }
 }
