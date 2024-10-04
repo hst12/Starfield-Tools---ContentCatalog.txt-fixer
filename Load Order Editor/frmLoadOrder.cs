@@ -1224,8 +1224,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (ExportMods != null)
                     if (ExportMods[0].StartsWith("\n# "))
                         ExportMods[0] = ExportMods[0][1..];
+                tempstr = "# Exported active mod list from hst Starfield Tools";
+                if (Profiles)
+                    tempstr += " using profile " + cmbProfile.Text;
+
                 using StreamWriter writer = new(ExportActive.FileName);
-                writer.WriteLine("# Exported active mod list from hst Starfield Tools\n");
+                writer.WriteLine(tempstr+"\n");
                 for (i = 0; i < ExportMods.Count; i++)
                     writer.WriteLine(ExportMods[i]);
                 sbar3("Export done");
