@@ -23,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false,AutoUpdate=false;
 
         public frmLoadOrder(string parameter)
         {
@@ -174,8 +174,19 @@ namespace Starfield_Tools
                 LooseFiles = false;
             }
 
+            if (Properties.Settings.Default.AutoUpdate)
+            {
+                autoUpdateModsToolStripMenuItem.Checked = true;
+                AutoUpdate = true;
+            }
+            else
+            {
+                autoUpdateModsToolStripMenuItem.Checked = false;
+                AutoUpdate = false;
+            }
+
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
-            sbar3(StarfieldTools.CatalogStatus);
+            sbar4(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
@@ -190,6 +201,9 @@ namespace Starfield_Tools
                 sbar2("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
+
+            if (AutoUpdate)
+                AddRemove();
 
 #if DEBUG
             testToolStripMenu.Visible = true;
@@ -1229,7 +1243,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     tempstr += " using profile " + cmbProfile.Text;
 
                 using StreamWriter writer = new(ExportActive.FileName);
-                writer.WriteLine(tempstr+"\n");
+                writer.WriteLine(tempstr + "\n");
                 for (i = 0; i < ExportMods.Count; i++)
                     writer.WriteLine(ExportMods[i]);
                 sbar3("Export done");
@@ -1606,6 +1620,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void sbar3(string StatusBarMessage)
         {
             toolStripStatusTertiary.Text = StatusBarMessage;
+        }
+
+        private void sbar4(string StatusBarMessage)
+        {
+            toolStripStatusLabel4.Text = StatusBarMessage;
         }
 
         private void sbarCCCOn()
@@ -2015,18 +2034,25 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (LooseFiles)
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
-                File.Copy("Common\\LooseFilesOn.txt", LooseFilesDir + "StarfieldCustom.ini",true);
+                File.Copy("Common\\LooseFilesOn.txt", LooseFilesDir + "StarfieldCustom.ini", true);
                 sbar3("Loose Files Enabled");
             }
             else
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
-                File.Copy("Common\\LooseFilesOff.txt",LooseFilesDir + "StarfieldCustom.ini", true);
+                File.Copy("Common\\LooseFilesOff.txt", LooseFilesDir + "StarfieldCustom.ini", true);
                 sbar3("Loose Files Disabled");
             }
-            
+
             Properties.Settings.Default.LooseFiles = LooseFiles;
 
+        }
+
+        private void autoUpdateModsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutoUpdate = !AutoUpdate;
+            autoUpdateModsToolStripMenuItem.Checked = !autoUpdateModsToolStripMenuItem.Checked;
+            Properties.Settings.Default.AutoUpdate = AutoUpdate;
         }
     }
 }
