@@ -500,6 +500,7 @@
             // 
             // toolStripStatusLabel4
             // 
+            toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             toolStripStatusLabel4.Size = new System.Drawing.Size(0, 32);
             // 

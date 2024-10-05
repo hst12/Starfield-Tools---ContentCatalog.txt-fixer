@@ -23,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false,AutoUpdate=false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -1104,7 +1104,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             else
             {
                 isModified = false;
-                sbar3("No mods found to add or delete");
+                sbar3("Plugins.txt is up to date");
             }
         }
 
@@ -2029,18 +2029,39 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void looseFilesDisabledToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\";
+            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
+                filePath = LooseFilesDir + "StarfieldCustom.ini";
             LooseFiles = !LooseFiles;
             if (LooseFiles)
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
-                File.Copy("Common\\LooseFilesOn.txt", LooseFilesDir + "StarfieldCustom.ini", true);
+                List<string> linesToAppend = new List<string>
+        {
+            "[Archive]",
+            "bInvalidateOlderFiles=1",
+            "sResourceDataDirsFinal="
+        };
+
+                File.AppendAllLines(filePath, linesToAppend);
                 sbar3("Loose Files Enabled");
             }
             else
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
-                File.Copy("Common\\LooseFilesOff.txt", LooseFilesDir + "StarfieldCustom.ini", true);
+                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal=" };
+
+                // Read all lines from the file
+                var lines = File.ReadAllLines(filePath).ToList();
+
+                // Remove the specified lines
+                foreach (var lineToRemove in linesToRemove)
+                {
+                    lines.RemoveAll(line => line.Trim() == lineToRemove);
+                }
+
+                // Write the updated lines back to the file
+                File.WriteAllLines(filePath, lines);
+
                 sbar3("Loose Files Disabled");
             }
 
