@@ -167,11 +167,13 @@ namespace Starfield_Tools
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
                 LooseFiles = true;
+                sbarCCC("Loose files enabled");
             }
             else
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
                 LooseFiles = false;
+                sbarCCC("Loose files disabled");
             }
 
             if (Properties.Settings.Default.AutoUpdate)
@@ -1627,6 +1629,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel4.Text = StatusBarMessage;
         }
 
+        private void sbarCCC(string sbarMesssage)
+        {
+            toolStripStatusDelCCC.Text =sbarMesssage;
+        }
         private void sbarCCCOn()
         {
             toolStripStatusDelCCC.Text = "Auto delete Starfield.ccc: On";
@@ -2043,7 +2049,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         };
 
                 File.AppendAllLines(filePath, linesToAppend);
-                sbar3("Loose Files Enabled");
+                sbarCCC("Loose Files Enabled");
             }
             else
             {
@@ -2062,7 +2068,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 // Write the updated lines back to the file
                 File.WriteAllLines(filePath, lines);
 
-                sbar3("Loose Files Disabled");
+                sbarCCC("Loose Files Disabled");
             }
 
             Properties.Settings.Default.LooseFiles = LooseFiles;
