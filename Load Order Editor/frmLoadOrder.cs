@@ -1631,7 +1631,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void sbarCCC(string sbarMesssage)
         {
-            toolStripStatusDelCCC.Text =sbarMesssage;
+            toolStripStatusDelCCC.Text = sbarMesssage;
         }
         private void sbarCCCOn()
         {
@@ -2080,6 +2080,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             AutoUpdate = !AutoUpdate;
             autoUpdateModsToolStripMenuItem.Checked = !autoUpdateModsToolStripMenuItem.Checked;
             Properties.Settings.Default.AutoUpdate = AutoUpdate;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDataGrid();
         }
     }
 }
