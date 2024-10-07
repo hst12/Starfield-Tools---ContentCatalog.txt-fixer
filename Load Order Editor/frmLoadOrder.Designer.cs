@@ -177,12 +177,13 @@
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             label1 = new System.Windows.Forms.Label();
             txtSearchBox = new System.Windows.Forms.TextBox();
+            btnUpdate = new System.Windows.Forms.Button();
+            btnRefresh = new System.Windows.Forms.Button();
             btnQuit = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             btnRun = new System.Windows.Forms.Button();
             btnCheckCatalog = new System.Windows.Forms.Button();
-            btnUpdate = new System.Windows.Forms.Button();
-            btnRefresh = new System.Windows.Forms.Button();
+            btnLoot = new System.Windows.Forms.Button();
             fontDialog1 = new System.Windows.Forms.FontDialog();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
@@ -471,7 +472,7 @@
             statusStrip1.Location = new System.Drawing.Point(0, 887);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            statusStrip1.Size = new System.Drawing.Size(1824, 42);
+            statusStrip1.Size = new System.Drawing.Size(1901, 42);
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "Starting up";
             // 
@@ -521,7 +522,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1824, 887);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1901, 887);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
@@ -1193,7 +1194,8 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 13;
+            tableLayoutPanel2.ColumnCount = 14;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -1214,12 +1216,13 @@
             tableLayoutPanel2.Controls.Add(splitContainer2, 5, 0);
             tableLayoutPanel2.Controls.Add(btnBottom, 3, 0);
             tableLayoutPanel2.Controls.Add(splitContainer1, 4, 0);
-            tableLayoutPanel2.Controls.Add(btnQuit, 12, 0);
-            tableLayoutPanel2.Controls.Add(btnCancel, 11, 0);
-            tableLayoutPanel2.Controls.Add(btnRun, 10, 0);
-            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 9, 0);
             tableLayoutPanel2.Controls.Add(btnUpdate, 8, 0);
             tableLayoutPanel2.Controls.Add(btnRefresh, 7, 0);
+            tableLayoutPanel2.Controls.Add(btnQuit, 13, 0);
+            tableLayoutPanel2.Controls.Add(btnCancel, 12, 0);
+            tableLayoutPanel2.Controls.Add(btnRun, 11, 0);
+            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 10, 0);
+            tableLayoutPanel2.Controls.Add(btnLoot, 9, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 769);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -1271,7 +1274,7 @@
             btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnSave.Location = new System.Drawing.Point(904, 23);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(120, 68);
+            btnSave.Size = new System.Drawing.Size(100, 68);
             btnSave.TabIndex = 4;
             btnSave.Text = "Save";
             toolTip1.SetToolTip(btnSave, "Save Plugins.txt");
@@ -1375,60 +1378,10 @@
             txtSearchBox.TabIndex = 6;
             txtSearchBox.KeyDown += txtSearchBox_KeyDown;
             // 
-            // btnQuit
-            // 
-            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1660, 23);
-            btnQuit.Name = "btnQuit";
-            btnQuit.Size = new System.Drawing.Size(120, 68);
-            btnQuit.TabIndex = 17;
-            btnQuit.Text = "Exit";
-            toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
-            btnQuit.UseVisualStyleBackColor = true;
-            btnQuit.Click += btnQuit_Click;
-            // 
-            // btnCancel
-            // 
-            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnCancel.AutoSize = true;
-            btnCancel.Location = new System.Drawing.Point(1534, 23);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(120, 68);
-            btnCancel.TabIndex = 10;
-            btnCancel.Text = "Cancel";
-            toolTip1.SetToolTip(btnCancel, "Cancel Changes");
-            btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += btnCancel_Click;
-            // 
-            // btnRun
-            // 
-            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRun.Location = new System.Drawing.Point(1408, 23);
-            btnRun.Name = "btnRun";
-            btnRun.Size = new System.Drawing.Size(120, 68);
-            btnRun.TabIndex = 5;
-            btnRun.Text = "Run";
-            toolTip1.SetToolTip(btnRun, "Run the game (R)");
-            btnRun.UseVisualStyleBackColor = true;
-            btnRun.Click += btnRun_Click;
-            // 
-            // btnCheckCatalog
-            // 
-            btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnCheckCatalog.Location = new System.Drawing.Point(1282, 23);
-            btnCheckCatalog.Name = "btnCheckCatalog";
-            btnCheckCatalog.Size = new System.Drawing.Size(120, 68);
-            btnCheckCatalog.TabIndex = 18;
-            btnCheckCatalog.Text = "Catalog";
-            toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
-            btnCheckCatalog.UseVisualStyleBackColor = true;
-            btnCheckCatalog.Click += btnCheckCatalog_Click;
-            // 
             // btnUpdate
             // 
             btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnUpdate.Location = new System.Drawing.Point(1156, 23);
+            btnUpdate.Location = new System.Drawing.Point(1136, 23);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(120, 68);
             btnUpdate.TabIndex = 19;
@@ -1440,7 +1393,7 @@
             // btnRefresh
             // 
             btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRefresh.Location = new System.Drawing.Point(1030, 23);
+            btnRefresh.Location = new System.Drawing.Point(1010, 23);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new System.Drawing.Size(120, 68);
             btnRefresh.TabIndex = 20;
@@ -1448,6 +1401,68 @@
             toolTip1.SetToolTip(btnRefresh, "Reload Plugins");
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
+            // 
+            // btnQuit
+            // 
+            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnQuit.AutoSize = true;
+            btnQuit.Location = new System.Drawing.Point(1766, 23);
+            btnQuit.Name = "btnQuit";
+            btnQuit.Size = new System.Drawing.Size(100, 68);
+            btnQuit.TabIndex = 17;
+            btnQuit.Text = "Exit";
+            toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
+            btnQuit.UseVisualStyleBackColor = true;
+            btnQuit.Click += btnQuit_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnCancel.AutoSize = true;
+            btnCancel.Location = new System.Drawing.Point(1640, 23);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(120, 68);
+            btnCancel.TabIndex = 10;
+            btnCancel.Text = "Cancel";
+            toolTip1.SetToolTip(btnCancel, "Cancel Changes");
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // btnRun
+            // 
+            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnRun.Location = new System.Drawing.Point(1514, 23);
+            btnRun.Name = "btnRun";
+            btnRun.Size = new System.Drawing.Size(120, 68);
+            btnRun.TabIndex = 5;
+            btnRun.Text = "Run";
+            toolTip1.SetToolTip(btnRun, "Run the game (R)");
+            btnRun.UseVisualStyleBackColor = true;
+            btnRun.Click += btnRun_Click;
+            // 
+            // btnCheckCatalog
+            // 
+            btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnCheckCatalog.Location = new System.Drawing.Point(1388, 23);
+            btnCheckCatalog.Name = "btnCheckCatalog";
+            btnCheckCatalog.Size = new System.Drawing.Size(120, 68);
+            btnCheckCatalog.TabIndex = 18;
+            btnCheckCatalog.Text = "Catalog";
+            toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
+            btnCheckCatalog.UseVisualStyleBackColor = true;
+            btnCheckCatalog.Click += btnCheckCatalog_Click;
+            // 
+            // btnLoot
+            // 
+            btnLoot.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnLoot.Location = new System.Drawing.Point(1262, 23);
+            btnLoot.Name = "btnLoot";
+            btnLoot.Size = new System.Drawing.Size(120, 68);
+            btnLoot.TabIndex = 21;
+            btnLoot.Text = "LOOT";
+            toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
+            btnLoot.UseVisualStyleBackColor = true;
+            btnLoot.Click += btnLoot_Click;
             // 
             // openFileDialog1
             // 
@@ -1462,7 +1477,7 @@
             // 
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             AutoSize = true;
-            ClientSize = new System.Drawing.Size(1824, 929);
+            ClientSize = new System.Drawing.Size(1901, 929);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(statusStrip1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
@@ -1656,5 +1671,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuMS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCustom;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnLoot;
     }
 }

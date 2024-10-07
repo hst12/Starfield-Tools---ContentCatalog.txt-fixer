@@ -2115,5 +2115,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             RefreshDataGrid();
         }
+
+        private void btnLoot_Click(object sender, EventArgs e)
+        {
+            RunLOOT(true);
+        }
     }
 }
