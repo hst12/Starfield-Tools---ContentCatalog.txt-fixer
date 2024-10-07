@@ -1607,9 +1607,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     cmbProfile.Enabled = true;
                     chkProfile.Checked = true;
                     AddRemove();
-                    //RefreshDataGrid();
+                    SavePlugings();
                 }
-                //InitDataGrid();
             }
         }
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
