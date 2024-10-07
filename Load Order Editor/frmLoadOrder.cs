@@ -220,6 +220,7 @@ namespace Starfield_Tools
             isModified = false;
             GameVersionDisplay();
             sbar3("");
+            sbar4("");
         }
 
         private void KeyEvent(object sender, KeyEventArgs e)
@@ -1099,6 +1100,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (addedMods != 0 || removedMods != 0)
             {
                 SavePlugings();
+                if (Profiles)
+                    SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 InitDataGrid();
                 isModified = false;
                 sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
@@ -1560,7 +1563,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void RunLOOT(bool LOOTMode) // True for autosort
         {
-            string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine = "";
+            bool ProfilesActive = Profiles;
+            if (ProfilesActive)
+            {
+                Profiles = false;
+                cmbProfile.Enabled = false;
+                chkProfile.Checked = false;
+            }
+
+            string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine = "--game Starfield";
             if (LOOTPath == "")
             {
                 if (!SetLOOTPath())
@@ -1573,12 +1584,33 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (LOOTPath != "")
             {
                 if (LOOTMode)
-                    cmdLine = " --auto-sort";
-                Process.Start(LOOTPath, "--game Starfield" + cmdLine);
-                Thread.Sleep(2000);
-                InitDataGrid();
+                    cmdLine += " --auto-sort";
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = LOOTPath,
+                    Arguments = "  " + cmdLine,
+                    WorkingDirectory = LOOTPath.Substring(0, LOOTPath.LastIndexOf("LOOT.exe"))
+                };
+
+                using (Process process = Process.Start(startInfo))
+                {
+                    process.WaitForExit();
+                }
+                sbar4("Loot exit");
+
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
+                if (ProfilesActive)
+                {
+                    InitDataGrid();
+                    SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
+                    Profiles = true;
+                    cmbProfile.Enabled = true;
+                    chkProfile.Checked = true;
+                    AddRemove();
+                    //RefreshDataGrid();
+                }
+                //InitDataGrid();
             }
         }
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
