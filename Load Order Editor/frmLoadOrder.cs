@@ -46,6 +46,9 @@ namespace Starfield_Tools
             this.Font = Properties.Settings.Default.FontSize;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
+
+
+
             CustomEXE = Properties.Settings.Default.CustomEXE;
 
             if (Properties.Settings.Default.AutoDelccc)
@@ -69,6 +72,10 @@ namespace Starfield_Tools
                 case 2:
                     toolStripMenuCustom.Checked = true;
                     break;
+                case 3:
+                    gameVersionSFSEToolStripMenuItem.Checked = true;
+                    break;
+
             }
             GameVersionDisplay();
 
@@ -1842,6 +1849,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 toolStripMenuSteam.Checked = false;
                 toolStripMenuMS.Checked = false;
+                gameVersionSFSEToolStripMenuItem.Checked = false;
             }
 
             Properties.Settings.Default.GameVersion = GameVersion;
@@ -1889,6 +1897,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     break;
                 case 2:
                     sbar2("Game version - Custom - " + Properties.Settings.Default.CustomEXE);
+                    break;
+                case 3:
+                    sbar2("Game version - SFSE");
                     break;
             }
         }
@@ -1949,6 +1960,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 toolStripMenuMS.Checked = false;
                 toolStripMenuCustom.Checked = false;
+                gameVersionSFSEToolStripMenuItem.Checked = false;
                 GameVersion = 0;
                 sbar2("Game version set to Steam");
                 Properties.Settings.Default.GameVersion = GameVersion;
@@ -1962,6 +1974,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 toolStripMenuSteam.Checked = false;
                 toolStripMenuCustom.Checked = false;
+                gameVersionSFSEToolStripMenuItem.Checked = false;
                 GameVersion = 1;
                 sbar2("Game version set to MS");
                 Properties.Settings.Default.GameVersion = GameVersion;
@@ -2119,6 +2132,33 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void btnLoot_Click(object sender, EventArgs e)
         {
             RunLOOT(true);
+        }
+
+        private void gameVersionSFSEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(StarfieldGamePath + "\\sfse_loader.exe"))
+            {
+                gameVersionSFSEToolStripMenuItem.Checked = !gameVersionSFSEToolStripMenuItem.Checked;
+                if (gameVersionSFSEToolStripMenuItem.Checked)
+                {
+                    toolStripMenuSteam.Checked = false;
+                    toolStripMenuMS.Checked = false;
+                    toolStripMenuCustom.Checked = false;
+
+                    GameVersion = 3;
+                    sbar2("Game version set to SFSE");
+                    Properties.Settings.Default.GameVersion = GameVersion;
+                }
+            }
+            else
+            {
+                MessageBox.Show("SFSE doesn't seem to be installed or Starfield path not send", "Unable to switch to SFSE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GameVersion = 0;
+                toolStripMenuSteam.Checked = true;
+                toolStripMenuMS.Checked = false;
+                toolStripMenuCustom.Checked = false;
+                gameVersionSFSEToolStripMenuItem.Checked = false;
+            }
         }
     }
 }

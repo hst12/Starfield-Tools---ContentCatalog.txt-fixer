@@ -244,6 +244,30 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
+        
+        public static bool StartStarfieldSFSE()
+        {
+            string cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\sfse_loader.exe";
+            if (cmdLine == null)
+                return false;
+
+            try
+            {
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = cmdLine,
+                    WorkingDirectory = Properties.Settings.Default.StarfieldGamePath,
+                    UseShellExecute = false //
+                };
+                Process.Start(startInfo);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + cmdLine, "Error");
+                return false;
+            }
+        }
         public static bool StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
@@ -272,6 +296,9 @@ namespace Starfield_Tools.Common
                     break;
                 case 2:
                     result = StartStarfieldCustom();
+                    break;
+                case 3:
+                    result = StartStarfieldSFSE();
                     break;
             }
             return result;
