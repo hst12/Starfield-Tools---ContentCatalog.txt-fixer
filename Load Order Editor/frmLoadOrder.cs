@@ -47,8 +47,6 @@ namespace Starfield_Tools
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
 
-
-
             CustomEXE = Properties.Settings.Default.CustomEXE;
 
             if (Properties.Settings.Default.AutoDelccc)
@@ -222,6 +220,7 @@ namespace Starfield_Tools
         {
             InitDataGrid();
             GetProfiles();
+
             GridSorted = false;
             isModified = false;
             GameVersionDisplay();
@@ -427,7 +426,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     for (i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
-
                                 if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                     row.Cells["Group"].Value = "Bethesda";
                                 row.Cells["ModEnabled"].Value = ModEnabled;
@@ -443,13 +441,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     row.Cells["Files"].Value = ModFiles;
                                 if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
                                     row.Cells["FileSize"].Value = ModFileSize;
-                                //if (dataGridView1.Columns["CreationsID"].Visible)
                                 row.Cells["CreationsID"].Value = ModID;
                                 if (dataGridView1.Columns["Index"].Visible)
                                     row.Cells["Index"].Value = IndexCount++;
                                 if (dataGridView1.Columns["URL"].Visible)
                                     row.Cells["URL"].Value = URL;
-
                             }
                         }
                     }
@@ -471,7 +467,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly), file =>
                 {
                     esmCount++;
-                    esmFiles.Add(file);
                 });
                 Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly), file =>
                 {
@@ -512,7 +507,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 foreach (var profileName in Directory.EnumerateFiles(ProfileFolder, "*.txt", SearchOption.TopDirectoryOnly))
                 {
                     cmbProfile.Items.Add(profileName[(profileName.LastIndexOf('\\') + 1)..]);
-
                 }
                 int index = cmbProfile.Items.IndexOf(Properties.Settings.Default.LastProfile);
                 if (index != -1)
@@ -891,11 +885,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result)
-            {
-
                 InitDataGrid();
 
-            }
             if (OpenPlugins.FileName != "")
             {
                 Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
@@ -999,14 +990,17 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 MessageBox.Show("Can't continue without game installation path");
                 return 0;
             }
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+
+            foreach(var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            };
+
+            foreach(var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
+            };
+
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
             List<string> MissingFiles = esmespFiles.Except(PluginFiles).ToList();
@@ -1019,7 +1013,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     AddedFiles++;
                     int rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
-                    if (FilesToAdd[i].Contains(".esm"))
+                    if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null)
                         row.Cells["ModEnabled"].Value = true;
                     else
                         row.Cells["ModEnabled"].Value = false;
@@ -1050,14 +1044,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 MessageBox.Show("Can't continue without game installation path");
                 return 0;
             }
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+
+            foreach(var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            };
+
+            foreach(var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
+            };
+
+
             int i;
             for (i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
@@ -1073,9 +1071,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
             {
                 FilesToRemove.Add(tools.BethFiles[i]);
-#if DEBUG
-                Debug.WriteLine(FilesToRemove[i]);
-#endif
             }
 
             if (FilesToRemove.Count > 0)
@@ -1166,7 +1161,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 catch (Exception ex)
                 {
                     sbar(ex.Message);
-
                 }
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
                 {
@@ -1337,10 +1331,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 string directoryPath = StarfieldGamePath + "\\Data";
 
                 ModFile = directoryPath + "\\" + ModName;
+                if (File.Exists(ModFile + ".esp"))
+                {
+                    File.Delete(ModFile + ".esp");
+                    SavePlugings();
+                    sbar3("esp uninstalled - esm and archive files skipped");
+                    return;
+                }
                 if (File.Exists(ModFile + ".esm"))
                     File.Delete(ModFile + ".esm");
-                if (File.Exists(ModFile + ".esp"))
-                    File.Delete(ModFile + ".esp");
+
                 if (File.Exists(ModFile + " - textures.ba2"))
                     File.Delete(ModFile + " - textures.ba2");
                 if (File.Exists(ModFile + " - main.ba2"))
