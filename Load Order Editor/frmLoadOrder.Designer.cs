@@ -1289,7 +1289,7 @@
             btnSave.Location = new System.Drawing.Point(904, 23);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(100, 68);
-            btnSave.TabIndex = 4;
+            btnSave.TabIndex = 7;
             btnSave.Text = "Save";
             toolTip1.SetToolTip(btnSave, "Save Plugins.txt");
             btnSave.UseVisualStyleBackColor = true;
@@ -1321,7 +1321,7 @@
             chkProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             chkProfile.Name = "chkProfile";
             chkProfile.Size = new System.Drawing.Size(114, 36);
-            chkProfile.TabIndex = 7;
+            chkProfile.TabIndex = 5;
             chkProfile.Text = "Profile";
             toolTip1.SetToolTip(chkProfile, "Enable/Disable Profiles");
             chkProfile.UseVisualStyleBackColor = true;
@@ -1335,7 +1335,7 @@
             cmbProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             cmbProfile.Name = "cmbProfile";
             cmbProfile.Size = new System.Drawing.Size(281, 40);
-            cmbProfile.TabIndex = 8;
+            cmbProfile.TabIndex = 6;
             toolTip1.SetToolTip(cmbProfile, "Profile select");
             cmbProfile.SelectedIndexChanged += cmbProfile_SelectedIndexChanged;
             // 
@@ -1389,7 +1389,7 @@
             txtSearchBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             txtSearchBox.Name = "txtSearchBox";
             txtSearchBox.Size = new System.Drawing.Size(312, 39);
-            txtSearchBox.TabIndex = 6;
+            txtSearchBox.TabIndex = 4;
             txtSearchBox.KeyDown += txtSearchBox_KeyDown;
             // 
             // btnUpdate
@@ -1398,7 +1398,7 @@
             btnUpdate.Location = new System.Drawing.Point(1136, 23);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(120, 68);
-            btnUpdate.TabIndex = 19;
+            btnUpdate.TabIndex = 9;
             btnUpdate.Text = "Update";
             toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt");
             btnUpdate.UseVisualStyleBackColor = true;
@@ -1410,7 +1410,7 @@
             btnRefresh.Location = new System.Drawing.Point(1010, 23);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new System.Drawing.Size(120, 68);
-            btnRefresh.TabIndex = 20;
+            btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             toolTip1.SetToolTip(btnRefresh, "Reload Plugins");
             btnRefresh.UseVisualStyleBackColor = true;
@@ -1423,7 +1423,7 @@
             btnQuit.Location = new System.Drawing.Point(1766, 23);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(100, 68);
-            btnQuit.TabIndex = 17;
+            btnQuit.TabIndex = 14;
             btnQuit.Text = "Exit";
             toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
             btnQuit.UseVisualStyleBackColor = true;
@@ -1436,7 +1436,7 @@
             btnCancel.Location = new System.Drawing.Point(1640, 23);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(120, 68);
-            btnCancel.TabIndex = 10;
+            btnCancel.TabIndex = 13;
             btnCancel.Text = "Cancel";
             toolTip1.SetToolTip(btnCancel, "Cancel Changes");
             btnCancel.UseVisualStyleBackColor = true;
@@ -1448,7 +1448,7 @@
             btnRun.Location = new System.Drawing.Point(1514, 23);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(120, 68);
-            btnRun.TabIndex = 5;
+            btnRun.TabIndex = 12;
             btnRun.Text = "Run";
             toolTip1.SetToolTip(btnRun, "Run the game (R)");
             btnRun.UseVisualStyleBackColor = true;
@@ -1460,7 +1460,7 @@
             btnCheckCatalog.Location = new System.Drawing.Point(1388, 23);
             btnCheckCatalog.Name = "btnCheckCatalog";
             btnCheckCatalog.Size = new System.Drawing.Size(120, 68);
-            btnCheckCatalog.TabIndex = 18;
+            btnCheckCatalog.TabIndex = 11;
             btnCheckCatalog.Text = "Catalog";
             toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
             btnCheckCatalog.UseVisualStyleBackColor = true;
@@ -1472,7 +1472,7 @@
             btnLoot.Location = new System.Drawing.Point(1262, 23);
             btnLoot.Name = "btnLoot";
             btnLoot.Size = new System.Drawing.Size(120, 68);
-            btnLoot.TabIndex = 21;
+            btnLoot.TabIndex = 10;
             btnLoot.Text = "LOOT";
             toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
             btnLoot.UseVisualStyleBackColor = true;
