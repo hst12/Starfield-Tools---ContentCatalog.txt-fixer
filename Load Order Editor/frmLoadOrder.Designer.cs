@@ -1473,7 +1473,7 @@
             btnLoot.Name = "btnLoot";
             btnLoot.Size = new System.Drawing.Size(120, 68);
             btnLoot.TabIndex = 10;
-            btnLoot.Text = "LOOT";
+            btnLoot.Text = "Autosort";
             toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
             btnLoot.UseVisualStyleBackColor = true;
             btnLoot.Click += btnLoot_Click;

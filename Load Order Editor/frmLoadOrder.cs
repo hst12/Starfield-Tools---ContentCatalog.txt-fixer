@@ -1337,10 +1337,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 string directoryPath = StarfieldGamePath + "\\Data";
 
                 ModFile = directoryPath + "\\" + ModName;
+                if (File.Exists(ModFile + ".esp"))
+                {
+                    File.Delete(ModFile + ".esp");
+                    SavePlugings();
+                    sbar3("esp uninstalled - esm and archive files skipped");
+                    return;
+                }
                 if (File.Exists(ModFile + ".esm"))
                     File.Delete(ModFile + ".esm");
-                if (File.Exists(ModFile + ".esp"))
-                    File.Delete(ModFile + ".esp");
+
                 if (File.Exists(ModFile + " - textures.ba2"))
                     File.Delete(ModFile + " - textures.ba2");
                 if (File.Exists(ModFile + " - main.ba2"))
