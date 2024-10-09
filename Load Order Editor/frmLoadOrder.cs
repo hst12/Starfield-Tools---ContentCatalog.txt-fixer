@@ -1339,6 +1339,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 ModFile = directoryPath + "\\" + ModName;
                 if (File.Exists(ModFile + ".esm"))
                     File.Delete(ModFile + ".esm");
+                if (File.Exists(ModFile + ".esp"))
+                    File.Delete(ModFile + ".esp");
                 if (File.Exists(ModFile + " - textures.ba2"))
                     File.Delete(ModFile + " - textures.ba2");
                 if (File.Exists(ModFile + " - main.ba2"))
@@ -1598,11 +1600,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     WorkingDirectory = LOOTPath.Substring(0, LOOTPath.LastIndexOf("LOOT.exe"))
                 };
 
+                sbar4("App paused waiting for LOOT exit");
                 using (Process process = Process.Start(startInfo))
                 {
                     process.WaitForExit();
                 }
-                sbar4("Loot exit");
+                sbar4("Loot exit - review the load order if necessary");
 
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
