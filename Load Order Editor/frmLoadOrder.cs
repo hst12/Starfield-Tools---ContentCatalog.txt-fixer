@@ -2168,6 +2168,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             List<string> Plugins = new();
             string PluginName;
+            int ModCount = dataGridView1.RowCount;
             string loText = Tools.StarfieldAppData + "\\Plugins.txt";
             using (var reader = new StreamReader(loText))
             {
@@ -2180,6 +2181,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             File.WriteAllLines(loText, distinctList);
             InitDataGrid();
             SavePlugings();
+            sbar4("Duplicates removed: "+ (ModCount - dataGridView1.RowCount).ToString());
         }
     }
 }
