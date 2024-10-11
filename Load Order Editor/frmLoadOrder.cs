@@ -2181,7 +2181,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             File.WriteAllLines(loText, distinctList);
             InitDataGrid();
             SavePlugings();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25413a0754dfc70b682bb43893b41a47b7e20b75
             sbar4("Duplicates removed: "+ (ModCount - dataGridView1.RowCount).ToString());
         }
     }
