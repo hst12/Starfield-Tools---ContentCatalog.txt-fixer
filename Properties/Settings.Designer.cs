@@ -252,12 +252,12 @@ namespace Starfield_Tools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ProflieOn {
+        public bool ProfileOn {
             get {
-                return ((bool)(this["ProflieOn"]));
+                return ((bool)(this["ProfileOn"]));
             }
             set {
-                this["ProflieOn"] = value;
+                this["ProfileOn"] = value;
             }
         }
         

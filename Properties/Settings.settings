@@ -59,7 +59,7 @@
     <Setting Name="AutoDelccc" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ProflieOn" Type="System.Boolean" Scope="User">
+    <Setting Name="ProfileOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Index" Type="System.Boolean" Scope="User">
