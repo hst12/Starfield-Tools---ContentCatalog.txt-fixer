@@ -148,6 +148,7 @@
             toolStripMenuAutoClean = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuScanMods = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuCleanup = new System.Windows.Forms.ToolStripMenuItem();
+            removeDuplicatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuInstall = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuUninstall = new System.Windows.Forms.ToolStripMenuItem();
@@ -1009,7 +1010,7 @@
             // 
             // toolStripMenuMods
             // 
-            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort, toolStripSeparator15, looseFilesDisabledToolStripMenuItem });
+            toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, removeDuplicatesToolStripMenuItem, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort, toolStripSeparator15, looseFilesDisabledToolStripMenuItem });
             toolStripMenuMods.Name = "toolStripMenuMods";
             toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
             toolStripMenuMods.Text = "Mods";
@@ -1073,6 +1074,13 @@
             toolStripMenuCleanup.Size = new System.Drawing.Size(419, 44);
             toolStripMenuCleanup.Text = "Remove Missing";
             toolStripMenuCleanup.Click += toolStripMenuCleanup_Click;
+            // 
+            // removeDuplicatesToolStripMenuItem
+            // 
+            removeDuplicatesToolStripMenuItem.Name = "removeDuplicatesToolStripMenuItem";
+            removeDuplicatesToolStripMenuItem.Size = new System.Drawing.Size(419, 44);
+            removeDuplicatesToolStripMenuItem.Text = "Remove Duplicates";
+            removeDuplicatesToolStripMenuItem.Click += removeDuplicatesToolStripMenuItem_Click;
             // 
             // toolStripSeparator7
             // 
@@ -1201,7 +1209,7 @@
             // toolStripMenuTestJson
             // 
             toolStripMenuTestJson.Name = "toolStripMenuTestJson";
-            toolStripMenuTestJson.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuTestJson.Size = new System.Drawing.Size(240, 44);
             toolStripMenuTestJson.Text = "json Test";
             toolStripMenuTestJson.Click += toolStripMenuTestJson_Click;
             // 
@@ -1688,5 +1696,6 @@
         private System.Windows.Forms.Button btnLoot;
         private System.Windows.Forms.ToolStripMenuItem gameVersionSFSEToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripMenuItem removeDuplicatesToolStripMenuItem;
     }
 }
