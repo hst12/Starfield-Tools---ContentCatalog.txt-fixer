@@ -426,7 +426,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
                                     for (i = 0; i < Groups.plugins.Count; i++)
                                         if (Groups.plugins[i].name == PluginName)
+                                        {
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
+                                            break;
+                                        }
 
                                 if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                     row.Cells["Group"].Value = "Bethesda";
@@ -584,9 +587,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void MoveDown()
         {
-
             int rowIndex = dataGridView1.SelectedCells[0].OwningRow.Index;
-            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            int colIndex = 1;
 
             if (rowIndex == dataGridView1.Rows.Count - 1)
                 return; // Already at the bottom
@@ -655,7 +658,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
-            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            int colIndex = 1;
 
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(0, selectedRow);
@@ -666,7 +670,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void MoveBottom()
         {
             int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
-            int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
+            int colIndex = 1;
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
 
             dataGridView1.Rows.Remove(selectedRow);
@@ -2066,6 +2071,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 ChangeCount += CheckAndDeleteINI("Starfield.ini.baked");
                 ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
                 ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
+                ChangeCount += CheckAndDeleteINI("Starfield.ini.base");
                 if (Delccc())
                     ChangeCount++;
                 sbar3(ChangeCount + " Change(s) made to Vortex created files");
@@ -2181,8 +2187,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             File.WriteAllLines(loText, distinctList);
             InitDataGrid();
             SavePlugings();
-
-
             sbar4("Duplicates removed: "+ (ModCount - dataGridView1.RowCount).ToString());
         }
     }
