@@ -209,7 +209,6 @@ namespace Starfield_Tools
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
 
-            //InitDataGrid();
             cmbProfile.Enabled = Profiles;
             GetProfiles();
             if (!Profiles)
@@ -503,9 +502,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 dataGridView1.EndEdit();
                 if (ActiveOnly)
+                {
+                    sbar("Hiding inactive mods...");
+                    statusStrip1.Refresh();
                     for (i = 0; i < dataGridView1.RowCount; i++)
                         if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
                             dataGridView1.Rows[i].Visible = false;
+                }
                 sbar(StatText);
             }
             catch

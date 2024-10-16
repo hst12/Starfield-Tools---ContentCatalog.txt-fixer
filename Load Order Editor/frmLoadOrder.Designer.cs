@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             dataGridView1 = new System.Windows.Forms.DataGridView();
             Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -170,43 +170,33 @@
             testToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuTestJson = new System.Windows.Forms.ToolStripMenuItem();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            txtSearchBox = new System.Windows.Forms.TextBox();
             btnUp = new System.Windows.Forms.Button();
             btnDown = new System.Windows.Forms.Button();
             btnTop = new System.Windows.Forms.Button();
-            btnSave = new System.Windows.Forms.Button();
-            splitContainer2 = new System.Windows.Forms.SplitContainer();
+            btnBottom = new System.Windows.Forms.Button();
             chkProfile = new System.Windows.Forms.CheckBox();
             cmbProfile = new System.Windows.Forms.ComboBox();
-            btnBottom = new System.Windows.Forms.Button();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
-            label1 = new System.Windows.Forms.Label();
-            txtSearchBox = new System.Windows.Forms.TextBox();
-            btnUpdate = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
             btnRefresh = new System.Windows.Forms.Button();
-            btnQuit = new System.Windows.Forms.Button();
-            btnCancel = new System.Windows.Forms.Button();
-            btnRun = new System.Windows.Forms.Button();
-            btnCheckCatalog = new System.Windows.Forms.Button();
+            btnUpdate = new System.Windows.Forms.Button();
             btnLoot = new System.Windows.Forms.Button();
+            btnCheckCatalog = new System.Windows.Forms.Button();
+            btnRun = new System.Windows.Forms.Button();
+            btnCancel = new System.Windows.Forms.Button();
+            btnQuit = new System.Windows.Forms.Button();
             fontDialog1 = new System.Windows.Forms.FontDialog();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             timer1 = new System.Windows.Forms.Timer(components);
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
@@ -215,19 +205,20 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
-            dataGridView1.ColumnHeadersHeight = 46;
+            dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Index, ModEnabled, PluginName, Description, Group, Version, AuthorVersion, TimeStamp, Achievements, Files, CreationsID, FileSize, URL });
             dataGridView1.ContextMenuStrip = contextMenuDatagrid;
             dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new System.Drawing.Point(4, 47);
-            dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            dataGridView1.Location = new System.Drawing.Point(2, 40);
+            dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new System.Drawing.Size(1904, 714);
+            dataGridView1.Size = new System.Drawing.Size(1570, 695);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
@@ -285,8 +276,8 @@
             // Version
             // 
             Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.NullValue = null;
-            Version.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            Version.DefaultCellStyle = dataGridViewCellStyle2;
             Version.HeaderText = "Version Date";
             Version.MinimumWidth = 10;
             Version.Name = "Version";
@@ -474,10 +465,10 @@
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusStats, toolStripStatusDelCCC, toolStripStatusSecondary, toolStripStatusTertiary, toolStripStatusLabel4 });
-            statusStrip1.Location = new System.Drawing.Point(0, 887);
+            statusStrip1.Location = new System.Drawing.Point(0, 787);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            statusStrip1.Size = new System.Drawing.Size(1901, 42);
+            statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            statusStrip1.Size = new System.Drawing.Size(1574, 42);
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "Starting up";
             // 
@@ -513,6 +504,7 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.AutoSize = true;
             tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -521,13 +513,13 @@
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1901, 887);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1574, 787);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
@@ -536,7 +528,8 @@
             menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, viewToolStripMenuItem, toolsToolStripMenuItem, toolStripMenuGame, toolStripMenuMods, toolStripMenuLinks, helpToolStripMenuItem, testToolStripMenu });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new System.Drawing.Size(1912, 42);
+            menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            menuStrip1.Size = new System.Drawing.Size(1574, 38);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -544,7 +537,7 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator5, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, toolStripSeparator17, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new System.Drawing.Size(71, 38);
+            fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
             fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -749,7 +742,7 @@
             // 
             editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuDeleteLine });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new System.Drawing.Size(74, 38);
+            editToolStripMenuItem.Size = new System.Drawing.Size(74, 36);
             editToolStripMenuItem.Text = "&Edit";
             // 
             // toolStripMenuDeleteLine
@@ -764,7 +757,7 @@
             // 
             viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { refreshToolStripMenuItem, toolStripMenuColumns, activeOnlyToolStripMenuItem });
             viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            viewToolStripMenuItem.Size = new System.Drawing.Size(85, 38);
+            viewToolStripMenuItem.Size = new System.Drawing.Size(85, 36);
             viewToolStripMenuItem.Text = "View";
             // 
             // refreshToolStripMenuItem
@@ -848,7 +841,7 @@
             // 
             toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuAutoDelccc, toolStripSeparator22, toolStripMenuProfilesOn, toolStripSeparator23, autoUpdateModsToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
+            toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             toolsToolStripMenuItem.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -966,7 +959,7 @@
             // 
             toolStripMenuGame.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuRun, toolStripSeparator16, toolStripMenuSteam, toolStripMenuMS, gameVersionSFSEToolStripMenuItem, toolStripSeparator24, toolStripMenuCustom });
             toolStripMenuGame.Name = "toolStripMenuGame";
-            toolStripMenuGame.Size = new System.Drawing.Size(96, 38);
+            toolStripMenuGame.Size = new System.Drawing.Size(96, 36);
             toolStripMenuGame.Text = "Game";
             // 
             // toolStripMenuRun
@@ -1021,7 +1014,7 @@
             // 
             toolStripMenuMods.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableAll, toolStripMenuDisableAll, toolStripSeparator6, toolStripMenuAdd, toolStripMenuDelete, toolStripSeparator8, toolStripMenuAutoClean, toolStripMenuScanMods, toolStripMenuCleanup, removeDuplicatesToolStripMenuItem, toolStripSeparator7, toolStripMenuInstall, toolStripMenuUninstall, toolStripSeparator9, toolStripMenuLoot, toolStripMenuLootSort, toolStripSeparator15, looseFilesDisabledToolStripMenuItem });
             toolStripMenuMods.Name = "toolStripMenuMods";
-            toolStripMenuMods.Size = new System.Drawing.Size(94, 38);
+            toolStripMenuMods.Size = new System.Drawing.Size(94, 36);
             toolStripMenuMods.Text = "Mods";
             // 
             // toolStripMenuEnableAll
@@ -1147,7 +1140,7 @@
             // 
             toolStripMenuLinks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuCreations, toolStripMenuNexus, toolStripMenuBGSStarfield, toolStripMenuBGSX, toolStripMenuGitHub });
             toolStripMenuLinks.Name = "toolStripMenuLinks";
-            toolStripMenuLinks.Size = new System.Drawing.Size(87, 38);
+            toolStripMenuLinks.Size = new System.Drawing.Size(87, 36);
             toolStripMenuLinks.Text = "Links";
             // 
             // toolStripMenuCreations
@@ -1189,7 +1182,7 @@
             // 
             helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuShortcuts, aboutToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
+            helpToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
             helpToolStripMenuItem.Text = "&Help";
             // 
             // toolStripMenuShortcuts
@@ -1211,7 +1204,7 @@
             // 
             testToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuTestJson });
             testToolStripMenu.Name = "testToolStripMenu";
-            testToolStripMenu.Size = new System.Drawing.Size(76, 38);
+            testToolStripMenu.Size = new System.Drawing.Size(76, 36);
             testToolStripMenu.Text = "Test";
             testToolStripMenu.Visible = false;
             // 
@@ -1224,8 +1217,11 @@
             // 
             // tableLayoutPanel2
             // 
+            tableLayoutPanel2.AutoSize = true;
             tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 14;
+            tableLayoutPanel2.ColumnCount = 16;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -1243,32 +1239,48 @@
             tableLayoutPanel2.Controls.Add(btnUp, 0, 0);
             tableLayoutPanel2.Controls.Add(btnDown, 1, 0);
             tableLayoutPanel2.Controls.Add(btnTop, 2, 0);
-            tableLayoutPanel2.Controls.Add(btnSave, 6, 0);
-            tableLayoutPanel2.Controls.Add(splitContainer2, 5, 0);
             tableLayoutPanel2.Controls.Add(btnBottom, 3, 0);
-            tableLayoutPanel2.Controls.Add(splitContainer1, 4, 0);
-            tableLayoutPanel2.Controls.Add(btnUpdate, 8, 0);
-            tableLayoutPanel2.Controls.Add(btnRefresh, 7, 0);
-            tableLayoutPanel2.Controls.Add(btnQuit, 13, 0);
-            tableLayoutPanel2.Controls.Add(btnCancel, 12, 0);
-            tableLayoutPanel2.Controls.Add(btnRun, 11, 0);
-            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 10, 0);
-            tableLayoutPanel2.Controls.Add(btnLoot, 9, 0);
-            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(3, 769);
+            tableLayoutPanel2.Controls.Add(btnQuit, 15, 0);
+            tableLayoutPanel2.Controls.Add(btnCancel, 14, 0);
+            tableLayoutPanel2.Controls.Add(btnRun, 13, 0);
+            tableLayoutPanel2.Controls.Add(btnCheckCatalog, 12, 0);
+            tableLayoutPanel2.Controls.Add(btnLoot, 11, 0);
+            tableLayoutPanel2.Controls.Add(btnUpdate, 10, 0);
+            tableLayoutPanel2.Controls.Add(btnRefresh, 9, 0);
+            tableLayoutPanel2.Controls.Add(btnSave, 8, 0);
+            tableLayoutPanel2.Controls.Add(cmbProfile, 7, 0);
+            tableLayoutPanel2.Controls.Add(chkProfile, 6, 0);
+            tableLayoutPanel2.Controls.Add(txtSearchBox, 5, 0);
+            tableLayoutPanel2.Controls.Add(label1, 4, 0);
+            tableLayoutPanel2.Location = new System.Drawing.Point(2, 739);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(1906, 115);
+            tableLayoutPanel2.Size = new System.Drawing.Size(1564, 46);
             tableLayoutPanel2.TabIndex = 9;
+            // 
+            // txtSearchBox
+            // 
+            txtSearchBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            txtSearchBox.Location = new System.Drawing.Point(261, 3);
+            txtSearchBox.Margin = new System.Windows.Forms.Padding(2);
+            txtSearchBox.Name = "txtSearchBox";
+            txtSearchBox.Size = new System.Drawing.Size(127, 39);
+            txtSearchBox.TabIndex = 17;
+            toolTip1.SetToolTip(txtSearchBox, "Search Box");
+            txtSearchBox.KeyDown += txtSearchBox_KeyDown;
             // 
             // btnUp
             // 
             btnUp.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnUp.AutoSize = true;
+            btnUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnUp.Image = Properties.Resources.Github_Octicons_Arrow_up_24_32;
-            btnUp.Location = new System.Drawing.Point(3, 23);
+            btnUp.Location = new System.Drawing.Point(2, 4);
+            btnUp.Margin = new System.Windows.Forms.Padding(2);
             btnUp.Name = "btnUp";
-            btnUp.Size = new System.Drawing.Size(68, 68);
+            btnUp.Size = new System.Drawing.Size(38, 38);
             btnUp.TabIndex = 0;
             toolTip1.SetToolTip(btnUp, "Move mod up (W)");
             btnUp.UseVisualStyleBackColor = true;
@@ -1278,10 +1290,12 @@
             // 
             btnDown.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnDown.AutoSize = true;
+            btnDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnDown.Image = Properties.Resources.Github_Octicons_Arrow_down_24_32;
-            btnDown.Location = new System.Drawing.Point(77, 23);
+            btnDown.Location = new System.Drawing.Point(44, 4);
+            btnDown.Margin = new System.Windows.Forms.Padding(2);
             btnDown.Name = "btnDown";
-            btnDown.Size = new System.Drawing.Size(68, 68);
+            btnDown.Size = new System.Drawing.Size(38, 38);
             btnDown.TabIndex = 1;
             toolTip1.SetToolTip(btnDown, "Move mod down (S)");
             btnDown.UseVisualStyleBackColor = true;
@@ -1291,51 +1305,38 @@
             // 
             btnTop.Anchor = System.Windows.Forms.AnchorStyles.Left;
             btnTop.AutoSize = true;
+            btnTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnTop.Image = Properties.Resources.Github_Octicons_Move_to_top_24_32;
-            btnTop.Location = new System.Drawing.Point(151, 23);
+            btnTop.Location = new System.Drawing.Point(86, 4);
+            btnTop.Margin = new System.Windows.Forms.Padding(2);
             btnTop.Name = "btnTop";
-            btnTop.Size = new System.Drawing.Size(68, 68);
+            btnTop.Size = new System.Drawing.Size(38, 38);
             btnTop.TabIndex = 2;
             toolTip1.SetToolTip(btnTop, "Move mod to the top (A)");
             btnTop.UseVisualStyleBackColor = true;
             btnTop.Click += btnTop_Click;
             // 
-            // btnSave
+            // btnBottom
             // 
-            btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnSave.Location = new System.Drawing.Point(904, 23);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(100, 68);
-            btnSave.TabIndex = 7;
-            btnSave.Text = "Save";
-            toolTip1.SetToolTip(btnSave, "Save Plugins.txt");
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // splitContainer2
-            // 
-            splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer2.Location = new System.Drawing.Point(617, 3);
-            splitContainer2.Name = "splitContainer2";
-            splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            splitContainer2.Panel1.Controls.Add(chkProfile);
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.Controls.Add(cmbProfile);
-            splitContainer2.Size = new System.Drawing.Size(281, 109);
-            splitContainer2.SplitterDistance = 32;
-            splitContainer2.TabIndex = 16;
+            btnBottom.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnBottom.AutoSize = true;
+            btnBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnBottom.Image = Properties.Resources.Github_Octicons_Move_to_bottom_24_32;
+            btnBottom.Location = new System.Drawing.Point(128, 4);
+            btnBottom.Margin = new System.Windows.Forms.Padding(2);
+            btnBottom.Name = "btnBottom";
+            btnBottom.Size = new System.Drawing.Size(38, 38);
+            btnBottom.TabIndex = 3;
+            toolTip1.SetToolTip(btnBottom, "Move mod to the bottom (D)");
+            btnBottom.UseVisualStyleBackColor = true;
+            btnBottom.Click += btnBottom_Click;
             // 
             // chkProfile
             // 
-            chkProfile.Anchor = System.Windows.Forms.AnchorStyles.None;
+            chkProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             chkProfile.AutoSize = true;
-            chkProfile.Location = new System.Drawing.Point(0, -1);
-            chkProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            chkProfile.Location = new System.Drawing.Point(392, 5);
+            chkProfile.Margin = new System.Windows.Forms.Padding(2);
             chkProfile.Name = "chkProfile";
             chkProfile.Size = new System.Drawing.Size(114, 36);
             chkProfile.TabIndex = 5;
@@ -1346,154 +1347,136 @@
             // 
             // cmbProfile
             // 
-            cmbProfile.Dock = System.Windows.Forms.DockStyle.Top;
+            cmbProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             cmbProfile.FormattingEnabled = true;
-            cmbProfile.Location = new System.Drawing.Point(0, 0);
-            cmbProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            cmbProfile.ItemHeight = 32;
+            cmbProfile.Location = new System.Drawing.Point(510, 3);
+            cmbProfile.Margin = new System.Windows.Forms.Padding(2);
             cmbProfile.Name = "cmbProfile";
-            cmbProfile.Size = new System.Drawing.Size(281, 40);
+            cmbProfile.Size = new System.Drawing.Size(300, 40);
             cmbProfile.TabIndex = 6;
             toolTip1.SetToolTip(cmbProfile, "Profile select");
             cmbProfile.SelectedIndexChanged += cmbProfile_SelectedIndexChanged;
             // 
-            // btnBottom
+            // btnSave
             // 
-            btnBottom.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnBottom.AutoSize = true;
-            btnBottom.Image = Properties.Resources.Github_Octicons_Move_to_bottom_24_32;
-            btnBottom.Location = new System.Drawing.Point(225, 23);
-            btnBottom.Name = "btnBottom";
-            btnBottom.Size = new System.Drawing.Size(68, 68);
-            btnBottom.TabIndex = 3;
-            toolTip1.SetToolTip(btnBottom, "Move mod to the bottom (D)");
-            btnBottom.UseVisualStyleBackColor = true;
-            btnBottom.Click += btnBottom_Click;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.Location = new System.Drawing.Point(299, 3);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(label1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(txtSearchBox);
-            splitContainer1.Size = new System.Drawing.Size(312, 109);
-            splitContainer1.SplitterDistance = 32;
-            splitContainer1.TabIndex = 15;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            label1.Location = new System.Drawing.Point(0, 0);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(85, 32);
-            label1.TabIndex = 14;
-            label1.Text = "Search";
-            toolTip1.SetToolTip(label1, "Type text below and press <enter> to search");
-            // 
-            // txtSearchBox
-            // 
-            txtSearchBox.Dock = System.Windows.Forms.DockStyle.Top;
-            txtSearchBox.Location = new System.Drawing.Point(0, 0);
-            txtSearchBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            txtSearchBox.Name = "txtSearchBox";
-            txtSearchBox.Size = new System.Drawing.Size(312, 39);
-            txtSearchBox.TabIndex = 4;
-            txtSearchBox.KeyDown += txtSearchBox_KeyDown;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnUpdate.Location = new System.Drawing.Point(1136, 23);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new System.Drawing.Size(120, 68);
-            btnUpdate.TabIndex = 9;
-            btnUpdate.Text = "Update";
-            toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt");
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnSave.AutoSize = true;
+            btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnSave.Location = new System.Drawing.Point(814, 2);
+            btnSave.Margin = new System.Windows.Forms.Padding(2);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(74, 42);
+            btnSave.TabIndex = 7;
+            btnSave.Text = "Save";
+            toolTip1.SetToolTip(btnSave, "Save Plugins.txt");
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnRefresh
             // 
             btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRefresh.Location = new System.Drawing.Point(1010, 23);
+            btnRefresh.AutoSize = true;
+            btnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnRefresh.Location = new System.Drawing.Point(892, 2);
+            btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(120, 68);
+            btnRefresh.Size = new System.Drawing.Size(103, 42);
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             toolTip1.SetToolTip(btnRefresh, "Reload Plugins");
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
             // 
-            // btnQuit
+            // btnUpdate
             // 
-            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnQuit.AutoSize = true;
-            btnQuit.Location = new System.Drawing.Point(1766, 23);
-            btnQuit.Name = "btnQuit";
-            btnQuit.Size = new System.Drawing.Size(100, 68);
-            btnQuit.TabIndex = 14;
-            btnQuit.Text = "Exit";
-            toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
-            btnQuit.UseVisualStyleBackColor = true;
-            btnQuit.Click += btnQuit_Click;
+            btnUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnUpdate.AutoSize = true;
+            btnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnUpdate.Location = new System.Drawing.Point(999, 2);
+            btnUpdate.Margin = new System.Windows.Forms.Padding(2);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(101, 42);
+            btnUpdate.TabIndex = 9;
+            btnUpdate.Text = "Update";
+            toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt");
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
-            // btnCancel
+            // btnLoot
             // 
-            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnCancel.AutoSize = true;
-            btnCancel.Location = new System.Drawing.Point(1640, 23);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(120, 68);
-            btnCancel.TabIndex = 13;
-            btnCancel.Text = "Cancel";
-            toolTip1.SetToolTip(btnCancel, "Cancel Changes");
-            btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += btnCancel_Click;
-            // 
-            // btnRun
-            // 
-            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnRun.Location = new System.Drawing.Point(1514, 23);
-            btnRun.Name = "btnRun";
-            btnRun.Size = new System.Drawing.Size(120, 68);
-            btnRun.TabIndex = 12;
-            btnRun.Text = "Run";
-            toolTip1.SetToolTip(btnRun, "Run the game (R)");
-            btnRun.UseVisualStyleBackColor = true;
-            btnRun.Click += btnRun_Click;
+            btnLoot.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnLoot.AutoSize = true;
+            btnLoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnLoot.Location = new System.Drawing.Point(1104, 2);
+            btnLoot.Margin = new System.Windows.Forms.Padding(2);
+            btnLoot.Name = "btnLoot";
+            btnLoot.Size = new System.Drawing.Size(115, 42);
+            btnLoot.TabIndex = 10;
+            btnLoot.Text = "Autosort";
+            toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
+            btnLoot.UseVisualStyleBackColor = true;
+            btnLoot.Click += btnLoot_Click;
             // 
             // btnCheckCatalog
             // 
             btnCheckCatalog.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnCheckCatalog.Location = new System.Drawing.Point(1388, 23);
+            btnCheckCatalog.AutoSize = true;
+            btnCheckCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnCheckCatalog.Location = new System.Drawing.Point(1223, 2);
+            btnCheckCatalog.Margin = new System.Windows.Forms.Padding(2);
             btnCheckCatalog.Name = "btnCheckCatalog";
-            btnCheckCatalog.Size = new System.Drawing.Size(120, 68);
+            btnCheckCatalog.Size = new System.Drawing.Size(105, 42);
             btnCheckCatalog.TabIndex = 11;
             btnCheckCatalog.Text = "Catalog";
             toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
             btnCheckCatalog.UseVisualStyleBackColor = true;
             btnCheckCatalog.Click += btnCheckCatalog_Click;
             // 
-            // btnLoot
+            // btnRun
             // 
-            btnLoot.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            btnLoot.Location = new System.Drawing.Point(1262, 23);
-            btnLoot.Name = "btnLoot";
-            btnLoot.Size = new System.Drawing.Size(120, 68);
-            btnLoot.TabIndex = 10;
-            btnLoot.Text = "Autosort";
-            toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
-            btnLoot.UseVisualStyleBackColor = true;
-            btnLoot.Click += btnLoot_Click;
+            btnRun.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnRun.AutoSize = true;
+            btnRun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnRun.Location = new System.Drawing.Point(1332, 2);
+            btnRun.Margin = new System.Windows.Forms.Padding(2);
+            btnRun.Name = "btnRun";
+            btnRun.Size = new System.Drawing.Size(66, 42);
+            btnRun.TabIndex = 12;
+            btnRun.Text = "Run";
+            toolTip1.SetToolTip(btnRun, "Run the game (R)");
+            btnRun.UseVisualStyleBackColor = true;
+            btnRun.Click += btnRun_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnCancel.AutoSize = true;
+            btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnCancel.Location = new System.Drawing.Point(1402, 2);
+            btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(95, 42);
+            btnCancel.TabIndex = 13;
+            btnCancel.Text = "Cancel";
+            toolTip1.SetToolTip(btnCancel, "Cancel Changes");
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // btnQuit
+            // 
+            btnQuit.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            btnQuit.AutoSize = true;
+            btnQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnQuit.Location = new System.Drawing.Point(1501, 2);
+            btnQuit.Margin = new System.Windows.Forms.Padding(2);
+            btnQuit.Name = "btnQuit";
+            btnQuit.Size = new System.Drawing.Size(61, 42);
+            btnQuit.TabIndex = 14;
+            btnQuit.Text = "Exit";
+            toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
+            btnQuit.UseVisualStyleBackColor = true;
+            btnQuit.Click += btnQuit_Click;
             // 
             // openFileDialog1
             // 
@@ -1504,16 +1487,27 @@
             timer1.Interval = 7000;
             timer1.Tick += timer1_Tick;
             // 
+            // label1
+            // 
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(171, 7);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(85, 32);
+            label1.TabIndex = 18;
+            label1.Text = "Search";
+            // 
             // frmLoadOrder
             // 
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            AutoSize = true;
-            ClientSize = new System.Drawing.Size(1901, 929);
+            AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            ClientSize = new System.Drawing.Size(1574, 829);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(statusStrip1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
-            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            Margin = new System.Windows.Forms.Padding(2);
             Name = "frmLoadOrder";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Load Order";
@@ -1528,17 +1522,6 @@
             menuStrip1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel1.PerformLayout();
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel1.PerformLayout();
-            splitContainer1.Panel2.ResumeLayout(false);
-            splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1623,11 +1606,7 @@
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cmbProfile;
-        private System.Windows.Forms.TextBox txtSearchBox;
         private System.Windows.Forms.CheckBox chkProfile;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuGitHub;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuLoadingScreen;
@@ -1707,5 +1686,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripMenuItem removeDuplicatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activeOnlyToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtSearchBox;
+        private System.Windows.Forms.Label label1;
     }
 }
