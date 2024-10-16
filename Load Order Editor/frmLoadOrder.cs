@@ -22,7 +22,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -181,6 +181,17 @@ namespace Starfield_Tools
             }
 
             // Setup other preferences
+
+            if (Properties.Settings.Default.ActiveOnly)
+            {
+                activeOnlyToolStripMenuItem.Checked = true;
+                ActiveOnly = true;
+            }
+            else
+            {
+                activeOnlyToolStripMenuItem.Checked = false;
+                ActiveOnly = false;
+            }
             if (Properties.Settings.Default.AutoUpdate)
             {
                 autoUpdateModsToolStripMenuItem.Checked = true;
@@ -248,16 +259,33 @@ namespace Starfield_Tools
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1, i;
-            string loText, LOOTPath = Properties.Settings.Default.LOOTPath;
-            btnSave.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
+            int EnabledCount = 0, IndexCount = 1, i, TitleCount = 0, esmCount = 0, espCount = 0, ba2Count = 0, rowIndex;
+            string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
+                StatText = ""; ;
+            List<string> CreationsPlugin = [];
+            List<string> CreationsTitle = [];
+            List<string> CreationsFiles = [];
+            List<string> CreationsVersion = [];
+            List<bool> AchievmentSafe = [];
+            List<long> TimeStamp = [];
+            List<string> CreationsID = [];
+            List<string> esmFiles = [];
+            List<long> FileSize = [];
+            double VersionCheck;
+            long ModFileSize;
 
             if (!File.Exists(Tools.GetCatalog()))
             {
                 MessageBox.Show("Missing ContentCatalog.txt");
                 return;
             }
+
+            sbar("Loading...");
+            statusStrip1.Refresh();
+
+            btnSave.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             string jsonFilePath = Tools.GetCatalog();
@@ -281,23 +309,6 @@ namespace Starfield_Tools
                     sbar(ex.Message);
                 }
             }
-
-            List<string> CreationsPlugin = [];
-            List<string> CreationsTitle = [];
-            List<string> CreationsFiles = [];
-            List<string> CreationsVersion = [];
-            List<bool> AchievmentSafe = [];
-            List<long> TimeStamp = [];
-            List<string> CreationsID = [];
-            List<long> FileSize = [];
-
-            int TitleCount = 0;
-            int esmCount = 0;
-            int espCount = 0;
-            int ba2Count = 0;
-            string StatText = "";
-            double VersionCheck;
-            List<string> esmFiles = [];
 
             try
             {
@@ -330,7 +341,7 @@ namespace Starfield_Tools
                         AchievmentSafe.Add(kvp.Value.AchievementSafe);
                         TimeStamp.Add(kvp.Value.Timestamp);
                         CreationsID.Add(kvp.Key.ToString());
-                        FileSize.Add(kvp.Value.FilesSize); 
+                        FileSize.Add(kvp.Value.FilesSize);
                     }
                     catch (Exception ex)
                     {
@@ -364,8 +375,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             using (var reader = new StreamReader(loText))
             {
-                string PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL;
-                long ModFileSize;
 
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
@@ -418,9 +427,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                     }
                                 };
 
-                                int rowIndex = this.dataGridView1.Rows.Add();
+                                rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
-                                ;
+
                                 // Populate datagrid from LOOT groups
 
                                 if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
@@ -491,6 +500,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     StatText += ", esp files: " + espCount.ToString();
 
                 dataGridView1.EndEdit();
+                if (ActiveOnly)
+                    for (i = 0; i < dataGridView1.RowCount; i++)
+                        if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
+                            dataGridView1.Rows[i].Visible = false;
                 sbar(StatText);
             }
             catch
@@ -540,11 +553,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             bool ModEnabled;
             string ModLine;
+            int i;
 
             if (GridSorted)
                 return;
-            if (dataGridView1.Rows.Count > 0)
+            if (dataGridView1.RowCount > 0 && ActiveOnly)
+            {
+                for (i = 0; i < dataGridView1.RowCount; i++)
+                    dataGridView1.Rows[i].Visible = true;
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
+            }
 
             using (StreamWriter writer = new(PluginFileName))
             {
@@ -558,13 +576,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     writer.WriteLine(ModLine);
                 }
             }
+            if (ActiveOnly)
+                InitDataGrid();
             sbar2("Plugins.txt saved");
             isModified = false;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
             this.Close();
         }
         private void MoveUp()
@@ -984,7 +1003,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private int AddMissing() // Look for .esm or .esp files to add to Plugins.txt returns no. of file added
         {
-            int AddedFiles = 0;
+            int AddedFiles = 0, rowIndex;
             List<string> esmespFiles = [];
             List<string> PluginFiles = [];
             List<string> BethFiles = tools.BethFiles;
@@ -1020,7 +1039,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (int i = 0; i < FilesToAdd.Count; i++)
                 {
                     AddedFiles++;
-                    int rowIndex = this.dataGridView1.Rows.Add();
+                    rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
                     if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null)
                         row.Cells["ModEnabled"].Value = true;
@@ -1039,7 +1058,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private int RemoveMissing() // Remove entries from Plugins.txt for missing .esm files. Returns number of removals
         {
-            int RemovedFiles = 0;
+            int RemovedFiles = 0, i, j;
             List<string> esmespFiles = [];
             List<string> PluginFiles = [];
             List<string> FilesToRemove = [];
@@ -1064,7 +1083,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             };
 
-            int i;
             for (i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
 
@@ -1085,7 +1103,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 for (i = 0; i < FilesToRemove.Count; i++)
                 {
-                    for (int j = 0; j < dataGridView1.Rows.Count; j++)
+                    for (j = 0; j < dataGridView1.Rows.Count; j++)
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
                 }
@@ -1257,7 +1275,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (i = 0; i < ExportMods.Count; i++)
                     writer.WriteLine(ExportMods[i]);
                 sbar3("Export done");
-                Process.Start("explorer.exe", (ExportActive.FileName));
+                Process.Start("explorer.exe", ExportActive.FileName);
             }
         }
 
@@ -1404,14 +1422,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void SavePlugings()
         {
-            var dgCurrent = dataGridView1.CurrentCell;
+            //var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(Tools.StarfieldAppData + @"\Plugins.txt");
             if (Profiles)
             {
                 SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 toolStripStatusSecondary.Text += ", " + cmbProfile.Text + " profile saved";
             }
-            dataGridView1.CurrentCell = dgCurrent;
+            //dataGridView1.CurrentCell = dgCurrent;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -2072,6 +2090,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
                 ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
                 ChangeCount += CheckAndDeleteINI("Starfield.ini.base");
+                LooseFiles = false;
+                LooseFilesOnOff(false);
+                LooseFilesMenuUpdate();
                 if (Delccc())
                     ChangeCount++;
                 sbar3(ChangeCount + " Change(s) made to Vortex created files");
@@ -2084,28 +2105,21 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             SavePlugings();
         }
 
-        private void looseFilesDisabledToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LooseFilesOnOff(bool EnableDisable) // True for enabled
         {
             string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
-                filePath = LooseFilesDir + "StarfieldCustom.ini";
-            LooseFiles = !LooseFiles;
-            if (LooseFiles)
+                    filePath = LooseFilesDir + "StarfieldCustom.ini";
+            if (EnableDisable)
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
-                List<string> linesToAppend = new List<string>
-        {
-            "[Archive]",
-            "bInvalidateOlderFiles=1",
-            "sResourceDataDirsFinal="
-        };
 
+                List<string> linesToAppend = new List<string> { "[Archive]", "bInvalidateOlderFiles=1" };
                 File.AppendAllLines(filePath, linesToAppend);
+                LooseFiles = true;
                 sbarCCC("Loose Files Enabled");
             }
             else
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
-                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal=" };
+                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1" };
 
                 // Read all lines from the file
                 var lines = File.ReadAllLines(filePath).ToList();
@@ -2118,12 +2132,25 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 // Write the updated lines back to the file
                 File.WriteAllLines(filePath, lines);
-
+                LooseFiles = false;
                 sbarCCC("Loose Files Disabled");
             }
+        }
 
+        private void looseFilesDisabledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LooseFiles = !LooseFiles;
+            if (LooseFiles)
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                LooseFilesOnOff(true);
+            }
+            else
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                LooseFilesOnOff(false);
+            }
             Properties.Settings.Default.LooseFiles = LooseFiles;
-
         }
 
         private void autoUpdateModsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2187,7 +2214,32 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             File.WriteAllLines(loText, distinctList);
             InitDataGrid();
             SavePlugings();
-            sbar4("Duplicates removed: "+ (ModCount - dataGridView1.RowCount).ToString());
+            sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
+        }
+
+        private void activeOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            activeOnlyToolStripMenuItem.Checked = !activeOnlyToolStripMenuItem.Checked;
+            Properties.Settings.Default.ActiveOnly = activeOnlyToolStripMenuItem.Checked;
+            ActiveOnly = activeOnlyToolStripMenuItem.Checked;
+            RefreshDataGrid();
+        }
+
+        private void LooseFilesMenuUpdate()
+        {
+            if (LooseFiles)
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                LooseFiles = true;
+                sbarCCC("Loose files enabled");
+            }
+            else
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                LooseFiles = false;
+                sbarCCC("Loose files disabled");
+            }
+            Properties.Settings.Default.LooseFiles = LooseFiles;
         }
     }
 }
