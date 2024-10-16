@@ -2246,7 +2246,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             activeOnlyToolStripMenuItem.Checked = !activeOnlyToolStripMenuItem.Checked;
             Properties.Settings.Default.ActiveOnly = activeOnlyToolStripMenuItem.Checked;
             ActiveOnly = activeOnlyToolStripMenuItem.Checked;
-            RefreshDataGrid();
+            if (!ActiveOnly)
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                    dataGridView1.Rows[i].Visible = true;
+            else
+                InitDataGrid();
         }
 
         private void LooseFilesMenuUpdate()
