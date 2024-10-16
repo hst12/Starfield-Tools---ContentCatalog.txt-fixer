@@ -332,5 +332,17 @@ namespace Starfield_Tools.Properties {
                 this["AutoUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ActiveOnly {
+            get {
+                return ((bool)(this["ActiveOnly"]));
+            }
+            set {
+                this["ActiveOnly"] = value;
+            }
+        }
     }
 }
