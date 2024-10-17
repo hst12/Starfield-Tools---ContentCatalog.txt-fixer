@@ -344,5 +344,17 @@ namespace Starfield_Tools.Properties {
                 this["ActiveOnly"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string VortexPath {
+            get {
+                return ((string)(this["VortexPath"]));
+            }
+            set {
+                this["VortexPath"] = value;
+            }
+        }
     }
 }

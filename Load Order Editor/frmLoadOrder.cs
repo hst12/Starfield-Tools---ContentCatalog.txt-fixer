@@ -283,7 +283,6 @@ namespace Starfield_Tools
             statusStrip1.Refresh();
             //dataGridView1.Rows[0].Selected = true;
 
-
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
@@ -927,10 +926,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             };
 
             DialogResult result = OpenPlugins.ShowDialog();
-            if (DialogResult.OK == result)
-                InitDataGrid();
-
-            if (OpenPlugins.FileName != "")
+            if (DialogResult.OK == result && OpenPlugins.FileName != "")
             {
                 Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
                 SwitchProfile(OpenPlugins.FileName);
@@ -1437,14 +1433,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void SavePlugins()
         {
-            //var dgCurrent = dataGridView1.CurrentCell;
             SaveLO(Tools.StarfieldAppData + @"\Plugins.txt");
             if (Profiles)
             {
                 SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 toolStripStatusSecondary.Text += ", " + cmbProfile.Text + " profile saved";
             }
-            //dataGridView1.CurrentCell = dgCurrent;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -1649,7 +1643,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     Delccc();
                 if (ProfilesActive)
                 {
-                    //InitDataGrid();
                     try
                     {
                         File.Copy(Tools.StarfieldAppData + "\\Plugins.txt", Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text, true);
@@ -1659,12 +1652,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         MessageBox.Show(ex.Message);
                     }
                     SavePlugins();
-                    //SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                     Profiles = true;
                     cmbProfile.Enabled = true;
                     chkProfile.Checked = true;
-                    AddRemove();
-                    //SavePlugins();
+                    //AddRemove();
                 }
             }
         }
@@ -2143,7 +2134,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
             {
-                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1" };
+                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1" , "sResourceDataDirsFinal=" };
 
                 // Read all lines from the file
                 var lines = File.ReadAllLines(filePath).ToList();
@@ -2268,6 +2259,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 sbarCCC("Loose files disabled");
             }
             Properties.Settings.Default.LooseFiles = LooseFiles;
+        }
+
+        private void vortexPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Executable Files|*.exe";
+            openFileDialog1.Title = "Set the path to the Vortex executable";
+            openFileDialog1.FileName = "Vortex.exe";
+            DialogResult VortexPath = openFileDialog1.ShowDialog();
+            if (VortexPath == DialogResult.OK && openFileDialog1.FileName != "")
+                Properties.Settings.Default.VortexPath = openFileDialog1.FileName;
         }
     }
 }
