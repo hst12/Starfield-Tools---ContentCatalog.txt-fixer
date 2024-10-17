@@ -1641,6 +1641,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
+                InitDataGrid();
                 if (ProfilesActive)
                 {
                     try
@@ -1651,6 +1652,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     {
                         MessageBox.Show(ex.Message);
                     }
+                    
                     SavePlugins();
                     Profiles = true;
                     cmbProfile.Enabled = true;
@@ -2117,7 +2119,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             AddRemove();
-            SavePlugins();
+            //SavePlugins();
         }
 
         private void LooseFilesOnOff(bool EnableDisable) // True for enabled
