@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using Starfield_Tools.Common;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false,AutoSort=false;
 
         public frmLoadOrder(string parameter)
         {
@@ -180,7 +181,40 @@ namespace Starfield_Tools
                 sbarCCC("Loose files disabled");
             }
 
+            if (Properties.Settings.Default.URL)
+            {
+                uRLToolStripMenuItem.Checked = true;
+                dataGridView1.Columns["URL"].Visible = true;
+            }
+            else
+            {
+                uRLToolStripMenuItem.Checked = false;
+                dataGridView1.Columns["URL"].Visible = false;
+            }
+
             // Setup other preferences
+
+            if (Properties.Settings.Default.AutoSort)
+            {
+                autoSortToolStripMenuItem.Checked = true;
+                AutoSort = true;
+            }
+            else
+            {
+                autoSortToolStripMenuItem.Checked = false;
+                AutoSort = false;
+            }
+
+            if (Properties.Settings.Default.ActiveOnly)
+            {
+                activeOnlyToolStripMenuItem.Checked = true;
+                ActiveOnly = true;
+            }
+            else
+            {
+                activeOnlyToolStripMenuItem.Checked = false;
+                ActiveOnly = false;
+            }
 
             if (Properties.Settings.Default.ActiveOnly)
             {
@@ -611,7 +645,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void MoveDown()
         {
             int rowIndex = dataGridView1.SelectedCells[0].OwningRow.Index;
-            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
             int colIndex = 1;
 
             if (rowIndex == dataGridView1.Rows.Count - 1)
@@ -682,7 +715,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
-            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
             int colIndex = 1;
 
             dataGridView1.Rows.Remove(selectedRow);
@@ -694,7 +726,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void MoveBottom()
         {
             int rowIndex = dataGridView1.SelectedCells[0].RowIndex;
-            //int colIndex = dataGridView1.SelectedCells[0].ColumnIndex;
             int colIndex = 1;
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
 
@@ -1004,7 +1035,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuSetPath_Click(object sender, EventArgs e)
         {
             StarfieldGamePath = tools.SetStarfieldGamePath();
-            //InitDataGrid();
         }
 
         private void toolStripMenuCleanup_Click(object sender, EventArgs e)
@@ -1140,6 +1170,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 InitDataGrid();
                 isModified = false;
                 sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+                if (AutoSort)
+                    RunLOOT(true);
             }
             else
             {
@@ -1166,7 +1198,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
             SwitchProfile(Properties.Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
-            //InitDataGrid();
         }
 
         private void InstallMod()
@@ -1190,7 +1221,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 {
                     sbar2("Installing mod...");
                     ZipFile.ExtractToDirectory(ModPath, ExtractPath);
-
                 }
                 catch (Exception ex)
                 {
@@ -1399,7 +1429,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             isModified = true;
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
-            SaveOnDblClick();
+            SavePlugins();
         }
 
         private void toolStripMenuEnableDisable_Click(object sender, EventArgs e)
@@ -1425,10 +1455,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuInstallMod_Click(object sender, EventArgs e)
         {
             InstallMod();
-        }
-        private void SaveOnDblClick()
-        {
-            SavePlugins();
         }
 
         private void SavePlugins()
@@ -1466,22 +1492,13 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (DialogResult == DialogResult.OK)
-                {
-                    if (Tools.StartGame(GameVersion))
-                        result = true;
-                    else
-                        result = false;
-                }
+                    result = Tools.StartGame(GameVersion);
                 else
                     result = false;
             }
             else
-            {
-                if (Tools.StartGame(GameVersion))
-                    result = true;
-                else
-                    result = false;
-            }
+                result = Tools.StartGame(GameVersion);
+
             if (!result)
             {
                 timer1.Stop();
@@ -1526,7 +1543,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (dataGridView1.CurrentRow.Cells["URL"].Value != null)
                 OtherURL = dataGridView1.CurrentRow.Cells["URL"].Value.ToString();
 
-            if (CreationsID == "" && OtherURL == "")
+            if (CreationsID == "" || OtherURL == "")
             {
                 sbar3("No link for mod");
                 return;
@@ -1604,6 +1621,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void RunLOOT(bool LOOTMode) // True for autosort
         {
             bool ProfilesActive = Profiles;
+            int i, j;
             if (ProfilesActive)
             {
                 Profiles = false;
@@ -1642,23 +1660,22 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
                 InitDataGrid();
+
+                for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
+                    for (j = 0; j < dataGridView1.Rows.Count; j++)
+                        if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == tools.BethFiles[i])
+                            dataGridView1.Rows.RemoveAt(j);
+
                 if (ProfilesActive)
                 {
-                    try
-                    {
-                        File.Copy(Tools.StarfieldAppData + "\\Plugins.txt", Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text, true);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    
-                    SavePlugins();
                     Profiles = true;
+                    SavePlugins();
                     cmbProfile.Enabled = true;
                     chkProfile.Checked = true;
-                    //AddRemove();
+
                 }
+                else
+                    SavePlugins();
             }
         }
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
@@ -2119,7 +2136,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             AddRemove();
-            //SavePlugins();
+            SavePlugins();
         }
 
         private void LooseFilesOnOff(bool EnableDisable) // True for enabled
@@ -2136,7 +2153,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             else
             {
-                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1" , "sResourceDataDirsFinal=" };
+                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal=" };
 
                 // Read all lines from the file
                 var lines = File.ReadAllLines(filePath).ToList();
@@ -2271,6 +2288,46 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             DialogResult VortexPath = openFileDialog1.ShowDialog();
             if (VortexPath == DialogResult.OK && openFileDialog1.FileName != "")
                 Properties.Settings.Default.VortexPath = openFileDialog1.FileName;
+        }
+
+        private void uRLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            uRLToolStripMenuItem.Checked = !uRLToolStripMenuItem.Checked;
+            if (uRLToolStripMenuItem.Checked)
+                dataGridView1.Columns["URL"].Visible = true;
+            else
+                dataGridView1.Columns["URL"].Visible = false;
+            Properties.Settings.Default.URL = uRLToolStripMenuItem.Checked;
+        }
+
+        private void vortexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string keyName = @"HKEY_CLASSES_ROOT\nxm\shell\open\command";
+            string valueName = ""; // Default value
+
+            // Read the registry value
+            object value = Registry.GetValue(keyName, valueName, null);
+            if (value != null)
+            {
+                int startIndex = value.ToString().IndexOf('"') + 1;
+                int endIndex = value.ToString().IndexOf('"', startIndex);
+
+                if (startIndex > 0 && endIndex > startIndex)
+                {
+                    string extracted = value.ToString().Substring(startIndex, endIndex - startIndex);
+                    Process.Start(extracted);
+                }
+                else
+                    MessageBox.Show("Vortex doesn't seem to be installed.");
+            }
+            else
+                MessageBox.Show("Vortex doesn't seem to be installed.");
+        }
+
+        private void autoSortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            autoSortToolStripMenuItem.Checked = !autoSortToolStripMenuItem.Checked;
+            Properties.Settings.Default.AutoSort = autoSortToolStripMenuItem.Checked;
         }
     }
 }

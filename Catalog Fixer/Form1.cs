@@ -40,6 +40,7 @@ namespace Starfield_Tools
             //bool cmdLineLO = false;
             bool cmdLineRunSteam = false;
             bool cmdLineRunMS = false;
+            bool cmdlineRunSFSE = false;
             richTextBox2.Text = "";
 
             foreach (var arg in Environment.GetCommandLineArgs())
@@ -48,6 +49,8 @@ namespace Starfield_Tools
                     cmdLineRunSteam = true;
                 if (String.Equals(arg, "-runMS", StringComparison.OrdinalIgnoreCase))
                     cmdLineRunMS = true;
+                if (String.Equals(arg, "-runSFSE", StringComparison.OrdinalIgnoreCase))
+                    cmdlineRunSFSE = true;
                 if (String.Equals(arg, "-noauto", StringComparison.OrdinalIgnoreCase))
                 {
 
@@ -120,6 +123,17 @@ namespace Starfield_Tools
                 else
                     Environment.Exit(1);
             }
+
+            if (cmdlineRunSFSE)
+            {
+                SaveSettings();
+                Tools.StartStarfieldSFSE();
+                if (Application.MessageLoop)
+                    Application.Exit();
+                else
+                    Environment.Exit(1);
+            }
+
         }
         private void ScrollToEnd()
         {

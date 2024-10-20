@@ -356,5 +356,29 @@ namespace Starfield_Tools.Properties {
                 this["VortexPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool URL {
+            get {
+                return ((bool)(this["URL"]));
+            }
+            set {
+                this["URL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoSort {
+            get {
+                return ((bool)(this["AutoSort"]));
+            }
+            set {
+                this["AutoSort"] = value;
+            }
+        }
     }
 }
