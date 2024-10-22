@@ -23,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile, CustomEXE;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false,AutoSort=false;
+        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -215,17 +215,6 @@ namespace Starfield_Tools
                 activeOnlyToolStripMenuItem.Checked = false;
                 ActiveOnly = false;
             }
-
-            if (Properties.Settings.Default.ActiveOnly)
-            {
-                activeOnlyToolStripMenuItem.Checked = true;
-                ActiveOnly = true;
-            }
-            else
-            {
-                activeOnlyToolStripMenuItem.Checked = false;
-                ActiveOnly = false;
-            }
             if (Properties.Settings.Default.AutoUpdate)
             {
                 autoUpdateModsToolStripMenuItem.Checked = true;
@@ -315,7 +304,6 @@ namespace Starfield_Tools
 
             sbar("Loading...");
             statusStrip1.Refresh();
-            //dataGridView1.Rows[0].Selected = true;
 
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
@@ -595,12 +583,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (GridSorted)
                 return;
-            if (dataGridView1.RowCount > 0 && ActiveOnly)
-            {
-                for (i = 0; i < dataGridView1.RowCount; i++)
-                    dataGridView1.Rows[i].Visible = true;
-                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
-            }
+            /*  if (dataGridView1.RowCount > 0 && ActiveOnly)
+              {
+                  for (i = 0; i < dataGridView1.RowCount; i++)
+                      dataGridView1.Rows[i].Visible = true;
+                  //dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
+              }*/
 
             using (StreamWriter writer = new(PluginFileName))
             {
@@ -614,8 +602,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     writer.WriteLine(ModLine);
                 }
             }
-            if (ActiveOnly)
-                InitDataGrid();
+            /*if (ActiveOnly)
+            {
+                //sbar("Hiding inactive mods...");
+                statusStrip1.Refresh();
+                for (i = 0; i < dataGridView1.RowCount; i++)
+                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false)
+                        dataGridView1.Rows[i].Visible = false;
+            }*/
+
+            //InitDataGrid();
             sbar2("Plugins.txt saved");
             isModified = false;
         }
@@ -896,8 +892,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            if (dataGridView1.Rows.Count > 0)
-                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
+            /*if (dataGridView1.Rows.Count > 0)
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];*/
 
             SaveFileDialog SavePlugins = new();
             ProfileFolder = Properties.Settings.Default.ProfileFolder;
@@ -1543,7 +1539,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (dataGridView1.CurrentRow.Cells["URL"].Value != null)
                 OtherURL = dataGridView1.CurrentRow.Cells["URL"].Value.ToString();
 
-            if (CreationsID == "" || OtherURL == "")
+            if (CreationsID == "" && OtherURL == "")
             {
                 sbar3("No link for mod");
                 return;
@@ -2260,7 +2256,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                     dataGridView1.Rows[i].Visible = true;
             else
-                InitDataGrid();
+            {
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
+                        dataGridView1.Rows[i].Visible = false;
+            }
+            //InitDataGrid();
         }
 
         private void LooseFilesMenuUpdate()
