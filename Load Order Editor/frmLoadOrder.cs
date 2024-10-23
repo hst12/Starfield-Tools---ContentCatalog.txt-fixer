@@ -445,6 +445,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
+                                        URL = "https://creations.bethesda.net/en/starfield/details/" + ModID;
                                     }
                                 };
 
