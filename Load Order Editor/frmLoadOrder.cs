@@ -314,6 +314,7 @@ namespace Starfield_Tools
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
 
             Tools.Configuration Groups = new();
+            Tools.Configuration Url = new();
 
             if (toolStripMenuGroup.Checked && LOOTPath != "" && dataGridView1.Columns["Group"].Visible) // Read LOOT groups
             {
@@ -444,8 +445,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
-                                        if (Groups.plugins != null && Groups.plugins[i].url != null && dataGridView1.Columns["URL"].Visible)
-                                            URL = Groups.plugins[i].url[0].link.ToString();
                                     }
                                 };
 
@@ -459,6 +458,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         if (Groups.plugins[i].name == PluginName)
                                         {
                                             row.Cells["Group"].Value = Groups.plugins[i].group;
+                                            if (Groups.plugins[i].url != null)
+                                            {
+                                                URL = Groups.plugins[i].url[0].link;
+                                                Description = Groups.plugins[i].url[0].name;
+                                                //MessageBox.Show(Description);
+                                            }
                                             break;
                                         }
 
@@ -482,8 +487,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                 row.Cells["CreationsID"].Value = ModID;
                                 if (dataGridView1.Columns["Index"].Visible)
                                     row.Cells["Index"].Value = IndexCount++;
-                                if (dataGridView1.Columns["URL"].Visible)
-                                    row.Cells["URL"].Value = URL;
+                                row.Cells["URL"].Value = URL;
                             }
                         }
                     }
@@ -1551,8 +1555,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Tools.OpenUrl(url);  // Open Creations web site
             }
             else
-                if (url != "")
-                Tools.OpenUrl(url);
+                if (OtherURL != "")
+                Tools.OpenUrl(OtherURL);
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
