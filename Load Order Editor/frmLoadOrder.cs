@@ -568,9 +568,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             catch (Exception ex)
             {
-#if DEBUG
                 MessageBox.Show(ex.Message);
-#endif
             }
         }
 
@@ -588,35 +586,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (GridSorted)
                 return;
-            /*  if (dataGridView1.RowCount > 0 && ActiveOnly)
-              {
-                  for (i = 0; i < dataGridView1.RowCount; i++)
-                      dataGridView1.Rows[i].Visible = true;
-                  //dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];
-              }*/
 
             using (StreamWriter writer = new(PluginFileName))
             {
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
-                for (int y = 0; y < dataGridView1.Rows.Count; y++)
+                for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    ModEnabled = (bool)dataGridView1.Rows[y].Cells["ModEnabled"].Value;
-                    ModLine = (string)dataGridView1.Rows[y].Cells["PluginName"].Value;
+                    ModEnabled = (bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value;
+                    ModLine = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                     if (ModEnabled)
                         writer.Write("*"); // Insert a * for enabled mods then write the mod filename
                     writer.WriteLine(ModLine);
                 }
             }
-            /*if (ActiveOnly)
-            {
-                //sbar("Hiding inactive mods...");
-                statusStrip1.Refresh();
-                for (i = 0; i < dataGridView1.RowCount; i++)
-                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false)
-                        dataGridView1.Rows[i].Visible = false;
-            }*/
 
-            //InitDataGrid();
             sbar2("Plugins.txt saved");
             isModified = false;
         }
@@ -897,9 +880,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             string ProfileFolder;
 
-            /*if (dataGridView1.Rows.Count > 0)
-                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["ModEnabled"];*/
-
             SaveFileDialog SavePlugins = new();
             ProfileFolder = Properties.Settings.Default.ProfileFolder;
             if (ProfileFolder == null || ProfileFolder == "")
@@ -933,7 +913,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 Properties.Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
-                //SavePlugins();
                 InitDataGrid();
             }
             catch
@@ -1967,7 +1946,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuResetStarfieldCustom_Click(object sender, EventArgs e)
         {
-            DialogResult DialogResult = MessageBox.Show("This will restore your StarfieldCustom.ini to a basic version", "Are you sure?",
+            DialogResult DialogResult = MessageBox.Show("This will overwrite your StarfieldCustom.ini to a recommended version", "Are you sure?",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
             if (DialogResult == DialogResult.OK)
@@ -2321,7 +2300,19 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (startIndex > 0 && endIndex > startIndex)
                 {
                     string extracted = value.ToString().Substring(startIndex, endIndex - startIndex);
-                    Process.Start(extracted);
+                    try
+                    {
+                        var result = Process.Start(extracted);
+                        if (result != null)
+                        {
+                            SaveSettings();
+                            Application.Exit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 else
                     MessageBox.Show("Vortex doesn't seem to be installed.");

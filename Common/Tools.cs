@@ -177,9 +177,7 @@ namespace Starfield_Tools.Common
             }
             catch (Exception ex)
             {
-#if DEBUG
                 MessageBox.Show(ex.Message);
-#endif
                 return false; ;
             }
 
