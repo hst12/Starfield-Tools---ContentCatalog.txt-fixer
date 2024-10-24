@@ -168,6 +168,16 @@ namespace Starfield_Tools
                 dataGridView1.Columns["FileSize"].Visible = false;
             }
 
+            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
+        filePath = LooseFilesDir + "StarfieldCustom.ini";
+
+            var lines = File.ReadAllLines(filePath).ToList();
+            if (lines.Contains("bInvalidateOlderFiles=1"))
+                Properties.Settings.Default.LooseFiles = true;
+            else
+                Properties.Settings.Default.LooseFiles = false;
+            //Properties.Settings.Default.Save();
+
             if (Properties.Settings.Default.LooseFiles)
             {
                 looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
@@ -469,7 +479,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         }
 
                                 if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
-                                    row.Cells["Group"].Value = "Bethesda";
+                                    row.Cells["Group"].Value = "Bethesda Game Studios Creations";
 
                                 row.Cells["ModEnabled"].Value = ModEnabled;
                                 row.Cells["PluginName"].Value = PluginName;
@@ -2135,7 +2145,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal=" };
 
-                // Read all lines from the file
                 var lines = File.ReadAllLines(filePath).ToList();
 
                 // Remove the specified lines
@@ -2237,15 +2246,18 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             Properties.Settings.Default.ActiveOnly = activeOnlyToolStripMenuItem.Checked;
             ActiveOnly = activeOnlyToolStripMenuItem.Checked;
             if (!ActiveOnly)
+            {
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                     dataGridView1.Rows[i].Visible = true;
+                sbar4("All mods shown");
+            }
             else
             {
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                     if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
                         dataGridView1.Rows[i].Visible = false;
+                sbar4("Active mods only");
             }
-            //InitDataGrid();
         }
 
         private void LooseFilesMenuUpdate()
