@@ -406,7 +406,11 @@ namespace Starfield_Tools
 Click Ok and Quit to create a blank Plugins.txt file or click Ok and Cancel to fix manually
 Click File->Restore if you have a backup of your Plugins.txt file
 Altenatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
-                return;
+                using (StreamWriter writer = new(loText))
+                {
+                    writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
+                    return;
+                }
             }
             using (var reader = new StreamReader(loText))
             {
