@@ -549,7 +549,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 dataGridView1.EndEdit();
                 sbar(StatText);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 sbar("Starfield path needs to be set for mod stats");
 #if DEBUG
@@ -930,7 +930,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 isModified = false;
                 InitDataGrid();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 sbar2("Error switching profile");
 #if DEBUG
@@ -1167,7 +1167,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 InitDataGrid();
                 isModified = false;
-                
+
                 if (AutoSort)
                     RunLOOT(true);
                 sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
@@ -2352,6 +2352,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             autoSortToolStripMenuItem.Checked = !autoSortToolStripMenuItem.Checked;
             Properties.Settings.Default.AutoSort = autoSortToolStripMenuItem.Checked;
+        }
+
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Tools.OpenUrl("Documentation\\Index.htm");
         }
     }
 }
