@@ -110,10 +110,22 @@ namespace Starfield_Tools.Common
             public string group { get; set; }
             public List<string> after { get; set; }
             public List<string> inc { get; set; }
-            public List<string> req { get; set; }
+            public List<Req> req { get; set; }
+            public List<Msg> msg { get; set; }
             public List<Url> url { get; set; }
         }
 
+        public class Req // LOOT
+        {
+        public string name { get; set; }
+        public string display {  get; set; }
+        }
+
+        public class Msg // LOOT
+        {
+            public string type { get; set; }
+            public string content { get; set; }
+        }
         public class Url // LOOT
         {
             public string link { get; set; }
