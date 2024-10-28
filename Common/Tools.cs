@@ -242,7 +242,7 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
-        
+
         public static bool StartStarfieldSFSE()
         {
             string cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\sfse_loader.exe";
@@ -320,6 +320,16 @@ namespace Starfield_Tools.Common
                 MessageBox.Show(ex.Message, "Unable to start game");
                 return false;
             }
+        }
+
+        public bool ConfirmAction(string ActionText, string ActionTitle) // Return true for OK, false for cancel
+        {
+            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+
+            if (DialogResult == DialogResult.OK)
+                return true;
+            else
+                return false;
         }
     }
 }

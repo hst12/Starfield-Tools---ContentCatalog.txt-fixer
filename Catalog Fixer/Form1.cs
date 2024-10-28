@@ -175,8 +175,11 @@ namespace Starfield_Tools
             {
                 richTextBox1.Text = File.ReadAllText(Tools.GetCatalog());
             }
-            catch
+            catch (Exception ex)
             {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
                 toolStripStatusLabel1.Text = "Catalog not found";
             }
         }
@@ -275,6 +278,9 @@ namespace Starfield_Tools
 
             catch (Exception ex)
             {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
                 if (!File.Exists(Tools.GetCatalog()))
                 {
                     DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
@@ -433,8 +439,11 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Restore complete";
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
                 richTextBox2.Text += "\nRestore failed.\n";
                 toolStripStatusLabel1.Text = "Restore failed";
                 return false;
@@ -595,12 +604,12 @@ namespace Starfield_Tools
             }
             catch (Exception ex)
             {
-                toolStripStatusLabel1.Text = (ex.Message);
-                json = Tools.MakeHeaderBlank();
-                File.WriteAllText(Tools.GetCatalog(), json);
 #if DEBUG
                 MessageBox.Show($"Error: {ex.Message}");
 #endif
+                toolStripStatusLabel1.Text = (ex.Message);
+                json = Tools.MakeHeaderBlank();
+                File.WriteAllText(Tools.GetCatalog(), json);
             }
         }
 

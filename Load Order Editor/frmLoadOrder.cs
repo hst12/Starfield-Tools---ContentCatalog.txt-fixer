@@ -8,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -176,7 +175,6 @@ namespace Starfield_Tools
                 Properties.Settings.Default.LooseFiles = true;
             else
                 Properties.Settings.Default.LooseFiles = false;
-            //Properties.Settings.Default.Save();
 
             if (Properties.Settings.Default.LooseFiles)
             {
@@ -293,7 +291,7 @@ namespace Starfield_Tools
             bool ModEnabled;
             int EnabledCount = 0, IndexCount = 1, i, TitleCount = 0, esmCount = 0, espCount = 0, ba2Count = 0, rowIndex;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
-                StatText = ""; ;
+                StatText = "", directory;
             List<string> CreationsPlugin = [];
             List<string> CreationsTitle = [];
             List<string> CreationsFiles = [];
@@ -320,6 +318,7 @@ namespace Starfield_Tools
 
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
+
             string jsonFilePath = Tools.GetCatalog();
             string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
 
@@ -387,13 +386,14 @@ namespace Starfield_Tools
             }
             catch (Exception ex)
             {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
                 sbar(ex.Message);
                 json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
 
-#if DEBUG
-                MessageBox.Show(ex.Message);
-#endif
+
             }
 
             loText = Tools.StarfieldAppData + @"\plugins.txt";
@@ -473,7 +473,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                             {
                                                 URL = Groups.plugins[i].url[0].link;
                                                 Description = Groups.plugins[i].url[0].name;
-                                                //MessageBox.Show(Description);
                                             }
                                             break;
                                         }
@@ -516,19 +515,22 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             // Get mod stats
             try
             {
-                string directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
-                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly), file =>
+                directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
+                foreach (string file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
                     esmCount++;
-                });
-                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly), file =>
+                }
+
+                foreach (string file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
                 {
                     espCount++;
-                });
-                Parallel.ForEach(Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly), file =>
+                }
+
+                foreach (string file in Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly))
                 {
                     ba2Count++;
-                });
+                }
+
                 StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
                     (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
                     esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
@@ -536,7 +538,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 if (espCount > 0)
                     StatText += ", esp files: " + espCount.ToString();
 
-                dataGridView1.EndEdit();
                 if (ActiveOnly)
                 {
                     sbar("Hiding inactive mods...");
@@ -545,11 +546,15 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                         if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
                             dataGridView1.Rows[i].Visible = false;
                 }
+                dataGridView1.EndEdit();
                 sbar(StatText);
             }
-            catch
+            catch (Exception ex) 
             {
                 sbar("Starfield path needs to be set for mod stats");
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
             }
         }
 
@@ -925,9 +930,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 isModified = false;
                 InitDataGrid();
             }
-            catch
+            catch (Exception ex) 
             {
                 sbar2("Error switching profile");
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
             }
         }
 
@@ -1159,9 +1167,10 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 InitDataGrid();
                 isModified = false;
-                sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+                
                 if (AutoSort)
                     RunLOOT(true);
+                sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
             }
             else
             {
@@ -1192,7 +1201,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void InstallMod()
         {
-            string ModPath;
+            string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools";
 
             OpenFileDialog OpenMod = new()
@@ -1210,33 +1219,36 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 try
                 {
                     sbar2("Installing mod...");
-                    ZipFile.ExtractToDirectory(ModPath, ExtractPath);
+                    ZipFile.ExtractToDirectory(ModPath, ExtractPath, true); // Overwrite
                 }
                 catch (Exception ex)
                 {
+#if DEBUG
+                    MessageBox.Show(ex.Message);
+#endif
                     sbar(ex.Message);
                 }
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
                 {
-                    string fileName = Path.GetFileName(ModFile);
-                    string destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
+                    fileName = Path.GetFileName(ModFile);
+                    destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
 
-                    if (!File.Exists(destinationPath))
-                        File.Move(ModFile, destinationPath);
+                    if (File.Exists(destinationPath) && tools.ConfirmAction("Overwrite esm " + ModFile, "Replace mod?"))
+                        File.Move(ModFile, destinationPath, true);  // Overwrite
                 }
 
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.ba2", SearchOption.AllDirectories)) // Move archives
                 {
-                    string fileName = Path.GetFileName(ModFile);
-                    string destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
+                    fileName = Path.GetFileName(ModFile);
+                    destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
 
-                    if (!File.Exists(destinationPath))
-                        File.Move(ModFile, destinationPath);
+                    if (File.Exists(destinationPath) && tools.ConfirmAction("Overwrite archive " + ModFile, "Replace mod?"))
+                        File.Move(ModFile, destinationPath, true); // Overwrite
                 }
 
                 AddMissing();
                 SavePlugins();
-                sbar3("Mod installed");
+                //sbar3("Mod installed");
             }
 
         }
@@ -1640,12 +1652,12 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                     WorkingDirectory = LOOTPath.Substring(0, LOOTPath.LastIndexOf("LOOT.exe"))
                 };
 
-                sbar4("App paused waiting for LOOT exit");
+                //sbar4("App paused waiting for LOOT exit");
                 using (Process process = Process.Start(startInfo))
                 {
                     process.WaitForExit();
                 }
-                sbar4("Loot exit - review the load order if necessary");
+                //sbar4("Loot exit - review the load order if necessary");
 
                 if (Properties.Settings.Default.AutoDelccc)
                     Delccc();
@@ -1779,6 +1791,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             catch (Exception ex)
             {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
                 sbar3("Error deleting Starfield.ccc " + ex.Message);
                 return false;
             }
