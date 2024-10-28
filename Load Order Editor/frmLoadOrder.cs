@@ -170,11 +170,14 @@ namespace Starfield_Tools
             string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
         filePath = LooseFilesDir + "StarfieldCustom.ini";
 
-            var lines = File.ReadAllLines(filePath).ToList();
-            if (lines.Contains("bInvalidateOlderFiles=1"))
-                Properties.Settings.Default.LooseFiles = true;
-            else
-                Properties.Settings.Default.LooseFiles = false;
+            if (File.Exists(filePath))
+            {
+                var lines = File.ReadAllLines(filePath).ToList();
+                if (lines.Contains("bInvalidateOlderFiles=1"))
+                    Properties.Settings.Default.LooseFiles = true;
+                else
+                    Properties.Settings.Default.LooseFiles = false;
+            }
 
             if (Properties.Settings.Default.LooseFiles)
             {
@@ -352,7 +355,7 @@ namespace Starfield_Tools
             }
             try
             {
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
+                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Read ContentCatalog.txt
                 data.Remove("ContentCatalog");
                 foreach (var kvp in data)
                 {
@@ -392,7 +395,6 @@ namespace Starfield_Tools
                 sbar(ex.Message);
                 json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
-
 
             }
 
