@@ -114,6 +114,7 @@
             timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             uRLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             activeOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            darkModeExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -197,7 +198,6 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             timer1 = new System.Windows.Forms.Timer(components);
-            darkModeExperimentalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -850,6 +850,13 @@
             activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(425, 44);
             activeOnlyToolStripMenuItem.Text = "Active Only";
             activeOnlyToolStripMenuItem.Click += activeOnlyToolStripMenuItem_Click;
+            // 
+            // darkModeExperimentalToolStripMenuItem
+            // 
+            darkModeExperimentalToolStripMenuItem.Name = "darkModeExperimentalToolStripMenuItem";
+            darkModeExperimentalToolStripMenuItem.Size = new System.Drawing.Size(425, 44);
+            darkModeExperimentalToolStripMenuItem.Text = "Dark Mode (Experimental)";
+            darkModeExperimentalToolStripMenuItem.Click += darkModeExperimentalToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
             // 
@@ -1545,13 +1552,6 @@
             // 
             timer1.Interval = 7000;
             timer1.Tick += timer1_Tick;
-            // 
-            // darkModeExperimentalToolStripMenuItem
-            // 
-            darkModeExperimentalToolStripMenuItem.Name = "darkModeExperimentalToolStripMenuItem";
-            darkModeExperimentalToolStripMenuItem.Size = new System.Drawing.Size(425, 44);
-            darkModeExperimentalToolStripMenuItem.Text = "Dark Mode (Experimental)";
-            darkModeExperimentalToolStripMenuItem.Click += darkModeExperimentalToolStripMenuItem_Click;
             // 
             // frmLoadOrder
             // 

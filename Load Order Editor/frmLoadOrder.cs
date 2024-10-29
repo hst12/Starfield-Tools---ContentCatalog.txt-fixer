@@ -1176,7 +1176,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     fileName = Path.GetFileName(ModFile);
                     destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
 
-                    if (File.Exists(destinationPath) && tools.ConfirmAction("Overwrite esm " + ModFile, "Replace mod?"))
+                    if (File.Exists(destinationPath))
+                    {
+                        if (tools.ConfirmAction("Overwrite esm " + ModFile, "Replace mod?"))
+                            File.Move(ModFile, destinationPath, true);  // Overwrite
+                    }
+                    else
                         File.Move(ModFile, destinationPath, true);  // Overwrite
                 }
 
@@ -1185,7 +1190,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     fileName = Path.GetFileName(ModFile);
                     destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
 
-                    if (File.Exists(destinationPath) && tools.ConfirmAction("Overwrite archive " + ModFile, "Replace mod?"))
+                    if (File.Exists(destinationPath))
+                    {
+                        if (tools.ConfirmAction("Overwrite archive " + ModFile, "Replace mod?"))
+                            File.Move(ModFile, destinationPath, true); // Overwrite
+                    }
+                    else
                         File.Move(ModFile, destinationPath, true); // Overwrite
                 }
 
