@@ -20,7 +20,7 @@ namespace Starfield_Tools
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = 0;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath, LastProfile, CustomEXE;
+        private string StarfieldGamePath, LastProfile;
 
         bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false;
 
@@ -46,8 +46,6 @@ namespace Starfield_Tools
             this.Font = Properties.Settings.Default.FontSize;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
-
-            CustomEXE = Properties.Settings.Default.CustomEXE;
 
             if (Properties.Settings.Default.AutoDelccc)
             {
@@ -198,7 +196,7 @@ namespace Starfield_Tools
 #endif
         }
 
-        private void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
+        private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
         {
             menuItem.Checked = condition;
             column.Visible = condition;
@@ -223,7 +221,7 @@ namespace Starfield_Tools
                 RefreshDataGrid();
         }
 
-        private bool CheckStarfieldCustom()
+        private static bool CheckStarfieldCustom()
         {
             bool result = Tools.FileCompare(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                 "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder + "\\StarfieldCustom.ini");
@@ -239,7 +237,7 @@ namespace Starfield_Tools
             List<string> CreationsTitle = [];
             List<string> CreationsFiles = [];
             List<string> CreationsVersion = [];
-            List<bool> AchievmentSafe = [];
+            List<bool> AchievementSafe = [];
             List<long> TimeStamp = [];
             List<string> CreationsID = [];
             List<string> esmFiles = [];
@@ -313,7 +311,7 @@ namespace Starfield_Tools
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
                         CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
-                        AchievmentSafe.Add(kvp.Value.AchievementSafe);
+                        AchievementSafe.Add(kvp.Value.AchievementSafe);
                         TimeStamp.Add(kvp.Value.Timestamp);
                         CreationsID.Add(kvp.Key.ToString());
                         FileSize.Add(kvp.Value.FilesSize);
@@ -345,12 +343,11 @@ namespace Starfield_Tools
 
 Click Ok and Quit to create a blank Plugins.txt file or click Ok and Cancel to fix manually
 Click File->Restore if you have a backup of your Plugins.txt file
-Altenatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
-                using (StreamWriter writer = new(loText))
-                {
-                    writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
-                    return;
-                }
+Alternatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
+                using StreamWriter writer = new(loText);
+                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
+                return;
+
             }
             using (var reader = new StreamReader(loText))
             {
@@ -394,7 +391,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                                         ModVersion = Tools.ConvertTime(VersionCheck).ToString();
 
                                         ModFiles = CreationsFiles[i];
-                                        if (AchievmentSafe[i])
+                                        if (AchievementSafe[i])
                                             ASafe = "Yes";
                                         else
                                             ASafe = "";
@@ -614,7 +611,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
             if (isModified)
             {
-                MessageBox.Show("Plugins have been modified\nClick Ok to save first or Cancel to revert", "Backkup not done");
+                MessageBox.Show("Plugins have been modified\nClick Ok to save first or Cancel to revert", "Backup not done");
                 return;
             }
 
@@ -732,7 +729,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void SearchMod()
         {
             int ModIndex, currentIndex, nextIndex;
-            string DataGridSring, TextBoxString;
+            string DataGridString, TextBoxString;
             if (txtSearchBox.Text == "")
                 return;
             TextBoxString = txtSearchBox.Text.ToLower(); // Do lower case only search
@@ -744,16 +741,16 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
                 return;
             }
             nextIndex = currentIndex + 1;
-            DataGridSring = dataGridView1.Rows[currentIndex].Cells["PluginName"].Value.ToString().ToLower();
-            if (DataGridSring.Contains(TextBoxString))
+            DataGridString = dataGridView1.Rows[currentIndex].Cells["PluginName"].Value.ToString().ToLower();
+            if (DataGridString.Contains(TextBoxString))
             {
                 if (nextIndex < dataGridView1.Rows.Count)
                 {
                     DataGridViewRow nextRow = dataGridView1.Rows[nextIndex];
                     for (ModIndex = nextRow.Index; ModIndex < dataGridView1.RowCount; ModIndex++)
                     {
-                        DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
-                        if (DataGridSring.Contains(TextBoxString))
+                        DataGridString = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
+                        if (DataGridString.Contains(TextBoxString))
                         {
                             sbar2("Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString());
                             dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
@@ -764,8 +761,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             }
             for (ModIndex = 0; ModIndex < dataGridView1.RowCount; ModIndex++)
             {
-                DataGridSring = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
-                if (DataGridSring.Contains(TextBoxString))
+                DataGridString = dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString().ToLower();
+                if (DataGridString.Contains(TextBoxString))
                 {
                     sbar2("Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString());
                     if (dataGridView1.Rows[ModIndex].Visible)
@@ -1221,8 +1218,8 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         private void toolStripMenuExportActive_Click(object sender, EventArgs e)
         {
             int i;
-            string tempstr = "", Group = "";
-            List<string> ExportMods = new();
+            string tempstr, Group = "";
+            List<string> ExportMods = [];
             SaveFileDialog ExportActive = new()
             {
                 Filter = "Txt File|*.txt",
@@ -1485,7 +1482,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
-            string CreationsID = "", OtherURL = "", url = "";
+            string CreationsID = "", OtherURL = "", url;
             if (dataGridView1.CurrentRow.Cells["CreationsID"].Value != null)
                 CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
             if (dataGridView1.CurrentRow.Cells["URL"].Value != null)
@@ -1591,11 +1588,11 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             {
                 if (LOOTMode)
                     cmdLine += " --auto-sort";
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                ProcessStartInfo startInfo = new()
                 {
                     FileName = LOOTPath,
                     Arguments = "  " + cmdLine,
-                    WorkingDirectory = LOOTPath.Substring(0, LOOTPath.LastIndexOf("LOOT.exe"))
+                    WorkingDirectory = LOOTPath[..LOOTPath.LastIndexOf("LOOT.exe")]
                 };
 
                 //sbar4("App paused waiting for LOOT exit");
@@ -1674,9 +1671,9 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             toolStripStatusLabel4.Text = StatusBarMessage;
         }
 
-        private void sbarCCC(string sbarMesssage)
+        private void sbarCCC(string sbarMessage)
         {
-            toolStripStatusDelCCC.Text = sbarMesssage;
+            toolStripStatusDelCCC.Text = sbarMessage;
         }
         private void sbarCCCOn()
         {
@@ -1829,8 +1826,6 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             string CustomEXEFolder;
 
             CustomEXEFolder = Properties.Settings.Default.CustomEXE;
-
-            CustomEXEFolder = tools.StarfieldGamePath;
 
             OpenFileDialog OpenEXE = new()
             {
@@ -2097,14 +2092,14 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
             if (EnableDisable)
             {
 
-                List<string> linesToAppend = new List<string> { "[Archive]", "bInvalidateOlderFiles=1" };
+                List<string> linesToAppend = ["[Archive]", "bInvalidateOlderFiles=1"];
                 File.AppendAllLines(filePath, linesToAppend);
                 LooseFiles = true;
                 sbarCCC("Loose Files Enabled");
             }
             else
             {
-                string[] linesToRemove = { "[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal=" };
+                string[] linesToRemove = ["[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal="];
 
                 var lines = File.ReadAllLines(filePath).ToList();
 
@@ -2183,7 +2178,7 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
 
         private void removeDuplicatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> Plugins = new();
+            List<string> Plugins = [];
             string PluginName;
             int ModCount = dataGridView1.RowCount;
             string loText = Tools.StarfieldAppData + "\\Plugins.txt";
