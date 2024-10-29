@@ -115,3 +115,6 @@ A custom load screen picture can be set in the Tools menu.
 <div align="left">
     <img src="/Screenshot2.png" align="left"</img> 
 </div>
+<div align="left">
+    <img src="/Screenshot3.png" align="left"</img> 
+</div>
