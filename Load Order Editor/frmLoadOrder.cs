@@ -90,82 +90,14 @@ namespace Starfield_Tools
 
             // Setup columns
 
-            if (Properties.Settings.Default.TimeStamp)
-            {
-                timeStampToolStripMenuItem.Checked = true;
-                dataGridView1.Columns["TimeStamp"].Visible = true;
-            }
-            else
-            {
-                timeStampToolStripMenuItem.Checked = false;
-                dataGridView1.Columns["TimeStamp"].Visible = false;
-            }
-
-            if (Properties.Settings.Default.Achievements)
-            {
-                toolStripMenuAchievements.Checked = true;
-                dataGridView1.Columns["Achievements"].Visible = true;
-            }
-            else
-            {
-                toolStripMenuAchievements.Checked = false;
-                dataGridView1.Columns["Achievements"].Visible = false;
-            }
-
-            if (Properties.Settings.Default.CreationsID)
-            {
-                toolStripMenuCreationsID.Checked = true;
-                dataGridView1.Columns["CreationsID"].Visible = true;
-            }
-            else
-            {
-                dataGridView1.Columns["CreationsID"].Visible = false;
-                toolStripMenuCreationsID.Checked = false;
-            }
-
-            if (Properties.Settings.Default.Files)
-            {
-                toolStripMenuFiles.Checked = true;
-                dataGridView1.Columns["Files"].Visible = true;
-            }
-            else
-            {
-                dataGridView1.Columns["Files"].Visible = false;
-                toolStripMenuFiles.Checked = false;
-            }
-
-            if (Properties.Settings.Default.Group)
-            {
-                toolStripMenuGroup.Checked = true;
-                dataGridView1.Columns["Group"].Visible = true;
-            }
-            else
-            {
-                toolStripMenuGroup.Checked = false;
-                dataGridView1.Columns["Group"].Visible = false;
-            }
-
-            if (Properties.Settings.Default.Index)
-            {
-                toolStripMenuIndex.Checked = true;
-                dataGridView1.Columns["Index"].Visible = true;
-            }
-            else
-            {
-                toolStripMenuIndex.Checked = false;
-                dataGridView1.Columns["Index"].Visible = false;
-            }
-
-            if (Properties.Settings.Default.FileSize)
-            {
-                toolStripMenuFileSize.Checked = true;
-                dataGridView1.Columns["FileSize"].Visible = true;
-            }
-            else
-            {
-                toolStripMenuFileSize.Checked = false;
-                dataGridView1.Columns["FileSize"].Visible = false;
-            }
+            SetColumnVisibility(Properties.Settings.Default.TimeStamp, timeStampToolStripMenuItem, dataGridView1.Columns["TimeStamp"]);
+            SetColumnVisibility(Properties.Settings.Default.Achievements, toolStripMenuAchievements, dataGridView1.Columns["Achievements"]);
+            SetColumnVisibility(Properties.Settings.Default.CreationsID, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
+            SetColumnVisibility(Properties.Settings.Default.Files, toolStripMenuFiles, dataGridView1.Columns["Files"]);
+            SetColumnVisibility(Properties.Settings.Default.Group, toolStripMenuGroup, dataGridView1.Columns["Group"]);
+            SetColumnVisibility(Properties.Settings.Default.Index, toolStripMenuIndex, dataGridView1.Columns["Index"]);
+            SetColumnVisibility(Properties.Settings.Default.FileSize, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
+            SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
 
             string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
         filePath = LooseFilesDir + "StarfieldCustom.ini";
@@ -192,18 +124,19 @@ namespace Starfield_Tools
                 sbarCCC("Loose files disabled");
             }
 
-            if (Properties.Settings.Default.URL)
+            // Setup other preferences
+
+            if (Properties.Settings.Default.DarkMode)
             {
-                uRLToolStripMenuItem.Checked = true;
-                dataGridView1.Columns["URL"].Visible = true;
+                darkModeExperimentalToolStripMenuItem.Checked = true;
+                Application.SetColorMode(SystemColorMode.Dark);
+
             }
             else
             {
-                uRLToolStripMenuItem.Checked = false;
-                dataGridView1.Columns["URL"].Visible = false;
+                darkModeExperimentalToolStripMenuItem.Checked = false;
+                Application.SetColorMode(SystemColorMode.System);
             }
-
-            // Setup other preferences
 
             if (Properties.Settings.Default.AutoSort)
             {
@@ -237,6 +170,8 @@ namespace Starfield_Tools
                 AutoUpdate = false;
             }
 
+
+
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar4(StarfieldTools.CatalogStatus);
             if (StarfieldTools.CatalogStatus != null)
@@ -263,6 +198,11 @@ namespace Starfield_Tools
 #endif
         }
 
+        private void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
+        {
+            menuItem.Checked = condition;
+            column.Visible = condition;
+        }
         private void RefreshDataGrid()
         {
             if (!Profiles)
@@ -2364,5 +2304,20 @@ Altenatively, run the game once to have it create a Plugins.txt file for you.", 
         {
             Tools.OpenUrl("Documentation\\Index.htm");
         }
+
+        private void darkModeExperimentalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            darkModeExperimentalToolStripMenuItem.Checked = !darkModeExperimentalToolStripMenuItem.Checked;
+            Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
+            if (darkModeExperimentalToolStripMenuItem.Checked)
+            {
+                Application.SetColorMode(SystemColorMode.Dark);
+            }
+            else
+                Application.SetColorMode(SystemColorMode.System);
+            Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
+            SaveSettings();
+        }
+
     }
 }
