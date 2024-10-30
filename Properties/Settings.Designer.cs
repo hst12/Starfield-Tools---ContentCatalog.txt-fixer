@@ -392,5 +392,17 @@ namespace Starfield_Tools.Properties {
                 this["DarkMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CompareProfiles {
+            get {
+                return ((bool)(this["CompareProfiles"]));
+            }
+            set {
+                this["CompareProfiles"] = value;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
 using Starfield_Tools.Common;
+using Starfield_Tools.Load_Order_Editor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -124,6 +125,8 @@ namespace Starfield_Tools
 
             // Setup other preferences
 
+            compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
+
             if (Properties.Settings.Default.DarkMode)
             {
                 darkModeExperimentalToolStripMenuItem.Checked = true;
@@ -133,7 +136,7 @@ namespace Starfield_Tools
             else
             {
                 darkModeExperimentalToolStripMenuItem.Checked = false;
-                Application.SetColorMode(SystemColorMode.System);
+                Application.SetColorMode(SystemColorMode.Classic);
             }
 
             if (Properties.Settings.Default.AutoSort)
@@ -865,6 +868,26 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             if (!Profiles)
                 return;
+            var CurrentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
+            var NewProfile = File.ReadAllLines(ProfileName).ToList();
+            var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
+            var newProfile = File.ReadAllLines(ProfileName).ToList();
+
+            if (Properties.Settings.Default.CompareProfiles)
+            {
+                var Difference = newProfile.Except(currentProfile) // I have no idea how this works, Copilot did it. Shows the difference when switching profiles
+                                           .Concat(currentProfile.Except(newProfile))
+                                           .Where(s => s.StartsWith("*"))
+                                           .Select(s => s.Replace("*", string.Empty).Replace("#", string.Empty))
+                                           .ToList();
+
+                if (Difference.Count > 0)
+                {
+                    Form fpc = new frmProfileCompare(Difference);
+                    fpc.Show();
+                }
+            }
+
             try
             {
                 File.Copy(ProfileName, Tools.StarfieldAppData + "\\Plugins.txt", true);
@@ -2319,10 +2342,16 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 Application.SetColorMode(SystemColorMode.Dark);
             }
             else
-                Application.SetColorMode(SystemColorMode.System);
+                Application.SetColorMode(SystemColorMode.Classic);
             Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
             SaveSettings();
         }
 
+        private void compareProfilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            compareProfilesToolStripMenuItem.Checked = !compareProfilesToolStripMenuItem.Checked;
+            Properties.Settings.Default.CompareProfiles = compareProfilesToolStripMenuItem.Checked;
+            SaveSettings();
+        }
     }
 }
