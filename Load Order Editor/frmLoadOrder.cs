@@ -131,7 +131,9 @@ namespace Starfield_Tools
             {
                 darkModeExperimentalToolStripMenuItem.Checked = true;
                 dataGridView1.EnableHeadersVisualStyles = false;
-                Application.SetColorMode(SystemColorMode.Dark);
+                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
+                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
+                Application.SetColorMode(SystemColorMode.System);
 
             }
             else
@@ -2342,7 +2344,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (darkModeExperimentalToolStripMenuItem.Checked)
             {
                 dataGridView1.EnableHeadersVisualStyles = false;
-                Application.SetColorMode(SystemColorMode.Dark);
+                Application.SetColorMode(SystemColorMode.System);
             }
             else
             {
@@ -2358,6 +2360,11 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             compareProfilesToolStripMenuItem.Checked = !compareProfilesToolStripMenuItem.Checked;
             Properties.Settings.Default.CompareProfiles = compareProfilesToolStripMenuItem.Checked;
             SaveSettings();
+        }
+
+        private void darkModAutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
