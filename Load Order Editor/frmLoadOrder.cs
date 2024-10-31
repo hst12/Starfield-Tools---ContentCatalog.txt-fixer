@@ -130,12 +130,14 @@ namespace Starfield_Tools
             if (Properties.Settings.Default.DarkMode)
             {
                 darkModeExperimentalToolStripMenuItem.Checked = true;
+                dataGridView1.EnableHeadersVisualStyles = false;
                 Application.SetColorMode(SystemColorMode.Dark);
 
             }
             else
             {
                 darkModeExperimentalToolStripMenuItem.Checked = false;
+                dataGridView1.EnableHeadersVisualStyles = true;
                 Application.SetColorMode(SystemColorMode.Classic);
             }
 
@@ -2339,10 +2341,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
             if (darkModeExperimentalToolStripMenuItem.Checked)
             {
+                dataGridView1.EnableHeadersVisualStyles = false;
                 Application.SetColorMode(SystemColorMode.Dark);
             }
             else
+            {
+                dataGridView1.EnableHeadersVisualStyles = true;
                 Application.SetColorMode(SystemColorMode.Classic);
+            }
             Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
             SaveSettings();
         }
