@@ -772,7 +772,11 @@
             // 
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+<<<<<<< HEAD
             refreshToolStripMenuItem.Size = new System.Drawing.Size(409, 44);
+=======
+            refreshToolStripMenuItem.Size = new System.Drawing.Size(415, 44);
+>>>>>>> 8766507920a0df48a3c1c4a412dfdb7655813ebc
             refreshToolStripMenuItem.Text = "Refresh";
             refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             // 
@@ -780,7 +784,11 @@
             // 
             toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem, uRLToolStripMenuItem });
             toolStripMenuColumns.Name = "toolStripMenuColumns";
+<<<<<<< HEAD
             toolStripMenuColumns.Size = new System.Drawing.Size(409, 44);
+=======
+            toolStripMenuColumns.Size = new System.Drawing.Size(415, 44);
+>>>>>>> 8766507920a0df48a3c1c4a412dfdb7655813ebc
             toolStripMenuColumns.Text = "Columns";
             // 
             // toolStripMenuIndex
@@ -848,15 +856,24 @@
             // activeOnlyToolStripMenuItem
             // 
             activeOnlyToolStripMenuItem.Name = "activeOnlyToolStripMenuItem";
+<<<<<<< HEAD
             activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(409, 44);
+=======
+            activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(415, 44);
+>>>>>>> 8766507920a0df48a3c1c4a412dfdb7655813ebc
             activeOnlyToolStripMenuItem.Text = "Active Only";
             activeOnlyToolStripMenuItem.Click += activeOnlyToolStripMenuItem_Click;
             // 
             // darkModeExperimentalToolStripMenuItem
             // 
             darkModeExperimentalToolStripMenuItem.Name = "darkModeExperimentalToolStripMenuItem";
+<<<<<<< HEAD
             darkModeExperimentalToolStripMenuItem.Size = new System.Drawing.Size(409, 44);
             darkModeExperimentalToolStripMenuItem.Text = "Dark Mode (Restart App)";
+=======
+            darkModeExperimentalToolStripMenuItem.Size = new System.Drawing.Size(415, 44);
+            darkModeExperimentalToolStripMenuItem.Text = "Dark Mode (Restart Appl)";
+>>>>>>> 8766507920a0df48a3c1c4a412dfdb7655813ebc
             darkModeExperimentalToolStripMenuItem.Click += darkModeExperimentalToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
