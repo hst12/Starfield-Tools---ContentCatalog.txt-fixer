@@ -587,12 +587,15 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             int colIndex = dataGridView1.CurrentCell.ColumnIndex;
             if (rowIndex == 0)
                 return; // Already at the top
+            else
+                isModified = true;
 
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(rowIndex - 1, selectedRow);
             dataGridView1.Rows[rowIndex - 1].Selected = true;
             dataGridView1.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
+            isModified = true;
         }
         private void btnUp_Click(object sender, EventArgs e)
         {
@@ -606,6 +609,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             if (rowIndex == dataGridView1.Rows.Count - 1)
                 return; // Already at the bottom
+            else
+                isModified = true;
 
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
@@ -678,6 +683,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.Rows.Insert(0, selectedRow);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[0].Cells[colIndex].Selected = true;
+            isModified = true;
         }
 
         private void MoveBottom()
@@ -690,6 +696,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.Rows.Insert(dataGridView1.Rows.Count, selectedRow);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[^1].Cells[colIndex].Selected = true;
+            isModified = true;
         }
         private void btnBottom_Click(object sender, EventArgs e)
         {
@@ -1863,6 +1870,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
                 dataGridView1.Rows.RemoveAt(rowIndexFromMouseDown);
                 dataGridView1.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                isModified = true;
             }
         }
 
@@ -1928,7 +1936,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             try
             {
-                Process.Start("explorer.exe", Tools.CommonFolder + "\\Shortcuts.txt");
+                Process.Start("explorer.exe", Tools.DocumentationFolder+ "\\Shortcuts.txt");
             }
             catch (Exception ex)
             {

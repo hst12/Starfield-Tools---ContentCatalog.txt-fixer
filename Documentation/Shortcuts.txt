@@ -1,5 +1,4 @@
-﻿Toggle mod enable/disable - Space or  Double-Click anywhere on the mod line
-Double clicking a mod saves plugins.txt but pressing space to toggle a mod doesn't save automatically.
+﻿Mod enable/disable - Space or  Double-Click anywhere on the mod line - changes saved
 Delete from Plugins.txt - Del - Does not automatically save or delete the mod from the Data folder
 
 Mod move order keys:
@@ -8,6 +7,7 @@ Move Down -S
 Move Top - A
 Move Bottom -D
 Drag and drop with mouse
+The mod move functions don't save automatically. Press the Save button to save your changes.
 
 Run game - R
 Save Plugins - Ctrl-S
