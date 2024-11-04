@@ -127,20 +127,30 @@ namespace Starfield_Tools
 
             compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
 
-            if (Properties.Settings.Default.DarkMode)
+            switch (Properties.Settings.Default.DarkMode)
             {
-                darkModeExperimentalToolStripMenuItem.Checked = true;
-                dataGridView1.EnableHeadersVisualStyles = false;
-                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
-                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
-                Application.SetColorMode(SystemColorMode.System);
-
-            }
-            else
-            {
-                darkModeExperimentalToolStripMenuItem.Checked = false;
-                dataGridView1.EnableHeadersVisualStyles = true;
-                Application.SetColorMode(SystemColorMode.Classic);
+                case 0: // Light
+                    dataGridView1.EnableHeadersVisualStyles = true;
+                    Application.SetColorMode(SystemColorMode.Classic);
+                    lightToolStripMenuItem.Checked = true;
+                    break;
+                case 1: // Dark
+                    dataGridView1.EnableHeadersVisualStyles = false;
+                    dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
+                    dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
+                    Application.SetColorMode(SystemColorMode.Dark);
+                    darkToolStripMenuItem.Checked = true;
+                    break;
+                case 2: // System
+                    Application.SetColorMode(SystemColorMode.System);
+                    if (Application.SystemColorMode == SystemColorMode.Dark)
+                    {
+                        dataGridView1.EnableHeadersVisualStyles = false;
+                        dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
+                        dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
+                    }
+                    systemToolStripMenuItem.Checked = true;
+                    break;
             }
 
             if (Properties.Settings.Default.AutoSort)
@@ -174,8 +184,6 @@ namespace Starfield_Tools
                 autoUpdateModsToolStripMenuItem.Checked = false;
                 AutoUpdate = false;
             }
-
-
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar4(StarfieldTools.CatalogStatus);
@@ -2337,24 +2345,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             Tools.OpenUrl("Documentation\\Index.htm");
         }
 
-        private void darkModeExperimentalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            darkModeExperimentalToolStripMenuItem.Checked = !darkModeExperimentalToolStripMenuItem.Checked;
-            Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
-            if (darkModeExperimentalToolStripMenuItem.Checked)
-            {
-                dataGridView1.EnableHeadersVisualStyles = false;
-                Application.SetColorMode(SystemColorMode.System);
-            }
-            else
-            {
-                dataGridView1.EnableHeadersVisualStyles = true;
-                Application.SetColorMode(SystemColorMode.Classic);
-            }
-            Properties.Settings.Default.DarkMode = darkModeExperimentalToolStripMenuItem.Checked;
-            SaveSettings();
-        }
-
         private void compareProfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             compareProfilesToolStripMenuItem.Checked = !compareProfilesToolStripMenuItem.Checked;
@@ -2362,9 +2352,33 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             SaveSettings();
         }
 
-        private void darkModAutoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            lightToolStripMenuItem.Checked = !lightToolStripMenuItem.Checked;
+            Application.SetColorMode(SystemColorMode.Classic);
+            Properties.Settings.Default.DarkMode = 0;
+            darkToolStripMenuItem.Checked = false;
+            systemToolStripMenuItem.Checked = false;
         }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            darkToolStripMenuItem.Checked = !darkToolStripMenuItem.Checked;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            Application.SetColorMode(SystemColorMode.Dark);
+            Properties.Settings.Default.DarkMode = 1;
+            lightToolStripMenuItem.Checked = false;
+            systemToolStripMenuItem.Checked = false;
+        }
+
+        private void systemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            systemToolStripMenuItem.Checked = !systemToolStripMenuItem.Checked;
+            Application.SetColorMode(SystemColorMode.System);
+            Properties.Settings.Default.DarkMode = 2;
+            lightToolStripMenuItem.Checked= false;
+            darkToolStripMenuItem.Checked = false;
+        }
+
     }
 }

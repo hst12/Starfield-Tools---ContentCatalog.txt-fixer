@@ -383,10 +383,10 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DarkMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte DarkMode {
             get {
-                return ((bool)(this["DarkMode"]));
+                return ((byte)(this["DarkMode"]));
             }
             set {
                 this["DarkMode"] = value;
