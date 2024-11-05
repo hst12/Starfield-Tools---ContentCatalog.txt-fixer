@@ -10,6 +10,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
+using YamlDotNet.Core.Tokens;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
@@ -45,6 +46,7 @@ namespace Starfield_Tools
 
             menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
             this.Font = Properties.Settings.Default.FontSize;
+
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
 
@@ -1140,9 +1142,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             return RemovedFiles;
         }
 
-        private void AddRemove()
+        private string AddRemove()
         {
             int addedMods, removedMods;
+            string ReturnStatus;
             addedMods = AddMissing();
             removedMods = RemoveMissing();
             if (addedMods != 0 || removedMods != 0)
@@ -1155,13 +1158,16 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                 if (AutoSort)
                     RunLOOT(true);
-                sbar3(addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed");
+                ReturnStatus = addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed";
+                sbar3(ReturnStatus);
             }
             else
             {
                 isModified = false;
-                sbar3("Plugins.txt is up to date");
+                ReturnStatus = "Plugins.txt is up to date";
+                sbar3(ReturnStatus);
             }
+            return ReturnStatus;
         }
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
@@ -1936,7 +1942,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             try
             {
-                Process.Start("explorer.exe", Tools.DocumentationFolder+ "\\Shortcuts.txt");
+                Process.Start("explorer.exe", Tools.DocumentationFolder + "\\Shortcuts.txt");
             }
             catch (Exception ex)
             {
@@ -2134,8 +2140,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            AddRemove();
+            string ReturnStatus=AddRemove();
             SavePlugins();
+            sbar3(ReturnStatus);
         }
 
         private void LooseFilesOnOff(bool EnableDisable) // True for enabled
@@ -2384,7 +2391,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             systemToolStripMenuItem.Checked = !systemToolStripMenuItem.Checked;
             Application.SetColorMode(SystemColorMode.System);
             Properties.Settings.Default.DarkMode = 2;
-            lightToolStripMenuItem.Checked= false;
+            lightToolStripMenuItem.Checked = false;
             darkToolStripMenuItem.Checked = false;
         }
 
