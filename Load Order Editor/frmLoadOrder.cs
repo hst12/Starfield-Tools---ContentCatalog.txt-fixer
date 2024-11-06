@@ -887,8 +887,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void SwitchProfile(string ProfileName)
         {
-            if (!Profiles)
-                return;
+            /*if (!Profiles)
+                return;*/
             var CurrentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
             var NewProfile = File.ReadAllLines(ProfileName).ToList();
             var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
@@ -943,12 +943,19 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result && OpenPlugins.FileName != "")
-            {
-                Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
-                SwitchProfile(OpenPlugins.FileName);
-                GetProfiles();
-                Properties.Settings.Default.Save();
-            }
+                if (Profiles)
+                {
+                    {
+                        Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
+                        SwitchProfile(OpenPlugins.FileName);
+                        GetProfiles();
+                        Properties.Settings.Default.Save();
+                    }
+                }
+            else
+                {
+                    SwitchProfile(OpenPlugins.FileName);
+                }
         }
 
         private void toolStripMenuAdd_Click(object sender, EventArgs e)
