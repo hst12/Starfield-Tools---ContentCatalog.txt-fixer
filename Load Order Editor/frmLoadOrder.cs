@@ -887,16 +887,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void SwitchProfile(string ProfileName)
         {
-            if (!Profiles)
-                return;
-            var CurrentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
-            var NewProfile = File.ReadAllLines(ProfileName).ToList();
+            //var CurrentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
+            //var NewProfile = File.ReadAllLines(ProfileName).ToList();
             var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
             var newProfile = File.ReadAllLines(ProfileName).ToList();
 
             if (Properties.Settings.Default.CompareProfiles)
             {
-                var Difference = newProfile.Except(currentProfile) // I have no idea how this works, Copilot did it. Shows the difference when switching profiles
+                var Difference = newProfile.Except(currentProfile) // Shows the difference when switching profiles
                                            .Concat(currentProfile.Except(newProfile))
                                            .Where(s => s.StartsWith("*"))
                                            .Select(s => s.Replace("*", string.Empty).Replace("#", string.Empty))
@@ -943,12 +941,17 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             DialogResult result = OpenPlugins.ShowDialog();
             if (DialogResult.OK == result && OpenPlugins.FileName != "")
-            {
-                Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
-                SwitchProfile(OpenPlugins.FileName);
-                GetProfiles();
-                Properties.Settings.Default.Save();
-            }
+                if (Profiles)
+                {
+                    {
+                        Properties.Settings.Default.ProfileFolder = OpenPlugins.FileName[..OpenPlugins.FileName.LastIndexOf('\\')];
+                        SwitchProfile(OpenPlugins.FileName);
+                        GetProfiles();
+                        Properties.Settings.Default.Save();
+                    }
+                }
+                else
+                    SwitchProfile(OpenPlugins.FileName);
         }
 
         private void toolStripMenuAdd_Click(object sender, EventArgs e)
@@ -2140,7 +2143,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string ReturnStatus=AddRemove();
+            string ReturnStatus = AddRemove();
             SavePlugins();
             sbar3(ReturnStatus);
         }
