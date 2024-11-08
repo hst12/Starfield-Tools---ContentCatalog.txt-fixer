@@ -1208,7 +1208,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools\\";
-            bool InstallOK = false;
+
+            if (Directory.Exists(ExtractPath))
+                Directory.Delete(ExtractPath, true);
 
             OpenFileDialog OpenMod = new()
             {
@@ -1277,7 +1279,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 SavePlugins();
                 //sbar3("Mod installed");
             }
-
         }
         private void toolStripMenuInstall_Click(object sender, EventArgs e)
         {
