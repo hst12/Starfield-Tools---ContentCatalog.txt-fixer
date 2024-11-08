@@ -2007,11 +2007,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             try
             {
-                MessageBox.Show("About to compare");
                 if (!Tools.FileCompare(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                     "\\My Games\\Starfield\\StarfieldCustom.ini")) // Check if StarfieldCustom.ini needs resetting
                 {
-                    MessageBox.Show("About to copy");
                     File.Copy(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                         "\\My Games\\Starfield\\StarfieldCustom.ini", true);
                     sbar3("StarfieldCustom.ini restored");
@@ -2200,7 +2198,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
                     filePath = LooseFilesDir + "StarfieldCustom.ini";
-            
+
             if (EnableDisable)
             {
                 List<string> linesToAppend = ["[Archive]", "bInvalidateOlderFiles=1"];
