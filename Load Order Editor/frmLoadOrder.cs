@@ -1212,7 +1212,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             {
                 //OpenMod.InitialDirectory = ProfileFolder;
                 Filter = "Archive File|*.zip;*.7z",
-                Title = "Install Mod - Zip files only. Loose files not supported"
+                Title = "Install Mod - Loose files not supported"
             };
 
             DialogResult result = OpenMod.ShowDialog();
