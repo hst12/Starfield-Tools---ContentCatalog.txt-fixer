@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Core.Tokens;
 using YamlDotNet.Serialization;
@@ -1207,6 +1208,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools\\";
+            bool InstallOK = false;
 
             OpenFileDialog OpenMod = new()
             {
@@ -1229,15 +1231,15 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                         foreach (Entry entry in archiveFile.Entries)
                         {
                             entry.Extract(ExtractPath + entry.FileName);
+                            sbar2("Extracting " + entry.FileName);
+                            statusStrip1.Refresh();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-#if DEBUG
                     MessageBox.Show(ex.Message);
-#endif
-                    sbar(ex.Message);
+                    return;
                 }
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
                 {
@@ -1246,8 +1248,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                     if (File.Exists(destinationPath))
                     {
-                        if (tools.ConfirmAction("Overwrite esm " + ModFile, "Replace mod?"))
+                        if (tools.ConfirmAction("Overwrite esm " + destinationPath, "Replace mod?"))
                             File.Move(ModFile, destinationPath, true);  // Overwrite
+                        else
+                            break;
                     }
                     else
                         File.Move(ModFile, destinationPath, true);  // Overwrite
@@ -1260,8 +1264,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                     if (File.Exists(destinationPath))
                     {
-                        if (tools.ConfirmAction("Overwrite archive " + ModFile, "Replace mod?"))
+                        if (tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace mod?"))
                             File.Move(ModFile, destinationPath, true); // Overwrite
+                        else
+                            break;
                     }
                     else
                         File.Move(ModFile, destinationPath, true); // Overwrite
