@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
+using SevenZipExtractor;
 using Starfield_Tools.Common;
 using Starfield_Tools.Load_Order_Editor;
 using System;
@@ -1205,12 +1206,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void InstallMod()
         {
             string ModPath, fileName, destinationPath;
-            string ExtractPath = Path.GetTempPath() + "hstTools";
+            string ExtractPath = Path.GetTempPath() + "hstTools\\";
 
             OpenFileDialog OpenMod = new()
             {
                 //OpenMod.InitialDirectory = ProfileFolder;
-                Filter = "ZIP File|*.zip",
+                Filter = "Archive File|*.zip;*.7z",
                 Title = "Install Mod - Zip files only. Loose files not supported"
             };
 
@@ -1222,7 +1223,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 try
                 {
                     sbar2("Installing mod...");
-                    ZipFile.ExtractToDirectory(ModPath, ExtractPath, true); // Overwrite
+                    statusStrip1.Refresh();
+                    using (ArchiveFile archiveFile = new ArchiveFile(OpenMod.FileName))
+                    {
+                        foreach (Entry entry in archiveFile.Entries)
+                        {
+                            entry.Extract(ExtractPath + entry.FileName);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
