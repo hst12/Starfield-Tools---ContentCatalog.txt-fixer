@@ -93,10 +93,11 @@ Installing mods from the menu will copy .esm and .ba2 files to the game data fol
 Un-install will permanently DELETE the highlighted mod .esm and .ba2 files.
 
 The Load Order Editor can install or un-install mods from a folder with the following limitations:
-1. Zip files only
-2. The contents of the Zip archive are limited to .esm and .ba2 files only. Loose file are not supported. FOMOD files are not supported.
+1. The contents of the archive are limited to .esm and .ba2 files only.
+2. Loose file are not supported.
+3. FOMOD files are not supported.
 
-Profile switching: An experimental feature allowing you to switch mod profiles. Backup your Plugins.txt file before trying this out.
+Profile switching: Allows you to switch mod profiles. Backup your Plugins.txt file before trying this out.
 Pick an empty folder or create a folder somewhere in My Documents to save your profiles.
 Profile switching is always off by default until the checkbox next to Profiles is checked.
 
