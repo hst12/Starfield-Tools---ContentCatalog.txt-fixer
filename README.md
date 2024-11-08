@@ -1,17 +1,12 @@
-This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor
+This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor.
+The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 
 This version is compatible with the Shattered Space expansion.
 
 It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug, at least on my side so far.
-
-The mod manager section of the tool will continue to be updated and will move to a stand-alone tool later.
+The tool may be of use for save games made before the vehicle update when trying to open the in-game Creations menu.
 
 For keyboard shortcuts see Help->Shortcut keys
-
-To update the tool without downloading a new version to cater for future game updates peform the following steps:
-File menu->Explore App Common Folder
-Open the file BGS Exclude.txt. Identify and add any new Bethesda files to the this text file.
-Save the file then restart the app.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
 
