@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             dataGridView1 = new System.Windows.Forms.DataGridView();
             Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -136,6 +136,7 @@
             toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuProfilesOn = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuAutoDelccc = new System.Windows.Forms.ToolStripMenuItem();
             autoResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             autoUpdateModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -208,7 +209,6 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             timer1 = new System.Windows.Forms.Timer(components);
-            toolStripMenuAutoDelccc = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -293,8 +293,8 @@
             // Version
             // 
             Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.NullValue = null;
-            Version.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            Version.DefaultCellStyle = dataGridViewCellStyle1;
             Version.HeaderText = "Version Date";
             Version.MinimumWidth = 10;
             Version.Name = "Version";
@@ -904,33 +904,33 @@
             // optionsToolStripMenuItem
             // 
             optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            optionsToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            optionsToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             optionsToolStripMenuItem.Text = "Font";
             optionsToolStripMenuItem.Click += optionsToolStripMenuItem_Click;
             // 
             // toolStripSeparator18
             // 
             toolStripSeparator18.Name = "toolStripSeparator18";
-            toolStripSeparator18.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator18.Size = new System.Drawing.Size(404, 6);
             // 
             // toolStripMenuSetPath
             // 
             toolStripMenuSetPath.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuSetPath.Image");
             toolStripMenuSetPath.Name = "toolStripMenuSetPath";
-            toolStripMenuSetPath.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuSetPath.Size = new System.Drawing.Size(407, 44);
             toolStripMenuSetPath.Text = "Starfield path";
             toolStripMenuSetPath.Click += toolStripMenuSetPath_Click;
             // 
             // toolStripSeparator14
             // 
             toolStripSeparator14.Name = "toolStripSeparator14";
-            toolStripSeparator14.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator14.Size = new System.Drawing.Size(404, 6);
             // 
             // toolStripMenuLootPath
             // 
             toolStripMenuLootPath.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLootPath.Image");
             toolStripMenuLootPath.Name = "toolStripMenuLootPath";
-            toolStripMenuLootPath.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuLootPath.Size = new System.Drawing.Size(407, 44);
             toolStripMenuLootPath.Text = "LOOT Path";
             toolStripMenuLootPath.Click += toolStripMenuLootPath_Click;
             // 
@@ -938,7 +938,7 @@
             // 
             vortexPathToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("vortexPathToolStripMenuItem.Image");
             vortexPathToolStripMenuItem.Name = "vortexPathToolStripMenuItem";
-            vortexPathToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            vortexPathToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             vortexPathToolStripMenuItem.Text = "Vortex Path";
             vortexPathToolStripMenuItem.Click += vortexPathToolStripMenuItem_Click;
             // 
@@ -946,20 +946,20 @@
             // 
             modOrganizer2PathToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("modOrganizer2PathToolStripMenuItem.Image");
             modOrganizer2PathToolStripMenuItem.Name = "modOrganizer2PathToolStripMenuItem";
-            modOrganizer2PathToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            modOrganizer2PathToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             modOrganizer2PathToolStripMenuItem.Text = "Mod Organizer 2 Path";
             modOrganizer2PathToolStripMenuItem.Click += modOrganizer2PathToolStripMenuItem_Click;
             // 
             // toolStripSeparator13
             // 
             toolStripSeparator13.Name = "toolStripSeparator13";
-            toolStripSeparator13.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator13.Size = new System.Drawing.Size(404, 6);
             // 
             // toolStripMenuLoadingScreen
             // 
             toolStripMenuLoadingScreen.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLoadingScreen.Image");
             toolStripMenuLoadingScreen.Name = "toolStripMenuLoadingScreen";
-            toolStripMenuLoadingScreen.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuLoadingScreen.Size = new System.Drawing.Size(407, 44);
             toolStripMenuLoadingScreen.Text = "Set Load Screen";
             toolStripMenuLoadingScreen.Click += toolStripMenuLoadingScreen_Click;
             // 
@@ -967,7 +967,7 @@
             // 
             toolStripMenuLoadScreenPreview.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuLoadScreenPreview.Image");
             toolStripMenuLoadScreenPreview.Name = "toolStripMenuLoadScreenPreview";
-            toolStripMenuLoadScreenPreview.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuLoadScreenPreview.Size = new System.Drawing.Size(407, 44);
             toolStripMenuLoadScreenPreview.Text = "Load Screen Preview";
             toolStripMenuLoadScreenPreview.Click += toolStripMenuLoadScreenPreview_Click;
             // 
@@ -975,75 +975,82 @@
             // 
             resetLoadScreenToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("resetLoadScreenToolStripMenuItem.Image");
             resetLoadScreenToolStripMenuItem.Name = "resetLoadScreenToolStripMenuItem";
-            resetLoadScreenToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            resetLoadScreenToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             resetLoadScreenToolStripMenuItem.Text = "Reset Load Screen";
             resetLoadScreenToolStripMenuItem.Click += resetLoadScreenToolStripMenuItem_Click;
             // 
             // toolStripSeparator20
             // 
             toolStripSeparator20.Name = "toolStripSeparator20";
-            toolStripSeparator20.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator20.Size = new System.Drawing.Size(404, 6);
             // 
             // toolStripMenuCatalog
             // 
             toolStripMenuCatalog.Image = (System.Drawing.Image)resources.GetObject("toolStripMenuCatalog.Image");
             toolStripMenuCatalog.Name = "toolStripMenuCatalog";
-            toolStripMenuCatalog.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuCatalog.Size = new System.Drawing.Size(407, 44);
             toolStripMenuCatalog.Text = "Content Catalog Check";
             toolStripMenuCatalog.Click += toolStripMenuCatalog_Click;
             // 
             // toolStripSeparator21
             // 
             toolStripSeparator21.Name = "toolStripSeparator21";
-            toolStripSeparator21.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator21.Size = new System.Drawing.Size(404, 6);
             // 
             // toolStripMenuProfilesOn
             // 
             toolStripMenuProfilesOn.Name = "toolStripMenuProfilesOn";
-            toolStripMenuProfilesOn.Size = new System.Drawing.Size(393, 44);
+            toolStripMenuProfilesOn.Size = new System.Drawing.Size(407, 44);
             toolStripMenuProfilesOn.Text = "Profiles Enabled";
             toolStripMenuProfilesOn.Click += toolStripMenuProfilesOn_Click;
             // 
             // toolStripSeparator23
             // 
             toolStripSeparator23.Name = "toolStripSeparator23";
-            toolStripSeparator23.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator23.Size = new System.Drawing.Size(404, 6);
+            // 
+            // toolStripMenuAutoDelccc
+            // 
+            toolStripMenuAutoDelccc.Name = "toolStripMenuAutoDelccc";
+            toolStripMenuAutoDelccc.Size = new System.Drawing.Size(407, 44);
+            toolStripMenuAutoDelccc.Text = "Auto Delete Starfield.ccc";
+            toolStripMenuAutoDelccc.Click += toolStripMenuAutoDelccc_Click;
             // 
             // autoResetToolStripMenuItem
             // 
             autoResetToolStripMenuItem.Name = "autoResetToolStripMenuItem";
-            autoResetToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            autoResetToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             autoResetToolStripMenuItem.Text = "Auto Reset";
             autoResetToolStripMenuItem.Click += autoResetToolStripMenuItem_Click;
             // 
             // toolStripSeparator22
             // 
             toolStripSeparator22.Name = "toolStripSeparator22";
-            toolStripSeparator22.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator22.Size = new System.Drawing.Size(404, 6);
             // 
             // autoUpdateModsToolStripMenuItem
             // 
             autoUpdateModsToolStripMenuItem.Name = "autoUpdateModsToolStripMenuItem";
-            autoUpdateModsToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            autoUpdateModsToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             autoUpdateModsToolStripMenuItem.Text = "Auto update mods";
             autoUpdateModsToolStripMenuItem.Click += autoUpdateModsToolStripMenuItem_Click;
             // 
             // autoSortToolStripMenuItem
             // 
             autoSortToolStripMenuItem.Name = "autoSortToolStripMenuItem";
-            autoSortToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            autoSortToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             autoSortToolStripMenuItem.Text = "Auto Sort";
             autoSortToolStripMenuItem.Click += autoSortToolStripMenuItem_Click;
             // 
             // toolStripSeparator27
             // 
             toolStripSeparator27.Name = "toolStripSeparator27";
-            toolStripSeparator27.Size = new System.Drawing.Size(390, 6);
+            toolStripSeparator27.Size = new System.Drawing.Size(404, 6);
             // 
             // compareProfilesToolStripMenuItem
             // 
             compareProfilesToolStripMenuItem.Name = "compareProfilesToolStripMenuItem";
-            compareProfilesToolStripMenuItem.Size = new System.Drawing.Size(393, 44);
+            compareProfilesToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             compareProfilesToolStripMenuItem.Text = "Compare Profiles";
             compareProfilesToolStripMenuItem.Click += compareProfilesToolStripMenuItem_Click;
             // 
@@ -1309,22 +1316,23 @@
             // toolStripMenuShortcuts
             // 
             toolStripMenuShortcuts.Name = "toolStripMenuShortcuts";
-            toolStripMenuShortcuts.Size = new System.Drawing.Size(313, 44);
+            toolStripMenuShortcuts.Size = new System.Drawing.Size(359, 44);
             toolStripMenuShortcuts.Text = "Shortcut keys";
             toolStripMenuShortcuts.Click += toolStripMenuShortcuts_Click;
             // 
             // documentationToolStripMenuItem
             // 
             documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            documentationToolStripMenuItem.Size = new System.Drawing.Size(313, 44);
+            documentationToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             documentationToolStripMenuItem.Text = "Documentation";
+            documentationToolStripMenuItem.Visible = false;
             documentationToolStripMenuItem.Click += documentationToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("aboutToolStripMenuItem.Image");
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new System.Drawing.Size(313, 44);
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             aboutToolStripMenuItem.Text = "&About...";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -1643,13 +1651,6 @@
             // 
             timer1.Interval = 7000;
             timer1.Tick += timer1_Tick;
-            // 
-            // toolStripMenuAutoDelccc
-            // 
-            toolStripMenuAutoDelccc.Name = "toolStripMenuAutoDelccc";
-            toolStripMenuAutoDelccc.Size = new System.Drawing.Size(407, 44);
-            toolStripMenuAutoDelccc.Text = "Auto Delete Starfield.ccc";
-            toolStripMenuAutoDelccc.Click += toolStripMenuAutoDelccc_Click;
             // 
             // frmLoadOrder
             // 
