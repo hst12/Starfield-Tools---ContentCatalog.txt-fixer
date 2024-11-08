@@ -5,6 +5,7 @@ using Starfield_Tools.Load_Order_Editor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
@@ -100,7 +101,7 @@ namespace Starfield_Tools
             SetColumnVisibility(Properties.Settings.Default.FileSize, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
             SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
 
-            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
+            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
         filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (File.Exists(filePath))
@@ -209,6 +210,12 @@ namespace Starfield_Tools
 
             if (AutoUpdate)
                 AddRemove();
+
+            if (Properties.Settings.Default.AutoReset)
+            {
+                autoResetToolStripMenuItem.Checked = true;
+                ResetDefaults();
+            }
 
 #if DEBUG
             testToolStripMenu.Visible = true;
@@ -1156,9 +1163,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (addedMods != 0 || removedMods != 0)
             {
                 SavePlugins();
-                if (Profiles)
+                /*if (Profiles)
                     SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
-                InitDataGrid();
+                InitDataGrid();*/
                 isModified = false;
 
                 if (AutoSort)
@@ -1468,7 +1475,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void SavePlugins()
         {
             SaveLO(Tools.StarfieldAppData + @"\Plugins.txt");
-            if (Profiles)
+            if (Profiles && cmbProfile.Text != "")
             {
                 SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
                 toolStripStatusSecondary.Text += ", " + cmbProfile.Text + " profile saved";
@@ -1791,7 +1798,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 }
                 else
                 {
-                    sbar3("Starfield.ccc not found");
                     return false;
                 }
             }
@@ -1974,25 +1980,38 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
         }
 
+        private bool ResetStarfieldCustomINI(bool ConfirmOverwrite)  // true for confirmation
+        {
+            if (ConfirmOverwrite)
+            {
+                DialogResult DialogResult = MessageBox.Show("This will overwrite your StarfieldCustom.ini to a recommended version", "Are you sure?",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (DialogResult != DialogResult.OK)
+                    return false;
+            }
+
+            try
+            {
+                if (!Tools.FileCompare(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                    "\\My Games\\Starfield\\StarfieldCustom.ini")) // Check if StarfieldCustom.ini needs resetting
+                {
+                    File.Copy(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                        "\\My Games\\Starfield\\StarfieldCustom.ini", true);
+                    sbar3("StarfieldCustom.ini restored");
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error restoring StarfieldCustom.ini");
+                return false;
+            }
+        }
         private void toolStripMenuResetStarfieldCustom_Click(object sender, EventArgs e)
         {
-            DialogResult DialogResult = MessageBox.Show("This will overwrite your StarfieldCustom.ini to a recommended version", "Are you sure?",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-
-            if (DialogResult == DialogResult.OK)
-            {
-                try
-                {
-                    File.Copy(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini", true);
-                    sbar3("StarfieldCustom.ini restored");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error restoring StarfieldCustom.ini");
-                }
-            }
-            else
-                sbar3("StarfieldCustom.ini not modified");
+            ResetStarfieldCustomINI(true);
         }
 
         private void editStarfieldCustominiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2108,39 +2127,49 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             else
                 return 0;
         }
-        private void undoVortexChangesToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private int UndoVortexChanges(bool ConfirmPrompt)  // true to confirm
         {
             int ChangeCount = 0;
 
-            DialogResult DialogResult = MessageBox.Show("Are you sure?", "This will remove all changes made by Vortex",
-    MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
-            if (DialogResult == DialogResult.OK)
+            if (ConfirmPrompt)
             {
-                string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\";
-                if (File.Exists(FolderPath + "StarfieldCustom.ini.base"))
-                {
-                    File.Copy(FolderPath + "StarfieldCustom.ini.base", FolderPath + "StarfieldCustom.ini", true);
-                    File.Delete(FolderPath + "StarfieldCustom.ini.base");
-                    ChangeCount++;
-                }
-                if (File.Exists(FolderPath + "StarfieldPrefs.ini.base"))
-                {
-                    File.Copy(FolderPath + "StarfieldPrefs.ini.base", FolderPath + "StarfieldPrefs.ini", true);
-                    File.Delete(FolderPath + "StarfieldPrefs.ini.base");
-                    ChangeCount++;
-                }
-                ChangeCount += CheckAndDeleteINI("Starfield.ini");
-                ChangeCount += CheckAndDeleteINI("Starfield.ini.baked");
-                ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
-                ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
-                ChangeCount += CheckAndDeleteINI("Starfield.ini.base");
-                LooseFiles = false;
-                LooseFilesOnOff(false);
-                LooseFilesMenuUpdate();
-                if (Delccc())
-                    ChangeCount++;
-                sbar3(ChangeCount + " Change(s) made to Vortex created files");
+                DialogResult DialogResult = MessageBox.Show("Are you sure?", "This will remove all changes made by Vortex",
+        MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (DialogResult != DialogResult.OK)
+                    return 0;
             }
+
+            string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\";
+            if (File.Exists(FolderPath + "StarfieldCustom.ini.base"))
+            {
+                File.Copy(FolderPath + "StarfieldCustom.ini.base", FolderPath + "StarfieldCustom.ini", true);
+                File.Delete(FolderPath + "StarfieldCustom.ini.base");
+                ChangeCount++;
+            }
+            if (File.Exists(FolderPath + "StarfieldPrefs.ini.base"))
+            {
+                File.Copy(FolderPath + "StarfieldPrefs.ini.base", FolderPath + "StarfieldPrefs.ini", true);
+                File.Delete(FolderPath + "StarfieldPrefs.ini.base");
+                ChangeCount++;
+            }
+            ChangeCount += CheckAndDeleteINI("Starfield.ini");
+            ChangeCount += CheckAndDeleteINI("Starfield.ini.baked");
+            ChangeCount += CheckAndDeleteINI("StarfieldCustom.ini.baked");
+            ChangeCount += CheckAndDeleteINI("StarfieldPrefs.ini.baked");
+            ChangeCount += CheckAndDeleteINI("Starfield.ini.base");
+            LooseFiles = false;
+            LooseFilesOnOff(false);
+            LooseFilesMenuUpdate();
+            if (Delccc())
+                ChangeCount++;
+            if (ChangeCount > 0)
+                sbar3(ChangeCount + " Change(s) made to Vortex created files");
+            return ChangeCount;
+        }
+        private void undoVortexChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UndoVortexChanges(true);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -2164,20 +2193,27 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             else
             {
-                string[] linesToRemove = ["[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal="];
-
-                var lines = File.ReadAllLines(filePath).ToList();
-
-                // Remove the specified lines
-                foreach (var lineToRemove in linesToRemove)
+                if (File.Exists(filePath))
                 {
-                    lines.RemoveAll(line => line.Trim() == lineToRemove);
-                }
+                    var lines = File.ReadAllLines(filePath).ToList();
+                    if (lines.Contains("bInvalidateOlderFiles=1"))
+                    {
+                        string[] linesToRemove = ["[Archive]", "bInvalidateOlderFiles=1", "sResourceDataDirsFinal="];
 
-                // Write the updated lines back to the file
-                File.WriteAllLines(filePath, lines);
-                LooseFiles = false;
-                sbarCCC("Loose Files Disabled");
+                        //var lines = File.ReadAllLines(filePath).ToList();
+
+                        // Remove the specified lines
+                        foreach (var lineToRemove in linesToRemove)
+                        {
+                            lines.RemoveAll(line => line.Trim() == lineToRemove);
+                        }
+
+                        // Write the updated lines back to the file
+                        File.WriteAllLines(filePath, lines);
+                        LooseFiles = false;
+                        sbarCCC("Loose Files Disabled");
+                    }
+                }
             }
         }
 
@@ -2264,9 +2300,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void ActiveOnlyButtonSet()
         {
             if (ActiveOnly)
-                btnActiveOnly.Text = "Active";
+                btnActiveOnly.Text = "Active Only";
             else
-                btnActiveOnly.Text = "All";
+                btnActiveOnly.Text = "All Mods";
         }
 
         private void ActiveOnlyToggle()
@@ -2416,6 +2452,100 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void btnActiveOnly_Click(object sender, EventArgs e)
         {
             ActiveOnlyToggle();
+        }
+
+        private void mO2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string MO2Path = Properties.Settings.Default.MO2Path;
+            if (MO2Path != "")
+            {
+                try
+                {
+                    var result = Process.Start(MO2Path);
+                    if (result != null)
+                    {
+                        SaveSettings();
+                        Application.Exit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+                MessageBox.Show("MO2 doesn't seem to be installed.");
+        }
+
+        private void modOrganizer2PathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Executable Files|*.exe";
+            openFileDialog1.Title = "Set the path to the MO2 executable";
+            openFileDialog1.FileName = "ModOrganizer.exe";
+            DialogResult MO2Path = openFileDialog1.ShowDialog();
+            if (MO2Path == DialogResult.OK && openFileDialog1.FileName != "")
+                Properties.Settings.Default.MO2Path = openFileDialog1.FileName;
+
+        }
+
+        private void ResetDefaults()
+        {
+            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
+        filePath = LooseFilesDir + "StarfieldCustom.ini";
+            int ChangeCount = 0;
+
+            if (File.Exists(filePath))
+            {
+                var lines = File.ReadAllLines(filePath).ToList();
+                if (lines.Contains("bInvalidateOlderFiles=1"))
+                    LooseFilesOnOff(false);
+
+                if (Delccc())
+                    ChangeCount++;
+                ChangeCount += UndoVortexChanges(false);
+                if (ResetStarfieldCustomINI(false))
+                    ChangeCount++;
+                if (ChangeCount > 0)
+                    sbar3(ChangeCount.ToString() + " Change(s) made to ini files");
+            }
+        }
+        private void autoResetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!autoResetToolStripMenuItem.Checked)
+            {
+                DialogResult DialogResult = MessageBox.Show("This will run every time the app is started - Are you sure?", "This will reset settings made by other mod managers.",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+                if (DialogResult != DialogResult.OK)
+                    return;
+            }
+
+            autoResetToolStripMenuItem.Checked = !autoResetToolStripMenuItem.Checked;
+            if (autoResetToolStripMenuItem.Checked)
+                ResetDefaults();
+            Properties.Settings.Default.AutoReset = autoResetToolStripMenuItem.Checked;
+            SaveSettings();
+        }
+
+        private void creationKitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string executable = Properties.Settings.Default.StarfieldGamePath;
+            if (executable != null)
+            {
+                try
+                {
+                    Process.Start(executable + "\\CreationKit.exe");
+                    SaveSettings();
+                    Application.Exit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Starfield path not set");
+            }
         }
     }
 }

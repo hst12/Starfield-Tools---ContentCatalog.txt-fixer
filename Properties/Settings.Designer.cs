@@ -404,5 +404,29 @@ namespace Starfield_Tools.Properties {
                 this["CompareProfiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MO2Path {
+            get {
+                return ((string)(this["MO2Path"]));
+            }
+            set {
+                this["MO2Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoReset {
+            get {
+                return ((bool)(this["AutoReset"]));
+            }
+            set {
+                this["AutoReset"] = value;
+            }
+        }
     }
 }
