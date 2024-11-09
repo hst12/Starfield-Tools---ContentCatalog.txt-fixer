@@ -98,6 +98,7 @@
             compareStarfieldCustominiToBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             resetStarfieldCustominiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             undoVortexChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            resetToVanillaStarfieldSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -710,7 +711,7 @@
             // 
             // resetDeleteFilesToolStripMenuItem
             // 
-            resetDeleteFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuDeleteCCC, compareStarfieldCustominiToBackupToolStripMenuItem, resetStarfieldCustominiToolStripMenuItem, undoVortexChangesToolStripMenuItem });
+            resetDeleteFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuDeleteCCC, compareStarfieldCustominiToBackupToolStripMenuItem, resetStarfieldCustominiToolStripMenuItem, undoVortexChangesToolStripMenuItem, resetToVanillaStarfieldSettingsToolStripMenuItem });
             resetDeleteFilesToolStripMenuItem.Name = "resetDeleteFilesToolStripMenuItem";
             resetDeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
             resetDeleteFilesToolStripMenuItem.Text = "Reset/Delete Files";
@@ -742,6 +743,13 @@
             undoVortexChangesToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
             undoVortexChangesToolStripMenuItem.Text = "Undo Vortex changes";
             undoVortexChangesToolStripMenuItem.Click += undoVortexChangesToolStripMenuItem_Click;
+            // 
+            // resetToVanillaStarfieldSettingsToolStripMenuItem
+            // 
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Name = "resetToVanillaStarfieldSettingsToolStripMenuItem";
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Text = "Reset to vanilla Starfield settings";
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Click += resetToVanillaStarfieldSettingsToolStripMenuItem_Click;
             // 
             // toolStripSeparator17
             // 
@@ -1249,7 +1257,6 @@
             creationKitToolStripMenuItem.Name = "creationKitToolStripMenuItem";
             creationKitToolStripMenuItem.Size = new System.Drawing.Size(419, 44);
             creationKitToolStripMenuItem.Text = "Creation Kit";
-            creationKitToolStripMenuItem.Visible = false;
             creationKitToolStripMenuItem.Click += creationKitToolStripMenuItem_Click;
             // 
             // toolStripSeparator26
@@ -1861,5 +1868,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
         private System.Windows.Forms.ToolStripMenuItem creationKitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoDelccc;
+        private System.Windows.Forms.ToolStripMenuItem resetToVanillaStarfieldSettingsToolStripMenuItem;
     }
 }

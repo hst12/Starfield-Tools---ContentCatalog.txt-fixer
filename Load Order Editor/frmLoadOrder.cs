@@ -373,7 +373,7 @@ Click Ok and Quit to create a blank Plugins.txt file or click Ok and Cancel to f
 Click File->Restore if you have a backup of your Plugins.txt file
 Alternatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
                 using StreamWriter writer = new(loText);
-                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
+                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 return;
 
             }
@@ -575,7 +575,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             using (StreamWriter writer = new(PluginFileName))
             {
-                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\r\n# Please do not modify this file.\r\n");
+                writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     ModEnabled = (bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value;
@@ -2221,7 +2221,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                         }
 
                         // Write the updated lines back to the file
-                        MessageBox.Show("LooseFilesOnOff");
                         File.WriteAllLines(filePath, lines);
                         LooseFiles = false;
                         sbarCCC("Loose Files Disabled");
@@ -2541,15 +2540,22 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void creationKitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            const string userRoot = "HKEY_CURRENT_USER";
+            const string subkey = @"Software\Valve\Steam";
+            const string keyName = userRoot + "\\" + subkey;
+
             string executable = Properties.Settings.Default.StarfieldGamePath;
             if (executable != null)
             {
                 try
                 {
-                    Process.Start(executable + "\\CreationKit.exe");
                     SaveSettings();
+                    string stringValue = (string)Registry.GetValue(keyName, "SteamExe", ""); // Get Steam path from Registry
+                    var processInfo = new ProcessStartInfo(stringValue, "-applaunch 2722710");
+                    var process = Process.Start(processInfo);
                     Application.Exit();
                 }
+
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -2559,6 +2565,11 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             {
                 MessageBox.Show("Starfield path not set");
             }
+        }
+
+        private void resetToVanillaStarfieldSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetDefaults();
         }
     }
 }
