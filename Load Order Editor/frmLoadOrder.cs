@@ -609,7 +609,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.Rows[rowIndex - 1].Selected = true;
             dataGridView1.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
             isModified = true;
-            SavePlugins();
         }
         private void btnUp_Click(object sender, EventArgs e)
         {
@@ -632,7 +631,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.ClearSelection();
             dataGridView1.Rows[rowIndex + 1].Selected = true;
             dataGridView1.Rows[rowIndex + 1].Cells[colIndex].Selected = true;
-            SavePlugins();
         }
         private void btnDown_Click(object sender, EventArgs e)
         {
@@ -699,7 +697,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.ClearSelection();
             dataGridView1.Rows[0].Cells[colIndex].Selected = true;
             isModified = true;
-            SavePlugins();
         }
 
         private void MoveBottom()
@@ -713,7 +710,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             dataGridView1.ClearSelection();
             dataGridView1.Rows[^1].Cells[colIndex].Selected = true;
             isModified = true;
-            SavePlugins();
         }
         private void btnBottom_Click(object sender, EventArgs e)
         {
@@ -1025,7 +1021,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     EnableDisable();
                     break;
                 case Keys.R:
-                    Tools.StartGame(GameVersion);
+                    RunGame();
                     break;
             }
         }
@@ -1195,6 +1191,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void frmLoadOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (isModified)
+                SavePlugins();
             SaveSettings();
         }
 
