@@ -7,7 +7,6 @@ Move Down -S
 Move Top - A
 Move Bottom -D
 Drag and drop with mouse
-The mod move functions don't save automatically. Press the Save button to save your changes.
 
 Run game - R
 Save Plugins - Ctrl-S
