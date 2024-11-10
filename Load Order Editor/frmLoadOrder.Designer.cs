@@ -210,6 +210,7 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             timer1 = new System.Windows.Forms.Timer(components);
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -482,7 +483,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusStats, toolStripStatusDelCCC, toolStripStatusSecondary, toolStripStatusTertiary, toolStripStatusLabel4 });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusStats, toolStripStatusDelCCC, toolStripStatusSecondary, toolStripStatusTertiary, toolStripStatusLabel4, toolStripStatusLabel5 });
             statusStrip1.Location = new System.Drawing.Point(0, 787);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
@@ -1660,6 +1661,11 @@
             timer1.Interval = 7000;
             timer1.Tick += timer1_Tick;
             // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(0, 32);
+            // 
             // frmLoadOrder
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -1870,5 +1876,6 @@
         private System.Windows.Forms.ToolStripMenuItem creationKitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoDelccc;
         private System.Windows.Forms.ToolStripMenuItem resetToVanillaStarfieldSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }

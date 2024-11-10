@@ -6,14 +6,10 @@ using Starfield_Tools.Load_Order_Editor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using YamlDotNet.Core.Tokens;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
@@ -27,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile;
 
-        bool isModified = false, Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false;
+        bool Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false,isModified=false;
 
         public frmLoadOrder(string parameter)
         {
@@ -560,7 +556,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
 
         private void SaveLO(string PluginFileName)
@@ -1756,6 +1752,11 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void sbar4(string StatusBarMessage)
         {
             toolStripStatusLabel4.Text = StatusBarMessage;
+        }
+
+        private void sbar5Modified()
+        {
+            toolStripStatusLabel5.Text = "Modified";
         }
 
         private void sbarCCC(string sbarMessage)

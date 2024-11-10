@@ -1,14 +1,27 @@
 This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor.
+
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
+If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
 
-This version is compatible with the Shattered Space expansion.
+What it does:
+Re-order mods by using hot keys (WASD) or drag and drop.
+Enable/Disable mods
+Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile
+Install mods (loose files not supported)
+Un-install mods (loose files not supported)
+View the mod page on the Creations web site
+Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed
+Acts as a game launcher once you've made your load order edits and you can select between the Steam, MS Store or SFSE flavours of the game.
 
-It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug, at least on my side so far.
-The tool may be of use for save games made before the vehicle update when trying to open the in-game Creations menu.
+What it doesn't do:
+Let you like/unlike a mod - you'll have to go to the in-game load order tool for that.
+Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site for that
 
 For keyboard shortcuts see Help->Shortcut keys.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
+
+The rest of the readme pertains mostly to the catalog fixer function which isn't really needed any more unless you have an old save game you want to check.
 
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.
 This tool is intended to repair and then automatically perform a backup/restore of the catalog file.
@@ -39,9 +52,6 @@ Use the catalog backup and restore features instead of the repair features when 
 These functions are on by default and the tool will automatically decide what action to take.
 
 You can skip reading from here on or keep going for more detail.
-
-What's new: Experimental Support for reading LOOT groups and load order sorting.
-In the load order editor enable the Group column, then in the Tools menu set the path to the LOOT executable.
 
 Overview of buttons:
 Check button re-checks the file.
