@@ -5,17 +5,22 @@ If you're primarily a user of Creations mods and don't really use other mod mana
 
 What it does:
 Re-order mods by using hot keys (WASD) or drag and drop.
-Enable/Disable mods
-Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile
-Install mods (loose files not supported)
+Enable/Disable mods. Disabling a mod keeps the mod files on your system but the game won't load the mod.
+Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile.
+Pick or create an empty directory and use File->Save As to start creating profiles.
+Install mods (loose files and FOMOD not supported)
 Un-install mods (loose files not supported)
 View the mod page on the Creations web site
-Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed
+Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed. Enable the display of LOOT groups via the View->Columns->Group menu
 Acts as a game launcher once you've made your load order edits and you can select between the Steam, MS Store or SFSE flavours of the game.
 
-What it doesn't do:
-Let you like/unlike a mod - you'll have to go to the in-game load order tool for that.
-Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site for that
+What it doesn't do for Creations mods:
+Like/unlike a mod - you'll have to go to the in-game load order tool for that.
+Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site for that. Select a mod, right-click and choose View Web Site.
+You can un-install a Creations mod from this app but you still need to visit the Crations web site and un-subscribe from the mod to prevent it downloading again.
+
+You can install mods from sites like Nexus using the manual download option if they only include a .esm file and (optionally) one or more .ba2 archives.
+Use the Preview file contents option on Nexus to check.
 
 For keyboard shortcuts see Help->Shortcut keys.
 

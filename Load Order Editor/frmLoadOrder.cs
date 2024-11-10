@@ -961,28 +961,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     SwitchProfile(OpenPlugins.FileName);
         }
 
-        private void toolStripMenuAdd_Click(object sender, EventArgs e)
-        {
-            string GameData;
-
-            GameData = Properties.Settings.Default.StarfieldGamePath + "\\Data";
-            OpenFileDialog GetMod = new()
-            {
-                Filter = "esm File|*.esm",
-                Title = "Select mod",
-                InitialDirectory = GameData
-            };
-
-            DialogResult result = GetMod.ShowDialog();
-            if (DialogResult.OK == result)
-            {
-                GameData = GetMod.FileName[GetMod.FileName.LastIndexOf('\\')..];
-                dataGridView1.Rows.Add(true, GameData[1..]);
-                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
-                isModified = true;
-            }
-        }
-
         private void DeleteLine()
         {
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
