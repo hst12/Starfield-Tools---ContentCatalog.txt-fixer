@@ -47,7 +47,7 @@
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(richTextBox1);
             Name = "frmProfileCompare";
-            Text = "Profile Comparison";
+            Text = "Profile Changes";
             ResumeLayout(false);
         }
 

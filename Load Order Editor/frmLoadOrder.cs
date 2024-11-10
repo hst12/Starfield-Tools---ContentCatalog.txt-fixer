@@ -894,9 +894,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void SwitchProfile(string ProfileName)
         {
-            //var CurrentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
-            //var NewProfile = File.ReadAllLines(ProfileName).ToList();
-            var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
+            /*var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
             var newProfile = File.ReadAllLines(ProfileName).ToList();
 
             if (Properties.Settings.Default.CompareProfiles)
@@ -905,14 +903,32 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                            .Concat(currentProfile.Except(newProfile))
                                            .Where(s => s.StartsWith("*"))
                                            .Select(s => s.Replace("*", string.Empty).Replace("#", string.Empty))
-                                           .ToList();
+                                           .ToList();*/
 
-                if (Difference.Count > 0)
-                {
-                    Form fpc = new frmProfileCompare(Difference);
-                    fpc.Show();
-                }
+            var currentProfile = File.ReadAllLines(Tools.StarfieldAppData + "\\Plugins.txt").ToList();
+            var newProfile = File.ReadAllLines(ProfileName).ToList();
+
+            var Difference = newProfile.Except(currentProfile)
+                                       .Where(s => s.StartsWith("*"))
+                                       .Select(s => $"New Profile: {s.Replace("*", string.Empty).Replace("#", string.Empty)}")
+                                       .Concat(currentProfile.Except(newProfile)
+                                       .Where(s => s.StartsWith("*"))
+                                       .Select(s => $"Previous Profile: {s.Replace("*", string.Empty).Replace("#", string.Empty)}"))
+                                       .ToList();
+
+            // Display the differences
+            foreach (var diff in Difference)
+            {
+                Console.WriteLine(diff);
             }
+
+
+            if (Difference.Count > 0)
+            {
+                Form fpc = new frmProfileCompare(Difference);
+                fpc.Show();
+            }
+            //}
 
             try
             {
@@ -1139,9 +1155,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (addedMods != 0 || removedMods != 0)
             {
                 SavePlugins();
-                /*if (Profiles)
-                    SaveLO(Properties.Settings.Default.ProfileFolder + "\\" + cmbProfile.Text); // Save profile as well
-                InitDataGrid();*/
                 isModified = false;
 
                 if (AutoSort)
@@ -1919,12 +1932,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 GameVersion = 2;
                 Properties.Settings.Default.GameVersion = GameVersion;
             }
-            else
-            {
-                toolStripMenuSteam.Checked = false;
-                toolStripMenuMS.Checked = false;
-                gameVersionSFSEToolStripMenuItem.Checked = false;
-            }
+            toolStripMenuSteam.Checked = false;
+            toolStripMenuMS.Checked = false;
+            gameVersionSFSEToolStripMenuItem.Checked = false;
+
 
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
