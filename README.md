@@ -1,14 +1,27 @@
 This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor.
+
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
+If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
 
-This version is compatible with the Shattered Space expansion.
+What it does:
+Re-order mods by using hot keys (WASD) or drag and drop.
+Enable/Disable mods
+Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile
+Install mods (loose files not supported)
+Un-install mods (loose files not supported)
+View the mod page on the Creations web site
+Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed
+Acts as a game launcher once you've made your load order edits and you can select between the Steam, MS Store or SFSE flavours of the game.
 
-It seems like the Starfield vehicle update has fixed the Contentcatalog.txt bug, at least on my side so far.
-The tool may be of use for save games made before the vehicle update when trying to open the in-game Creations menu.
+What it doesn't do:
+Let you like/unlike a mod - you'll have to go to the in-game load order tool for that.
+Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site for that
 
-For keyboard shortcuts see Help->Shortcut keys
+For keyboard shortcuts see Help->Shortcut keys.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
+
+The rest of the readme pertains mostly to the catalog fixer function which isn't really needed any more unless you have an old save game you want to check.
 
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.
 This tool is intended to repair and then automatically perform a backup/restore of the catalog file.
@@ -16,11 +29,6 @@ You could simply delete the catalog file and have the game rebuild it, but that 
 
 To install, extract the zip file and run the msi installer. Un-install any version before running the new installer.
 The tool can be un-installed from the usual Windows settings menu or by re-running the installer.
-
-Alternate installation using Winget:
-winget source update
-winget install hst.Starfieldtools
-
 
 Enable all the checkboxes under Auto Functions except for Force Clean to have the tool work automatically. This is the default.
 Force clean is an experimental option to make the tool run a cleaning process even if it considers the catalog to be ok. Force clean should be off for normal use.
@@ -45,7 +53,6 @@ These functions are on by default and the tool will automatically decide what ac
 
 You can skip reading from here on or keep going for more detail.
 
-
 Overview of buttons:
 Check button re-checks the file.
 
@@ -67,7 +74,8 @@ Load Order button shows a list of mods and allows them to be turned on or off or
 There is a somewhat experimental mod profile switching feature in the load order editor. Backup your Plugins.txt file before trying it.
 A one-time only automatic backup of your Plugins.txt file is made the first time you open the load editor. Use the File->restore menu to restore this backup if necessary.
 
-Two Starfield launch buttons are provided. One for the Steam version of the game and another for the MS Store version. The tool will close after using either of these launch buttons.
+The tool can be used to launch Starfield. Click one of the radio buttons to choose either the Steam or MS versions of the game first.
+The tool will close a few seconds after launching the game.
 You can also launch the game from within the Load Order Editor. Set the game version in the Tools menu first - it defaults to Steam.
 
 Command line options - not case sensitive:
