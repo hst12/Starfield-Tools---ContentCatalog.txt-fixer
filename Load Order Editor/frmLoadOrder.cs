@@ -23,7 +23,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile;
 
-        bool Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false,isModified=false;
+        bool Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false;
 
         public frmLoadOrder(string parameter)
         {
@@ -1496,14 +1496,15 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             if (isModified)
             {
-                DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                /*DialogResult = MessageBox.Show("Load order is modified. Cancel and save changes first or press OK to load game without saving", "Launch Game", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (DialogResult == DialogResult.OK)
                     result = Tools.StartGame(GameVersion);
                 else
-                    result = false;
+                    result = false;*/
+                SavePlugins();
             }
-            else
-                result = Tools.StartGame(GameVersion);
+            //else
+            result = Tools.StartGame(GameVersion);
 
             if (!result)
             {
