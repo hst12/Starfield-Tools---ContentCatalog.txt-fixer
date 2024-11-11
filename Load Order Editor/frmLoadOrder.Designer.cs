@@ -145,6 +145,9 @@
             autoSortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             compareProfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+            enableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            disableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuRun = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
@@ -909,7 +912,7 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, compareProfilesToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, compareProfilesToolStripMenuItem, toolStripSeparator28, enableAllToolStripMenuItem, disableAllToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -1066,6 +1069,25 @@
             compareProfilesToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             compareProfilesToolStripMenuItem.Text = "Show Profile Changes";
             compareProfilesToolStripMenuItem.Click += compareProfilesToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator28
+            // 
+            toolStripSeparator28.Name = "toolStripSeparator28";
+            toolStripSeparator28.Size = new System.Drawing.Size(404, 6);
+            // 
+            // enableAllToolStripMenuItem
+            // 
+            enableAllToolStripMenuItem.Name = "enableAllToolStripMenuItem";
+            enableAllToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
+            enableAllToolStripMenuItem.Text = "Enable All Settings";
+            enableAllToolStripMenuItem.Click += enableAllToolStripMenuItem_Click;
+            // 
+            // disableAllToolStripMenuItem
+            // 
+            disableAllToolStripMenuItem.Name = "disableAllToolStripMenuItem";
+            disableAllToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
+            disableAllToolStripMenuItem.Text = "Disable All Settings";
+            disableAllToolStripMenuItem.Click += disableAllToolStripMenuItem_Click;
             // 
             // toolStripMenuGame
             // 
@@ -1868,5 +1890,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAutoDelccc;
         private System.Windows.Forms.ToolStripMenuItem resetToVanillaStarfieldSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripMenuItem enableAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disableAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
     }
 }

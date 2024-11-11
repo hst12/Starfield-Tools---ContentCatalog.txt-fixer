@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -29,7 +30,9 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-            Tools.CheckGame();
+            Tools.CheckGame(); // Exit if Starfield appdata folder not found
+
+            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -38,10 +41,6 @@ namespace Starfield_Tools
             this.StartPosition = FormStartPosition.CenterScreen;
 
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
-            toolStripMenuInstall.Enabled = true;
-            toolStripMenuUninstall.Enabled = true;
-
-            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
 
             menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
             this.Font = Properties.Settings.Default.FontSize;
@@ -73,7 +72,6 @@ namespace Starfield_Tools
                 case 3:
                     gameVersionSFSEToolStripMenuItem.Checked = true;
                     break;
-
             }
             GameVersionDisplay();
 
@@ -111,22 +109,7 @@ namespace Starfield_Tools
                     Properties.Settings.Default.LooseFiles = false;
             }
 
-            if (Properties.Settings.Default.LooseFiles)
-            {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
-                LooseFiles = true;
-                sbarCCC("Loose files enabled");
-            }
-            else
-            {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
-                LooseFiles = false;
-                sbarCCC("Loose files disabled");
-            }
-
             // Setup other preferences
-
-            compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
 
             switch (Properties.Settings.Default.DarkMode)
             {
@@ -154,39 +137,7 @@ namespace Starfield_Tools
                     break;
             }
 
-            if (Properties.Settings.Default.AutoSort)
-            {
-                autoSortToolStripMenuItem.Checked = true;
-                AutoSort = true;
-            }
-            else
-            {
-                autoSortToolStripMenuItem.Checked = false;
-                AutoSort = false;
-            }
-
-            if (Properties.Settings.Default.ActiveOnly)
-            {
-                activeOnlyToolStripMenuItem.Checked = true;
-                ActiveOnly = true;
-            }
-            else
-            {
-                activeOnlyToolStripMenuItem.Checked = false;
-                ActiveOnly = false;
-            }
-            ActiveOnlyButtonSet();
-
-            if (Properties.Settings.Default.AutoUpdate)
-            {
-                autoUpdateModsToolStripMenuItem.Checked = true;
-                AutoUpdate = true;
-            }
-            else
-            {
-                autoUpdateModsToolStripMenuItem.Checked = false;
-                AutoUpdate = false;
-            }
+            SetMenus();
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             sbar4(StarfieldTools.CatalogStatus);
@@ -210,14 +161,43 @@ namespace Starfield_Tools
                 AddRemove();
 
             if (Properties.Settings.Default.AutoReset)
-            {
-                autoResetToolStripMenuItem.Checked = true;
                 ResetDefaults();
-            }
 
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif
+        }
+
+        private void SetMenus()
+        {
+            toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProfileOn;
+            compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
+
+            LooseFiles = Properties.Settings.Default.LooseFiles;
+            if (LooseFiles)
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                sbarCCC("Loose files enabled");
+            }
+            else
+            {
+                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                sbarCCC("Loose files disabled");
+            }
+
+            autoSortToolStripMenuItem.Checked = Properties.Settings.Default.AutoSort;
+            AutoSort = Properties.Settings.Default.AutoSort;
+
+            activeOnlyToolStripMenuItem.Checked = Properties.Settings.Default.ActiveOnly;
+            ActiveOnly = Properties.Settings.Default.ActiveOnly;
+            ActiveOnlyButtonSet();
+
+            autoUpdateModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoUpdate;
+            AutoUpdate = Properties.Settings.Default.AutoUpdate;
+
+            toolStripMenuAutoDelccc.Checked = Properties.Settings.Default.AutoDelccc;
+
+            autoResetToolStripMenuItem.Checked = Properties.Settings.Default.AutoReset;
         }
 
         private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
@@ -285,7 +265,7 @@ namespace Starfield_Tools
             dataGridView1.Refresh();
 
             string jsonFilePath = Tools.GetCatalog();
-            string json = System.IO.File.ReadAllText(jsonFilePath); // Read catalog
+            string json = File.ReadAllText(jsonFilePath); // Read catalog
 
             Tools.Configuration Groups = new();
             Tools.Configuration Url = new();
@@ -921,7 +901,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             {
                 Console.WriteLine(diff);
             }
-
 
             if (Difference.Count > 0)
             {
@@ -1936,7 +1915,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             toolStripMenuMS.Checked = false;
             gameVersionSFSEToolStripMenuItem.Checked = false;
 
-
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
         }
@@ -2502,13 +2480,18 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             if (File.Exists(filePath))
             {
+                ChangeCount += UndoVortexChanges(false);
+
                 var lines = File.ReadAllLines(filePath).ToList();
                 if (lines.Contains("bInvalidateOlderFiles=1"))
+                {
                     LooseFilesOnOff(false);
+                    ChangeCount++;
+                }
 
                 if (Delccc())
                     ChangeCount++;
-                ChangeCount += UndoVortexChanges(false);
+
                 if (ResetStarfieldCustomINI(false))
                     ChangeCount++;
                 if (ChangeCount > 0)
@@ -2565,6 +2548,43 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             if (tools.ConfirmAction("Reset ini settings?", "Reset to vanilla defaults"))
                 ResetDefaults();
+        }
+
+        private void ChangeSettings(bool NewSetting)
+        {
+            Properties.Settings.Default.ProfileOn = NewSetting;
+            Profiles = NewSetting;
+
+            Properties.Settings.Default.LooseFiles = NewSetting;
+            LooseFiles = NewSetting;
+            sbarCCC("Loose files disabled");
+
+            Properties.Settings.Default.AutoSort = NewSetting;
+            AutoSort = NewSetting;
+
+            Properties.Settings.Default.ActiveOnly = NewSetting;
+            ActiveOnly = NewSetting;
+            ActiveOnlyButtonSet();
+
+            AutoUpdate = Properties.Settings.Default.AutoUpdate;
+            Properties.Settings.Default.AutoUpdate = NewSetting;
+
+            Properties.Settings.Default.AutoReset = NewSetting;
+            Properties.Settings.Default.AutoDelccc = NewSetting;
+
+            Properties.Settings.Default.CompareProfiles = NewSetting;
+
+            SaveSettings();
+            SetMenus();
+        }
+        private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeSettings(true);
+        }
+
+        private void disableAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeSettings(false);
         }
     }
 }
