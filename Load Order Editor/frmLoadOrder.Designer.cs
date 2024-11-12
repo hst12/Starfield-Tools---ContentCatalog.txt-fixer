@@ -1500,7 +1500,7 @@
             btnQuit.AutoSize = true;
             btnQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnQuit.Dock = System.Windows.Forms.DockStyle.Left;
-            btnQuit.Location = new System.Drawing.Point(1601, 2);
+            btnQuit.Location = new System.Drawing.Point(1651, 2);
             btnQuit.Margin = new System.Windows.Forms.Padding(2);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(61, 46);
@@ -1515,7 +1515,7 @@
             btnCancel.AutoSize = true;
             btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnCancel.Dock = System.Windows.Forms.DockStyle.Left;
-            btnCancel.Location = new System.Drawing.Point(1502, 2);
+            btnCancel.Location = new System.Drawing.Point(1552, 2);
             btnCancel.Margin = new System.Windows.Forms.Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(95, 46);
@@ -1530,7 +1530,7 @@
             btnRun.AutoSize = true;
             btnRun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnRun.Dock = System.Windows.Forms.DockStyle.Left;
-            btnRun.Location = new System.Drawing.Point(1432, 2);
+            btnRun.Location = new System.Drawing.Point(1482, 2);
             btnRun.Margin = new System.Windows.Forms.Padding(2);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(66, 46);
@@ -1545,7 +1545,7 @@
             btnCheckCatalog.AutoSize = true;
             btnCheckCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnCheckCatalog.Dock = System.Windows.Forms.DockStyle.Left;
-            btnCheckCatalog.Location = new System.Drawing.Point(1323, 2);
+            btnCheckCatalog.Location = new System.Drawing.Point(1373, 2);
             btnCheckCatalog.Margin = new System.Windows.Forms.Padding(2);
             btnCheckCatalog.Name = "btnCheckCatalog";
             btnCheckCatalog.Size = new System.Drawing.Size(105, 46);
@@ -1560,7 +1560,7 @@
             btnLoot.AutoSize = true;
             btnLoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnLoot.Dock = System.Windows.Forms.DockStyle.Left;
-            btnLoot.Location = new System.Drawing.Point(1204, 2);
+            btnLoot.Location = new System.Drawing.Point(1254, 2);
             btnLoot.Margin = new System.Windows.Forms.Padding(2);
             btnLoot.Name = "btnLoot";
             btnLoot.Size = new System.Drawing.Size(115, 46);
@@ -1575,7 +1575,7 @@
             btnUpdate.AutoSize = true;
             btnUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnUpdate.Dock = System.Windows.Forms.DockStyle.Left;
-            btnUpdate.Location = new System.Drawing.Point(1099, 2);
+            btnUpdate.Location = new System.Drawing.Point(1149, 2);
             btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(101, 46);
@@ -1590,7 +1590,7 @@
             btnRefresh.AutoSize = true;
             btnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
-            btnRefresh.Location = new System.Drawing.Point(992, 2);
+            btnRefresh.Location = new System.Drawing.Point(1042, 2);
             btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new System.Drawing.Size(103, 46);
@@ -1672,9 +1672,9 @@
             btnActiveOnly.Location = new System.Drawing.Point(870, 2);
             btnActiveOnly.Margin = new System.Windows.Forms.Padding(2);
             btnActiveOnly.Name = "btnActiveOnly";
-            btnActiveOnly.Size = new System.Drawing.Size(118, 46);
+            btnActiveOnly.Size = new System.Drawing.Size(168, 46);
             btnActiveOnly.TabIndex = 19;
-            btnActiveOnly.Text = "All Mods";
+            btnActiveOnly.Text = "Toggle Active";
             toolTip1.SetToolTip(btnActiveOnly, "Show all or show active mods only");
             btnActiveOnly.UseVisualStyleBackColor = true;
             btnActiveOnly.Click += btnActiveOnly_Click;

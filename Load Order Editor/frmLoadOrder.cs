@@ -190,7 +190,7 @@ namespace Starfield_Tools
 
             activeOnlyToolStripMenuItem.Checked = Properties.Settings.Default.ActiveOnly;
             ActiveOnly = Properties.Settings.Default.ActiveOnly;
-            ActiveOnlyButtonSet();
+            
 
             autoUpdateModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoUpdate;
             AutoUpdate = Properties.Settings.Default.AutoUpdate;
@@ -2281,14 +2281,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
         }
 
-        private void ActiveOnlyButtonSet()
-        {
-            if (ActiveOnly)
-                btnActiveOnly.Text = "Active Only";
-            else
-                btnActiveOnly.Text = "All Mods";
-        }
-
         private void ActiveOnlyToggle()
         {
             activeOnlyToolStripMenuItem.Checked = !activeOnlyToolStripMenuItem.Checked;
@@ -2307,7 +2299,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                         dataGridView1.Rows[i].Visible = false;
                 sbar4("Active mods only");
             }
-            ActiveOnlyButtonSet();
         }
         private void activeOnlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
