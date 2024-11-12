@@ -1245,6 +1245,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                 AddMissing();
                 SavePlugins();
+                if (Directory.Exists(ExtractPath)) // Clean up any left over files
+                    Directory.Delete(ExtractPath, true);
                 //sbar3("Mod installed");
             }
         }
