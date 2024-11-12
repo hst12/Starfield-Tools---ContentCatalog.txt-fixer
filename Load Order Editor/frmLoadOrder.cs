@@ -890,10 +890,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             var Difference = newProfile.Except(currentProfile)
                                        .Where(s => s.StartsWith("*"))
-                                       .Select(s => $"New Profile: {s.Replace("*", string.Empty).Replace("#", string.Empty)}")
+                                       .Select(s => $"New Profile added: {s.Replace("*", string.Empty).Replace("#", string.Empty)}")
                                        .Concat(currentProfile.Except(newProfile)
                                        .Where(s => s.StartsWith("*"))
-                                       .Select(s => $"Previous Profile: {s.Replace("*", string.Empty).Replace("#", string.Empty)}"))
+                                       .Select(s => $"Previous Profile removed: {s.Replace("*", string.Empty).Replace("#", string.Empty)}"))
                                        .ToList();
 
             // Display the differences
@@ -2555,16 +2555,16 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             Properties.Settings.Default.ProfileOn = NewSetting;
             Profiles = NewSetting;
 
-            Properties.Settings.Default.LooseFiles = NewSetting;
+            /*Properties.Settings.Default.LooseFiles = NewSetting;
             LooseFiles = NewSetting;
-            sbarCCC("Loose files disabled");
+            sbarCCC("Loose files disabled");*/
 
             Properties.Settings.Default.AutoSort = NewSetting;
             AutoSort = NewSetting;
 
-            Properties.Settings.Default.ActiveOnly = NewSetting;
+            /*Properties.Settings.Default.ActiveOnly = NewSetting;
             ActiveOnly = NewSetting;
-            ActiveOnlyButtonSet();
+            ActiveOnlyButtonSet();*/
 
             AutoUpdate = Properties.Settings.Default.AutoUpdate;
             Properties.Settings.Default.AutoUpdate = NewSetting;
@@ -2576,15 +2576,25 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             SaveSettings();
             SetMenus();
+            //InitDataGrid();
         }
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeSettings(true);
+            /*LooseFiles = false;
+            LooseFilesOnOff(false);
+            LooseFilesMenuUpdate();*/
         }
 
         private void disableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeSettings(false);
+        }
+
+        private void uIToEditStarfieldCustominiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStarfieldCustomINI fci = new();
+            fci.Show();
         }
     }
 }
