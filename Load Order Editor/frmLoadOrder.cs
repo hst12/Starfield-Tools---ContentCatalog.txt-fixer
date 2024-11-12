@@ -2554,6 +2554,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             Properties.Settings.Default.ProfileOn = NewSetting;
             Profiles = NewSetting;
+            chkProfile.Checked = NewSetting;
 
             /*Properties.Settings.Default.LooseFiles = NewSetting;
             LooseFiles = NewSetting;
