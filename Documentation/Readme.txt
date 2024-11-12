@@ -1,9 +1,18 @@
-This tool checks ContentCatalog.txt file automatically when launched and provides a basic load order editor.
+This tool provides a basic load order editor. and checks ContentCatalog.txt file automatically when launched.
 
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
 
-What it does:
+The tool works the same way with mods as the game does. A Plugins.txt file contains a list of your mods. The order of the lines in Plugins.txt determines the load order.
+The tool doesn't require the use of any .ini edits, folder junctions or virtual folders.
+The tool doesn't need to be running if you use it to launch the game. It will automatically quit a few seconds after launching the game.
+Creations mods and mods that are packaged in a format compatible with Creations are automatically recognised and you can adjust load order or enable/disable mods.
+The tool can be used to edit a Creations load order while your PC is offline.
+
+Loose file mods are not supported for installation, however you can use Vortex to install such mods.
+Altenatively if you have the Creation Kit installed, many mods can be converted into .esm/.ba2 files packages that are compatible with pretty much any mod manager.
+
+What this tool does:
 Re-order mods by using hot keys (WASD) or drag and drop.
 Enable/Disable mods. Disabling a mod keeps the mod files on your system but the game won't load the mod.
 Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile.
@@ -16,9 +25,9 @@ Acts as a game launcher once you've made your load order edits and you can selec
 
 What it doesn't do for Creations mods:
 Like/unlike a mod - you'll have to go to the in-game load order tool for that.
-Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site for that. Select a mod, right-click and choose View Web Site.
+Subscribe/unsubscribe/bookmark a mod - you have to go to the Creations web site or in-game Creations menu for that. Select a mod, right-click and choose View Web Site.
 Updating mods - you'll have to do this in the Creations menu in game.
-You can un-install a Creations mod from this app but you still need to visit the Crations web site and un-subscribe from the mod to prevent it downloading again.
+You can un-install a Creations mod from this app but you still need to visit the Creations web site and un-subscribe from the mod to prevent it downloading again.
 Some Creations mods apparently can't be un-subscribed from. This is a bug with some mods that Bethesda seems to fix from time to time.
 
 Its a good idea to exit the game when you are done in the Creations menu and run the tool to review and adjust your load order if necessary before loading a saved game.
@@ -26,8 +35,8 @@ Its a good idea to exit the game when you are done in the Creations menu and run
 If you have LOOT installed and configured with groups, press the Autosort button to sort your load order automatically after making changes in the in-game Creations menu.
 
 You can install mods from sites like Nexus using the manual download option if they only include a .esm file and (optionally) one or more .ba2 archives.
-Use the Preview file contents option on Nexus to check.
-Right-click anywhere on the mod list and choose Install or Click the Mods menu then Install mod. Most file archive types are recognised.
+Use the Preview file contents option on Nexus to check how the mod has been packaged.
+To install a new mod right-click anywhere on the mod list and choose Install or click the Mods menu then Install mod. Most file archive types are recognised.
 
 For keyboard shortcuts see Help->Shortcut keys.
 
