@@ -30,8 +30,8 @@
         {
             btnOK = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
-            ckhLooseFiles = new System.Windows.Forms.CheckBox();
-            ckhMOD = new System.Windows.Forms.CheckBox();
+            chkLooseFiles = new System.Windows.Forms.CheckBox();
+            chkMOTD = new System.Windows.Forms.CheckBox();
             ckhPapyrusLogging = new System.Windows.Forms.CheckBox();
             chkUserPhotos = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,6 +49,7 @@
             btnOK.TabIndex = 0;
             btnOK.Text = "OK";
             btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
             // btnCancel
             // 
@@ -61,25 +62,25 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
-            // ckhLooseFiles
+            // chkLooseFiles
             // 
-            ckhLooseFiles.AutoSize = true;
-            ckhLooseFiles.Location = new System.Drawing.Point(12, 12);
-            ckhLooseFiles.Name = "ckhLooseFiles";
-            ckhLooseFiles.Size = new System.Drawing.Size(162, 36);
-            ckhLooseFiles.TabIndex = 2;
-            ckhLooseFiles.Text = "Loose Files";
-            ckhLooseFiles.UseVisualStyleBackColor = true;
+            chkLooseFiles.AutoSize = true;
+            chkLooseFiles.Location = new System.Drawing.Point(12, 12);
+            chkLooseFiles.Name = "chkLooseFiles";
+            chkLooseFiles.Size = new System.Drawing.Size(162, 36);
+            chkLooseFiles.TabIndex = 2;
+            chkLooseFiles.Text = "Loose Files";
+            chkLooseFiles.UseVisualStyleBackColor = true;
             // 
-            // ckhMOD
+            // chkMOTD
             // 
-            ckhMOD.AutoSize = true;
-            ckhMOD.Location = new System.Drawing.Point(12, 54);
-            ckhMOD.Name = "ckhMOD";
-            ckhMOD.Size = new System.Drawing.Size(259, 36);
-            ckhMOD.TabIndex = 3;
-            ckhMOD.Text = "Message of the Day";
-            ckhMOD.UseVisualStyleBackColor = true;
+            chkMOTD.AutoSize = true;
+            chkMOTD.Location = new System.Drawing.Point(12, 54);
+            chkMOTD.Name = "chkMOTD";
+            chkMOTD.Size = new System.Drawing.Size(259, 36);
+            chkMOTD.TabIndex = 3;
+            chkMOTD.Text = "Message of the Day";
+            chkMOTD.UseVisualStyleBackColor = true;
             // 
             // ckhPapyrusLogging
             // 
@@ -126,7 +127,6 @@
             chkSkipIntro.TabIndex = 7;
             chkSkipIntro.Text = "Skip Intro";
             chkSkipIntro.UseVisualStyleBackColor = true;
-            chkSkipIntro.CheckedChanged += chkSkipIntro_CheckedChanged;
             // 
             // chkMainMenuDelay
             // 
@@ -148,8 +148,8 @@
             Controls.Add(tableLayoutPanel1);
             Controls.Add(chkUserPhotos);
             Controls.Add(ckhPapyrusLogging);
-            Controls.Add(ckhMOD);
-            Controls.Add(ckhLooseFiles);
+            Controls.Add(chkMOTD);
+            Controls.Add(chkLooseFiles);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmStarfieldCustomINI";
@@ -163,8 +163,8 @@
 
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox ckhLooseFiles;
-        private System.Windows.Forms.CheckBox ckhMOD;
+        private System.Windows.Forms.CheckBox chkLooseFiles;
+        private System.Windows.Forms.CheckBox chkMOTD;
         private System.Windows.Forms.CheckBox ckhPapyrusLogging;
         private System.Windows.Forms.CheckBox chkUserPhotos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

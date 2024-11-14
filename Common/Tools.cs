@@ -270,10 +270,18 @@ namespace Starfield_Tools.Common
         public static bool StartStarfieldMS()
         {
             string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
+            cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\Starfield.exe";
 
             try
             {
-                Process.Start(cmdLine);
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = cmdLine,
+                    WorkingDirectory = Properties.Settings.Default.StarfieldGamePath,
+                    UseShellExecute = false //
+                };
+                Process.Start(startInfo);
+
                 return true;
             }
             catch (Exception ex)
@@ -323,7 +331,7 @@ namespace Starfield_Tools.Common
             }
         }
 
-        public bool ConfirmAction(string ActionText, string ActionTitle) // Return true for OK, false for cancel
+        public static bool ConfirmAction(string ActionText, string ActionTitle) // Return true for OK, false for cancel
         {
             DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
