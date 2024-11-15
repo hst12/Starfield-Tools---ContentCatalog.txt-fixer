@@ -38,6 +38,18 @@ You can install mods from sites like Nexus using the manual download option if t
 Use the Preview file contents option on Nexus to check how the mod has been packaged.
 To install a new mod right-click anywhere on the mod list and choose Install or click the Mods menu then Install mod. Most file archive types are recognised.
 
+How to switch between Steam and MS Store versions of the game if you have both installed:
+Locate the directory that has the Starfield.exe file
+For example on my PC:
+Steam installation
+E:\SteamLibrary\steamapps\common\Starfield
+MS Store intallation
+F:\XboxGames\Starfield\Content
+Use the Game-Game Version menu to select the game to run or configure.
+Use the Tools->Starfield path menu option to set the path for each version of the game. The path setting only needs to be done once for either version of the game.
+Note that the game will silently overwrite your Plugins.txt file based upon what mods you have installed for each version of the game.
+You can work around this by using the profile feature in the app.
+
 For keyboard shortcuts see Help->Shortcut keys.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
