@@ -240,7 +240,7 @@
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new System.Drawing.Size(1770, 689);
+            dataGridView1.Size = new System.Drawing.Size(1770, 709);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
@@ -486,47 +486,46 @@
             // 
             statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusStats, toolStripStatusDelCCC, toolStripStatusSecondary, toolStripStatusTertiary, toolStripStatusLabel4, toolStripStatusLabel5 });
-            statusStrip1.Location = new System.Drawing.Point(0, 787);
+            statusStrip1.Location = new System.Drawing.Point(0, 807);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
-            statusStrip1.Size = new System.Drawing.Size(1774, 42);
+            statusStrip1.Size = new System.Drawing.Size(1774, 22);
             statusStrip1.TabIndex = 5;
             statusStrip1.Text = "Starting up";
             // 
             // toolStripStatusStats
             // 
             toolStripStatusStats.Name = "toolStripStatusStats";
-            toolStripStatusStats.Size = new System.Drawing.Size(131, 32);
-            toolStripStatusStats.Text = "Starting up";
+            toolStripStatusStats.Size = new System.Drawing.Size(0, 0);
             // 
             // toolStripStatusDelCCC
             // 
             toolStripStatusDelCCC.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
             toolStripStatusDelCCC.Name = "toolStripStatusDelCCC";
-            toolStripStatusDelCCC.Size = new System.Drawing.Size(0, 32);
+            toolStripStatusDelCCC.Size = new System.Drawing.Size(0, 12);
             // 
             // toolStripStatusSecondary
             // 
             toolStripStatusSecondary.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
             toolStripStatusSecondary.Name = "toolStripStatusSecondary";
-            toolStripStatusSecondary.Size = new System.Drawing.Size(0, 32);
+            toolStripStatusSecondary.Size = new System.Drawing.Size(0, 12);
             // 
             // toolStripStatusTertiary
             // 
             toolStripStatusTertiary.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
             toolStripStatusTertiary.Name = "toolStripStatusTertiary";
-            toolStripStatusTertiary.Size = new System.Drawing.Size(0, 32);
+            toolStripStatusTertiary.Size = new System.Drawing.Size(0, 12);
             // 
             // toolStripStatusLabel4
             // 
             toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(50, 6, 0, 4);
             toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            toolStripStatusLabel4.Size = new System.Drawing.Size(0, 32);
+            toolStripStatusLabel4.Size = new System.Drawing.Size(0, 12);
             // 
             // toolStripStatusLabel5
             // 
             toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            toolStripStatusLabel5.Size = new System.Drawing.Size(0, 32);
+            toolStripStatusLabel5.Size = new System.Drawing.Size(0, 12);
             // 
             // tableLayoutPanel1
             // 
@@ -545,7 +544,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1774, 787);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1774, 807);
             tableLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
@@ -1422,7 +1421,7 @@
             tableLayoutPanel2.Controls.Add(label1, 4, 0);
             tableLayoutPanel2.Controls.Add(btnActiveOnly, 9, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(2, 735);
+            tableLayoutPanel2.Location = new System.Drawing.Point(2, 755);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;

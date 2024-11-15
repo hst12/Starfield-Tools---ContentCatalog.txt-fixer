@@ -48,8 +48,11 @@ namespace Starfield_Tools
             menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
             this.Font = Properties.Settings.Default.FontSize;
 
-            StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             GameVersion = Properties.Settings.Default.GameVersion;
+            if (GameVersion != MS)
+                StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+            else
+                StarfieldGamePath = Properties.Settings.Default.GamePathMS;
 
             if (Properties.Settings.Default.AutoDelccc)
             {
@@ -352,6 +355,7 @@ Click File->Restore if you have a backup of your Plugins.txt file
 Alternatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
                 using StreamWriter writer = new(loText);
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
+                sbar("");
                 return;
 
             }
@@ -464,7 +468,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             // Get mod stats
             try
             {
-                directory = Properties.Settings.Default.StarfieldGamePath + @"\Data";
+                directory = StarfieldGamePath + @"\Data";
 
                 foreach (string file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
                 {
@@ -1005,7 +1009,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             List<string> BethFiles = tools.BethFiles;
             // Exclude game files - will probably need updating after updates
 
-            string directory = Properties.Settings.Default.StarfieldGamePath;
+            string directory = StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
             directory += @"\Data";
@@ -1057,7 +1061,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             List<string> PluginFiles = [];
             List<string> FilesToRemove = [];
 
-            string directory = Properties.Settings.Default.StarfieldGamePath;
+            string directory = StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
             directory += @"\Data";
@@ -1469,9 +1473,11 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
-            bool result;
             Form SS = new frmSplashScreen();
-            SS.Show();
+            if (GameVersion != MS)
+                SS.Show();
+            bool result;
+
 
             if (isModified)
                 SavePlugins();
@@ -1601,6 +1607,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             bool ProfilesActive = Profiles;
             int i, j;
+            string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine;
+            if (GameVersion != MS)
+                cmdLine = "--game Starfield";
+            else
+                cmdLine = cmdLine = "--game \"Starfield (MS Store)\"";
+
             if (ProfilesActive)
             {
                 Profiles = false;
@@ -1608,7 +1620,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 chkProfile.Checked = false;
             }
 
-            string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine = "--game Starfield";
             if (LOOTPath == "")
             {
                 if (!SetLOOTPath())
@@ -1887,16 +1898,15 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             toolStripMenuCustom.Checked = !toolStripMenuCustom.Checked;
             if (toolStripMenuCustom.Checked)
             {
-                sbar2("Game version set to Custom");
                 GameVersion = Custom;
-                Properties.Settings.Default.GameVersion = GameVersion;
-            }
-            toolStripMenuSteam.Checked = false;
-            toolStripMenuMS.Checked = false;
-            gameVersionSFSEToolStripMenuItem.Checked = false;
+                UpdateGameVersion("Custom");
+                toolStripMenuSteam.Checked = false;
+                toolStripMenuMS.Checked = false;
+                gameVersionSFSEToolStripMenuItem.Checked = false;
 
-            Properties.Settings.Default.GameVersion = GameVersion;
-            SaveSettings();
+                Properties.Settings.Default.GameVersion = GameVersion;
+                SaveSettings();
+            }
         }
 
         private void toolStripMenuRunCustom_Click(object sender, EventArgs e)
@@ -2017,9 +2027,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 toolStripMenuMS.Checked = false;
                 toolStripMenuCustom.Checked = false;
                 gameVersionSFSEToolStripMenuItem.Checked = false;
-                GameVersion = 0;
-                sbar2("Game version set to Steam");
-                Properties.Settings.Default.GameVersion = GameVersion;
+                GameVersion = Steam;
+                UpdateGameVersion("Steam");
             }
         }
 
@@ -2032,8 +2041,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 toolStripMenuCustom.Checked = false;
                 gameVersionSFSEToolStripMenuItem.Checked = false;
                 GameVersion = MS;
-                sbar2("Game version set to MS");
-                Properties.Settings.Default.GameVersion = GameVersion;
+                UpdateGameVersion("MS");
             }
         }
 
@@ -2226,8 +2234,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     toolStripMenuCustom.Checked = false;
 
                     GameVersion = SFSE;
-                    sbar2("Game version set to SFSE");
-                    Properties.Settings.Default.GameVersion = GameVersion;
+                    UpdateGameVersion("SFSE");
                 }
             }
             else
@@ -2494,7 +2501,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             const string subkey = @"Software\Valve\Steam";
             const string keyName = userRoot + "\\" + subkey;
 
-            string executable = Properties.Settings.Default.StarfieldGamePath;
+            string executable = StarfieldGamePath;
             if (executable != null)
             {
                 try
@@ -2557,6 +2564,18 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             frmStarfieldCustomINI fci = new();
             fci.Show();
+        }
+
+        private void UpdateGameVersion(string gameVersion)
+        {
+            Properties.Settings.Default.GameVersion = GameVersion;
+            SaveSettings();
+            if (GameVersion != MS)
+                StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+            else
+                StarfieldGamePath = Properties.Settings.Default.GamePathMS;
+            RefreshDataGrid();
+            sbar2("Game version set to " + gameVersion);
         }
     }
 }
