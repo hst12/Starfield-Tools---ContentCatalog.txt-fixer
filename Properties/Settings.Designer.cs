@@ -428,5 +428,17 @@ namespace Starfield_Tools.Properties {
                 this["AutoReset"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GamePathMS {
+            get {
+                return ((string)(this["GamePathMS"]));
+            }
+            set {
+                this["GamePathMS"] = value;
+            }
+        }
     }
 }

@@ -12,11 +12,13 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
+        
         public static string CommonFolder { get; set; }
 
         public static string DocumentationFolder { get; set; }
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
+        public string StarfieldGamePathMS { get; set; }
         public List<string> BethFiles { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
@@ -212,8 +214,17 @@ namespace Starfield_Tools.Common
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                StarfieldGamePath = selectedFolderPath;
-                Settings.Default.StarfieldGamePath = selectedFolderPath;
+                if (Properties.Settings.Default.GameVersion!=frmLoadOrder.MS)
+                {
+                    StarfieldGamePath = selectedFolderPath;
+                    Settings.Default.StarfieldGamePath = selectedFolderPath;
+                }
+                else
+                {
+                    StarfieldGamePathMS= selectedFolderPath;
+                    Settings.Default.GamePathMS = selectedFolderPath;
+                }
+
                 Settings.Default.Save();
                 return selectedFolderPath;
             }
@@ -269,15 +280,15 @@ namespace Starfield_Tools.Common
         }
         public static bool StartStarfieldMS()
         {
-            string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
-            cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\Starfield.exe";
+            //string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
+            string cmdLine = Properties.Settings.Default.GamePathMS + "\\Starfield.exe";
 
             try
             {
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = cmdLine,
-                    WorkingDirectory = Properties.Settings.Default.StarfieldGamePath,
+                    WorkingDirectory = Properties.Settings.Default.GamePathMS,
                     UseShellExecute = false //
                 };
                 Process.Start(startInfo);
