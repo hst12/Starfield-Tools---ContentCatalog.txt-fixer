@@ -48,13 +48,20 @@ F:\XboxGames\Starfield\Content
 Use the Game-Game Version menu to select the game to run or configure.
 Use the Tools->Starfield path menu option to set the path for each version of the game. The path setting only needs to be done once for either version of the game.
 Note that the game will silently overwrite your Plugins.txt file based upon what mods you have installed for each version of the game.
-You can work around this by using the profile feature in the app.
+You can work around this by using the profile feature in the app.It's best to switch to a "no mods" profile before switching game versions.
+The Steam and MS Store version share the same location for Plugins.txt and game settings like your controls and display settings.
+Mods for each game version go into their respective game folders.
+In other words a mod already in the Steam version won't show up in the MS Store version and has to be installed again and vice versa.
+
+Dark Mode
+View menu->Theme
+Select light, dark or system. System will follow your Windows theme. Restart the app after changing the setting or some of the UI elements won't be readable.
 
 For keyboard shortcuts see Help->Shortcut keys.
 
 This tool would not have been possible without the invaluable contributions of ZeeOgre who spent many hours testing, troubleshooting and offering advice.
 
-Software used:
+Software used for decompression:
 7-Zip - https://www.7-zip.org/
 SevenZipExtractor - https://github.com/adoconnection/SevenZipExtractor
 

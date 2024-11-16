@@ -836,7 +836,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void toolStripMenuCreations_Click(object sender, EventArgs e)
         {
 
-            Tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?sort=latest_uploaded");
+            Tools.OpenUrl("https://creations.bethesda.net/en/starfield/all?platforms=PC&sort=latest_uploaded");
         }
 
         private void toolStripMenuNexus_Click(object sender, EventArgs e)
