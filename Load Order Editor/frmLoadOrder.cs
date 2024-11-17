@@ -102,6 +102,8 @@ namespace Starfield_Tools
             SetColumnVisibility(Properties.Settings.Default.Index, toolStripMenuIndex, dataGridView1.Columns["Index"]);
             SetColumnVisibility(Properties.Settings.Default.FileSize, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
             SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
+            SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
+            SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
 
             string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
         filePath = LooseFilesDir + "StarfieldCustom.ini";
@@ -261,6 +263,7 @@ namespace Starfield_Tools
             }
 
             sbar("Loading...");
+            sbar3("");
             statusStrip1.Refresh();
 
             btnSave.Enabled = true;
@@ -281,6 +284,7 @@ namespace Starfield_Tools
                 {
                     var deserializer = new DeserializerBuilder().Build();
                     var yamlContent = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LOOT\games\Starfield\userlist.yaml");
+                    //var yamlContent = File.ReadAllText(@"C:\Users\hst12\Documents\GitHub\starfield\masterlist.yaml");
                     Groups = deserializer.Deserialize<Tools.Configuration>(yamlContent);
                 }
                 catch (Exception ex)
@@ -492,16 +496,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 if (espCount > 0)
                     StatText += ", esp files: " + espCount.ToString();
 
-                if (ActiveOnly)
-                {
-                    sbar("Hiding inactive mods...");
-                    statusStrip1.Refresh();
-                    for (i = 0; i < dataGridView1.RowCount; i++)
-                        if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
-                            dataGridView1.Rows[i].Visible = false;
-                }
-                dataGridView1.EndEdit();
-                sbar(StatText);
             }
             catch (Exception ex)
             {
@@ -510,6 +504,17 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 MessageBox.Show(ex.Message);
 #endif
             }
+
+            if (ActiveOnly)
+            {
+                sbar("Hiding inactive mods...");
+                statusStrip1.Refresh();
+                for (i = 0; i < dataGridView1.RowCount; i++)
+                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
+                        dataGridView1.Rows[i].Visible = false;
+            }
+            sbar(StatText);
+            dataGridView1.EndEdit();
         }
 
         private void GetProfiles()
@@ -2576,6 +2581,26 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 StarfieldGamePath = Properties.Settings.Default.GamePathMS;
             RefreshDataGrid();
             sbar2("Game version set to " + gameVersion);
+        }
+
+        private void toolStripMenuVersion_Click(object sender, EventArgs e)
+        {
+            toolStripMenuVersion.Checked = !toolStripMenuVersion.Checked;
+            if (toolStripMenuVersion.Checked)
+                dataGridView1.Columns["Version"].Visible = true;
+            else
+                dataGridView1.Columns["Version"].Visible = false;
+            Properties.Settings.Default.Version = toolStripMenuVersion.Checked;
+        }
+
+        private void toolStripMenuAuthorVersion_Click(object sender, EventArgs e)
+        {
+            toolStripMenuAuthorVersion.Checked = !toolStripMenuAuthorVersion.Checked;
+            if (toolStripMenuAuthorVersion.Checked)
+                dataGridView1.Columns["AuthorVersion"].Visible = true;
+            else
+                dataGridView1.Columns["AuthorVersion"].Visible = false;
+            Properties.Settings.Default.AuthorVersion = toolStripMenuAuthorVersion.Checked;
         }
     }
 }

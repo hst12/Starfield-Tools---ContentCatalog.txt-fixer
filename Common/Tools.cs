@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace Starfield_Tools.Common
@@ -111,12 +112,14 @@ namespace Starfield_Tools.Common
         public class Plugin // LOOT
         {
             public string name { get; set; }
+            public string display { get; set; }
             public string group { get; set; }
             public List<string> after { get; set; }
             public List<string> inc { get; set; }
             public List<Req> req { get; set; }
             public List<Msg> msg { get; set; }
             public List<Url> url { get; set; }
+
         }
 
         public class Req // LOOT
@@ -135,11 +138,34 @@ namespace Starfield_Tools.Common
             public string link { get; set; }
             public string name { get; set; }
         }
+        public class Prelude
+        {
+            public List<MessageAnchor> common { get; set; }
+        }
 
+        public class MessageAnchor
+        {
+            public string type { get; set; }
+            public string content { get; set; }
+            public List<string> subs { get; set; }
+            public string condition { get; set; }
+        }
+
+        public class Globals
+        {
+            public string type { get; set; }
+            public string content { get; set; }
+            public List<string> subs { get; set; }
+            public string condition { get; set; }
+        }
         public class Configuration // LOOT
         {
+            public Prelude prelude { get; set; }
+            public List<string> bash_tags { get; set; }
             public List<Group> groups { get; set; }
             public List<Plugin> plugins { get; set; }
+            public List<Plugin> common { get; set; }
+            public List<Globals> globals { get; set; }
         }
         public class Creation // ContentCatalog.txt format
         {

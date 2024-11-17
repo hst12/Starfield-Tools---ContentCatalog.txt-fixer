@@ -440,5 +440,29 @@ namespace Starfield_Tools.Properties {
                 this["GamePathMS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Version {
+            get {
+                return ((bool)(this["Version"]));
+            }
+            set {
+                this["Version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AuthorVersion {
+            get {
+                return ((bool)(this["AuthorVersion"]));
+            }
+            set {
+                this["AuthorVersion"] = value;
+            }
+        }
     }
 }

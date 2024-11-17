@@ -116,6 +116,8 @@
             toolStripMenuFileSize = new System.Windows.Forms.ToolStripMenuItem();
             timeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             uRLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuVersion = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuAuthorVersion = new System.Windows.Forms.ToolStripMenuItem();
             themeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -803,28 +805,28 @@
             // 
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            refreshToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
+            refreshToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             refreshToolStripMenuItem.Text = "Refresh";
             refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             // 
             // toolStripMenuColumns
             // 
-            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem, uRLToolStripMenuItem });
+            toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem, uRLToolStripMenuItem, toolStripMenuVersion, toolStripMenuAuthorVersion });
             toolStripMenuColumns.Name = "toolStripMenuColumns";
-            toolStripMenuColumns.Size = new System.Drawing.Size(269, 44);
+            toolStripMenuColumns.Size = new System.Drawing.Size(359, 44);
             toolStripMenuColumns.Text = "Columns";
             // 
             // toolStripMenuIndex
             // 
             toolStripMenuIndex.Name = "toolStripMenuIndex";
-            toolStripMenuIndex.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuIndex.Size = new System.Drawing.Size(359, 44);
             toolStripMenuIndex.Text = "Index";
             toolStripMenuIndex.Click += toolStripMenuIndex_Click;
             // 
             // toolStripMenuGroup
             // 
             toolStripMenuGroup.Name = "toolStripMenuGroup";
-            toolStripMenuGroup.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuGroup.Size = new System.Drawing.Size(359, 44);
             toolStripMenuGroup.Text = "Group";
             toolStripMenuGroup.Click += toolStripMenuGroup_Click;
             // 
@@ -833,7 +835,7 @@
             toolStripMenuAchievements.Checked = true;
             toolStripMenuAchievements.CheckState = System.Windows.Forms.CheckState.Checked;
             toolStripMenuAchievements.Name = "toolStripMenuAchievements";
-            toolStripMenuAchievements.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuAchievements.Size = new System.Drawing.Size(359, 44);
             toolStripMenuAchievements.Text = "Achievements";
             toolStripMenuAchievements.Click += toolStripMenuAchievements_Click;
             // 
@@ -842,7 +844,7 @@
             toolStripMenuCreationsID.Checked = true;
             toolStripMenuCreationsID.CheckState = System.Windows.Forms.CheckState.Checked;
             toolStripMenuCreationsID.Name = "toolStripMenuCreationsID";
-            toolStripMenuCreationsID.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuCreationsID.Size = new System.Drawing.Size(359, 44);
             toolStripMenuCreationsID.Text = "Creations ID";
             toolStripMenuCreationsID.Click += toolStripMenuCreationsID_Click;
             // 
@@ -851,36 +853,50 @@
             toolStripMenuFiles.Checked = true;
             toolStripMenuFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             toolStripMenuFiles.Name = "toolStripMenuFiles";
-            toolStripMenuFiles.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuFiles.Size = new System.Drawing.Size(359, 44);
             toolStripMenuFiles.Text = "Files";
             toolStripMenuFiles.Click += toolStripMenuFiles_Click;
             // 
             // toolStripMenuFileSize
             // 
             toolStripMenuFileSize.Name = "toolStripMenuFileSize";
-            toolStripMenuFileSize.Size = new System.Drawing.Size(297, 44);
+            toolStripMenuFileSize.Size = new System.Drawing.Size(359, 44);
             toolStripMenuFileSize.Text = "File Size";
             toolStripMenuFileSize.Click += toolStripMenuFileSize_Click;
             // 
             // timeStampToolStripMenuItem
             // 
             timeStampToolStripMenuItem.Name = "timeStampToolStripMenuItem";
-            timeStampToolStripMenuItem.Size = new System.Drawing.Size(297, 44);
+            timeStampToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             timeStampToolStripMenuItem.Text = "Time Stamp";
             timeStampToolStripMenuItem.Click += timeStampToolStripMenuItem_Click;
             // 
             // uRLToolStripMenuItem
             // 
             uRLToolStripMenuItem.Name = "uRLToolStripMenuItem";
-            uRLToolStripMenuItem.Size = new System.Drawing.Size(297, 44);
+            uRLToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             uRLToolStripMenuItem.Text = "URL";
             uRLToolStripMenuItem.Click += uRLToolStripMenuItem_Click;
+            // 
+            // toolStripMenuVersion
+            // 
+            toolStripMenuVersion.Name = "toolStripMenuVersion";
+            toolStripMenuVersion.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuVersion.Text = "Version";
+            toolStripMenuVersion.Click += toolStripMenuVersion_Click;
+            // 
+            // toolStripMenuAuthorVersion
+            // 
+            toolStripMenuAuthorVersion.Name = "toolStripMenuAuthorVersion";
+            toolStripMenuAuthorVersion.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuAuthorVersion.Text = "Author Version";
+            toolStripMenuAuthorVersion.Click += toolStripMenuAuthorVersion_Click;
             // 
             // themeToolStripMenuItem
             // 
             themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lightToolStripMenuItem, darkToolStripMenuItem, systemToolStripMenuItem });
             themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            themeToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
+            themeToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             themeToolStripMenuItem.Text = "Theme";
             // 
             // lightToolStripMenuItem
@@ -907,12 +923,12 @@
             // toolStripSeparator25
             // 
             toolStripSeparator25.Name = "toolStripSeparator25";
-            toolStripSeparator25.Size = new System.Drawing.Size(266, 6);
+            toolStripSeparator25.Size = new System.Drawing.Size(356, 6);
             // 
             // activeOnlyToolStripMenuItem
             // 
             activeOnlyToolStripMenuItem.Name = "activeOnlyToolStripMenuItem";
-            activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
+            activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             activeOnlyToolStripMenuItem.Text = "Active Only";
             activeOnlyToolStripMenuItem.Click += activeOnlyToolStripMenuItem_Click;
             // 
@@ -1895,5 +1911,7 @@
         private System.Windows.Forms.ToolStripMenuItem enableAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disableAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uIToEditStarfieldCustominiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuVersion;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuAuthorVersion;
     }
 }
