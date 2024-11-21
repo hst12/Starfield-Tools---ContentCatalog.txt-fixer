@@ -173,6 +173,7 @@ namespace Starfield_Tools
 
 #if DEBUG
             testToolStripMenu.Visible = true;
+            uIToEditStarfieldCustominiToolStripMenuItem.Visible = true;
 #endif
         }
 
@@ -349,7 +350,7 @@ namespace Starfield_Tools
 
             }
 
-            loText = Tools.StarfieldAppData + @"\plugins.txt";
+            loText = Tools.StarfieldAppData + @"\Plugins.txt";
             if (!File.Exists(loText))
             {
                 MessageBox.Show(@"Missing Plugins.txt file
@@ -435,13 +436,18 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         }
 
                                 if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
-                                    row.Cells["Group"].Value = "Bethesda Game Studios Creations";
+                                    if (row.Cells["Group"].Value == null)
+                                        row.Cells["Group"].Value = "Bethesda Game Studios Creations";
+                                    else
+                                        row.Cells["Group"].Value += " (Bethesda)";
 
                                 row.Cells["ModEnabled"].Value = ModEnabled;
                                 row.Cells["PluginName"].Value = PluginName;
                                 row.Cells["Description"].Value = Description;
-                                row.Cells["Version"].Value = ModVersion;
-                                row.Cells["AuthorVersion"].Value = AuthorVersion;
+                                if (dataGridView1.Columns["Version"].Visible)
+                                    row.Cells["Version"].Value = ModVersion;
+                                if (dataGridView1.Columns["AuthorVersion"].Visible)
+                                    row.Cells["AuthorVersion"].Value = AuthorVersion;
 
                                 if (dataGridView1.Columns["TimeStamp"].Visible)
                                     row.Cells["TimeStamp"].Value = ModTimeStamp;
@@ -911,6 +917,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 Properties.Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
+                if (AutoUpdate)
+                    AddRemove();
                 InitDataGrid();
             }
             catch (Exception ex)
@@ -1721,9 +1729,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             toolStripStatusLabel4.Text = StatusBarMessage;
         }
 
-        private void sbar5Modified()
+        private void sbar5(string StatusMessage)
         {
-            toolStripStatusLabel5.Text = "Modified";
+            toolStripStatusLabel5.Text = StatusMessage;
         }
 
         private void sbarCCC(string sbarMessage)
@@ -2481,6 +2489,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 if (ChangeCount > 0)
                     sbar3(ChangeCount.ToString() + " Change(s) made to ini files");
             }
+            sbar5("Auto Reset");
         }
         private void autoResetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2495,8 +2504,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             autoResetToolStripMenuItem.Checked = !autoResetToolStripMenuItem.Checked;
             if (autoResetToolStripMenuItem.Checked)
                 ResetDefaults();
+            else
+                sbar5("");
+
             Properties.Settings.Default.AutoReset = autoResetToolStripMenuItem.Checked;
-            ResetDefaults();
             SaveSettings();
         }
 
@@ -2563,6 +2574,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void disableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeSettings(false);
+            sbar5("");
         }
 
         private void uIToEditStarfieldCustominiToolStripMenuItem_Click(object sender, EventArgs e)
