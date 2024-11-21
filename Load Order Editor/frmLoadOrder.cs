@@ -2614,5 +2614,21 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 dataGridView1.Columns["AuthorVersion"].Visible = false;
             Properties.Settings.Default.AuthorVersion = toolStripMenuAuthorVersion.Checked;
         }
+
+        private void enableAchievementSafeOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAll();
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if ((string)dataGridView1.Rows[i].Cells["Achievements"].Value == "Yes")
+                dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
+            }
+
+      
+
+                sbar2("All achievement friendly mods enabled");
+            isModified = true;
+        }
     }
 }
