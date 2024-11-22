@@ -1,5 +1,11 @@
 This tool provides a basic load order editor. and checks ContentCatalog.txt file automatically when launched.
 
+New experimental feature:
+Click the Backup button in the catalog checker screen before trying this feature.
+Set all Creation mod flags to enabled. Press Catalog, then press Achievements.
+Use at your own risk. Only usable for Creations mods.
+Won't reset the status of a game save that already has the [C] tag.
+
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
 

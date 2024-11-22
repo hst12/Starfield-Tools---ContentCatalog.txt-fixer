@@ -59,6 +59,7 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            btnAchievemnts = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -109,9 +110,9 @@
             // cmdClean
             // 
             cmdClean.AutoSize = true;
-            cmdClean.Location = new System.Drawing.Point(232, 3);
+            cmdClean.Location = new System.Drawing.Point(159, 3);
             cmdClean.Name = "cmdClean";
-            cmdClean.Size = new System.Drawing.Size(223, 50);
+            cmdClean.Size = new System.Drawing.Size(150, 50);
             cmdClean.TabIndex = 1;
             cmdClean.Text = "Clean";
             toolTip1.SetToolTip(cmdClean, "Strip out corrupt characters");
@@ -135,7 +136,7 @@
             btnCheck.AutoSize = true;
             btnCheck.Location = new System.Drawing.Point(3, 3);
             btnCheck.Name = "btnCheck";
-            btnCheck.Size = new System.Drawing.Size(223, 50);
+            btnCheck.Size = new System.Drawing.Size(150, 50);
             btnCheck.TabIndex = 0;
             btnCheck.Text = "Check";
             toolTip1.SetToolTip(btnCheck, "Check for corruption");
@@ -145,9 +146,9 @@
             // btnBackup
             // 
             btnBackup.AutoSize = true;
-            btnBackup.Location = new System.Drawing.Point(919, 3);
+            btnBackup.Location = new System.Drawing.Point(735, 3);
             btnBackup.Name = "btnBackup";
-            btnBackup.Size = new System.Drawing.Size(223, 50);
+            btnBackup.Size = new System.Drawing.Size(150, 50);
             btnBackup.TabIndex = 4;
             btnBackup.Text = "Backup";
             toolTip1.SetToolTip(btnBackup, "Backup ContentCatalog.txt to ContentCatalog.txt.bak");
@@ -157,9 +158,9 @@
             // btnRestore
             // 
             btnRestore.AutoSize = true;
-            btnRestore.Location = new System.Drawing.Point(1148, 3);
+            btnRestore.Location = new System.Drawing.Point(891, 3);
             btnRestore.Name = "btnRestore";
-            btnRestore.Size = new System.Drawing.Size(223, 50);
+            btnRestore.Size = new System.Drawing.Size(150, 50);
             btnRestore.TabIndex = 5;
             btnRestore.Text = "Restore";
             toolTip1.SetToolTip(btnRestore, "Restore ContentCatlog.txt.bak to ContextCatlog.txt");
@@ -180,9 +181,10 @@
             // 
             // btnResetAll
             // 
-            btnResetAll.Location = new System.Drawing.Point(690, 3);
+            btnResetAll.AutoSize = true;
+            btnResetAll.Location = new System.Drawing.Point(519, 3);
             btnResetAll.Name = "btnResetAll";
-            btnResetAll.Size = new System.Drawing.Size(223, 50);
+            btnResetAll.Size = new System.Drawing.Size(210, 50);
             btnResetAll.TabIndex = 3;
             btnResetAll.Text = "Reset All Versions";
             toolTip1.SetToolTip(btnResetAll, "Resets all version numbers to 1704067200.0. Should enable updates");
@@ -191,9 +193,10 @@
             // 
             // cmdDeleteStale
             // 
-            cmdDeleteStale.Location = new System.Drawing.Point(461, 3);
+            cmdDeleteStale.AutoSize = true;
+            cmdDeleteStale.Location = new System.Drawing.Point(315, 3);
             cmdDeleteStale.Name = "cmdDeleteStale";
-            cmdDeleteStale.Size = new System.Drawing.Size(223, 50);
+            cmdDeleteStale.Size = new System.Drawing.Size(198, 50);
             cmdDeleteStale.TabIndex = 2;
             cmdDeleteStale.Text = "Remove Unused";
             toolTip1.SetToolTip(cmdDeleteStale, "Remove missing mods from ContentCatalog.txt");
@@ -240,6 +243,7 @@
             flowLayoutPanel3.Controls.Add(btnResetAll);
             flowLayoutPanel3.Controls.Add(btnBackup);
             flowLayoutPanel3.Controls.Add(btnRestore);
+            flowLayoutPanel3.Controls.Add(btnAchievemnts);
             flowLayoutPanel3.Controls.Add(btnClearLog);
             flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel3.Location = new System.Drawing.Point(6, 38);
@@ -249,9 +253,10 @@
             // 
             // btnClearLog
             // 
-            btnClearLog.Location = new System.Drawing.Point(1377, 3);
+            btnClearLog.AutoSize = true;
+            btnClearLog.Location = new System.Drawing.Point(1227, 3);
             btnClearLog.Name = "btnClearLog";
-            btnClearLog.Size = new System.Drawing.Size(223, 50);
+            btnClearLog.Size = new System.Drawing.Size(150, 50);
             btnClearLog.TabIndex = 6;
             btnClearLog.Text = "Clear Log";
             btnClearLog.UseVisualStyleBackColor = true;
@@ -409,6 +414,17 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // btnAchievemnts
+            // 
+            btnAchievemnts.AutoSize = true;
+            btnAchievemnts.Location = new System.Drawing.Point(1047, 3);
+            btnAchievemnts.Name = "btnAchievemnts";
+            btnAchievemnts.Size = new System.Drawing.Size(174, 50);
+            btnAchievemnts.TabIndex = 7;
+            btnAchievemnts.Text = "Achievements";
+            btnAchievemnts.UseVisualStyleBackColor = true;
+            btnAchievemnts.Click += btnAchievemnts_Click;
+            // 
             // frmStarfieldTools
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -477,6 +493,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.CheckBox chkVerbose;
+        private System.Windows.Forms.Button btnAchievemnts;
     }
 }
 

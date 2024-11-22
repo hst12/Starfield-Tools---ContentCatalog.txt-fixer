@@ -478,9 +478,9 @@ namespace Starfield_Tools
             // Hack the Bethesda header back in
             json = Tools.MakeHeader() + json[1..];
 
-            File.WriteAllText(Tools.GetCatalog(), json); // Write updated cataalog
+            File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
             DisplayCatalog();
-            toolStripStatusLabel1.Text = "Version numbers reset\n";
+            toolStripStatusLabel1.Text = "Version numbers reset";
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -710,6 +710,34 @@ namespace Starfield_Tools
         private void frmStarfieldTools_Shown(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void btnAchievemnts_Click(object sender, EventArgs e)
+        {
+            if (!Tools.ConfirmAction("Do you want to continue?", "Experimental Feature - All achievement flags will be set. "))
+            {
+                toolStripStatusLabel1.Text = "Achievement flags not reset";
+                return;
+            }
+
+            string jsonFilePath = Tools.GetCatalog(), json = File.ReadAllText(jsonFilePath);
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
+
+            foreach (var kvp in data)
+            {
+                kvp.Value.AchievementSafe = true;  // set Achievement flag
+            }
+
+            data.Remove("ContentCatalog"); // remove messed up content catalog section
+
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+            // Hack the Bethesda header back in
+            json = Tools.MakeHeader() + json[1..];
+
+            File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
+            DisplayCatalog();
+            toolStripStatusLabel1.Text = "Achievement flags set";
         }
     }
 }

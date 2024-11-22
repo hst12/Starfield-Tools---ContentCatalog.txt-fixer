@@ -28,7 +28,6 @@ namespace Starfield_Tools
 
         bool Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false;
 
-
         public frmLoadOrder(string parameter)
         {
             InitializeComponent();
@@ -565,9 +564,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             int i;
 
             if (GridSorted)
+            {
+                MessageBox.Show("Save disabled");
                 return;
-            /*if (!isModified)
-                return;*/
+            }
 
             using (StreamWriter writer = new(PluginFileName))
             {
@@ -582,7 +582,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 }
             }
 
-            sbar2("Plugins.txt saved");
+            sbar2(Path.GetFileName(PluginFileName) + " saved");
             isModified = false;
         }
 
@@ -730,10 +730,13 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             sbar2("All mods disabled");
             isModified = true;
+            //InitDataGrid();
         }
 
         private void EnableAll()
         {
+            if (ActiveOnly)
+                ActiveOnlyToggle();
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
@@ -917,8 +920,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 Properties.Settings.Default.LastProfile = ProfileName[(ProfileName.LastIndexOf('\\') + 1)..];
                 SaveSettings();
                 isModified = false;
-                if (AutoUpdate)
-                    AddRemove();
+                /*if (AutoUpdate)
+                    AddRemove();*/
                 InitDataGrid();
             }
             catch (Exception ex)
@@ -1133,19 +1136,11 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             removedMods = RemoveMissing();
             if (addedMods != 0 || removedMods != 0)
             {
-                isModified = true;
                 SavePlugins();
-
-                if (AutoSort)
-                    RunLOOT(true);
                 ReturnStatus = addedMods.ToString() + " Mods added, " + removedMods.ToString() + " Mods removed";
-
             }
             else
-            {
-                isModified = false;
                 ReturnStatus = "Plugins.txt is up to date";
-            }
             return ReturnStatus;
         }
 
@@ -1491,7 +1486,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 SS.Show();
             bool result;
 
-
             if (isModified)
                 SavePlugins();
 
@@ -1564,7 +1558,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            SaveLO(Tools.StarfieldAppData + @"\Plugins.txt");
+            if (isModified)
+                SavePlugins();
             SaveSettings();
             Application.Exit();
         }
@@ -2622,12 +2617,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 if ((string)dataGridView1.Rows[i].Cells["Achievements"].Value == "Yes")
-                dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
+                    dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
             }
 
-      
-
-                sbar2("All achievement friendly mods enabled");
+            sbar2("All achievement friendly mods enabled");
             isModified = true;
         }
     }

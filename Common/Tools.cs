@@ -13,7 +13,7 @@ namespace Starfield_Tools.Common
 
     internal class Tools
     {
-        
+
         public static string CommonFolder { get; set; }
 
         public static string DocumentationFolder { get; set; }
@@ -27,7 +27,7 @@ namespace Starfield_Tools.Common
         public Tools() // Constructor
         {
             CommonFolder = Environment.CurrentDirectory + "\\Common";
-            DocumentationFolder= Environment.CurrentDirectory + "\\Documentation";
+            DocumentationFolder = Environment.CurrentDirectory + "\\Documentation";
             try
             {
                 BethFiles = new(File.ReadAllLines(CommonFolder + "\\BGS Exclude.txt"));
@@ -124,8 +124,8 @@ namespace Starfield_Tools.Common
 
         public class Req // LOOT
         {
-        public string name { get; set; }
-        public string display {  get; set; }
+            public string name { get; set; }
+            public string display { get; set; }
         }
 
         public class Msg // LOOT
@@ -203,11 +203,11 @@ namespace Starfield_Tools.Common
                     return true;
                 else
                     return false;
-                
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Tools.FileCompare error: "+ex.Message);
+                MessageBox.Show("Tools.FileCompare error: " + ex.Message);
                 return false; ;
             }
 
@@ -235,19 +235,22 @@ namespace Starfield_Tools.Common
         public string SetStarfieldGamePath()
         {
             using FolderBrowserDialog folderBrowserDialog = new();
-            folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
+            if (Settings.Default.GameVersion == 1)
+                folderBrowserDialog.SelectedPath = Settings.Default.GamePathMS;
+            else
+                folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
             folderBrowserDialog.Description = "Choose path to the game installation folder";
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                if (Properties.Settings.Default.GameVersion!=frmLoadOrder.MS)
+                if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS)
                 {
                     StarfieldGamePath = selectedFolderPath;
                     Settings.Default.StarfieldGamePath = selectedFolderPath;
                 }
                 else
                 {
-                    StarfieldGamePathMS= selectedFolderPath;
+                    StarfieldGamePathMS = selectedFolderPath;
                     Settings.Default.GamePathMS = selectedFolderPath;
                 }
 
