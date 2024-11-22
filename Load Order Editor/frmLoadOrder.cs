@@ -597,6 +597,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (rowIndex == 0)
                 return; // Already at the top
 
+            if (ActiveOnly)
+                ActiveOnlyToggle();
+
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
             dataGridView1.Rows.Insert(rowIndex - 1, selectedRow);
@@ -616,6 +619,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             if (rowIndex == dataGridView1.Rows.Count - 1)
                 return; // Already at the bottom
+
+            if (ActiveOnly)
+                ActiveOnlyToggle();
 
             DataGridViewRow selectedRow = dataGridView1.Rows[rowIndex];
             dataGridView1.Rows.Remove(selectedRow);
