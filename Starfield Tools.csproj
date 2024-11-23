@@ -62,10 +62,14 @@
     <IsPublishable>True</IsPublishable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Banner.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\publish\Publish.html" />
     <Content Include="Clipboard.ico" />
     <Content Include="Documentation\Readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -84,31 +88,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Common\App Version.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Common\BGS Exclude.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Common\Catalog Version.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Common\Header.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Common\StarFieldCustom.ini.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\D3DCompiler_47_cor3.dll.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Buttons.htm.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Images\Buttons.jpg.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Index.htm.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Menus.htm.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Readme.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Documentation\Shortcuts.txt.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Launcher.exe.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\PenImc_cor3.dll.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\SpaceShip.ico.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Starfield Tools.dll.config.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Starfield Tools.dll.manifest" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\Starfield Tools.exe.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\vcruntime140_cor3.dll.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\wpfgfx_cor3.dll.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\x64\7z.dll.deploy" />
-    <None Include="bin\publish\Application Files\Starfield Tools_1_10_5_0\x86\7z.dll.deploy" />
-    <None Include="bin\publish\Starfield Tools.application" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
