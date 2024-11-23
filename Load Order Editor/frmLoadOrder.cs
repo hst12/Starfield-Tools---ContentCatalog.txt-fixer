@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using SevenZipExtractor;
 using Starfield_Tools.Common;
@@ -10,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -2630,7 +2632,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void enableAchievementSafeOnlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool ActiveOnlyStatus = ActiveOnly;
             DisableAll();
+            if (ActiveOnly)
+                ActiveOnlyToggle();
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -2638,8 +2643,43 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     dataGridView1.Rows[i].Cells["ModEnabled"].Value = true;
             }
 
+            if (ActiveOnlyStatus)
+                ActiveOnlyToggle();
             sbar2("All achievement friendly mods enabled");
             isModified = true;
+        }
+
+        private void SetAchievement(bool OnOff)
+        {
+            string jsonFilePath = Tools.GetCatalog(), json = File.ReadAllText(jsonFilePath);
+            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
+
+            data.Remove("ContentCatalog");
+
+            foreach (var kvp in data)
+            {
+                int selectedIndex = dataGridView1.SelectedRows[0].Index;
+                if (dataGridView1.Rows[selectedIndex].Cells["CreationsID"].Value.ToString() == kvp.Key.ToString())
+                    kvp.Value.AchievementSafe = OnOff;
+            }
+
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+
+            // Hack the Bethesda header back in
+            json = Tools.MakeHeader() + json[1..];
+
+            File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
+            RefreshDataGrid();
+        }
+        private void disableAchievementFlagToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetAchievement(false);
+
+        }
+
+        private void enableAchievementFlagToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetAchievement(true);
         }
     }
 }

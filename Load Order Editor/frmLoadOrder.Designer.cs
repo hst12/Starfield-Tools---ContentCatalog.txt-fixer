@@ -60,6 +60,9 @@
             toolStripMenuLootAutoSort = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuViewOnCreations = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+            enableAchievementFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            disableAchievementFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuRefresh = new System.Windows.Forms.ToolStripMenuItem();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -373,9 +376,9 @@
             // contextMenuDatagrid
             // 
             contextMenuDatagrid.ImageScalingSize = new System.Drawing.Size(32, 32);
-            contextMenuDatagrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableDisable, toolStripSeparator10, toolStripMenuUp, toolStripMenuDown, toolStripMenuTop, toolStripMenuBottom, toolStripSeparator4, toolStripMenAddRemoveContext, toolStripMenuDelContext, toolStripMenuInstallMod, toolStripMenuUninstallContext, toolStripMenuLootAutoSort, toolStripSeparator11, toolStripMenuViewOnCreations, toolStripSeparator12, toolStripMenuRefresh });
+            contextMenuDatagrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableDisable, toolStripSeparator10, toolStripMenuUp, toolStripMenuDown, toolStripMenuTop, toolStripMenuBottom, toolStripSeparator4, toolStripMenAddRemoveContext, toolStripMenuDelContext, toolStripMenuInstallMod, toolStripMenuUninstallContext, toolStripMenuLootAutoSort, toolStripSeparator11, toolStripMenuViewOnCreations, toolStripSeparator28, enableAchievementFlagToolStripMenuItem, disableAchievementFlagToolStripMenuItem, toolStripSeparator12, toolStripMenuRefresh });
             contextMenuDatagrid.Name = "contextMenuDatagrid";
-            contextMenuDatagrid.Size = new System.Drawing.Size(523, 508);
+            contextMenuDatagrid.Size = new System.Drawing.Size(523, 594);
             // 
             // toolStripMenuEnableDisable
             // 
@@ -471,6 +474,25 @@
             toolStripMenuViewOnCreations.Size = new System.Drawing.Size(522, 40);
             toolStripMenuViewOnCreations.Text = "View Web Site";
             toolStripMenuViewOnCreations.Click += toolStripMenuViewOnCreations_Click;
+            // 
+            // toolStripSeparator28
+            // 
+            toolStripSeparator28.Name = "toolStripSeparator28";
+            toolStripSeparator28.Size = new System.Drawing.Size(519, 6);
+            // 
+            // enableAchievementFlagToolStripMenuItem
+            // 
+            enableAchievementFlagToolStripMenuItem.Name = "enableAchievementFlagToolStripMenuItem";
+            enableAchievementFlagToolStripMenuItem.Size = new System.Drawing.Size(522, 40);
+            enableAchievementFlagToolStripMenuItem.Text = "Enable Achievement Flag";
+            enableAchievementFlagToolStripMenuItem.Click += enableAchievementFlagToolStripMenuItem_Click;
+            // 
+            // disableAchievementFlagToolStripMenuItem
+            // 
+            disableAchievementFlagToolStripMenuItem.Name = "disableAchievementFlagToolStripMenuItem";
+            disableAchievementFlagToolStripMenuItem.Size = new System.Drawing.Size(522, 40);
+            disableAchievementFlagToolStripMenuItem.Text = "Disable Achievement Flag";
+            disableAchievementFlagToolStripMenuItem.Click += disableAchievementFlagToolStripMenuItem_Click;
             // 
             // toolStripSeparator12
             // 
@@ -1924,5 +1946,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuVersion;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAuthorVersion;
         private System.Windows.Forms.ToolStripMenuItem enableAchievementSafeOnlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
+        private System.Windows.Forms.ToolStripMenuItem disableAchievementFlagToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableAchievementFlagToolStripMenuItem;
     }
 }
