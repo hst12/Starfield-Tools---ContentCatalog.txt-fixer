@@ -1,0 +1,27 @@
+﻿Mod enable/disable - Space or  Double-Click anywhere on the mod line - changes saved
+Delete from Plugins.txt - Del - Does not automatically save or delete the mod from the Data folder
+
+Mod move order keys:
+Move Up - W
+Move Down -S
+Move Top - A
+Move Bottom -D
+Drag and drop with mouse
+
+Run game - R
+Save Plugins - Ctrl-S
+Open Profile - Ctrl-O
+
+Misc:
+Right-click for context menu
+
+Context menu functions:
+Install mod from zip file - won't work for mods that have loose files.
+Un-install (delete) mod
+Add/Remove function checks game folder for installed mods and adds them to plugins.txt or removes deleted mods from Plugins.txt
+View web site page for Creations mods
+Run LOOT if installed
+
+Refresh - F5 - discards unsaved changes
+Search - Click in the search box, type text to search for (mod filename only) and press enter. Press enter again to find the next match.
+Search is case insensitive and any part of the filename can be searched for.
