@@ -177,7 +177,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>p4S3RcJMa1KDwu4QsIsuvk+ux5eY3QRGJbnrD1RG2U8=</dsig:DigestValue>
+      <dsig:DigestValue>8cfQm7QjTiBvL8W96RzfzfdHzBs508cWxeuIT+DBpZg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="x64\7z.dll" size="1710080">
