@@ -1034,13 +1034,18 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             string directory = StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
-            directory += @"\Data";
-
-            if (directory == "\\Data")
+            if (!File.Exists(directory + "\\Starfield.exe"))
             {
                 MessageBox.Show("Can't continue without game installation path");
                 return 0;
             }
+            directory += @"\Data";
+
+            /*            if (directory == "\\Data")
+                        {
+                            MessageBox.Show("Can't continue without game installation path");
+                            return 0;
+                        }*/
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
@@ -1086,13 +1091,20 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             string directory = StarfieldGamePath;
             if (directory == "" || directory == null)
                 directory = tools.SetStarfieldGamePath();
-            directory += @"\Data";
 
-            if (directory == "\\Data")
+            if (!File.Exists(directory + "\\Starfield.exe"))
             {
                 MessageBox.Show("Can't continue without game installation path");
                 return 0;
             }
+
+            directory += @"\Data";
+
+            /*            if (directory == "\\Data")
+                        {
+                            MessageBox.Show("Can't continue without game installation path");
+                            return 0;
+                        }*/
 
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {

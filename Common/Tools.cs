@@ -239,10 +239,15 @@ namespace Starfield_Tools.Common
                 folderBrowserDialog.SelectedPath = Settings.Default.GamePathMS;
             else
                 folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
-            folderBrowserDialog.Description = "Choose path to the game installation folder";
+            folderBrowserDialog.Description = "Choose path to the game installation folder where Starfield.exe is located";
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                if (!File.Exists(selectedFolderPath + "\\Starfield.exe"))
+                {
+                    MessageBox.Show("Starfield.exe not found in the selected path","Please select the correct folder",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    return ("");
+                }
                 if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS)
                 {
                     StarfieldGamePath = selectedFolderPath;
@@ -253,7 +258,6 @@ namespace Starfield_Tools.Common
                     StarfieldGamePathMS = selectedFolderPath;
                     Settings.Default.GamePathMS = selectedFolderPath;
                 }
-
                 Settings.Default.Save();
                 return selectedFolderPath;
             }
