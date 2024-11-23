@@ -13,14 +13,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Application Files\Starfield Tools_1_10_5_0\Starfield Tools.dll.manifest" size="10804">
+    <dependentAssembly dependencyType="install" codebase="Application Files\Starfield Tools_1_10_5_0\Starfield Tools.dll.manifest" size="10906">
       <assemblyIdentity name="Starfield Tools.exe" version="1.10.5.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6u544V75HqhxJ54Wdmt9k6aniiusl90NsjEuTiCUxi4=</dsig:DigestValue>
+        <dsig:DigestValue>5KEVE1PhJpLPIzUee5UbOVVWuedkuQTqHbCzLdua2sQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
