@@ -145,7 +145,7 @@ Profile switching is always off by default until the checkbox next to Profiles i
 When launching a game from the Load Order Editor a load screen is displayed for a few seconds while the game loads.
 A custom load screen picture can be set in the Tools menu.
 
-<a href="bin/publish/Publish.html>Installer</a>
+<a href="bin/publish/Publish.html"">Installer</a>
 
 <div align="left">
     <img src="/Screenshot.png" align="left"</img> 
