@@ -151,6 +151,8 @@
             autoUpdateModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             autoSortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+            showTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             enableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             disableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
@@ -221,6 +223,7 @@
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             timer1 = new System.Windows.Forms.Timer(components);
+            timer2 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             contextMenuDatagrid.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -960,7 +963,7 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, compareProfilesToolStripMenuItem, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, enableAllToolStripMenuItem, disableAllToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, compareProfilesToolStripMenuItem, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, showTimeToolStripMenuItem, toolStripSeparator30, enableAllToolStripMenuItem, disableAllToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 36);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -1118,6 +1121,18 @@
             // 
             toolStripSeparator27.Name = "toolStripSeparator27";
             toolStripSeparator27.Size = new System.Drawing.Size(404, 6);
+            // 
+            // showTimeToolStripMenuItem
+            // 
+            showTimeToolStripMenuItem.Name = "showTimeToolStripMenuItem";
+            showTimeToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
+            showTimeToolStripMenuItem.Text = "Show Time";
+            showTimeToolStripMenuItem.Click += showTimeToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator30
+            // 
+            toolStripSeparator30.Name = "toolStripSeparator30";
+            toolStripSeparator30.Size = new System.Drawing.Size(404, 6);
             // 
             // enableAllToolStripMenuItem
             // 
@@ -1744,6 +1759,11 @@
             timer1.Interval = 7000;
             timer1.Tick += timer1_Tick;
             // 
+            // timer2
+            // 
+            timer2.Interval = 1000;
+            timer2.Tick += timer2_Tick;
+            // 
             // frmLoadOrder
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -1965,5 +1985,8 @@
         private System.Windows.Forms.ToolStripMenuItem enableAchievementFlagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAllActiveModWebPagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripMenuItem showTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
     }
 }

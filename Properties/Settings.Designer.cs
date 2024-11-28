@@ -464,5 +464,17 @@ namespace Starfield_Tools.Properties {
                 this["AuthorVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Showtime {
+            get {
+                return ((bool)(this["Showtime"]));
+            }
+            set {
+                this["Showtime"] = value;
+            }
+        }
     }
 }

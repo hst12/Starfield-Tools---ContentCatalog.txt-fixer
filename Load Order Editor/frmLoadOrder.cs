@@ -36,7 +36,10 @@ namespace Starfield_Tools
 
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
-            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
+            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt",
+ LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
+filePath = LooseFilesDir + "StarfieldCustom.ini";
+
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -105,9 +108,6 @@ namespace Starfield_Tools
             SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
             SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
             SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
-
-            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
-        filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (File.Exists(filePath))
             {
@@ -206,6 +206,9 @@ namespace Starfield_Tools
             toolStripMenuAutoDelccc.Checked = Properties.Settings.Default.AutoDelccc;
 
             autoResetToolStripMenuItem.Checked = Properties.Settings.Default.AutoReset;
+            
+            showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
+            timer2.Enabled= Properties.Settings.Default.Showtime; 
         }
 
         private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
@@ -2683,6 +2686,23 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void openAllActiveModWebPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            DateTime now = DateTime.Now;
+            string formattedTime = now.ToString("hh:mm tt");
+            sbar5(formattedTime);
+        }
+
+        private void showTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer2.Enabled = !timer2.Enabled;
+            showTimeToolStripMenuItem.Checked = timer2.Enabled;
+            Properties.Settings.Default.Showtime = showTimeToolStripMenuItem.Checked;
+            if (!timer2.Enabled)
+                sbar5("");
         }
     }
 }
