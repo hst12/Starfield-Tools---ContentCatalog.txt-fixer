@@ -2266,7 +2266,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             else
             {
-                MessageBox.Show("SFSE doesn't seem to be installed or Starfield path not send", "Unable to switch to SFSE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("SFSE doesn't seem to be installed or Starfield path not set", "Unable to switch to SFSE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 GameVersion = Steam;
                 toolStripMenuSteam.Checked = true;
                 toolStripMenuMS.Checked = false;
