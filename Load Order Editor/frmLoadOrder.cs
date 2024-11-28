@@ -174,7 +174,6 @@ namespace Starfield_Tools
 
 #if DEBUG
             testToolStripMenu.Visible = true;
-            uIToEditStarfieldCustominiToolStripMenuItem.Visible = true;
 #endif
         }
 
@@ -2623,10 +2622,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void toolStripMenuAuthorVersion_Click(object sender, EventArgs e)
         {
             toolStripMenuAuthorVersion.Checked = !toolStripMenuAuthorVersion.Checked;
-            if (toolStripMenuAuthorVersion.Checked)
-                dataGridView1.Columns["AuthorVersion"].Visible = true;
-            else
-                dataGridView1.Columns["AuthorVersion"].Visible = false;
+            dataGridView1.Columns["AuthorVersion"].Visible = toolStripMenuAuthorVersion.Checked ? true : false;
             Properties.Settings.Default.AuthorVersion = toolStripMenuAuthorVersion.Checked;
         }
 
@@ -2660,7 +2656,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             {
                 int selectedIndex = dataGridView1.SelectedRows[0].Index;
                 if (dataGridView1.Rows[selectedIndex].Cells["CreationsID"].Value.ToString() == kvp.Key.ToString())
+                {
                     kvp.Value.AchievementSafe = OnOff;
+                    dataGridView1.Rows[selectedIndex].Cells["Achievements"].Value = OnOff ? "Yes" : "";
+                }
             }
 
             json = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
@@ -2669,17 +2668,21 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             json = Tools.MakeHeader() + json[1..];
 
             File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
-            RefreshDataGrid();
+            //RefreshDataGrid();
         }
         private void disableAchievementFlagToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetAchievement(false);
-
         }
 
         private void enableAchievementFlagToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetAchievement(true);
+        }
+
+        private void openAllActiveModWebPagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
