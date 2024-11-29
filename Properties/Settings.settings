@@ -108,7 +108,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Version" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="AuthorVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

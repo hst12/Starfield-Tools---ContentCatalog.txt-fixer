@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using Newtonsoft.Json;
 using SevenZipExtractor;
 using Starfield_Tools.Common;
@@ -10,7 +9,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
@@ -96,18 +94,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 else Profiles = false;
             }
 
-            // Setup columns
-
-            SetColumnVisibility(Properties.Settings.Default.TimeStamp, timeStampToolStripMenuItem, dataGridView1.Columns["TimeStamp"]);
-            SetColumnVisibility(Properties.Settings.Default.Achievements, toolStripMenuAchievements, dataGridView1.Columns["Achievements"]);
-            SetColumnVisibility(Properties.Settings.Default.CreationsID, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
-            SetColumnVisibility(Properties.Settings.Default.Files, toolStripMenuFiles, dataGridView1.Columns["Files"]);
-            SetColumnVisibility(Properties.Settings.Default.Group, toolStripMenuGroup, dataGridView1.Columns["Group"]);
-            SetColumnVisibility(Properties.Settings.Default.Index, toolStripMenuIndex, dataGridView1.Columns["Index"]);
-            SetColumnVisibility(Properties.Settings.Default.FileSize, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
-            SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
-            SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
-            SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
+            SetupColumns();
 
             if (File.Exists(filePath))
             {
@@ -167,7 +154,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             if (AutoUpdate)
-                AddRemove();
+                sbar4(AddRemove());
 
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
@@ -177,6 +164,19 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 #endif
         }
 
+        private void SetupColumns()
+        {
+            SetColumnVisibility(Properties.Settings.Default.TimeStamp, timeStampToolStripMenuItem, dataGridView1.Columns["TimeStamp"]);
+            SetColumnVisibility(Properties.Settings.Default.Achievements, toolStripMenuAchievements, dataGridView1.Columns["Achievements"]);
+            SetColumnVisibility(Properties.Settings.Default.CreationsID, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
+            SetColumnVisibility(Properties.Settings.Default.Files, toolStripMenuFiles, dataGridView1.Columns["Files"]);
+            SetColumnVisibility(Properties.Settings.Default.Group, toolStripMenuGroup, dataGridView1.Columns["Group"]);
+            SetColumnVisibility(Properties.Settings.Default.Index, toolStripMenuIndex, dataGridView1.Columns["Index"]);
+            SetColumnVisibility(Properties.Settings.Default.FileSize, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
+            SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
+            SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
+            SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
+        }
         private void SetMenus()
         {
             toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProfileOn;
@@ -206,9 +206,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             toolStripMenuAutoDelccc.Checked = Properties.Settings.Default.AutoDelccc;
 
             autoResetToolStripMenuItem.Checked = Properties.Settings.Default.AutoReset;
-            
+
             showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
-            timer2.Enabled= Properties.Settings.Default.Showtime; 
+            timer2.Enabled = Properties.Settings.Default.Showtime;
         }
 
         private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
@@ -257,8 +257,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<string> CreationsID = [];
             List<string> esmFiles = [];
             List<long> FileSize = [];
-            double VersionCheck;
             long ModFileSize;
+            DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
 
             if (!File.Exists(Tools.GetCatalog()))
             {
@@ -275,6 +275,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
+
+            SetColumnVisibility(false, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
+            SetColumnVisibility(false, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
 
             string jsonFilePath = Tools.GetCatalog();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
@@ -397,6 +400,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                 ModFileSize = 0;
                                 URL = "";
 
+
                                 for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
@@ -404,9 +408,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                     {
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
-                                        VersionCheck = double.Parse((ModVersion[..ModVersion.IndexOf('.')]));
                                         AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
-                                        ModVersion = Tools.ConvertTime(VersionCheck).ToString();
+                                        //ModVersion = start.AddSeconds(double.Parse((ModVersion[..ModVersion.IndexOf('.')]))). ToString();
+                                        ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
+
 
                                         ModFiles = CreationsFiles[i];
                                         if (AchievementSafe[i])
@@ -418,7 +423,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         ModFileSize = FileSize[i] / 1024;
                                         URL = "https://creations.bethesda.net/en/starfield/details/" + ModID;
                                     }
-                                };
+                                }
 
                                 rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
@@ -477,6 +482,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     }
                 }
             }
+
+            SetupColumns();
 
             // Get mod stats
             try
@@ -1144,9 +1151,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                         if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == FilesToRemove[i])
                             dataGridView1.Rows.RemoveAt(j);
                 }
-                //sbar3(RemovedFiles.ToString() + " file(s) removed");
-                isModified = true;
             }
+            if (RemovedFiles > 0)
+                isModified = true;
             return RemovedFiles;
         }
 
@@ -1401,10 +1408,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName[..ModName.IndexOf('.')];
-            DialogResult DialogResult = MessageBox.Show(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
-            if (DialogResult == DialogResult.OK)
+            if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?"))
             {
                 isModified = true;
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
@@ -2303,6 +2308,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             activeOnlyToolStripMenuItem.Checked = !activeOnlyToolStripMenuItem.Checked;
             Properties.Settings.Default.ActiveOnly = activeOnlyToolStripMenuItem.Checked;
             ActiveOnly = activeOnlyToolStripMenuItem.Checked;
+            sbar4("Loading...");
+            statusStrip1.Refresh();
             if (!ActiveOnly)
             {
                 for (int i = 0; i < dataGridView1.RowCount; i++)
