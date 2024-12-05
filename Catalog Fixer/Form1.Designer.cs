@@ -46,6 +46,7 @@
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             grpActions = new System.Windows.Forms.GroupBox();
             flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            btnAchievemnts = new System.Windows.Forms.Button();
             btnClearLog = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
@@ -59,7 +60,6 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            btnAchievemnts = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -251,6 +251,17 @@
             flowLayoutPanel3.Size = new System.Drawing.Size(1618, 56);
             flowLayoutPanel3.TabIndex = 7;
             // 
+            // btnAchievemnts
+            // 
+            btnAchievemnts.AutoSize = true;
+            btnAchievemnts.Location = new System.Drawing.Point(1047, 3);
+            btnAchievemnts.Name = "btnAchievemnts";
+            btnAchievemnts.Size = new System.Drawing.Size(174, 50);
+            btnAchievemnts.TabIndex = 7;
+            btnAchievemnts.Text = "Achievements";
+            btnAchievemnts.UseVisualStyleBackColor = true;
+            btnAchievemnts.Click += btnAchievemnts_Click;
+            // 
             // btnClearLog
             // 
             btnClearLog.AutoSize = true;
@@ -413,17 +424,6 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnAchievemnts
-            // 
-            btnAchievemnts.AutoSize = true;
-            btnAchievemnts.Location = new System.Drawing.Point(1047, 3);
-            btnAchievemnts.Name = "btnAchievemnts";
-            btnAchievemnts.Size = new System.Drawing.Size(174, 50);
-            btnAchievemnts.TabIndex = 7;
-            btnAchievemnts.Text = "Achievements";
-            btnAchievemnts.UseVisualStyleBackColor = true;
-            btnAchievemnts.Click += btnAchievemnts_Click;
             // 
             // frmStarfieldTools
             // 

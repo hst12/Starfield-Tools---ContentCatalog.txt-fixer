@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProfileCompare));
             richTextBox1 = new System.Windows.Forms.RichTextBox();
             SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(richTextBox1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "frmProfileCompare";
             Text = "Profile Changes";
             ResumeLayout(false);

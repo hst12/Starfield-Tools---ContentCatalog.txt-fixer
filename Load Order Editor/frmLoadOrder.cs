@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -400,7 +401,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                 ModFileSize = 0;
                                 URL = "";
 
-
                                 for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
@@ -411,7 +411,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
                                         //ModVersion = start.AddSeconds(double.Parse((ModVersion[..ModVersion.IndexOf('.')]))). ToString();
                                         ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
-
 
                                         ModFiles = CreationsFiles[i];
                                         if (AchievementSafe[i])
@@ -732,7 +731,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            sbar3("Warning! - Plugins sorted - saving changes disabled");
+            sbar3("Warning! - Plugins sorted - saving changes disabled - Refresh to enable saving");
             toolStripStatusTertiary.ForeColor = Color.Red;
             btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
@@ -747,7 +746,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             sbar2("All mods disabled");
             isModified = true;
-            //InitDataGrid();
+            SavePlugins();
         }
 
         private void EnableAll()
@@ -760,6 +759,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             sbar2("All mods enabled");
             isModified = true;
+            SavePlugins();
         }
 
         private void FontSelect()
@@ -2299,6 +2299,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             List<string> distinctList = Plugins.Distinct().ToList();
             File.WriteAllLines(loText, distinctList);
             InitDataGrid();
+            isModified = true;
             SavePlugins();
             sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
         }
@@ -2653,6 +2654,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 ActiveOnlyToggle();
             sbar2("All achievement friendly mods enabled");
             isModified = true;
+            SavePlugins();
         }
 
         private void SetAchievement(bool OnOff)
@@ -2699,11 +2701,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
 
             DateTime now = DateTime.Now;
-            string formattedTime = now.ToString("hh:mm tt");
-            sbar5(formattedTime);
+            sbar5(now.ToString("ddd, d MMM yyyy - hh:mm tt", CultureInfo.CurrentCulture.DateTimeFormat));
         }
 
-        private void showTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void showTimeToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             timer2.Enabled = !timer2.Enabled;
             showTimeToolStripMenuItem.Checked = timer2.Enabled;

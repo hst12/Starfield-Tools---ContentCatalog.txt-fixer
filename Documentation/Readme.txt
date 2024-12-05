@@ -1,15 +1,14 @@
 This tool provides a basic load order editor. and checks ContentCatalog.txt file automatically when launched.
 
-New experimental feature:
-Click the Backup button in the catalog checker screen before trying this feature.
-Set all Creation mod achievement flags to enabled. Press Catalog, then press Achievements.
-Use the Refresh button to see the changes in the mod manager. You'll need to turn on the achivements column in the View menu if necessary.
-Use at your own risk. Only usable for Creations mods.
-Won't reset the status of a game save that already has the [C] tag. The game will reset the achievements flags if you load a modded game.
-Added a menu option Mods->Enable Achievement Safe only
-
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
+
+Use with caution if you're using other mod managers such as Vortex or MO2. You can use another mod manager if you understand how they work
+
+Why use this tool instead of the Creations menu?
+It's faster
+It shows more of your load order on screen at once.
+You can use "Profiles" to switch mod setups if you have different save games that you like to switch between.
 
 The tool works the same way with mods as the game does. A Plugins.txt file contains a list of your mods. The order of the lines in Plugins.txt determines the load order.
 The tool doesn't require the use of any .ini edits, folder junctions or virtual folders.
@@ -40,6 +39,31 @@ Some Creations mods apparently can't be un-subscribed from. This is a bug with s
 
 Its a good idea to exit the game when you are done in the Creations menu and run the tool to review and adjust your load order if necessary before loading a saved game.
 
+Some background on how the game handles Creations mods:
+The game creates a file called Plugins.txt in the folder %localappdata%\Starfield.
+The Plugins.txt file will be automatically created by the time you reach the game start menu if it doesn't exist.
+Plugins.txt is a plain text file that lists installed mods in the order that they are loaded by the game.
+A * symbol indicates that a mod is active in the file.
+A # symbol is a comment.
+
+Example:
+# This file is used by Starfield to keep track of your downloaded content.
+# Please do not modify this file.
+*ship power fix.esm
+*ng-20 thruster animation fix.esm
+sfbgs021.esm
+In the example above the mods ship power fix.esm and ng-20 thruster animation fix.esm are active but the mod sfbgs021.esm is inactive and won't be loaded.
+
+You can edit the Plugins.txt file yourself with a text editor such as Notepad.exe or this tool.Any edits you make will be recognised by the game as if it was done within the Creations menu.
+
+Experimental feature:
+Click the Backup button in the catalog checker screen before trying this feature.
+Set all Creation mod achievement flags to enabled. Press Catalog, then press Achievements.
+Use the Refresh button to see the changes in the mod manager. You'll need to turn on the achivements column in the View menu if necessary.
+Use at your own risk. Only usable for Creations mods.
+Won't reset the status of a game save that already has the [C] tag. The game will reset the achievements flags if you load a modded game.
+Added a menu option Mods->Enable Achievement Safe only
+
 If you have LOOT installed and configured with groups, press the Autosort button to sort your load order automatically after making changes in the in-game Creations menu.
 
 You can install mods from sites like Nexus using the manual download option if they only include a .esm file and (optionally) one or more .ba2 archives.
@@ -53,7 +77,7 @@ Steam installation
 E:\SteamLibrary\steamapps\common\Starfield
 MS Store intallation
 F:\XboxGames\Starfield\Content
-Use the Game-Game Version menu to select the game to run or configure.
+Use the Game->Game Version menu to select the game to run or configure.
 Use the Tools->Starfield path menu option to set the path for each version of the game. The path setting only needs to be done once for either version of the game.
 Note that the game will silently overwrite your Plugins.txt file based upon what mods you have installed for each version of the game.
 You can work around this by using the profile feature in the app.It's best to switch to a "no mods" profile before switching game versions.

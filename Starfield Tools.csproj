@@ -63,11 +63,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Documentation\Images\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Documentation\Images\**" />
     <None Remove="bin\**" />
+    <None Remove="Documentation\Images\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Banner.jpg" />
+    <None Remove="Documentation\Buttons.htm" />
+    <None Remove="Documentation\Index.htm" />
+    <None Remove="Documentation\Menus.htm" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clipboard.ico" />
@@ -125,18 +131,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Common\StarFieldCustom.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Documentation\Buttons.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Documentation\Images\Buttons.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Documentation\Index.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Documentation\Menus.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">

@@ -66,10 +66,10 @@ namespace Starfield_Tools.Load_Order_Editor
         {
             //string INISection, INISetting;
 
-            ChangeSetting(chkLooseFiles.Checked, "[Archive]", "bInvalidateOlderFiles=1");
-            //ChangeSetting(chkMOTD.Checked, "[General]", "bEnableMessageOfTheDay=0");
-            //ChangeSetting(chkUserPhotos.Checked, "Interface", "bForcePhotoModeLoadScreen = 1");
-            ChangeSetting(ckhPapyrusLogging.Checked, "[Papyrus]", "bEnableLogging=1");
+            ChangeSetting(chkLooseFiles.Checked, "[Archive]", "bInvalidateOlderFiles=");
+            ChangeSetting(chkMOTD.Checked, "[General]", "bEnableMessageOfTheDay=");
+            ChangeSetting(chkUserPhotos.Checked, "[Interface]", "bForcePhotoModeLoadScreen=");
+            ChangeSetting(ckhPapyrusLogging.Checked, "[Papyrus]", "bEnableLogging=");
             this.Close();
         }
     }
