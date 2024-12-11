@@ -10,7 +10,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -136,17 +135,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             SetMenus();
 
-            frmStarfieldTools StarfieldTools = new(); // Check the catalog
-            sbar4(StarfieldTools.CatalogStatus);
-            if (StarfieldTools.CatalogStatus != null)
-                if (StarfieldTools.CatalogStatus.Contains("Error"))
-                    StarfieldTools.Show(); // Show catalog fixer if catalog broken
-
-            cmbProfile.Enabled = Profiles;
-            GetProfiles();
-            if (!Profiles)
-                InitDataGrid();
-
             // Do a 1-time backup of Plugins.txt if it doesn't exist
             if (!File.Exists(PluginsPath + ".bak"))
             {
@@ -154,8 +142,29 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 File.Copy(PluginsPath, PluginsPath + ".bak");
             }
 
+            frmStarfieldTools StarfieldTools = new(); // Check the catalog
+            sbar4(StarfieldTools.CatalogStatus);
+            if (StarfieldTools.CatalogStatus != null)
+                if (StarfieldTools.CatalogStatus.Contains("Error"))
+                    StarfieldTools.Show(); // Show catalog fixer if catalog broken
+
+            cmbProfile.Enabled = Profiles;
+            if (Profiles)
+                GetProfiles();
+            else
+                InitDataGrid();
+
             if (AutoUpdate)
-                sbar4(AddRemove());
+            {
+                int AddedMods = AddMissing(), RemovedMods = RemoveMissing();
+
+                if (AddedMods + RemovedMods > 0)
+                {
+                    sbar4("Added: " + AddedMods + ", Removed: " + RemovedMods);
+                    SavePlugins();
+                    InitDataGrid();
+                }
+            }
 
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
@@ -1052,11 +1061,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             directory += @"\Data";
 
-            /*            if (directory == "\\Data")
-                        {
-                            MessageBox.Show("Can't continue without game installation path");
-                            return 0;
-                        }*/
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
@@ -1086,7 +1090,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     row.Cells["PluginName"].Value = FilesToAdd[i];
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
-                //sbar3(AddedFiles.ToString() + " file(s) added");
                 isModified = true;
             }
             return AddedFiles;
