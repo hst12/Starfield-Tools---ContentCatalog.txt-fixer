@@ -2190,8 +2190,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-            //SavePlugins();
             sbar3(ReturnStatus);
+            if (AutoSort && ReturnStatus!= "Plugins.txt is up to date")
+                RunLOOT(true);
         }
 
         private void LooseFilesOnOff(bool EnableDisable) // True for enabled
