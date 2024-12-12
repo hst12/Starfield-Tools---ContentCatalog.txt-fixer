@@ -522,7 +522,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                 if (dataGridView1.RowCount - TitleCount < 0)
                     sbar4("Catalog/Plugins mismatch - Run game to solve");
-
             }
             catch (Exception ex)
             {
