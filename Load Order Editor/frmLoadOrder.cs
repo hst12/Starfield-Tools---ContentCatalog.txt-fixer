@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
@@ -2191,7 +2192,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             string ReturnStatus = AddRemove();
             sbar3(ReturnStatus);
-            if (AutoSort && ReturnStatus!= "Plugins.txt is up to date")
+            if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
                 RunLOOT(true);
         }
 
@@ -2717,6 +2718,66 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             Properties.Settings.Default.Showtime = showTimeToolStripMenuItem.Checked;
             if (!timer2.Enabled)
                 sbar5("");
+        }
+
+        static void CreateZipFromFiles(List<string> files, string zipPath)
+        {
+            using (FileStream zipToOpen = new FileStream(zipPath, FileMode.Create))
+            {
+                using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
+                {
+                    foreach (string file in files)
+                    {
+                        ZipArchiveEntry entry = archive.CreateEntryFromFile(file, Path.GetFileName(file));
+                    }
+                }
+            }
+
+        }
+
+        private void archiveModToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            string ModName, ModFile;
+            List<string> files = new();
+
+            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
+            ModName = ModName[..ModName.IndexOf('.')];
+
+            string directoryPath = StarfieldGamePath + "\\Data";
+
+            using FolderBrowserDialog folderBrowserDialog = new();
+
+            folderBrowserDialog.Description = "Choose folder to archive the mod to";
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+
+                ModFile = directoryPath + "\\" + ModName;
+                if (File.Exists(ModFile + ".esp"))
+                    files.Add(ModFile + ".esp");
+
+                if (File.Exists(ModFile + ".esm"))
+                    files.Add(ModFile + ".esm");
+
+                if (File.Exists(ModFile + " - textures.ba2"))
+                    files.Add(ModFile + " - textures.ba2");
+
+                if (File.Exists(ModFile + " - main.ba2"))
+                    files.Add(ModFile + " - main.ba2");
+
+                string zipPath = folderBrowserDialog.SelectedPath + Path.GetFileName(ModFile) + ".zip";
+                if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", "Archive exists"))
+                {
+                    sbar3("Archive not created");
+                    return;
+                }
+                sbar3("Creating archive...");
+                statusStrip1.Refresh();
+                CreateZipFromFiles(files, zipPath);
+                sbar3(Path.GetFileName(ModFile)+" archived");
+
+
+            }
         }
     }
 }
