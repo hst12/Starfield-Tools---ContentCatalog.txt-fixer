@@ -2765,8 +2765,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 if (File.Exists(ModFile + " - main.ba2"))
                     files.Add(ModFile + " - main.ba2");
 
-                string zipPath = folderBrowserDialog.SelectedPath + Path.GetFileName(ModFile) + ".zip";
-                if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", "Archive exists"))
+                string zipPath = folderBrowserDialog.SelectedPath + "\\"+Path.GetFileName(ModFile) + ".zip";
+                if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", "Archive exists - "+Path.GetFileName(ModFile)))
                 {
                     sbar3("Archive not created");
                     return;
