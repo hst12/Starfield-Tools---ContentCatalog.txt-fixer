@@ -17,6 +17,7 @@ Right-click for context menu
 
 Context menu functions:
 Install mod from zip file - won't work for mods that have loose files.
+Archive mod - Zips up the files for a mod and copies them to a specified folder. The mod can be uninstalled at this point and re-installed later from the folder chosen.
 Un-install (delete) mod
 Add/Remove function checks game folder for installed mods and adds them to plugins.txt or removes deleted mods from Plugins.txt
 View web site page for Creations mods
