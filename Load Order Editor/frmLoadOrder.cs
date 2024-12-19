@@ -1209,6 +1209,15 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (Directory.Exists(ExtractPath))
                 Directory.Delete(ExtractPath, true);
 
+            if (StarfieldGamePath == "" || StarfieldGamePath == null)
+                StarfieldGamePath=tools.SetStarfieldGamePath();
+            if (StarfieldGamePath == "")
+            {
+                MessageBox.Show("Unable to continue without Starfield game path");
+                return;
+            }
+
+
             OpenFileDialog OpenMod = new()
             {
                 //OpenMod.InitialDirectory = ProfileFolder;
