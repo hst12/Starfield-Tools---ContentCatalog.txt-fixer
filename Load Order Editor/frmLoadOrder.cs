@@ -1424,6 +1424,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName[..ModName.IndexOf('.')];
 
+            if (StarfieldGamePath == "" || StarfieldGamePath == null)
+                StarfieldGamePath = tools.SetStarfieldGamePath();
+            if (StarfieldGamePath == "")
+            {
+                MessageBox.Show("Unable to continue without Starfield game path");
+                return;
+            }
+
             if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?"))
             {
                 isModified = true;
