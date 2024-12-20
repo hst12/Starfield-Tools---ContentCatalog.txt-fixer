@@ -1425,14 +1425,14 @@
             // toolStripMenuShortcuts
             // 
             toolStripMenuShortcuts.Name = "toolStripMenuShortcuts";
-            toolStripMenuShortcuts.Size = new System.Drawing.Size(313, 44);
-            toolStripMenuShortcuts.Text = "Shortcuts";
+            toolStripMenuShortcuts.Size = new System.Drawing.Size(419, 44);
+            toolStripMenuShortcuts.Text = "Shortcuts and Quick Help";
             toolStripMenuShortcuts.Click += toolStripMenuShortcuts_Click;
             // 
             // documentationToolStripMenuItem
             // 
             documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            documentationToolStripMenuItem.Size = new System.Drawing.Size(313, 44);
+            documentationToolStripMenuItem.Size = new System.Drawing.Size(419, 44);
             documentationToolStripMenuItem.Text = "Documentation";
             documentationToolStripMenuItem.Visible = false;
             documentationToolStripMenuItem.Click += documentationToolStripMenuItem_Click;
@@ -1441,7 +1441,7 @@
             // 
             aboutToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("aboutToolStripMenuItem.Image");
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new System.Drawing.Size(313, 44);
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(419, 44);
             aboutToolStripMenuItem.Text = "&About...";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 

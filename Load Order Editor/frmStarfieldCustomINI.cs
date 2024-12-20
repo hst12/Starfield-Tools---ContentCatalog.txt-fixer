@@ -49,7 +49,7 @@ namespace Starfield_Tools.Load_Order_Editor
         {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini";
 
-                List<string> INILines = new();
+            List<string> INILines = new();
             INILines.Add(@"[General]
 sIntroSequence=");
 

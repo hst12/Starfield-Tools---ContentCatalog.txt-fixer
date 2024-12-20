@@ -37,6 +37,7 @@
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             chkSkipIntro = new System.Windows.Forms.CheckBox();
             chkMainMenuDelay = new System.Windows.Forms.CheckBox();
+            label1 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // btnCancel
             // 
             btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            btnCancel.Location = new System.Drawing.Point(658, 3);
+            btnCancel.Location = new System.Drawing.Point(605, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(136, 59);
             btnCancel.TabIndex = 1;
@@ -77,9 +78,9 @@
             chkMOTD.AutoSize = true;
             chkMOTD.Location = new System.Drawing.Point(12, 54);
             chkMOTD.Name = "chkMOTD";
-            chkMOTD.Size = new System.Drawing.Size(731, 36);
+            chkMOTD.Size = new System.Drawing.Size(361, 36);
             chkMOTD.TabIndex = 3;
-            chkMOTD.Text = "Disable Message of the Day (Will disable all loadscreen pictures)";
+            chkMOTD.Text = "Disable Message of the Day *";
             chkMOTD.UseVisualStyleBackColor = true;
             // 
             // chkPapyrusLogging
@@ -95,11 +96,11 @@
             // chkUserPhotos
             // 
             chkUserPhotos.AutoSize = true;
-            chkUserPhotos.Location = new System.Drawing.Point(12, 180);
+            chkUserPhotos.Location = new System.Drawing.Point(12, 96);
             chkUserPhotos.Name = "chkUserPhotos";
-            chkUserPhotos.Size = new System.Drawing.Size(317, 36);
+            chkUserPhotos.Size = new System.Drawing.Size(334, 36);
             chkUserPhotos.TabIndex = 5;
-            chkUserPhotos.Text = "Player Photo Loadscreens";
+            chkUserPhotos.Text = "Player Photo Loadscreens *";
             chkUserPhotos.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -110,18 +111,18 @@
             tableLayoutPanel1.Controls.Add(btnOK, 0, 0);
             tableLayoutPanel1.Controls.Add(btnCancel, 1, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 293);
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 353);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(797, 65);
+            tableLayoutPanel1.Size = new System.Drawing.Size(744, 65);
             tableLayoutPanel1.TabIndex = 6;
             // 
             // chkSkipIntro
             // 
             chkSkipIntro.AutoSize = true;
-            chkSkipIntro.Location = new System.Drawing.Point(12, 96);
+            chkSkipIntro.Location = new System.Drawing.Point(12, 180);
             chkSkipIntro.Name = "chkSkipIntro";
             chkSkipIntro.Size = new System.Drawing.Size(148, 36);
             chkSkipIntro.TabIndex = 7;
@@ -138,11 +139,21 @@
             chkMainMenuDelay.Text = "Reduce Main Menu Delay before skip";
             chkMainMenuDelay.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(12, 296);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(703, 32);
+            label1.TabIndex = 9;
+            label1.Text = "* These options used together will disable all photo load screens";
+            // 
             // frmStarfieldCustomINI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(797, 358);
+            ClientSize = new System.Drawing.Size(744, 418);
+            Controls.Add(label1);
             Controls.Add(chkMainMenuDelay);
             Controls.Add(chkSkipIntro);
             Controls.Add(tableLayoutPanel1);
@@ -170,5 +181,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkSkipIntro;
         private System.Windows.Forms.CheckBox chkMainMenuDelay;
+        private System.Windows.Forms.Label label1;
     }
 }
