@@ -133,9 +133,9 @@
             chkMainMenuDelay.AutoSize = true;
             chkMainMenuDelay.Location = new System.Drawing.Point(12, 138);
             chkMainMenuDelay.Name = "chkMainMenuDelay";
-            chkMainMenuDelay.Size = new System.Drawing.Size(363, 36);
+            chkMainMenuDelay.Size = new System.Drawing.Size(448, 36);
             chkMainMenuDelay.TabIndex = 8;
-            chkMainMenuDelay.Text = "Main Menu Delay before skip";
+            chkMainMenuDelay.Text = "Reduce Main Menu Delay before skip";
             chkMainMenuDelay.UseVisualStyleBackColor = true;
             // 
             // frmStarfieldCustomINI
