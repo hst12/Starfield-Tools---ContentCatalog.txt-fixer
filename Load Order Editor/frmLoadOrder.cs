@@ -173,21 +173,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             else
                 InitDataGrid();
 
-            if (AutoUpdate)
-            {
-                int AddedMods = AddMissing(), RemovedMods = RemoveMissing();
-
-                if (AddedMods + RemovedMods > 0)
-                {
-                    sbar4("Added: " + AddedMods + ", Removed: " + RemovedMods);
-                    SavePlugins();
-                    InitDataGrid();
-                }
-            }
-
-            if (Properties.Settings.Default.AutoReset)
-                ResetDefaults();
-
 #if DEBUG
             testToolStripMenu.Visible = true;
 #endif
@@ -237,6 +222,24 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
             timer2.Enabled = Properties.Settings.Default.Showtime;
+
+            if (Properties.Settings.Default.AutoReset)
+                ResetDefaults();
+
+            if (AutoUpdate)
+            {
+                int AddedMods = AddMissing(), RemovedMods = RemoveMissing();
+
+                if (AddedMods + RemovedMods > 0)
+                {
+                    sbar4("Added: " + AddedMods + ", Removed: " + RemovedMods);
+                    SavePlugins();
+                    if (AutoSort)
+                        RunLOOT(true);
+                    InitDataGrid();
+                }
+            }
+
         }
 
         private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
