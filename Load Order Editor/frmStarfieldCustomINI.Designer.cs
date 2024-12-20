@@ -77,9 +77,9 @@
             chkMOTD.AutoSize = true;
             chkMOTD.Location = new System.Drawing.Point(12, 54);
             chkMOTD.Name = "chkMOTD";
-            chkMOTD.Size = new System.Drawing.Size(757, 36);
+            chkMOTD.Size = new System.Drawing.Size(731, 36);
             chkMOTD.TabIndex = 3;
-            chkMOTD.Text = "Disable Message of the Day (Will cancel Player Photo Loadscreens)";
+            chkMOTD.Text = "Disable Message of the Day (Will disable all loadscreen pictures)";
             chkMOTD.UseVisualStyleBackColor = true;
             // 
             // chkPapyrusLogging
