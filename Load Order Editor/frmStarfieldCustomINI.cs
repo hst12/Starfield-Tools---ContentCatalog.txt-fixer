@@ -17,23 +17,26 @@ namespace Starfield_Tools.Load_Order_Editor
         {
             InitializeComponent();
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini";
-            var fileContent = File.ReadAllLines(filePath);
-
-            //Set checkboxes
-            foreach (var lines in fileContent)
+            if (File.Exists(filePath))
             {
-                if (lines.Contains("sIntroSequence"))
-                    chkSkipIntro.Checked = true;
-                if (lines.Contains("bInvalidateOlderFiles"))
-                    chkLooseFiles.Checked = true;
-                if (lines.Contains("bEnableMessageOfTheDay"))
-                    chkMOTD.Checked = true;
-                if (lines.Contains("uMainMenuDelayBeforeAllowSkip"))
-                    chkMainMenuDelay.Checked = true;
-                if (lines.Contains("bForcePhotoModeLoadScreen"))
-                    chkUserPhotos.Checked = true;
-                if (lines.Contains("bEnableLogging"))
-                    chkPapyrusLogging.Checked = true;
+                var fileContent = File.ReadAllLines(filePath);
+
+                //Set checkboxes
+                foreach (var lines in fileContent)
+                {
+                    if (lines.Contains("sIntroSequence"))
+                        chkSkipIntro.Checked = true;
+                    if (lines.Contains("bInvalidateOlderFiles"))
+                        chkLooseFiles.Checked = true;
+                    if (lines.Contains("bEnableMessageOfTheDay"))
+                        chkMOTD.Checked = true;
+                    if (lines.Contains("uMainMenuDelayBeforeAllowSkip"))
+                        chkMainMenuDelay.Checked = true;
+                    if (lines.Contains("bForcePhotoModeLoadScreen"))
+                        chkUserPhotos.Checked = true;
+                    if (lines.Contains("bEnableLogging"))
+                        chkPapyrusLogging.Checked = true;
+                }
             }
         }
 
