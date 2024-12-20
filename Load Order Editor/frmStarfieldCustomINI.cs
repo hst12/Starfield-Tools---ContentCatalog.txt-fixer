@@ -16,45 +16,25 @@ namespace Starfield_Tools.Load_Order_Editor
         public frmStarfieldCustomINI()
         {
             InitializeComponent();
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini";
+            var fileContent = File.ReadAllLines(filePath);
 
             //Set checkboxes
-            if (Properties.Settings.Default.LooseFiles)
-                chkLooseFiles.Checked = true;
-
-        }
-
-        private void ChangeSetting(bool EnableDisable, string INISection, string INISetting, string INISetting2 = "sResourceDataDirsFinal=") // True for enabled
-        {
-            string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\",
-                    filePath = LooseFilesDir + "StarfieldCustom.ini";
-            bool LooseFiles = false;
-
-            if (EnableDisable)
+            foreach (var lines in fileContent)
             {
-                List<string> linesToAppend = [INISection, INISetting];
-                File.AppendAllLines(filePath, linesToAppend);
-                LooseFiles = true;
+                if (lines.Contains("sIntroSequence"))
+                    chkSkipIntro.Checked = true;
+                if (lines.Contains("bInvalidateOlderFiles"))
+                    chkLooseFiles.Checked = true;
+                if (lines.Contains("bEnableMessageOfTheDay"))
+                    chkMOTD.Checked = true;
+                if (lines.Contains("uMainMenuDelayBeforeAllowSkip"))
+                    chkMainMenuDelay.Checked = true;
+                if (lines.Contains("bForcePhotoModeLoadScreen"))
+                    chkUserPhotos.Checked = true;
+                if (lines.Contains("bEnableLogging"))
+                    chkPapyrusLogging.Checked = true;
             }
-            else
-            {
-                if (File.Exists(filePath))
-                {
-                    var lines = File.ReadAllLines(filePath).ToList();
-                    if (lines.Contains(INISetting))
-                    {
-                        string[] linesToRemove = [INISection, INISetting, INISetting2];
-
-                        foreach (var lineToRemove in linesToRemove)
-                        {
-                            lines.RemoveAll(line => line.Trim() == lineToRemove);
-                        }
-
-                        File.WriteAllLines(filePath, lines);
-                        LooseFiles = false;
-                    }
-                }
-            }
-            Properties.Settings.Default.LooseFiles = LooseFiles;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -64,12 +44,38 @@ namespace Starfield_Tools.Load_Order_Editor
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            //string INISection, INISetting;
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini";
 
-            ChangeSetting(chkLooseFiles.Checked, "[Archive]", "bInvalidateOlderFiles=");
-            ChangeSetting(chkMOTD.Checked, "[General]", "bEnableMessageOfTheDay=");
-            ChangeSetting(chkUserPhotos.Checked, "[Interface]", "bForcePhotoModeLoadScreen=");
-            ChangeSetting(ckhPapyrusLogging.Checked, "[Papyrus]", "bEnableLogging=");
+                List<string> INILines = new();
+            INILines.Add(@"[General]
+sIntroSequence=");
+
+            if (chkMOTD.Checked)
+                INILines.Add("bEnableMessageOfTheDay=0");
+
+            if (chkMainMenuDelay.Checked)
+                INILines.Add("uMainMenuDelayBeforeAllowSkip=0");
+
+            if (chkUserPhotos.Checked)
+                INILines.Add(@"
+[Interface]
+bForcePhotoModeLoadScreen=1");
+
+            if (chkLooseFiles.Checked)
+            {
+                INILines.Add(@"
+[Archive]
+bInvalidateOlderFiles=");
+            }
+
+            if (chkPapyrusLogging.Checked)
+            {
+                INILines.Add(@"
+[Papyrus]
+bEnableLogging=1");
+            }
+
+            File.WriteAllLines(filePath, INILines);
             this.Close();
         }
     }

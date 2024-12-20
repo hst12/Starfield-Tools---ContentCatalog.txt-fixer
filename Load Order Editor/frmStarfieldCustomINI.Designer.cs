@@ -32,7 +32,7 @@
             btnCancel = new System.Windows.Forms.Button();
             chkLooseFiles = new System.Windows.Forms.CheckBox();
             chkMOTD = new System.Windows.Forms.CheckBox();
-            ckhPapyrusLogging = new System.Windows.Forms.CheckBox();
+            chkPapyrusLogging = new System.Windows.Forms.CheckBox();
             chkUserPhotos = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             chkSkipIntro = new System.Windows.Forms.CheckBox();
@@ -54,7 +54,7 @@
             // btnCancel
             // 
             btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
-            btnCancel.Location = new System.Drawing.Point(512, 3);
+            btnCancel.Location = new System.Drawing.Point(658, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(136, 59);
             btnCancel.TabIndex = 1;
@@ -77,20 +77,20 @@
             chkMOTD.AutoSize = true;
             chkMOTD.Location = new System.Drawing.Point(12, 54);
             chkMOTD.Name = "chkMOTD";
-            chkMOTD.Size = new System.Drawing.Size(259, 36);
+            chkMOTD.Size = new System.Drawing.Size(757, 36);
             chkMOTD.TabIndex = 3;
-            chkMOTD.Text = "Message of the Day";
+            chkMOTD.Text = "Disable Message of the Day (Will cancel Player Photo Loadscreens)";
             chkMOTD.UseVisualStyleBackColor = true;
             // 
-            // ckhPapyrusLogging
+            // chkPapyrusLogging
             // 
-            ckhPapyrusLogging.AutoSize = true;
-            ckhPapyrusLogging.Location = new System.Drawing.Point(12, 222);
-            ckhPapyrusLogging.Name = "ckhPapyrusLogging";
-            ckhPapyrusLogging.Size = new System.Drawing.Size(222, 36);
-            ckhPapyrusLogging.TabIndex = 4;
-            ckhPapyrusLogging.Text = "Papyrus Logging";
-            ckhPapyrusLogging.UseVisualStyleBackColor = true;
+            chkPapyrusLogging.AutoSize = true;
+            chkPapyrusLogging.Location = new System.Drawing.Point(12, 222);
+            chkPapyrusLogging.Name = "chkPapyrusLogging";
+            chkPapyrusLogging.Size = new System.Drawing.Size(222, 36);
+            chkPapyrusLogging.TabIndex = 4;
+            chkPapyrusLogging.Text = "Papyrus Logging";
+            chkPapyrusLogging.UseVisualStyleBackColor = true;
             // 
             // chkUserPhotos
             // 
@@ -115,7 +115,7 @@
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(651, 65);
+            tableLayoutPanel1.Size = new System.Drawing.Size(797, 65);
             tableLayoutPanel1.TabIndex = 6;
             // 
             // chkSkipIntro
@@ -142,18 +142,18 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(651, 358);
+            ClientSize = new System.Drawing.Size(797, 358);
             Controls.Add(chkMainMenuDelay);
             Controls.Add(chkSkipIntro);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(chkUserPhotos);
-            Controls.Add(ckhPapyrusLogging);
+            Controls.Add(chkPapyrusLogging);
             Controls.Add(chkMOTD);
             Controls.Add(chkLooseFiles);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmStarfieldCustomINI";
-            Text = "StarfieldCustom.ini Settings (not working yet)";
+            Text = "StarfieldCustom.ini Settings";
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -165,7 +165,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chkLooseFiles;
         private System.Windows.Forms.CheckBox chkMOTD;
-        private System.Windows.Forms.CheckBox ckhPapyrusLogging;
+        private System.Windows.Forms.CheckBox chkPapyrusLogging;
         private System.Windows.Forms.CheckBox chkUserPhotos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkSkipIntro;
