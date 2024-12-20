@@ -27,7 +27,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile;
 
-        bool Profiles = false, GridSorted = false, LooseFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false;
+        bool Profiles = false, GridSorted = false, leFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false,LooseFiles;
 
         public frmLoadOrder(string parameter)
         {
@@ -38,7 +38,25 @@ namespace Starfield_Tools
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt",
  LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
 filePath = LooseFilesDir + "StarfieldCustom.ini";
+            try
+            {
+                var StarfieldCustomINI = File.ReadAllLines(filePath);
+                foreach (var lines in StarfieldCustomINI)
+                {
+                    if (lines.Contains("bInvalidateOlderFiles"))
+                    {
+                        Properties.Settings.Default.LooseFiles = true;
+                        Properties.Settings.Default.Save();
+                        LooseFiles = true;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
 
+            }
+          
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -97,14 +115,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             SetupColumns();
 
-            if (File.Exists(filePath))
+            /*if (File.Exists(filePath))
             {
                 var lines = File.ReadAllLines(filePath).ToList();
                 if (lines.Contains("bInvalidateOlderFiles=1"))
                     Properties.Settings.Default.LooseFiles = true;
                 else
                     Properties.Settings.Default.LooseFiles = false;
-            }
+            }*/
 
             // Setup other preferences
 
@@ -193,15 +211,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProfileOn;
             compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
 
-            LooseFiles = Properties.Settings.Default.LooseFiles;
-            if (LooseFiles)
+            if (LooseFiles || Properties.Settings.Default.LooseFiles)
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                looseFilesDisabledToolStripMenuItem.Checked = true;
                 sbarCCC("Loose files enabled");
             }
             else
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                looseFilesDisabledToolStripMenuItem.Checked = false;
                 sbarCCC("Loose files disabled");
             }
 
@@ -2228,12 +2245,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             LooseFiles = !LooseFiles;
             if (LooseFiles)
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                looseFilesDisabledToolStripMenuItem.Checked = true;
                 LooseFilesOnOff(true);
             }
             else
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                looseFilesDisabledToolStripMenuItem.Checked = false;
                 LooseFilesOnOff(false);
             }
             Properties.Settings.Default.LooseFiles = LooseFiles;
@@ -2333,13 +2350,13 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         {
             if (LooseFiles)
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Enabled";
+                looseFilesDisabledToolStripMenuItem.Checked = true;
                 LooseFiles = true;
                 sbarCCC("Loose files enabled");
             }
             else
             {
-                looseFilesDisabledToolStripMenuItem.Text = "Loose Files Disabled";
+                looseFilesDisabledToolStripMenuItem.Checked = false;
                 LooseFiles = false;
                 sbarCCC("Loose files disabled");
             }
@@ -2604,7 +2621,34 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void uIToEditStarfieldCustominiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmStarfieldCustomINI fci = new();
-            fci.Show();
+            fci.ShowDialog();
+            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt",
+LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
+filePath = LooseFilesDir + "StarfieldCustom.ini";
+            LooseFiles = false;
+            try
+            {
+                var StarfieldCustomINI = File.ReadAllLines(filePath);
+                foreach (var lines in StarfieldCustomINI)
+                {
+                    if (lines.Contains("bInvalidateOlderFiles"))
+                    {
+                        Properties.Settings.Default.LooseFiles = true;
+                        Properties.Settings.Default.Save();
+                        LooseFiles = true;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            if (LooseFiles)
+                sbarCCC("Loose Files Enabled");
+            else
+                sbarCCC("Loose Files Disabled");
+            looseFilesDisabledToolStripMenuItem.Checked = LooseFiles;
         }
 
         private void UpdateGameVersion(string gameVersion)

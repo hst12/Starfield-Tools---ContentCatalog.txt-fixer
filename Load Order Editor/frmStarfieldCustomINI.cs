@@ -76,6 +76,8 @@ bEnableLogging=1");
             }
 
             File.WriteAllLines(filePath, INILines);
+            Properties.Settings.Default.LooseFiles = chkLooseFiles.Checked;
+            Properties.Settings.Default.Save();
             this.Close();
         }
     }
