@@ -50,8 +50,10 @@ namespace Starfield_Tools.Load_Order_Editor
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\StarfieldCustom.ini";
 
             List<string> INILines = new();
-            INILines.Add(@"[General]
-sIntroSequence=");
+            INILines.Add(@"[General]");
+            
+            if (chkSkipIntro.Checked)
+                INILines.Add("sIntroSequence=");
 
             if (chkMOTD.Checked)
                 INILines.Add("bEnableMessageOfTheDay=0");
@@ -82,6 +84,16 @@ bEnableLogging=1");
             Properties.Settings.Default.LooseFiles = chkLooseFiles.Checked;
             Properties.Settings.Default.Save();
             this.Close();
+        }
+
+        private void btnSuggested_Click(object sender, EventArgs e)
+        {
+            chkLooseFiles.Checked = false;
+            chkMOTD.Checked = true;
+            chkUserPhotos.Checked = true;
+            chkMainMenuDelay.Checked = true;
+            chkSkipIntro.Checked = true;
+            chkPapyrusLogging.Checked = false;
         }
     }
 }
