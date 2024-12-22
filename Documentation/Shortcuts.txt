@@ -1,19 +1,19 @@
 ﻿Mod enable/disable - Space or  Double-Click anywhere on the mod line - changes saved
-Delete from Plugins.txt - Del - Does not automatically save or delete the mod from the Data folder
+Delete from Plugins.txt - Del - Does not delete the mod files from the Data folder
 
 Mod move order keys:
+Select a mod by clicking once on it then:
 Move Up - W
 Move Down -S
 Move Top - A
 Move Bottom -D
-Drag and drop with mouse
+Alternatively, drag and drop with mouse
 
 Run game - R
 Save Plugins - Ctrl-S
 Open Profile - Ctrl-O
 
-Misc:
-Right-click for context menu
+Right-click on the mod list for context menu
 
 Context menu functions:
 Install mod from zip file - won't work for mods that have loose files.
@@ -23,7 +23,7 @@ Add/Remove function checks game folder for installed mods and adds them to plugi
 View web site page for Creations mods or non-Creations mods if LOOT is installed, configured in the app and link metadata is available.
 Loot Autosort: Run LOOT with autosort parameter if installed
 
-Refresh - F5 - discards unsaved changes
+Refresh - F5 - discards unsaved changes. Use this function to update the display if necessary.
 Search - Click in the search box, type text to search for (mod filename only) and press enter. Press enter again to find the next match.
 Search is case insensitive and any part of the filename can be searched for.
 
@@ -34,3 +34,11 @@ Theme: Light, dark mode or System=Windows setting
 File->Edit Files->StarfieldCustomINI Editor - Some tweak options for the game.
 Warning, using this function will overwrite your StarfieldCustom.ini file
 Disable Tools->Auto Reset if enabled for the settings to persist
+
+Tools Menu
+Set up paths for the game folder and various other tools - Steam and MS Store version of the game supported.
+Load screen - just a gimmick meant for the Steam version of the game to show you that something is happening if you launch the game from this app. MS Store game has its own loading screen.
+The app will quit 7 seconds after launching the game for the Steam version.
+Content Catalog Check - Launches the ContentCatalog.txt checker. This runs automatically at startup but won't display anything unless an issue is found.
+Warning: The Enable All Settings function will turn on settings that will reverse the INI file changes made by Vortex, so use with caution. It will also overwrite any settings in StarfieldCustom.ini and deletes Starfield.CCC file if found. A warning will be displayed before any action is taken in case you accidently click this option.
+The tool will not modify the INI files in the game folder, only the ones found in your Documents\My Games\Starfield folder.
