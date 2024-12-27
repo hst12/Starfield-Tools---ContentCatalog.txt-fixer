@@ -48,6 +48,10 @@
     <PlatformTarget>x64</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Title>Starfield Tools</Title>
+    <PackageIcon>SpaceShip.ico</PackageIcon>
+    <SignAssembly>True</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -138,6 +142,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="SpaceShip.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
