@@ -27,7 +27,7 @@ namespace Starfield_Tools
         readonly Tools tools = new();
         private string StarfieldGamePath, LastProfile;
 
-        bool Profiles = false, GridSorted = false, leFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false,LooseFiles;
+        bool Profiles = false, GridSorted = false, leFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false, LooseFiles;
 
         public frmLoadOrder(string parameter)
         {
@@ -35,11 +35,12 @@ namespace Starfield_Tools
 
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
-            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt",
- LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
-filePath = LooseFilesDir + "StarfieldCustom.ini";
+            string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
+
             try
             {
+                string LooseFilesDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\My Games\\Starfield\\", // Check if loose files are enabled
+filePath = LooseFilesDir + "StarfieldCustom.ini";
                 var StarfieldCustomINI = File.ReadAllLines(filePath);
                 foreach (var lines in StarfieldCustomINI)
                 {
@@ -52,11 +53,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
             }
-          
+
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -115,15 +118,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             SetupColumns();
 
-            /*if (File.Exists(filePath))
-            {
-                var lines = File.ReadAllLines(filePath).ToList();
-                if (lines.Contains("bInvalidateOlderFiles=1"))
-                    Properties.Settings.Default.LooseFiles = true;
-                else
-                    Properties.Settings.Default.LooseFiles = false;
-            }*/
-
             // Setup other preferences
 
             switch (Properties.Settings.Default.DarkMode)
@@ -172,10 +166,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 GetProfiles();
             else
                 InitDataGrid();
-
-#if DEBUG
-            testToolStripMenu.Visible = true;
-#endif
         }
 
         private void SetupColumns()
@@ -515,42 +505,47 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             SetupColumns();
 
             // Get mod stats
-            try
+            if (StarfieldGamePath != "")
             {
-                directory = StarfieldGamePath + @"\Data";
-
-                foreach (string file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+                try
                 {
-                    esmCount++;
-                }
+                    directory = StarfieldGamePath + @"\Data";
 
-                foreach (string file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+                    foreach (string file in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+                    {
+                        esmCount++;
+                    }
+
+                    foreach (string file in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+                    {
+                        espCount++;
+                    }
+
+                    foreach (string file in Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly))
+                    {
+                        ba2Count++;
+                    }
+
+                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
+                        (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
+                        esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
+
+                    if (espCount > 0)
+                        StatText += ", esp files: " + espCount.ToString();
+
+                    if (dataGridView1.RowCount - TitleCount < 0)
+                        sbar4("Catalog/Plugins mismatch - Run game to solve");
+                }
+                catch (Exception ex)
                 {
-                    espCount++;
-                }
-
-                foreach (string file in Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly))
-                {
-                    ba2Count++;
-                }
-
-                StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
-                    (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
-                    esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
-
-                if (espCount > 0)
-                    StatText += ", esp files: " + espCount.ToString();
-
-                if (dataGridView1.RowCount - TitleCount < 0)
-                    sbar4("Catalog/Plugins mismatch - Run game to solve");
-            }
-            catch (Exception ex)
-            {
-                sbar("Starfield path needs to be set for mod stats");
+                    sbar("Starfield path needs to be set for mod stats");
 #if DEBUG
-                MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
 #endif
+                }
             }
+            else
+                sbar("Starfield path needs to be set for mod stats");
 
             if (ActiveOnly)
             {
@@ -1272,7 +1267,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace mod?"))
+                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?"))
                             File.Move(ModFile, destinationPath, true); // Overwrite
                         else
                             break;
@@ -1283,6 +1278,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                 AddMissing();
                 SavePlugins();
+                if (AutoSort)
+                    RunLOOT(true);
                 if (Directory.Exists(ExtractPath)) // Clean up any left over files
                     Directory.Delete(ExtractPath, true);
                 //sbar3("Mod installed");
@@ -1558,18 +1555,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void toolStripMenuBGSX_Click(object sender, EventArgs e)
         {
             Tools.OpenUrl("https://x.com/StarfieldGame");
-        }
-
-        private void toolStripMenuTestJson_Click(object sender, EventArgs e)
-        {
-            var modMetaData = new Tools.ModMetaData();
-            string jsonPath = "Z:\\test.txt", json;
-
-            modMetaData.ModName = "Test";
-            modMetaData.SourceURL = "http://127.0.0.1";
-            modMetaData.ModVersion = "1.0";
-            json = Newtonsoft.Json.JsonConvert.SerializeObject(modMetaData, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText(jsonPath, json);
         }
 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
@@ -2494,7 +2479,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 }
             }
             else
-                MessageBox.Show("MO2 doesn't seem to be installed.");
+                MessageBox.Show("MO2 doesn't seem to be installed or path not configured.");
         }
 
         private void modOrganizer2PathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2831,6 +2816,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 sbar3(Path.GetFileName(ModFile) + " archived");
 
             }
+        }
+
+        private void enabledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form ProfilesForm = new frmProfiles(cmbProfile.SelectedItem.ToString());
+            ProfilesForm.Show();
         }
     }
 }
