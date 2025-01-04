@@ -60,6 +60,7 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            btnDelete = new System.Windows.Forms.Button();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -244,6 +245,7 @@
             flowLayoutPanel3.Controls.Add(btnBackup);
             flowLayoutPanel3.Controls.Add(btnRestore);
             flowLayoutPanel3.Controls.Add(btnAchievemnts);
+            flowLayoutPanel3.Controls.Add(btnDelete);
             flowLayoutPanel3.Controls.Add(btnClearLog);
             flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel3.Location = new System.Drawing.Point(6, 38);
@@ -265,7 +267,7 @@
             // btnClearLog
             // 
             btnClearLog.AutoSize = true;
-            btnClearLog.Location = new System.Drawing.Point(1227, 3);
+            btnClearLog.Location = new System.Drawing.Point(1383, 3);
             btnClearLog.Name = "btnClearLog";
             btnClearLog.Size = new System.Drawing.Size(150, 50);
             btnClearLog.TabIndex = 6;
@@ -425,6 +427,16 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // btnDelete
+            // 
+            btnDelete.Location = new System.Drawing.Point(1227, 3);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(150, 46);
+            btnDelete.TabIndex = 8;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
             // frmStarfieldTools
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -494,6 +506,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.CheckBox chkVerbose;
         private System.Windows.Forms.Button btnAchievemnts;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

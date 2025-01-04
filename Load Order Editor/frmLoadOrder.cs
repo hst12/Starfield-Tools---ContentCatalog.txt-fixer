@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -421,7 +422,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                 ModFileSize = 0;
                                 URL = "";
 
-                                for (i = 0; i < CreationsPlugin.Count; i++)
+                                Parallel.For(0, CreationsPlugin.Count, i =>  // (i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                         CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
@@ -442,7 +443,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         ModFileSize = FileSize[i] / 1024;
                                         URL = "https://creations.bethesda.net/en/starfield/details/" + ModID;
                                     }
-                                }
+                                });
 
                                 rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];

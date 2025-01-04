@@ -739,5 +739,11 @@ namespace Starfield_Tools
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Achievement flags set";
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt"))
+                File.Delete(Tools.GetCatalog());
+        }
     }
 }
