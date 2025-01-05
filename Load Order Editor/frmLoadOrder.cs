@@ -26,7 +26,7 @@ namespace Starfield_Tools
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = Steam;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath, LastProfile;
+        private string StarfieldGamePath, LastProfile,tempstr;
 
         bool Profiles = false, GridSorted = false, leFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false, LooseFiles;
 
@@ -154,6 +154,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 sbar2("Plugins.txt backed up to Plugins.txt.bak");
                 File.Copy(PluginsPath, PluginsPath + ".bak");
+            }
+
+            // Do a 1-time backup of StarfieldCustom.ini if it doesn't exist
+            tempstr = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                "\\My Games\\Starfield\\StarfieldCustom.ini";
+            if (!File.Exists(tempstr+".bak") && File.Exists(tempstr))
+            {
+                sbar2("StarfieldCustom.ini backed up to StarfieldCustom.ini.bak");
+                File.Copy(tempstr, tempstr+".bak");
             }
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
