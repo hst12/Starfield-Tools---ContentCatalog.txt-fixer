@@ -11,7 +11,7 @@ namespace Starfield_Tools.Load_Order_Editor
         {
             InitializeComponent();
 
-            string DestProfile = Properties.Settings.Default.ProfileFolder + "\\NSFW.txt";
+            string DestProfile = Properties.Settings.Default.ProfileFolder + "\\NSFW.txt", ProfileFolder;
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -40,6 +40,29 @@ namespace Starfield_Tools.Load_Order_Editor
                     }
                 }
             }
+
+            cmbDestination.Items.Clear();
+            ProfileFolder = Properties.Settings.Default.ProfileFolder;
+            if (ProfileFolder == null || ProfileFolder == "")
+                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            try
+            {
+                foreach (var profileName in Directory.EnumerateFiles(ProfileFolder, "*.txt", SearchOption.TopDirectoryOnly))
+                {
+                    cmbDestination.Items.Add(profileName[(profileName.LastIndexOf('\\') + 1)..]);
+                }
+                int index = cmbDestination.Items.IndexOf(Properties.Settings.Default.LastProfile);
+                if (index != -1)
+                {
+                    cmbDestination.SelectedIndex = index;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -77,7 +77,8 @@ bInvalidateOlderFiles=");
             {
                 INILines.Add(@"
 [Papyrus]
-bEnableLogging=1");
+bEnableLogging=1
+bEnableTrace=1");
             }
 
             File.WriteAllLines(filePath, INILines);

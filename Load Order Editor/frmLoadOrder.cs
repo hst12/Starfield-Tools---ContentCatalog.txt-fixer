@@ -121,7 +121,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             // Setup other preferences
 
-            switch (Properties.Settings.Default.DarkMode)
+            switch (Properties.Settings.Default.DarkMode) // Theme
             {
                 case 0: // Light
                     dataGridView1.EnableHeadersVisualStyles = true;

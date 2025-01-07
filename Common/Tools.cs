@@ -138,12 +138,12 @@ namespace Starfield_Tools.Common
             public string link { get; set; }
             public string name { get; set; }
         }
-        public class Prelude
+        public class Prelude// LOOT
         {
             public List<MessageAnchor> common { get; set; }
         }
 
-        public class MessageAnchor
+        public class MessageAnchor// LOOT
         {
             public string type { get; set; }
             public string content { get; set; }
@@ -151,7 +151,7 @@ namespace Starfield_Tools.Common
             public string condition { get; set; }
         }
 
-        public class Globals
+        public class Globals// LOOT
         {
             public string type { get; set; }
             public string content { get; set; }
