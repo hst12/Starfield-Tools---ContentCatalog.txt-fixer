@@ -26,7 +26,7 @@ namespace Starfield_Tools
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = Steam;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath, LastProfile,tempstr;
+        private string StarfieldGamePath, LastProfile, tempstr;
 
         bool Profiles = false, GridSorted = false, leFiles = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false, LooseFiles;
 
@@ -104,6 +104,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     gameVersionSFSEToolStripMenuItem.Checked = true;
                     break;
             }
+            if (!File.Exists(StarfieldGamePath + "\\sfse_loader.exe"))
+                gameVersionSFSEToolStripMenuItem.Visible = false;
             GameVersionDisplay();
 
             if (Properties.Settings.Default.ProfileOn)
@@ -159,10 +161,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             // Do a 1-time backup of StarfieldCustom.ini if it doesn't exist
             tempstr = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                 "\\My Games\\Starfield\\StarfieldCustom.ini";
-            if (!File.Exists(tempstr+".bak") && File.Exists(tempstr))
+            if (!File.Exists(tempstr + ".bak") && File.Exists(tempstr))
             {
                 sbar2("StarfieldCustom.ini backed up to StarfieldCustom.ini.bak");
-                File.Copy(tempstr, tempstr+".bak");
+                File.Copy(tempstr, tempstr + ".bak");
             }
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
@@ -301,6 +303,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             sbar3("");
             statusStrip1.Refresh();
 
+            Form LoadScreen = new frmLoading();
+            LoadScreen.Show();
+
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
@@ -401,9 +406,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 return;
 
             }
-            using (var reader = new StreamReader(loText))
-            {
 
+            using (var reader = new StreamReader(loText))
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
                     try
@@ -510,7 +514,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 #endif
                     }
                 }
-            }
 
             SetupColumns();
 
@@ -567,6 +570,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             }
             sbar(StatText);
             dataGridView1.EndEdit();
+            LoadScreen.Close();
         }
 
         private void GetProfiles()
@@ -2837,6 +2841,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             Form ProfilesForm = new frmProfiles(cmbProfile.SelectedItem.ToString());
             ProfilesForm.Show();
+        }
+
+        private void btnUp_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
