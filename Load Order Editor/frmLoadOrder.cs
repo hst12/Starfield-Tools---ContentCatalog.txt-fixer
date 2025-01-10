@@ -1324,10 +1324,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             int i;
             string tempstr, Group = "";
             List<string> ExportMods = [];
+
             SaveFileDialog ExportActive = new()
             {
                 Filter = "Txt File|*.txt",
-                Title = "Export Active Plugins"
+                Title = "Export Active Plugins",
+                FileName = "Plugins.txt"
             };
 
             DialogResult dlgResult = ExportActive.ShowDialog();
