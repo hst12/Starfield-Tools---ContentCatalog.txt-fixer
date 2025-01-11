@@ -389,7 +389,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 sbar(ex.Message);
                 json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalog(), json);
-
             }
 
             loText = Tools.StarfieldAppData + @"\Plugins.txt";
@@ -404,7 +403,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 sbar("");
                 return;
-
             }
 
             using (var reader = new StreamReader(loText))
@@ -443,7 +441,6 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         Description = CreationsTitle[i]; // Add Content Catalog description if available
                                         ModVersion = CreationsVersion[i];
                                         AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
-                                        //ModVersion = start.AddSeconds(double.Parse((ModVersion[..ModVersion.IndexOf('.')]))). ToString();
                                         ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
 
                                         ModFiles = CreationsFiles[i];
@@ -454,7 +451,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
-                                        URL = "https://creations.bethesda.net/en/starfield/details/" + ModID;
+                                        URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
                                     }
                                 });
 
@@ -1575,26 +1572,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
-            string CreationsID = "", OtherURL = "", url;
-            if (dataGridView1.CurrentRow.Cells["CreationsID"].Value != null)
-                CreationsID = dataGridView1.CurrentRow.Cells["CreationsID"].Value.ToString();
-            if (dataGridView1.CurrentRow.Cells["URL"].Value != null)
-                OtherURL = dataGridView1.CurrentRow.Cells["URL"].Value.ToString();
+            string  url;
 
-            if (CreationsID == "" && OtherURL == "")
-            {
+            url = (string)dataGridView1.CurrentRow.Cells["URL"].Value;
+            if ((bool)dataGridView1.CurrentRow.Cells["ModEnabled"].Value == true && url != "")
+                Tools.OpenUrl(url);
+
+            if (url=="")
                 sbar3("No link for mod");
-                return;
-            }
-
-            if (CreationsID != "")
-            {
-                url = "https://creations.bethesda.net/en/starfield/details/" + CreationsID[3..];
-                Tools.OpenUrl(url);  // Open Creations web site
-            }
-            else
-                if (OtherURL != "")
-                Tools.OpenUrl(OtherURL);
         }
 
         private void toolStripMenuUninstall_Click(object sender, EventArgs e)
@@ -2741,7 +2726,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void openAllActiveModWebPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int i;
+            string url , CreationsID;
 
+            if (Tools.ConfirmAction("Are you sure you want to open all mod web pages?", "This might take a while and a lot of memory"))
+            {
+                for (i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    url = (string)dataGridView1.Rows[i].Cells["URL"].Value;
+                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == true && url!="")
+                            Tools.OpenUrl(url);
+                }
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -2772,7 +2768,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     }
                 }
             }
-
         }
 
         private bool CheckGamePath()
@@ -2830,7 +2825,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 statusStrip1.Refresh();
                 CreateZipFromFiles(files, zipPath);
                 sbar3(Path.GetFileName(ModFile) + " archived");
-
             }
         }
 
@@ -2843,11 +2837,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             Form ProfilesForm = new frmProfiles(cmbProfile.SelectedItem.ToString());
             ProfilesForm.Show();
-        }
-
-        private void btnUp_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
