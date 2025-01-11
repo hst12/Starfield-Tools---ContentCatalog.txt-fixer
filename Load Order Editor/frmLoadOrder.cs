@@ -1572,13 +1572,13 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void toolStripMenuViewOnCreations_Click(object sender, EventArgs e)
         {
-            string  url;
+            string url;
 
             url = (string)dataGridView1.CurrentRow.Cells["URL"].Value;
-            if ((bool)dataGridView1.CurrentRow.Cells["ModEnabled"].Value == true && url != "")
+            if (url != "")
                 Tools.OpenUrl(url);
 
-            if (url=="")
+            if (url == "")
                 sbar3("No link for mod");
         }
 
@@ -2727,15 +2727,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void openAllActiveModWebPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int i;
-            string url , CreationsID;
+            string url, CreationsID;
 
             if (Tools.ConfirmAction("Are you sure you want to open all mod web pages?", "This might take a while and a lot of memory"))
             {
                 for (i = 0; i < dataGridView1.RowCount; i++)
                 {
                     url = (string)dataGridView1.Rows[i].Cells["URL"].Value;
-                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == true && url!="")
-                            Tools.OpenUrl(url);
+                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == true && url != "")
+                        Tools.OpenUrl(url);
                 }
             }
         }

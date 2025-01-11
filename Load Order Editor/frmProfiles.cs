@@ -11,7 +11,7 @@ namespace Starfield_Tools.Load_Order_Editor
         {
             InitializeComponent();
 
-            string DestProfile = Properties.Settings.Default.ProfileFolder + "\\NSFW.txt", ProfileFolder;
+            string DestProfile = Properties.Settings.Default.ProfileFolder + "\\Default.txt", ProfileFolder;
             Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
@@ -80,6 +80,9 @@ namespace Starfield_Tools.Load_Order_Editor
             e.NewValue = e.CurrentValue;
         }
 
-
+        private void cmbDestination_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show((string)cmbDestination.SelectedItem);
+        }
     }
 }

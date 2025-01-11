@@ -127,6 +127,7 @@
             cmbDestination.Name = "cmbDestination";
             cmbDestination.Size = new System.Drawing.Size(242, 40);
             cmbDestination.TabIndex = 10;
+            cmbDestination.SelectedIndexChanged += cmbDestination_SelectedIndexChanged;
             // 
             // lblSource
             // 
