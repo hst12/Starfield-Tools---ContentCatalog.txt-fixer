@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtMessage = new System.Windows.Forms.TextBox();
             SuspendLayout();
             // 
-            // textBox1
+            // txtMessage
             // 
-            textBox1.BackColor = System.Drawing.SystemColors.Control;
-            textBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            textBox1.Location = new System.Drawing.Point(0, 0);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(246, 50);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Loading...";
-            textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            txtMessage.BackColor = System.Drawing.SystemColors.Control;
+            txtMessage.Font = new System.Drawing.Font("Segoe UI", 12F);
+            txtMessage.Location = new System.Drawing.Point(0, 0);
+            txtMessage.Name = "txtMessage";
+            txtMessage.Size = new System.Drawing.Size(246, 50);
+            txtMessage.TabIndex = 0;
+            txtMessage.Text = "Loading...";
+            txtMessage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmLoading
             // 
@@ -50,7 +50,7 @@
             AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             ClientSize = new System.Drawing.Size(273, 59);
             ControlBox = false;
-            Controls.Add(textBox1);
+            Controls.Add(txtMessage);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -65,6 +65,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMessage;
     }
 }

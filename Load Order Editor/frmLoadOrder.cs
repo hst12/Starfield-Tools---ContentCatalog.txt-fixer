@@ -104,9 +104,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     gameVersionSFSEToolStripMenuItem.Checked = true;
                     break;
             }
+
+            // Detect other apps
             if (!File.Exists(StarfieldGamePath + "\\sfse_loader.exe"))
                 gameVersionSFSEToolStripMenuItem.Visible = false;
             GameVersionDisplay();
+
+            if (Properties.Settings.Default.MO2Path == "")
+                mO2ToolStripMenuItem.Visible = false;
 
             if (Properties.Settings.Default.ProfileOn)
             {
@@ -303,7 +308,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             sbar3("");
             statusStrip1.Refresh();
 
-            Form LoadScreen = new frmLoading();
+            Form LoadScreen = new frmLoading("Loading");
             LoadScreen.Show();
 
             btnSave.Enabled = true;
@@ -942,6 +947,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             {
                 Properties.Settings.Default.ProfileFolder = SavePlugins.FileName[..SavePlugins.FileName.LastIndexOf('\\')];
                 Properties.Settings.Default.Save();
+                SwitchProfile(SavePlugins.FileName);
                 GetProfiles();
                 isModified = false;
             }
@@ -1236,6 +1242,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             if (OpenMod.FileName != "")
             {
+                Form LoadScreen = new frmLoading("Extracting mod...");
+                LoadScreen.Show();
                 try
                 {
                     sbar2("Installing mod...");
@@ -1253,6 +1261,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    LoadScreen.Close();
                     return;
                 }
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
@@ -1286,6 +1295,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     else
                         File.Move(ModFile, destinationPath, true); // Overwrite
                 }
+                LoadScreen.Close();
 
                 AddMissing();
                 SavePlugins();
@@ -2490,7 +2500,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             openFileDialog1.FileName = "ModOrganizer.exe";
             DialogResult MO2Path = openFileDialog1.ShowDialog();
             if (MO2Path == DialogResult.OK && openFileDialog1.FileName != "")
+            {
                 Properties.Settings.Default.MO2Path = openFileDialog1.FileName;
+                mO2ToolStripMenuItem.Visible = true;
+            }
 
         }
 
@@ -2802,6 +2815,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
 
+                Form LoadScreen = new frmLoading("Archiving mod...");
+                LoadScreen.Show();
+
                 ModFile = directoryPath + "\\" + ModName;
                 if (File.Exists(ModFile + ".esp"))
                     files.Add(ModFile + ".esp");
@@ -2825,6 +2841,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 statusStrip1.Refresh();
                 CreateZipFromFiles(files, zipPath);
                 sbar3(Path.GetFileName(ModFile) + " archived");
+                LoadScreen.Close();
             }
         }
 

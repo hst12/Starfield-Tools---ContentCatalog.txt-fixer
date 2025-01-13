@@ -12,11 +12,11 @@ namespace Starfield_Tools.Common
 {
     public partial class frmLoading : Form
     {
-        public frmLoading()
+        public frmLoading(string msgText)
         {
             InitializeComponent();
             this.CenterToScreen();
-            //this.Width = textBox1.Width;
+            txtMessage.Text = msgText;
         }
 
     }
