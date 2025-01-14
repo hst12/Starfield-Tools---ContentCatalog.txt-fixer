@@ -34,6 +34,10 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
+#if DEBUG
+            toolStripMenuProfiles.Visible = true;
+#endif
+
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
@@ -57,7 +61,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"Error opening StarfieldCustom.ini");
 #endif
             }
 
@@ -157,10 +161,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SetMenus();
 
             // Do a 1-time backup of Plugins.txt if it doesn't exist
-            if (!File.Exists(PluginsPath + ".bak"))
+            try
             {
-                sbar2("Plugins.txt backed up to Plugins.txt.bak");
-                File.Copy(PluginsPath, PluginsPath + ".bak");
+                if (!File.Exists(PluginsPath + ".bak"))
+                {
+                    sbar2("Plugins.txt backed up to Plugins.txt.bak");
+                    File.Copy(PluginsPath, PluginsPath + ".bak");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Unable to find Plugins.txt");
             }
 
             // Do a 1-time backup of StarfieldCustom.ini if it doesn't exist
@@ -1092,6 +1103,8 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 return 0;
 
             directory += @"\Data";
+            if (directory == @"\Data")
+                return 0;
 
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
             {
