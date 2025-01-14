@@ -7,6 +7,8 @@ If you're primarily a user of Creations mods and don't really use other mod mana
 
 Use with caution if you're using other mod managers such as Vortex or MO2. You can use another mod manager if you understand how they work
 
+The app automatically backs up your Plugins.txt file the first time it runs. Use File->Restore Plugins.txt menu option to restore the original file if necessary.
+
 Why use this tool instead of the Creations menu?
 It's faster
 It shows more of your load order on screen at once.
