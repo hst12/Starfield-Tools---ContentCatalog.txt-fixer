@@ -13,6 +13,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.ApplicationModel.Chat;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
@@ -2698,6 +2699,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void enableAchievementSafeOnlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Tools.ConfirmAction("Do you want to continue", "Warning - this will alter your current load order to achievement friendly mods only"))
+                return;
             bool ActiveOnlyStatus = ActiveOnly;
             DisableAll();
             if (ActiveOnly)
