@@ -172,7 +172,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Unable to find Plugins.txt");
+                MessageBox.Show(ex.Message, "Unable to find Plugins.txt");
             }
 
             // Do a 1-time backup of StarfieldCustom.ini if it doesn't exist
@@ -906,12 +906,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
         private void toolStripMenuEnableAll_Click(object sender, EventArgs e)
         {
-            EnableAll();
+            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?"))
+                EnableAll();
         }
 
         private void toolStripMenuDisableAll_Click(object sender, EventArgs e)
         {
-            DisableAll();
+            if (Tools.ConfirmAction("This will reset your current load order", "Disable all mods?"))
+                DisableAll();
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2213,7 +2215,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-            
+
             if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
                 RunLOOT(true);
             sbar3(ReturnStatus);
