@@ -26,11 +26,11 @@ namespace Starfield_Tools.Common
 
         public Tools() // Constructor
         {
-            CommonFolder = Environment.CurrentDirectory + "\\Common";
+            CommonFolder = Environment.CurrentDirectory + "\\Common\\";
             DocumentationFolder = Environment.CurrentDirectory + "\\Documentation";
             try
             {
-                BethFiles = new(File.ReadAllLines(CommonFolder + "\\BGS Exclude.txt"));
+                BethFiles = new(File.ReadAllLines(CommonFolder + "BGS Exclude.txt"));
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace Starfield_Tools.Common
             }
             try
             {
-                CatalogVersion = File.ReadAllText(CommonFolder + "\\Catalog Version.txt");
+                CatalogVersion = File.ReadAllText(CommonFolder + "Catalog Version.txt");
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Starfield_Tools.Common
 
             try
             {
-                HeaderString = File.ReadAllText(CommonFolder + "\\header.txt"); // Read the header from file
+                HeaderString = File.ReadAllText(CommonFolder + "header.txt"); // Read the header from file
             }
             catch (Exception ex)
             {
@@ -207,7 +207,9 @@ namespace Starfield_Tools.Common
             }
             catch (Exception ex)
             {
+#if DEBUG
                 MessageBox.Show("Tools.FileCompare error: " + ex.Message);
+#endif
                 return false; ;
             }
 

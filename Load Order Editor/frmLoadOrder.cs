@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Windows.ApplicationModel.Chat;
 using YamlDotNet.Serialization;
+using static System.Windows.Forms.LinkLabel;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -62,7 +63,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show(ex.Message,"Error opening StarfieldCustom.ini");
+                MessageBox.Show(ex.Message, "Error opening StarfieldCustom.ini");
 #endif
             }
 
@@ -289,7 +290,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private static bool CheckStarfieldCustom()
         {
             bool result = Tools.FileCompare(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder + "\\StarfieldCustom.ini");
+                "\\My Games\\Starfield\\StarfieldCustom.ini", Tools.CommonFolder + "StarfieldCustom.ini");
             return result;
         }
         private void InitDataGrid()
@@ -344,13 +345,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     var deserializer = new DeserializerBuilder().Build();
                     var yamlContent = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\LOOT\games\Starfield\userlist.yaml");
-                    //var yamlContent = File.ReadAllText(@"C:\Users\hst12\Documents\GitHub\starfield\masterlist.yaml");
                     Groups = deserializer.Deserialize<Tools.Configuration>(yamlContent);
                 }
                 catch (Exception ex)
                 {
 #if DEBUG
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Yaml decoding error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 #endif
                     sbar(ex.Message);
                 }
@@ -1560,12 +1560,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
         }
         private void RunGame()
         {
+            bool result;
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
             Form SS = new frmSplashScreen();
             if (GameVersion != MS)
                 SS.Show();
-            bool result;
 
             if (isModified)
                 SavePlugins();
@@ -2034,10 +2034,10 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             try
             {
-                if (!Tools.FileCompare(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                if (!Tools.FileCompare(Tools.CommonFolder + "StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                     "\\My Games\\Starfield\\StarfieldCustom.ini")) // Check if StarfieldCustom.ini needs resetting
                 {
-                    File.Copy(Tools.CommonFolder + "\\StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                    File.Copy(Tools.CommonFolder + "StarfieldCustom.ini", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                         "\\My Games\\Starfield\\StarfieldCustom.ini", true);
                     sbar3("StarfieldCustom.ini restored");
                     return true;
@@ -2854,6 +2854,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", "Archive exists - " + Path.GetFileName(ModFile)))
                 {
                     sbar3("Archive not created");
+                    LoadScreen.Close();
                     return;
                 }
                 sbar3("Creating archive...");
@@ -2873,6 +2874,37 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             Form ProfilesForm = new frmProfiles(cmbProfile.SelectedItem.ToString());
             ProfilesForm.Show();
+        }
+
+        private void checkArchivesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> BGSArchives = new();
+            List<string> archives = new();
+            List<string> orphaned = new();
+            string tempstr;
+
+            using (StreamReader sr = new StreamReader(Tools.CommonFolder + "BGS Archives.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    BGSArchives.Add(line);
+                }
+            }
+
+            foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.ba2", SearchOption.TopDirectoryOnly))
+            {
+                archives.Add(Path.GetFileName(file));
+            }
+            List<string> modArchives = archives.Except(BGSArchives).ToList();
+            foreach (var item in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.esm", SearchOption.TopDirectoryOnly))
+            {
+                tempstr = "";
+                if (!File.Exists(item))
+                    orphaned.Add(item);
+            }
+
+            MessageBox.Show("Done");
         }
     }
 }
