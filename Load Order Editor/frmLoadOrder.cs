@@ -244,6 +244,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
             timer2.Enabled = Properties.Settings.Default.Showtime;
 
+            activateNewModsToolStripMenuItem.Checked = Properties.Settings.Default.ActivateNew;
+
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
 
@@ -1102,13 +1104,13 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (directory == @"\Data")
                 return 0;
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly)) // Add esm files
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
             ;
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
@@ -1126,7 +1128,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     AddedFiles++;
                     rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
-                    if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null)
+                    if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null && Properties.Settings.Default.ActivateNew) // Activate the mod if the option is set in menu
                         row.Cells["ModEnabled"].Value = true;
                     else
                         row.Cells["ModEnabled"].Value = false;
@@ -2615,6 +2617,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             Properties.Settings.Default.AutoReset = NewSetting;
             Properties.Settings.Default.AutoDelccc = NewSetting;
             Properties.Settings.Default.CompareProfiles = NewSetting;
+            Properties.Settings.Default.ActivateNew = NewSetting;
 
             SaveSettings();
             SetMenus();
@@ -2899,7 +2902,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.esm", SearchOption.TopDirectoryOnly)) // Build a list of all plugins
             {
-                tempstr=Path.GetFileName(file);
+                tempstr = Path.GetFileName(file);
                 plugins.Add(tempstr[..tempstr.LastIndexOf('.')]);
             }
 
@@ -2907,12 +2910,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.ba2", SearchOption.TopDirectoryOnly)) // Build a list of all archives
             {
-                tempstr= Path.GetFileName(file);
+                tempstr = Path.GetFileName(file);
                 archives.Add(tempstr[..tempstr.LastIndexOf('.')]);
             }
             List<string> modArchives = archives.Except(BGSArchives).ToList(); // Build a list of non-vanilla game archives
 
             MessageBox.Show("Done");
+        }
+
+        private void activateNewModsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            activateNewModsToolStripMenuItem.Checked = !activateNewModsToolStripMenuItem.Checked;
+            Properties.Settings.Default.ActivateNew = activateNewModsToolStripMenuItem.Checked;
         }
     }
 }

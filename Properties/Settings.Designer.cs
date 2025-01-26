@@ -476,5 +476,17 @@ namespace Starfield_Tools.Properties {
                 this["Showtime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ActivateNew {
+            get {
+                return ((bool)(this["ActivateNew"]));
+            }
+            set {
+                this["ActivateNew"] = value;
+            }
+        }
     }
 }
