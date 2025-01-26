@@ -152,7 +152,7 @@ namespace Starfield_Tools
         }
         private bool CheckBackup()
         {
-            string fileName1 = Tools.GetCatalog();
+            string fileName1 = Tools.GetCatalogPath();
             string fileName2 = fileName1 + ".bak";
 
             if (Tools.FileCompare(fileName1, fileName2))
@@ -171,9 +171,10 @@ namespace Starfield_Tools
 
         private void DisplayCatalog()
         {
+#pragma warning disable CS0168 // Variable is declared but never used
             try
             {
-                richTextBox1.Text = File.ReadAllText(Tools.GetCatalog());
+                richTextBox1.Text = File.ReadAllText(Tools.GetCatalogPath());
             }
             catch (Exception ex)
             {
@@ -182,6 +183,7 @@ namespace Starfield_Tools
 #endif
                 toolStripStatusLabel1.Text = "Catalog not found";
             }
+#pragma warning restore CS0168 // Variable is declared but never used
         }
 
         private bool CheckCatalog() // returns true if catalog good
@@ -196,7 +198,7 @@ namespace Starfield_Tools
 
             try
             {
-                string jsonFilePath = Tools.GetCatalog();
+                string jsonFilePath = Tools.GetCatalogPath();
                 if (jsonFilePath == null)
                 {
                     toolStripStatusLabel1.Text = "Start the game and enter the Creations menu or load a save to create a catalog file";
@@ -281,14 +283,14 @@ namespace Starfield_Tools
 #if DEBUG
                 MessageBox.Show(ex.Message);
 #endif
-                if (!File.Exists(Tools.GetCatalog()))
+                if (!File.Exists(Tools.GetCatalogPath()))
                 {
                     DialogResult result = MessageBox.Show("Missing ContentCatalog.txt", "Do you want to create a blank ContentCatalog.txt file?", MessageBoxButtons.OKCancel);
                     if (result == DialogResult.OK)
                     {
 
                         var CatalogHeader = Tools.MakeHeaderBlank();
-                        File.WriteAllText(Tools.GetCatalog(), CatalogHeader);
+                        File.WriteAllText(Tools.GetCatalogPath(), CatalogHeader);
                         toolStripStatusLabel1.Text = "Dummy ContentCatalog.txt created";
                         return false;
                     }
@@ -304,11 +306,11 @@ namespace Starfield_Tools
 
         private void CleanCatalog()
         {
-            if (!File.Exists(Tools.GetCatalog()))
-                File.WriteAllText(Tools.GetCatalog(), string.Empty); // Create dummy catalog
+            if (!File.Exists(Tools.GetCatalogPath()))
+                File.WriteAllText(Tools.GetCatalogPath(), string.Empty); // Create dummy catalog
             else
             {
-                long fileSize = new FileInfo(Tools.GetCatalog()).Length;
+                long fileSize = new FileInfo(Tools.GetCatalogPath()).Length;
 
                 if (fileSize > 0)
                 {
@@ -345,7 +347,7 @@ namespace Starfield_Tools
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string pathToFile = Tools.GetCatalog();
+            string pathToFile = Tools.GetCatalogPath();
             Process.Start("explorer", pathToFile);
         }
 
@@ -367,7 +369,7 @@ namespace Starfield_Tools
 
             if (!CheckBackup())
             {
-                string sourceFileName = Tools.GetCatalog();
+                string sourceFileName = Tools.GetCatalogPath();
                 string destFileName = sourceFileName + ".bak";
 
                 try
@@ -427,9 +429,10 @@ namespace Starfield_Tools
 
         private bool RestoreCatalog()
         {
-            string destFileName = Tools.GetCatalog();
+            string destFileName = Tools.GetCatalogPath();
             string sourceFileName = destFileName + ".bak";
 
+#pragma warning disable CS0168 // Variable is declared but never used
             try
             {
                 // Copy the file
@@ -448,6 +451,7 @@ namespace Starfield_Tools
                 toolStripStatusLabel1.Text = "Restore failed";
                 return false;
             }
+#pragma warning restore CS0168 // Variable is declared but never used
         }
 
         private void btnResetAll_Click(object sender, EventArgs e)
@@ -460,7 +464,7 @@ namespace Starfield_Tools
                 return;
             }
 
-            string jsonFilePath = Tools.GetCatalog();
+            string jsonFilePath = Tools.GetCatalogPath();
 
             string json = File.ReadAllText(jsonFilePath);
 
@@ -478,7 +482,7 @@ namespace Starfield_Tools
             // Hack the Bethesda header back in
             json = Tools.MakeHeader() + json[1..];
 
-            File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
+            File.WriteAllText(Tools.GetCatalogPath(), json); // Write updated catalog
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Version numbers reset";
         }
@@ -503,7 +507,7 @@ namespace Starfield_Tools
         private void RemoveDeleteddEntries() // Remove left over entries from catalog
         {
             List<string> esmFiles = [];
-            string jsonFilePath = Tools.GetCatalog();
+            string jsonFilePath = Tools.GetCatalogPath();
             string json = File.ReadAllText(jsonFilePath); // Read catalog
             List<string> CreationsPlugin = []; // filename of .esm
             List<string> CreationsTitle = []; // Display title for .esm
@@ -593,7 +597,7 @@ namespace Starfield_Tools
                     // Hack the Bethesda header back in
                     json = Tools.MakeHeader() + json[1..];
 
-                    File.WriteAllText(Tools.GetCatalog(), json);
+                    File.WriteAllText(Tools.GetCatalogPath(), json);
                 }
                 else
                 {
@@ -609,13 +613,13 @@ namespace Starfield_Tools
 #endif
                 toolStripStatusLabel1.Text = (ex.Message);
                 json = Tools.MakeHeaderBlank();
-                File.WriteAllText(Tools.GetCatalog(), json);
+                File.WriteAllText(Tools.GetCatalogPath(), json);
             }
         }
 
         private void NewFix()
         {
-            string jsonFilePath = Tools.GetCatalog();
+            string jsonFilePath = Tools.GetCatalogPath();
 
             string json = File.ReadAllText(jsonFilePath); // Load catalog
             if (json == "")
@@ -720,7 +724,7 @@ namespace Starfield_Tools
                 return;
             }
 
-            string jsonFilePath = Tools.GetCatalog(), json = File.ReadAllText(jsonFilePath);
+            string jsonFilePath = Tools.GetCatalogPath(), json = File.ReadAllText(jsonFilePath);
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
 
             foreach (var kvp in data)
@@ -735,7 +739,7 @@ namespace Starfield_Tools
             // Hack the Bethesda header back in
             json = Tools.MakeHeader() + json[1..];
 
-            File.WriteAllText(Tools.GetCatalog(), json); // Write updated catalog
+            File.WriteAllText(Tools.GetCatalogPath(), json); // Write updated catalog
             DisplayCatalog();
             toolStripStatusLabel1.Text = "Achievement flags set";
         }
@@ -743,7 +747,7 @@ namespace Starfield_Tools
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt"))
-                File.Delete(Tools.GetCatalog());
+                File.Delete(Tools.GetCatalogPath());
         }
     }
 }

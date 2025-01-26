@@ -98,7 +98,7 @@ namespace Starfield_Tools.Common
             }
             return start;
         }
-        public static string GetCatalog()
+        public static string GetCatalogPath()
         {
             return StarfieldAppData + @"\ContentCatalog.txt";
         }
@@ -195,6 +195,7 @@ namespace Starfield_Tools.Common
             }
 
             // Open the two files.
+#pragma warning disable CS0168 // Variable is declared but never used
             try
             {
                 var fileA = File.ReadAllText(file1);
@@ -212,6 +213,7 @@ namespace Starfield_Tools.Common
 #endif
                 return false; ;
             }
+#pragma warning restore CS0168 // Variable is declared but never used
 
         }
         public static void CheckGame()
