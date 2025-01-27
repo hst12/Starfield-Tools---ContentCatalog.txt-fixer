@@ -988,21 +988,21 @@
             // 
             toolStripMenuProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { enabledToolStripMenuItem, manageToolStripMenuItem });
             toolStripMenuProfiles.Name = "toolStripMenuProfiles";
-            toolStripMenuProfiles.Size = new System.Drawing.Size(269, 38);
-            toolStripMenuProfiles.Text = "Profiles (Not Working)";
+            toolStripMenuProfiles.Size = new System.Drawing.Size(174, 38);
+            toolStripMenuProfiles.Text = "Profiles (WIP)";
             toolStripMenuProfiles.Visible = false;
             // 
             // enabledToolStripMenuItem
             // 
             enabledToolStripMenuItem.Name = "enabledToolStripMenuItem";
-            enabledToolStripMenuItem.Size = new System.Drawing.Size(234, 44);
+            enabledToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             enabledToolStripMenuItem.Text = "Enabled";
             enabledToolStripMenuItem.Click += enabledToolStripMenuItem_Click;
             // 
             // manageToolStripMenuItem
             // 
             manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            manageToolStripMenuItem.Size = new System.Drawing.Size(234, 44);
+            manageToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             manageToolStripMenuItem.Text = "Manage";
             manageToolStripMenuItem.Click += manageToolStripMenuItem_Click;
             // 

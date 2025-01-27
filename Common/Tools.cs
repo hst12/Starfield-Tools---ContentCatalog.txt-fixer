@@ -8,14 +8,13 @@ using System.IO;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
-namespace Starfield_Tools.Common
+namespace Starfield_Tools.Common // Various functions used by the app
 {
 
     internal class Tools
     {
 
         public static string CommonFolder { get; set; }
-
         public static string DocumentationFolder { get; set; }
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
@@ -23,14 +22,15 @@ namespace Starfield_Tools.Common
         public List<string> BethFiles { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
+        public List<string> PluginList { get; set; }
 
         public Tools() // Constructor
         {
-            CommonFolder = Environment.CurrentDirectory + "\\Common\\";
+            CommonFolder = Environment.CurrentDirectory + "\\Common\\"; // Used to read misc txt files used by the app
             DocumentationFolder = Environment.CurrentDirectory + "\\Documentation";
             try
             {
-                BethFiles = new(File.ReadAllLines(CommonFolder + "BGS Exclude.txt"));
+                BethFiles = new(File.ReadAllLines(CommonFolder + "BGS Exclude.txt")); // Exclude these files from Plugin list
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Starfield_Tools.Common
             }
         }
 
-        public static string MakeHeaderBlank()
+        public static string MakeHeaderBlank() // Used to build ContentCatalog.txt header
         {
             string HeaderString = "";
 
@@ -74,18 +74,18 @@ namespace Starfield_Tools.Common
             return HeaderString;
         }
 
-        public static string MakeHeader()
+        public static string MakeHeader() // Used to build ContentCatalog.txt header
         {
             string HeaderString = MakeHeaderBlank();
             HeaderString = HeaderString[..^5] + ",";
             return HeaderString;
         }
-        public static void OpenUrl(string url)
+        public static void OpenUrl(string url) // Launch web browser from argument
         {
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
         }
 
-        public static DateTime ConvertTime(double TimeToConvert)
+        public static DateTime ConvertTime(double TimeToConvert) // Convert catalog time format to human readable
         {
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
             try
@@ -94,7 +94,7 @@ namespace Starfield_Tools.Common
             }
             catch
             {
-                start = new(1970, 1, 1, 0, 0, 0, 0);
+                start = new(1970, 1, 1, 0, 0, 0, 0); // Return 1970 if error converting
             }
             return start;
         }
@@ -186,7 +186,7 @@ namespace Starfield_Tools.Common
             public string MainCategory { get; set; }
         }
 
-        public static bool FileCompare(string file1, string file2)
+        public static bool FileCompare(string file1, string file2) // Compare two files. Return true if same
         {
             // Check if the same file was referenced two times.
             if (file1 == file2)
@@ -216,11 +216,11 @@ namespace Starfield_Tools.Common
 #pragma warning restore CS0168 // Variable is declared but never used
 
         }
-        public static void CheckGame()
+        public static void CheckGame() // Check if Starfield appdata folder exists
         {
-            if (!Directory.Exists(StarfieldAppData)) // Check if Starfield is installed
+            if (!Directory.Exists(StarfieldAppData)) 
             {
-                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield not found in AppData directory", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield AppData directory not found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Environment.Exit(1);
             }
         }
@@ -236,7 +236,7 @@ namespace Starfield_Tools.Common
             AboutBox.Show();
         }
 
-        public string SetStarfieldGamePath()
+        public string SetStarfieldGamePath() // Prompt for Starfield game path
         {
             using FolderBrowserDialog folderBrowserDialog = new();
             if (Settings.Default.GameVersion == 1)
@@ -249,17 +249,17 @@ namespace Starfield_Tools.Common
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
                 if (!File.Exists(selectedFolderPath + "\\Starfield.exe"))
                 {
-                    MessageBox.Show("Starfield.exe not found in the selected path","Please select the correct folder",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("Starfield.exe not found in the selected path", "Please select the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return ("");
                 }
-                if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS)
+                if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS) 
                 {
                     StarfieldGamePath = selectedFolderPath;
                     Settings.Default.StarfieldGamePath = selectedFolderPath;
                 }
                 else
                 {
-                    StarfieldGamePathMS = selectedFolderPath;
+                    StarfieldGamePathMS = selectedFolderPath; // Cater for MS Store game path
                     Settings.Default.GamePathMS = selectedFolderPath;
                 }
                 Settings.Default.Save();
@@ -268,7 +268,7 @@ namespace Starfield_Tools.Common
             return "";
         }
 
-        public static bool StartStarfieldCustom()
+        public static bool StartStarfieldCustom() // Start game with custom exe
         {
             string cmdLine = Properties.Settings.Default.CustomEXE;
             if (cmdLine == null)
@@ -292,7 +292,7 @@ namespace Starfield_Tools.Common
             }
         }
 
-        public static bool StartStarfieldSFSE()
+        public static bool StartStarfieldSFSE() // Start game with SFSE loader
         {
             string cmdLine = Properties.Settings.Default.StarfieldGamePath + "\\sfse_loader.exe";
             if (cmdLine == null)
@@ -315,7 +315,7 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
-        public static bool StartStarfieldMS()
+        public static bool StartStarfieldMS() // Start game with MS Store version
         {
             //string cmdLine = @"shell:AppsFolder\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc!Game";
             string cmdLine = Properties.Settings.Default.GamePathMS + "\\Starfield.exe";
@@ -338,7 +338,7 @@ namespace Starfield_Tools.Common
                 return false;
             }
         }
-        public static bool StartGame(int GameVersion)
+        public static bool StartGame(int GameVersion) // Figure out which version of the game to start
         {
             bool result = false;
             switch (GameVersion)
@@ -359,7 +359,7 @@ namespace Starfield_Tools.Common
             return result;
         }
 
-        public static bool StartStarfieldSteam()
+        public static bool StartStarfieldSteam() // Start game with Steam version
         {
             const string userRoot = "HKEY_CURRENT_USER";
             const string subkey = @"Software\Valve\Steam";
@@ -387,6 +387,25 @@ namespace Starfield_Tools.Common
                 return true;
             else
                 return false;
+        }
+        public List<string> GetPluginList() // Get list of plugins from Starfield appdata folder
+        {
+            PluginList = new();
+            try
+            {
+                string[] files = Directory.GetFiles(frmLoadOrder.StarfieldGamePath+ "\\Data","*.esm", SearchOption.TopDirectoryOnly);
+                foreach (string file in files)
+                {
+                    if (!BethFiles.Contains(Path.GetFileName(file)))
+                        PluginList.Add(Path.GetFileName(file));
+                }
+                return PluginList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error reading plugins", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            return PluginList;
         }
     }
 }

@@ -11,22 +11,24 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
 namespace Starfield_Tools
 {
+
     public partial class frmLoadOrder : Form
     {
         public const byte Steam = 0, MS = 1, Custom = 2, SFSE = 3;
+        public static string StarfieldGamePath;
 
         private Rectangle dragBoxFromMouseDown;
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = Steam;
 
         readonly Tools tools = new();
-        private string StarfieldGamePath, LastProfile, tempstr;
+
+        private string LastProfile, tempstr;
 
         bool Profiles = false, GridSorted = false, AutoUpdate = false, ActiveOnly = false, AutoSort = false, isModified = false, LooseFiles;
 
@@ -299,7 +301,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1, i, TitleCount = 0, esmCount = 0, espCount = 0, ba2Count = 0, rowIndex;
+            int EnabledCount = 0, IndexCount = 1, i,  esmCount = 0, espCount = 0, ba2Count , rowIndex;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
             List<string> CreationsPlugin = [];
@@ -376,13 +378,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     try
                     {
                         for (i = 0; i < kvp.Value.Files.Length; i++)
-                        {
                             if (kvp.Value.Files[i].IndexOf(".esm") > 0 || kvp.Value.Files[i].IndexOf(".esp") > 0) // Look for .esm or .esp files
-                            {
                                 CreationsPlugin.Add(kvp.Value.Files[i]);
-                                TitleCount++;
-                            }
-                        }
 
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
@@ -453,7 +450,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                 ModFileSize = 0;
                                 URL = "";
 
-                                Parallel.For(0, CreationsPlugin.Count, i =>  // (i = 0; i < CreationsPlugin.Count; i++)
+                                for (i = 0; i < CreationsPlugin.Count; i++)
                                 {
                                     if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                         CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
@@ -472,8 +469,9 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                                         ModID = CreationsID[i];
                                         ModFileSize = FileSize[i] / 1024;
                                         URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
+                                        break;
                                     }
-                                });
+                                }
 
                                 rowIndex = this.dataGridView1.Rows.Add();
                                 var row = this.dataGridView1.Rows[rowIndex];
@@ -543,16 +541,16 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
                     esmCount = Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly).Count();
                     espCount = Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly).Count();
-                    ba2Count += Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
+                    ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
 
-                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + TitleCount.ToString() + ", Other: " +
-                        (dataGridView1.RowCount - TitleCount).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
+                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + CreationsPlugin.Count.ToString() + ", Other: " +
+                        (dataGridView1.RowCount - CreationsPlugin.Count).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
                         esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
 
                     if (espCount > 0)
                         StatText += ", esp files: " + espCount.ToString();
 
-                    if (dataGridView1.RowCount - TitleCount < 0)
+                    if (dataGridView1.RowCount - CreationsPlugin.Count < 0)
                         sbar4("Catalog/Plugins mismatch - Run game to solve");
                 }
                 catch (Exception ex)
@@ -1104,11 +1102,7 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
             if (directory == @"\Data")
                 return 0;
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly)) // Add esm files
-            {
-                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
-            ;
+            esmespFiles = tools.GetPluginList(); // Add esm files
 
             foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
             {
@@ -1154,17 +1148,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
 
             directory += @"\Data";
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly))
-            {
-                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
-            }
-            ;
+            esmespFiles = tools.GetPluginList(); // Add esm files
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly))
+            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
             {
                 esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
             }
-            ;
 
             for (i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
@@ -2900,13 +2889,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.esm", SearchOption.TopDirectoryOnly)) // Build a list of all plugins
-            {
-                tempstr = Path.GetFileName(file);
-                plugins.Add(tempstr[..tempstr.LastIndexOf('.')]);
-            }
-
-            plugins = plugins.Except(tools.BethFiles).ToList(); // Build a list of non-vanilla game plugins
+            plugins = tools.GetPluginList(); // Build a list of all plugins excluding vanilla game files
 
             foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.ba2", SearchOption.TopDirectoryOnly)) // Build a list of all archives
             {

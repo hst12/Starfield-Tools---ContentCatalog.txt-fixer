@@ -57,7 +57,6 @@
             // 
             // chkAdd
             // 
-            chkAdd.CheckOnClick = true;
             chkAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             chkAdd.FormattingEnabled = true;
             chkAdd.Location = new System.Drawing.Point(289, 49);
