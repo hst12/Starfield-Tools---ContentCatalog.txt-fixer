@@ -42,6 +42,9 @@ namespace Starfield_Tools
 
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
+
+
+
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
 
 #pragma warning disable CS0168 // Variable is declared but never used
@@ -77,6 +80,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             this.StartPosition = FormStartPosition.CenterScreen;
 
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
+
+            progressBar1.Width = 400; // Set the width of the progress bar
+            progressBar1.Height = 50; // Set the height of the progress bar
+
+            // Calculate the position to center the progress bar
+            int x = (this.ClientSize.Width - progressBar1.Width) / 2;
+            int y = (this.ClientSize.Height - progressBar1.Height) / 2;
+
+            // Set the location of the progress bar
+            progressBar1.Location = new System.Drawing.Point(x, y);
 
             menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
             this.Font = Properties.Settings.Default.FontSize;
@@ -301,18 +314,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1, i,  esmCount = 0, espCount = 0, ba2Count , rowIndex;
+            int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count, rowIndex;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
-            List<string> CreationsPlugin = [];
-            List<string> CreationsTitle = [];
-            List<string> CreationsFiles = [];
-            List<string> CreationsVersion = [];
-            List<bool> AchievementSafe = [];
-            List<long> TimeStamp = [];
-            List<string> CreationsID = [];
-            List<string> esmFiles = [];
-            List<long> FileSize = [];
+            List<string> CreationsPlugin = new();
+            List<string> CreationsTitle = new();
+            List<string> CreationsFiles = new();
+            List<string> CreationsVersion = new();
+            List<bool> AchievementSafe = new();
+            List<long> TimeStamp = new();
+            List<string> CreationsID = new();
+            List<string> esmFiles = new();
+            List<long> FileSize = new();
             long ModFileSize;
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
 
@@ -326,8 +339,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             sbar3("");
             statusStrip1.Refresh();
 
-            Form LoadScreen = new frmLoading("Loading");
-            LoadScreen.Show();
 
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
@@ -363,30 +374,24 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             try
             {
-                dynamic json_Dictionary = JsonConvert.DeserializeObject<dynamic>(json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            try
-            {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Read ContentCatalog.txt
                 data.Remove("ContentCatalog");
                 foreach (var kvp in data)
                 {
                     try
                     {
-                        for (i = 0; i < kvp.Value.Files.Length; i++)
-                            if (kvp.Value.Files[i].IndexOf(".esm") > 0 || kvp.Value.Files[i].IndexOf(".esp") > 0) // Look for .esm or .esp files
-                                CreationsPlugin.Add(kvp.Value.Files[i]);
+                        foreach (var file in kvp.Value.Files)
+                        {
+                            if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
+                                CreationsPlugin.Add(file);
+                        }
 
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
                         CreationsFiles.Add(string.Join(", ", kvp.Value.Files));
                         AchievementSafe.Add(kvp.Value.AchievementSafe);
                         TimeStamp.Add(kvp.Value.Timestamp);
-                        CreationsID.Add(kvp.Key.ToString());
+                        CreationsID.Add(kvp.Key);
                         FileSize.Add(kvp.Value.FilesSize);
                     }
                     catch (Exception ex)
@@ -413,121 +418,126 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 MessageBox.Show(@"Missing Plugins.txt file
 
-Click Ok to create a blank Plugins.txt file
-Click File->Restore if you have a backup of your Plugins.txt file
-Alternatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
+        Click Ok to create a blank Plugins.txt file
+        Click File->Restore if you have a backup of your Plugins.txt file
+        Alternatively, run the game once to have it create a Plugins.txt file for you.", "Plugins.txt not found");
                 using StreamWriter writer = new(loText);
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 sbar("");
                 return;
             }
 
-            using (var reader = new StreamReader(loText))
-                while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
+            var lines = File.ReadAllLines(loText);
+            progressBar1.Maximum = lines.Length;
+            progressBar1.Value = 0;
+            progressBar1.Show();
+
+            foreach (var line in lines) // Read Plugins.txt
+            {
+                progressBar1.Value++;
+                PluginName = line;
+                try
                 {
-                    try
+                    if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))
                     {
-                        if (PluginName != "" && !tools.BethFiles.Contains(PluginName))
+                        if (PluginName[0] == '*') // * = Mod enabled
                         {
-                            if (PluginName[0] == '*') // * = Mod enabled
-                            {
-                                ModEnabled = true;
-                                EnabledCount++;
-                                PluginName = PluginName[1..];
-                            }
-                            else
-                                ModEnabled = false;
+                            ModEnabled = true;
+                            EnabledCount++;
+                            PluginName = PluginName[1..];
+                        }
+                        else
+                            ModEnabled = false;
 
-                            if (PluginName[0] != '#') // Ignore comment
-                            {
-                                Description = "";
-                                ModFiles = "";
-                                ModVersion = "";
-                                AuthorVersion = "";
-                                ASafe = "";
-                                ModTimeStamp = "";
-                                ModID = "";
-                                ModFileSize = 0;
-                                URL = "";
+                        if (PluginName[0] != '#') // Ignore comment
+                        {
+                            Description = "";
+                            ModFiles = "";
+                            ModVersion = "";
+                            AuthorVersion = "";
+                            ASafe = "";
+                            ModTimeStamp = "";
+                            ModID = "";
+                            ModFileSize = 0;
+                            URL = "";
 
-                                for (i = 0; i < CreationsPlugin.Count; i++)
+                            for (i = 0; i < CreationsPlugin.Count; i++)
+                            {
+                                if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
+                                    CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
                                 {
-                                    if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
-                                        CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
-                                    {
-                                        Description = CreationsTitle[i]; // Add Content Catalog description if available
-                                        ModVersion = CreationsVersion[i];
-                                        AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
-                                        ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
+                                    Description = CreationsTitle[i]; // Add Content Catalog description if available
+                                    ModVersion = CreationsVersion[i];
+                                    AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
+                                    ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
 
-                                        ModFiles = CreationsFiles[i];
-                                        if (AchievementSafe[i])
-                                            ASafe = "Yes";
-                                        else
-                                            ASafe = "";
-                                        ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
-                                        ModID = CreationsID[i];
-                                        ModFileSize = FileSize[i] / 1024;
-                                        URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
-                                        break;
+                                    ModFiles = CreationsFiles[i];
+                                    ASafe = AchievementSafe[i] ? "Yes" : "";
+                                    ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
+                                    ModID = CreationsID[i];
+                                    ModFileSize = FileSize[i] / 1024;
+                                    URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
+                                    break;
+                                }
+                            }
+
+                            rowIndex = this.dataGridView1.Rows.Add();
+                            var row = this.dataGridView1.Rows[rowIndex];
+
+                            // Populate datagrid from LOOT groups
+
+                            if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
+                            {
+                                var group = Groups.plugins.FirstOrDefault(p => p.name == PluginName);
+                                if (group != null)
+                                {
+                                    row.Cells["Group"].Value = group.group;
+                                    if (group.url != null)
+                                    {
+                                        URL = group.url[0].link;
+                                        Description = group.url[0].name;
                                     }
                                 }
-
-                                rowIndex = this.dataGridView1.Rows.Add();
-                                var row = this.dataGridView1.Rows[rowIndex];
-
-                                // Populate datagrid from LOOT groups
-
-                                if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
-                                    for (i = 0; i < Groups.plugins.Count; i++)
-                                        if (Groups.plugins[i].name == PluginName)
-                                        {
-                                            row.Cells["Group"].Value = Groups.plugins[i].group;
-                                            if (Groups.plugins[i].url != null)
-                                            {
-                                                URL = Groups.plugins[i].url[0].link;
-                                                Description = Groups.plugins[i].url[0].name;
-                                            }
-                                            break;
-                                        }
-
-                                if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
-                                    if (row.Cells["Group"].Value == null)
-                                        row.Cells["Group"].Value = "Bethesda Game Studios Creations";
-                                    else
-                                        row.Cells["Group"].Value += " (Bethesda)";
-
-                                row.Cells["ModEnabled"].Value = ModEnabled;
-                                row.Cells["PluginName"].Value = PluginName;
-                                row.Cells["Description"].Value = Description;
-                                if (dataGridView1.Columns["Version"].Visible)
-                                    row.Cells["Version"].Value = ModVersion;
-                                if (dataGridView1.Columns["AuthorVersion"].Visible)
-                                    row.Cells["AuthorVersion"].Value = AuthorVersion;
-                                if (dataGridView1.Columns["TimeStamp"].Visible)
-                                    row.Cells["TimeStamp"].Value = ModTimeStamp;
-                                if (dataGridView1.Columns["Achievements"].Visible)
-                                    row.Cells["Achievements"].Value = ASafe;
-                                if (dataGridView1.Columns["Files"].Visible)
-                                    row.Cells["Files"].Value = ModFiles;
-                                if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
-                                    row.Cells["FileSize"].Value = ModFileSize;
-                                row.Cells["CreationsID"].Value = ModID;
-                                if (dataGridView1.Columns["Index"].Visible)
-                                    row.Cells["Index"].Value = IndexCount++;
-                                row.Cells["URL"].Value = URL;
                             }
+
+                            if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
+                            {
+                                if (row.Cells["Group"].Value == null)
+                                    row.Cells["Group"].Value = "Bethesda Game Studios Creations";
+                                else
+                                    row.Cells["Group"].Value += " (Bethesda)";
+                            }
+
+                            row.Cells["ModEnabled"].Value = ModEnabled;
+                            row.Cells["PluginName"].Value = PluginName;
+                            row.Cells["Description"].Value = Description;
+                            if (dataGridView1.Columns["Version"].Visible)
+                                row.Cells["Version"].Value = ModVersion;
+                            if (dataGridView1.Columns["AuthorVersion"].Visible)
+                                row.Cells["AuthorVersion"].Value = AuthorVersion;
+                            if (dataGridView1.Columns["TimeStamp"].Visible)
+                                row.Cells["TimeStamp"].Value = ModTimeStamp;
+                            if (dataGridView1.Columns["Achievements"].Visible)
+                                row.Cells["Achievements"].Value = ASafe;
+                            if (dataGridView1.Columns["Files"].Visible)
+                                row.Cells["Files"].Value = ModFiles;
+                            if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
+                                row.Cells["FileSize"].Value = ModFileSize;
+                            row.Cells["CreationsID"].Value = ModID;
+                            if (dataGridView1.Columns["Index"].Visible)
+                                row.Cells["Index"].Value = IndexCount++;
+                            row.Cells["URL"].Value = URL;
                         }
                     }
-                    catch (Exception ex)
-                    {
-
-                        sbar(ex.Message);
-#if DEBUG
-                        MessageBox.Show(ex.Message);
-#endif
-                    }
                 }
+                catch (Exception ex)
+                {
+                    sbar(ex.Message);
+#if DEBUG
+                    MessageBox.Show(ex.Message);
+#endif
+                }
+            }
 
             SetupColumns();
 
@@ -543,12 +553,12 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                     espCount = Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly).Count();
                     ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
 
-                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + CreationsPlugin.Count.ToString() + ", Other: " +
-                        (dataGridView1.RowCount - CreationsPlugin.Count).ToString() + ", Enabled: " + EnabledCount.ToString() + ", esm files: " +
-                        esmCount.ToString() + " " + "Archives: " + ba2Count.ToString();
+                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + CreationsPlugin.Count + ", Other: " +
+                        (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm files: " +
+                        esmCount + " " + "Archives: " + ba2Count;
 
                     if (espCount > 0)
-                        StatText += ", esp files: " + espCount.ToString();
+                        StatText += ", esp files: " + espCount;
 
                     if (dataGridView1.RowCount - CreationsPlugin.Count < 0)
                         sbar4("Catalog/Plugins mismatch - Run game to solve");
@@ -570,12 +580,14 @@ Alternatively, run the game once to have it create a Plugins.txt file for you.",
                 sbar("Hiding inactive mods...");
                 statusStrip1.Refresh();
                 for (i = 0; i < dataGridView1.RowCount; i++)
-                    if ((bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value == false && dataGridView1.RowCount > 0)
+                    if (!(bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value && dataGridView1.RowCount > 0)
                         dataGridView1.Rows[i].Visible = false;
             }
             sbar(StatText);
             dataGridView1.EndEdit();
-            LoadScreen.Close();
+            
+            progressBar1.Value = progressBar1.Maximum; // Ensure the progress bar is full at the end
+            progressBar1.Hide();
         }
 
         private void GetProfiles()
