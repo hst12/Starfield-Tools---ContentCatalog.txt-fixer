@@ -42,9 +42,6 @@ namespace Starfield_Tools
 
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
-
-
-
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
 
 #pragma warning disable CS0168 // Variable is declared but never used
@@ -339,7 +336,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             sbar3("");
             statusStrip1.Refresh();
 
-
             btnSave.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
 
@@ -585,7 +581,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
             sbar(StatText);
             dataGridView1.EndEdit();
-            
+
             progressBar1.Value = progressBar1.Maximum; // Ensure the progress bar is full at the end
             progressBar1.Hide();
         }
@@ -1673,6 +1669,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             bool ProfilesActive = Profiles;
             int i, j;
             string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine;
+
+            if (LOOTPath == "")
+            {
+                if (!SetLOOTPath())
+                {
+                    sbar2("LOOT path is required to run LOOT");
+                    return;
+                }
+            }
+
             if (GameVersion != MS)
                 cmdLine = "--game Starfield";
             else
@@ -1685,53 +1691,39 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 chkProfile.Checked = false;
             }
 
-            if (LOOTPath == "")
+            if (LOOTMode)
+                cmdLine += " --auto-sort";
+            ProcessStartInfo startInfo = new()
             {
-                if (!SetLOOTPath())
-                {
-                    sbar2("LOOT path is required to run LOOT");
-                    return;
-                }
+                FileName = LOOTPath,
+                Arguments = "  " + cmdLine,
+                WorkingDirectory = LOOTPath[..LOOTPath.LastIndexOf("LOOT.exe")]
+            };
+
+            using (Process process = Process.Start(startInfo))
+            {
+                process.WaitForExit();
             }
 
-            if (LOOTPath != "")
+            if (Properties.Settings.Default.AutoDelccc)
+                Delccc();
+            //InitDataGrid(); Re-enable this if necessary
+
+            for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
+                for (j = 0; j < dataGridView1.Rows.Count; j++)
+                    if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == tools.BethFiles[i])
+                        dataGridView1.Rows.RemoveAt(j);
+
+            if (ProfilesActive)
             {
-                if (LOOTMode)
-                    cmdLine += " --auto-sort";
-                ProcessStartInfo startInfo = new()
-                {
-                    FileName = LOOTPath,
-                    Arguments = "  " + cmdLine,
-                    WorkingDirectory = LOOTPath[..LOOTPath.LastIndexOf("LOOT.exe")]
-                };
+                Profiles = true;
+                SavePlugins();
+                cmbProfile.Enabled = true;
+                chkProfile.Checked = true;
 
-                //sbar4("App paused waiting for LOOT exit");
-                using (Process process = Process.Start(startInfo))
-                {
-                    process.WaitForExit();
-                }
-                //sbar4("Loot exit - review the load order if necessary");
-
-                if (Properties.Settings.Default.AutoDelccc)
-                    Delccc();
-                InitDataGrid();
-
-                for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
-                    for (j = 0; j < dataGridView1.Rows.Count; j++)
-                        if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == tools.BethFiles[i])
-                            dataGridView1.Rows.RemoveAt(j);
-
-                if (ProfilesActive)
-                {
-                    Profiles = true;
-                    SavePlugins();
-                    cmbProfile.Enabled = true;
-                    chkProfile.Checked = true;
-
-                }
-                else
-                    SavePlugins();
             }
+            else
+                SavePlugins();
         }
         private void toolStripMenuLoot_Click(object sender, EventArgs e)
         {
