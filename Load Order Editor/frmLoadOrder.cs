@@ -1709,7 +1709,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 Delccc();
             //InitDataGrid(); Re-enable this if necessary
 
-            for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
+            for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files if LOOT added them
                 for (j = 0; j < dataGridView1.Rows.Count; j++)
                     if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == tools.BethFiles[i])
                         dataGridView1.Rows.RemoveAt(j);
@@ -2883,6 +2883,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<string> archives = [];
             List<string> plugins = [];
             List<string> orphaned = [];
+            List<string> toDelete = [];
+
+            if (StarfieldGamePath == "")
+                return;
 
             using (StreamReader sr = new StreamReader(Tools.CommonFolder + "BGS Archives.txt")) // Read a list of standard game archives. Will need updating for future DLC
             {
@@ -2893,16 +2897,49 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            plugins = tools.GetPluginList(); // Build a list of all plugins excluding vanilla game files
+            plugins = tools.GetPluginList() // Build a list of all plugins excluding vanilla game files
+    .Select(s => s.Substring(0, s.Length - 4).ToLower())
+    .ToList();
 
             foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.ba2", SearchOption.TopDirectoryOnly)) // Build a list of all archives
             {
-                tempstr = Path.GetFileName(file);
+                tempstr = Path.GetFileName(file).ToLower();
                 archives.Add(tempstr[..tempstr.LastIndexOf('.')]);
             }
-            List<string> modArchives = archives.Except(BGSArchives).ToList(); // Build a list of non-vanilla game archives
 
-            MessageBox.Show("Done");
+            List<string> modArchives = archives.Except(BGSArchives) // Get the archive base names excluding BGS Archives
+                .Select(s => s.ToLower()
+                .Replace(" - main", string.Empty)
+                .Replace(" - textures", string.Empty)
+                .Replace(" - voices_en", string.Empty))
+                .ToList();
+
+            orphaned = modArchives.Except(plugins).ToList(); // Strip out esm files to get orphaned archives
+
+            var suffixes = new List<string> { " - main.ba2", " - textures.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
+
+            foreach (var item in orphaned)
+            {
+                tempstr = Path.Combine(StarfieldGamePath, "Data", item);
+
+                foreach (var suffix in suffixes)
+                {
+                    var filePath = tempstr + suffix;
+                    if (File.Exists(filePath))
+                    {
+                        toDelete.Add(filePath);
+                    }
+                }
+            }
+
+            if (toDelete.Count > 0)
+            {
+                Form Orphaned = new frmOrphaned(toDelete);
+                Orphaned.Show();
+            }
+            else
+                MessageBox.Show("No orphaned archives found");
+
         }
 
         private void activateNewModsToolStripMenuItem_Click(object sender, EventArgs e)
