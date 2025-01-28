@@ -41,18 +41,21 @@ namespace Starfield_Tools.Load_Order_Editor
             {
                 return;
             }
-
-            foreach (var item in checkedListBox1.CheckedItems)
+            try
             {
-                try
+                foreach (var item in checkedListBox1.CheckedItems)
                 {
                     File.Delete(frmLoadOrder.StarfieldGamePath + "\\Data\\" + item.ToString());
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error deleting file: " + ex.Message);
-                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error deleting file: " + ex.Message);
+                this.Close();
+                return;
+            }
+
+            MessageBox.Show("Files deleted successfully.");
             this.Close();
         }
     }
