@@ -13,10 +13,15 @@ namespace Starfield_Tools.Load_Order_Editor
         public frmOrphaned(List<string> orphaned)
         {
             InitializeComponent();
+            long fileSize = 0;
+
             foreach (var item in orphaned)
             {
                 checkedListBox1.Items.Add(Path.GetFileName(item));
+                FileInfo fileInfo = new FileInfo(item);
+                fileSize += fileInfo.Length;
             }
+            toolStripStatusLabel1.Text = "Total Size: " + (fileSize / 1024).ToString() + " Mbytes";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
