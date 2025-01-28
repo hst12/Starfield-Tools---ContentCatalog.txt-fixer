@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -95,6 +96,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             else
                 StarfieldGamePath = Properties.Settings.Default.GamePathMS;
+
+            if (!File.Exists(StarfieldGamePath + "\\CreationKit.exe")) // Hide option to launch CK if not found
+                creationKitToolStripMenuItem.Visible = false;
 
             if (Properties.Settings.Default.AutoDelccc)
             {
@@ -456,7 +460,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             ModFileSize = 0;
                             URL = "";
 
-                            for (i = 0; i < CreationsPlugin.Count; i++)
+                           for (i = 0; i < CreationsPlugin.Count; i++) // Parallel.For (0,  CreationsPlugin.Count, i=> 
                             {
                                 if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                     CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
