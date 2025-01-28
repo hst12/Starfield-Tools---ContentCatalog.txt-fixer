@@ -1,19 +1,15 @@
-﻿using System;
+﻿using Starfield_Tools.Common;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Starfield_Tools.Load_Order_Editor
 {
     public partial class frmOrphaned : Form
     {
+        readonly Tools tools = new();
         public frmOrphaned(List<string> orphaned)
         {
             InitializeComponent();
@@ -38,6 +34,14 @@ namespace Starfield_Tools.Load_Order_Editor
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (checkedListBox1.CheckedItems.Count == 0)
+                return;
+
+            if (!Tools.ConfirmAction("Are you sure you want to delete the selected files?", "Last Chance"))
+            {
+                return;
+            }
+
             foreach (var item in checkedListBox1.CheckedItems)
             {
                 try
@@ -49,7 +53,7 @@ namespace Starfield_Tools.Load_Order_Editor
                     MessageBox.Show("Error deleting file: " + ex.Message);
                 }
             }
-
+            this.Close();
         }
     }
 }

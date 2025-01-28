@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using SevenZipExtractor;
 using Starfield_Tools.Common;
 using Starfield_Tools.Load_Order_Editor;
