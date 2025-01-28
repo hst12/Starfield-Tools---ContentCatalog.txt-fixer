@@ -2888,6 +2888,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (StarfieldGamePath == "")
                 return;
 
+            if (!Tools.ConfirmAction("Use at own risk - Are you sure?","This will check for orphaned archives and optionally delete them" ))
+                return;
+
             using (StreamReader sr = new StreamReader(Tools.CommonFolder + "BGS Archives.txt")) // Read a list of standard game archives. Will need updating for future DLC
             {
                 string line;
