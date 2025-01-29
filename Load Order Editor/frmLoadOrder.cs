@@ -1934,6 +1934,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuCustom_Click(object sender, EventArgs e)
         {
+            if (!GameSwitchWarning())
+                return;
+
             string CustomEXEFolder;
 
             CustomEXEFolder = Properties.Settings.Default.CustomEXE;
@@ -2078,9 +2081,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             RunGame();
         }
-
+        private bool GameSwitchWarning()
+        {
+            return(Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before switching"));
+        }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
+            if (!GameSwitchWarning())
+                return;
             toolStripMenuSteam.Checked = !toolStripMenuSteam.Checked;
             if (toolStripMenuSteam.Checked)
             {
@@ -2094,6 +2102,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuMS_Click(object sender, EventArgs e)
         {
+            if (!GameSwitchWarning())
+                return;
             toolStripMenuMS.Checked = !toolStripMenuMS.Checked;
             if (toolStripMenuMS.Checked)
             {
@@ -2286,6 +2296,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void gameVersionSFSEToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!GameSwitchWarning())
+                return;
+
             if (File.Exists(StarfieldGamePath + "\\sfse_loader.exe"))
             {
                 gameVersionSFSEToolStripMenuItem.Checked = !gameVersionSFSEToolStripMenuItem.Checked;
