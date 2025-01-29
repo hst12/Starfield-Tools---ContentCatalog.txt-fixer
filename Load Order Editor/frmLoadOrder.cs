@@ -460,7 +460,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             ModFileSize = 0;
                             URL = "";
 
-                           for (i = 0; i < CreationsPlugin.Count; i++) // Parallel.For (0,  CreationsPlugin.Count, i=> 
+                            for (i = 0; i < CreationsPlugin.Count; i++) // Parallel.For (0,  CreationsPlugin.Count, i=> 
                             {
                                 if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                     CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
@@ -2891,9 +2891,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (StarfieldGamePath == "")
                 return;
 
-            if (!Tools.ConfirmAction("Use at own risk - Are you sure?","This will check for orphaned archives and optionally delete them" ))
-                return;
-
             using (StreamReader sr = new StreamReader(Tools.CommonFolder + "BGS Archives.txt")) // Read a list of standard game archives. Will need updating for future DLC
             {
                 string line;
@@ -2932,9 +2929,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     var filePath = tempstr + suffix;
                     if (File.Exists(filePath))
-                    {
                         toDelete.Add(filePath);
-                    }
                 }
             }
 

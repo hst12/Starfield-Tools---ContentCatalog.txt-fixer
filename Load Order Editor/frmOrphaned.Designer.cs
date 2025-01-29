@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrphaned));
             checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -135,6 +136,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(775, 412);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "frmOrphaned";
             Text = "Delete Orphaned Archives";
             tableLayoutPanel1.ResumeLayout(false);
