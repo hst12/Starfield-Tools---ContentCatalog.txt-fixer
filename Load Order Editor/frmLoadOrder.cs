@@ -99,6 +99,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 if (StarfieldGamePath == "")
                 {
                     GetSteamGamePath(); // Detect game path
+                    if (StarfieldGamePath=="")
+                        tools.SetStarfieldGamePath();
                     Properties.Settings.Default.StarfieldGamePath = StarfieldGamePath;
                     Properties.Settings.Default.Save();
                 }
