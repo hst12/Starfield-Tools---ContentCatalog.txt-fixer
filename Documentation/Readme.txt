@@ -103,6 +103,9 @@ Software used for decompression:
 7-Zip - https://www.7-zip.org/
 SevenZipExtractor - https://github.com/adoconnection/SevenZipExtractor
 
+Narod's Steam Game Finder:
+https://github.com/NarodGaming/steamgamefinder
+
 The rest of the readme pertains mostly to the catalog fixer function which isn't really needed any more unless you have an old save game you want to check.
 
 Starfield currently has an issue that causes corruption of a file called ContentCatalog.txt when you load a save game.

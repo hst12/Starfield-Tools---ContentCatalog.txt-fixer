@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Narod.SteamGameFinder;
 using SevenZipExtractor;
 using Starfield_Tools.Common;
 using Starfield_Tools.Load_Order_Editor;
@@ -10,7 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -92,11 +92,20 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             this.Font = Properties.Settings.Default.FontSize;
 
             GameVersion = Properties.Settings.Default.GameVersion;
+
             if (GameVersion != MS)
+            {
                 StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
+                if (StarfieldGamePath == "")
+                {
+                    GetSteamGamePath(); // Detect game path
+                    Properties.Settings.Default.StarfieldGamePath = StarfieldGamePath;
+                    Properties.Settings.Default.Save();
+                }
+            }
             else
                 StarfieldGamePath = Properties.Settings.Default.GamePathMS;
-
+            
             if (!File.Exists(StarfieldGamePath + "\\CreationKit.exe")) // Hide option to launch CK if not found
                 creationKitToolStripMenuItem.Visible = false;
 
@@ -228,55 +237,55 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
         }
         private void SetMenus()
+{
+    toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProfileOn;
+    compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
+
+    if (LooseFiles || Properties.Settings.Default.LooseFiles)
+    {
+        looseFilesDisabledToolStripMenuItem.Checked = true;
+        sbarCCC("Loose files enabled");
+    }
+    else
+    {
+        looseFilesDisabledToolStripMenuItem.Checked = false;
+        sbarCCC("Loose files disabled");
+    }
+
+    autoSortToolStripMenuItem.Checked = Properties.Settings.Default.AutoSort;
+    AutoSort = Properties.Settings.Default.AutoSort;
+
+    activeOnlyToolStripMenuItem.Checked = Properties.Settings.Default.ActiveOnly;
+    ActiveOnly = Properties.Settings.Default.ActiveOnly;
+
+    autoUpdateModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoUpdate;
+    AutoUpdate = Properties.Settings.Default.AutoUpdate;
+
+    toolStripMenuAutoDelccc.Checked = Properties.Settings.Default.AutoDelccc;
+
+    autoResetToolStripMenuItem.Checked = Properties.Settings.Default.AutoReset;
+
+    showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
+    timer2.Enabled = Properties.Settings.Default.Showtime;
+
+    activateNewModsToolStripMenuItem.Checked = Properties.Settings.Default.ActivateNew;
+
+    if (Properties.Settings.Default.AutoReset)
+        ResetDefaults();
+
+    if (AutoUpdate)
+    {
+        int AddedMods = AddMissing(), RemovedMods = RemoveMissing();
+
+        if (AddedMods + RemovedMods > 0)
         {
-            toolStripMenuProfilesOn.Checked = Properties.Settings.Default.ProfileOn;
-            compareProfilesToolStripMenuItem.Checked = Properties.Settings.Default.CompareProfiles;
-
-            if (LooseFiles || Properties.Settings.Default.LooseFiles)
-            {
-                looseFilesDisabledToolStripMenuItem.Checked = true;
-                sbarCCC("Loose files enabled");
-            }
-            else
-            {
-                looseFilesDisabledToolStripMenuItem.Checked = false;
-                sbarCCC("Loose files disabled");
-            }
-
-            autoSortToolStripMenuItem.Checked = Properties.Settings.Default.AutoSort;
-            AutoSort = Properties.Settings.Default.AutoSort;
-
-            activeOnlyToolStripMenuItem.Checked = Properties.Settings.Default.ActiveOnly;
-            ActiveOnly = Properties.Settings.Default.ActiveOnly;
-
-            autoUpdateModsToolStripMenuItem.Checked = Properties.Settings.Default.AutoUpdate;
-            AutoUpdate = Properties.Settings.Default.AutoUpdate;
-
-            toolStripMenuAutoDelccc.Checked = Properties.Settings.Default.AutoDelccc;
-
-            autoResetToolStripMenuItem.Checked = Properties.Settings.Default.AutoReset;
-
-            showTimeToolStripMenuItem.Checked = Properties.Settings.Default.Showtime;
-            timer2.Enabled = Properties.Settings.Default.Showtime;
-
-            activateNewModsToolStripMenuItem.Checked = Properties.Settings.Default.ActivateNew;
-
-            if (Properties.Settings.Default.AutoReset)
-                ResetDefaults();
-
-            if (AutoUpdate)
-            {
-                int AddedMods = AddMissing(), RemovedMods = RemoveMissing();
-
-                if (AddedMods + RemovedMods > 0)
-                {
-                    sbar4("Added: " + AddedMods + ", Removed: " + RemovedMods);
-                    SavePlugins();
-                    if (AutoSort)
-                        RunLOOT(true);
-                    InitDataGrid();
-                }
-            }
+            sbar4("Added: " + AddedMods + ", Removed: " + RemovedMods);
+            SavePlugins();
+            if (AutoSort)
+                RunLOOT(true);
+            InitDataGrid();
+        }
+    }
 
         }
 
@@ -2086,7 +2095,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private bool GameSwitchWarning()
         {
-            return(Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before switching"));
+            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before switching"));
         }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
@@ -2963,6 +2972,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             activateNewModsToolStripMenuItem.Checked = !activateNewModsToolStripMenuItem.Checked;
             Properties.Settings.Default.ActivateNew = activateNewModsToolStripMenuItem.Checked;
+        }
+
+        private void GetSteamGamePath()
+        {
+            SteamGameLocator steamGameLocator = new SteamGameLocator();
+            StarfieldGamePath = steamGameLocator.getGameInfoByFolder("Starfield").steamGameLocation;
         }
     }
 }
