@@ -774,43 +774,43 @@
             // toolStripMenuDeleteCCC
             // 
             toolStripMenuDeleteCCC.Name = "toolStripMenuDeleteCCC";
-            toolStripMenuDeleteCCC.Size = new System.Drawing.Size(564, 44);
+            toolStripMenuDeleteCCC.Size = new System.Drawing.Size(585, 44);
             toolStripMenuDeleteCCC.Text = "Delete Starfield.ccc";
             toolStripMenuDeleteCCC.Click += toolStripMenuDeleteCCC_Click;
             // 
             // compareStarfieldCustominiToBackupToolStripMenuItem
             // 
             compareStarfieldCustominiToBackupToolStripMenuItem.Name = "compareStarfieldCustominiToBackupToolStripMenuItem";
-            compareStarfieldCustominiToBackupToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
+            compareStarfieldCustominiToBackupToolStripMenuItem.Size = new System.Drawing.Size(585, 44);
             compareStarfieldCustominiToBackupToolStripMenuItem.Text = "Compare StarfieldCustom.ini to backup";
             compareStarfieldCustominiToBackupToolStripMenuItem.Click += compareStarfieldCustominiToBackupToolStripMenuItem_Click;
             // 
             // resetStarfieldCustominiToolStripMenuItem
             // 
             resetStarfieldCustominiToolStripMenuItem.Name = "resetStarfieldCustominiToolStripMenuItem";
-            resetStarfieldCustominiToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
+            resetStarfieldCustominiToolStripMenuItem.Size = new System.Drawing.Size(585, 44);
             resetStarfieldCustominiToolStripMenuItem.Text = "Reset StarfieldCustom.ini";
             resetStarfieldCustominiToolStripMenuItem.Click += toolStripMenuResetStarfieldCustom_Click;
             // 
             // undoVortexChangesToolStripMenuItem
             // 
             undoVortexChangesToolStripMenuItem.Name = "undoVortexChangesToolStripMenuItem";
-            undoVortexChangesToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
+            undoVortexChangesToolStripMenuItem.Size = new System.Drawing.Size(585, 44);
             undoVortexChangesToolStripMenuItem.Text = "Undo Vortex changes";
             undoVortexChangesToolStripMenuItem.Click += undoVortexChangesToolStripMenuItem_Click;
             // 
             // checkArchivesToolStripMenuItem
             // 
             checkArchivesToolStripMenuItem.Name = "checkArchivesToolStripMenuItem";
-            checkArchivesToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
+            checkArchivesToolStripMenuItem.Size = new System.Drawing.Size(585, 44);
             checkArchivesToolStripMenuItem.Text = "Check for Orphaned Archives";
             checkArchivesToolStripMenuItem.Click += checkArchivesToolStripMenuItem_Click;
             // 
             // resetToVanillaStarfieldSettingsToolStripMenuItem
             // 
             resetToVanillaStarfieldSettingsToolStripMenuItem.Name = "resetToVanillaStarfieldSettingsToolStripMenuItem";
-            resetToVanillaStarfieldSettingsToolStripMenuItem.Size = new System.Drawing.Size(564, 44);
-            resetToVanillaStarfieldSettingsToolStripMenuItem.Text = "Reset to vanilla Starfield settings";
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Size = new System.Drawing.Size(585, 44);
+            resetToVanillaStarfieldSettingsToolStripMenuItem.Text = "Reset to Recommended Starfield settings";
             resetToVanillaStarfieldSettingsToolStripMenuItem.Click += resetToVanillaStarfieldSettingsToolStripMenuItem_Click;
             // 
             // toolStripSeparator17

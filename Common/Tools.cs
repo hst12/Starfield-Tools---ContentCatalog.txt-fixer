@@ -218,7 +218,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
         }
         public static void CheckGame() // Check if Starfield appdata folder exists
         {
-            if (!Directory.Exists(StarfieldAppData)) 
+            if (!Directory.Exists(StarfieldAppData))
             {
                 MessageBox.Show("Unable to continue. Is Starfield installed correctly?", "Starfield AppData directory not found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Environment.Exit(1);
@@ -238,34 +238,43 @@ namespace Starfield_Tools.Common // Various functions used by the app
 
         public string SetStarfieldGamePath() // Prompt for Starfield game path
         {
-            using FolderBrowserDialog folderBrowserDialog = new();
-            if (Settings.Default.GameVersion == 1)
-                folderBrowserDialog.SelectedPath = Settings.Default.GamePathMS;
-            else
-                folderBrowserDialog.SelectedPath = Settings.Default.StarfieldGamePath;
-            folderBrowserDialog.Description = "Choose path to the game installation folder where Starfield.exe is located";
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+
+            MessageBox.Show("Please select the path to the game installation folder where Starfield.exe is located", "Select Game Path", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                if (!File.Exists(selectedFolderPath + "\\Starfield.exe"))
-                {
-                    MessageBox.Show("Starfield.exe not found in the selected path", "Please select the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return ("");
-                }
-                if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS) 
-                {
-                    StarfieldGamePath = selectedFolderPath;
-                    Settings.Default.StarfieldGamePath = selectedFolderPath;
-                }
+                if (Settings.Default.GameVersion == 1)
+                    openFileDialog.InitialDirectory = Settings.Default.GamePathMS;
                 else
+                    openFileDialog.InitialDirectory = Settings.Default.StarfieldGamePath;
+
+                openFileDialog.Title = "Set the path to the Starfield executable - Starfield.exe";
+                openFileDialog.FileName = "Starfield.exe";
+                openFileDialog.Filter = "Starfield.exe|Starfield.exe";
+                var Result = openFileDialog.ShowDialog();
+                if (Result == DialogResult.OK)
                 {
-                    StarfieldGamePathMS = selectedFolderPath; // Cater for MS Store game path
-                    Settings.Default.GamePathMS = selectedFolderPath;
+                    string selectedFolderPath = Path.GetDirectoryName(openFileDialog.FileName);
+                    if (!File.Exists(selectedFolderPath + "\\Starfield.exe"))
+                    {
+                        MessageBox.Show("Starfield.exe not found in the selected path", "Please select the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return ("");
+                    }
+                    if (Properties.Settings.Default.GameVersion != frmLoadOrder.MS)
+                    {
+                        StarfieldGamePath = selectedFolderPath;
+                        Settings.Default.StarfieldGamePath = selectedFolderPath;
+                    }
+                    else
+                    {
+                        StarfieldGamePathMS = selectedFolderPath; // Cater for MS Store game path
+                        Settings.Default.GamePathMS = Path.GetDirectoryName(selectedFolderPath);
+                    }
+                    Settings.Default.Save();
+                    return selectedFolderPath;
                 }
-                Settings.Default.Save();
-                return selectedFolderPath;
+                return "";
             }
-            return "";
         }
 
         public static bool StartStarfieldCustom() // Start game with custom exe
@@ -393,7 +402,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
             PluginList = new();
             try
             {
-                string[] files = Directory.GetFiles(frmLoadOrder.StarfieldGamePath+ "\\Data","*.esm", SearchOption.TopDirectoryOnly);
+                string[] files = Directory.GetFiles(frmLoadOrder.StarfieldGamePath + "\\Data", "*.esm", SearchOption.TopDirectoryOnly);
                 foreach (string file in files)
                 {
                     if (!BethFiles.Contains(Path.GetFileName(file)))

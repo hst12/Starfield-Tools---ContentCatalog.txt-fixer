@@ -1680,6 +1680,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     sbar2("LOOT path is required to run LOOT");
                     return;
                 }
+                else
+                    LOOTPath = Properties.Settings.Default.LOOTPath;
             }
 
             if (GameVersion != MS)
@@ -1744,6 +1746,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 if (openFileDialog1.FileName != "")
                 {
                     Properties.Settings.Default.LOOTPath = openFileDialog1.FileName;
+                    Properties.Settings.Default.Save();
                     return true;
                 }
                 else return false;
@@ -2538,7 +2541,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         filePath = LooseFilesDir + "StarfieldCustom.ini";
             int ChangeCount = 0;
 
-            if (File.Exists(filePath))
+            if (File.Exists(filePath)) // Disable loose files
             {
                 ChangeCount += UndoVortexChanges(false);
 
@@ -2549,10 +2552,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     ChangeCount++;
                 }
 
-                if (Delccc())
+                if (Delccc()) // Delete Starfield.ccc
                     ChangeCount++;
 
-                if (ResetStarfieldCustomINI(false))
+                if (ResetStarfieldCustomINI(false)) // Apply recommended settings
                     ChangeCount++;
                 if (ChangeCount > 0)
                     sbar3(ChangeCount.ToString() + " Change(s) made to ini files");
@@ -2610,7 +2613,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void resetToVanillaStarfieldSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("Reset ini settings?", "Reset to vanilla defaults"))
+            if (Tools.ConfirmAction("Reset ini settings?", "Reset to recommended settings"))
                 ResetDefaults();
         }
 
@@ -2633,7 +2636,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will turn on a number of auto settings and reset ini settings", "Reset to vanilla defaults?"))
+            if (Tools.ConfirmAction("This will turn on a number of auto settings and reset ini settings", "Reset to recommended settings?"))
             {
                 ChangeSettings(true);
                 ResetDefaults();
@@ -2913,7 +2916,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            plugins = tools.GetPluginList() // Build a list of all plugins excluding vanilla game files
+            plugins = tools.GetPluginList() // Build a list of all plugins excluding base game files
     .Select(s => s.Substring(0, s.Length - 4).ToLower())
     .ToList();
 
