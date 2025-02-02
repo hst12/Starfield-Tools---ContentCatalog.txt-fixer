@@ -243,9 +243,9 @@ namespace Starfield_Tools.Common // Various functions used by the app
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                if (frmLoadOrder.StarfieldGamePath != null || frmLoadOrder.StarfieldGamePath!="")
+                openFileDialog.InitialDirectory=frmLoadOrder.StarfieldGamePath;
+                if (frmLoadOrder.StarfieldGamePath != null || frmLoadOrder.StarfieldGamePath != "")
                     openFileDialog.InitialDirectory = frmLoadOrder.StarfieldGamePath;
-                    //openFileDialog.InitialDirectory = frmLoadOrder.StarfieldGamePath;
                 else
                 {
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);

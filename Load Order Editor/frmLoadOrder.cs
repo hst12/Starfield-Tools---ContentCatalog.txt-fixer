@@ -1734,7 +1734,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (Properties.Settings.Default.AutoDelccc)
                 Delccc();
-            //InitDataGrid(); Re-enable this if necessary
+            InitDataGrid(); //Re-enable this if necessary
 
             for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files if LOOT added them
                 for (j = 0; j < dataGridView1.Rows.Count; j++)
@@ -1759,6 +1759,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private bool SetLOOTPath()
         {
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.LOOTPath;
             openFileDialog1.Filter = "Executable Files|*.exe";
             openFileDialog1.Title = "Set the path to the LOOT executable";
             openFileDialog1.FileName = "LOOT.exe";
