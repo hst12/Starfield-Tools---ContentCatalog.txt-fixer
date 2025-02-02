@@ -108,7 +108,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             else
             {
                 if (Properties.Settings.Default.GamePathMS == "")
-                    tools.SetStarfieldGamePath();
+                    tools.SetStarfieldGamePathMS();
                 StarfieldGamePath = Properties.Settings.Default.GamePathMS;
             }
 
@@ -1103,7 +1103,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuSetPath_Click(object sender, EventArgs e)
         {
-            StarfieldGamePath = tools.SetStarfieldGamePath();
+            if (GameVersion != MS)
+                StarfieldGamePath = tools.SetStarfieldGamePath();
+            else
+                StarfieldGamePath = tools.SetStarfieldGamePathMS();
         }
 
         private void toolStripMenuCleanup_Click(object sender, EventArgs e)
@@ -1130,11 +1133,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             esmespFiles = tools.GetPluginList(); // Add esm files
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
+            try
             {
-                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
+                {
+                    esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                }
             }
-            ;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 PluginFiles.Add((string)dataGridView1.Rows[i].Cells["PluginName"].Value);
@@ -1176,9 +1185,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             esmespFiles = tools.GetPluginList(); // Add esm files
 
-            foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
+            try
             {
-                esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                foreach (var missingFile in Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly)) // Add esp files
+                {
+                    esmespFiles.Add(missingFile[(missingFile.LastIndexOf('\\') + 1)..]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             for (i = 0; i < dataGridView1.Rows.Count; i++)
@@ -1688,14 +1704,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             int i, j;
             string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine;
 
-            if (File.Exists(@"C:\Program Files\LOOT\LOOT.exe") && LOOTPath == "")
+            if (File.Exists(@"C:\Program Files\LOOT\LOOT.exe") && LOOTPath == "") // Try detect LOOT if installed in default location
             {
                 LOOTPath = @"C:\Program Files\LOOT\LOOT.exe";
                 Properties.Settings.Default.LOOTPath = LOOTPath;
                 Properties.Settings.Default.Save();
             }
 
-            if (LOOTPath == "")
+            if (LOOTPath == "") // LOOT not found. Prompt for path
             {
                 if (!SetLOOTPath())
                 {
@@ -1711,7 +1727,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             else
                 cmdLine = cmdLine = "--game \"Starfield (MS Store)\"";
 
-            if (ProfilesActive)
+            if (ProfilesActive) // Temporary disable of profiles
             {
                 Profiles = false;
                 cmbProfile.Enabled = false;
@@ -1727,21 +1743,21 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 WorkingDirectory = LOOTPath[..LOOTPath.LastIndexOf("LOOT.exe")]
             };
 
-            using (Process process = Process.Start(startInfo))
+            using (Process process = Process.Start(startInfo)) // Freeze this app until LOOT closes
             {
                 process.WaitForExit();
             }
 
             if (Properties.Settings.Default.AutoDelccc)
                 Delccc();
-            InitDataGrid(); //Re-enable this if necessary
+            InitDataGrid();
 
             for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files if LOOT added them
                 for (j = 0; j < dataGridView1.Rows.Count; j++)
                     if ((string)dataGridView1.Rows[j].Cells["PluginName"].Value == tools.BethFiles[i])
                         dataGridView1.Rows.RemoveAt(j);
 
-            if (ProfilesActive)
+            if (ProfilesActive) // Re-enable profiles
             {
                 Profiles = true;
                 SavePlugins();
@@ -2109,7 +2125,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private bool GameSwitchWarning()
         {
-            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before switching"));
+            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding"));
         }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
