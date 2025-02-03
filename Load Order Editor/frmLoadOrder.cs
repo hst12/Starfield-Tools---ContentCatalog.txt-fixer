@@ -2262,7 +2262,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-
+            RemoveDuplicates();
             if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
                 RunLOOT(true);
             sbar3(ReturnStatus);
@@ -2364,8 +2364,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 gameVersionSFSEToolStripMenuItem.Checked = false;
             }
         }
-
-        private void removeDuplicatesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveDuplicates()
         {
             List<string> Plugins = [];
             string PluginName;
@@ -2384,6 +2383,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             isModified = true;
             SavePlugins();
             sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
+
+        }
+        private void removeDuplicatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveDuplicates();
         }
 
         private void ActiveOnlyToggle()
@@ -2935,7 +2939,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             ProfilesForm.Show();
         }
 
-        private void checkArchivesToolStripMenuItem_Click(object sender, EventArgs e) // WIP
+        private void checkArchivesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> BGSArchives = [];
             List<string> archives = [];
@@ -3016,6 +3020,20 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 return;
             ChangeSettings(false);
             File.Delete(Tools.StarfieldAppData + "\\Plugins.txt");
+        }
+
+        private void toolStripMenuAddToProfile_Click(object sender, EventArgs e) // WIP
+        {
+            List<string> profiles = new();
+
+            foreach (var item in cmbProfile.Items)
+            {
+                profiles.Add(item.ToString());
+            }
+            profiles.Remove(cmbProfile.SelectedItem.ToString()); // Remove current profile from list
+
+            frmAddModToProfile addMod = new(profiles, dataGridView1.CurrentRow.Cells["PluginName"].Value.ToString());
+            addMod.Show(cmbProfile);
         }
     }
 }
