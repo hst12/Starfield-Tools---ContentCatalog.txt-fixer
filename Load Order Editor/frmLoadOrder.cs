@@ -3009,5 +3009,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SteamGameLocator steamGameLocator = new SteamGameLocator();
             StarfieldGamePath = steamGameLocator.getGameInfoByFolder("Starfield").steamGameLocation;
         }
+
+        private void toolStripMenuItemDeletePlugins_Click(object sender, EventArgs e)
+        {
+            if (!Tools.ConfirmAction("Are you sure you want to delete all plugins?", "This will delete all plugins and clear most settings"))
+                return;
+            ChangeSettings(false);
+            File.Delete(Tools.StarfieldAppData + "\\Plugins.txt");
+        }
     }
 }
