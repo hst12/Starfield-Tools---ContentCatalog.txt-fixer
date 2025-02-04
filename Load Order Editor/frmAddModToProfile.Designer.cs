@@ -37,6 +37,7 @@
             btnAdd = new System.Windows.Forms.Button();
             btnRemove = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
             tableLayoutPanel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -47,22 +48,24 @@
             checkedListBox1.FormattingEnabled = true;
             checkedListBox1.Location = new System.Drawing.Point(3, 3);
             checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new System.Drawing.Size(917, 391);
+            checkedListBox1.Size = new System.Drawing.Size(917, 503);
             checkedListBox1.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 1);
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 2);
             tableLayoutPanel1.Controls.Add(checkedListBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(label1, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(923, 450);
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.Size = new System.Drawing.Size(923, 634);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -73,9 +76,9 @@
             flowLayoutPanel1.Controls.Add(btnRemove);
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            flowLayoutPanel1.Location = new System.Drawing.Point(3, 400);
+            flowLayoutPanel1.Location = new System.Drawing.Point(3, 544);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(917, 47);
+            flowLayoutPanel1.Size = new System.Drawing.Size(917, 87);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // btnSelectAll
@@ -133,16 +136,27 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            label1.Location = new System.Drawing.Point(3, 509);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(917, 32);
+            label1.TabIndex = 3;
+            label1.Text = "When switching to another profile use the Update button ro remove any duplicates";
+            // 
             // frmAddModToProfile
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(923, 450);
+            ClientSize = new System.Drawing.Size(923, 634);
             Controls.Add(tableLayoutPanel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "frmAddModToProfile";
-            Text = "Add or Remove Mod to profiles";
+            Text = "Enable or Disable Mod in other profiles";
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -158,5 +172,6 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnSelectNone;
+        private System.Windows.Forms.Label label1;
     }
 }

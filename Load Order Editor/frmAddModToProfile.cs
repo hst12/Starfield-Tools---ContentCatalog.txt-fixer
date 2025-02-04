@@ -25,7 +25,7 @@ namespace Starfield_Tools.Load_Order_Editor
             {
                 checkedListBox1.Items.Add(item);
             }
-            this.Text = "Add or Remove " + modName + " to Profile(s)"; // Change form title to name of mod being applied
+            this.Text = "Enable or Disable " + modName + " in Profile(s)"; // Change form title to name of mod being applied
             ModName = modName;
         }
 
