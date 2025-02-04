@@ -392,7 +392,7 @@
             contextMenuDatagrid.ImageScalingSize = new System.Drawing.Size(32, 32);
             contextMenuDatagrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableDisable, toolStripSeparator10, toolStripMenuUp, toolStripMenuDown, toolStripMenuTop, toolStripMenuBottom, toolStripSeparator4, toolStripMenAddRemoveContext, toolStripMenuAddToProfile, toolStripMenuDelContext, toolStripMenuInstallMod, archiveModToolStripMenuItem, toolStripMenuUninstallContext, toolStripMenuLootAutoSort, toolStripSeparator11, toolStripMenuViewOnCreations, toolStripSeparator28, enableAchievementFlagToolStripMenuItem, disableAchievementFlagToolStripMenuItem, toolStripSeparator12, toolStripMenuRefresh });
             contextMenuDatagrid.Name = "contextMenuDatagrid";
-            contextMenuDatagrid.Size = new System.Drawing.Size(622, 718);
+            contextMenuDatagrid.Size = new System.Drawing.Size(622, 674);
             // 
             // toolStripMenuEnableDisable
             // 
@@ -1727,7 +1727,7 @@
             btnUpdate.Size = new System.Drawing.Size(101, 42);
             btnUpdate.TabIndex = 9;
             btnUpdate.Text = "Update";
-            toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt");
+            toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt, Check for Duplicates");
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 

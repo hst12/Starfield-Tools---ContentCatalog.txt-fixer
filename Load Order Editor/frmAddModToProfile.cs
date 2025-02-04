@@ -34,21 +34,6 @@ namespace Starfield_Tools.Load_Order_Editor
             this.Close();
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(Properties.Settings.Default.ProfileFolder))
-            {
-                foreach (var item in checkedListBox1.CheckedItems)
-                {
-                    File.AppendAllText(Properties.Settings.Default.ProfileFolder + "\\" + item, "*" + ModName + Environment.NewLine); // Add mod and set to active
-                }
-            }
-            else
-                return;
-
-            this.Close();
-        }
-
         private void btnRemove_Click(object sender, EventArgs e)
         {
             List<string> fileContents = new();
@@ -58,9 +43,8 @@ namespace Starfield_Tools.Load_Order_Editor
                 foreach (var item in checkedListBox1.CheckedItems)
                 {
                     fileContents = File.ReadAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item).ToList();
-                    //fileContents.Remove(ModName);
                     fileContents.Remove("*" + ModName);
-                    fileContents.Add(ModName);
+                    fileContents.Add(ModName); // Add the mod back without the * to indicate it is inactive
                     File.WriteAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item, fileContents);
                 }
             }
@@ -86,6 +70,28 @@ namespace Starfield_Tools.Load_Order_Editor
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            List<string> fileContents = new();
+
+            if (Directory.Exists(Properties.Settings.Default.ProfileFolder))
+            {
+                foreach (var item in checkedListBox1.CheckedItems)
+                {
+                    //File.AppendAllText(Properties.Settings.Default.ProfileFolder + "\\" + item, "*" + ModName + Environment.NewLine); // Add mod and set to active
+                    fileContents = File.ReadAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item).ToList();
+                    fileContents.Remove(ModName); // Avoid adding a duplicate
+                    fileContents.Remove("*" + ModName);
+                    fileContents.Add("*"+ModName); // Add the mod back with the * to indicate it is active
+                    File.WriteAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item, fileContents);
+                }
+            }
+            else
+                return;
+
+            this.Close();
         }
     }
 }

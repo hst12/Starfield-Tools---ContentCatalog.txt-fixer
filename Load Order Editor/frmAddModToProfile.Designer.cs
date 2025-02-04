@@ -32,10 +32,10 @@
             checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnAdd = new System.Windows.Forms.Button();
-            btnRemove = new System.Windows.Forms.Button();
             btnSelectAll = new System.Windows.Forms.Button();
             btnSelectNone = new System.Windows.Forms.Button();
+            btnAdd = new System.Windows.Forms.Button();
+            btnRemove = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -78,28 +78,6 @@
             flowLayoutPanel1.Size = new System.Drawing.Size(917, 47);
             flowLayoutPanel1.TabIndex = 2;
             // 
-            // btnAdd
-            // 
-            btnAdd.AutoSize = true;
-            btnAdd.Location = new System.Drawing.Point(319, 3);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(150, 46);
-            btnAdd.TabIndex = 0;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnOk_Click;
-            // 
-            // btnRemove
-            // 
-            btnRemove.AutoSize = true;
-            btnRemove.Location = new System.Drawing.Point(475, 3);
-            btnRemove.Name = "btnRemove";
-            btnRemove.Size = new System.Drawing.Size(150, 46);
-            btnRemove.TabIndex = 2;
-            btnRemove.Text = "Remove";
-            btnRemove.UseVisualStyleBackColor = true;
-            btnRemove.Click += btnRemove_Click;
-            // 
             // btnSelectAll
             // 
             btnSelectAll.AutoSize = true;
@@ -121,6 +99,28 @@
             btnSelectNone.Text = "Select None";
             btnSelectNone.UseVisualStyleBackColor = true;
             btnSelectNone.Click += btnSelectNone_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.AutoSize = true;
+            btnAdd.Location = new System.Drawing.Point(319, 3);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(150, 46);
+            btnAdd.TabIndex = 0;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnRemove
+            // 
+            btnRemove.AutoSize = true;
+            btnRemove.Location = new System.Drawing.Point(475, 3);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new System.Drawing.Size(150, 46);
+            btnRemove.TabIndex = 2;
+            btnRemove.Text = "Remove";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // btnCancel
             // 
