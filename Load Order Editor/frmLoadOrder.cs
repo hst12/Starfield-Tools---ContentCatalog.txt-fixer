@@ -2262,9 +2262,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-            RemoveDuplicates();
-            if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
+            int Duplicates = RemoveDuplicates();
+
+            if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
                 RunLOOT(true);
+ 
             sbar3(ReturnStatus);
         }
 
@@ -2364,7 +2366,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 gameVersionSFSEToolStripMenuItem.Checked = false;
             }
         }
-        private void RemoveDuplicates()
+        private int RemoveDuplicates()
         {
             List<string> Plugins = [];
             string PluginName;
@@ -2383,6 +2385,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             isModified = true;
             SavePlugins();
             sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
+            return (ModCount - dataGridView1.RowCount);
 
         }
         private void removeDuplicatesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3022,7 +3025,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             File.Delete(Tools.StarfieldAppData + "\\Plugins.txt");
         }
 
-        private void toolStripMenuAddToProfile_Click(object sender, EventArgs e) // WIP
+        private void toolStripMenuAddToProfile_Click(object sender, EventArgs e)
         {
             List<string> profiles = new();
 
