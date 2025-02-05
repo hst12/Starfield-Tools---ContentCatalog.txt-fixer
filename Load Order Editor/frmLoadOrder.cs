@@ -35,6 +35,11 @@ namespace Starfield_Tools
         public frmLoadOrder(string parameter)
         {
             InitializeComponent();
+            //this.Load += new EventHandler(Form1_Load);
+            //this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+            /*this.Width = 1800;
+            this.Height = 917;*/
+
 
 #if DEBUG
             toolStripMenuProfiles.Visible = true;
@@ -69,12 +74,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 #pragma warning restore CS0168 // Variable is declared but never used
 
-            Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
+            /*Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
             double screenWidth = resolution.Width;
             double screenHeight = resolution.Height;
             this.Width = (int)(screenWidth * 0.85);
             this.Height = (int)(screenHeight * 0.85);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.CenterScreen;*/
 
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
 
@@ -1250,9 +1255,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void frmLoadOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Properties.Settings.Default.WindowLocation = this.Location;
+            Properties.Settings.Default.WindowSize = this.Size;
+
             if (isModified)
                 SavePlugins();
             SaveSettings();
+            /*Properties.Settings.Default.FormWidth = this.Width;
+            Properties.Settings.Default.FormHeight = this.Height;
+            Properties.Settings.Default.Save(); // Save settings*/
         }
 
         private static void SaveSettings()
@@ -2266,7 +2277,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
                 RunLOOT(true);
- 
+
             sbar3(ReturnStatus);
         }
 
@@ -3037,6 +3048,29 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             frmAddModToProfile addMod = new(profiles, dataGridView1.CurrentRow.Cells["PluginName"].Value.ToString());
             addMod.Show(cmbProfile);
+        }
+
+        /*private void Form1_Load(object sender, EventArgs e)
+        {
+            /*this.Width = Properties.Settings.Default.FormWidth;
+            this.Height = Properties.Settings.Default.FormHeight;
+
+        }*/
+
+        private void frmLoadOrder_Load(object sender, EventArgs e)
+        {
+            this.Location = Properties.Settings.Default.WindowLocation;
+            this.Size = Properties.Settings.Default.WindowSize;
+            if (this.Width < 500)
+            {
+                Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
+                double screenWidth = resolution.Width;
+                double screenHeight = resolution.Height;
+                this.Width = (int)(screenWidth * 0.85);
+                this.Height = (int)(screenHeight * 0.85);
+                this.StartPosition = FormStartPosition.CenterScreen;
+            }
+
         }
     }
 }
