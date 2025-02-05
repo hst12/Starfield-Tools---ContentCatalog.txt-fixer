@@ -405,6 +405,8 @@ namespace Starfield_Tools.Common // Various functions used by the app
 
         public static bool ConfirmAction(string ActionText, string ActionTitle) // Return true for OK, false for cancel
         {
+            if (frmLoadOrder.NoWarn)
+                return true;
             DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
 
             if (DialogResult == DialogResult.OK)

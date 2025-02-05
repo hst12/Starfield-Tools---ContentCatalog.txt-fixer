@@ -191,7 +191,7 @@ namespace Starfield_Tools.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Files {
             get {
                 return ((bool)(this["Files"]));
@@ -534,6 +534,18 @@ namespace Starfield_Tools.Properties {
             }
             set {
                 this["WindowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoWarn {
+            get {
+                return ((bool)(this["NoWarn"]));
+            }
+            set {
+                this["NoWarn"] = value;
             }
         }
     }
