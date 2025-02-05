@@ -80,11 +80,12 @@ namespace Starfield_Tools.Load_Order_Editor
             {
                 foreach (var item in checkedListBox1.CheckedItems)
                 {
-                    //File.AppendAllText(Properties.Settings.Default.ProfileFolder + "\\" + item, "*" + ModName + Environment.NewLine); // Add mod and set to active
                     fileContents = File.ReadAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item).ToList();
                     fileContents.Remove(ModName); // Avoid adding a duplicate
                     fileContents.Remove("*" + ModName);
-                    fileContents.Add("*"+ModName); // Add the mod back with the * to indicate it is active
+                    fileContents.Add("*" + ModName); // Add the mod back with the * to indicate it is active
+                    fileContents=fileContents.Distinct().ToList();
+
                     File.WriteAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item, fileContents);
                 }
             }

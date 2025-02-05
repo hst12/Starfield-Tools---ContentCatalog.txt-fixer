@@ -110,7 +110,7 @@
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(150, 46);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "Add";
+            btnAdd.Text = "Enable";
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
@@ -121,7 +121,7 @@
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new System.Drawing.Size(150, 46);
             btnRemove.TabIndex = 2;
-            btnRemove.Text = "Remove";
+            btnRemove.Text = "Disable";
             btnRemove.UseVisualStyleBackColor = true;
             btnRemove.Click += btnRemove_Click;
             // 

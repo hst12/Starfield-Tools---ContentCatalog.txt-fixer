@@ -2261,9 +2261,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-            int Duplicates = RemoveDuplicates();
+            //int Duplicates = RemoveDuplicates();
 
-            if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
+            //if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
+            if (AutoSort && ReturnStatus != "Plugins.txt is up to date" )
                 RunLOOT(true);
 
             sbar3(ReturnStatus);
