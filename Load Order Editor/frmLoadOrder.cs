@@ -35,11 +35,6 @@ namespace Starfield_Tools
         public frmLoadOrder(string parameter)
         {
             InitializeComponent();
-            //this.Load += new EventHandler(Form1_Load);
-            //this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-            /*this.Width = 1800;
-            this.Height = 917;*/
-
 
 #if DEBUG
             toolStripMenuProfiles.Visible = true;
@@ -73,13 +68,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 #endif
             }
 #pragma warning restore CS0168 // Variable is declared but never used
-
-            /*Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
-            double screenWidth = resolution.Width;
-            double screenHeight = resolution.Height;
-            this.Width = (int)(screenWidth * 0.85);
-            this.Height = (int)(screenHeight * 0.85);
-            this.StartPosition = FormStartPosition.CenterScreen;*/
 
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(KeyEvent); // Handle <enter> for search
 
@@ -3050,27 +3038,26 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             addMod.Show(cmbProfile);
         }
 
-        /*private void Form1_Load(object sender, EventArgs e)
+        private void ResetWindowSize()
         {
-            /*this.Width = Properties.Settings.Default.FormWidth;
-            this.Height = Properties.Settings.Default.FormHeight;
-
-        }*/
-
+            Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
+            double screenWidth = resolution.Width;
+            double screenHeight = resolution.Height;
+            this.Width = (int)(screenWidth * 0.85);
+            this.Height = (int)(screenHeight * 0.85);
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
         private void frmLoadOrder_Load(object sender, EventArgs e)
         {
             this.Location = Properties.Settings.Default.WindowLocation;
             this.Size = Properties.Settings.Default.WindowSize;
-            if (this.Width < 500)
-            {
-                Rectangle resolution = Screen.PrimaryScreen.Bounds; // Resize window to 75% of screen width
-                double screenWidth = resolution.Width;
-                double screenHeight = resolution.Height;
-                this.Width = (int)(screenWidth * 0.85);
-                this.Height = (int)(screenHeight * 0.85);
-                this.StartPosition = FormStartPosition.CenterScreen;
-            }
+            if (this.Width < 500 || this.Height < 100)
+                ResetWindowSize();
+        }
 
+        private void toolStripMenuResetWindow_Click(object sender, EventArgs e)
+        {
+            ResetWindowSize();
         }
     }
 }
