@@ -1,14 +1,8 @@
 ﻿using Starfield_Tools.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Starfield_Tools.Load_Order_Editor
@@ -81,10 +75,10 @@ namespace Starfield_Tools.Load_Order_Editor
                 foreach (var item in checkedListBox1.CheckedItems)
                 {
                     fileContents = File.ReadAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item).ToList();
-                    fileContents.Remove(ModName); // Avoid adding a duplicate
+                    fileContents.Remove(ModName); 
                     fileContents.Remove("*" + ModName);
                     fileContents.Add("*" + ModName); // Add the mod back with the * to indicate it is active
-                    fileContents=fileContents.Distinct().ToList();
+                    fileContents=fileContents.Distinct().ToList(); // Avoid adding a duplicate
 
                     File.WriteAllLines(Properties.Settings.Default.ProfileFolder + "\\" + item, fileContents);
                 }

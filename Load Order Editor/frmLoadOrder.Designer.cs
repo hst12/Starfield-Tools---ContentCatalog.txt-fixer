@@ -162,6 +162,8 @@
             toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             enableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             disableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            disableAllWarningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuRun = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
@@ -1033,7 +1035,7 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, compareProfilesToolStripMenuItem, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, activateNewModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, enableAllToolStripMenuItem, disableAllToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem, toolStripSeparator18, toolStripMenuSetPath, toolStripSeparator14, toolStripMenuLootPath, vortexPathToolStripMenuItem, modOrganizer2PathToolStripMenuItem, toolStripSeparator13, toolStripMenuLoadingScreen, toolStripMenuLoadScreenPreview, resetLoadScreenToolStripMenuItem, toolStripSeparator20, toolStripMenuCatalog, toolStripSeparator21, toolStripMenuProfilesOn, compareProfilesToolStripMenuItem, toolStripSeparator23, toolStripMenuAutoDelccc, autoResetToolStripMenuItem, toolStripSeparator22, autoUpdateModsToolStripMenuItem, activateNewModsToolStripMenuItem, autoSortToolStripMenuItem, toolStripSeparator27, enableAllToolStripMenuItem, disableAllToolStripMenuItem, toolStripSeparator5, disableAllWarningToolStripMenuItem });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(89, 38);
             toolsToolStripMenuItem.Text = "&Tools";
@@ -1212,6 +1214,18 @@
             disableAllToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
             disableAllToolStripMenuItem.Text = "Disable All Settings";
             disableAllToolStripMenuItem.Click += disableAllToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(404, 6);
+            // 
+            // disableAllWarningToolStripMenuItem
+            // 
+            disableAllWarningToolStripMenuItem.Name = "disableAllWarningToolStripMenuItem";
+            disableAllWarningToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
+            disableAllWarningToolStripMenuItem.Text = "Disable All Warnings";
+            disableAllWarningToolStripMenuItem.Click += disableAllWarningToolStripMenuItem_Click;
             // 
             // toolStripMenuGame
             // 
@@ -2067,5 +2081,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeletePlugins;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAddToProfile;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuResetWindow;
+        private System.Windows.Forms.ToolStripMenuItem disableAllWarningToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

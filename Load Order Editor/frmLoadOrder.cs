@@ -22,6 +22,7 @@ namespace Starfield_Tools
     {
         public const byte Steam = 0, MS = 1, Custom = 2, SFSE = 3;
         public static string StarfieldGamePath;
+        public static bool NoWarn;
 
         private Rectangle dragBoxFromMouseDown;
         private int rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop, GameVersion = Steam;
@@ -268,6 +269,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             timer2.Enabled = Properties.Settings.Default.Showtime;
 
             activateNewModsToolStripMenuItem.Checked = Properties.Settings.Default.ActivateNew;
+
+            disableAllWarningToolStripMenuItem.Checked = Properties.Settings.Default.NoWarn;
+            NoWarn = disableAllWarningToolStripMenuItem.Checked;
 
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
@@ -1721,10 +1725,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     LOOTPath = Properties.Settings.Default.LOOTPath;
             }
 
-            if (GameVersion != MS)
-                cmdLine = "--game Starfield";
-            else
-                cmdLine = cmdLine = "--game \"Starfield (MS Store)\"";
+            cmdLine = (GameVersion != MS) ? "--game Starfield" : "--game \"Starfield (MS Store)\"";
 
             if (ProfilesActive) // Temporary disable of profiles
             {
@@ -2264,7 +2265,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             //int Duplicates = RemoveDuplicates();
 
             //if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
-            if (AutoSort && ReturnStatus != "Plugins.txt is up to date" )
+            if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
                 RunLOOT(true);
 
             sbar3(ReturnStatus);
@@ -3029,6 +3030,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             List<string> profiles = new();
 
+            if (cmbProfile.Items.Count == 0 || cmbProfile.SelectedItem==null)
+            {
+                MessageBox.Show("No valid profiles found");
+                return;
+            }   
+
             foreach (var item in cmbProfile.Items)
             {
                 profiles.Add(item.ToString());
@@ -3059,6 +3066,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void toolStripMenuResetWindow_Click(object sender, EventArgs e)
         {
             ResetWindowSize();
+        }
+
+        private void disableAllWarningToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            disableAllWarningToolStripMenuItem.Checked = !disableAllWarningToolStripMenuItem.Checked;
+            Properties.Settings.Default.NoWarn = disableAllWarningToolStripMenuItem.Checked;
+            NoWarn = disableAllWarningToolStripMenuItem.Checked;
         }
     }
 }
