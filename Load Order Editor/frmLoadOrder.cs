@@ -2262,11 +2262,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string ReturnStatus = AddRemove();
-            //int Duplicates = RemoveDuplicates();
+            int Duplicates = RemoveDuplicates();
 
-            //if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
-            if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
-                RunLOOT(true);
+            if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
+                if (AutoSort && ReturnStatus != "Plugins.txt is up to date")
+                    RunLOOT(true);
 
             sbar3(ReturnStatus);
         }
@@ -2377,14 +2377,21 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
-                    Plugins.Add(PluginName);
+                    if (PluginName[0] != '#') // Strip out comments
+                        if (PluginName[0]== '*') // Strip out '*'
+                            Plugins.Add(PluginName[1..]);
+                        else
+                            Plugins.Add(PluginName);
                 }
             }
             List<string> distinctList = Plugins.Distinct().ToList();
-            File.WriteAllLines(loText, distinctList);
-            InitDataGrid();
-            isModified = true;
-            SavePlugins();
+            if (ModCount != distinctList.Count)
+            {
+                File.WriteAllLines(loText, distinctList);
+                InitDataGrid();
+                isModified = true;
+                SavePlugins();
+            }
             sbar4("Duplicates removed: " + (ModCount - dataGridView1.RowCount).ToString());
             return (ModCount - dataGridView1.RowCount);
 
@@ -3030,11 +3037,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             List<string> profiles = new();
 
-            if (cmbProfile.Items.Count == 0 || cmbProfile.SelectedItem==null)
+            if (cmbProfile.Items.Count == 0 || cmbProfile.SelectedItem == null)
             {
                 MessageBox.Show("No valid profiles found");
                 return;
-            }   
+            }
 
             foreach (var item in cmbProfile.Items)
             {

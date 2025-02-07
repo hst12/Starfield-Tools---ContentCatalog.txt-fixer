@@ -24,6 +24,8 @@ Un-install (delete) mod
 
 Add/Remove function checks game folder for installed mods and adds them to plugins.txt or removes deleted mods from Plugins.txt
 
+Enable or disable mod in other profiles. Enables or disables the selected mod in one or more other profiles. Doesn't delete the mod from the profile.
+
 View web site page for Creations mods or non-Creations mods if LOOT is installed, configured in the app and link metadata is available.
 
 Loot Autosort: Run LOOT with autosort parameter if installed. Turn on the Group column in View->Columns->Group to see the LOOT groups.
