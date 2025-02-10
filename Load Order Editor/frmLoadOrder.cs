@@ -11,7 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -341,7 +340,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<long> FileSize = new();
             long ModFileSize;
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
-            DataGridViewRow row;
 
             if (!File.Exists(Tools.GetCatalogPath()))
             {
@@ -389,15 +387,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json); // Read ContentCatalog.txt
                 data.Remove("ContentCatalog");
-                Parallel.ForEach(data, kvp =>  //foreach (var kvp in data)
+                foreach (var kvp in data)
                 {
                     try
                     {
-                        Parallel.ForEach(kvp.Value.Files, file => // foreach (var file in kvp.Value.Files)
+                        foreach (var file in kvp.Value.Files)
                         {
                             if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
                                 CreationsPlugin.Add(file);
-                        });
+                        }
 
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
@@ -414,7 +412,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         MessageBox.Show(ex.Message);
 #endif
                     }
-                });
+                }
             }
             catch (Exception ex)
             {
@@ -422,11 +420,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 MessageBox.Show(ex.Message);
 #endif
                 sbar(ex.Message);
-                json = Tools.MakeHeaderBlank(); // Create blank catalog if missing
+                json = Tools.MakeHeaderBlank();
                 File.WriteAllText(Tools.GetCatalogPath(), json);
             }
 
-            loText = Tools.StarfieldAppData + @"\Plugins.txt"; // Try read Plugins.txt.
+            loText = Tools.StarfieldAppData + @"\Plugins.txt";
             if (!File.Exists(loText))
             {
                 MessageBox.Show(@"Missing Plugins.txt file
@@ -440,25 +438,27 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 return;
             }
 
-            var lines = File.ReadAllLines(loText); // Read Plugins.txt and set up progress bar
+            var lines = File.ReadAllLines(loText);
             progressBar1.Maximum = lines.Length;
             progressBar1.Value = 0;
             progressBar1.Show();
 
-            foreach (var line in lines) // Iterate through Plugins.txt
+            foreach (var line in lines) // Read Plugins.txt
             {
                 progressBar1.Value++;
                 PluginName = line;
                 try
                 {
-                    if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName)) // Strip out BGS files
+                    if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))
                     {
-                        ModEnabled = PluginName[0] == '*'; // * Indicates enabled mod
-                        if (ModEnabled)
+                        if (PluginName[0] == '*') // * = Mod enabled
                         {
+                            ModEnabled = true;
                             EnabledCount++;
-                            PluginName = PluginName[1..]; // Strip out the '*'
+                            PluginName = PluginName[1..];
                         }
+                        else
+                            ModEnabled = false;
 
                         if (PluginName[0] != '#') // Ignore comment
                         {
@@ -472,32 +472,34 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             ModFileSize = 0;
                             URL = "";
 
-                            Parallel.For(0, CreationsPlugin.Count, (i, state) =>  // for (i = 0; i < CreationsPlugin.Count; i++)
+                            for (i = 0; i < CreationsPlugin.Count; i++) // Parallel.For (0,  CreationsPlugin.Count, i=> 
                             {
                                 if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
-                                    CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName) // Match plugin.txt line to Creations
+                                    CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
                                 {
                                     Description = CreationsTitle[i]; // Add Content Catalog description if available
                                     ModVersion = CreationsVersion[i];
                                     AuthorVersion = ModVersion[(ModVersion.IndexOf('.') + 1)..];
                                     ModVersion = start.AddSeconds(double.Parse(ModVersion[..ModVersion.IndexOf('.')])).Date.ToString("yyyy-MM-dd");
+
                                     ModFiles = CreationsFiles[i];
                                     ASafe = AchievementSafe[i] ? "Yes" : "";
                                     ModTimeStamp = Tools.ConvertTime(TimeStamp[i]).ToString();
                                     ModID = CreationsID[i];
                                     ModFileSize = FileSize[i] / 1024;
-                                    URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..]; // Creations URL
-                                    state.Break(); // Skip to the next line of Plugins.txt if a Creations mod was found
+                                    URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
+                                    break;
                                 }
-                            });
+                            }
 
-                            row = dataGridView1.Rows[dataGridView1.Rows.Add()]; // Add a row to the datagrid
+                            rowIndex = this.dataGridView1.Rows.Add();
+                            var row = this.dataGridView1.Rows[rowIndex];
 
                             // Populate datagrid from LOOT groups
 
-                            if (!string.IsNullOrEmpty(LOOTPath) && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
+                            if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
                             {
-                                var group = Groups.plugins.FirstOrDefault(p => p.name == PluginName); // Find the plugin in the LOOT groups
+                                var group = Groups.plugins.FirstOrDefault(p => p.name == PluginName);
                                 if (group != null)
                                 {
                                     row.Cells["Group"].Value = group.group;
@@ -511,9 +513,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                             {
-                                row.Cells["Group"].Value = row.Cells["Group"].Value == null
-                                    ? "Bethesda Game Studios Creations"
-                                    : $"{row.Cells["Group"].Value} (Bethesda)";
+                                if (row.Cells["Group"].Value == null)
+                                    row.Cells["Group"].Value = "Bethesda Game Studios Creations";
+                                else
+                                    row.Cells["Group"].Value += " (Bethesda)";
                             }
 
                             row.Cells["ModEnabled"].Value = ModEnabled;
@@ -547,7 +550,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            SetupColumns(); // Turn hidden columns back on
+            SetupColumns();
 
             // Get mod stats
             if (StarfieldGamePath != "")
@@ -588,7 +591,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 sbar("Hiding inactive mods...");
                 statusStrip1.Refresh();
                 for (i = 0; i < dataGridView1.RowCount; i++)
-
                     if (!(bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value && dataGridView1.RowCount > 0)
                         dataGridView1.Rows[i].Visible = false;
             }
