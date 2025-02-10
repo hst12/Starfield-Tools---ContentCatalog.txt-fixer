@@ -446,6 +446,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             var lines = File.ReadAllLines(loText);
             progressBar1.Maximum = lines.Length;
             progressBar1.Value = 0;
+            // Get the dimensions of the current form
+            int formWidth = this.ClientSize.Width;
+            int formHeight = this.ClientSize.Height;
+
+            // Calculate the new location for the ProgressBar
+            int newX = (formWidth - progressBar1.Width) / 2;
+            int newY = (formHeight - progressBar1.Height) / 2;
+
+            // Set the new location
+            progressBar1.Location = new Point(newX, newY);
             progressBar1.Show();
 
             foreach (var line in lines) // Read Plugins.txt
