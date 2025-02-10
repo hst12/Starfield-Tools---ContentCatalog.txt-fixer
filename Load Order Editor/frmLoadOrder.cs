@@ -393,12 +393,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     try
                     {
-                        /*foreach (var file in kvp.Value.Files)
-                        {
-                            if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
-                                CreationsPlugin.Add(file);
-                        }*/
-
                         Parallel.ForEach(kvp.Value.Files, file =>
                         {
                             if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
@@ -406,7 +400,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 CreationsPlugin.Add(file);
                             }
                         });
-
 
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
@@ -463,14 +456,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))
                     {
-                        if (PluginName[0] == '*') // * = Mod enabled
+
+                        ModEnabled = PluginName[0] == '*';
+                        if (ModEnabled)
                         {
-                            ModEnabled = true;
                             EnabledCount++;
                             PluginName = PluginName[1..];
                         }
-                        else
-                            ModEnabled = false;
 
                         if (PluginName[0] != '#') // Ignore comment
                         {
@@ -484,7 +476,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             ModFileSize = 0;
                             URL = "";
 
-                            for (i = 0; i < CreationsPlugin.Count; i++) // Parallel.For (0,  CreationsPlugin.Count, i=> 
+                            Parallel.For(0, CreationsPlugin.Count, (i,state) => // for (i = 0; i < CreationsPlugin.Count; i++) 
                             {
                                 if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                     CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
@@ -500,16 +492,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                     ModID = CreationsID[i];
                                     ModFileSize = FileSize[i] / 1024;
                                     URL = "https://creations.bethesda.net/en/starfield/details/" + ModID[3..];
-                                    break;
+                                    state.Break();
                                 }
-                            }
+                            });
 
-                            //rowIndex = this.dataGridView1.Rows.Add();
                             row = dataGridView1.Rows[dataGridView1.Rows.Add()];
 
                             // Populate datagrid from LOOT groups
 
-                            if (LOOTPath != "" && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
+                            if (!string.IsNullOrEmpty(LOOTPath) && Groups.groups != null && dataGridView1.Columns["Group"].Visible)
                             {
                                 var group = Groups.plugins.FirstOrDefault(p => p.name == PluginName);
                                 if (group != null)
