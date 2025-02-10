@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
@@ -326,7 +327,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count, rowIndex;
+            int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
             List<string> CreationsPlugin = new();
@@ -340,6 +341,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<long> FileSize = new();
             long ModFileSize;
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
+            DataGridViewRow row;
 
             if (!File.Exists(Tools.GetCatalogPath()))
             {
@@ -391,11 +393,20 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     try
                     {
-                        foreach (var file in kvp.Value.Files)
+                        /*foreach (var file in kvp.Value.Files)
                         {
                             if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
                                 CreationsPlugin.Add(file);
-                        }
+                        }*/
+
+                        Parallel.ForEach(kvp.Value.Files, file =>
+                        {
+                            if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
+                            {
+                                CreationsPlugin.Add(file);
+                            }
+                        });
+
 
                         CreationsTitle.Add(kvp.Value.Title);
                         CreationsVersion.Add(kvp.Value.Version);
@@ -412,6 +423,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         MessageBox.Show(ex.Message);
 #endif
                     }
+
                 }
             }
             catch (Exception ex)
@@ -492,8 +504,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
-                            rowIndex = this.dataGridView1.Rows.Add();
-                            var row = this.dataGridView1.Rows[rowIndex];
+                            //rowIndex = this.dataGridView1.Rows.Add();
+                            row = dataGridView1.Rows[dataGridView1.Rows.Add()];
 
                             // Populate datagrid from LOOT groups
 
