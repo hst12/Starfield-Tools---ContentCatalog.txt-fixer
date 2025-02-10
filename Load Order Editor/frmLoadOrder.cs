@@ -1242,7 +1242,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuAutoClean_Click(object sender, EventArgs e)
         {
-            AddRemove();
+            sbar3(AddRemove());
         }
 
         private void frmLoadOrder_FormClosing(object sender, FormClosingEventArgs e)
@@ -2378,7 +2378,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
                     if (PluginName[0] != '#') // Strip out comments
-                        if (PluginName[0]== '*') // Strip out '*'
+                        if (PluginName[0] == '*') // Strip out '*'
                             Plugins.Add(PluginName[1..]);
                         else
                             Plugins.Add(PluginName);
