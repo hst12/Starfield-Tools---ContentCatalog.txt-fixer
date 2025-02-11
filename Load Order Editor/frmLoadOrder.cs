@@ -2121,11 +2121,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Process.Start("explorer", pathToFile);
         }
 
-        private void btnCheckCatalog_Click(object sender, EventArgs e)
-        {
-            CheckCatalog();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();

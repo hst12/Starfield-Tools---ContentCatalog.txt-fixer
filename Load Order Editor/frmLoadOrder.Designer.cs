@@ -224,7 +224,6 @@
             btnRefresh = new System.Windows.Forms.Button();
             btnUpdate = new System.Windows.Forms.Button();
             btnLoot = new System.Windows.Forms.Button();
-            btnCheckCatalog = new System.Windows.Forms.Button();
             btnRun = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             btnQuit = new System.Windows.Forms.Button();
@@ -395,7 +394,7 @@
             contextMenuDatagrid.ImageScalingSize = new System.Drawing.Size(32, 32);
             contextMenuDatagrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEnableDisable, toolStripSeparator10, toolStripMenuUp, toolStripMenuDown, toolStripMenuTop, toolStripMenuBottom, toolStripSeparator4, toolStripMenAddRemoveContext, toolStripMenuAddToProfile, toolStripMenuDelContext, toolStripMenuInstallMod, archiveModToolStripMenuItem, toolStripMenuUninstallContext, toolStripMenuLootAutoSort, toolStripSeparator11, toolStripMenuViewOnCreations, toolStripSeparator28, enableAchievementFlagToolStripMenuItem, disableAchievementFlagToolStripMenuItem, toolStripSeparator12, toolStripMenuRefresh });
             contextMenuDatagrid.Name = "contextMenuDatagrid";
-            contextMenuDatagrid.Size = new System.Drawing.Size(625, 718);
+            contextMenuDatagrid.Size = new System.Drawing.Size(625, 674);
             // 
             // toolStripMenuEnableDisable
             // 
@@ -1193,7 +1192,7 @@
             // 
             autoSortToolStripMenuItem.Name = "autoSortToolStripMenuItem";
             autoSortToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
-            autoSortToolStripMenuItem.Text = "Auto Sort";
+            autoSortToolStripMenuItem.Text = "Auto Sort with LOOT";
             autoSortToolStripMenuItem.Click += autoSortToolStripMenuItem_Click;
             // 
             // toolStripSeparator27
@@ -1585,13 +1584,12 @@
             flowLayoutPanel1.Controls.Add(btnRefresh);
             flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Controls.Add(btnLoot);
-            flowLayoutPanel1.Controls.Add(btnCheckCatalog);
             flowLayoutPanel1.Controls.Add(btnRun);
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnQuit);
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(1710, 46);
+            flowLayoutPanel1.Size = new System.Drawing.Size(1601, 46);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // btnUp
@@ -1767,25 +1765,11 @@
             btnLoot.UseVisualStyleBackColor = true;
             btnLoot.Click += btnLoot_Click;
             // 
-            // btnCheckCatalog
-            // 
-            btnCheckCatalog.AutoSize = true;
-            btnCheckCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnCheckCatalog.Location = new System.Drawing.Point(1369, 2);
-            btnCheckCatalog.Margin = new System.Windows.Forms.Padding(2);
-            btnCheckCatalog.Name = "btnCheckCatalog";
-            btnCheckCatalog.Size = new System.Drawing.Size(105, 42);
-            btnCheckCatalog.TabIndex = 11;
-            btnCheckCatalog.Text = "Catalog";
-            toolTip1.SetToolTip(btnCheckCatalog, "Check ContentCatalog.txt");
-            btnCheckCatalog.UseVisualStyleBackColor = true;
-            btnCheckCatalog.Click += btnCheckCatalog_Click;
-            // 
             // btnRun
             // 
             btnRun.AutoSize = true;
             btnRun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnRun.Location = new System.Drawing.Point(1478, 2);
+            btnRun.Location = new System.Drawing.Point(1369, 2);
             btnRun.Margin = new System.Windows.Forms.Padding(2);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(66, 42);
@@ -1799,7 +1783,7 @@
             // 
             btnCancel.AutoSize = true;
             btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnCancel.Location = new System.Drawing.Point(1548, 2);
+            btnCancel.Location = new System.Drawing.Point(1439, 2);
             btnCancel.Margin = new System.Windows.Forms.Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(95, 42);
@@ -1813,7 +1797,7 @@
             // 
             btnQuit.AutoSize = true;
             btnQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnQuit.Location = new System.Drawing.Point(1647, 2);
+            btnQuit.Location = new System.Drawing.Point(1538, 2);
             btnQuit.Margin = new System.Windows.Forms.Padding(2);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(61, 42);
@@ -1987,7 +1971,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDeleteCCC;
         private System.Windows.Forms.ToolStripMenuItem resetStarfieldCustominiToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-        private System.Windows.Forms.Button btnCheckCatalog;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem compareStarfieldCustominiToBackupToolStripMenuItem;
