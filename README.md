@@ -1,9 +1,15 @@
 This tool provides a basic load order editor. and checks ContentCatalog.txt file automatically when launched.
 
+TLDR; See the Help->Shortcuts and Quick Help menu
+
+New Feature: Check for .ba2 archives that are orphaned and optionally delete them.
+
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
 
 Use with caution if you're using other mod managers such as Vortex or MO2. You can use another mod manager if you understand how they work
+
+The app automatically backs up your Plugins.txt file the first time it runs. Use File->Restore Plugins.txt menu option to restore the original file if necessary.
 
 Why use this tool instead of the Creations menu?
 It's faster
@@ -24,10 +30,10 @@ Re-order mods by using hot keys (WASD) or drag and drop.
 Enable/Disable mods. Disabling a mod keeps the mod files on your system but the game won't load the mod.
 Mod profiles - for example a no-mods profile, an Achievements only profile or a fully modded profile.
 Pick or create an empty directory and use File->Save As to start creating profiles.
-Install mods (loose files and FOMOD not supported)
-Un-install mods (loose files not supported)
-View the mod page on the Creations web site
-Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed. Enable the display of LOOT groups via the View->Columns->Group menu
+Install mods (loose files and FOMOD not supported).
+Un-install mods (loose files not supported).
+View the mod page on the Creations web site.
+Works with LOOT if you have it installed to do mod sorting. LOOT groups are read and can be displayed. Enable the display of LOOT groups via the View->Columns->Group menu.
 Acts as a game launcher once you've made your load order edits and you can select between the Steam, MS Store or SFSE flavours of the game.
 
 What it doesn't do for Creations mods:
@@ -96,6 +102,9 @@ This tool would not have been possible without the invaluable contributions of Z
 Software used for decompression:
 7-Zip - https://www.7-zip.org/
 SevenZipExtractor - https://github.com/adoconnection/SevenZipExtractor
+
+Narod's Steam Game Finder:
+https://github.com/NarodGaming/steamgamefinder
 
 The rest of the readme pertains mostly to the catalog fixer function which isn't really needed any more unless you have an old save game you want to check.
 
