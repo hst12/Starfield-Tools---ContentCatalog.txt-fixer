@@ -403,11 +403,14 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
         }
 
-        public static bool ConfirmAction(string ActionText, string ActionTitle) // Return true for OK, false for cancel
+        
+        public static bool ConfirmAction(string ActionText, string ActionTitle="",MessageBoxButtons buttons=MessageBoxButtons.OKCancel,MessageBoxIcon icon=MessageBoxIcon.Stop) 
         {
+            // Return true for OK, false for cancel
+
             if (frmLoadOrder.NoWarn)
                 return true;
-            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, buttons,icon);
 
             if (DialogResult == DialogResult.OK)
                 return true;

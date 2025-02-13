@@ -3091,7 +3091,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuExportCSV_Click(object sender, EventArgs e)
         {
-            int i,ExportedLines=0;
+            int i, j, ExportedLines = 0;
 
             SaveFileDialog ExportActive = new()
             {
@@ -3119,7 +3119,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         for (i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             ExportedLines++;
-                            for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                            for (j = 0; j < dataGridView1.Columns.Count; j++)
                             {
                                 sw.Write(dataGridView1.Rows[i].Cells[j].Value);
                                 if (j < dataGridView1.Columns.Count - 1) sw.Write(",");
@@ -3128,22 +3128,19 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         }
                     }
 
-                    Process.Start("explorer.exe", ExportActive.FileName);
+                    if (Tools.ConfirmAction("Open exported file?","Export Complete",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+                        Process.Start("explorer.exe", ExportActive.FileName);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error while exporting data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                if (ExportedLines== 0)
+                if (ExportedLines == 0)
                 {
                     sbar3("Nothing to export");
                     return;
                 }
-
-
-                sbar3("Export done");
-                Process.Start("explorer.exe", ExportActive.FileName);
             }
         }
 
