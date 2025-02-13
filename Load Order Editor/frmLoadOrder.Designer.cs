@@ -86,6 +86,7 @@
             toolStripMenuRestore = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             toolStripMenuExportActive = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuExportCSV = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             exploreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuExploreAppData = new System.Windows.Forms.ToolStripMenuItem();
@@ -616,7 +617,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator1, toolStripMenuExportActive, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, toolStripSeparator17, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator, toolStripMenuBackup, toolStripMenuRestore, toolStripSeparator1, toolStripMenuExportActive, toolStripMenuExportCSV, toolStripSeparator2, exploreToolStripMenuItem, toolStripSeparator3, toolStripMenuEditFiles, toolStripSeparator19, resetDeleteFilesToolStripMenuItem, toolStripSeparator17, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(71, 36);
             fileToolStripMenuItem.Text = "&File";
@@ -628,7 +629,7 @@
             newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             newToolStripMenuItem.Name = "newToolStripMenuItem";
             newToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N;
-            newToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            newToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             newToolStripMenuItem.Text = "&New";
             newToolStripMenuItem.Visible = false;
             // 
@@ -638,7 +639,7 @@
             openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
-            openToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            openToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             openToolStripMenuItem.Text = "&Open Profile";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -648,58 +649,65 @@
             saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
-            saveToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            saveToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             saveToolStripMenuItem.Text = "&Save Plugins.txt";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
-            saveAsToolStripMenuItem.Text = "Save &As (New or Overwite pofile)";
+            saveAsToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
+            saveAsToolStripMenuItem.Text = "Save &As (New or Overwite Profile)";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
-            toolStripSeparator.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator.Size = new System.Drawing.Size(501, 6);
             // 
             // toolStripMenuBackup
             // 
             toolStripMenuBackup.Name = "toolStripMenuBackup";
-            toolStripMenuBackup.Size = new System.Drawing.Size(497, 44);
+            toolStripMenuBackup.Size = new System.Drawing.Size(504, 44);
             toolStripMenuBackup.Text = "Backup Plugins.txt";
             toolStripMenuBackup.Click += toolStripMenuBackup_Click;
             // 
             // toolStripMenuRestore
             // 
             toolStripMenuRestore.Name = "toolStripMenuRestore";
-            toolStripMenuRestore.Size = new System.Drawing.Size(497, 44);
+            toolStripMenuRestore.Size = new System.Drawing.Size(504, 44);
             toolStripMenuRestore.Text = "Restore Plugins.txt";
             toolStripMenuRestore.Click += toolStripMenuRestore_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator1.Size = new System.Drawing.Size(501, 6);
             // 
             // toolStripMenuExportActive
             // 
             toolStripMenuExportActive.Name = "toolStripMenuExportActive";
-            toolStripMenuExportActive.Size = new System.Drawing.Size(497, 44);
+            toolStripMenuExportActive.Size = new System.Drawing.Size(504, 44);
             toolStripMenuExportActive.Text = "Export Active Mods to Text File";
             toolStripMenuExportActive.Click += toolStripMenuExportActive_Click;
+            // 
+            // toolStripMenuExportCSV
+            // 
+            toolStripMenuExportCSV.Name = "toolStripMenuExportCSV";
+            toolStripMenuExportCSV.Size = new System.Drawing.Size(504, 44);
+            toolStripMenuExportCSV.Text = "Export Mods to CSV";
+            toolStripMenuExportCSV.Click += toolStripMenuExportCSV_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(501, 6);
             // 
             // exploreToolStripMenuItem
             // 
             exploreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuExploreAppData, toolStripMenuExploreData, toolStripMenuExploreGameDocs, toolStripMenuExploreCommon });
             exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            exploreToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            exploreToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             exploreToolStripMenuItem.Text = "Explore";
             // 
             // toolStripMenuExploreAppData
@@ -733,13 +741,13 @@
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator3.Size = new System.Drawing.Size(501, 6);
             // 
             // toolStripMenuEditFiles
             // 
             toolStripMenuEditFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuEditPlugins, editStarfieldCustominiToolStripMenuItem, uIToEditStarfieldCustominiToolStripMenuItem, editContentCatalogtxtToolStripMenuItem });
             toolStripMenuEditFiles.Name = "toolStripMenuEditFiles";
-            toolStripMenuEditFiles.Size = new System.Drawing.Size(497, 44);
+            toolStripMenuEditFiles.Size = new System.Drawing.Size(504, 44);
             toolStripMenuEditFiles.Text = "Edit Files";
             // 
             // toolStripMenuEditPlugins
@@ -773,13 +781,13 @@
             // toolStripSeparator19
             // 
             toolStripSeparator19.Name = "toolStripSeparator19";
-            toolStripSeparator19.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator19.Size = new System.Drawing.Size(501, 6);
             // 
             // resetDeleteFilesToolStripMenuItem
             // 
             resetDeleteFilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuDeleteCCC, toolStripMenuItemDeletePlugins, compareStarfieldCustominiToBackupToolStripMenuItem, resetStarfieldCustominiToolStripMenuItem, undoVortexChangesToolStripMenuItem, checkArchivesToolStripMenuItem, resetToVanillaStarfieldSettingsToolStripMenuItem, toolStripMenuResetWindow });
             resetDeleteFilesToolStripMenuItem.Name = "resetDeleteFilesToolStripMenuItem";
-            resetDeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            resetDeleteFilesToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             resetDeleteFilesToolStripMenuItem.Text = "Reset/Delete Files";
             // 
             // toolStripMenuDeleteCCC
@@ -841,12 +849,12 @@
             // toolStripSeparator17
             // 
             toolStripSeparator17.Name = "toolStripSeparator17";
-            toolStripSeparator17.Size = new System.Drawing.Size(494, 6);
+            toolStripSeparator17.Size = new System.Drawing.Size(501, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new System.Drawing.Size(497, 44);
+            exitToolStripMenuItem.Size = new System.Drawing.Size(504, 44);
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -2066,5 +2074,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuResetWindow;
         private System.Windows.Forms.ToolStripMenuItem disableAllWarningToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuExportCSV;
     }
 }

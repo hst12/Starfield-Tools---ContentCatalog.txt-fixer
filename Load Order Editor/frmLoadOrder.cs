@@ -396,9 +396,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         Parallel.ForEach(kvp.Value.Files, file =>
                         {
                             if (file.EndsWith(".esm") || file.EndsWith(".esp")) // Look for .esm or .esp files
-                            {
                                 CreationsPlugin.Add(file);
-                            }
                         });
 
                         CreationsTitle.Add(kvp.Value.Title);
@@ -486,7 +484,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             ModFileSize = 0;
                             URL = "";
 
-                            Parallel.For(0, CreationsPlugin.Count, (i,state) => // for (i = 0; i < CreationsPlugin.Count; i++) 
+                            Parallel.For(0, CreationsPlugin.Count, (i, state) => // for (i = 0; i < CreationsPlugin.Count; i++) 
                             {
                                 if (CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esm" == PluginName ||
                                     CreationsPlugin[i][..CreationsPlugin[i].LastIndexOf('.')] + ".esp" == PluginName)
@@ -526,10 +524,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                             {
-                                if (row.Cells["Group"].Value == null)
+                                row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
+                                /*if (row.Cells["Group"].Value == null)
                                     row.Cells["Group"].Value = "Bethesda Game Studios Creations";
                                 else
-                                    row.Cells["Group"].Value += " (Bethesda)";
+                                    row.Cells["Group"].Value += " (Bethesda)";*/
                             }
 
                             row.Cells["ModEnabled"].Value = ModEnabled;
@@ -621,8 +620,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 return;
             cmbProfile.Items.Clear();
             ProfileFolder = Properties.Settings.Default.ProfileFolder;
-            if (ProfileFolder == null || ProfileFolder == "")
-                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ProfileFolder = string.IsNullOrEmpty(ProfileFolder)
+    ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+    : ProfileFolder;
+
             LastProfile ??= Properties.Settings.Default.LastProfile;
             try
             {
@@ -971,8 +972,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             SaveFileDialog SavePlugins = new();
             ProfileFolder = Properties.Settings.Default.ProfileFolder;
-            if (ProfileFolder == null || ProfileFolder == "")
-                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ProfileFolder ??= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             SavePlugins.InitialDirectory = ProfileFolder;
             SavePlugins.Filter = "Txt File|*.txt";
@@ -1042,8 +1042,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string ProfileFolder;
 
             ProfileFolder = Properties.Settings.Default.ProfileFolder;
-            if (ProfileFolder == null || ProfileFolder == "")
-                ProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ProfileFolder ??= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             OpenFileDialog OpenPlugins = new()
             {
@@ -3089,5 +3088,67 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Properties.Settings.Default.NoWarn = disableAllWarningToolStripMenuItem.Checked;
             NoWarn = disableAllWarningToolStripMenuItem.Checked;
         }
+
+        private void toolStripMenuExportCSV_Click(object sender, EventArgs e)
+        {
+            int i,ExportedLines=0;
+
+            SaveFileDialog ExportActive = new()
+            {
+                Filter = "CSV File|*.csv",
+                Title = "Export Active Plugins",
+                FileName = "Plugins.csv"
+            };
+
+            DialogResult dlgResult = ExportActive.ShowDialog();
+            if (dlgResult == DialogResult.OK)
+            {
+
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(ExportActive.FileName))
+                    {
+                        // Write the headers
+                        for (i = 0; i < dataGridView1.Columns.Count; i++)
+                        {
+                            sw.Write(dataGridView1.Columns[i].HeaderText);
+                            if (i < dataGridView1.Columns.Count - 1) sw.Write(",");
+                        }
+                        sw.WriteLine();
+
+                        // Write the data
+                        for (i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            ExportedLines++;
+                            for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                            {
+                                sw.Write(dataGridView1.Rows[i].Cells[j].Value);
+                                if (j < dataGridView1.Columns.Count - 1) sw.Write(",");
+                            }
+                            sw.WriteLine();
+                        }
+                    }
+
+                    Process.Start("explorer.exe", ExportActive.FileName);
+
+                    // MessageBox.Show("Data exported successfully to " + ExportActive.FileName, "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while exporting data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ExportedLines== 0)
+                {
+                    sbar3("Nothing to export");
+                    return;
+                }
+
+
+                sbar3("Export done");
+                Process.Start("explorer.exe", ExportActive.FileName);
+            }
+        }
+
     }
 }
