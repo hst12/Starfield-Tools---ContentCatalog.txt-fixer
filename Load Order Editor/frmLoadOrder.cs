@@ -934,13 +934,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuEnableAll_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?"))
+            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
                 EnableAll();
         }
 
         private void toolStripMenuDisableAll_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will reset your current load order", "Disable all mods?"))
+            if (Tools.ConfirmAction("This will reset your current load order", "Disable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 DisableAll();
         }
 

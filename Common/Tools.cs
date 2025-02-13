@@ -411,8 +411,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
             if (frmLoadOrder.NoWarn)
                 return true;
             DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, buttons,icon);
-
-            if (DialogResult == DialogResult.OK)
+            if ( DialogResult == DialogResult.OK || DialogResult==DialogResult.Yes)
                 return true;
             else
                 return false;
