@@ -3096,14 +3096,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SaveFileDialog ExportActive = new()
             {
                 Filter = "CSV File|*.csv",
-                Title = "Export Active Plugins",
-                FileName = "Plugins.csv"
+                Title = "Export to CSV",
+                FileName = "Plugins.csv",
             };
 
             DialogResult dlgResult = ExportActive.ShowDialog();
             if (dlgResult == DialogResult.OK)
             {
-
                 try
                 {
                     using (StreamWriter sw = new StreamWriter(ExportActive.FileName))
@@ -3130,8 +3129,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     }
 
                     Process.Start("explorer.exe", ExportActive.FileName);
-
-                    // MessageBox.Show("Data exported successfully to " + ExportActive.FileName, "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
