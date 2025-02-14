@@ -3162,9 +3162,47 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuDescription_Click(object sender, EventArgs e)
         {
-            toolStripMenuDescription.Checked=!toolStripMenuDescription.Checked;
+            toolStripMenuDescription.Checked = !toolStripMenuDescription.Checked;
             dataGridView1.Columns["Description"].Visible = toolStripMenuDescription.Checked;
             Properties.Settings.Default.Description = toolStripMenuDescription.Checked;
+        }
+
+        private void toolStripMenuItemHideAll_Click(object sender, EventArgs e)
+        {
+            SetColumnVisibility(false, timeStampToolStripMenuItem, dataGridView1.Columns["TimeStamp"]);
+            Properties.Settings.Default.TimeStamp = false;
+            SetColumnVisibility(false, toolStripMenuAchievements, dataGridView1.Columns["Achievements"]);
+            Properties.Settings.Default.Achievements = false;
+            SetColumnVisibility(false, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
+            Properties.Settings.Default.CreationsID = false;
+            SetColumnVisibility(false, toolStripMenuFiles, dataGridView1.Columns["Files"]);
+            Properties.Settings.Default.Files = false;
+            SetColumnVisibility(false, toolStripMenuGroup, dataGridView1.Columns["Group"]);
+            Properties.Settings.Default.Group = false;
+            SetColumnVisibility(false, toolStripMenuIndex, dataGridView1.Columns["Index"]);
+            Properties.Settings.Default.Index = false;
+            SetColumnVisibility(false, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
+            Properties.Settings.Default.FileSize = false;
+            SetColumnVisibility(false, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
+            Properties.Settings.Default.URL = false;
+            SetColumnVisibility(false, toolStripMenuVersion, dataGridView1.Columns["Version"]);
+            Properties.Settings.Default.Version = false;
+            SetColumnVisibility(false, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
+            Properties.Settings.Default.AuthorVersion = false;
+            SetColumnVisibility(false, toolStripMenuDescription, dataGridView1.Columns["Description"]);
+            Properties.Settings.Default.Description = false;
+        }
+
+        private void toolStripMenuShowRecommended_Click(object sender, EventArgs e)
+        {
+            SetColumnVisibility(true, toolStripMenuGroup, dataGridView1.Columns["Group"]);
+            Properties.Settings.Default.Group = true;
+            SetColumnVisibility(true, toolStripMenuVersion, dataGridView1.Columns["Version"]);
+            Properties.Settings.Default.Version = true;
+            SetColumnVisibility(true, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
+            Properties.Settings.Default.AuthorVersion = true;
+            SetColumnVisibility(true, toolStripMenuDescription, dataGridView1.Columns["Description"]);
+            Properties.Settings.Default.Description = true;
         }
     }
 }
