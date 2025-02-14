@@ -442,6 +442,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 using StreamWriter writer = new(loText);
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 sbar("");
+                progressBar1.Hide();
                 return;
             }
 
@@ -2384,6 +2385,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string PluginName;
             int ModCount = dataGridView1.RowCount;
             string loText = Tools.StarfieldAppData + "\\Plugins.txt";
+            if (!File.Exists(loText))
+                return 0;
             using (var reader = new StreamReader(loText))
             {
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
