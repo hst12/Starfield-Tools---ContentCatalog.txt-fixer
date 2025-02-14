@@ -236,6 +236,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SetColumnVisibility(Properties.Settings.Default.URL, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
             SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
             SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
+            SetColumnVisibility(Properties.Settings.Default.Description, toolStripMenuDescription, dataGridView1.Columns["Description"]);
         }
         private void SetMenus()
         {
@@ -371,7 +372,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Tools.Configuration Url = new();
 
             if (!toolStripMenuLOOTToggle.Checked)
-                    LOOTPath = "";
+                LOOTPath = "";
             if (toolStripMenuGroup.Checked && LOOTPath != "" && dataGridView1.Columns["Group"].Visible) // Read LOOT groups
             {
                 try
@@ -538,7 +539,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                             row.Cells["ModEnabled"].Value = ModEnabled;
                             row.Cells["PluginName"].Value = PluginName;
-                            row.Cells["Description"].Value = Description;
+                            if (dataGridView1.Columns["Description"].Visible)
+                                row.Cells["Description"].Value = Description;
                             if (dataGridView1.Columns["Version"].Visible)
                                 row.Cells["Version"].Value = ModVersion;
                             if (dataGridView1.Columns["AuthorVersion"].Visible)
@@ -3154,8 +3156,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuLOOTToggle_Click(object sender, EventArgs e)
         {
-            toolStripMenuLOOTToggle.Checked=!toolStripMenuLOOTToggle.Checked;
+            toolStripMenuLOOTToggle.Checked = !toolStripMenuLOOTToggle.Checked;
             Properties.Settings.Default.LOOTEnabled = toolStripMenuLOOTToggle.Checked;
+        }
+
+        private void toolStripMenuDescription_Click(object sender, EventArgs e)
+        {
+            toolStripMenuDescription.Checked=!toolStripMenuDescription.Checked;
+            dataGridView1.Columns["Description"].Visible = toolStripMenuDescription.Checked;
+            Properties.Settings.Default.Description = toolStripMenuDescription.Checked;
         }
     }
 }

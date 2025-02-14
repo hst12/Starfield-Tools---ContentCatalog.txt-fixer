@@ -560,5 +560,17 @@ namespace Starfield_Tools.Properties {
                 this["LOOTEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Description {
+            get {
+                return ((bool)(this["Description"]));
+            }
+            set {
+                this["Description"] = value;
+            }
+        }
     }
 }
