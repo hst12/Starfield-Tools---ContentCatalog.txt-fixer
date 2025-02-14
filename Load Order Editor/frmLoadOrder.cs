@@ -3203,6 +3203,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Properties.Settings.Default.AuthorVersion = true;
             SetColumnVisibility(true, toolStripMenuDescription, dataGridView1.Columns["Description"]);
             Properties.Settings.Default.Description = true;
+            RefreshDataGrid();
         }
     }
 }
