@@ -274,6 +274,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             disableAllWarningToolStripMenuItem.Checked = Properties.Settings.Default.NoWarn;
             NoWarn = disableAllWarningToolStripMenuItem.Checked;
 
+            toolStripMenuLOOTToggle.Checked = Properties.Settings.Default.LOOTEnabled;
+
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
 
@@ -368,6 +370,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Tools.Configuration Groups = new();
             Tools.Configuration Url = new();
 
+            if (!toolStripMenuLOOTToggle.Checked)
+                    LOOTPath = "";
             if (toolStripMenuGroup.Checked && LOOTPath != "" && dataGridView1.Columns["Group"].Visible) // Read LOOT groups
             {
                 try
@@ -934,7 +938,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuEnableAll_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 EnableAll();
         }
 
@@ -2691,6 +2695,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Properties.Settings.Default.AutoDelccc = NewSetting;
             Properties.Settings.Default.CompareProfiles = NewSetting;
             Properties.Settings.Default.ActivateNew = NewSetting;
+            Properties.Settings.Default.LOOTEnabled = NewSetting;
 
             SaveSettings();
             SetMenus();
@@ -3128,7 +3133,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         }
                     }
 
-                    if (Tools.ConfirmAction("Open exported file?","Export Complete",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+                    if (Tools.ConfirmAction("Open exported file?", "Export Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         Process.Start("explorer.exe", ExportActive.FileName);
                 }
                 catch (Exception ex)
@@ -3144,5 +3149,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
         }
 
+        private void toolStripMenuLOOTToggle_Click(object sender, EventArgs e)
+        {
+            toolStripMenuLOOTToggle.Checked=!toolStripMenuLOOTToggle.Checked;
+            Properties.Settings.Default.LOOTEnabled = toolStripMenuLOOTToggle.Checked;
+        }
     }
 }
