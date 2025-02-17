@@ -1797,6 +1797,7 @@
             toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt, Check for Duplicates");
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
+
             // 
             // btnLoot
             // 

@@ -82,7 +82,14 @@ namespace Starfield_Tools.Common // Various functions used by the app
         }
         public static void OpenUrl(string url) // Launch web browser from argument
         {
-            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+            try
+            {
+                Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error opening URL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
 
         public static DateTime ConvertTime(double TimeToConvert) // Convert catalog time format to human readable
@@ -403,15 +410,15 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
         }
 
-        
-        public static bool ConfirmAction(string ActionText, string ActionTitle="",MessageBoxButtons buttons=MessageBoxButtons.OKCancel,MessageBoxIcon icon=MessageBoxIcon.Stop) 
+
+        public static bool ConfirmAction(string ActionText, string ActionTitle = "", MessageBoxButtons buttons = MessageBoxButtons.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Stop)
         {
             // Return true for OK, false for cancel
 
             if (frmLoadOrder.NoWarn)
                 return true;
-            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, buttons,icon);
-            if ( DialogResult == DialogResult.OK || DialogResult==DialogResult.Yes)
+            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, buttons, icon);
+            if (DialogResult == DialogResult.OK || DialogResult == DialogResult.Yes)
                 return true;
             else
                 return false;

@@ -293,7 +293,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     InitDataGrid();
                 }
             }
-
         }
 
         private static void SetColumnVisibility(bool condition, ToolStripMenuItem menuItem, DataGridViewColumn column)
@@ -2275,7 +2274,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string ReturnStatus = AddRemove();
+            string ReturnStatus =  AddRemove();
             int Duplicates = RemoveDuplicates();
 
             if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
