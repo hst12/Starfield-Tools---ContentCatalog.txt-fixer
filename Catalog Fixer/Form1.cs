@@ -33,6 +33,17 @@ namespace Starfield_Tools
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             Verbose = Properties.Settings.Default.Verbose;
             chkVerbose.Checked = Properties.Settings.Default.Verbose;
+            chkRevertBackup.Checked = Properties.Settings.Default.RevertBackup;
+            if (chkRevertBackup.Checked)
+            {
+                chkAutoBackup.Enabled = false;
+                if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
+                {
+                    RestoreCatalog();
+                    CatalogStatus = "Catalog Reverted to Backup";
+                    MessageBox.Show("Catalog Reverted to Backup","Catalog Change Detected");
+                }
+            }
 
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
@@ -73,8 +84,7 @@ namespace Starfield_Tools
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
-                /*if (String.Equals(arg, "-lo", StringComparison.OrdinalIgnoreCase)) // Open Load order editor
-                    cmdLineLO = true;*/
+
             }
 
             if (AutoCheck) // Check catalog status if enabled
@@ -705,10 +715,7 @@ namespace Starfield_Tools
         private void chkVerbose_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.Verbose = chkVerbose.Checked;
-            if (chkVerbose.Checked)
-                Verbose = true;
-            else
-                Verbose = false;
+            Verbose = chkVerbose.Checked;
         }
 
         private void frmStarfieldTools_Shown(object sender, EventArgs e)
@@ -748,6 +755,19 @@ namespace Starfield_Tools
         {
             if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt"))
                 File.Delete(Tools.GetCatalogPath());
+        }
+
+        private void chkRevertBackup_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.RevertBackup = chkRevertBackup.Checked;
+            if (chkRevertBackup.Checked)
+            {
+                Settings.Default.AutoBackup = false; // Turn off Catalog auto-backup
+                chkAutoBackup.Checked = false;
+                chkAutoBackup.Enabled = false;
+            }
+            else
+                chkAutoBackup.Enabled = true;
         }
     }
 }

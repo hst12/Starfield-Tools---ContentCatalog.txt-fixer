@@ -3043,7 +3043,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuItemDeletePlugins_Click(object sender, EventArgs e)
         {
-            if (!Tools.ConfirmAction("Are you sure you want to delete Plugins.txt?", "This will delete Plugins.txt and turn off most app settings"))
+            if (!Tools.ConfirmAction("Are you sure you want to delete Plugins.txt?", "This will delete Plugins.txt"))
                 return;
             ChangeSettings(false);
             File.Delete(Tools.StarfieldAppData + "\\Plugins.txt");
@@ -3065,8 +3065,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
             profiles.Remove(cmbProfile.SelectedItem.ToString()); // Remove current profile from list
 
-            frmAddModToProfile addMod = new(profiles, dataGridView1.CurrentRow.Cells["PluginName"].Value.ToString());
-            addMod.Show(cmbProfile);
+            try
+            {
+                frmAddModToProfile addMod = new(profiles, dataGridView1.CurrentRow.Cells["PluginName"].Value.ToString());
+                addMod.Show(cmbProfile);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void ResetWindowSize()

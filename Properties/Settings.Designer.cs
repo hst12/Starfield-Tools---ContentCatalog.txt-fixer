@@ -572,5 +572,17 @@ namespace Starfield_Tools.Properties {
                 this["Description"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RevertBackup {
+            get {
+                return ((bool)(this["RevertBackup"]));
+            }
+            set {
+                this["RevertBackup"] = value;
+            }
+        }
     }
 }

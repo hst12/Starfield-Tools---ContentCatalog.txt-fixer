@@ -47,6 +47,7 @@
             grpActions = new System.Windows.Forms.GroupBox();
             flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             btnAchievemnts = new System.Windows.Forms.Button();
+            btnDelete = new System.Windows.Forms.Button();
             btnClearLog = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
@@ -60,7 +61,7 @@
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            btnDelete = new System.Windows.Forms.Button();
+            chkRevertBackup = new System.Windows.Forms.CheckBox();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -264,6 +265,16 @@
             btnAchievemnts.UseVisualStyleBackColor = true;
             btnAchievemnts.Click += btnAchievemnts_Click;
             // 
+            // btnDelete
+            // 
+            btnDelete.Location = new System.Drawing.Point(1227, 3);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(150, 46);
+            btnDelete.TabIndex = 8;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
             // btnClearLog
             // 
             btnClearLog.AutoSize = true;
@@ -343,6 +354,7 @@
             flowLayoutPanel2.Controls.Add(chkAutoRestore);
             flowLayoutPanel2.Controls.Add(chkForceClean);
             flowLayoutPanel2.Controls.Add(chkVerbose);
+            flowLayoutPanel2.Controls.Add(chkRevertBackup);
             flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             flowLayoutPanel2.Location = new System.Drawing.Point(3, 35);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -427,15 +439,16 @@
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // btnDelete
+            // chkRevertBackup
             // 
-            btnDelete.Location = new System.Drawing.Point(1227, 3);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new System.Drawing.Size(150, 46);
-            btnDelete.TabIndex = 8;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
+            chkRevertBackup.AutoSize = true;
+            chkRevertBackup.Location = new System.Drawing.Point(1149, 3);
+            chkRevertBackup.Name = "chkRevertBackup";
+            chkRevertBackup.Size = new System.Drawing.Size(276, 36);
+            chkRevertBackup.TabIndex = 16;
+            chkRevertBackup.Text = "Always Revert Backup";
+            chkRevertBackup.UseVisualStyleBackColor = true;
+            chkRevertBackup.CheckedChanged += chkRevertBackup_CheckedChanged;
             // 
             // frmStarfieldTools
             // 
@@ -507,6 +520,7 @@
         private System.Windows.Forms.CheckBox chkVerbose;
         private System.Windows.Forms.Button btnAchievemnts;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.CheckBox chkRevertBackup;
     }
 }
 
