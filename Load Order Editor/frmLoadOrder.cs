@@ -888,7 +888,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         if (DataGridString.Contains(TextBoxString))
                         {
                             sbar2("Found " + txtSearchBox.Text + " in " + dataGridView1.Rows[ModIndex].Cells["PluginName"].Value.ToString());
-                            dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
+                            if (dataGridView1.Rows[ModIndex].Cells["PluginName"].Visible)
+                                dataGridView1.CurrentCell = dataGridView1.Rows[ModIndex].Cells["PluginName"];
                             return;
                         }
                     }

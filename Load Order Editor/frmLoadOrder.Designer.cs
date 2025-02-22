@@ -1631,8 +1631,8 @@
             flowLayoutPanel1.Controls.Add(btnActiveOnly);
             flowLayoutPanel1.Controls.Add(btnRefresh);
             flowLayoutPanel1.Controls.Add(btnUpdate);
-            flowLayoutPanel1.Controls.Add(btnCatalog);
             flowLayoutPanel1.Controls.Add(btnLoot);
+            flowLayoutPanel1.Controls.Add(btnCatalog);
             flowLayoutPanel1.Controls.Add(btnRun);
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnQuit);
@@ -1752,7 +1752,7 @@
             btnSave.Margin = new System.Windows.Forms.Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(74, 42);
-            btnSave.TabIndex = 7;
+            btnSave.TabIndex = 0;
             btnSave.Text = "Save";
             toolTip1.SetToolTip(btnSave, "Save Plugins.txt (Ctrl-S)");
             btnSave.UseVisualStyleBackColor = true;
@@ -1766,7 +1766,7 @@
             btnActiveOnly.Margin = new System.Windows.Forms.Padding(2);
             btnActiveOnly.Name = "btnActiveOnly";
             btnActiveOnly.Size = new System.Drawing.Size(168, 42);
-            btnActiveOnly.TabIndex = 19;
+            btnActiveOnly.TabIndex = 1;
             btnActiveOnly.Text = "Toggle Active";
             toolTip1.SetToolTip(btnActiveOnly, "Show all or show active mods only");
             btnActiveOnly.UseVisualStyleBackColor = true;
@@ -1780,7 +1780,7 @@
             btnRefresh.Margin = new System.Windows.Forms.Padding(2);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new System.Drawing.Size(103, 42);
-            btnRefresh.TabIndex = 8;
+            btnRefresh.TabIndex = 2;
             btnRefresh.Text = "Refresh";
             toolTip1.SetToolTip(btnRefresh, "Reload Plugins (F5)");
             btnRefresh.UseVisualStyleBackColor = true;
@@ -1794,7 +1794,7 @@
             btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new System.Drawing.Size(101, 42);
-            btnUpdate.TabIndex = 9;
+            btnUpdate.TabIndex = 3;
             btnUpdate.Text = "Update";
             toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt, Check for Duplicates");
             btnUpdate.UseVisualStyleBackColor = true;
@@ -1804,10 +1804,10 @@
             // 
             btnCatalog.AutoSize = true;
             btnCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnCatalog.Location = new System.Drawing.Point(1251, 3);
+            btnCatalog.Location = new System.Drawing.Point(1370, 3);
             btnCatalog.Name = "btnCatalog";
             btnCatalog.Size = new System.Drawing.Size(105, 42);
-            btnCatalog.TabIndex = 20;
+            btnCatalog.TabIndex = 4;
             btnCatalog.Text = "Catalog";
             btnCatalog.UseVisualStyleBackColor = true;
             btnCatalog.Click += btnCatalog_Click;
@@ -1816,11 +1816,11 @@
             // 
             btnLoot.AutoSize = true;
             btnLoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnLoot.Location = new System.Drawing.Point(1361, 2);
+            btnLoot.Location = new System.Drawing.Point(1250, 2);
             btnLoot.Margin = new System.Windows.Forms.Padding(2);
             btnLoot.Name = "btnLoot";
             btnLoot.Size = new System.Drawing.Size(115, 42);
-            btnLoot.TabIndex = 10;
+            btnLoot.TabIndex = 5;
             btnLoot.Text = "Autosort";
             toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
             btnLoot.UseVisualStyleBackColor = true;
@@ -1834,7 +1834,7 @@
             btnRun.Margin = new System.Windows.Forms.Padding(2);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(66, 42);
-            btnRun.TabIndex = 12;
+            btnRun.TabIndex = 6;
             btnRun.Text = "Run";
             toolTip1.SetToolTip(btnRun, "Run the game (R)");
             btnRun.UseVisualStyleBackColor = true;
@@ -1848,7 +1848,7 @@
             btnCancel.Margin = new System.Windows.Forms.Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(95, 42);
-            btnCancel.TabIndex = 13;
+            btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             toolTip1.SetToolTip(btnCancel, "Exit without saving changes");
             btnCancel.UseVisualStyleBackColor = true;
@@ -1862,7 +1862,7 @@
             btnQuit.Margin = new System.Windows.Forms.Padding(2);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(61, 42);
-            btnQuit.TabIndex = 14;
+            btnQuit.TabIndex = 8;
             btnQuit.Text = "Exit";
             toolTip1.SetToolTip(btnQuit, "Save changes and Exit");
             btnQuit.UseVisualStyleBackColor = true;
