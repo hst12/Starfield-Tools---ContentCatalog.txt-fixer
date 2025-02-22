@@ -34,16 +34,6 @@ namespace Starfield_Tools
             Verbose = Properties.Settings.Default.Verbose;
             chkVerbose.Checked = Properties.Settings.Default.Verbose;
             chkRevertBackup.Checked = Properties.Settings.Default.RevertBackup;
-            if (chkRevertBackup.Checked)
-            {
-                chkAutoBackup.Enabled = false;
-                if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
-                {
-                    RestoreCatalog();
-                    CatalogStatus = "Catalog Reverted to Backup";
-                    MessageBox.Show("Catalog Reverted to Backup","Catalog Change Detected");
-                }
-            }
 
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
@@ -84,7 +74,6 @@ namespace Starfield_Tools
                     SaveSettings();
                     SetAutoCheckBoxes();
                 }
-
             }
 
             if (AutoCheck) // Check catalog status if enabled
@@ -142,6 +131,16 @@ namespace Starfield_Tools
                     Application.Exit();
                 else
                     Environment.Exit(1);
+            }
+
+            if (chkRevertBackup.Checked)
+            {
+                chkAutoBackup.Enabled = false;
+                if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
+                {
+                    RestoreCatalog();
+                    CatalogStatus = "Catalog Reverted to Backup";
+                }
             }
 
         }
@@ -765,6 +764,10 @@ namespace Starfield_Tools
                 Settings.Default.AutoBackup = false; // Turn off Catalog auto-backup
                 chkAutoBackup.Checked = false;
                 chkAutoBackup.Enabled = false;
+                /*if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
+                    if (Tools.ConfirmAction("Do you want to make a backup of the current catalog?", "Catalog backup is out of date", 
+                        MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+                        BackupCatalog();*/
             }
             else
                 chkAutoBackup.Enabled = true;

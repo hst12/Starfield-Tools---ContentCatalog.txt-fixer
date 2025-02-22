@@ -229,6 +229,7 @@
             btnActiveOnly = new System.Windows.Forms.Button();
             btnRefresh = new System.Windows.Forms.Button();
             btnUpdate = new System.Windows.Forms.Button();
+            btnCatalog = new System.Windows.Forms.Button();
             btnLoot = new System.Windows.Forms.Button();
             btnRun = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
@@ -268,7 +269,7 @@
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new System.Drawing.Size(1770, 726);
+            dataGridView1.Size = new System.Drawing.Size(1770, 724);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
@@ -890,7 +891,7 @@
             // 
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            refreshToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            refreshToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
             refreshToolStripMenuItem.Text = "Refresh";
             refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
             // 
@@ -898,7 +899,7 @@
             // 
             toolStripMenuColumns.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuIndex, toolStripMenuDescription, toolStripMenuGroup, toolStripMenuAchievements, toolStripMenuCreationsID, toolStripMenuFiles, toolStripMenuFileSize, timeStampToolStripMenuItem, uRLToolStripMenuItem, toolStripMenuVersion, toolStripMenuAuthorVersion, toolStripSeparator30, toolStripMenuItemHideAll, toolStripMenuShowRecommended });
             toolStripMenuColumns.Name = "toolStripMenuColumns";
-            toolStripMenuColumns.Size = new System.Drawing.Size(359, 44);
+            toolStripMenuColumns.Size = new System.Drawing.Size(269, 44);
             toolStripMenuColumns.Text = "Columns";
             // 
             // toolStripMenuIndex
@@ -1007,7 +1008,7 @@
             // 
             themeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { lightToolStripMenuItem, darkToolStripMenuItem, systemToolStripMenuItem });
             themeToolStripMenuItem.Name = "themeToolStripMenuItem";
-            themeToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            themeToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
             themeToolStripMenuItem.Text = "Theme";
             // 
             // lightToolStripMenuItem
@@ -1034,19 +1035,19 @@
             // toolStripSeparator25
             // 
             toolStripSeparator25.Name = "toolStripSeparator25";
-            toolStripSeparator25.Size = new System.Drawing.Size(356, 6);
+            toolStripSeparator25.Size = new System.Drawing.Size(266, 6);
             // 
             // showTimeToolStripMenuItem
             // 
             showTimeToolStripMenuItem.Name = "showTimeToolStripMenuItem";
-            showTimeToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            showTimeToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
             showTimeToolStripMenuItem.Text = "Show Time";
             showTimeToolStripMenuItem.Click += showTimeToolStripMenuItem_Click_1;
             // 
             // activeOnlyToolStripMenuItem
             // 
             activeOnlyToolStripMenuItem.Name = "activeOnlyToolStripMenuItem";
-            activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
             activeOnlyToolStripMenuItem.Text = "Active Only";
             activeOnlyToolStripMenuItem.Click += activeOnlyToolStripMenuItem_Click;
             // 
@@ -1239,7 +1240,7 @@
             // 
             autoSortToolStripMenuItem.Name = "autoSortToolStripMenuItem";
             autoSortToolStripMenuItem.Size = new System.Drawing.Size(407, 44);
-            autoSortToolStripMenuItem.Text = "Auto Sort with LOOT";
+            autoSortToolStripMenuItem.Text = "LOOT Autosort";
             autoSortToolStripMenuItem.Click += autoSortToolStripMenuItem_Click;
             // 
             // toolStripSeparator27
@@ -1605,12 +1606,12 @@
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             tableLayoutPanel2.Controls.Add(flowLayoutPanel1, 16, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(2, 770);
+            tableLayoutPanel2.Location = new System.Drawing.Point(2, 768);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(1770, 52);
+            tableLayoutPanel2.Size = new System.Drawing.Size(1770, 54);
             tableLayoutPanel2.TabIndex = 9;
             // 
             // flowLayoutPanel1
@@ -1630,13 +1631,14 @@
             flowLayoutPanel1.Controls.Add(btnActiveOnly);
             flowLayoutPanel1.Controls.Add(btnRefresh);
             flowLayoutPanel1.Controls.Add(btnUpdate);
+            flowLayoutPanel1.Controls.Add(btnCatalog);
             flowLayoutPanel1.Controls.Add(btnLoot);
             flowLayoutPanel1.Controls.Add(btnRun);
             flowLayoutPanel1.Controls.Add(btnCancel);
             flowLayoutPanel1.Controls.Add(btnQuit);
             flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(1601, 46);
+            flowLayoutPanel1.Size = new System.Drawing.Size(1712, 48);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // btnUp
@@ -1699,7 +1701,7 @@
             // 
             label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(177, 7);
+            label1.Location = new System.Drawing.Point(177, 8);
             label1.Margin = new System.Windows.Forms.Padding(2);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(85, 32);
@@ -1797,13 +1799,24 @@
             toolTip1.SetToolTip(btnUpdate, "Add or delete missing mods from Plugins.txt, Check for Duplicates");
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
-
+            // 
+            // btnCatalog
+            // 
+            btnCatalog.AutoSize = true;
+            btnCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnCatalog.Location = new System.Drawing.Point(1251, 3);
+            btnCatalog.Name = "btnCatalog";
+            btnCatalog.Size = new System.Drawing.Size(105, 42);
+            btnCatalog.TabIndex = 20;
+            btnCatalog.Text = "Catalog";
+            btnCatalog.UseVisualStyleBackColor = true;
+            btnCatalog.Click += btnCatalog_Click;
             // 
             // btnLoot
             // 
             btnLoot.AutoSize = true;
             btnLoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnLoot.Location = new System.Drawing.Point(1250, 2);
+            btnLoot.Location = new System.Drawing.Point(1361, 2);
             btnLoot.Margin = new System.Windows.Forms.Padding(2);
             btnLoot.Name = "btnLoot";
             btnLoot.Size = new System.Drawing.Size(115, 42);
@@ -1817,7 +1830,7 @@
             // 
             btnRun.AutoSize = true;
             btnRun.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnRun.Location = new System.Drawing.Point(1369, 2);
+            btnRun.Location = new System.Drawing.Point(1480, 2);
             btnRun.Margin = new System.Windows.Forms.Padding(2);
             btnRun.Name = "btnRun";
             btnRun.Size = new System.Drawing.Size(66, 42);
@@ -1831,7 +1844,7 @@
             // 
             btnCancel.AutoSize = true;
             btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnCancel.Location = new System.Drawing.Point(1439, 2);
+            btnCancel.Location = new System.Drawing.Point(1550, 2);
             btnCancel.Margin = new System.Windows.Forms.Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(95, 42);
@@ -1845,7 +1858,7 @@
             // 
             btnQuit.AutoSize = true;
             btnQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnQuit.Location = new System.Drawing.Point(1538, 2);
+            btnQuit.Location = new System.Drawing.Point(1649, 2);
             btnQuit.Margin = new System.Windows.Forms.Padding(2);
             btnQuit.Name = "btnQuit";
             btnQuit.Size = new System.Drawing.Size(61, 42);
@@ -2120,5 +2133,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemHideAll;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuShowRecommended;
+        private System.Windows.Forms.Button btnCatalog;
     }
 }

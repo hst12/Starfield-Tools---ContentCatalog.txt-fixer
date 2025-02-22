@@ -15,7 +15,6 @@ namespace Starfield_Tools
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
-            //Application.Run(new frmStarfieldTools());
             Application.Run(new frmLoadOrder(""));
         }
     }

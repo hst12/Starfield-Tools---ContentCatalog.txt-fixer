@@ -78,6 +78,7 @@ bInvalidateOlderFiles=");
                 INILines.Add(@"
 [Papyrus]
 bEnableLogging=1
+bLoadDebugInformation=1
 bEnableTrace=1");
             }
 

@@ -41,7 +41,6 @@ namespace Starfield_Tools
 #if DEBUG
             toolStripMenuProfiles.Visible = true;
 #endif
-
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
@@ -2041,7 +2040,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             frmStarfieldTools StarfieldTools = new();
             StarfieldTools.Show();
-            sbar2(StarfieldTools.CatalogStatus);
+            sbar4(StarfieldTools.CatalogStatus);
             return StarfieldTools.CatalogStatus;
         }
         private void toolStripMenuCatalog_Click(object sender, EventArgs e)
@@ -2274,7 +2273,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string ReturnStatus =  AddRemove();
+            string ReturnStatus = AddRemove();
             int Duplicates = RemoveDuplicates();
 
             if (AutoSort && (ReturnStatus != "Plugins.txt is up to date" || Duplicates > 0))
@@ -2706,7 +2705,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will turn on a number of auto settings and reset ini settings", "Reset to recommended settings?"))
+            if (Tools.ConfirmAction("Enable All settings?", "This will turn on a number of auto settings and reset ini settings", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
             {
                 ChangeSettings(true);
                 ResetDefaults();
@@ -3210,6 +3209,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SetColumnVisibility(true, toolStripMenuDescription, dataGridView1.Columns["Description"]);
             Properties.Settings.Default.Description = true;
             RefreshDataGrid();
+        }
+
+        private void btnCatalog_Click(object sender, EventArgs e)
+        {
+            CheckCatalog();
         }
     }
 }
