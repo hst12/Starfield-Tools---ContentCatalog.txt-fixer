@@ -211,7 +211,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
-            sbar4(StarfieldTools.CatalogStatus);
+            tempstr = StarfieldTools.CatalogStatus;
+            if (Properties.Settings.Default.RevertBackup)
+                tempstr += ", Revert On";
+            sbar4(tempstr);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
