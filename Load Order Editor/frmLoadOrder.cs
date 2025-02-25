@@ -212,7 +212,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             tempstr = StarfieldTools.CatalogStatus;
-            if (Properties.Settings.Default.RevertBackup)
+            if (Properties.Settings.Default.RevertBackup && !StarfieldTools.CatalogStatus.Contains("Reverted"))
                 tempstr += ", Revert On";
             sbar4(tempstr);
             if (StarfieldTools.CatalogStatus != null)
@@ -311,7 +311,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             GridSorted = false;
             isModified = false;
             GameVersionDisplay();
-            toolStripStatusTertiary.ForeColor = DefaultForeColor;
+            toolStripStatusStats.ForeColor = DefaultForeColor;
             sbar3("Refresh complete");
             sbar4("");
         }
@@ -469,15 +469,22 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 PluginName = line;
                 try
                 {
-                    if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))
+
+                    if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))  // Don't add base game files
                     {
 
                         ModEnabled = PluginName[0] == '*';
+                        if (tools.BlockedMods.Contains(PluginName[1..])) // Disable blocked mods
+                        {
+                            ModEnabled = false;
+                            PluginName = PluginName[1..];
+                        }
                         if (ModEnabled)
                         {
                             EnabledCount++;
                             PluginName = PluginName[1..];
                         }
+
 
                         if (PluginName[0] != '#') // Ignore comment
                         {
@@ -530,13 +537,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             }
 
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
-                            {
                                 row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
-                                /*if (row.Cells["Group"].Value == null)
-                                    row.Cells["Group"].Value = "Bethesda Game Studios Creations";
-                                else
-                                    row.Cells["Group"].Value += " (Bethesda)";*/
-                            }
 
                             row.Cells["ModEnabled"].Value = ModEnabled;
                             row.Cells["PluginName"].Value = PluginName;
@@ -675,7 +676,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 writer.Write("# This file is used by Starfield to keep track of your downloaded content.\n# Please do not modify this file.\n");
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    ModEnabled = (bool)dataGridView1.Rows[i].Cells["ModEnabled"].Value;
+                    ModEnabled = (bool?)(dataGridView1.Rows[i].Cells["ModEnabled"].Value) ?? false;
                     ModLine = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                     if (ModEnabled)
                         writer.Write("*"); // Insert a * for enabled mods then write the mod filename
@@ -775,7 +776,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 File.Copy(sourceFileName, destFileName, true); // overwrite
                 InitDataGrid();
 
-                toolStripStatusTertiary.ForeColor = DefaultForeColor;
+                toolStripStatusStats.ForeColor = DefaultForeColor;
                 SavePlugins();
                 sbar2("Restore done");
             }
@@ -822,8 +823,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            sbar3("Warning! - Plugins sorted - saving changes disabled - Refresh to enable saving");
-            toolStripStatusTertiary.ForeColor = Color.Red;
+            sbar("Warning! - Plugins sorted - saving changes disabled - Refresh to enable saving");
+            toolStripStatusStats.ForeColor = Color.Red;
             btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
             GridSorted = true;
@@ -1137,8 +1138,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             int AddedFiles = 0, rowIndex;
             List<string> esmespFiles = [];
             List<string> PluginFiles = [];
-            List<string> BethFiles = tools.BethFiles;
-            // Exclude game files - will probably need updating after updates
+            List<string> BethFiles = tools.BethFiles; // Exclude game files - will probably need updating after updates
 
             string directory = StarfieldGamePath;
 
@@ -1168,6 +1168,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<string> MissingFiles = esmespFiles.Except(PluginFiles).ToList();
 
             List<string> FilesToAdd = MissingFiles.Except(BethFiles).ToList();  // Exclude BGS esm files
+
             if (FilesToAdd.Count > 0)
             {
                 for (int i = 0; i < FilesToAdd.Count; i++)
@@ -1175,10 +1176,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     AddedFiles++;
                     rowIndex = this.dataGridView1.Rows.Add();
                     var row = this.dataGridView1.Rows[rowIndex];
-                    if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null && Properties.Settings.Default.ActivateNew) // Activate the mod if the option is set in menu
+
+                    if (FilesToAdd[i].Contains(".esm") && FilesToAdd[i] != null && Properties.Settings.Default.ActivateNew)   // Activate the mod if the option is set in menu
                         row.Cells["ModEnabled"].Value = true;
                     else
                         row.Cells["ModEnabled"].Value = false;
+
                     row.Cells["PluginName"].Value = FilesToAdd[i];
                 }
                 dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["PluginName"];
@@ -1227,9 +1230,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             for (i = 0; i < tools.BethFiles.Count; i++)  // Remove base game files
-            {
                 FilesToRemove.Add(tools.BethFiles[i]);
-            }
 
             if (FilesToRemove.Count > 0)
             {

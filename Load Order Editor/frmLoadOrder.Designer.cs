@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoadOrder));
             dataGridView1 = new System.Windows.Forms.DataGridView();
             Index = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -229,8 +229,8 @@
             btnActiveOnly = new System.Windows.Forms.Button();
             btnRefresh = new System.Windows.Forms.Button();
             btnUpdate = new System.Windows.Forms.Button();
-            btnCatalog = new System.Windows.Forms.Button();
             btnLoot = new System.Windows.Forms.Button();
+            btnCatalog = new System.Windows.Forms.Button();
             btnRun = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             btnQuit = new System.Windows.Forms.Button();
@@ -327,8 +327,8 @@
             // Version
             // 
             Version.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.NullValue = null;
-            Version.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            Version.DefaultCellStyle = dataGridViewCellStyle2;
             Version.HeaderText = "Date";
             Version.MinimumWidth = 10;
             Version.Name = "Version";
@@ -1800,18 +1800,6 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
-            // btnCatalog
-            // 
-            btnCatalog.AutoSize = true;
-            btnCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            btnCatalog.Location = new System.Drawing.Point(1370, 3);
-            btnCatalog.Name = "btnCatalog";
-            btnCatalog.Size = new System.Drawing.Size(105, 42);
-            btnCatalog.TabIndex = 4;
-            btnCatalog.Text = "Catalog";
-            btnCatalog.UseVisualStyleBackColor = true;
-            btnCatalog.Click += btnCatalog_Click;
-            // 
             // btnLoot
             // 
             btnLoot.AutoSize = true;
@@ -1825,6 +1813,18 @@
             toolTip1.SetToolTip(btnLoot, "LOOT Autosort");
             btnLoot.UseVisualStyleBackColor = true;
             btnLoot.Click += btnLoot_Click;
+            // 
+            // btnCatalog
+            // 
+            btnCatalog.AutoSize = true;
+            btnCatalog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            btnCatalog.Location = new System.Drawing.Point(1370, 3);
+            btnCatalog.Name = "btnCatalog";
+            btnCatalog.Size = new System.Drawing.Size(105, 42);
+            btnCatalog.TabIndex = 4;
+            btnCatalog.Text = "Catalog";
+            btnCatalog.UseVisualStyleBackColor = true;
+            btnCatalog.Click += btnCatalog_Click;
             // 
             // btnRun
             // 
