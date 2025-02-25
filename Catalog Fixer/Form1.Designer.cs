@@ -60,8 +60,8 @@
             chkAutoBackup = new System.Windows.Forms.CheckBox();
             chkAutoRestore = new System.Windows.Forms.CheckBox();
             chkVerbose = new System.Windows.Forms.CheckBox();
-            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             chkRevertBackup = new System.Windows.Forms.CheckBox();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             statusStrip1.SuspendLayout();
             grpActions.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
@@ -416,6 +416,17 @@
             chkVerbose.UseVisualStyleBackColor = true;
             chkVerbose.CheckedChanged += chkVerbose_CheckedChanged;
             // 
+            // chkRevertBackup
+            // 
+            chkRevertBackup.AutoSize = true;
+            chkRevertBackup.Location = new System.Drawing.Point(1149, 3);
+            chkRevertBackup.Name = "chkRevertBackup";
+            chkRevertBackup.Size = new System.Drawing.Size(280, 36);
+            chkRevertBackup.TabIndex = 16;
+            chkRevertBackup.Text = "Always Revert Catalog";
+            chkRevertBackup.UseVisualStyleBackColor = true;
+            chkRevertBackup.CheckedChanged += chkRevertBackup_CheckedChanged;
+            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
@@ -438,17 +449,6 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel1.Size = new System.Drawing.Size(1637, 1100);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // chkRevertBackup
-            // 
-            chkRevertBackup.AutoSize = true;
-            chkRevertBackup.Location = new System.Drawing.Point(1149, 3);
-            chkRevertBackup.Name = "chkRevertBackup";
-            chkRevertBackup.Size = new System.Drawing.Size(276, 36);
-            chkRevertBackup.TabIndex = 16;
-            chkRevertBackup.Text = "Always Revert Backup";
-            chkRevertBackup.UseVisualStyleBackColor = true;
-            chkRevertBackup.CheckedChanged += chkRevertBackup_CheckedChanged;
             // 
             // frmStarfieldTools
             // 

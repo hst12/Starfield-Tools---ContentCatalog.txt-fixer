@@ -266,9 +266,9 @@ namespace Starfield_Tools
                 {
                     if (WarningCount == 0)
                     {
-                        toolStripStatusLabel1.Text = "Catalog ok";
+                        toolStripStatusLabel1.Text = "Catalog OK";
                         CatalogStatus = toolStripStatusLabel1.Text;
-                        richTextBox2.Text += "\nCatalog ok\n";
+                        richTextBox2.Text += "\nCatalog OK\n";
                         return true;
                     }
                     else

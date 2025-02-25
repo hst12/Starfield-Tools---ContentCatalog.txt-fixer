@@ -20,6 +20,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
         public string StarfieldGamePath { get; set; }
         public string StarfieldGamePathMS { get; set; }
         public List<string> BethFiles { get; set; }
+        public List<string> BlockedMods { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
         public List<string> PluginList { get; set; }
@@ -35,6 +36,15 @@ namespace Starfield_Tools.Common // Various functions used by the app
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "BGS Exclude file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Environment.Exit(1);
+            }
+            try
+            {
+                BlockedMods = new(File.ReadAllLines(CommonFolder + "BlockedMods.txt")); // Don't enable these mods
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Environment.Exit(1);
             }
             try
@@ -423,7 +433,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
             else
                 return false;
         }
-        public List<string> GetPluginList() // Get list of plugins from Starfield appdata folder
+        public List<string> GetPluginList() // Get list of plugins from Starfield Data folder
         {
             PluginList = new();
             try
