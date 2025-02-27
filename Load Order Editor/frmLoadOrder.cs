@@ -3226,5 +3226,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             CheckCatalog();
         }
+
+        private void editBlockedModstxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathToFile = (Tools.CommonFolder+ "BlockedMods.txt");
+            Process.Start("explorer", pathToFile);
+            MessageBox.Show("Restart the application for any changes to take effect");
+        }
     }
 }
