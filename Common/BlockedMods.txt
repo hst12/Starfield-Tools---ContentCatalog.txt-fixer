@@ -2,4 +2,4 @@
 #themidasmanor.esm
 #sfbgs00c.esm
 #kgcdoom.esm
-#A1_EMPTY_STUB_XXXXXXXXXX.esm
+A1_EMPTY_STUB_XXXXXXXXXX.esm

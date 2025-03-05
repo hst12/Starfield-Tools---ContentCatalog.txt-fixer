@@ -576,12 +576,12 @@ namespace Starfield_Tools.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool RevertBackup {
+        public bool Blocked {
             get {
-                return ((bool)(this["RevertBackup"]));
+                return ((bool)(this["Blocked"]));
             }
             set {
-                this["RevertBackup"] = value;
+                this["Blocked"] = value;
             }
         }
     }

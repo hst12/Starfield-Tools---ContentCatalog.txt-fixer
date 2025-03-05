@@ -212,8 +212,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             tempstr = StarfieldTools.CatalogStatus;
-            if (Properties.Settings.Default.RevertBackup && !StarfieldTools.CatalogStatus.Contains("Reverted"))
-                tempstr += ", Revert On";
+            /*if (Properties.Settings.Default.RevertBackup && !StarfieldTools.CatalogStatus.Contains("Reverted"))
+                tempstr += ", Revert On";*/
             sbar4(tempstr);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
@@ -239,6 +239,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SetColumnVisibility(Properties.Settings.Default.Version, toolStripMenuVersion, dataGridView1.Columns["Version"]);
             SetColumnVisibility(Properties.Settings.Default.AuthorVersion, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
             SetColumnVisibility(Properties.Settings.Default.Description, toolStripMenuDescription, dataGridView1.Columns["Description"]);
+            SetColumnVisibility(Properties.Settings.Default.Blocked, blockedToolStripMenuItem, dataGridView1.Columns["Blocked"]);
         }
         private void SetMenus()
         {
@@ -330,7 +331,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void InitDataGrid()
         {
-            bool ModEnabled;
+            bool ModEnabled,Blocked;
             int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
@@ -473,12 +474,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))  // Don't add base game files
                     {
 
+
                         ModEnabled = PluginName[0] == '*';
-                        if (tools.BlockedMods.Contains(PluginName[1..])) // Disable blocked mods
-                        {
-                            ModEnabled = false;
-                            PluginName = PluginName[1..];
-                        }
+
                         if (ModEnabled)
                         {
                             EnabledCount++;
@@ -535,6 +533,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
+                            if (tools.BlockedMods.Contains(PluginName)) // Disable blocked mods
+                            {
+                                ModEnabled = false;
+                                //PluginName = PluginName[1..];
+                                Blocked = true;
+                            }
+                            else
+                                Blocked = false;
+
+                            if (dataGridView1.Columns["Blocked"].Visible && Blocked)
+                                row.Cells["Blocked"].Value = true;
+
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                 row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
 
@@ -558,6 +568,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                             if (dataGridView1.Columns["Index"].Visible)
                                 row.Cells["Index"].Value = IndexCount++;
                             row.Cells["URL"].Value = URL;
+
                         }
                     }
                 }
@@ -824,7 +835,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void dataGridView1_Sorted(object sender, EventArgs e)
         {
-            sbar("Warning! - Plugins sorted - saving changes disabled - Refresh to enable saving");
+            sbar("Plugins sorted - saving changes disabled - Refresh to enable saving");
             toolStripStatusStats.ForeColor = Color.Red;
             btnSave.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
@@ -3207,6 +3218,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Properties.Settings.Default.AuthorVersion = false;
             SetColumnVisibility(false, toolStripMenuDescription, dataGridView1.Columns["Description"]);
             Properties.Settings.Default.Description = false;
+            SetColumnVisibility(false, blockedToolStripMenuItem, dataGridView1.Columns["Blocked"]);
+            Properties.Settings.Default.Blocked = false;
         }
 
         private void toolStripMenuShowRecommended_Click(object sender, EventArgs e)
@@ -3229,9 +3242,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void editBlockedModstxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pathToFile = (Tools.CommonFolder+ "BlockedMods.txt");
+            string pathToFile = (Tools.CommonFolder + "BlockedMods.txt");
             Process.Start("explorer", pathToFile);
             MessageBox.Show("Restart the application for any changes to take effect");
+        }
+
+        private void blockedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            blockedToolStripMenuItem.Checked = !blockedToolStripMenuItem.Checked;
+            dataGridView1.Columns["Blocked"].Visible = blockedToolStripMenuItem.Checked;
+            Properties.Settings.Default.Blocked = blockedToolStripMenuItem.Checked;
         }
     }
 }

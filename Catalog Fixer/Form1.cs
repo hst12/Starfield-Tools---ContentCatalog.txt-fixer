@@ -29,12 +29,10 @@ namespace Starfield_Tools
             AutoCheck = Properties.Settings.Default.AutoCheck;
             AutoClean = Properties.Settings.Default.AutoClean;
             AutoBackup = Properties.Settings.Default.AutoBackup;
-            AutoRestore = Properties.Settings.Default.AutoRestore;
             StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
             Verbose = Properties.Settings.Default.Verbose;
             chkVerbose.Checked = Properties.Settings.Default.Verbose;
-            chkRevertBackup.Checked = Properties.Settings.Default.RevertBackup;
-
+            AutoRestore = Properties.Settings.Default.AutoRestore;
             ForceClean = Properties.Settings.Default.ForceClean;
             SetAutoCheckBoxes();
 
@@ -96,9 +94,18 @@ namespace Starfield_Tools
             else toolStripStatusLabel1.Text = "Ready";
             ScrollToEnd();
 
+            if (AutoRestore && !Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
+            {
+                RestoreCatalog();
+                CatalogStatus = "Catalog restored";
+            }
+
             if (AutoBackup)
                 if (!CheckBackup()) // Backup if necessary
                     BackupCatalog();
+
+            if (!File.Exists(Tools.GetCatalogPath()+".bak")) // Backup catalog if backup doesn't exist
+                BackupCatalog();
 
             DisplayCatalog();
 
@@ -132,17 +139,6 @@ namespace Starfield_Tools
                 else
                     Environment.Exit(1);
             }
-
-            if (chkRevertBackup.Checked)
-            {
-                chkAutoBackup.Enabled = false;
-                if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
-                {
-                    RestoreCatalog();
-                    CatalogStatus = "Catalog Reverted to Backup";
-                }
-            }
-
         }
         private void ScrollToEnd()
         {
@@ -412,6 +408,7 @@ namespace Starfield_Tools
         private void chkAutoRestore_CheckedChanged(object sender, EventArgs e)
         {
             AutoRestore = chkAutoRestore.Checked;
+            Properties.Settings.Default.AutoRestore = AutoRestore;
         }
 
         private void chkForceClean_CheckedChanged(object sender, EventArgs e)
@@ -754,23 +751,6 @@ namespace Starfield_Tools
         {
             if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt"))
                 File.Delete(Tools.GetCatalogPath());
-        }
-
-        private void chkRevertBackup_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.RevertBackup = chkRevertBackup.Checked;
-            if (chkRevertBackup.Checked)
-            {
-                Settings.Default.AutoBackup = false; // Turn off Catalog auto-backup
-                chkAutoBackup.Checked = false;
-                chkAutoBackup.Enabled = false;
-                /*if (!Tools.FileCompare(Tools.GetCatalogPath(), Tools.GetCatalogPath() + ".bak"))
-                    if (Tools.ConfirmAction("Do you want to make a backup of the current catalog?", "Catalog backup is out of date", 
-                        MessageBoxButtons.YesNo,MessageBoxIcon.Question))
-                        BackupCatalog();*/
-            }
-            else
-                chkAutoBackup.Enabled = true;
         }
     }
 }

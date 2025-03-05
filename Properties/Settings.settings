@@ -140,7 +140,7 @@
     <Setting Name="Description" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="RevertBackup" Type="System.Boolean" Scope="User">
+    <Setting Name="Blocked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
