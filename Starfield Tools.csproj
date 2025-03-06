@@ -52,6 +52,8 @@
     <Title>Starfield Tools</Title>
     <PackageIcon>SpaceShip.ico</PackageIcon>
     <SignAssembly>True</SignAssembly>
+    <Description>Starfield Tools</Description>
+    <PackageTags>Starfield</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -129,7 +131,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Common\BlockedMods.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Common\Catalog Version.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

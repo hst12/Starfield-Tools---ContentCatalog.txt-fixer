@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
 
         public static string CommonFolder { get; set; }
         public static string DocumentationFolder { get; set; }
+        public static string LocalAppDataPath { get; set; }
         public string StarFieldPath { get; set; }
         public string StarfieldGamePath { get; set; }
         public string StarfieldGamePathMS { get; set; }
@@ -25,9 +27,13 @@ namespace Starfield_Tools.Common // Various functions used by the app
         public static string StarfieldAppData { get; set; }
         public List<string> PluginList { get; set; }
 
+
         public Tools() // Constructor
         {
             CommonFolder = Environment.CurrentDirectory + "\\Common\\"; // Used to read misc txt files used by the app
+
+            LocalAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Starfield_Tools\\");
+
             DocumentationFolder = Environment.CurrentDirectory + "\\Documentation";
             try
             {
@@ -40,7 +46,11 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
             try
             {
-                BlockedMods = new(File.ReadAllLines(CommonFolder + "BlockedMods.txt")); // Don't enable these mods
+                if (!File.Exists(LocalAppDataPath + "BlockedMods.txt"))
+                {
+                    File.Create(LocalAppDataPath + "BlockedMods.txt");
+                }
+                BlockedMods = new(File.ReadAllLines(LocalAppDataPath + "BlockedMods.txt")); // Don't enable these mods
             }
             catch (Exception ex)
             {
@@ -67,6 +77,8 @@ namespace Starfield_Tools.Common // Various functions used by the app
                 Environment.Exit(1);
             }
         }
+
+
 
         public static string MakeHeaderBlank() // Used to build ContentCatalog.txt header
         {
@@ -420,7 +432,6 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
         }
 
-
         public static bool ConfirmAction(string ActionText, string ActionTitle = "", MessageBoxButtons buttons = MessageBoxButtons.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Stop)
         {
             // Return true for OK, false for cancel
@@ -453,4 +464,6 @@ namespace Starfield_Tools.Common // Various functions used by the app
             return PluginList;
         }
     }
+
+
 }

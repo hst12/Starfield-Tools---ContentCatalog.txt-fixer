@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
+using static System.Net.Mime.MediaTypeNames;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -163,19 +164,19 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 case 0: // Light
                     dataGridView1.EnableHeadersVisualStyles = true;
 #pragma warning disable WFO5001 // 'System.Windows.Forms.Application.SetColorMode(System.Windows.Forms.SystemColorMode)' is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-                    Application.SetColorMode(SystemColorMode.Classic);
+                    System.Windows.Forms.Application.SetColorMode(SystemColorMode.Classic);
                     lightToolStripMenuItem.Checked = true;
                     break;
                 case 1: // Dark
                     dataGridView1.EnableHeadersVisualStyles = false;
                     dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
                     dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
-                    Application.SetColorMode(SystemColorMode.Dark);
+                    System.Windows.Forms.Application.SetColorMode(SystemColorMode.Dark);
                     darkToolStripMenuItem.Checked = true;
                     break;
                 case 2: // System
-                    Application.SetColorMode(SystemColorMode.System);
-                    if (Application.SystemColorMode == SystemColorMode.Dark)
+                    System.Windows.Forms.Application.SetColorMode(SystemColorMode.System);
+                    if (System.Windows.Forms.Application.SystemColorMode == SystemColorMode.Dark)
                     {
                         dataGridView1.EnableHeadersVisualStyles = false;
                         dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
@@ -331,7 +332,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void InitDataGrid()
         {
-            bool ModEnabled,Blocked;
+            bool ModEnabled;
             int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
@@ -474,7 +475,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     if (!string.IsNullOrEmpty(PluginName) && !tools.BethFiles.Contains(PluginName))  // Don't add base game files
                     {
 
-
                         ModEnabled = PluginName[0] == '*';
 
                         if (ModEnabled)
@@ -533,17 +533,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
-                            if (tools.BlockedMods.Contains(PluginName)) // Disable blocked mods
+                            if (tools.BlockedMods.Contains(PluginName)  && dataGridView1.Columns["Blocked"].Visible) // Disable blocked mods
                             {
                                 ModEnabled = false;
-                                //PluginName = PluginName[1..];
-                                Blocked = true;
-                            }
-                            else
-                                Blocked = false;
-
-                            if (dataGridView1.Columns["Blocked"].Visible && Blocked)
                                 row.Cells["Blocked"].Value = true;
+                            }
 
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                 row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
@@ -936,7 +930,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveSettings();
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1690,7 +1684,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (isModified)
                 SavePlugins();
             SaveSettings();
-            Application.Exit();
+            System.Windows.Forms.Application.Exit();
         }
 
         private void toolStripMenuGitHub_Click(object sender, EventArgs e)
@@ -2521,7 +2515,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         if (result != null)
                         {
                             SaveSettings();
-                            Application.Exit();
+                            System.Windows.Forms.Application.Exit();
                         }
                     }
                     catch (Exception ex)
@@ -2558,7 +2552,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void lightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             lightToolStripMenuItem.Checked = !lightToolStripMenuItem.Checked;
-            Application.SetColorMode(SystemColorMode.Classic);
+            System.Windows.Forms.Application.SetColorMode(SystemColorMode.Classic);
             Properties.Settings.Default.DarkMode = 0;
             darkToolStripMenuItem.Checked = false;
             systemToolStripMenuItem.Checked = false;
@@ -2568,7 +2562,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             darkToolStripMenuItem.Checked = !darkToolStripMenuItem.Checked;
             dataGridView1.EnableHeadersVisualStyles = false;
-            Application.SetColorMode(SystemColorMode.Dark);
+            System.Windows.Forms.Application.SetColorMode(SystemColorMode.Dark);
             Properties.Settings.Default.DarkMode = 1;
             lightToolStripMenuItem.Checked = false;
             systemToolStripMenuItem.Checked = false;
@@ -2577,7 +2571,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void systemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             systemToolStripMenuItem.Checked = !systemToolStripMenuItem.Checked;
-            Application.SetColorMode(SystemColorMode.System);
+            System.Windows.Forms.Application.SetColorMode(SystemColorMode.System);
             Properties.Settings.Default.DarkMode = 2;
             lightToolStripMenuItem.Checked = false;
             darkToolStripMenuItem.Checked = false;
@@ -2599,7 +2593,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     if (result != null)
                     {
                         SaveSettings();
-                        Application.Exit();
+                        System.Windows.Forms.Application.Exit();
                     }
                 }
                 catch (Exception ex)
@@ -2687,7 +2681,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     string stringValue = (string)Registry.GetValue(keyName, "SteamExe", ""); // Get Steam path from Registry
                     var processInfo = new ProcessStartInfo(stringValue, "-applaunch 2722710");
                     var process = Process.Start(processInfo);
-                    Application.Exit();
+                    System.Windows.Forms.Application.Exit();
                 }
 
                 catch (Exception ex)
@@ -3242,7 +3236,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void editBlockedModstxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string pathToFile = (Tools.CommonFolder + "BlockedMods.txt");
+            string pathToFile = (Tools.LocalAppDataPath + "BlockedMods.txt");
             Process.Start("explorer", pathToFile);
             MessageBox.Show("Restart the application for any changes to take effect");
         }
@@ -3252,6 +3246,38 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             blockedToolStripMenuItem.Checked = !blockedToolStripMenuItem.Checked;
             dataGridView1.Columns["Blocked"].Visible = blockedToolStripMenuItem.Checked;
             Properties.Settings.Default.Blocked = blockedToolStripMenuItem.Checked;
+        }
+
+        private void blockUnblockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> blockedMods = new(tools.BlockedMods);
+
+        
+
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow.Cells["Blocked"].Value == null)
+            {
+                currentRow.Cells["Blocked"].Value = false;
+            }
+            currentRow.Cells["Blocked"].Value = !(bool)(currentRow.Cells["Blocked"].Value);
+
+            if ((bool)currentRow.Cells["Blocked"].Value)
+            {
+                blockedMods.Add(currentRow.Cells["PluginName"].Value.ToString());
+                sbar3(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
+            }
+            else
+            {
+                blockedMods.Remove(currentRow.Cells["PluginName"].Value.ToString());
+                sbar3(currentRow.Cells["PluginName"].Value.ToString() + " unblocked");
+            }
+
+            /*using (StreamWriter w =*/
+            File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt",blockedMods);
+            /*{
+                w.WriteLine(currentRow.Cells["PluginName"].Value.ToString());
+            }*/
+
         }
     }
 }
