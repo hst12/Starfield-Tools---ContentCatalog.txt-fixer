@@ -3,7 +3,7 @@ This tool provides a basic load order editor. and checks ContentCatalog.txt file
 TLDR; See the Help->Shortcuts and Quick Help menu
 
 New Feature: Block mods - block one or more mods from being activated. Useful for Creations mods that you don't want but Creations keeps downloading them anyway.
-Enable the Blocked Column under View->Columns->Blocked then press the Refresh button.
+Enable the Blocked Column under View->Columns->Blocked.
 Once the column is enabled, select a mod by clicking anywhere on the line and right click to block or unblock a mod from the context menu.
 The blocked mods are written to a text file under %localappdata%\Starfield Tools called BlockedMods.txt.
 You can use File->Edit Files->Edit BlockedMods.txt to manually edit the list of blocked mods.

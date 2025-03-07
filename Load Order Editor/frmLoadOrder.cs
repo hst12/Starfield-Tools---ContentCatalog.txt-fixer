@@ -3265,6 +3265,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if ((bool)currentRow.Cells["Blocked"].Value) // Add currently selected mod to block file
             {
                 blockedMods.Add(currentRow.Cells["PluginName"].Value.ToString());
+                currentRow.Cells["ModEnabled"].Value = false;
                 sbar2(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
             }
             else // Remove currently selected mod from block file
