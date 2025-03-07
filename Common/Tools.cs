@@ -86,15 +86,16 @@ namespace Starfield_Tools.Common // Various functions used by the app
                 if (!File.Exists(LocalAppDataPath + "BlockedMods.txt"))
                 {
                     File.Create(LocalAppDataPath + "BlockedMods.txt");
+                    return null;
                 }
-                return (File.ReadAllLines(LocalAppDataPath + "BlockedMods.txt").ToList()); // Don't enable these mods
+                else
+                    return (File.ReadAllLines(LocalAppDataPath + "BlockedMods.txt").ToList()); // Don't enable these mods
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return null;
             }
-            //return BlockedMods;
         }
         public static string MakeHeaderBlank() // Used to build ContentCatalog.txt header
         {
