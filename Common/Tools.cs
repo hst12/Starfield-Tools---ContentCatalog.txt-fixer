@@ -22,11 +22,10 @@ namespace Starfield_Tools.Common // Various functions used by the app
         public string StarfieldGamePath { get; set; }
         public string StarfieldGamePathMS { get; set; }
         public List<string> BethFiles { get; set; }
-        public List<string> BlockedMods { get; set; }
+        //public List<string> BlockedMods { get; set; }
         public static string CatalogVersion { get; set; }
         public static string StarfieldAppData { get; set; }
         public List<string> PluginList { get; set; }
-
 
         public Tools() // Constructor
         {
@@ -44,7 +43,8 @@ namespace Starfield_Tools.Common // Various functions used by the app
                 MessageBox.Show(ex.Message, "BGS Exclude file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Environment.Exit(1);
             }
-            try
+
+            /*try
             {
                 if (!File.Exists(LocalAppDataPath + "BlockedMods.txt"))
                 {
@@ -55,8 +55,9 @@ namespace Starfield_Tools.Common // Various functions used by the app
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                Environment.Exit(1);
-            }
+            }*/
+
+
             try
             {
                 CatalogVersion = File.ReadAllText(CommonFolder + "Catalog Version.txt");
@@ -78,8 +79,23 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
         }
 
-
-
+        public List<string> BlockedMods()
+        {
+            try
+            {
+                if (!File.Exists(LocalAppDataPath + "BlockedMods.txt"))
+                {
+                    File.Create(LocalAppDataPath + "BlockedMods.txt");
+                }
+                return (File.ReadAllLines(LocalAppDataPath + "BlockedMods.txt").ToList()); // Don't enable these mods
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return null;
+            }
+            //return BlockedMods;
+        }
         public static string MakeHeaderBlank() // Used to build ContentCatalog.txt header
         {
             string HeaderString = "";
@@ -464,6 +480,5 @@ namespace Starfield_Tools.Common // Various functions used by the app
             return PluginList;
         }
     }
-
 
 }

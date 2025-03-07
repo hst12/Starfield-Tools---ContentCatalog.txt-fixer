@@ -14,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
-using static System.Net.Mime.MediaTypeNames;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -333,7 +332,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void InitDataGrid()
         {
             bool ModEnabled;
-            int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count;
+            int EnabledCount = 0, IndexCount = 1, i, esmCount = 0, espCount = 0, ba2Count, mainCount;
             string loText, LOOTPath = Properties.Settings.Default.LOOTPath, PluginName, Description, ModFiles, ModVersion, AuthorVersion, ASafe, ModTimeStamp, ModID, URL,
                 StatText = "", directory;
             List<string> CreationsPlugin = new();
@@ -451,7 +450,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             var lines = File.ReadAllLines(loText);
-            progressBar1.Maximum = lines.Length;
+            progressBar1.Maximum = lines.Length; // Set up progress bar
             progressBar1.Value = 0;
             // Get the dimensions of the current form
             int formWidth = this.ClientSize.Width;
@@ -533,7 +532,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
-                            if (tools.BlockedMods.Contains(PluginName)  && dataGridView1.Columns["Blocked"].Visible) // Disable blocked mods
+                            if (tools.BlockedMods().Contains(PluginName) /*&& dataGridView1.Columns["Blocked"].Visible*/) // Disable blocked mods
                             {
                                 ModEnabled = false;
                                 row.Cells["Blocked"].Value = true;
@@ -588,10 +587,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     esmCount = Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly).Count();
                     espCount = Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly).Count();
                     ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
+                    mainCount = Directory.EnumerateFiles(directory, "*- main.ba2", SearchOption.TopDirectoryOnly).Count();
 
                     StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + CreationsPlugin.Count + ", Other: " +
                         (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm files: " +
-                        esmCount + " " + "Archives: " + ba2Count;
+                        esmCount + " Archives: " + ba2Count + ", Main: " + mainCount;
 
                     if (espCount > 0)
                         StatText += ", esp files: " + espCount;
@@ -681,7 +681,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 for (i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     ModEnabled = (bool?)(dataGridView1.Rows[i].Cells["ModEnabled"].Value) ?? false;
-                    if (tools.BlockedMods.Contains((string)dataGridView1.Rows[i].Cells["PluginName"].Value))
+                    if (tools.BlockedMods().Contains((string)dataGridView1.Rows[i].Cells["PluginName"].Value))
                         ModEnabled = false;
                     ModLine = (string)dataGridView1.Rows[i].Cells["PluginName"].Value;
                     if (ModEnabled)
@@ -1562,7 +1562,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             if (GridSorted)
                 return;
-            if (tools.BlockedMods.Contains((string)dataGridView1.CurrentRow.Cells["PluginName"].Value))
+            if (tools.BlockedMods().Contains((string)dataGridView1.CurrentRow.Cells["PluginName"].Value))
             {
                 sbar2("Mod is blocked");
                 return;
@@ -3238,7 +3238,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             string pathToFile = (Tools.LocalAppDataPath + "BlockedMods.txt");
             Process.Start("explorer", pathToFile);
-            MessageBox.Show("Restart the application for any changes to take effect");
+            MessageBox.Show("Click OK to refresh");
+            RefreshDataGrid();
         }
 
         private void blockedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3250,34 +3251,27 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void blockUnblockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> blockedMods = new(tools.BlockedMods);
+            List<string> blockedMods = new(tools.BlockedMods());
 
-        
-
-            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            DataGridViewRow currentRow = dataGridView1.CurrentRow; // Get current row
             if (currentRow.Cells["Blocked"].Value == null)
             {
                 currentRow.Cells["Blocked"].Value = false;
             }
-            currentRow.Cells["Blocked"].Value = !(bool)(currentRow.Cells["Blocked"].Value);
+            currentRow.Cells["Blocked"].Value = !(bool)(currentRow.Cells["Blocked"].Value); // Toggle blocked status
 
-            if ((bool)currentRow.Cells["Blocked"].Value)
+            if ((bool)currentRow.Cells["Blocked"].Value) // Add currently selected mod to block file
             {
                 blockedMods.Add(currentRow.Cells["PluginName"].Value.ToString());
-                sbar3(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
+                sbar2(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
             }
-            else
+            else // Remove currently selected mod from block file
             {
                 blockedMods.Remove(currentRow.Cells["PluginName"].Value.ToString());
-                sbar3(currentRow.Cells["PluginName"].Value.ToString() + " unblocked");
+                sbar2(currentRow.Cells["PluginName"].Value.ToString() + " unblocked");
             }
 
-            /*using (StreamWriter w =*/
-            File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt",blockedMods);
-            /*{
-                w.WriteLine(currentRow.Cells["PluginName"].Value.ToString());
-            }*/
-
+            File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s))); // Strip duplicates and empty lines
         }
     }
 }
