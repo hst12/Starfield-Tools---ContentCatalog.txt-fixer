@@ -6,7 +6,7 @@ New Feature: Block mods - block one or more mods from being activated. Useful fo
 Enable the Blocked Column under View->Columns->Blocked.
 Once the column is enabled, select a mod by clicking anywhere on the line and right click to block or unblock a mod from the context menu.
 The blocked mods are written to a text file under %localappdata%\Starfield Tools called BlockedMods.txt.
-You can use File->Edit Files->Edit BlockedMods.txt to manually edit the list of blocked mods.
+Optional: You can use File->Edit Files->Edit BlockedMods.txt to manually edit the list of blocked mods.
 
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
