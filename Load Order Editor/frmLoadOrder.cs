@@ -343,6 +343,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<long> TimeStamp = new();
             List<string> CreationsID = new();
             List<string> esmFiles = new();
+            List<string> blockedMods = tools.BlockedMods();
             List<long> FileSize = new();
             long ModFileSize;
             DateTime start = new(1970, 1, 1, 0, 0, 0, 0);
@@ -532,11 +533,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
-                            if (tools.BlockedMods().Contains(PluginName) /*&& dataGridView1.Columns["Blocked"].Visible*/) // Disable blocked mods
-                            {
-                                ModEnabled = false;
-                                row.Cells["Blocked"].Value = true;
-                            }
+                            if (blockedMods != null)
+                                if (blockedMods.Contains(PluginName)) // Disable blocked mods
+                                {
+                                    ModEnabled = false;
+                                    row.Cells["Blocked"].Value = true;
+                                }
 
                             if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
                                 row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";

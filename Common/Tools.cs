@@ -93,7 +93,7 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                //MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return null;
             }
         }
