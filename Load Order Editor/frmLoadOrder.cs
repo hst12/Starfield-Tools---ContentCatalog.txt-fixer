@@ -167,10 +167,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     lightToolStripMenuItem.Checked = true;
                     break;
                 case 1: // Dark
+                    System.Windows.Forms.Application.SetColorMode(SystemColorMode.Dark);
                     dataGridView1.EnableHeadersVisualStyles = false;
                     dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
                     dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
-                    System.Windows.Forms.Application.SetColorMode(SystemColorMode.Dark);
+                    statusStrip1.BackColor = Color.Black;
                     darkToolStripMenuItem.Checked = true;
                     break;
                 case 2: // System
@@ -180,6 +181,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         dataGridView1.EnableHeadersVisualStyles = false;
                         dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
                         dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White; // Text color of selected cells
+                        statusStrip1.BackColor = Color.Black;
                     }
                     systemToolStripMenuItem.Checked = true;
                     break;
@@ -2723,7 +2725,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("Enable All settings?", "This will turn on a number of auto settings and reset ini settings", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
+            if (Tools.ConfirmAction("Enable All settings?", "This will turn on a most of the Tools menu settings and reset ini settings", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
             {
                 ChangeSettings(true);
                 ResetDefaults();
