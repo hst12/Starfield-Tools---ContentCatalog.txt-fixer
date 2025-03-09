@@ -227,13 +227,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             // Creations update
             if (Properties.Settings.Default.CreationsUpdate)
             {
-                creationsUpdateToolStripMenuItem.Checked = false;
+                prepareForCreationsUpdateToolStripMenuItem.Checked = false;
                 Properties.Settings.Default.CreationsUpdate = false;
                 StarfieldTools.BackupCatalog();
                 Properties.Settings.Default.AutoRestore = true;
                 MessageBox.Show("Catalog backed up\nAuto Restore turned on", "Creations update complete");
             }
-
         }
 
         private void SetupColumns()
@@ -290,7 +289,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             toolStripMenuLOOTToggle.Checked = Properties.Settings.Default.LOOTEnabled;
 
-            creationsUpdateToolStripMenuItem.Checked = Properties.Settings.Default.CreationsUpdate;
+            prepareForCreationsUpdateToolStripMenuItem.Checked = Properties.Settings.Default.CreationsUpdate;
 
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
@@ -3280,18 +3279,23 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void creationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void prepareForCreationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             if (!Properties.Settings.Default.CreationsUpdate)
             {
-                creationsUpdateToolStripMenuItem.Checked = true;
+                prepareForCreationsUpdateToolStripMenuItem.Checked = true;
                 Properties.Settings.Default.CreationsUpdate = true;
                 Properties.Settings.Default.AutoRestore = false;
                 MessageBox.Show("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again", "Steps to Update Creations Mods");
             }
             else
             {
-                creationsUpdateToolStripMenuItem.Checked = false;
+                prepareForCreationsUpdateToolStripMenuItem.Checked = false;
                 Properties.Settings.Default.CreationsUpdate = false;
-                MessageBox.Show("Set Catalog Auto Restore to Your Preference\nRecommendation - Set Auto Restore to on for Normal Gameplay","Creations Update Cancelled");
+                MessageBox.Show("Set Catalog Auto Restore to Your Preference\nRecommendation - Set Auto Restore to on for Normal Gameplay", "Creations Update Cancelled");
                 Properties.Settings.Default.AutoRestore = true;
                 frmStarfieldTools StarfieldTools = new();
                 StarfieldTools.Show();
