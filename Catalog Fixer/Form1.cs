@@ -363,14 +363,16 @@ namespace Starfield_Tools
             ScrollToEnd();
             DisplayCatalog();
         }
-        public void BackupCatalog()
+        public bool BackupCatalog()
         {
+            bool BackupStatus=false;
+
             if (!CheckCatalog())
             {
                 richTextBox2.Text += "\nCatalog is corrupted. Backup not made.\n";
                 if (AutoClean)
                     CleanCatalog();
-                return;
+                return false;
             }
 
             if (!CheckBackup())
@@ -383,12 +385,16 @@ namespace Starfield_Tools
                     File.Copy(sourceFileName, destFileName, true); // overwrite
                     richTextBox2.Text += "\nBackup done\n";
                     toolStripStatusLabel1.Text = "Backup done";
+                    BackupStatus = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error: {ex.Message}", "Backup failed");
                 }
             }
+            else
+                BackupStatus = false;
+            return BackupStatus;
         }
 
         private void chkAutoCheck_CheckedChanged(object sender, EventArgs e)

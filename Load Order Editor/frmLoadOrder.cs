@@ -41,6 +41,7 @@ namespace Starfield_Tools
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
+            bool BackupStatus = false;
 
 #pragma warning disable CS0168 // Variable is declared but never used
             try
@@ -159,7 +160,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 case 0: // Light mode
                     dataGridView1.EnableHeadersVisualStyles = true;
-#pragma warning disable WFO5001 // 'System.Windows.Forms.Application.SetColorMode(System.Windows.Forms.SystemColorMode)' is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning disable WFO5001
+                    // 'System.Windows.Forms.Application.SetColorMode(System.Windows.Forms.SystemColorMode)' is for evaluation purposes only and is subject to
+                    // change or removal in future updates.
+                    // Suppress this diagnostic to proceed.
                     System.Windows.Forms.Application.SetColorMode(SystemColorMode.Classic);
                     lightToolStripMenuItem.Checked = true;
                     break;
@@ -229,9 +233,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             {
                 prepareForCreationsUpdateToolStripMenuItem.Checked = false;
                 Properties.Settings.Default.CreationsUpdate = false;
-                StarfieldTools.BackupCatalog();
+                BackupStatus = StarfieldTools.BackupCatalog();
+                tempstr = BackupStatus ? "Catalog backed up" : "Catalog backup is up to date";
                 Properties.Settings.Default.AutoRestore = true;
-                MessageBox.Show("Catalog backed up\nAuto Restore turned on", "Creations update complete");
+                MessageBox.Show(tempstr+"\nAuto Restore turned on", "Creations update complete");
             }
         }
 
@@ -2734,7 +2739,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("Enable All settings?", "This will turn on a most of the Tools menu settings and reset ini settings", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation))
+            if (Tools.ConfirmAction("Enable All settings?", "This will turn on a most of the Tools menu settings and reset ini settings", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Exclamation))
             {
                 ChangeSettings(true);
                 ResetDefaults();
@@ -3284,16 +3290,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void prepareForCreationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Properties.Settings.Default.CreationsUpdate)
+            if (!Properties.Settings.Default.CreationsUpdate) // Catalog Auto Restore off etc.
             {
                 prepareForCreationsUpdateToolStripMenuItem.Checked = true;
                 Properties.Settings.Default.CreationsUpdate = true;
                 Properties.Settings.Default.AutoRestore = false;
-                MessageBox.Show("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\nTo Cancel this option, click the menu option again", "Steps to Update Creations Mods");
+                MessageBox.Show("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\nTo Cancel this option," +
+                    " click this menu option again", "Steps to Update Creations Mods");
             }
             else
             {
-                prepareForCreationsUpdateToolStripMenuItem.Checked = false;
+                prepareForCreationsUpdateToolStripMenuItem.Checked = false; // Cancel Creations update
                 Properties.Settings.Default.CreationsUpdate = false;
                 MessageBox.Show("Set Catalog Auto Restore to Your Preference\nRecommendation - Set Auto Restore to on for Normal Gameplay", "Creations Update Cancelled");
                 Properties.Settings.Default.AutoRestore = true;
