@@ -16,6 +16,7 @@ namespace Starfield_Tools
 
         public bool AutoCheck, AutoClean, AutoBackup, AutoRestore, ForceClean, Verbose;
         public string CatalogStatus;
+        
 
         readonly Tools tools = new();
         private readonly string StarfieldGamePath;
@@ -362,7 +363,7 @@ namespace Starfield_Tools
             ScrollToEnd();
             DisplayCatalog();
         }
-        private void BackupCatalog()
+        public void BackupCatalog()
         {
             if (!CheckCatalog())
             {

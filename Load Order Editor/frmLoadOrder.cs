@@ -38,9 +38,6 @@ namespace Starfield_Tools
         {
             InitializeComponent();
 
-#if DEBUG
-            toolStripMenuProfiles.Visible = true;
-#endif
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
             string PluginsPath = Tools.StarfieldAppData + "\\Plugins.txt";
@@ -160,13 +157,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             switch (Properties.Settings.Default.DarkMode) // Theme
             {
-                case 0: // Light
+                case 0: // Light mode
                     dataGridView1.EnableHeadersVisualStyles = true;
 #pragma warning disable WFO5001 // 'System.Windows.Forms.Application.SetColorMode(System.Windows.Forms.SystemColorMode)' is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
                     System.Windows.Forms.Application.SetColorMode(SystemColorMode.Classic);
                     lightToolStripMenuItem.Checked = true;
                     break;
-                case 1: // Dark
+                case 1: // Dark mode
                     System.Windows.Forms.Application.SetColorMode(SystemColorMode.Dark);
                     dataGridView1.EnableHeadersVisualStyles = false;
                     dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Green; // Background color of selected cells
@@ -226,6 +223,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 GetProfiles();
             else
                 InitDataGrid();
+
+            // Creations update
+            if (Properties.Settings.Default.CreationsUpdate)
+            {
+                creationsUpdateToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.CreationsUpdate = false;
+                StarfieldTools.BackupCatalog();
+                Properties.Settings.Default.AutoRestore = true;
+                MessageBox.Show("Catalog backed up\nAuto Restore turned on", "Creations update complete");
+            }
+
         }
 
         private void SetupColumns()
@@ -281,6 +289,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             NoWarn = disableAllWarningToolStripMenuItem.Checked;
 
             toolStripMenuLOOTToggle.Checked = Properties.Settings.Default.LOOTEnabled;
+
+            creationsUpdateToolStripMenuItem.Checked = Properties.Settings.Default.CreationsUpdate;
 
             if (Properties.Settings.Default.AutoReset)
                 ResetDefaults();
@@ -389,7 +399,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 catch (Exception ex)
                 {
 #if DEBUG
-                    MessageBox.Show(ex.Message, "Yaml decoding error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(ex.Message, "Yaml decoding error\nLOOT userlist.yaml possibly corrupt", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 #endif
                     sbar(ex.Message);
                 }
@@ -2974,17 +2984,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
         }
 
-        private void enabledToolStripMenuItem_Click(object sender, EventArgs e) // WIP
-        {
-
-        }
-
-        private void manageToolStripMenuItem_Click(object sender, EventArgs e) // WIP
-        {
-            Form ProfilesForm = new frmProfiles(cmbProfile.SelectedItem.ToString());
-            ProfilesForm.Show();
-        }
-
         private void checkArchivesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> BGSArchives = [];
@@ -3277,6 +3276,26 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s))); // Strip duplicates and empty lines
+        }
+
+        private void creationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Properties.Settings.Default.CreationsUpdate)
+            {
+                creationsUpdateToolStripMenuItem.Checked = true;
+                Properties.Settings.Default.CreationsUpdate = true;
+                Properties.Settings.Default.AutoRestore = false;
+                MessageBox.Show("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again", "Steps to Update Creations Mods");
+            }
+            else
+            {
+                creationsUpdateToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.CreationsUpdate = false;
+                MessageBox.Show("Set Catalog Auto Restore to Your Preference\nRecommendation - Set Auto Restore to on for Normal Gameplay","Creations Update Cancelled");
+                Properties.Settings.Default.AutoRestore = true;
+                frmStarfieldTools StarfieldTools = new();
+                StarfieldTools.Show();
+            }
         }
     }
 }

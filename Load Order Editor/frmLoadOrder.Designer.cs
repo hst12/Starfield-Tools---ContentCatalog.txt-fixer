@@ -141,9 +141,6 @@
             toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             showTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             activeOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuProfiles = new System.Windows.Forms.ToolStripMenuItem();
-            enabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -218,7 +215,7 @@
             documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             testToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuTestJson = new System.Windows.Forms.ToolStripMenuItem();
+            creationsUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnUp = new System.Windows.Forms.Button();
@@ -634,7 +631,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, viewToolStripMenuItem, toolStripMenuProfiles, toolsToolStripMenuItem, toolStripMenuGame, toolStripMenuMods, toolStripMenuLinks, helpToolStripMenuItem, testToolStripMenu });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, viewToolStripMenuItem, toolsToolStripMenuItem, toolStripMenuGame, toolStripMenuMods, toolStripMenuLinks, helpToolStripMenuItem, testToolStripMenu });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
@@ -1084,28 +1081,6 @@
             activeOnlyToolStripMenuItem.Size = new System.Drawing.Size(269, 44);
             activeOnlyToolStripMenuItem.Text = "Active Only";
             activeOnlyToolStripMenuItem.Click += activeOnlyToolStripMenuItem_Click;
-            // 
-            // toolStripMenuProfiles
-            // 
-            toolStripMenuProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { enabledToolStripMenuItem, manageToolStripMenuItem });
-            toolStripMenuProfiles.Name = "toolStripMenuProfiles";
-            toolStripMenuProfiles.Size = new System.Drawing.Size(174, 38);
-            toolStripMenuProfiles.Text = "Profiles (WIP)";
-            toolStripMenuProfiles.Visible = false;
-            // 
-            // enabledToolStripMenuItem
-            // 
-            enabledToolStripMenuItem.Name = "enabledToolStripMenuItem";
-            enabledToolStripMenuItem.Size = new System.Drawing.Size(234, 44);
-            enabledToolStripMenuItem.Text = "Enabled";
-            enabledToolStripMenuItem.Click += enabledToolStripMenuItem_Click;
-            // 
-            // manageToolStripMenuItem
-            // 
-            manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            manageToolStripMenuItem.Size = new System.Drawing.Size(234, 44);
-            manageToolStripMenuItem.Text = "Manage";
-            manageToolStripMenuItem.Click += manageToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
             // 
@@ -1604,17 +1579,17 @@
             // 
             // testToolStripMenu
             // 
-            testToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuTestJson });
+            testToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { creationsUpdateToolStripMenuItem });
             testToolStripMenu.Name = "testToolStripMenu";
             testToolStripMenu.Size = new System.Drawing.Size(76, 38);
             testToolStripMenu.Text = "Test";
-            testToolStripMenu.Visible = false;
             // 
-            // toolStripMenuTestJson
+            // creationsUpdateToolStripMenuItem
             // 
-            toolStripMenuTestJson.Name = "toolStripMenuTestJson";
-            toolStripMenuTestJson.Size = new System.Drawing.Size(240, 44);
-            toolStripMenuTestJson.Text = "json Test";
+            creationsUpdateToolStripMenuItem.Name = "creationsUpdateToolStripMenuItem";
+            creationsUpdateToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            creationsUpdateToolStripMenuItem.Text = "Creations Update";
+            creationsUpdateToolStripMenuItem.Click += creationsUpdateToolStripMenuItem_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -2024,7 +1999,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenu;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuTestJson;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btnBottom;
         private System.Windows.Forms.Button btnTop;
@@ -2134,9 +2108,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.ToolStripMenuItem showTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem archiveModToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuProfiles;
-        private System.Windows.Forms.ToolStripMenuItem enabledToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.ToolStripMenuItem checkArchivesToolStripMenuItem;
@@ -2172,5 +2143,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Blocked;
         private System.Windows.Forms.ToolStripMenuItem blockUnblockToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator31;
+        private System.Windows.Forms.ToolStripMenuItem creationsUpdateToolStripMenuItem;
     }
 }

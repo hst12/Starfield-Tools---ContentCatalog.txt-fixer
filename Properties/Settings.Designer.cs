@@ -584,5 +584,17 @@ namespace Starfield_Tools.Properties {
                 this["Blocked"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CreationsUpdate {
+            get {
+                return ((bool)(this["CreationsUpdate"]));
+            }
+            set {
+                this["CreationsUpdate"] = value;
+            }
+        }
     }
 }
