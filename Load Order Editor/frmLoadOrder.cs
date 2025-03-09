@@ -236,7 +236,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 BackupStatus = StarfieldTools.BackupCatalog();
                 tempstr = BackupStatus ? "Catalog backed up" : "Catalog backup is up to date";
                 Properties.Settings.Default.AutoRestore = true;
-                MessageBox.Show(tempstr+"\nAuto Restore turned on", "Creations update complete");
+                MessageBox.Show(tempstr+"\nAuto Restore turned on\n\nYou can now play the game normally until the next time you want to update\n\n" +
+                    "Remember to choose the Prepare for Creations Update option again before you update or add new mods", "Creations update complete");
             }
         }
 
