@@ -22,7 +22,7 @@ namespace Starfield_Tools.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Starfield_Tools.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Starfield_Tools.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Starfield_Tools.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,21 @@ namespace Starfield_Tools.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Loot {
+            get {
+                object obj = ResourceManager.GetObject("Loot", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ar91m {
+        public static System.Drawing.Bitmap MO2 {
             get {
-                object obj = ResourceManager.GetObject("ar91m", resourceCulture);
+                object obj = ResourceManager.GetObject("MO2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,40 +83,20 @@ namespace Starfield_Tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Github_Octicons_Arrow_down_24_32 {
+        public static System.Drawing.Bitmap Photo_2024_07_26_095212 {
             get {
-                object obj = ResourceManager.GetObject("Github-Octicons-Arrow-down-24.32", resourceCulture);
+                object obj = ResourceManager.GetObject("Photo_2024-07-26-095212", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap Github_Octicons_Arrow_up_24_32 {
+        public static System.Drawing.Icon Vortex {
             get {
-                object obj = ResourceManager.GetObject("Github-Octicons-Arrow-up-24.32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Github_Octicons_Move_to_bottom_24_32 {
-            get {
-                object obj = ResourceManager.GetObject("Github-Octicons-Move-to-bottom-24.32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Github_Octicons_Move_to_top_24_32 {
-            get {
-                object obj = ResourceManager.GetObject("Github-Octicons-Move-to-top-24.32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("Vortex", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

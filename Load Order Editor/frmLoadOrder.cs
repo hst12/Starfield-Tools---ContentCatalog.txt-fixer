@@ -3248,6 +3248,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string pathToFile = (Tools.LocalAppDataPath + "BlockedMods.txt");
             Process.Start("explorer", pathToFile);
             MessageBox.Show("Click OK to refresh");
+            isModified = true;
             RefreshDataGrid();
         }
 
@@ -3282,11 +3283,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s))); // Strip duplicates and empty lines
-        }
-
-        private void creationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            isModified = true;
         }
 
         private void prepareForCreationsUpdateToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1586,7 +1586,7 @@
             aboutToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("aboutToolStripMenuItem.Image");
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new System.Drawing.Size(419, 44);
-            aboutToolStripMenuItem.Text = "&About...";
+            aboutToolStripMenuItem.Text = "&About / Readme.txt";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // tableLayoutPanel2
