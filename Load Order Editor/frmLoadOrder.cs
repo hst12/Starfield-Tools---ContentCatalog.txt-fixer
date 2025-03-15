@@ -90,7 +90,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 StarfieldGamePath = Properties.Settings.Default.StarfieldGamePath;
                 if (StarfieldGamePath == "")
                 {
-                    GetSteamGamePath(); // Detect game path
+                    GetSteamGamePath(); // Detect Steam path
                     if (StarfieldGamePath == "")
                         StarfieldGamePath = tools.SetStarfieldGamePath();
                     Properties.Settings.Default.StarfieldGamePath = StarfieldGamePath;
@@ -117,6 +117,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             else
                 sbarCCCOff();
 
+            // Setup game version
             switch (GameVersion)
             {
                 case Steam:
@@ -188,6 +189,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     break;
             }
 
+            // Initialise menu check marks from Properties.Settings.Default
             SetMenus();
 
             // Do a 1-time backup of Plugins.txt if it doesn't exist
@@ -215,13 +217,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             frmStarfieldTools StarfieldTools = new(); // Check the catalog
             tempstr = StarfieldTools.CatalogStatus;
-            /*if (Properties.Settings.Default.RevertBackup && !StarfieldTools.CatalogStatus.Contains("Reverted"))
-                tempstr += ", Revert On";*/
             sbar4(tempstr);
             if (StarfieldTools.CatalogStatus != null)
                 if (StarfieldTools.CatalogStatus.Contains("Error"))
                     StarfieldTools.Show(); // Show catalog fixer if catalog broken
 
+            // Initialise profiles
             cmbProfile.Enabled = Profiles;
             if (Profiles)
                 GetProfiles();
@@ -368,8 +369,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (!File.Exists(Tools.GetCatalogPath()))
             {
-                MessageBox.Show("Missing ContentCatalog.txt");
-                return;
+                MessageBox.Show("App Restart required","Missing ContentCatalog.txt");
+
+                tempstr = Tools.MakeHeaderBlank();
+
+                using (StreamWriter writer = new StreamWriter(Tools.GetCatalogPath()))
+                {
+                    writer.WriteLine(tempstr);
+                }
+                Environment.Exit(1);
             }
 
             sbar("Loading...");
@@ -3293,9 +3301,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 prepareForCreationsUpdateToolStripMenuItem.Checked = true;
                 Properties.Settings.Default.CreationsUpdate = true;
                 Properties.Settings.Default.AutoRestore = false;
-                /*MessageBox.Show("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\nTo Cancel this option," +
-                    " click this menu option again", "Steps to Update Creations Mods");*/
-                if (Tools.ConfirmAction("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\nTo Cancel this option," +
+                if (Tools.ConfirmAction("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\n" +
+                    "To Cancel this option," +
                     " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
                     RunGame(); ;
             }
