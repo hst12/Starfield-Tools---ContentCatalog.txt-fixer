@@ -369,7 +369,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (!File.Exists(Tools.GetCatalogPath()))
             {
-                MessageBox.Show("App Restart required","Missing ContentCatalog.txt");
+                MessageBox.Show("Blank Catalog created\n\nStart the game and load a save or enter the Creations menu in game to rebuild the catalog",
+                    "Missing ContentCatalog.txt - Restart the app");
 
                 tempstr = Tools.MakeHeaderBlank();
 
