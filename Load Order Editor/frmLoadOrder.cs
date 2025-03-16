@@ -3038,7 +3038,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             orphaned = modArchives.Except(plugins).ToList(); // Strip out esm files to get orphaned archives
 
-            var suffixes = new List<string> { " - main.ba2", " - textures.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
+            var suffixes = new List<string> { " - main*.ba2", " - textures*.ba2", " - voices_en*.ba2", ".ba2" }; // Build a list of archives to delete with full path
 
             foreach (var item in orphaned)
             {
