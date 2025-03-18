@@ -617,9 +617,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
                     mainCount = Directory.EnumerateFiles(directory, "*- main.ba2", SearchOption.TopDirectoryOnly).Count();
 
-                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations Mods: " + CreationsPlugin.Count + ", Other: " +
-                        (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm files: " +
-                        esmCount + " Archives: " + ba2Count + ", Main: " + mainCount;
+                    StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations: " + CreationsPlugin.Count + ", Other: " +
+                        (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm: " +
+                        esmCount + ", Archives: " + ba2Count + ", Main archives: " + mainCount;
 
                     if (espCount > 0)
                         StatText += ", esp files: " + espCount;
