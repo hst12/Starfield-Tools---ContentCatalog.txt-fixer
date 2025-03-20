@@ -1329,11 +1329,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools\\";
 
-            if (Directory.Exists(ExtractPath))
-                Directory.Delete(ExtractPath, true);
+
 
             if (!CheckGamePath()) // Bail out if game path not set
                 return;
+
+            if (Directory.Exists(ExtractPath)) // Clean extract directory if necessary
+                Directory.Delete(ExtractPath, true);
 
             OpenFileDialog OpenMod = new()
             {
@@ -1369,6 +1371,17 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     LoadScreen.Close();
                     return;
                 }
+
+                if (Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories).Count()==0) // Bail out if no esm files found
+                {
+                    MessageBox.Show("No esm files found in archive", "Unable to install");
+                    LoadScreen.Close();
+                    if (Directory.Exists(ExtractPath)) // Clean extract directory if necessary
+                        Directory.Delete(ExtractPath, true);
+                    return;
+                }
+
+
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move extracted.esm files to Data folder
                 {
                     fileName = Path.GetFileName(ModFile);

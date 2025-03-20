@@ -1535,7 +1535,7 @@
             // 
             toolStripMenuNexus.Name = "toolStripMenuNexus";
             toolStripMenuNexus.Size = new System.Drawing.Size(553, 44);
-            toolStripMenuNexus.Text = "Starfield Nexus";
+            toolStripMenuNexus.Text = "Starfield Nexus Latest Mods";
             toolStripMenuNexus.Click += toolStripMenuNexus_Click;
             // 
             // toolStripMenuBGSStarfield
