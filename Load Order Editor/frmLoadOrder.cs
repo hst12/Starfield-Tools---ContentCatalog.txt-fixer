@@ -389,7 +389,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             saveToolStripMenuItem.Enabled = true;
 
             dataGridView1.Rows.Clear();
-            dataGridView1.Refresh();
+            //dataGridView1.Refresh();
 
             SetColumnVisibility(false, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
             SetColumnVisibility(false, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
@@ -615,7 +615,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     esmCount = Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly).Count();
                     espCount = Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly).Count();
                     ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
-                    mainCount = Directory.EnumerateFiles(directory, "*- main.ba2", SearchOption.TopDirectoryOnly).Count();
+                    mainCount = Directory.EnumerateFiles(directory, "*- main*.ba2", SearchOption.TopDirectoryOnly).Count();
 
                     StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations: " + CreationsPlugin.Count + ", Other: " +
                         (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm: " +
@@ -1001,7 +1001,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuNexus_Click(object sender, EventArgs e)
         {
-            Tools.OpenUrl("https://www.nexusmods.com/starfield");
+            Tools.OpenUrl("https://www.nexusmods.com/games/starfield/mods");
         }
 
         private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
@@ -1332,7 +1332,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (Directory.Exists(ExtractPath))
                 Directory.Delete(ExtractPath, true);
 
-            if (!CheckGamePath())
+            if (!CheckGamePath()) // Bail out if game path not set
                 return;
 
             OpenFileDialog OpenMod = new()
@@ -1369,7 +1369,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     LoadScreen.Close();
                     return;
                 }
-                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move .esm files
+                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move extracted.esm files to Data folder
                 {
                     fileName = Path.GetFileName(ModFile);
                     destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
@@ -1385,7 +1385,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         File.Move(ModFile, destinationPath, true);  // Overwrite
                 }
 
-                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.ba2", SearchOption.AllDirectories)) // Move archives
+                foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.ba2", SearchOption.AllDirectories)) // Move extracted archives to Data folder
                 {
                     fileName = Path.GetFileName(ModFile);
                     destinationPath = Path.Combine(StarfieldGamePath + "\\Data", fileName);
