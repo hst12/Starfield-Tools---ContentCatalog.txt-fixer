@@ -3317,7 +3317,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 Properties.Settings.Default.AutoRestore = false;
                 if (Tools.ConfirmAction("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\n" +
                     "To Cancel this option," +
-                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods",MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods",MessageBoxButtons.YesNo,MessageBoxIcon.Question,true))
                     RunGame(); ;
             }
             else
