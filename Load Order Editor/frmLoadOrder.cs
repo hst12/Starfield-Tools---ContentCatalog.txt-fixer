@@ -1671,7 +1671,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             Properties.Settings.Default.GameVersion = GameVersion;
             SaveSettings();
             Form SS = new frmSplashScreen();
-            if (GameVersion != MS)
+            if (GameVersion == Steam)
                 SS.Show();
 
             if (isModified)
