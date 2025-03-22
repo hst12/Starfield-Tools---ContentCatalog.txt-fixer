@@ -1055,6 +1055,16 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                 if (Difference.Count > 0)
                 {
+                    // Check if the form is already open
+                    var existingForm = Application.OpenForms.OfType<frmProfileCompare>().FirstOrDefault();
+
+                    if (existingForm != null)
+                    {
+                        // Close the existing form
+                        existingForm.Close();
+                    }
+
+                    // Create and show a new instance of the form
                     Form fpc = new frmProfileCompare(Difference);
                     fpc.Show();
                 }
@@ -1329,8 +1339,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools\\";
 
-
-
             if (!CheckGamePath()) // Bail out if game path not set
                 return;
 
@@ -1380,7 +1388,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         Directory.Delete(ExtractPath, true);
                     return;
                 }
-
 
                 foreach (string ModFile in Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories)) // Move extracted.esm files to Data folder
                 {
@@ -2450,9 +2457,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
                     if (PluginName[0] != '#') // Strip out comments
-                        /*          if (PluginName[0] == '*') // Strip out '*'
-                                      Plugins.Add(PluginName[1..]);
-                                  else*/
                         Plugins.Add(PluginName);
                 }
             }
