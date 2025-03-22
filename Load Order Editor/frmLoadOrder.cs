@@ -237,7 +237,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 BackupStatus = StarfieldTools.BackupCatalog();
                 tempstr = BackupStatus ? "Catalog backed up" : "Catalog backup is up to date";
                 Properties.Settings.Default.AutoRestore = true;
-                MessageBox.Show(tempstr+"\nAuto Restore turned on\n\nYou can now play the game normally until the next time you want to update\n\n" +
+                MessageBox.Show(tempstr + "\nAuto Restore turned on\n\nYou can now play the game normally until the next time you want to update\n\n" +
                     "Remember to choose the Prepare for Creations Update option again before you update or add new mods", "Creations update complete");
             }
         }
@@ -1372,7 +1372,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     return;
                 }
 
-                if (Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories).Count()==0) // Bail out if no esm files found
+                if (Directory.EnumerateFiles(ExtractPath, "*.esm", SearchOption.AllDirectories).Count() == 0) // Bail out if no esm files found
                 {
                     MessageBox.Show("No esm files found in archive", "Unable to install");
                     LoadScreen.Close();
@@ -2438,6 +2438,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private int RemoveDuplicates()
         {
+            //return 0;
             List<string> Plugins = [];
             string PluginName;
             int ModCount = dataGridView1.RowCount;
@@ -2449,10 +2450,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 while ((PluginName = reader.ReadLine()) != null) // Read Plugins.txt
                 {
                     if (PluginName[0] != '#') // Strip out comments
-                        if (PluginName[0] == '*') // Strip out '*'
-                            Plugins.Add(PluginName[1..]);
-                        else
-                            Plugins.Add(PluginName);
+                        /*          if (PluginName[0] == '*') // Strip out '*'
+                                      Plugins.Add(PluginName[1..]);
+                                  else*/
+                        Plugins.Add(PluginName);
                 }
             }
             List<string> distinctList = Plugins.Distinct().ToList();
@@ -3317,7 +3318,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 Properties.Settings.Default.AutoRestore = false;
                 if (Tools.ConfirmAction("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\n" +
                     "To Cancel this option," +
-                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods",MessageBoxButtons.YesNo,MessageBoxIcon.Question,true))
+                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods", MessageBoxButtons.YesNo, MessageBoxIcon.Question, true))
                     RunGame(); ;
             }
             else
