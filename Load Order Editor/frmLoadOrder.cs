@@ -1573,7 +1573,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void UninstallMod()
         {
-            string ModName, ModFile;
+            /*string ModName, ModFile;
 
             ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
             ModName = ModName[..ModName.IndexOf('.')];
@@ -1608,6 +1608,59 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
             else
                 sbar2("Un-install cancelled");
+            */
+
+            string ModName, ModFile;
+
+            // Ensure there are selected rows
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                sbar2("No rows selected for uninstallation.");
+                return;
+            }
+
+            if (!CheckGamePath())
+                return;
+
+            // Loop through each selected row
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                ModName = (string)row.Cells["PluginName"].Value;
+                ModName = ModName[..ModName.IndexOf('.')];
+
+                if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?"))
+                {
+                    isModified = true;
+                    dataGridView1.Rows.Remove(row);
+
+                    string directoryPath = StarfieldGamePath + "\\Data";
+                    ModFile = directoryPath + "\\" + ModName;
+
+                    if (File.Exists(ModFile + ".esp"))
+                    {
+                        File.Delete(ModFile + ".esp");
+                        SavePlugins();
+                        sbar3("esp uninstalled - esm and archive files skipped");
+                        continue;
+                    }
+
+                    if (File.Exists(ModFile + ".esm"))
+                        File.Delete(ModFile + ".esm");
+
+                    if (File.Exists(ModFile + " - textures.ba2"))
+                        File.Delete(ModFile + " - textures.ba2");
+
+                    if (File.Exists(ModFile + " - main.ba2"))
+                        File.Delete(ModFile + " - main.ba2");
+
+                    SavePlugins();
+                    sbar3($"Mod '{ModName}' uninstalled.");
+                }
+                else
+                {
+                    sbar2($"Un-install of '{ModName}' cancelled.");
+                }
+            }
         }
 
         private void toolStripMenuUninstallContext_Click(object sender, EventArgs e)
@@ -3388,5 +3441,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 StarfieldTools.Show();
             }
         }
+
     }
 }
