@@ -3305,7 +3305,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void blockUnblockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> blockedMods = new(tools.BlockedMods());
+            /*List<string> blockedMods = new(tools.BlockedMods());
 
             DataGridViewRow currentRow = dataGridView1.CurrentRow; // Get current row
             if (currentRow.Cells["Blocked"].Value == null)
@@ -3327,6 +3327,42 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
 
             File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s))); // Strip duplicates and empty lines
+            isModified = true;
+            */
+
+            List<string> blockedMods = new(tools.BlockedMods());
+
+            // Loop through each selected row
+            foreach (DataGridViewRow currentRow in dataGridView1.SelectedRows)
+            {
+                // Skip new rows
+                if (currentRow.IsNewRow)
+                    continue;
+
+                // Initialize 'Blocked' cell if it's null
+                if (currentRow.Cells["Blocked"].Value == null)
+                {
+                    currentRow.Cells["Blocked"].Value = false;
+                }
+
+                // Toggle blocked status
+                currentRow.Cells["Blocked"].Value = !(bool)(currentRow.Cells["Blocked"].Value);
+
+                if ((bool)currentRow.Cells["Blocked"].Value) // Add mod to blocked list
+                {
+                    blockedMods.Add(currentRow.Cells["PluginName"].Value.ToString());
+                    currentRow.Cells["ModEnabled"].Value = false;
+                    sbar2(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
+                }
+                else // Remove mod from blocked list
+                {
+                    blockedMods.Remove(currentRow.Cells["PluginName"].Value.ToString());
+                    sbar2(currentRow.Cells["PluginName"].Value.ToString() + " unblocked");
+                }
+            }
+
+            // Write to BlockedMods.txt and update isModified flag
+            File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s)));
             isModified = true;
         }
 
