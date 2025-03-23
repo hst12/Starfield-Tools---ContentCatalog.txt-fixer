@@ -1120,15 +1120,24 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     SwitchProfile(OpenPlugins.FileName);
         }
 
-        private void DeleteLine()
+        private void DeleteLines()
         {
-            dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            //dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                // Check if the row is not a new row
+                if (!row.IsNewRow)
+                {
+                    dataGridView1.Rows.Remove(row);
+                }
+            }
+
             isModified = true;
         }
 
         private void toolStripMenuDelete_Click(object sender, EventArgs e)
         {
-            DeleteLine();
+            DeleteLines();
         }
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e) // Keyboard shortcuts
@@ -1559,7 +1568,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuDelContext_Click(object sender, EventArgs e)
         {
-            DeleteLine();
+            DeleteLines();
         }
 
         private void UninstallMod()
@@ -1616,8 +1625,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 return;
             }
             isModified = true;
-            DataGridViewRow currentRow = dataGridView1.CurrentRow;
-            currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
+            foreach (var row in dataGridView1.SelectedRows)
+            {
+                DataGridViewRow currentRow = (DataGridViewRow)row;
+                currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
+            }
+            /*DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);*/
             SavePlugins();
         }
 
@@ -1787,6 +1801,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             bool ProfilesActive = Profiles;
             int i, j;
             string LOOTPath = Properties.Settings.Default.LOOTPath, cmdLine;
+
+            if (isModified)
+                SavePlugins();
 
             if (File.Exists(@"C:\Program Files\LOOT\LOOT.exe") && LOOTPath == "") // Try detect LOOT if installed in default location
             {
