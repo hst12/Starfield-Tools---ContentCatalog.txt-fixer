@@ -1412,7 +1412,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite esm " + destinationPath, "Replace mod?"))
+                        if (Tools.ConfirmAction("Overwrite esm " + destinationPath, "Replace mod?", MessageBoxButtons.YesNo))
                             File.Move(ModFile, destinationPath, true);  // Overwrite
                         else
                             break;
@@ -1428,7 +1428,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?"))
+                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?",MessageBoxButtons.YesNo))
                             File.Move(ModFile, destinationPath, true); // Overwrite
                         else
                             break;
@@ -2088,17 +2088,21 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void dataGridView1_DragDrop(object sender, DragEventArgs e)
         {
+            int ModCounter = 0;
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 foreach (var item in files)
                 {
+                    ModCounter++;
                     InstallMod(item);
                     isModified = true;
                     SavePlugins();
                 }
                 if (AutoSort)
                     RunLOOT(true);
+                sbar3(ModCounter+ " Mods installed");
                 return;
             }
 
