@@ -1426,7 +1426,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?",MessageBoxButtons.YesNo))
+                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?", MessageBoxButtons.YesNo))
                             File.Move(ModFile, destinationPath, true); // Overwrite
                         else
                             break;
@@ -1443,6 +1443,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 if (Directory.Exists(ExtractPath)) // Clean up any left over files
                     Directory.Delete(ExtractPath, true);
                 //sbar3("Mod installed");
+                return;
             }
         }
         private void toolStripMenuInstall_Click(object sender, EventArgs e)
@@ -2100,7 +2101,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
                 if (AutoSort)
                     RunLOOT(true);
-                sbar3(ModCounter+ " Mods installed");
+                sbar3(ModCounter + " Mods installed");
                 return;
             }
 
@@ -3066,7 +3067,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     string zipPath = selectedFolderPath + "\\" + ModName + ".zip"; // Choose path to Zip it
 
                     // Check if archive already exists, bail out on user cancel
-                    if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}"))
+                    if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}",MessageBoxButtons.YesNo))
                     {
                         sbar3($"Archive for {ModName} not created");
                         continue;

@@ -1,20 +1,34 @@
 This tool provides a basic load order editor. and checks ContentCatalog.txt file automatically when launched.
 
+Use with caution if you're using other mod managers such as Vortex or MO2. You can use another mod manager if you understand how they work.
+Running Vortex after using this tool will likely mess up your load order.
+
 TLDR; See the Help->Shortcuts and Quick Help menu
 
-New Feature: Check for .ba2 archives that are orphaned and optionally delete them.
+New Features
+Multi select mods with Ctrl+Click or Shift+Click to perform actions on multiple mods at once.
+Drag drop mod zip or other archive formats onto grid to install. Supports multiple files.
+
+Prepare for Creations Update in Mods menu
+Works around an issue with Creations where already downloaded mods with updates are re-downloaded every time you enter the Creations menu.
+Follow the instructions in the dialog box that appears after selecting this option.
+
+Block mods - block one or more mods from being activated. Useful for Creations mods that you don't want but Creations keeps downloading them anyway.
+Enable the Blocked Column under View->Columns->Blocked.
+Once the column is enabled, select a mod by clicking anywhere on the line and right click to block or unblock a mod from the context menu.
+The blocked mods are written to a text file under %localappdata%\Starfield Tools called BlockedMods.txt.
+Optional: You can use File->Edit Files->Edit BlockedMods.txt to manually edit the list of blocked mods.
 
 The load order editor can be used outside of the game to manage Creations mods and manually installed mods that use .esm and .ba2 files.
 If you're primarily a user of Creations mods and don't really use other mod managers then you may find this tool useful.
-
-Use with caution if you're using other mod managers such as Vortex or MO2. You can use another mod manager if you understand how they work
 
 The app automatically backs up your Plugins.txt file the first time it runs. Use File->Restore Plugins.txt menu option to restore the original file if necessary.
 
 Why use this tool instead of the Creations menu?
 It's faster
 It shows more of your load order on screen at once.
-You can use "Profiles" to switch mod setups if you have different save games that you like to switch between.
+You can use Profiles to switch mod setups if you have different save games that you like to switch between.
+The Profiles feature is pretty much essential to using this app to ensure that your load order works the way you want to and is automatically restored when affected by other apps.
 
 The tool works the same way with mods as the game does. A Plugins.txt file contains a list of your mods. The order of the lines in Plugins.txt determines the load order.
 The tool doesn't require the use of any .ini edits, folder junctions or virtual folders.

@@ -81,6 +81,8 @@ namespace Starfield_Tools.Common // Various functions used by the app
 
         public List<string> BlockedMods()
         {
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+#pragma warning disable CS0168 // Variable is declared but never used
             try
             {
                 if (!File.Exists(LocalAppDataPath + "BlockedMods.txt"))
@@ -96,6 +98,8 @@ namespace Starfield_Tools.Common // Various functions used by the app
                 //MessageBox.Show(ex.Message, "BlockedMods file missing. Repair or re-install the app", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return null;
             }
+#pragma warning restore CS0168 // Variable is declared but never used
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
         }
         public static string MakeHeaderBlank() // Used to build ContentCatalog.txt header
         {
