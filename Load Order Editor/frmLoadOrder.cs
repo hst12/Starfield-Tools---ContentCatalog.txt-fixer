@@ -1354,8 +1354,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (Directory.Exists(ExtractPath)) // Clean extract directory if necessary
                 Directory.Delete(ExtractPath, true);
 
-
-
             OpenFileDialog OpenMod = new()
             {
                 //OpenMod.InitialDirectory = ProfileFolder;
@@ -3032,55 +3030,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void archiveModToolStripMenuItem_Click_1(object sender, EventArgs e) // Make a zip of a mod and copy it to specified folder
         {
-            /*string ModName, ModFile;
-            List<string> files = [];
-
-            if (!CheckGamePath()) // Abort if game path not set
-                return;
-
-            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
-            ModName = ModName[..ModName.IndexOf('.')]; // Get current mod name
-
-            string directoryPath = StarfieldGamePath + "\\Data";
-
-            using FolderBrowserDialog folderBrowserDialog = new();
-            folderBrowserDialog.Description = "Choose folder to archive the mod to";
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-
-                Form LoadScreen = new frmLoading("Archiving mod..."); // Show popup while archive process runs
-                LoadScreen.Show();
-
-                ModFile = directoryPath + "\\" + ModName; // Add esp, esm and archives to files list
-                if (File.Exists(ModFile + ".esp"))
-                    files.Add(ModFile + ".esp");
-
-                if (File.Exists(ModFile + ".esm"))
-                    files.Add(ModFile + ".esm");
-
-                if (File.Exists(ModFile + " - textures.ba2")) // Revise to work with - textures1.ba2 etc
-                    files.Add(ModFile + " - textures.ba2");
-
-                if (File.Exists(ModFile + " - main.ba2"))
-                    files.Add(ModFile + " - main.ba2");
-
-                string zipPath = folderBrowserDialog.SelectedPath + "\\" + Path.GetFileName(ModFile) + ".zip"; // Choose pat to Zip it
-
-                // Check if archive already exists, bail out on user cancel
-                if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", "Archive exists - " + Path.GetFileName(ModFile)))
-                {
-                    sbar3("Archive not created");
-                    LoadScreen.Close();
-                    return;
-                }
-                sbar3("Creating archive...");
-                statusStrip1.Refresh();
-                CreateZipFromFiles(files, zipPath); // Make zip
-                sbar3(Path.GetFileName(ModFile) + " archived");
-                LoadScreen.Close();
-            }*/
-
             List<string> files = new();
             if (!CheckGamePath()) // Abort if game path not set
                 return;
@@ -3126,6 +3075,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     statusStrip1.Refresh();
                     CreateZipFromFiles(files, zipPath); // Make zip
                     sbar3($"{ModName} archived");
+                    statusStrip1.Refresh();
                     files.Clear();
                 }
 
