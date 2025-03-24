@@ -274,6 +274,7 @@
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             dataGridView1.Sorted += dataGridView1_Sorted;
             dataGridView1.DragDrop += dataGridView1_DragDrop;
+            dataGridView1.DragEnter += dataGridView1_DragEnter;
             dataGridView1.DragOver += dataGridView1_DragOver;
             dataGridView1.KeyDown += dataGridView1_KeyDown;
             dataGridView1.MouseDown += dataGridView1_MouseDown;

@@ -1343,7 +1343,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SwitchProfile(Properties.Settings.Default.ProfileFolder + "\\" + (string)cmbProfile.SelectedItem);
         }
 
-        private void InstallMod()
+        private void InstallMod(string InstallMod = "")
         {
             string ModPath, fileName, destinationPath;
             string ExtractPath = Path.GetTempPath() + "hstTools\\";
@@ -1354,6 +1354,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (Directory.Exists(ExtractPath)) // Clean extract directory if necessary
                 Directory.Delete(ExtractPath, true);
 
+
+
             OpenFileDialog OpenMod = new()
             {
                 //OpenMod.InitialDirectory = ProfileFolder;
@@ -1361,8 +1363,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 Title = "Install Mod - Loose files not supported"
             };
 
-            DialogResult result = OpenMod.ShowDialog();
-            ModPath = OpenMod.FileName;
+            if (InstallMod == "")
+            {
+                DialogResult result = OpenMod.ShowDialog();
+                ModPath = OpenMod.FileName;
+            }
+            else
+                OpenMod.FileName = InstallMod;
 
             if (OpenMod.FileName != "")
             {
@@ -2072,6 +2079,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void dataGridView1_DragDrop(object sender, DragEventArgs e)
         {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (var item in files)
+                {
+                    InstallMod(item);
+                    isModified=true;
+                    SavePlugins();
+                }
+                return;
+            }
+
             // Convert screen coordinates to client coordinates
             Point clientPoint = dataGridView1.PointToClient(new Point(e.X, e.Y));
             rowIndexOfItemUnderMouseToDrop = dataGridView1.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
@@ -3309,42 +3328,45 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuItemHideAll_Click(object sender, EventArgs e)
         {
-            SetColumnVisibility(false, timeStampToolStripMenuItem, dataGridView1.Columns["TimeStamp"]);
-            Properties.Settings.Default.TimeStamp = false;
-            SetColumnVisibility(false, toolStripMenuAchievements, dataGridView1.Columns["Achievements"]);
-            Properties.Settings.Default.Achievements = false;
-            SetColumnVisibility(false, toolStripMenuCreationsID, dataGridView1.Columns["CreationsID"]);
-            Properties.Settings.Default.CreationsID = false;
-            SetColumnVisibility(false, toolStripMenuFiles, dataGridView1.Columns["Files"]);
-            Properties.Settings.Default.Files = false;
-            SetColumnVisibility(false, toolStripMenuGroup, dataGridView1.Columns["Group"]);
-            Properties.Settings.Default.Group = false;
-            SetColumnVisibility(false, toolStripMenuIndex, dataGridView1.Columns["Index"]);
-            Properties.Settings.Default.Index = false;
-            SetColumnVisibility(false, toolStripMenuFileSize, dataGridView1.Columns["FileSize"]);
-            Properties.Settings.Default.FileSize = false;
-            SetColumnVisibility(false, uRLToolStripMenuItem, dataGridView1.Columns["URL"]);
-            Properties.Settings.Default.URL = false;
-            SetColumnVisibility(false, toolStripMenuVersion, dataGridView1.Columns["Version"]);
-            Properties.Settings.Default.Version = false;
-            SetColumnVisibility(false, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
-            Properties.Settings.Default.AuthorVersion = false;
-            SetColumnVisibility(false, toolStripMenuDescription, dataGridView1.Columns["Description"]);
-            Properties.Settings.Default.Description = false;
-            SetColumnVisibility(false, blockedToolStripMenuItem, dataGridView1.Columns["Blocked"]);
-            Properties.Settings.Default.Blocked = false;
+            var items = new[]
+{
+    ("TimeStamp", timeStampToolStripMenuItem),
+    ("Achievements", toolStripMenuAchievements),
+    ("CreationsID", toolStripMenuCreationsID),
+    ("Files", toolStripMenuFiles),
+    ("Group", toolStripMenuGroup),
+    ("Index", toolStripMenuIndex),
+    ("FileSize", toolStripMenuFileSize),
+    ("URL", uRLToolStripMenuItem),
+    ("Version", toolStripMenuVersion),
+    ("AuthorVersion", toolStripMenuAuthorVersion),
+    ("Description", toolStripMenuDescription),
+    ("Blocked", blockedToolStripMenuItem)
+};
+
+            foreach (var (columnName, menuItem) in items)
+            {
+                SetColumnVisibility(false, menuItem, dataGridView1.Columns[columnName]);
+                Properties.Settings.Default[columnName] = false;
+            }
         }
 
         private void toolStripMenuShowRecommended_Click(object sender, EventArgs e)
         {
-            SetColumnVisibility(true, toolStripMenuGroup, dataGridView1.Columns["Group"]);
-            Properties.Settings.Default.Group = true;
-            SetColumnVisibility(true, toolStripMenuVersion, dataGridView1.Columns["Version"]);
-            Properties.Settings.Default.Version = true;
-            SetColumnVisibility(true, toolStripMenuAuthorVersion, dataGridView1.Columns["AuthorVersion"]);
-            Properties.Settings.Default.AuthorVersion = true;
-            SetColumnVisibility(true, toolStripMenuDescription, dataGridView1.Columns["Description"]);
-            Properties.Settings.Default.Description = true;
+            var items = new[]
+{
+    ("Group", toolStripMenuGroup),
+    ("Version", toolStripMenuVersion),
+    ("AuthorVersion", toolStripMenuAuthorVersion),
+    ("Description", toolStripMenuDescription)
+};
+
+            foreach (var (columnName, menuItem) in items)
+            {
+                SetColumnVisibility(true, menuItem, dataGridView1.Columns[columnName]);
+                Properties.Settings.Default[columnName] = true;
+            }
+
             RefreshDataGrid();
         }
 
@@ -3371,31 +3393,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void blockUnblockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*List<string> blockedMods = new(tools.BlockedMods());
-
-            DataGridViewRow currentRow = dataGridView1.CurrentRow; // Get current row
-            if (currentRow.Cells["Blocked"].Value == null)
-            {
-                currentRow.Cells["Blocked"].Value = false;
-            }
-            currentRow.Cells["Blocked"].Value = !(bool)(currentRow.Cells["Blocked"].Value); // Toggle blocked status
-
-            if ((bool)currentRow.Cells["Blocked"].Value) // Add currently selected mod to block file
-            {
-                blockedMods.Add(currentRow.Cells["PluginName"].Value.ToString());
-                currentRow.Cells["ModEnabled"].Value = false;
-                sbar2(currentRow.Cells["PluginName"].Value.ToString() + " blocked");
-            }
-            else // Remove currently selected mod from block file
-            {
-                blockedMods.Remove(currentRow.Cells["PluginName"].Value.ToString());
-                sbar2(currentRow.Cells["PluginName"].Value.ToString() + " unblocked");
-            }
-
-            File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s))); // Strip duplicates and empty lines
-            isModified = true;
-            */
-
             List<string> blockedMods = new(tools.BlockedMods());
 
             // Loop through each selected row
@@ -3427,7 +3424,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            // Write to BlockedMods.txt and update isModified flag
+            // Write to BlockedMods.txt and update isModified flag. No blank lines.
             File.WriteAllLines(Tools.LocalAppDataPath + "BlockedMods.txt", blockedMods.Distinct().Where(s => !string.IsNullOrEmpty(s)));
             isModified = true;
         }
@@ -3455,5 +3452,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
         }
 
+        private void dataGridView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
     }
 }
