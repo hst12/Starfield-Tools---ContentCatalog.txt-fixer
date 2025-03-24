@@ -1440,7 +1440,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                 AddMissing();
                 SavePlugins();
-                if (AutoSort)
+                if (AutoSort && InstallMod == "")
                     RunLOOT(true);
                 if (Directory.Exists(ExtractPath)) // Clean up any left over files
                     Directory.Delete(ExtractPath, true);
@@ -2065,9 +2065,18 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
             {
                 // If the mouse moves outside the rectangle, start the drag
-                if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                try
                 {
-                    DragDropEffects dropEffect = dataGridView1.DoDragDrop(dataGridView1.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                    {
+                        DragDropEffects dropEffect = dataGridView1.DoDragDrop(dataGridView1.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    }
+                }
+                catch (Exception ex)
+                {
+#if DEBUG
+                    MessageBox.Show(ex.Message);
+#endif
                 }
             }
         }
@@ -2085,9 +2094,11 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 foreach (var item in files)
                 {
                     InstallMod(item);
-                    isModified=true;
+                    isModified = true;
                     SavePlugins();
                 }
+                if (AutoSort)
+                    RunLOOT(true);
                 return;
             }
 

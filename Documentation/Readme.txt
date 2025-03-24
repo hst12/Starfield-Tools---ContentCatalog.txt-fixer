@@ -6,7 +6,7 @@ Running Vortex after using this tool will likely mess up your load order.
 TLDR; See the Help->Shortcuts and Quick Help menu
 
 New Feature: Multi select mods with Ctrl+Click or Shift+Click to perform actions on multiple mods at once.
-Todo: Install multiple mods at once.
+More testing needed: Install multiple mods at once by dragging and dropping them onto the mod list.
 
 Prepare for Creations Update in Mods menu
 Works around an issue with Creations where already downloaded mods with updates are re-downloaded every time you enter the Creations menu.
