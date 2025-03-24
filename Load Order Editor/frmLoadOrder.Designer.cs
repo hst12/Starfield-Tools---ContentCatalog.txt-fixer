@@ -417,7 +417,7 @@
             // 
             toolStripMenuEnableDisable.Name = "toolStripMenuEnableDisable";
             toolStripMenuEnableDisable.Size = new System.Drawing.Size(624, 40);
-            toolStripMenuEnableDisable.Text = "Enable/Disable Mod";
+            toolStripMenuEnableDisable.Text = "Enable/Disable Mods";
             toolStripMenuEnableDisable.ToolTipText = "Space";
             toolStripMenuEnableDisable.Click += toolStripMenuEnableDisable_Click;
             // 
@@ -499,7 +499,7 @@
             // 
             archiveModToolStripMenuItem.Name = "archiveModToolStripMenuItem";
             archiveModToolStripMenuItem.Size = new System.Drawing.Size(624, 40);
-            archiveModToolStripMenuItem.Text = "Archive Mod to Zip file";
+            archiveModToolStripMenuItem.Text = "Archive Mods to Zip file";
             archiveModToolStripMenuItem.Click += archiveModToolStripMenuItem_Click_1;
             // 
             // toolStripMenuUninstallContext

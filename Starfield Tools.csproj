@@ -54,6 +54,8 @@
     <SignAssembly>True</SignAssembly>
     <Description>Starfield Tools</Description>
     <PackageTags>Starfield</PackageTags>
+    <FileVersion>1.11.0</FileVersion>
+    <AssemblyVersion>1.11.0</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>

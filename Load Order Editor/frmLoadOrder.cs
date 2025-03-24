@@ -1573,43 +1573,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void UninstallMod()
         {
-            /*string ModName, ModFile;
-
-            ModName = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["PluginName"].Value;
-            ModName = ModName[..ModName.IndexOf('.')];
-
-            if (!CheckGamePath())
-                return;
-
-            if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?"))
-            {
-                isModified = true;
-                dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-                string directoryPath = StarfieldGamePath + "\\Data";
-
-                ModFile = directoryPath + "\\" + ModName;
-                if (File.Exists(ModFile + ".esp"))
-                {
-                    File.Delete(ModFile + ".esp");
-                    SavePlugins();
-                    sbar3("esp uninstalled - esm and archive files skipped");
-                    return;
-                }
-                if (File.Exists(ModFile + ".esm"))
-                    File.Delete(ModFile + ".esm");
-
-                if (File.Exists(ModFile + " - textures.ba2"))
-                    File.Delete(ModFile + " - textures.ba2");
-                if (File.Exists(ModFile + " - main.ba2"))
-                    File.Delete(ModFile + " - main.ba2");
-
-                SavePlugins();
-                sbar3("Mod uninstalled");
-            }
-            else
-                sbar2("Un-install cancelled");
-            */
-
             string ModName, ModFile;
 
             // Ensure there are selected rows
@@ -1683,8 +1646,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 DataGridViewRow currentRow = (DataGridViewRow)row;
                 currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);
             }
-            /*DataGridViewRow currentRow = dataGridView1.CurrentRow;
-            currentRow.Cells["ModEnabled"].Value = !(bool)(currentRow.Cells["ModEnabled"].Value);*/
+
             SavePlugins();
         }
 
@@ -3036,7 +2998,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private void archiveModToolStripMenuItem_Click_1(object sender, EventArgs e) // Make a zip of a mod and copy it to specified folder
         {
-            string ModName, ModFile;
+            /*string ModName, ModFile;
             List<string> files = [];
 
             if (!CheckGamePath()) // Abort if game path not set
@@ -3048,7 +3010,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string directoryPath = StarfieldGamePath + "\\Data";
 
             using FolderBrowserDialog folderBrowserDialog = new();
-
             folderBrowserDialog.Description = "Choose folder to archive the mod to";
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
@@ -3064,7 +3025,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 if (File.Exists(ModFile + ".esm"))
                     files.Add(ModFile + ".esm");
 
-                if (File.Exists(ModFile + " - textures.ba2"))
+                if (File.Exists(ModFile + " - textures.ba2")) // Revise to work with - textures1.ba2 etc
                     files.Add(ModFile + " - textures.ba2");
 
                 if (File.Exists(ModFile + " - main.ba2"))
@@ -3084,6 +3045,58 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 CreateZipFromFiles(files, zipPath); // Make zip
                 sbar3(Path.GetFileName(ModFile) + " archived");
                 LoadScreen.Close();
+            }*/
+
+            List<string> files = new();
+            if (!CheckGamePath()) // Abort if game path not set
+                return;
+
+            string directoryPath = StarfieldGamePath + "\\Data";
+
+            using FolderBrowserDialog folderBrowserDialog = new();
+            folderBrowserDialog.Description = "Choose folder to archive the mods to";
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+
+                Form LoadScreen = new frmLoading("Archiving mods..."); // Show popup while archive process runs
+                LoadScreen.Show();
+
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    if (row.Cells["PluginName"].Value is not string ModNameRaw) continue;
+                    string ModName = ModNameRaw[..ModNameRaw.IndexOf('.')]; // Get current mod name
+                    string ModFile = directoryPath + "\\" + ModName; // Add esp, esm, and archives to files list
+
+                    if (File.Exists(ModFile + ".esp"))
+                        files.Add(ModFile + ".esp");
+
+                    if (File.Exists(ModFile + ".esm"))
+                        files.Add(ModFile + ".esm");
+
+                    if (File.Exists(ModFile + " - textures.ba2"))
+                        files.Add(ModFile + " - textures.ba2");
+
+                    if (File.Exists(ModFile + " - main.ba2"))
+                        files.Add(ModFile + " - main.ba2");
+
+                    string zipPath = selectedFolderPath + "\\" + ModName + ".zip"; // Choose path to Zip it
+
+                    // Check if archive already exists, bail out on user cancel
+                    if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}"))
+                    {
+                        sbar3($"Archive for {ModName} not created");
+                        continue;
+                    }
+                    sbar3($"Creating archive for {ModName}...");
+                    statusStrip1.Refresh();
+                    CreateZipFromFiles(files, zipPath); // Make zip
+                    sbar3($"{ModName} archived");
+                    files.Clear();
+                }
+
+                LoadScreen.Close();
+                sbar3("Mods archived");
             }
         }
 
