@@ -1622,6 +1622,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     if (File.Exists(ModFile + " - main.ba2"))
                         File.Delete(ModFile + " - main.ba2");
 
+                    if (File.Exists(ModFile + " - voices_en.ba2"))
+                        File.Delete(ModFile + " - voices_en.ba2");
+
                     SavePlugins();
                     sbar3($"Mod '{ModName}' uninstalled.");
                 }
@@ -3124,7 +3127,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             orphaned = modArchives.Except(plugins).ToList(); // Strip out esm files to get orphaned archives
 
-            var suffixes = new List<string> { " - main*.ba2", " - textures*.ba2", " - voices_en*.ba2", ".ba2" }; // Build a list of archives to delete with full path
+            var suffixes = new List<string> { " - main*.ba2", " - textures*.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
 
             foreach (var item in orphaned)
             {
