@@ -728,7 +728,7 @@ namespace Starfield_Tools
 
         private void btnAchievemnts_Click(object sender, EventArgs e)
         {
-            if (!Tools.ConfirmAction("Do you want to continue?", "Experimental Feature - All achievement flags will be set. "))
+            if (Tools.ConfirmAction("Do you want to continue?", "Experimental Feature - All achievement flags will be set. ",MessageBoxButtons.YesNo)==DialogResult.No)
             {
                 toolStripStatusLabel1.Text = "Achievement flags not reset";
                 return;
@@ -756,7 +756,7 @@ namespace Starfield_Tools
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt"))
+            if (Tools.ConfirmAction("Are you Sure?", "Delete ContentCatalog.txt", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 File.Delete(Tools.GetCatalogPath());
         }
     }

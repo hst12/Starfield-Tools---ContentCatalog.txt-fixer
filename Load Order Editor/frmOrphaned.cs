@@ -42,7 +42,7 @@ namespace Starfield_Tools.Load_Order_Editor
             if (checkedListBox1.CheckedItems.Count == 0)
                 return;
 
-            if (!Tools.ConfirmAction("Are you sure you want to delete the selected files?", "Last Chance"))
+            if (Tools.ConfirmAction("Are you sure you want to delete the selected files?", "Last Chance", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 return;
             }

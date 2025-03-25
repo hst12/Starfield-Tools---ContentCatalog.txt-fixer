@@ -978,13 +978,13 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuEnableAll_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (Tools.ConfirmAction("This will reset your current load order", "Enable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 EnableAll();
         }
 
         private void toolStripMenuDisableAll_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("This will reset your current load order", "Disable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (Tools.ConfirmAction("This will reset your current load order", "Disable all mods?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 DisableAll();
         }
 
@@ -1410,7 +1410,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite esm " + destinationPath, "Replace mod?", MessageBoxButtons.YesNo))
+                        if (Tools.ConfirmAction("Overwrite esm " + destinationPath, "Replace mod?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             File.Move(ModFile, destinationPath, true);  // Overwrite
                         else
                             break;
@@ -1426,7 +1426,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(destinationPath))
                     {
-                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?", MessageBoxButtons.YesNo))
+                        if (Tools.ConfirmAction("Overwrite archive " + destinationPath, "Replace archive?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             File.Move(ModFile, destinationPath, true); // Overwrite
                         else
                             break;
@@ -1597,7 +1597,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 ModName = (string)row.Cells["PluginName"].Value;
                 ModName = ModName[..ModName.IndexOf('.')];
 
-                if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?"))
+                if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     isModified = true;
                     dataGridView1.Rows.Remove(row);
@@ -2269,7 +2270,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private bool GameSwitchWarning()
         {
-            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding"));
+            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding", MessageBoxButtons.YesNo) == DialogResult.Yes);
         }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
@@ -2811,7 +2812,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void resetToVanillaStarfieldSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.ConfirmAction("Reset ini settings?", "Reset to recommended settings"))
+            if (Tools.ConfirmAction("Reset ini settings?", "Reset to recommended settings", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 ResetDefaults();
         }
 
@@ -2836,7 +2837,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void enableAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Tools.ConfirmAction("Enable All settings?", "This will turn on a most of the Tools menu settings and reset ini settings", MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Exclamation))
+                MessageBoxIcon.Exclamation) == DialogResult.OK)
             {
                 ChangeSettings(true);
                 ResetDefaults();
@@ -2913,7 +2914,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void enableAchievementSafeOnlyToolStripMenuItem_Click(object sender, EventArgs e) // Experimental. Should probably remove
         {
-            if (!Tools.ConfirmAction("Do you want to continue", "Warning - this will alter your current load order to achievement friendly mods only"))
+            if (Tools.ConfirmAction("Do you want to continue", "Warning - this will alter your current load order to achievement friendly mods only",
+                MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             if (dataGridView1.Columns["Achievements"].Visible == false)
             {
@@ -2980,7 +2982,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             int i;
             string url;
 
-            if (Tools.ConfirmAction("Are you sure you want to open all mod web pages?", "This might take a while and a lot of memory"))
+            if (Tools.ConfirmAction("Are you sure you want to open all mod web pages?", "This might take a while and a lot of memory", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 for (i = 0; i < dataGridView1.RowCount; i++)
                 {
@@ -3070,7 +3072,15 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     string zipPath = selectedFolderPath + "\\" + ModName + ".zip"; // Choose path to Zip it
 
                     // Check if archive already exists, bail out on user cancel
-                    if (File.Exists(zipPath) && !Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}",MessageBoxButtons.YesNo))
+                    DialogResult dlgResult = Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}", MessageBoxButtons.YesNoCancel);
+                    if (dlgResult == DialogResult.Cancel)
+                    {
+                        LoadScreen.Close();
+                        sbar3("Archive creation cancelled");
+                        return;
+                    }
+
+                    if (File.Exists(zipPath) && dlgResult == DialogResult.No)
                     {
                         sbar3($"Archive for {ModName} not created");
                         continue;
@@ -3127,7 +3137,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             orphaned = modArchives.Except(plugins).ToList(); // Strip out esm files to get orphaned archives
 
-            var suffixes = new List<string> { " - main*.ba2", " - textures*.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
+            var suffixes = new List<string> { " - main.ba2", " - textures.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
 
             foreach (var item in orphaned)
             {
@@ -3165,7 +3175,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
         private void toolStripMenuItemDeletePlugins_Click(object sender, EventArgs e)
         {
-            if (!Tools.ConfirmAction("Are you sure you want to delete Plugins.txt?", "This will delete Plugins.txt"))
+            if (Tools.ConfirmAction("Are you sure you want to delete Plugins.txt?", "This will delete Plugins.txt", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             ChangeSettings(false);
             File.Delete(Tools.StarfieldAppData + "\\Plugins.txt");
@@ -3266,7 +3276,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                         }
                     }
 
-                    if (Tools.ConfirmAction("Open exported file?", "Export Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    if (Tools.ConfirmAction("Open exported file?", "Export Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         Process.Start("explorer.exe", ExportActive.FileName);
                 }
                 catch (Exception ex)
@@ -3407,7 +3417,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 Properties.Settings.Default.AutoRestore = false;
                 if (Tools.ConfirmAction("1. Run the game and update Creations mods.\n2. Don't Load a Save Game\n3. Quit the game and run this app again\n\n" +
                     "To Cancel this option," +
-                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods", MessageBoxButtons.YesNo, MessageBoxIcon.Question, true))
+                    " click this menu option again\n\nRun the game now?", "Steps to Update Creations Mods", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    true) == DialogResult.Yes)
                     RunGame(); ;
             }
             else

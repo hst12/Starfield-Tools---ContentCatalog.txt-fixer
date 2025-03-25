@@ -453,18 +453,33 @@ namespace Starfield_Tools.Common // Various functions used by the app
             }
         }
 
-        public static bool ConfirmAction(string ActionText, string ActionTitle = "", MessageBoxButtons buttons = MessageBoxButtons.OKCancel, 
-            MessageBoxIcon icon = MessageBoxIcon.Stop,bool overRide=false) // overRide - always show dialog
+        public static DialogResult ConfirmAction(string ActionText, string ActionTitle = "", MessageBoxButtons buttons = MessageBoxButtons.OKCancel,
+            MessageBoxIcon icon = MessageBoxIcon.Stop, bool overRide = false) // overRide - always show dialog
         {
             // Return true for OK, false for cancel
 
             if (frmLoadOrder.NoWarn && !overRide)
-                return true;
-            DialogResult DialogResult = MessageBox.Show(ActionText, ActionTitle, buttons, icon);
-            if (DialogResult == DialogResult.OK || DialogResult == DialogResult.Yes)
-                return true;
-            else
-                return false;
+                return DialogResult.OK;
+            DialogResult dlgResult = MessageBox.Show(ActionText, ActionTitle, buttons, icon);
+            switch (dlgResult)
+            {
+                case DialogResult.OK:
+                    return DialogResult.OK;
+                    break;
+                case DialogResult.Yes:
+                    return DialogResult.Yes;
+                    break;
+                case DialogResult.No:
+                    return DialogResult.No;
+                    break;
+                case DialogResult.Cancel:
+                    return DialogResult.Cancel;
+                    break;
+                default:
+                    return DialogResult.Cancel;
+                    break;
+
+            }
         }
         public List<string> GetPluginList() // Get list of plugins from Starfield Data folder
         {
