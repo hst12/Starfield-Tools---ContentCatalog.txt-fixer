@@ -13,6 +13,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.ApplicationModel.Activation;
 using YamlDotNet.Serialization;
 using File = System.IO.File;
 
@@ -1598,7 +1599,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 ModName = ModName[..ModName.IndexOf('.')];
 
                 if (Tools.ConfirmAction(@"This will delete all files related to the '" + ModName + @"' mod", "Delete " + ModName + " - Are you sure?",
-                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    MessageBoxButtons.YesNo) == DialogResult.Yes || NoWarn)
                 {
                     isModified = true;
                     dataGridView1.Rows.Remove(row);
@@ -3069,28 +3070,40 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     if (File.Exists(ModFile + " - main.ba2"))
                         files.Add(ModFile + " - main.ba2");
 
+                    if (File.Exists(ModFile + " - voices_en.ba2"))
+                        files.Add(ModFile + " - voices_en.ba2");
+
                     string zipPath = selectedFolderPath + "\\" + ModName + ".zip"; // Choose path to Zip it
 
-                    // Check if archive already exists, bail out on user cancel
-                    DialogResult dlgResult = Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}", MessageBoxButtons.YesNoCancel);
-                    if (dlgResult == DialogResult.Cancel)
+                    void makeArchive()
                     {
-                        LoadScreen.Close();
-                        sbar3("Archive creation cancelled");
-                        return;
+                        sbar3($"Creating archive for {ModName}...");
+                        statusStrip1.Refresh();
+                        CreateZipFromFiles(files, zipPath); // Make zip
+                        sbar3($"{ModName} archived");
+                        statusStrip1.Refresh();
+                        files.Clear();
                     }
 
-                    if (File.Exists(zipPath) && dlgResult == DialogResult.No)
+                    // Check if archive already exists, bail out on user cancel
+                    if (File.Exists(zipPath))
                     {
-                        sbar3($"Archive for {ModName} not created");
-                        continue;
+                        DialogResult dlgResult = Tools.ConfirmAction("Overwrite archive?", $"Archive exists - {ModName}", MessageBoxButtons.YesNoCancel);
+
+                        if (dlgResult == DialogResult.Cancel)
+                        {
+                            LoadScreen.Close();
+                            sbar3("Archive creation cancelled");
+                            return;
+                        }
+
+                        if (dlgResult == DialogResult.No)
+                            sbar3($"Archive for {ModName} not created");
+                        if (dlgResult == DialogResult.Yes)
+                            makeArchive();
                     }
-                    sbar3($"Creating archive for {ModName}...");
-                    statusStrip1.Refresh();
-                    CreateZipFromFiles(files, zipPath); // Make zip
-                    sbar3($"{ModName} archived");
-                    statusStrip1.Refresh();
-                    files.Clear();
+                    else
+                        makeArchive();
                 }
 
                 LoadScreen.Close();
