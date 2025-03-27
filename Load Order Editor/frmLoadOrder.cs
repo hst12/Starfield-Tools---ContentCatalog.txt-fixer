@@ -11,10 +11,10 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.Serialization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using File = System.IO.File;
 
 namespace Starfield_Tools
@@ -22,6 +22,8 @@ namespace Starfield_Tools
 
     public partial class frmLoadOrder : Form
     {
+        private CancellationTokenSource cancellationTokenSource;
+
         public const byte Steam = 0, MS = 1, Custom = 2, SFSE = 3;
         public static string StarfieldGamePath;
         public static bool NoWarn;
@@ -38,6 +40,9 @@ namespace Starfield_Tools
         public frmLoadOrder(string parameter)
         {
             InitializeComponent();
+
+            this.KeyPreview = true; // Ensure the form captures key presses
+            //this.KeyDown += frmLoadOrder_KeyDown; // Subscribe to KeyDown event
 
             Tools.CheckGame(); // Exit if Starfield appdata folder not found
 
@@ -3110,6 +3115,71 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             }
         }
 
+        private async Task UpdateBackupAsync(CancellationToken token)
+        {
+            List<string> files = new();
+            int modsArchived = 0;
+
+            if (!CheckGamePath()) // Abort if game path not set
+                return;
+
+            string directoryPath = StarfieldGamePath + "\\Data";
+
+            using FolderBrowserDialog folderBrowserDialog = new();
+            folderBrowserDialog.Description = "Choose folder to archive the mods to";
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Current archive will continue to be created","Press Q to stop operation");
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (token.IsCancellationRequested)
+                    {
+                        sbar3("Archive creation cancelled");
+                        return;
+                    }
+
+                    Application.DoEvents();
+
+                    if (row.Cells["PluginName"].Value is not string ModNameRaw) continue;
+                    string ModName = ModNameRaw[..ModNameRaw.IndexOf('.')]; // Get current mod name
+                    string ModFile = directoryPath + "\\" + ModName; // Add esp, esm, and archives to files list
+
+                    if (File.Exists(ModFile + ".esp"))
+                        files.Add(ModFile + ".esp");
+
+                    if (File.Exists(ModFile + ".esm"))
+                        files.Add(ModFile + ".esm");
+
+                    if (File.Exists(ModFile + " - textures.ba2"))
+                        files.Add(ModFile + " - textures.ba2");
+
+                    if (File.Exists(ModFile + " - main.ba2"))
+                        files.Add(ModFile + " - main.ba2");
+
+                    if (File.Exists(ModFile + " - voices_en.ba2"))
+                        files.Add(ModFile + " - voices_en.ba2");
+
+                    string zipPath = selectedFolderPath + "\\" + ModName + ".zip"; // Choose path to Zip it
+
+                    // Check if archive already exists, bail out on user cancel
+                    if (!File.Exists(zipPath))
+                    {
+                        sbar3($"Creating archive for {ModName}...");
+                        statusStrip1.Refresh();
+                        CreateZipFromFiles(files, zipPath); // Make zip
+                        sbar3($"{ModName} archived");
+                        statusStrip1.Refresh();
+                        modsArchived++;
+                    }
+                    files.Clear();
+
+                }
+                sbar3(modsArchived + " Mods archived");
+            }
+        }
         private void checkArchivesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> BGSArchives = [];
@@ -3457,5 +3527,45 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             string pathToFile = (Properties.Settings.Default.ProfileFolder);
             Process.Start("explorer", pathToFile);
         }
+
+        private async void frmLoadOrder_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Q)
+            {
+                sbar3("Operation Stopped.");
+                try
+                {
+                    cancellationTokenSource.Cancel(); // Signal cancellation
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private async Task UpdateArchiveModsAsync()
+        {
+            cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                await UpdateBackupAsync(cancellationTokenSource.Token);
+
+            }
+            catch (OperationCanceledException)
+            {
+                MessageBox.Show("Task was aborted!");
+            }
+            finally
+            {
+                cancellationTokenSource.Dispose();
+            }
+        }
+
+        private void updateArchivedModsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateArchiveModsAsync();
+        }
     }
+
 }
