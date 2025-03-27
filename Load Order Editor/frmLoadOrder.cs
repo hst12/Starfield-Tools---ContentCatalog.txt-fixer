@@ -2942,7 +2942,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             SavePlugins();
         }
 
-        private void SetAchievement(bool OnOff) // Experimental. Should probably remove
+        /*private void SetAchievement(bool OnOff) // Experimental. Should probably remove
         {
             string jsonFilePath = Tools.GetCatalogPath(), json = File.ReadAllText(jsonFilePath);
             var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Tools.Creation>>(json);
@@ -2975,7 +2975,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private void enableAchievementFlagToolStripMenuItem_Click(object sender, EventArgs e) // Experimental. Should probably remove
         {
             SetAchievement(true);
-        }
+        }*/
 
         private void openAllActiveModWebPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
