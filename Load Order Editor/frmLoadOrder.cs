@@ -560,36 +560,36 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                                 }
                             }
 
-                                if (blockedMods != null)
-                                    if (blockedMods.Contains(PluginName)) // Disable blocked mods
-                                    {
-                                        ModEnabled = false;
-                                        row.Cells["Blocked"].Value = true;
-                                    }
+                            if (blockedMods != null)
+                                if (blockedMods.Contains(PluginName)) // Disable blocked mods
+                                {
+                                    ModEnabled = false;
+                                    row.Cells["Blocked"].Value = true;
+                                }
 
-                                if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
-                                    row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
-                                row.Cells["ModEnabled"].Value = ModEnabled;
-                                row.Cells["PluginName"].Value = PluginName;
-                                if (dataGridView1.Columns["Description"].Visible)
-                                    row.Cells["Description"].Value = Description;
-                                if (dataGridView1.Columns["Version"].Visible)
-                                    row.Cells["Version"].Value = ModVersion;
-                                if (dataGridView1.Columns["AuthorVersion"].Visible)
-                                    row.Cells["AuthorVersion"].Value = AuthorVersion;
-                                if (dataGridView1.Columns["TimeStamp"].Visible)
-                                    row.Cells["TimeStamp"].Value = ModTimeStamp;
-                                if (dataGridView1.Columns["Achievements"].Visible)
-                                    row.Cells["Achievements"].Value = ASafe;
-                                if (dataGridView1.Columns["Files"].Visible)
-                                    row.Cells["Files"].Value = ModFiles;
-                                if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
-                                    row.Cells["FileSize"].Value = ModFileSize;
-                                row.Cells["CreationsID"].Value = ModID;
-                                if (dataGridView1.Columns["Index"].Visible)
-                                    row.Cells["Index"].Value = IndexCount++;
-                                row.Cells["URL"].Value = URL;
-                            
+                            if (PluginName.StartsWith("sfbgs")) // Assume Bethesda plugin
+                                row.Cells["Group"].Value = (row.Cells["Group"].Value ?? "Bethesda Game Studios Creations") + " (Bethesda)";
+                            row.Cells["ModEnabled"].Value = ModEnabled;
+                            row.Cells["PluginName"].Value = PluginName;
+                            if (dataGridView1.Columns["Description"].Visible)
+                                row.Cells["Description"].Value = Description;
+                            if (dataGridView1.Columns["Version"].Visible)
+                                row.Cells["Version"].Value = ModVersion;
+                            if (dataGridView1.Columns["AuthorVersion"].Visible)
+                                row.Cells["AuthorVersion"].Value = AuthorVersion;
+                            if (dataGridView1.Columns["TimeStamp"].Visible)
+                                row.Cells["TimeStamp"].Value = ModTimeStamp;
+                            if (dataGridView1.Columns["Achievements"].Visible)
+                                row.Cells["Achievements"].Value = ASafe;
+                            if (dataGridView1.Columns["Files"].Visible)
+                                row.Cells["Files"].Value = ModFiles;
+                            if (ModFileSize != 0 && dataGridView1.Columns["FileSize"].Visible)
+                                row.Cells["FileSize"].Value = ModFileSize;
+                            row.Cells["CreationsID"].Value = ModID;
+                            if (dataGridView1.Columns["Index"].Visible)
+                                row.Cells["Index"].Value = IndexCount++;
+                            row.Cells["URL"].Value = URL;
+
                         }
                     }
                 }
@@ -3450,6 +3450,12 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        private void profileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pathToFile = (Properties.Settings.Default.ProfileFolder);
+            Process.Start("explorer", pathToFile);
         }
     }
 }
