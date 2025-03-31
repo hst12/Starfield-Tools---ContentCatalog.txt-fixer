@@ -620,7 +620,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                     esmCount = Directory.EnumerateFiles(directory, "*.esm", SearchOption.TopDirectoryOnly).Count();
                     espCount = Directory.EnumerateFiles(directory, "*.esp", SearchOption.TopDirectoryOnly).Count();
                     ba2Count = Directory.EnumerateFiles(directory, "*.ba2", SearchOption.TopDirectoryOnly).Count();
-                    mainCount = Directory.EnumerateFiles(directory, "*- main*.ba2", SearchOption.TopDirectoryOnly).Count();
+                    mainCount = Directory.EnumerateFiles(directory, "* - main*.ba2", SearchOption.TopDirectoryOnly).Count();
 
                     StatText = "Total Mods: " + dataGridView1.RowCount + ", Creations: " + CreationsPlugin.Count + ", Other: " +
                         (dataGridView1.RowCount - CreationsPlugin.Count) + ", Enabled: " + EnabledCount + ", esm: " +
@@ -1333,9 +1333,6 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             if (isModified)
                 SavePlugins();
             SaveSettings();
-            /*Properties.Settings.Default.FormWidth = this.Width;
-            Properties.Settings.Default.FormHeight = this.Height;
-            Properties.Settings.Default.Save(); // Save settings*/
         }
 
         private static void SaveSettings()
@@ -1624,6 +1621,9 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
                     if (File.Exists(ModFile + " - textures.ba2"))
                         File.Delete(ModFile + " - textures.ba2");
+
+                    if (File.Exists(ModFile + " - Textures_xbox.ba2"))
+                        File.Delete(ModFile + " - Textures_xbox.ba2");
 
                     if (File.Exists(ModFile + " - main.ba2"))
                         File.Delete(ModFile + " - main.ba2");
@@ -2275,7 +2275,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         }
         private bool GameSwitchWarning()
         {
-            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding", MessageBoxButtons.YesNo) == DialogResult.Yes);
+            return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding",
+                MessageBoxButtons.YesNo) == DialogResult.Yes);
         }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
@@ -3129,9 +3130,8 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             folderBrowserDialog.Description = "Choose folder to archive the mods to";
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Current archive will continue to be created","Press Q to stop operation");
+                MessageBox.Show("Current archive will continue to be created", "Press Q to stop operation");
                 string selectedFolderPath = folderBrowserDialog.SelectedPath;
-
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
@@ -3187,6 +3187,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             List<string> plugins = [];
             List<string> orphaned = [];
             List<string> toDelete = [];
+            List<string> suffixes = new List<string> { " - main.ba2", " - textures.ba2", " - textures_xbox.ba2", " - voices_en.ba2", ".ba2" };
 
             if (StarfieldGamePath == "")
                 return;
@@ -3200,26 +3201,24 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 }
             }
 
-            plugins = tools.GetPluginList() // Build a list of all plugins excluding base game files
-    .Select(s => s.Substring(0, s.Length - 4).ToLower())
-    .ToList();
+            // Build a list of all plugins excluding base game files
+            plugins = tools.GetPluginList().Select(s => s[..^4].ToLower()).ToList();
 
             foreach (string file in Directory.EnumerateFiles(StarfieldGamePath + "\\Data", "*.ba2", SearchOption.TopDirectoryOnly)) // Build a list of all archives
             {
-                tempstr = Path.GetFileName(file).ToLower();
-                archives.Add(tempstr[..tempstr.LastIndexOf('.')]);
+                archives.Add(Path.GetFileName(file).ToLower());
             }
 
             List<string> modArchives = archives.Except(BGSArchives) // Get the archive base names excluding BGS Archives
                 .Select(s => s.ToLower()
-                .Replace(" - main", string.Empty)
-                .Replace(" - textures", string.Empty)
-                .Replace(" - voices_en", string.Empty))
+                .Replace(" - main.ba2", string.Empty)
+                .Replace(" - textures.ba2", string.Empty)
+                .Replace(" - textures_xbox.ba2", string.Empty)
+                .Replace(" - voices_en.ba2", string.Empty))
                 .ToList();
 
+            // Build a list of archives to delete with full path
             orphaned = modArchives.Except(plugins).ToList(); // Strip out esm files to get orphaned archives
-
-            var suffixes = new List<string> { " - main.ba2", " - textures.ba2", " - voices_en.ba2", ".ba2" }; // Build a list of archives to delete with full path
 
             foreach (var item in orphaned)
             {
@@ -3566,6 +3565,82 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         {
             UpdateArchiveModsAsync();
         }
-    }
 
+        private bool CleanFolder(string folderPath)
+        {
+            try
+            {
+                Directory.Delete(StarfieldGamePath + "\\Data\\" + folderPath, true); // Delete recursive
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show(ex.Message);
+#endif
+                return false;
+            }
+            return true;
+        }
+        private void deleteLooseFileFoldersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int deleteCount = 0;
+            if (string.IsNullOrEmpty(StarfieldGamePath))
+            {
+                MessageBox.Show("Game path not set");
+                return;
+            }
+            if (Tools.ConfirmAction("Are you sure you want to delete loose files folders including their contents?", "Warning, this will delete any loose file mods",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                return;
+
+            // Delete these folders
+            var foldersToDelete = new[]
+            { "meshes",
+                "interface",
+                "textures\\actors",
+                "textures\\architecture",
+                "textures\\common",
+                "textures\\decals",
+                "textures\\effects",
+                "textures\\interface",
+                "textures\\items",
+                "textures\\Motd_Media",
+                "textures\\setdressing",
+                "textures\\ships",
+                "geometries",
+                "scripts",
+                "sound" };
+
+            foreach (var item in foldersToDelete)
+            {
+                if (CleanFolder(item))
+                    deleteCount++;
+            }
+
+            // Clear the Materials folder but leave it in place
+            string folderPath = StarfieldGamePath + "\\Data\\Materials";
+            try
+            {
+                // Delete all files in the folder
+                foreach (string file in Directory.GetFiles(folderPath))
+                {
+                    File.Delete(file);
+                }
+
+                // Delete all subdirectories and their contents
+                foreach (string directory in Directory.GetDirectories(folderPath))
+                {
+                    Directory.Delete(directory, true); // 'true' ensures recursive deletion
+                    deleteCount++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+            MessageBox.Show(Text = deleteCount + " Folder(s) deleted");
+        }
+    }
 }
