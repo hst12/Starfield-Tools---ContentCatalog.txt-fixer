@@ -86,8 +86,10 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
             // Set the location of the progress bar
             progressBar1.Location = new System.Drawing.Point(x, y);
 
-            menuStrip1.Font = Properties.Settings.Default.FontSize; // Get settings
+            menuStrip1.Font = Properties.Settings.Default.FontSize; // Get font size
             this.Font = Properties.Settings.Default.FontSize;
+
+            // Initialise settings
 
             GameVersion = Properties.Settings.Default.GameVersion;
 
@@ -147,6 +149,14 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
 
             if (Properties.Settings.Default.MO2Path == "")
                 mO2ToolStripMenuItem.Visible = false;
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.LOOTPath))
+            {
+                toolStripMenuLOOTToggle.Visible = false;
+                autoSortToolStripMenuItem.Visible = false;
+                toolStripMenuLoot.Visible = false;
+                toolStripMenuLootSort.Visible = false;
+            }
 
             if (Properties.Settings.Default.ProfileOn)
             {
@@ -1914,6 +1924,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 {
                     Properties.Settings.Default.LOOTPath = openFileDialog1.FileName;
                     Properties.Settings.Default.Save();
+                    MessageBox.Show("LOOT path set to " + openFileDialog1.FileName,"Restart the app for changes to take effect");    
                     return true;
                 }
                 else return false;
@@ -2276,7 +2287,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
         private bool GameSwitchWarning()
         {
             return (Tools.ConfirmAction("Do you want to proceed?", "Switching to a no mods profile is suggested before proceeding",
-                MessageBoxButtons.YesNo) == DialogResult.Yes);
+                MessageBoxButtons.YesNo,MessageBoxIcon.Question,true) == DialogResult.Yes);
         }
         private void toolStripMenuSteam_Click(object sender, EventArgs e)
         {
@@ -3590,7 +3601,7 @@ filePath = LooseFilesDir + "StarfieldCustom.ini";
                 return;
             }
             if (Tools.ConfirmAction("Are you sure you want to delete loose files folders including their contents?", "Warning, this will delete any loose file mods",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,true) == DialogResult.No)
                 return;
 
             // Delete these folders

@@ -530,7 +530,7 @@
             // 
             updateArchivedModsToolStripMenuItem.Name = "updateArchivedModsToolStripMenuItem";
             updateArchivedModsToolStripMenuItem.Size = new System.Drawing.Size(624, 40);
-            updateArchivedModsToolStripMenuItem.Text = "Update archived mods";
+            updateArchivedModsToolStripMenuItem.Text = "Add New Mods to Archive Folder";
             updateArchivedModsToolStripMenuItem.Click += updateArchivedModsToolStripMenuItem_Click;
             // 
             // toolStripSeparator11

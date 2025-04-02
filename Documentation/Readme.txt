@@ -5,7 +5,29 @@ Running Vortex after using this tool will likely mess up your load order.
 
 TLDR; See the Help->Shortcuts and Quick Help menu
 
-New Features
+New Feature
+File->Reset/Delete Files->Delete Loose File Folders - Don't use this option if you have loose file mods installed that you want to keep!
+It will delete the mod files from the game data folder and remove diretories that don't exist in the vanilla game.
+SFSE files and folders will be left untouched.
+This function is meant to serve as a cleanup tool for mods that have been uninstalled but have left files behind.
+The following folders and their contents will be deleted if you choose this menu option:
+meshes
+interface
+textures\actors
+textures\architecture
+textures\common
+textures\decals
+textures\effects
+textures\interface
+textures\items
+textures\Motd_Media
+textures\setdressing
+textures\ships
+geometries
+scripts
+sound
+materials <- This folder will be kept, but its contents will be deleted
+
 Multi select mods with Ctrl+Click or Shift+Click to perform actions on multiple mods at once.
 Drag drop mod zip or other archive formats onto grid to install. Supports multiple files.
 
